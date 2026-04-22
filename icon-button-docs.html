@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon Button — Engage Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ═══ TOP NAV (injected by nav.js) ═══ -->
+<div id="topnav-placeholder"></div>
+
+<!-- ═══ SHELL ═══ -->
+<div class="shell">
+
+<!-- ═══ SIDEBAR (injected by nav.js) ═══ -->
+<div id="sidebar-placeholder"></div>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="content-wrap">
+<article class="content">
+
+  <div class="breadcrumb">
+    <a href="#">Docs</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">Buttons</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>Icon Button</span>
+  </div>
+
+  <div class="page-header">
+    <div class="page-badges">
+      <span class="badge badge-brand">Buttons</span>
+      <span class="badge badge-stable">Stable</span>
+      <span class="badge badge-neutral">Updated Apr 2026</span>
+    </div>
+    <h1>Icon Button</h1>
+    <p class="page-desc">A fixed-size button that uses an icon instead of a text label to represent an action. Use it when space is tight and the icon's meaning is immediately clear to your audience.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ANATOMY -->
+  <section class="section" id="anatomy">
+    <h2><span class="emoji">🔬</span> Anatomy</h2>
+    <p class="section-lead">The component has two parts. Every variant contains both layers.</p>
+
+    <div class="anatomy-fig">
+      <div style="position:relative; display:inline-flex; align-items:center; padding: 0 96px;">
+        <button class="ib ib-36 ib-primary" style="pointer-events:none;">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg>
+        </button>
+        <div style="position:absolute; right:calc(100% - 76px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
+          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">① Container</span>
+          <div style="width:28px; height:1px; background:var(--text-3);"></div>
+          <div style="width:5px; height:5px; border-radius:50%; background:var(--text-3);"></div>
+        </div>
+        <div style="position:absolute; left:calc(100% - 76px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
+          <div style="width:5px; height:5px; border-radius:50%; background:var(--text-3);"></div>
+          <div style="width:28px; height:1px; background:var(--text-3);"></div>
+          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">② Icon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="anatomy-items">
+      <div class="anatomy-item">
+        <div class="anatomy-num">1</div>
+        <div><span class="anatomy-term">Container</span> — the outer shape that defines size, background colour, border, corner radius, and shadow. All visual changes between types and states happen here.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">2</div>
+        <div><span class="anatomy-term">Icon</span> — the symbol inside the button. Any icon from the shared library can be swapped in. Its colour updates automatically to match the current state.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- WHEN TO USE -->
+  <section class="section" id="when-to-use">
+    <h2><span class="emoji">🧭</span> When to Use</h2>
+    <div class="use-cols">
+      <div class="use-group">
+        <div class="use-group-label do">✓ Use when</div>
+        <ul class="use-list">
+          <li><i class="use-icon">✓</i> The icon alone is universally understood — close, search, add, edit, delete, overflow (⋯).</li>
+          <li><i class="use-icon">✓</i> Space is too tight for a text label — toolbars, table row actions, sidebars, floating bars.</li>
+          <li><i class="use-icon">✓</i> Supporting action alongside a clearly labelled primary action.</li>
+        </ul>
+      </div>
+      <div class="use-group">
+        <div class="use-group-label dont">✗ Avoid when</div>
+        <ul class="use-list">
+          <li><i class="use-icon">✗</i> The icon is ambiguous — users may not recognise it. Use a labelled button instead.</li>
+          <li><i class="use-icon">✗</i> It is the primary call-to-action on a screen.</li>
+          <li><i class="use-icon">✗</i> A tooltip cannot be guaranteed — users have no text fallback.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- VARIANTS -->
+  <section class="section" id="variants">
+    <h2><span class="emoji">🧩</span> Variants</h2>
+    <p class="section-lead">Three types control visual hierarchy. Choose the one that matches the importance of the action relative to its surroundings.</p>
+
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+        <span class="preview-label">Default state</span>
+      </div>
+      <div class="preview-body col">
+        <div class="var-row">
+          <span class="var-label">Primary</span>
+          <button class="ib ib-36 ib-primary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <button class="ib ib-36 ib-primary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
+          <button class="ib ib-36 ib-primary" aria-label="More"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+        </div>
+        <div class="var-row">
+          <span class="var-label">Secondary</span>
+          <button class="ib ib-36 ib-secondary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <button class="ib ib-36 ib-secondary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
+          <button class="ib ib-36 ib-secondary" aria-label="More"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+        </div>
+        <div class="var-row">
+          <span class="var-label">Tertiary</span>
+          <button class="ib ib-36 ib-tertiary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <button class="ib ib-36 ib-tertiary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
+          <button class="ib ib-36 ib-tertiary" aria-label="More"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Variant</th><th>Use for</th></tr></thead>
+        <tbody>
+          <tr><td><span class="vb vb-brand">Primary</span></td><td>Highest emphasis. Solid brand fill. One per toolbar — treat it the same as a primary text button.</td></tr>
+          <tr><td><span class="vb vb-neutral">Secondary</span></td><td>Supporting actions. White background with a subtle border. Use below a Primary action.</td></tr>
+          <tr><td><span class="vb vb-neutral">Tertiary</span></td><td>Lowest emphasis. No background or border in the Default state. Use in toolbars and table rows where the pattern is already understood.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SIZES -->
+  <section class="section" id="sizes">
+    <h2><span class="emoji">📏</span> Sizes</h2>
+    <p class="section-lead">Two fixed sizes, both square with equal padding and a 6px corner radius.</p>
+
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+        <span class="preview-label">Primary variant</span>
+      </div>
+      <div class="preview-body center" style="padding:36px;">
+        <div class="size-item">
+          <button class="ib ib-36 ib-primary" aria-label="Action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <span class="size-name">36px</span>
+          <span class="size-sub">9px padding · 18px icon</span>
+        </div>
+        <div class="size-item">
+          <button class="ib ib-24 ib-primary" aria-label="Action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <span class="size-name">24px</span>
+          <span class="size-sub">4px padding · 16px icon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Size</th><th>Dimensions</th><th>Padding</th><th>When to use</th></tr></thead>
+        <tbody>
+          <tr><td><span class="vb vb-brand">36px</span></td><td>36 × 36px</td><td>9px uniform</td><td>Default. Toolbars, cards, modals, action bars.</td></tr>
+          <tr><td><span class="vb vb-neutral">24px</span></td><td>24 × 24px</td><td>4px uniform</td><td>Dense layouts — inline table actions, compact sidebars. Needs an expanded hit area on touch devices.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- STATES -->
+  <section class="section" id="states">
+    <h2><span class="emoji">🔁</span> States</h2>
+    <p class="section-lead">All three variants share four states. The tokens that change differ per variant.</p>
+
+    <h3>Primary</h3>
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+        <span class="preview-label">Primary variant</span>
+      </div>
+      <div class="preview-body center">
+        <div class="state-col"><button class="ib ib-36 ib-primary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-bottom:24px;">
+      <table>
+        <thead><tr><th>State</th><th>Fill</th><th>Border</th><th>Icon</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td><code>bg/brand/base</code></td><td><code>border/brand/base</code></td><td><code>all/fixed-white</code></td></tr>
+          <tr><td>Hover</td><td><code>bg/brand/base-hover</code></td><td><code>border/brand/base-hover</code></td><td><code>all/fixed-white</code></td></tr>
+          <tr><td>Pressed</td><td><code>bg/brand/base-pressed</code></td><td><code>border/brand/base-pressed</code></td><td><code>all/fixed-white</code></td></tr>
+          <tr><td>Disabled</td><td><code>bg/disabled</code></td><td>—</td><td><code>content/disabled</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Secondary</h3>
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+        <span class="preview-label">Secondary variant</span>
+      </div>
+      <div class="preview-body center">
+        <div class="state-col"><button class="ib ib-36 ib-secondary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-bottom:24px;">
+      <table>
+        <thead><tr><th>State</th><th>Fill</th><th>Border</th><th>Icon</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td><code>bg/base</code></td><td><code>border/action</code></td><td><code>content/action</code></td></tr>
+          <tr><td>Hover</td><td><code>bg/input-hover</code></td><td><code>border/action-hover</code></td><td><code>content/action-hover</code></td></tr>
+          <tr><td>Pressed</td><td><code>bg/input-pressed</code></td><td><code>border/action-pressed</code></td><td><code>content/action-pressed</code></td></tr>
+          <tr><td>Disabled</td><td><code>bg/base</code></td><td><code>border/base</code></td><td><code>content/disabled</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tertiary</h3>
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
+        <span class="preview-label">Tertiary variant</span>
+      </div>
+      <div class="preview-body center">
+        <div class="state-col"><button class="ib ib-36 ib-tertiary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>State</th><th>Fill</th><th>Border</th><th>Icon</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>—</td><td>—</td><td><code>content/action</code></td></tr>
+          <tr><td>Hover</td><td><code>bg/input-hover</code></td><td>—</td><td><code>content/action-hover</code></td></tr>
+          <tr><td>Pressed</td><td><code>bg/input-pressed</code></td><td>—</td><td><code>content/action</code></td></tr>
+          <tr><td>Disabled</td><td>—</td><td>—</td><td><code>content/disabled</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TOKENS -->
+  <section class="section" id="tokens">
+    <h2><span class="emoji">🪙</span> Design Tokens</h2>
+    <p class="section-lead">Token names and resolved values. Use the token name in design and code — never hardcode the hex value.</p>
+
+    <div class="tbl-wrap" style="margin-bottom:16px;">
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td><code>#0a9d99</code></td><td>Primary fill — Default</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><code>#0c827f</code></td><td>Primary fill — Hover</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td><code>#166764</code></td><td>Primary fill — Pressed</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>border/brand/base</span></td><td><code>#0c827f</code></td><td>Primary stroke — Default</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>border/brand/base-hover</span></td><td><code>#166764</code></td><td>Primary stroke — Hover</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#0e4846;"></span>border/brand/base-pressed</span></td><td><code>#0e4846</code></td><td>Primary stroke — Pressed</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #e4e4e7;"></span>all/fixed-white</span></td><td><code>#ffffff</code></td><td>Icon — Primary all active states</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #e4e4e7;"></span>bg/base</span></td><td><code>#ffffff</code></td><td>Secondary fill — Default &amp; Disabled</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#f8f8f9;"></span>bg/input-hover</span></td><td><code>#f8f8f9</code></td><td>Secondary/Tertiary fill — Hover</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td><code>#f1f2f4</code></td><td>Secondary/Tertiary fill — Pressed</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td><code>#bcc1cd</code></td><td>Secondary stroke — Default</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#a5adbc;"></span>border/action-hover</span></td><td><code>#a5adbc</code></td><td>Secondary stroke — Hover</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#7b869e;"></span>border/action-pressed</span></td><td><code>#7b869e</code></td><td>Secondary stroke — Pressed</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#e1e4e8;"></span>border/base</span></td><td><code>#e1e4e8</code></td><td>Secondary stroke — Disabled</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.80);"></span>content/action</span></td><td><code>#192743</code> 80%</td><td>Icon — Secondary/Tertiary Default</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.95);"></span>content/action-hover</span></td><td><code>#192743</code> 95%</td><td>Icon — Secondary/Tertiary Hover &amp; Pressed</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.10);"></span>bg/disabled</span></td><td><code>#192743</code> 10%</td><td>Primary fill — Disabled</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.30);"></span>content/disabled</span></td><td><code>#192743</code> 30%</td><td>Icon — Disabled (all variants)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Effect token</th><th>Values</th><th>Applied to</th></tr></thead>
+        <tbody>
+          <tr><td><code>shadow/action</code></td><td>Drop shadow · <code>#192743</code> 4% · offset <code>0, 1px</code> · radius <code>2px</code></td><td>Primary and Secondary — Default state only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" id="accessibility">
+    <h2><span class="emoji">♿</span> Accessibility</h2>
+
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <span><strong>aria-label is mandatory.</strong> Every icon button needs <code>aria-label</code> describing the action, not the icon. Write <code>aria-label="Close dialog"</code>, not <code>aria-label="X"</code>.</span>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <span><strong>Use a native <code>&lt;button&gt;</code> element.</strong> Gives you keyboard activation (<kbd>Enter</kbd> + <kbd>Space</kbd>) and focus management for free. Don't use a <code>&lt;div&gt;</code> with onclick.</span>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <span><strong>Touch target on 24px.</strong> 24px falls below the 44 × 44pt minimum. Engineering must extend the hit area with padding or a <code>::before</code> pseudo-element.</span>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <span><strong>Toggle buttons need <code>aria-pressed</code>.</strong> For bookmark, mute, or favourite buttons add <code>aria-pressed="true/false"</code> and update it on every interaction.</span>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <span><strong>Always pair with a tooltip.</strong> Use <code>role="tooltip"</code> linked via <code>aria-describedby</code>. Must appear on both hover and keyboard focus.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <nav class="pagination">
+    <a class="pag-card" href="#">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Button</span>
+    </a>
+    <a class="pag-card right" href="#">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Button Big</span>
+    </a>
+  </nav>
+
+</article>
+
+<!-- ═══ TOC ═══ -->
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">On this page</div>
+    <a class="toc-link" href="#anatomy">Anatomy</a>
+    <a class="toc-link" href="#when-to-use">When to Use</a>
+    <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#sizes">Sizes</a>
+    <a class="toc-link" href="#states">States</a>
+    <a class="toc-link" href="#tokens">Design Tokens</a>
+    <a class="toc-link" href="#accessibility">Accessibility</a>
+  </nav>
+</div>
+
+</div><!-- /content-wrap -->
+</div><!-- /shell -->
+
+<script src="nav.js"></script>
+</body>
+</html>
