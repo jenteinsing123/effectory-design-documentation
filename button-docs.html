@@ -45,16 +45,15 @@
     .btn-secondary.is-disabled { background: #fff !important; border-color: #e1e4e8 !important; }
     .btn-tertiary.is-disabled  { background: transparent !important; border-color: transparent !important; }
 
-    /* Icon SVG helpers */
-    .icon-plus { display:inline-block; }
-    .icon-trash { display:inline-block; }
-
-    /* Variant row layout */
-    .var-grid { display: flex; flex-direction: column; gap: 14px; }
-    .var-row  { display: flex; align-items: center; gap: 12px; }
-    .var-label { font-size: 12px; color: var(--text-3); font-weight: 500; width: 80px; flex-shrink: 0; }
-    .state-col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    /* State helpers for docs */
+    .state-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .state-label { font-size: 11px; color: var(--text-3); }
+
+    /* ── Content Guidelines extras ── */
+    .cg-btn-long {
+      white-space: normal; height: auto; padding: 8px 14px;
+      text-align: center; max-width: 180px; line-height: 1.4;
+    }
   </style>
 </head>
 <body>
@@ -133,27 +132,187 @@
 
   <hr class="divider" />
 
-  <!-- WHEN TO USE -->
-  <section class="section" id="when-to-use">
-    <h2><span class="emoji">✅</span> When to Use</h2>
-    <div class="use-cols">
-      <div class="use-group">
-        <div class="use-group-label do">✔ USE WHEN</div>
-        <ul class="use-list">
-          <li><span class="use-icon">✓</span> The action has a clear name that fits in 1–3 words</li>
-          <li><span class="use-icon">✓</span> You need to communicate action hierarchy — one primary, supporting secondaries</li>
-          <li><span class="use-icon">✓</span> The action is destructive and needs an explicit, labelled confirmation (Danger type)</li>
+  <!-- USAGE -->
+  <section class="section" id="usage">
+    <h2><span class="emoji">✅</span> Usage</h2>
+    <p class="section-lead">A button is the right choice when the action needs a clear label. Use type and hierarchy to help users understand what happens next.</p>
+
+    <div class="uw-grid">
+      <div class="uw-card">
+        <div class="uw-hd do">✔ Use when</div>
+        <ul class="uw-list">
+          <li><span class="uw-ic chk">✓</span>The action has a clear name that fits in 1–3 words</li>
+          <li><span class="uw-ic chk">✓</span>You need to communicate action hierarchy — one primary, supporting secondaries</li>
+          <li><span class="uw-ic chk">✓</span>The action is destructive and requires an explicit, labelled confirmation</li>
         </ul>
       </div>
-      <div class="use-group">
-        <div class="use-group-label dont">✕ AVOID WHEN</div>
-        <ul class="use-list">
-          <li><span class="use-icon">✗</span> Space is too tight for a label — use an Icon Button instead</li>
-          <li><span class="use-icon">✗</span> The action navigates to a new page — use a Link Button</li>
-          <li><span class="use-icon">✗</span> You need more than two primary buttons side by side — reconsider the hierarchy</li>
+      <div class="uw-card">
+        <div class="uw-hd dont">✕ Avoid when</div>
+        <ul class="uw-list">
+          <li><span class="uw-ic x">✕</span>Space is too tight for a label — use <a href="icon-button-docs.html">Icon Button</a> instead</li>
+          <li><span class="uw-ic x">✕</span>The action navigates to a new page — use a <a href="link-button-docs.html">Link Button</a></li>
+          <li><span class="uw-ic x">✕</span>You need more than two primary buttons side by side — reconsider the hierarchy</li>
         </ul>
       </div>
     </div>
+
+    <h3>Best practices</h3>
+
+    <!-- Do/Don't 1: One primary per view -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev">
+          <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+          <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+        </div>
+        <div class="dd-cap">Use one Primary button per view. Pair it with a Secondary for the opposing action.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev">
+          <button class="btn btn-primary" style="pointer-events:none;">Save</button>
+          <button class="btn btn-primary" style="pointer-events:none;">Publish</button>
+        </div>
+        <div class="dd-cap">Avoid two Primary buttons side by side — they create competing calls-to-action with no clear winner.</div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 2: Primary on the right -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev">
+          <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+          <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+        </div>
+        <div class="dd-cap">Place the Primary action on the right. This matches the natural reading direction toward confirmation.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev">
+          <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+          <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+        </div>
+        <div class="dd-cap">Don't place the Primary button on the left — users may reach for Cancel by habit and miss it.</div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 3: Separate destructive actions -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev spread">
+          <button class="btn btn-danger" style="pointer-events:none;">Delete account</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+            <button class="btn btn-primary" style="pointer-events:none;">Save</button>
+          </div>
+        </div>
+        <div class="dd-cap">Give destructive actions visual breathing room — move them to the opposite side of the layout.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev">
+          <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+          <button class="btn btn-danger" style="pointer-events:none;">Delete account</button>
+        </div>
+        <div class="dd-cap">Never place a Danger button directly next to a Primary — users can accidentally click the wrong one.</div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 4: Disabled is a last resort -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev" style="flex-direction: column; gap: 10px; align-items: flex-start; padding: 20px 24px;">
+          <input
+            type="text" placeholder="Survey name is required"
+            style="width:100%; padding: 7px 10px; border: 1px solid #d3353b; border-radius: 6px; font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
+          />
+          <span style="font-size: 12px; color: #d3353b;">Survey name is required</span>
+          <button class="btn btn-primary" style="pointer-events:none;">Save survey</button>
+        </div>
+        <div class="dd-cap">Keep the button active and show an inline validation error so users know exactly what's blocking them.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev">
+          <button class="btn btn-primary is-disabled" disabled>Save survey</button>
+        </div>
+        <div class="dd-cap">Avoid disabled buttons without explanation — users get no feedback on why they can't proceed.</div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 5: Alignment and positioning -->
+    <h3>Alignment and positioning</h3>
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
+          <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:60%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:80%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:45%;"></div>
+          </div>
+          <div style="padding:12px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:8px; background:#fff;">
+            <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+            <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+          </div>
+        </div>
+        <div class="dd-cap">Right-align button groups in forms and dialogs — this anchors the primary action near the natural endpoint of the reading flow.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
+          <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:60%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:80%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:45%;"></div>
+          </div>
+          <div style="padding:12px 20px; border-top:1px solid var(--border); display:flex; justify-content:center; gap:8px; background:#fff;">
+            <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
+            <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+          </div>
+        </div>
+        <div class="dd-cap">Avoid center-aligning buttons in forms — it disconnects them from the content edge and creates awkward visual tension.</div>
+      </div>
+    </div>
+
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-hd do">✓ Do</div>
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
+          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); background:#fff;">
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:90px;"></div>
+            <div style="flex:1;"></div>
+            <button class="btn btn-secondary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Export</button>
+            <button class="btn btn-primary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Add member</button>
+          </div>
+          <div style="padding:16px; display:flex; flex-direction:column; gap:8px;">
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:70%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:50%;"></div>
+          </div>
+        </div>
+        <div class="dd-cap">In page headers and toolbars, place action buttons on the trailing edge (right) so they don't compete with the page title.</div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-hd dont">✕ Don't</div>
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
+          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--border); background:#fff;">
+            <button class="btn btn-secondary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Export</button>
+            <button class="btn btn-primary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Add member</button>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:90px;"></div>
+          </div>
+          <div style="padding:16px; display:flex; flex-direction:column; gap:8px;">
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:70%;"></div>
+            <div style="height:7px; background:#dddde0; border-radius:3px; width:50%;"></div>
+          </div>
+        </div>
+        <div class="dd-cap">Don't scatter buttons across the header — placing them before the title makes the layout feel unstructured and breaks scan order.</div>
+      </div>
+    </div>
+
   </section>
 
   <hr class="divider" />
@@ -215,6 +374,101 @@
         </button>
       </div>
     </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTENT GUIDELINES -->
+  <section class="section" id="content-guidelines">
+    <h2><span class="emoji">✍️</span> Content guidelines</h2>
+    <p class="section-lead">Button labels are the voice of an action. Write them to be clear, specific, and self-explanatory — even when read out of context by a screen reader.</p>
+
+    <!-- Rule 1: Verb + noun -->
+    <div class="cg-rule">
+      <h3>Use verb + noun</h3>
+      <p>Combine an action verb with the object it acts on. This makes the outcome clear without relying on surrounding context.</p>
+      <div class="dd-grid">
+        <div class="dd-card">
+          <div class="dd-hd do">✓ Do</div>
+          <div class="dd-prev" style="gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
+            <button class="btn btn-danger" style="pointer-events:none;">Delete survey</button>
+            <button class="btn btn-secondary" style="pointer-events:none;">Add member</button>
+          </div>
+          <div class="dd-cap">Verb + noun makes the outcome crystal clear, even without visual context.</div>
+        </div>
+        <div class="dd-card">
+          <div class="dd-hd dont">✕ Don't</div>
+          <div class="dd-prev" style="gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-primary" style="pointer-events:none;">Submit</button>
+            <button class="btn btn-danger" style="pointer-events:none;">Yes</button>
+            <button class="btn btn-secondary" style="pointer-events:none;">OK</button>
+          </div>
+          <div class="dd-cap">Vague labels like "Submit", "Yes", or "OK" lose all meaning when read out of context.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule 2: Keep it short -->
+    <div class="cg-rule">
+      <h3>Keep labels short</h3>
+      <p>Aim for 1–3 words. If you feel the need for more, consider whether the extra context belongs in nearby helper text instead.</p>
+      <div class="dd-grid">
+        <div class="dd-card">
+          <div class="dd-hd do">✓ Do</div>
+          <div class="dd-prev">
+            <button class="btn btn-primary" style="pointer-events:none;">Invite team</button>
+          </div>
+          <div class="dd-cap">Short labels scan instantly and fit neatly in the button container.</div>
+        </div>
+        <div class="dd-card">
+          <div class="dd-hd dont">✕ Don't</div>
+          <div class="dd-prev">
+            <button class="btn btn-primary cg-btn-long" style="pointer-events:none;">Click here to invite your team members</button>
+          </div>
+          <div class="dd-cap">Long labels are hard to scan and can break layouts on smaller screens.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule 3: Icons reinforce, not decorate -->
+    <div class="cg-rule">
+      <h3>Icons reinforce, not decorate</h3>
+      <p>Only add an icon when it genuinely aids comprehension — a trash icon on Delete, a plus on Add. When in doubt, leave the icon out.</p>
+      <div class="dd-grid">
+        <div class="dd-card">
+          <div class="dd-hd do">✓ Do</div>
+          <div class="dd-prev" style="gap: 8px;">
+            <button class="btn btn-danger" style="pointer-events:none;">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              Delete
+            </button>
+            <button class="btn btn-primary" style="pointer-events:none;">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+              Add member
+            </button>
+          </div>
+          <div class="dd-cap">The trash and plus icons directly reinforce the meaning of their labels.</div>
+        </div>
+        <div class="dd-card">
+          <div class="dd-hd dont">✕ Don't</div>
+          <div class="dd-prev" style="gap: 8px;">
+            <button class="btn btn-primary" style="pointer-events:none;">
+              <!-- Star icon - decorative, doesn't reinforce "Save" -->
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+              Save changes
+            </button>
+            <button class="btn btn-secondary" style="pointer-events:none;">
+              <!-- Arrow icon - doesn't relate to "Edit" -->
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+              Edit
+            </button>
+          </div>
+          <div class="dd-cap">Random icons add visual noise without helping users understand the action faster.</div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <hr class="divider" />
@@ -353,8 +607,9 @@
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#anatomy">Anatomy</a>
-    <a class="toc-link" href="#when-to-use">When to Use</a>
+    <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#content-guidelines">Content guidelines</a>
     <a class="toc-link" href="#states">States</a>
     <a class="toc-link" href="#tokens">Design Tokens</a>
     <a class="toc-link" href="#accessibility">Accessibility</a>
