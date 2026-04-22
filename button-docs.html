@@ -5,6 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Button — Engage Design System</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Button component styles ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; height: 36px; padding: 0 12px;
+      border-radius: 6px; border: 1px solid transparent;
+      font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 500;
+      cursor: pointer; white-space: nowrap; transition: all .1s;
+      text-decoration: none;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Primary */
+    .btn-primary { background: #0a9d99; border-color: #0c827f; color: #fff; box-shadow: 0 1px 2px rgba(25,39,67,.08); }
+    .btn-primary:hover, .btn-primary.is-hover { background: #0c827f; border-color: #166764; }
+    .btn-primary:active, .btn-primary.is-pressed { background: #166764; border-color: #0e4846; }
+
+    /* Secondary */
+    .btn-secondary { background: #fff; border-color: #bcc1cd; color: rgba(25,39,67,.85); box-shadow: 0 1px 2px rgba(25,39,67,.04); }
+    .btn-secondary:hover, .btn-secondary.is-hover { background: #f8f8f9; border-color: #a5adbc; }
+    .btn-secondary:active, .btn-secondary.is-pressed { background: #f1f2f4; border-color: #7b869e; }
+
+    /* Tertiary */
+    .btn-tertiary { background: transparent; border-color: transparent; color: rgba(25,39,67,.85); }
+    .btn-tertiary:hover, .btn-tertiary.is-hover { background: #f8f8f9; }
+    .btn-tertiary:active, .btn-tertiary.is-pressed { background: #f1f2f4; }
+
+    /* Danger */
+    .btn-danger { background: #d3353b; border-color: #b9252a; color: #fff; box-shadow: 0 1px 2px rgba(25,39,67,.08); }
+    .btn-danger:hover, .btn-danger.is-hover { background: #b9252a; border-color: #861a1d; }
+    .btn-danger:active, .btn-danger.is-pressed { background: #861a1d; border-color: #5a1013; }
+
+    /* Disabled */
+    .btn.is-disabled {
+      background: rgba(25,39,67,.07) !important; border-color: transparent !important;
+      color: rgba(25,39,67,.3) !important; box-shadow: none !important; cursor: not-allowed;
+    }
+    .btn-secondary.is-disabled { background: #fff !important; border-color: #e1e4e8 !important; }
+    .btn-tertiary.is-disabled  { background: transparent !important; border-color: transparent !important; }
+
+    /* Icon SVG helpers */
+    .icon-plus { display:inline-block; }
+    .icon-trash { display:inline-block; }
+
+    /* Variant row layout */
+    .var-grid { display: flex; flex-direction: column; gap: 14px; }
+    .var-row  { display: flex; align-items: center; gap: 12px; }
+    .var-label { font-size: 12px; color: var(--text-3); font-weight: 500; width: 80px; flex-shrink: 0; }
+    .state-col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .state-label { font-size: 11px; color: var(--text-3); }
+  </style>
 </head>
 <body>
 
@@ -27,17 +78,289 @@
   <div class="page-header">
     <div class="page-badges">
       <span class="badge badge-brand">Buttons</span>
-      <span class="badge badge-beta">Coming Soon</span>
+      <span class="badge badge-stable">Stable</span>
+      <span class="badge badge-neutral">Updated Apr 2026</span>
     </div>
     <h1>Button</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
+    <p class="page-desc">A labelled button that triggers an action. Use it whenever an action needs to be clearly named — it scales from low-emphasis ghost actions to high-emphasis primary calls-to-action and destructive confirmations.</p>
   </div>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+  <hr class="divider" />
+
+  <!-- ANATOMY -->
+  <section class="section" id="anatomy">
+    <h2><span class="emoji">🔬</span> Anatomy</h2>
+    <p class="section-lead">The button is built from three layers. The label is always required; icons are optional.</p>
+
+    <div class="anatomy-fig">
+      <div style="position:relative; display:inline-flex; align-items:center; padding: 0 80px;">
+        <button class="btn btn-primary" style="pointer-events:none; gap:6px;">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+          Label
+        </button>
+        <div style="position:absolute; right:calc(100% - 56px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
+          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">① Container</span>
+          <div style="width:20px; height:1px; background:var(--text-3);"></div>
+          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--text-3);"></div>
+        </div>
+        <div style="position:absolute; top:-28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">② Icon (optional)</span>
+          <div style="width:1px; height:16px; background:var(--text-3);"></div>
+        </div>
+        <div style="position:absolute; left:calc(100% - 72px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
+          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--text-3);"></div>
+          <div style="width:20px; height:1px; background:var(--text-3);"></div>
+          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">③ Label</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="anatomy-items">
+      <div class="anatomy-item">
+        <div class="anatomy-num">1</div>
+        <div><span class="anatomy-term">Container</span> — the outer shape that carries the fill, border, corner radius, and shadow. All visual differences between types and states are applied here.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">2</div>
+        <div><span class="anatomy-term">Icon</span> (optional) — a 14×14px icon placed left or right of the label. Use it to reinforce the action, not to decorate.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">3</div>
+        <div><span class="anatomy-term">Label</span> — always required. Keep it short and action-oriented: "Save", "Delete project", "Send invite". Avoid vague labels like "OK" or "Click here".</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- WHEN TO USE -->
+  <section class="section" id="when-to-use">
+    <h2><span class="emoji">✅</span> When to Use</h2>
+    <div class="use-cols">
+      <div class="use-group">
+        <div class="use-group-label do">✔ USE WHEN</div>
+        <ul class="use-list">
+          <li><span class="use-icon">✓</span> The action has a clear name that fits in 1–3 words</li>
+          <li><span class="use-icon">✓</span> You need to communicate action hierarchy — one primary, supporting secondaries</li>
+          <li><span class="use-icon">✓</span> The action is destructive and needs an explicit, labelled confirmation (Danger type)</li>
+        </ul>
+      </div>
+      <div class="use-group">
+        <div class="use-group-label dont">✕ AVOID WHEN</div>
+        <ul class="use-list">
+          <li><span class="use-icon">✗</span> Space is too tight for a label — use an Icon Button instead</li>
+          <li><span class="use-icon">✗</span> The action navigates to a new page — use a Link Button</li>
+          <li><span class="use-icon">✗</span> You need more than two primary buttons side by side — reconsider the hierarchy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- VARIANTS -->
+  <section class="section" id="variants">
+    <h2><span class="emoji">🎨</span> Variants</h2>
+    <p class="section-lead">The <code>Type</code> property controls visual hierarchy. Use one Primary per view maximum.</p>
+
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div><span class="preview-label">Types</span></div>
+      <div class="preview-body" style="gap:12px; padding: 32px;">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-tertiary">Tertiary</button>
+        <button class="btn btn-danger">Danger</button>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>TYPE</th><th>USE FOR</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="vb vb-brand">Primary</span></td>
+            <td>The single highest-emphasis action on a view. Submit a form, complete an onboarding step, confirm a key decision. Use only once per page section.</td>
+          </tr>
+          <tr>
+            <td><span class="vb vb-neutral">Secondary</span></td>
+            <td>Supporting actions alongside a Primary — Cancel, Edit, Export. Can appear multiple times without competing with the primary.</td>
+          </tr>
+          <tr>
+            <td><span class="vb vb-neutral">Tertiary</span></td>
+            <td>Low-emphasis inline actions in dense layouts — table rows, cards, toolbars. No background or border so it blends into content.</td>
+          </tr>
+          <tr>
+            <td><span class="vb" style="background:#fef2f2; color:#b91c1c;">Danger</span></td>
+            <td>Destructive, irreversible actions: delete, remove, revoke. Always requires an explicit label so users understand the consequence.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>With icons</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div><span class="preview-label">Icon left · Icon right</span></div>
+      <div class="preview-body" style="gap:12px; padding: 32px; flex-wrap: wrap;">
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+          Add member
+        </button>
+        <button class="btn btn-secondary">
+          Export
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10V3M5 7l3 3 3-3M4 13h8"/></svg>
+        </button>
+        <button class="btn btn-danger">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+          Delete
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- STATES -->
+  <section class="section" id="states">
+    <h2><span class="emoji">🔄</span> States</h2>
+    <p class="section-lead">All four types share the same four states. Token mappings differ per type.</p>
+
+    <h3>Primary</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-primary">Save</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-primary is-hover">Save</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-primary is-pressed">Save</button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="btn btn-primary is-disabled" disabled>Save</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
+    <h3>Secondary</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-secondary">Cancel</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-secondary is-hover">Cancel</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-secondary is-pressed">Cancel</button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="btn btn-secondary is-disabled" disabled>Cancel</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
+    <h3>Tertiary</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-tertiary">Edit</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-tertiary is-hover">Edit</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-tertiary is-pressed">Edit</button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="btn btn-tertiary is-disabled" disabled>Edit</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
+    <h3>Danger</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-danger">Delete</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-danger is-hover">Delete</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-danger is-pressed">Delete</button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="btn btn-danger is-disabled" disabled>Delete</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:16px;">
+      <table>
+        <thead><tr><th>STATE</th><th>PRIMARY FILL</th><th>SECONDARY FILL</th><th>BORDER</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #ddd;"></span>bg/input</span></td><td><span class="token">border/action</span></td></tr>
+          <tr><td>Hover</td><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><span class="token"><span class="swatch" style="background:#f8f8f9;"></span>bg/input-hover</span></td><td><span class="token">border/action-hover</span></td></tr>
+          <tr><td>Pressed</td><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td><span class="token">border/action-pressed</span></td></tr>
+          <tr><td>Disabled</td><td colspan="2"><span class="token"><span class="swatch" style="background:rgba(25,39,67,.07);"></span>bg/disabled</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- DESIGN TOKENS -->
+  <section class="section" id="tokens">
+    <h2><span class="emoji">🌑</span> Design Tokens</h2>
+    <p class="section-lead">Token names and their resolved colour values.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
+        <tbody>
+          <tr><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td>#0a9d99</td><td>Primary default fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td>#0c827f</td><td>Primary hover fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td>#166764</td><td>Primary pressed fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>border/brand/base</span></td><td>#0c827f</td><td>Primary default border</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#ffffff; border:1px solid #ddd;"></span>bg/input</span></td><td>#ffffff</td><td>Secondary default fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#f8f8f9;"></span>bg/input-hover</span></td><td>#f8f8f9</td><td>Secondary/Tertiary hover fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td>#f1f2f4</td><td>Secondary/Tertiary pressed fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td>#bcc1cd</td><td>Secondary default border</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#d3353b;"></span>bg/negative/base</span></td><td>#d3353b</td><td>Danger default fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#b9252a;"></span>bg/negative/base-hover</span></td><td>#b9252a</td><td>Danger hover fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:#861a1d;"></span>bg/negative/base-pressed</span></td><td>#861a1d</td><td>Danger pressed fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.07);"></span>bg/disabled</span></td><td>#192743 · 7%</td><td>All types disabled fill</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" id="accessibility">
+    <h2><span class="emoji">♿</span> Accessibility</h2>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Always use a native <code>&lt;button&gt;</code> element.</strong> You get keyboard focus, Enter/Space activation, and <code>role="button"</code> for free. Never simulate a button with a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Labels must describe the action, not the element.</strong> Write "Delete survey" not "Delete" when context is ambiguous. Screen readers read the label in isolation.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Disabled buttons need a reason.</strong> Add a tooltip or helper text explaining why the button is disabled. <code>disabled</code> buttons are not reachable by keyboard — consider using <code>aria-disabled="true"</code> with a click handler that explains the constraint instead.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Danger buttons must be extra clear.</strong> Use an explicit label ("Delete account", not just "Delete") and consider a confirmation dialog for irreversible actions.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Icon-only decoration needs <code>aria-hidden</code>.</strong> If an icon is next to a label, add <code>aria-hidden="true"</code> to the SVG so screen readers don't read it twice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <div></div>
+    <a class="pag-card right" href="icon-button-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Icon Button</span>
+    </a>
   </div>
 
 </article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#anatomy">Anatomy</a>
+    <a class="toc-link" href="#when-to-use">When to Use</a>
+    <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#states">States</a>
+    <a class="toc-link" href="#tokens">Design Tokens</a>
+    <a class="toc-link" href="#accessibility">Accessibility</a>
+  </nav>
+</div>
+
 </div><!-- /content-wrap -->
 </div><!-- /shell -->
 
