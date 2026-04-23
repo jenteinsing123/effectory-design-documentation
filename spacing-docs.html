@@ -6,131 +6,55 @@
   <title>Spacing — Engage Design System</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* ── Named token scale table ── */
-    .sp-table {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
-      overflow: hidden; margin-bottom: 16px;
-    }
-    .sp-head {
-      display: grid; grid-template-columns: 52px 1fr 192px;
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border);
-      font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
-    }
-    .sp-head > div { padding: 9px 14px; }
-    .sp-head > div:first-child { text-align: right; border-right: 1px solid var(--border-light); }
-    .sp-row {
-      display: grid; grid-template-columns: 52px 1fr 192px;
-      border-top: 1px solid var(--border-light); transition: background .1s;
-    }
-    .sp-row:hover > div { background: var(--bg-subtle); }
-    .sp-row.named { background: rgba(10,157,153,.02); }
-    .sp-row.named:hover > div { background: rgba(10,157,153,.05); }
-    .sp-px {
-      padding: 12px 14px; text-align: right; border-right: 1px solid var(--border-light);
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; font-weight: 600; color: var(--text-2);
-      display: flex; align-items: center; justify-content: flex-end;
-    }
-    .sp-bar-cell {
-      padding: 12px 14px; display: flex; align-items: center; gap: 12px;
-    }
-    .sp-bar {
-      height: 14px; border-radius: 3px; flex-shrink: 0;
-    }
-    .sp-bar.named { background: var(--brand); opacity: .8; }
-    .sp-bar.raw   { background: var(--brand); opacity: .22; }
-    .sp-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .sp-token { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--brand); white-space: nowrap; }
-    .sp-desc  { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-    .sp-info {
-      padding: 12px 14px; border-left: 1px solid var(--border-light);
-      font-size: 12.5px; color: var(--text-2); line-height: 1.55;
-      display: flex; align-items: center;
-    }
-
-    /* ── Layout mockups ── */
-    .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-    .mock-card {
-      border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
-    }
-    .mock-label {
-      padding: 8px 14px; font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border);
-    }
-    .mock-body { padding: 20px; }
-
-    /* reusable mock elements */
-    .m-block { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 6px; }
-    .m-line  { background: var(--border); border-radius: 3px; height: 10px; }
-    .m-line.short { width: 55%; }
-    .m-line.med   { width: 75%; }
-    .m-line.full  { width: 100%; }
-    .m-line.heading { height: 14px; width: 60%; background: var(--text-3); opacity: .35; }
-    .m-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      height: 30px; padding: 0 12px; background: var(--brand); border-radius: 6px;
-      font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 500; color: #fff;
-    }
-    .m-input {
-      height: 32px; border: 1px solid var(--border); border-radius: 6px;
-      background: #fff; width: 100%;
-    }
-
-    /* gap ruler (shows labeled spacing arrow) */
-    .gap-ruler {
-      display: flex; align-items: center; justify-content: center; position: relative;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10px; font-weight: 600; color: var(--brand);
-    }
-    .gap-ruler::before, .gap-ruler::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, var(--brand));
-      opacity: .35;
-    }
-    .gap-ruler::after { background: linear-gradient(to left, transparent, var(--brand)); }
-    .gap-ruler span { padding: 0 8px; white-space: nowrap; }
-
-    /* ── Typography spacing specimen ── */
-    .typo-specimen {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
-      overflow: hidden; margin-bottom: 16px;
-    }
-    .typo-row {
-      display: grid; grid-template-columns: 200px 1fr;
+    /* ── Scale list ── */
+    .scale-list { display: flex; flex-direction: column; margin-bottom: 16px; }
+    .scale-item {
+      display: grid;
+      grid-template-columns: 200px 1fr 60px;
+      align-items: center;
+      gap: 24px;
+      padding: 14px 0;
       border-bottom: 1px solid var(--border-light);
     }
-    .typo-row:last-child { border-bottom: none; }
-    .typo-meta {
-      padding: 20px 16px; background: var(--bg-subtle);
-      border-right: 1px solid var(--border-light);
-      display: flex; flex-direction: column; gap: 4px;
+    .scale-item:last-child { border-bottom: none; }
+    .scale-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .scale-name {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; color: var(--text); font-weight: 600;
     }
-    .typo-rule { font-size: 12px; color: var(--text-2); line-height: 1.55; }
-    .typo-token { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--brand); }
-    .typo-preview { padding: 20px 24px; }
+    .scale-name.unnamed { color: var(--text-3); font-weight: 400; font-style: italic; }
+    .scale-use {
+      font-size: 12px; color: var(--text-3); line-height: 1.5;
+    }
+    .scale-bar-wrap {
+      display: flex; align-items: center; min-width: 0;
+    }
+    .scale-bar {
+      height: 24px; background: var(--brand); border-radius: 3px;
+      opacity: .85;
+    }
+    .scale-bar.unnamed { opacity: .25; }
+    .scale-px {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; font-weight: 600; color: var(--text-2);
+      text-align: right;
+    }
 
-    /* ── Token reference table ── */
-    .ref-table {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
-      overflow: hidden; margin-bottom: 16px;
+    /* ── Note callout ── */
+    .note {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+      margin-bottom: 16px;
     }
-    .ref-head {
-      display: grid; grid-template-columns: 1fr 60px 60px 1fr;
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border);
-      font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
+    .note strong { color: var(--text); font-weight: 600; }
+    .note code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; background: var(--bg); padding: 1px 6px;
+      border-radius: 4px; border: 1px solid var(--border);
     }
-    .ref-head > div, .ref-row > div { padding: 9px 14px; }
-    .ref-row {
-      display: grid; grid-template-columns: 1fr 60px 60px 1fr;
-      border-top: 1px solid var(--border-light); transition: background .1s;
-    }
-    .ref-row:hover > div { background: var(--bg-subtle); }
-    .ref-token { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; color: var(--brand); display: flex; align-items: center; }
-    .ref-val   { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--text-2); display: flex; align-items: center; }
-    .ref-desc  { font-size: 12.5px; color: var(--text-2); line-height: 1.55; display: flex; align-items: center; }
   </style>
 </head>
 <body>
@@ -154,10 +78,9 @@
     <div class="page-badges">
       <span class="badge badge-brand">Foundations</span>
       <span class="badge badge-stable">Stable</span>
-      <span class="badge badge-neutral">Updated Apr 2026</span>
     </div>
     <h1>Spacing</h1>
-    <p class="page-desc">All spacing in Engage is built on a 4 px base unit. Eight named semantic tokens cover the most common layout situations — from tight inline gaps to generous section breaks. Raw grid values (4–120 px) are available for component sizing and one-off measurements.</p>
+    <p class="page-desc">Engage spacing is built on a 4 px base unit. Eight named tokens cover layout spacing — from tight inline gaps to generous section breaks. Always use a token; never hardcode a pixel value.</p>
   </div>
 
   <hr class="divider" />
@@ -165,531 +88,100 @@
   <!-- SCALE -->
   <section class="section" id="scale">
     <h2><span class="emoji">📏</span> Scale</h2>
-    <p class="section-lead">Named tokens (highlighted in teal) carry semantic meaning and should be used for layout spacing. Raw grid steps are available for component widths, heights, and other measurements that don't map to a named role.</p>
 
-    <div class="sp-table">
-      <div class="sp-head">
-        <div>px</div>
-        <div>Visual</div>
-        <div>When to use</div>
-      </div>
-
-      <!-- 4px -->
-      <div class="sp-row named">
-        <div class="sp-px">4</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:10px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-extra-tight</span>
-            <span class="sp-desc">0.25 rem · 4 px</span>
-          </div>
+    <div class="scale-list">
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-extra-tight</span>
+          <span class="scale-use">Icon-to-label · l4–l6 to body</span>
         </div>
-        <div class="sp-info">Icon-to-label gap; small heading (l4–l6) to body; chip padding</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:4px;"></div></div>
+        <div class="scale-px">4 px</div>
       </div>
 
-      <!-- 6px -->
-      <div class="sp-row">
-        <div class="sp-px">6</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:15px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-tight</span>
+          <span class="scale-use">l1–l3 to body · button vertical padding</span>
         </div>
-        <div class="sp-info">Avatar group overlap offset; fine-tuned component spacing</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:8px;"></div></div>
+        <div class="scale-px">8 px</div>
       </div>
 
-      <!-- 8px -->
-      <div class="sp-row named">
-        <div class="sp-px">8</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:20px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-tight</span>
-            <span class="sp-desc">0.5 rem · 8 px</span>
-          </div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-base-tight</span>
+          <span class="scale-use">List item · table cell padding</span>
         </div>
-        <div class="sp-info">Large heading (l1–l3) to body; button internal vertical padding; tag padding</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:12px;"></div></div>
+        <div class="scale-px">12 px</div>
       </div>
 
-      <!-- 12px -->
-      <div class="sp-row named">
-        <div class="sp-px">12</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:30px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-base-tight</span>
-            <span class="sp-desc">0.75 rem · 12 px</span>
-          </div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-base</span>
+          <span class="scale-use">Default · component padding · between form fields</span>
         </div>
-        <div class="sp-info">Compact list-item padding; table cell padding; small button horizontal padding</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:16px;"></div></div>
+        <div class="scale-px">16 px</div>
       </div>
 
-      <!-- 16px -->
-      <div class="sp-row named">
-        <div class="sp-px">16</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:40px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-base</span>
-            <span class="sp-desc">1 rem · 16 px · <strong style="color:var(--brand);">Default</strong></span>
-          </div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-loose</span>
+          <span class="scale-use">Card padding · section padding · grid gap</span>
         </div>
-        <div class="sp-info">Standard component padding; input field padding; gap between stacked form fields</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:24px;"></div></div>
+        <div class="scale-px">24 px</div>
       </div>
 
-      <!-- 20px -->
-      <div class="sp-row">
-        <div class="sp-px">20</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:50px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-extra-loose</span>
+          <span class="scale-use">Between major form groups · large cards</span>
         </div>
-        <div class="sp-info">Medium button horizontal padding; sidebar item padding</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:32px;"></div></div>
+        <div class="scale-px">32 px</div>
       </div>
 
-      <!-- 24px -->
-      <div class="sp-row named">
-        <div class="sp-px">24</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:60px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-loose</span>
-            <span class="sp-desc">1.5 rem · 24 px</span>
-          </div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-super-loose</span>
+          <span class="scale-use">Between related page sections</span>
         </div>
-        <div class="sp-info">Card padding; section internal padding; gap between cards in a grid; page header bottom margin</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:40px;"></div></div>
+        <div class="scale-px">40 px</div>
       </div>
 
-      <!-- 32px -->
-      <div class="sp-row named">
-        <div class="sp-px">32</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:80px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-extra-loose</span>
-            <span class="sp-desc">2 rem · 32 px</span>
-          </div>
+      <div class="scale-item">
+        <div class="scale-meta">
+          <span class="scale-name">spacing-super-extra-loose</span>
+          <span class="scale-use">Between unrelated sections · hero padding</span>
         </div>
-        <div class="sp-info">Between major form groups; large card padding; panel section dividers</div>
-      </div>
-
-      <!-- 40px -->
-      <div class="sp-row named">
-        <div class="sp-px">40</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:100px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-super-loose</span>
-            <span class="sp-desc">2.5 rem · 40 px</span>
-          </div>
-        </div>
-        <div class="sp-info">Between related page sections; page-level vertical rhythm</div>
-      </div>
-
-      <!-- 48px -->
-      <div class="sp-row">
-        <div class="sp-px">48</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:120px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info">Compact component fixed heights; icon frame sizing</div>
-      </div>
-
-      <!-- 56px -->
-      <div class="sp-row named">
-        <div class="sp-px">56</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar named" style="width:140px;"></div>
-          <div class="sp-meta">
-            <span class="sp-token">spacing-super-extra-loose</span>
-            <span class="sp-desc">3.5 rem · 56 px</span>
-          </div>
-        </div>
-        <div class="sp-info">Between unrelated page sections; hero content padding; major visual breaks</div>
-      </div>
-
-      <!-- 64–120 raw -->
-      <div class="sp-row">
-        <div class="sp-px">64</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:160px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info" style="color:var(--text-3);">Used directly for fixed component heights and widths</div>
-      </div>
-      <div class="sp-row">
-        <div class="sp-px">72</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:180px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info" style="color:var(--text-3);">Used directly for fixed component heights and widths</div>
-      </div>
-      <div class="sp-row">
-        <div class="sp-px">80</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:200px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info" style="color:var(--text-3);">Used directly for fixed component heights and widths</div>
-      </div>
-      <div class="sp-row">
-        <div class="sp-px">96</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:240px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info" style="color:var(--text-3);">Used directly for fixed component heights and widths</div>
-      </div>
-      <div class="sp-row">
-        <div class="sp-px">120</div>
-        <div class="sp-bar-cell">
-          <div class="sp-bar raw" style="width:300px;"></div>
-          <div class="sp-meta"><span class="sp-desc" style="color:var(--text-3); font-style:italic;">Raw grid step</span></div>
-        </div>
-        <div class="sp-info" style="color:var(--text-3);">Used directly for fixed component heights and widths</div>
+        <div class="scale-bar-wrap"><div class="scale-bar" style="width:56px;"></div></div>
+        <div class="scale-px">56 px</div>
       </div>
     </div>
 
-    <div class="a11y-list">
-      <div class="a11y-item">
-        <span class="a11y-arrow">→</span>
-        <div>The base unit is <strong>4 px</strong>. Every value in the grid is a multiple of 4, which keeps spacing consistent and avoids sub-pixel rendering artifacts.</div>
-      </div>
-      <div class="a11y-item">
-        <span class="a11y-arrow">→</span>
-        <div>Steps 88, 104, and 112 exist in the grid but have no current named uses — they remain available for future component sizing needs.</div>
-      </div>
+    <div class="note">
+      <strong>Beyond 56 px</strong> — the grid continues at 64, 72, 80, 88, 96, 104, 112, and 120 px for component sizing (heights, widths, fixed dimensions). These steps don't have named tokens and are referenced directly by their pixel value.
     </div>
   </section>
 
   <hr class="divider" />
 
-  <!-- LAYOUT USAGE -->
-  <section class="section" id="layout">
-    <h2><span class="emoji">🏗️</span> Layout usage</h2>
-    <p class="section-lead">Spacing tokens map directly to layout contexts. The further apart two elements are on the page, the less related they should feel. Use tighter spacing to imply connection, and looser spacing to signal a break.</p>
+  <!-- GUIDANCE -->
+  <section class="section" id="guidance">
+    <h2><span class="emoji">✨</span> Guidance</h2>
 
-    <div class="mock-grid">
+    <h3>Proximity signals relationship</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Items that belong together should sit closer than items that are independent. Use <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-extra-tight</code> between a label and its input, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-base</code> between adjacent fields, and <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-super-loose</code> between sections that aren't directly related.</p>
 
-      <!-- Between page sections -->
-      <div class="mock-card">
-        <div class="mock-label">Between page sections</div>
-        <div class="mock-body" style="display:flex; flex-direction:column; gap:0;">
-          <div class="m-block" style="padding:14px 16px; display:flex; flex-direction:column; gap:8px;">
-            <div class="m-line heading"></div>
-            <div class="m-line med"></div>
-            <div class="m-line short"></div>
-          </div>
-          <div class="gap-ruler" style="height:40px;"><span>40px · spacing-super-loose</span></div>
-          <div class="m-block" style="padding:14px 16px; display:flex; flex-direction:column; gap:8px;">
-            <div class="m-line heading"></div>
-            <div class="m-line full"></div>
-            <div class="m-line med"></div>
-          </div>
-          <div class="gap-ruler" style="height:56px;"><span>56px · spacing-super-extra-loose</span></div>
-          <div class="m-block" style="padding:14px 16px; display:flex; flex-direction:column; gap:8px;">
-            <div class="m-line heading"></div>
-            <div class="m-line short"></div>
-          </div>
-        </div>
-      </div>
+    <h3>Stay on the 4 px grid</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Every value in the scale is a multiple of 4. Avoid in-between values like 14, 18, or 22 px — they break visual rhythm and create misalignment with adjacent components. When something feels off, snap to the nearest grid step.</p>
 
-      <!-- Within cards -->
-      <div class="mock-card">
-        <div class="mock-label">Within cards &amp; panels</div>
-        <div class="mock-body">
-          <div class="m-block" style="padding:24px; display:flex; flex-direction:column; gap:16px; position:relative;">
-            <div style="position:absolute; top:0; left:-18px; height:100%; display:flex; align-items:center;">
-              <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:600; color:var(--brand); white-space:nowrap;">24px padding</div>
-            </div>
-            <div class="m-line heading"></div>
-            <div style="display:flex; flex-direction:column; gap:16px;">
-              <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-                <div style="width:10px;height:10px;background:var(--border);border-radius:2px;flex-shrink:0;"></div>
-                <div class="m-line" style="flex:1; margin:0;"></div>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-                <div style="width:10px;height:10px;background:var(--border);border-radius:2px;flex-shrink:0;"></div>
-                <div class="m-line" style="flex:1; margin:0;"></div>
-              </div>
-              <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-                <div style="width:10px;height:10px;background:var(--border);border-radius:2px;flex-shrink:0;"></div>
-                <div class="m-line short" style="margin:0;"></div>
-              </div>
-            </div>
-            <div style="display:flex; justify-content:flex-end; gap:8px;">
-              <div style="height:28px; width:64px; border:1px solid var(--border); border-radius:6px; background:#fff;"></div>
-              <div class="m-btn">Save</div>
-            </div>
-          </div>
-          <div style="margin-top:10px; font-size:11.5px; color:var(--text-3); line-height:1.6;">24px card padding · 16px between rows · 8px internal button gap</div>
-        </div>
-      </div>
-
-      <!-- Stacked form fields -->
-      <div class="mock-card">
-        <div class="mock-label">Stacked form fields</div>
-        <div class="mock-body" style="display:flex; flex-direction:column; gap:0;">
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <div class="m-line" style="width:80px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input"></div>
-            <div class="m-line short" style="height:8px; opacity:.5;"></div>
-          </div>
-          <div class="gap-ruler" style="height:16px;"><span>16px · spacing-base</span></div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <div class="m-line" style="width:100px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input"></div>
-          </div>
-          <div class="gap-ruler" style="height:16px;"><span>16px · spacing-base</span></div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <div class="m-line" style="width:64px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input"></div>
-          </div>
-          <div class="gap-ruler" style="height:24px;"><span>24px · spacing-loose</span></div>
-          <div style="display:flex; justify-content:flex-end;">
-            <div class="m-btn">Submit</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card-based layouts -->
-      <div class="mock-card">
-        <div class="mock-label">Card-based layouts</div>
-        <div class="mock-body" style="display:flex; flex-direction:column; gap:0;">
-          <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:4px;">
-            <div class="m-line heading" style="width:50%;"></div>
-            <div class="m-line short"></div>
-          </div>
-          <div class="gap-ruler" style="height:24px;"><span>24px · header bottom</span></div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-            <div class="m-block" style="padding:14px; display:flex; flex-direction:column; gap:8px;">
-              <div class="m-line heading" style="width:70%;"></div>
-              <div class="m-line med"></div>
-              <div class="m-line short"></div>
-            </div>
-            <div class="m-block" style="padding:14px; display:flex; flex-direction:column; gap:8px;">
-              <div class="m-line heading" style="width:70%;"></div>
-              <div class="m-line full"></div>
-              <div class="m-line short"></div>
-            </div>
-          </div>
-          <div style="margin-top:8px; font-size:11.5px; color:var(--text-3); line-height:1.6;">16px gap between cards · 24px below section header</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- TYPOGRAPHY SPACING -->
-  <section class="section" id="typography">
-    <h2><span class="emoji">✍️</span> Typography spacing</h2>
-    <p class="section-lead">The space between a heading and the body copy that follows it scales with the heading level. Larger headings have stronger visual weight and need more separation; smaller headings sit closer to their content.</p>
-
-    <div class="typo-specimen">
-      <div class="typo-row">
-        <div class="typo-meta">
-          <div class="typo-rule">Large headings <strong>l1 · l2 · l3</strong></div>
-          <div class="typo-token">spacing-tight · 8px</div>
-        </div>
-        <div class="typo-preview">
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2; margin-bottom:8px;">Survey results at a glance</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:14px; font-weight:400; color:var(--text-2); line-height:1.6;">A summary of your organisation's most recent engagement survey, including participation rates, top themes, and recommended next steps.</div>
-        </div>
-      </div>
-      <div class="typo-row">
-        <div class="typo-meta">
-          <div class="typo-rule">Small headings <strong>l4 · l5 · l6</strong></div>
-          <div class="typo-token">spacing-extra-tight · 4px</div>
-        </div>
-        <div class="typo-preview">
-          <div style="font-family:'Poppins',sans-serif; font-size:14px; font-weight:600; color:var(--text); line-height:1.4; margin-bottom:4px;">Response rate by department</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:14px; font-weight:400; color:var(--text-2); line-height:1.6;">Engineering 84% · Product 79% · Marketing 72%</div>
-        </div>
-      </div>
-      <div class="typo-row">
-        <div class="typo-meta">
-          <div class="typo-rule">Large headings + call-to-action</div>
-          <div class="typo-token">spacing-tight · 8px</div>
-        </div>
-        <div class="typo-preview" style="display:flex; flex-direction:column; gap:0;">
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2; margin-bottom:8px;">Start your first survey</div>
-          <div class="m-btn" style="align-self:flex-start;">Get started</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- BEST PRACTICES -->
-  <section class="section" id="best-practices">
-    <h2><span class="emoji">✨</span> Best practices</h2>
-
-    <h3>Use named tokens — don't hardcode pixel values</h3>
-    <p class="section-lead" style="margin-bottom:14px;">Named tokens are the contract between design and code. When spacing is adjusted at the token level, every component updates automatically. Hardcoded values scatter the change across hundreds of files.</p>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:10px; min-height:100px;">
-          <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
-            <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-              <div style="width:12px;height:12px;background:var(--bg-subtle);border-radius:2px;flex-shrink:0;border:1px solid var(--border);"></div>
-              <div class="m-line" style="flex:1; margin:0;"></div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-              <div style="width:12px;height:12px;background:var(--bg-subtle);border-radius:2px;flex-shrink:0;border:1px solid var(--border);"></div>
-              <div class="m-line short" style="margin:0;"></div>
-            </div>
-          </div>
-          <code style="font-size:11px; color:var(--text-3);">gap: spacing-base (16px)</code>
-        </div>
-        <div class="dd-cap">Token-based spacing updates globally when the scale changes.</div>
-      </div>
-      <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:10px; min-height:100px;">
-          <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
-            <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-              <div style="width:12px;height:12px;background:var(--bg-subtle);border-radius:2px;flex-shrink:0;border:1px solid var(--border);"></div>
-              <div class="m-line" style="flex:1; margin:0;"></div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#fff;">
-              <div style="width:12px;height:12px;background:var(--bg-subtle);border-radius:2px;flex-shrink:0;border:1px solid var(--border);"></div>
-              <div class="m-line short" style="margin:0;"></div>
-            </div>
-          </div>
-          <code style="font-size:11px; color:var(--red);">gap: 16px &nbsp; ← hardcoded</code>
-        </div>
-        <div class="dd-cap">Hardcoded pixel values require manual updates every time the design scales.</div>
-      </div>
-    </div>
-
-    <h3>Use tighter spacing for related items</h3>
-    <p class="section-lead" style="margin-bottom:14px;">Proximity signals relationship. Items that belong together should be spaced closer than items that are independent. This is the Law of Proximity — and it's the core principle behind the spacing scale.</p>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:0; min-height:108px;">
-          <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:20px;">
-            <div class="m-line" style="width:80px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input" style="height:28px;"></div>
-            <div class="m-line" style="width:140px; height:8px; opacity:.4;"></div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <div class="m-line" style="width:100px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input" style="height:28px;"></div>
-          </div>
-        </div>
-        <div class="dd-cap">4px between label and input (tightly related), 20px between fields (related but separate).</div>
-      </div>
-      <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:0; min-height:108px;">
-          <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:16px;">
-            <div class="m-line" style="width:80px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input" style="height:28px;"></div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:16px;">
-            <div class="m-line" style="width:100px; height:10px; background:var(--text-3); opacity:.3;"></div>
-            <div class="m-input" style="height:28px;"></div>
-          </div>
-        </div>
-        <div class="dd-cap">Equal spacing between label and input as between fields makes labels feel unrelated to their fields.</div>
-      </div>
-    </div>
-
-    <h3>Stay on the grid — avoid values between steps</h3>
-    <p class="section-lead" style="margin-bottom:14px;">Using values like 14px, 18px, or 22px breaks the rhythm of the 4px grid. When a layout feels off, the fix is almost always to move to the nearest grid step — not split the difference.</p>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:16px; min-height:80px;">
-          <div class="m-block" style="padding:16px; width:100%; display:flex; flex-direction:column; gap:8px;">
-            <div class="m-line heading" style="width:60%;"></div>
-            <div class="m-line med"></div>
-          </div>
-        </div>
-        <div class="dd-cap">16px padding, 8px internal gap — both on the 4px grid.</div>
-      </div>
-      <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
-        <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:16px; min-height:80px;">
-          <div class="m-block" style="padding:14px 18px; width:100%; display:flex; flex-direction:column; gap:7px;">
-            <div class="m-line heading" style="width:60%;"></div>
-            <div class="m-line med"></div>
-          </div>
-          <code style="font-size:11px; color:var(--red);">padding: 14px 18px; gap: 7px</code>
-        </div>
-        <div class="dd-cap">Off-grid values create misalignment with adjacent elements and make layouts harder to maintain.</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- TOKEN REFERENCE -->
-  <section class="section" id="tokens">
-    <h2><span class="emoji">🌑</span> Token reference</h2>
-    <p class="section-lead">All named spacing tokens and their pixel and rem equivalents. Raw grid steps (multiples of 4 not listed here) are referenced directly by their pixel value.</p>
-
-    <div class="ref-table">
-      <div class="ref-head">
-        <div>Token</div>
-        <div>px</div>
-        <div>rem</div>
-        <div>Primary use case</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-extra-tight</div>
-        <div class="ref-val">4</div>
-        <div class="ref-val">0.25</div>
-        <div class="ref-desc">Icon-to-label gap; l4–l6 heading to body; chip / badge padding</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-tight</div>
-        <div class="ref-val">8</div>
-        <div class="ref-val">0.5</div>
-        <div class="ref-desc">l1–l3 heading to body; button vertical padding; tag padding</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-base-tight</div>
-        <div class="ref-val">12</div>
-        <div class="ref-val">0.75</div>
-        <div class="ref-desc">Compact list item padding; table cell; small button horizontal padding</div>
-      </div>
-      <div class="ref-row" style="background:rgba(10,157,153,.02);">
-        <div class="ref-token">spacing-base</div>
-        <div class="ref-val">16</div>
-        <div class="ref-val">1</div>
-        <div class="ref-desc"><strong>Default.</strong> Component padding; input padding; gap between form fields</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-loose</div>
-        <div class="ref-val">24</div>
-        <div class="ref-val">1.5</div>
-        <div class="ref-desc">Card padding; section internal padding; grid gap between cards</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-extra-loose</div>
-        <div class="ref-val">32</div>
-        <div class="ref-val">2</div>
-        <div class="ref-desc">Between major form groups; large card padding; panel section dividers</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-super-loose</div>
-        <div class="ref-val">40</div>
-        <div class="ref-val">2.5</div>
-        <div class="ref-desc">Between related page sections; page-level vertical rhythm</div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-token">spacing-super-extra-loose</div>
-        <div class="ref-val">56</div>
-        <div class="ref-val">3.5</div>
-        <div class="ref-desc">Between unrelated sections; hero padding; major visual breaks</div>
-      </div>
-    </div>
+    <h3>Never hardcode pixel values</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">Reference the named token in code, not the resolved value. When the spacing scale is adjusted, every component updates automatically — hardcoded values do not.</p>
   </section>
 
   <!-- PAGINATION -->
@@ -710,10 +202,7 @@
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#scale">Scale</a>
-    <a class="toc-link" href="#layout">Layout usage</a>
-    <a class="toc-link" href="#typography">Typography spacing</a>
-    <a class="toc-link" href="#best-practices">Best practices</a>
-    <a class="toc-link" href="#tokens">Token reference</a>
+    <a class="toc-link" href="#guidance">Guidance</a>
   </nav>
 </div>
 
