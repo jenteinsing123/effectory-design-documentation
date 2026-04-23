@@ -4,14 +4,129 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iconography — Engage Design System</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Size scale row */
+    .size-row {
+      display: flex; align-items: flex-end; gap: 48px;
+      padding: 32px; background: var(--bg-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+    }
+    .size-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .size-cell svg { color: var(--text); }
+    .size-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px; color: var(--text-3); font-weight: 600;
+    }
+    .size-use { font-size: 12px; color: var(--text-3); max-width: 140px; text-align: center; line-height: 1.5; }
+
+    /* Icon grid */
+    .icon-toolbar {
+      display: flex; gap: 12px; align-items: center;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .icon-search {
+      flex: 1; min-width: 220px;
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 8px 12px; font-size: 13px; background: var(--bg);
+      font-family: inherit; color: var(--text);
+    }
+    .icon-search:focus { outline: none; border-color: var(--brand); }
+
+    .icon-group-title {
+      font-size: 12px; font-weight: 600; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin: 24px 0 10px; padding-top: 12px;
+      border-top: 1px solid var(--border-light);
+    }
+    .icon-group-title:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .icon-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 8px;
+      border: 1px solid var(--border-light); border-radius: 8px;
+      background: var(--bg); cursor: pointer;
+      transition: border-color .12s ease, background .12s ease;
+    }
+    .icon-cell:hover {
+      border-color: var(--border);
+      background: var(--bg-subtle);
+    }
+    .icon-cell svg { color: var(--text); flex-shrink: 0; }
+    .icon-cell-name {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px; color: var(--text-3);
+      text-align: center; word-break: break-all; line-height: 1.4;
+    }
+
+    .note {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .note strong { color: var(--text); font-weight: 600; }
+    .note a { color: var(--brand); text-decoration: none; font-weight: 500; }
+    .note a:hover { text-decoration: underline; }
+    .g-code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; background: var(--bg-subtle);
+      padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border);
+    }
+
+    /* Example usage row */
+    .usage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .usage-card {
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      background: var(--bg); overflow: hidden;
+    }
+    .usage-demo {
+      padding: 24px; background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      min-height: 90px; display: flex; align-items: center; justify-content: center;
+    }
+    .usage-meta { padding: 12px 16px; }
+    .usage-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .usage-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+
+    /* Demo primitives */
+    .d-btn {
+      background: var(--brand); color: #fff; border: none;
+      border-radius: 6px; padding: 9px 14px; font-size: 13px; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .d-icon-btn {
+      width: 32px; height: 32px; border: 1px solid var(--border);
+      background: var(--bg); border-radius: 6px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text);
+    }
+    .d-menu-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; font-size: 13px; color: var(--text);
+      border-radius: 6px; min-width: 200px;
+    }
+    .d-menu-row:hover { background: var(--bg-subtle); }
+    .d-alert {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 8px;
+      background: var(--bg-subtle); color: var(--text);
+      font-size: 13px;
+      border: 1px solid var(--border);
+    }
+  </style>
 </head>
 <body>
 
 <div id="topnav-placeholder"></div>
-
 <div class="shell">
 <div id="sidebar-placeholder"></div>
 
@@ -29,20 +144,304 @@
   <div class="page-header">
     <div class="page-badges">
       <span class="badge badge-brand">Foundations</span>
-      <span class="badge badge-beta">Coming Soon</span>
+      <span class="badge badge-stable">Stable</span>
     </div>
     <h1>Iconography</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
+    <p class="page-desc">Engage uses a single line-icon set — consistent stroke width, square optical alignment, and three fixed sizes. Icons carry meaning at a glance: pair them with a label wherever the meaning isn't obvious, and let them stand alone only for universally understood actions.</p>
   </div>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+  <hr class="divider" />
+
+  <!-- SIZES -->
+  <section class="section" id="sizes">
+    <h2><span class="emoji">📐</span> Sizes</h2>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:20px;">Three fixed sizes. Pick the one that matches the surrounding text size — icons and text should feel balanced, not dominant.</p>
+
+    <div class="size-row">
+      <div class="size-cell">
+        <!-- 16 -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span class="size-label">16 px</span>
+        <span class="size-use">Inline with body text, dense lists, compact controls.</span>
+      </div>
+      <div class="size-cell">
+        <!-- 24 -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span class="size-label">24 px</span>
+        <span class="size-use">Default. Buttons, nav items, menu rows, toolbars.</span>
+      </div>
+      <div class="size-cell">
+        <!-- 32 -->
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span class="size-label">32 px</span>
+        <span class="size-use">Empty states, feature highlights, large header actions.</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Stroke stays at 2 px</strong> across all sizes. Don't rescale the SVG stroke-width — it breaks visual consistency against text and against other icons on the same surface.
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- LIBRARY -->
+  <section class="section" id="library">
+    <h2><span class="emoji">📚</span> Library</h2>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:16px;">A curated sample of the ~200 general icons available. Search to filter, or browse the complete set in Figma and the developer styleguide.</p>
+
+    <div class="note">
+      Full set: <a href="https://www.figma.com/design/pQwaTgTOFsS96zxIPZ6SHm/%F0%9F%8D%91-Assets?node-id=2958-169" target="_blank">Figma — Assets · General icons</a> · <a href="https://styleguide.effectory.com/styles/icons" target="_blank">Styleguide</a>
+    </div>
+
+    <div class="icon-toolbar">
+      <input id="icon-search" class="icon-search" type="text" placeholder="Search icons — e.g. search, chevron, user, trash…" oninput="filterIcons(this.value)" />
+    </div>
+
+    <!-- Navigation -->
+    <div class="icon-group-title">Navigation</div>
+    <div class="icon-grid" data-group="Navigation">
+      <div class="icon-cell" data-name="arrow-left"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span class="icon-cell-name">arrow-left</span></div>
+      <div class="icon-cell" data-name="arrow-right"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><span class="icon-cell-name">arrow-right</span></div>
+      <div class="icon-cell" data-name="arrow-up"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="icon-cell-name">arrow-up</span></div>
+      <div class="icon-cell" data-name="arrow-down"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg><span class="icon-cell-name">arrow-down</span></div>
+      <div class="icon-cell" data-name="chevron-left"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="icon-cell-name">chevron-left</span></div>
+      <div class="icon-cell" data-name="chevron-right"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg><span class="icon-cell-name">chevron-right</span></div>
+      <div class="icon-cell" data-name="chevron-up"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg><span class="icon-cell-name">chevron-up</span></div>
+      <div class="icon-cell" data-name="chevron-down"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span class="icon-cell-name">chevron-down</span></div>
+      <div class="icon-cell" data-name="external-link"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="icon-cell-name">external-link</span></div>
+      <div class="icon-cell" data-name="menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg><span class="icon-cell-name">menu</span></div>
+      <div class="icon-cell" data-name="more-horizontal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg><span class="icon-cell-name">more-horizontal</span></div>
+      <div class="icon-cell" data-name="more-vertical"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span class="icon-cell-name">more-vertical</span></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="icon-group-title">Actions</div>
+    <div class="icon-grid" data-group="Actions">
+      <div class="icon-cell" data-name="plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span class="icon-cell-name">plus</span></div>
+      <div class="icon-cell" data-name="minus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg><span class="icon-cell-name">minus</span></div>
+      <div class="icon-cell" data-name="cross"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span class="icon-cell-name">cross</span></div>
+      <div class="icon-cell" data-name="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="icon-cell-name">check</span></div>
+      <div class="icon-cell" data-name="search"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="icon-cell-name">search</span></div>
+      <div class="icon-cell" data-name="edit"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span class="icon-cell-name">edit</span></div>
+      <div class="icon-cell" data-name="trash"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg><span class="icon-cell-name">trash</span></div>
+      <div class="icon-cell" data-name="copy"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="icon-cell-name">copy</span></div>
+      <div class="icon-cell" data-name="share"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span class="icon-cell-name">share</span></div>
+      <div class="icon-cell" data-name="download"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="icon-cell-name">download</span></div>
+      <div class="icon-cell" data-name="upload"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span class="icon-cell-name">upload</span></div>
+      <div class="icon-cell" data-name="refresh"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><span class="icon-cell-name">refresh</span></div>
+      <div class="icon-cell" data-name="filter"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span class="icon-cell-name">filter</span></div>
+      <div class="icon-cell" data-name="send"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span class="icon-cell-name">send</span></div>
+      <div class="icon-cell" data-name="link"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span class="icon-cell-name">link</span></div>
+      <div class="icon-cell" data-name="undo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 8"/></svg><span class="icon-cell-name">undo</span></div>
+    </div>
+
+    <!-- Status -->
+    <div class="icon-group-title">Status &amp; feedback</div>
+    <div class="icon-grid" data-group="Status">
+      <div class="icon-cell" data-name="info"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span class="icon-cell-name">info</span></div>
+      <div class="icon-cell" data-name="alert-circle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="icon-cell-name">alert-circle</span></div>
+      <div class="icon-cell" data-name="alert-triangle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="icon-cell-name">alert-triangle</span></div>
+      <div class="icon-cell" data-name="help"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="icon-cell-name">help</span></div>
+      <div class="icon-cell" data-name="check-square"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span class="icon-cell-name">check-square</span></div>
+      <div class="icon-cell" data-name="bell"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="icon-cell-name">bell</span></div>
+      <div class="icon-cell" data-name="clock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="icon-cell-name">clock</span></div>
+      <div class="icon-cell" data-name="trend-up"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span class="icon-cell-name">trend-up</span></div>
+      <div class="icon-cell" data-name="trend-down"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg><span class="icon-cell-name">trend-down</span></div>
+      <div class="icon-cell" data-name="star"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span class="icon-cell-name">star</span></div>
+      <div class="icon-cell" data-name="bookmark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span class="icon-cell-name">bookmark</span></div>
+      <div class="icon-cell" data-name="lightbulb"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.6 1 1.4 1 2.3v1h6v-1c0-.9.4-1.7 1-2.3A7 7 0 0 0 12 2z"/></svg><span class="icon-cell-name">lightbulb</span></div>
+    </div>
+
+    <!-- Users / people -->
+    <div class="icon-group-title">People</div>
+    <div class="icon-grid" data-group="People">
+      <div class="icon-cell" data-name="user"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="icon-cell-name">user</span></div>
+      <div class="icon-cell" data-name="users"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="icon-cell-name">users</span></div>
+      <div class="icon-cell" data-name="user-plus"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg><span class="icon-cell-name">user-plus</span></div>
+      <div class="icon-cell" data-name="user-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg><span class="icon-cell-name">user-check</span></div>
+      <div class="icon-cell" data-name="user-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M7 18a5 5 0 0 1 10 0"/><line x1="9" y1="2" x2="15" y2="2"/></svg><span class="icon-cell-name">user-badge</span></div>
+      <div class="icon-cell" data-name="hierarchy"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="6"/><rect x="2" y="16" width="6" height="6"/><rect x="16" y="16" width="6" height="6"/><path d="M12 8v4M5 16v-2h14v2"/></svg><span class="icon-cell-name">hierarchy</span></div>
+    </div>
+
+    <!-- Objects -->
+    <div class="icon-group-title">Objects</div>
+    <div class="icon-grid" data-group="Objects">
+      <div class="icon-cell" data-name="file"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg><span class="icon-cell-name">file</span></div>
+      <div class="icon-cell" data-name="folder"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span class="icon-cell-name">folder</span></div>
+      <div class="icon-cell" data-name="mail"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="icon-cell-name">mail</span></div>
+      <div class="icon-cell" data-name="calendar"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="icon-cell-name">calendar</span></div>
+      <div class="icon-cell" data-name="home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="icon-cell-name">home</span></div>
+      <div class="icon-cell" data-name="gear"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.36.17.73.26 1.1.26H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span class="icon-cell-name">gear</span></div>
+      <div class="icon-cell" data-name="eye"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span class="icon-cell-name">eye</span></div>
+      <div class="icon-cell" data-name="eye-off"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span class="icon-cell-name">eye-off</span></div>
+      <div class="icon-cell" data-name="lock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="icon-cell-name">lock</span></div>
+      <div class="icon-cell" data-name="unlock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg><span class="icon-cell-name">unlock</span></div>
+      <div class="icon-cell" data-name="tag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span class="icon-cell-name">tag</span></div>
+      <div class="icon-cell" data-name="globe"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="icon-cell-name">globe</span></div>
+    </div>
+
+    <!-- Data -->
+    <div class="icon-group-title">Data &amp; insights</div>
+    <div class="icon-grid" data-group="Data">
+      <div class="icon-cell" data-name="barchart-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span class="icon-cell-name">barchart-2</span></div>
+      <div class="icon-cell" data-name="pie-chart"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg><span class="icon-cell-name">pie-chart</span></div>
+      <div class="icon-cell" data-name="activity"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="icon-cell-name">activity</span></div>
+      <div class="icon-cell" data-name="target"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span class="icon-cell-name">target</span></div>
+      <div class="icon-cell" data-name="sort-ascending"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h13M3 12h9M3 18h5"/><path d="M17 8l4-4 4 4"/><path d="M21 4v16"/></svg><span class="icon-cell-name">sort-ascending</span></div>
+      <div class="icon-cell" data-name="sort-descending"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h5M3 12h9M3 18h13"/><path d="M17 16l4 4 4-4"/><path d="M21 4v16"/></svg><span class="icon-cell-name">sort-descending</span></div>
+      <div class="icon-cell" data-name="hashtag"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg><span class="icon-cell-name">hashtag</span></div>
+      <div class="icon-cell" data-name="percent"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg><span class="icon-cell-name">percent</span></div>
+      <div class="icon-cell" data-name="zap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span class="icon-cell-name">zap</span></div>
+      <div class="icon-cell" data-name="compass"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span class="icon-cell-name">compass</span></div>
+    </div>
+
+    <div class="note" id="no-results" style="display:none;">No icons match your search. Try a different term, or browse the full set in <a href="https://www.figma.com/design/pQwaTgTOFsS96zxIPZ6SHm/%F0%9F%8D%91-Assets?node-id=2958-169" target="_blank">Figma</a>.</div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- USAGE -->
+  <section class="section" id="usage">
+    <h2><span class="emoji">🧩</span> Usage</h2>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:20px;">Icons earn their place when they clarify — and get in the way when they don't. A few patterns that hold up everywhere.</p>
+
+    <div class="usage-grid">
+
+      <div class="usage-card">
+        <div class="usage-demo">
+          <button class="d-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download report
+          </button>
+        </div>
+        <div class="usage-meta">
+          <div class="usage-title">Icon + label in buttons</div>
+          <div class="usage-desc">Use a 16&nbsp;px icon with <span class="g-code">spacing-extra-tight</span> to the label. The icon reinforces the action — the label carries the meaning.</div>
+        </div>
+      </div>
+
+      <div class="usage-card">
+        <div class="usage-demo">
+          <div style="display:flex; gap:8px;">
+            <button class="d-icon-btn" aria-label="Edit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+            <button class="d-icon-btn" aria-label="Share"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+            <button class="d-icon-btn" aria-label="Delete"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
+          </div>
+        </div>
+        <div class="usage-meta">
+          <div class="usage-title">Icon-only controls</div>
+          <div class="usage-desc">Reserve for universally understood actions (edit, share, delete). Always include an <span class="g-code">aria-label</span> — there's no text to fall back on.</div>
+        </div>
+      </div>
+
+      <div class="usage-card">
+        <div class="usage-demo">
+          <div style="display:flex; flex-direction:column; gap:2px; width:100%; max-width:220px;">
+            <div class="d-menu-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Home
+            </div>
+            <div class="d-menu-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Reports
+            </div>
+            <div class="d-menu-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.36.17.73.26 1.1.26H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Settings
+            </div>
+          </div>
+        </div>
+        <div class="usage-meta">
+          <div class="usage-title">Nav &amp; menu rows</div>
+          <div class="usage-desc">18–20&nbsp;px icon aligned left, label aligned to the icon. Icons improve scanability down a long list.</div>
+        </div>
+      </div>
+
+      <div class="usage-card">
+        <div class="usage-demo">
+          <div class="d-alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#b48100;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Survey ends in 2 days.
+          </div>
+        </div>
+        <div class="usage-meta">
+          <div class="usage-title">Status &amp; inline feedback</div>
+          <div class="usage-desc">Icons carry the tone so the text stays neutral. Info, success, warning, and error each pair with a fixed icon.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- GUIDANCE -->
+  <section class="section" id="guidance">
+    <h2><span class="emoji">✨</span> Guidance</h2>
+
+    <h3>Meaning first, decoration never</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Every icon should clarify something the label alone can't. If you added it for visual flavour, remove it — decorative icons add noise to the scan.</p>
+
+    <h3>One icon per meaning</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">The same action always gets the same icon. If <span class="g-code">edit</span> means "edit" in one place, don't use <span class="g-code">pen-tool</span> elsewhere. Consistency builds the visual vocabulary users rely on.</p>
+
+    <h3>Match the size to the context</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">16&nbsp;px next to body text, 24&nbsp;px in buttons and menu rows, 32&nbsp;px in empty states. Don't free-scale — if nothing fits, the container is likely the wrong size.</p>
+
+    <h3>Always label icon-only buttons</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">An icon without a visible label still needs an <span class="g-code">aria-label</span> and a tooltip. Assistive tech and first-time users both lose if the meaning lives only in the glyph.</p>
+  </section>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <a class="pag-card" href="colors-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Color</span>
+    </a>
+    <a class="pag-card right" href="motion-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Motion</span>
+    </a>
   </div>
 
 </article>
-</div><!-- /content-wrap -->
-</div><!-- /shell -->
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#sizes">Sizes</a>
+    <a class="toc-link" href="#library">Library</a>
+    <a class="toc-link" href="#usage">Usage</a>
+    <a class="toc-link" href="#guidance">Guidance</a>
+  </nav>
+</div>
+
+</div>
+</div>
 
 <script src="nav.js"></script>
+<script>
+  function filterIcons(q) {
+    q = (q || '').trim().toLowerCase();
+    const grids = document.querySelectorAll('.icon-grid');
+    let anyVisible = false;
+    grids.forEach(grid => {
+      let groupVisible = false;
+      grid.querySelectorAll('.icon-cell').forEach(cell => {
+        const name = cell.dataset.name || '';
+        const match = !q || name.includes(q);
+        cell.style.display = match ? '' : 'none';
+        if (match) groupVisible = true;
+      });
+      const title = grid.previousElementSibling;
+      if (title && title.classList.contains('icon-group-title')) {
+        title.style.display = groupVisible ? '' : 'none';
+      }
+      if (groupVisible) anyVisible = true;
+    });
+    document.getElementById('no-results').style.display = anyVisible ? 'none' : '';
+  }
+</script>
 </body>
 </html>
