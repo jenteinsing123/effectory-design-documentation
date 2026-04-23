@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadows — Engage Design System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .sh-action          { box-shadow: 0 1px 2px  rgba(25,39,67,.04); }
+    .sh-action-hover    { box-shadow: 0 2px 2px  rgba(25,39,67,.06); }
+    .sh-card            { box-shadow: 0 2px 4px  rgba(25,39,67,.04); }
+    .sh-card-hover      { box-shadow: 0 2px 9px  rgba(25,39,67,.08); }
+    .sh-dialogs         { box-shadow: 0 4px 12px rgba(25,39,67,.08); }
+    .sh-footer          { box-shadow: 0 4px 12px rgba(25,39,67,.08); }
+    .sh-popovers        { box-shadow: 0 2px 12px rgba(25,39,67,.08); }
+    .sh-slide-panel     { box-shadow: -4px 4px 4px rgba(25,39,67,.04); }
+
+    .shadow-list { display: flex; flex-direction: column; margin-bottom: 16px; }
+    .shadow-item {
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr;
+      align-items: center;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .shadow-item:last-child { border-bottom: none; }
+    .shadow-meta { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .shadow-name {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; color: var(--text); font-weight: 600;
+    }
+    .shadow-use { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+    .shadow-spec {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px; color: var(--text-3);
+    }
+    .shadow-swatch {
+      height: 80px; background: var(--bg);
+      border-radius: 10px;
+    }
+    .shadow-stage {
+      background: var(--bg-subtle);
+      border-radius: 12px;
+      padding: 32px 24px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 140px;
+    }
+
+    .d-btn {
+      background: var(--bg); color: var(--text); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 16px; font-size: 13px; font-weight: 500;
+    }
+    .d-btn-primary { background: var(--brand); color: #fff; border: none; }
+    .d-card {
+      background: var(--bg); border-radius: 10px;
+      padding: 16px 18px; min-width: 200px;
+    }
+    .d-card .d-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .d-card .d-body { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .d-dialog {
+      background: var(--bg); border-radius: 12px; padding: 20px 22px;
+      min-width: 240px;
+    }
+    .d-dialog .d-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .d-dialog .d-body { font-size: 12.5px; color: var(--text-2); line-height: 1.5; margin-bottom: 14px; }
+    .d-dropdown {
+      background: var(--bg); border-radius: 8px;
+      padding: 6px; min-width: 180px;
+      display: flex; flex-direction: column;
+    }
+    .d-dropdown .d-row {
+      font-size: 12.5px; color: var(--text); padding: 8px 10px;
+      border-radius: 5px;
+    }
+    .d-dropdown .d-row.active { background: var(--bg-subtle); }
+
+    .note {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+    }
+    .note strong { color: var(--text); font-weight: 600; }
+    .note code, .g-code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; background: var(--bg-subtle);
+      padding: 1px 6px; border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div id="topnav-placeholder"></div>
+<div class="shell">
+<div id="sidebar-placeholder"></div>
+
+<div class="content-wrap">
+<article class="content">
+
+  <div class="breadcrumb">
+    <a href="index.html">Docs</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">Foundations</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>Shadows</span>
+  </div>
+
+  <div class="page-header">
+    <div class="page-badges">
+      <span class="badge badge-brand">Foundations</span>
+      <span class="badge badge-stable">Stable</span>
+    </div>
+    <h1>Shadows</h1>
+    <p class="page-desc">Shadows lift an element off the page. Engage uses eight tokens — each scoped to a specific surface — built from a single navy tint at varying opacity, offset, and blur. Reach for the token that matches the surface, not the visual weight you want.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <section class="section" id="scale">
+    <h2><span class="emoji">👻</span> Scale</h2>
+
+    <div class="shadow-list">
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/action</span>
+          <span class="shadow-use">Resting state of buttons and interactive controls.</span>
+          <span class="shadow-spec">0 · 1 · 2 · 4%</span>
+        </div>
+        <div class="shadow-stage">
+          <button class="d-btn d-btn-primary sh-action">Save changes</button>
+        </div>
+        <div class="shadow-swatch sh-action"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/action-hover</span>
+          <span class="shadow-use">Hover state of the same controls — a subtle lift to signal interactivity.</span>
+          <span class="shadow-spec">0 · 2 · 2 · 6%</span>
+        </div>
+        <div class="shadow-stage">
+          <button class="d-btn d-btn-primary sh-action-hover">Save changes</button>
+        </div>
+        <div class="shadow-swatch sh-action-hover"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/card</span>
+          <span class="shadow-use">Resting state of cards, tiles, and content panels.</span>
+          <span class="shadow-spec">0 · 2 · 4 · 4%</span>
+        </div>
+        <div class="shadow-stage">
+          <div class="d-card sh-card">
+            <div class="d-title">Team overview</div>
+            <div class="d-body">128 respondents · 4 teams</div>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-card"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/card-hover</span>
+          <span class="shadow-use">Hover state of cards — a clear step up from resting.</span>
+          <span class="shadow-spec">0 · 2 · 9 · 8%</span>
+        </div>
+        <div class="shadow-stage">
+          <div class="d-card sh-card-hover">
+            <div class="d-title">Team overview</div>
+            <div class="d-body">128 respondents · 4 teams</div>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-card-hover"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/popovers-dropdowns</span>
+          <span class="shadow-use">Dropdown menus, select popovers, and tooltips that float briefly above content.</span>
+          <span class="shadow-spec">0 · 2 · 12 · 8%</span>
+        </div>
+        <div class="shadow-stage">
+          <div class="d-dropdown sh-popovers">
+            <div class="d-row active">Export as CSV</div>
+            <div class="d-row">Export as PDF</div>
+            <div class="d-row">Share link</div>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-popovers"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/dialogs</span>
+          <span class="shadow-use">Modal dialogs and confirmation windows — anchored above a scrim.</span>
+          <span class="shadow-spec">0 · 4 · 12 · 8%</span>
+        </div>
+        <div class="shadow-stage">
+          <div class="d-dialog sh-dialogs">
+            <div class="d-title">Delete survey?</div>
+            <div class="d-body">This will permanently remove the survey and all responses.</div>
+            <div style="display:flex; gap:8px; justify-content:flex-end;">
+              <button class="d-btn">Cancel</button>
+              <button class="d-btn d-btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-dialogs"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/footer</span>
+          <span class="shadow-use">Sticky bottom footers — action bars that float over scrolling content.</span>
+          <span class="shadow-spec">0 · 4 · 12 · 8%</span>
+        </div>
+        <div class="shadow-stage">
+          <div class="d-card sh-footer" style="min-width:280px; display:flex; gap:12px; justify-content:flex-end; padding:12px 16px;">
+            <button class="d-btn">Cancel</button>
+            <button class="d-btn d-btn-primary">Save changes</button>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-footer"></div>
+      </div>
+
+      <div class="shadow-item">
+        <div class="shadow-meta">
+          <span class="shadow-name">shadow/slide-panel</span>
+          <span class="shadow-use">Drawers and side panels that slide in from the right — shadow casts to the left.</span>
+          <span class="shadow-spec">-4 · 4 · 4 · 4%</span>
+        </div>
+        <div class="shadow-stage" style="justify-content:flex-end; padding-right:0;">
+          <div class="d-card sh-slide-panel" style="min-width:180px; border-radius:12px 0 0 12px; padding:20px;">
+            <div class="d-title">Filters</div>
+            <div class="d-body">Refine the view.</div>
+          </div>
+        </div>
+        <div class="shadow-swatch sh-slide-panel"></div>
+      </div>
+
+    </div>
+
+    <div class="note">
+      <strong>Spec format</strong> — <code>x · y · blur · alpha</code>. Every shadow uses the same tint: navy <code>#192743</code>. Only opacity and distance change.
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="section" id="guidance">
+    <h2><span class="emoji">✨</span> Guidance</h2>
+
+    <h3>Match the token to the surface, not the weight</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Each token is named after what it wraps — <span class="g-code">card</span>, <span class="g-code">dialog</span>, <span class="g-code">popover</span>. Pick the one that describes the element you're styling, not the one that "looks about right." This keeps elevation consistent across every product surface.</p>
+
+    <h3>Pair resting and hover states</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Interactive elements move between two tokens: <span class="g-code">action</span> → <span class="g-code">action-hover</span> for buttons, <span class="g-code">card</span> → <span class="g-code">card-hover</span> for tiles. Don't leap across unrelated tokens on hover — the jump feels unmotivated.</p>
+
+    <h3>One layer at a time</h3>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">Nested shadows stack noise and blur the hierarchy. A dialog already casts <span class="g-code">shadow/dialogs</span> — cards inside it should sit flat. Shadow is a scarce signal; use it only where the surface truly leaves the page.</p>
+  </section>
+
+  <div class="pagination">
+    <a class="pag-card" href="spacing-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Spacing</span>
+    </a>
+    <a class="pag-card right" href="border-radius-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Border Radius</span>
+    </a>
+  </div>
+
+</article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#scale">Scale</a>
+    <a class="toc-link" href="#guidance">Guidance</a>
+  </nav>
+</div>
+
+</div>
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>
