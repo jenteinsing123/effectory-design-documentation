@@ -77,7 +77,7 @@
       font-size: 11.5px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .sem-dot {
-      width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0;
+      width: 20px; height: 20px; border-radius: var(--radius-sm); flex-shrink: 0;
       border: 1px solid rgba(0,0,0,.10);
     }
     .sem-hex { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--text-3); }
@@ -92,7 +92,7 @@
         linear-gradient(-45deg,transparent 75%,#ccc 75%);
       background-size: 8px 8px;
       background-position: 0 0,0 4px,4px -4px,-4px 0;
-      border-radius: 4px; overflow: hidden;
+      border-radius: var(--radius-sm); overflow: hidden;
     }
     .alpha-bg-inner { width: 100%; height: 100%; border-radius: 3px; }
   </style>
@@ -505,7 +505,7 @@
       <div class="dd-card">
         <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:8px; min-height:100px;">
-          <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#FFEBEB; border:1px solid #FEB9B9; border-radius:8px; width:100%;">
+          <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#FFEBEB; border:1px solid #FEB9B9; border-radius:var(--radius-md); width:100%;">
             <span style="color:#B9252A; font-size:15px;">✕</span>
             <span style="font-family:'Poppins',sans-serif; font-size:13px; color:#B9252A; font-weight:500;">This field is required</span>
           </div>
@@ -516,7 +516,7 @@
       <div class="dd-card">
         <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:8px; min-height:100px;">
-          <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#FFEBEB; border:1px solid #FEB9B9; border-radius:8px; width:100%;">
+          <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#FFEBEB; border:1px solid #FEB9B9; border-radius:var(--radius-md); width:100%;">
             <span style="color:#B9252A; font-size:15px;">✕</span>
             <span style="font-family:'Poppins',sans-serif; font-size:13px; color:#B9252A; font-weight:500;">This field is required</span>
           </div>
@@ -570,16 +570,16 @@
       <div class="dd-card">
         <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:8px; min-height:100px;">
-          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#0A9D99; color:#fff; border:none; border-radius:6px; padding:8px 14px; cursor:pointer;">Save changes</button>
-          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#D3353B; color:#fff; border:none; border-radius:6px; padding:8px 14px; cursor:pointer;">Delete survey</button>
+          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#0A9D99; color:#fff; border:none; border-radius:var(--radius-base); padding:8px 14px; cursor:pointer;">Save changes</button>
+          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#D3353B; color:#fff; border:none; border-radius:var(--radius-base); padding:8px 14px; cursor:pointer;">Delete survey</button>
         </div>
         <div class="dd-cap">Brand (turquoise) for primary actions, Negative (red) for destructive actions.</div>
       </div>
       <div class="dd-card">
         <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:8px; min-height:100px;">
-          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#D3353B; color:#fff; border:none; border-radius:6px; padding:8px 14px; cursor:pointer;">Save changes</button>
-          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#0A9D99; color:#fff; border:none; border-radius:6px; padding:8px 14px; cursor:pointer;">Delete survey</button>
+          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#D3353B; color:#fff; border:none; border-radius:var(--radius-base); padding:8px 14px; cursor:pointer;">Save changes</button>
+          <button style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; background:#0A9D99; color:#fff; border:none; border-radius:var(--radius-base); padding:8px 14px; cursor:pointer;">Delete survey</button>
         </div>
         <div class="dd-cap">Swapping semantic roles causes confusion — a red "Save" button signals danger where there is none.</div>
       </div>

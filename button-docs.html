@@ -10,7 +10,7 @@
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 6px; height: 36px; padding: 0 12px;
-      border-radius: 6px; border: 1px solid transparent;
+      border-radius: var(--radius-base); border: 1px solid transparent;
       font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 500;
       cursor: pointer; white-space: nowrap; transition: all .1s;
       text-decoration: none;
@@ -94,7 +94,7 @@
     <div class="anatomy-fig">
       <div style="position:relative; display:inline-flex; align-items:center; padding: 0 80px;">
         <button class="btn btn-primary" style="pointer-events:none; gap:6px;">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+          <i data-icon="plus"></i>
           Label
         </button>
         <div style="position:absolute; right:calc(100% - 56px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
@@ -228,7 +228,7 @@
         <div class="dd-prev" style="flex-direction: column; gap: 10px; align-items: flex-start; padding: 20px 24px;">
           <input
             type="text" placeholder="Survey name is required"
-            style="width:100%; padding: 7px 10px; border: 1px solid #d3353b; border-radius: 6px; font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
+            style="width:100%; padding: 7px 10px; border: 1px solid #d3353b; border-radius: var(--radius-base); font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
           />
           <span style="font-size: 12px; color: #d3353b;">Survey name is required</span>
           <button class="btn btn-primary" style="pointer-events:none;">Save survey</button>
@@ -361,15 +361,15 @@
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div><span class="preview-label">Icon left · Icon right</span></div>
       <div class="preview-body" style="gap:12px; padding: 32px; flex-wrap: wrap;">
         <button class="btn btn-primary">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+          <i data-icon="plus"></i>
           Add member
         </button>
         <button class="btn btn-secondary">
           Export
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10V3M5 7l3 3 3-3M4 13h8"/></svg>
+          <i data-icon="download"></i>
         </button>
         <button class="btn btn-danger">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+          <i data-icon="trash"></i>
           Delete
         </button>
       </div>
@@ -440,11 +440,11 @@
           <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev" style="gap: 8px;">
             <button class="btn btn-danger" style="pointer-events:none;">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
               Delete
             </button>
             <button class="btn btn-primary" style="pointer-events:none;">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>
+              <i data-icon="plus"></i>
               Add member
             </button>
           </div>
@@ -455,12 +455,12 @@
           <div class="dd-prev" style="gap: 8px;">
             <button class="btn btn-primary" style="pointer-events:none;">
               <!-- Star icon - decorative, doesn't reinforce "Save" -->
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+              <i data-icon="star"></i>
               Save changes
             </button>
             <button class="btn btn-secondary" style="pointer-events:none;">
               <!-- Arrow icon - doesn't relate to "Edit" -->
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+              <i data-icon="Clock"></i>
               Edit
             </button>
           </div>

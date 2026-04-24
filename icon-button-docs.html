@@ -23,7 +23,7 @@
     .ib-code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10.5px; background: var(--bg-hover);
-      padding: 2px 7px; border-radius: 4px; color: var(--text);
+      padding: 2px 7px; border-radius: var(--radius-sm); color: var(--text);
     }
     .ib-code.bad { color: var(--red); background: var(--red-bg); }
   </style>
@@ -66,7 +66,7 @@
     <div class="anatomy-fig">
       <div style="position:relative; display:inline-flex; align-items:center; padding: 0 96px;">
         <button class="ib ib-36 ib-primary" style="pointer-events:none;">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg>
+          <i data-icon="more-vertical"></i>
         </button>
         <div style="position:absolute; right:calc(100% - 76px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
           <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">① Container</span>
@@ -127,13 +127,13 @@
         <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev">
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Add">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+            <i data-icon="plus"></i>
           </button>
           <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+            <i data-icon="edit"></i>
           </button>
           <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="More options">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg>
+            <i data-icon="more-vertical"></i>
           </button>
         </div>
         <div class="dd-cap">Use one Primary icon button per toolbar. Support it with Secondary and Tertiary to create clear visual hierarchy.</div>
@@ -142,13 +142,13 @@
         <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Add">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+            <i data-icon="plus"></i>
           </button>
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Edit">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+            <i data-icon="edit"></i>
           </button>
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="More options">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg>
+            <i data-icon="more-vertical"></i>
           </button>
         </div>
         <div class="dd-cap">Avoid making every toolbar action Primary — all actions become equally loud and users can't tell what matters most.</div>
@@ -161,11 +161,11 @@
         <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; gap:12px; align-items:stretch; padding:20px;">
           <!-- Card header with 36px -->
-          <div style="background:#fff; border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+          <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;">
             <div style="padding:10px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center;">
               <span style="font-size:12px; font-weight:600; flex:1; color:var(--text);">Survey results</span>
               <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="More">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg>
+                <i data-icon="more-vertical"></i>
               </button>
             </div>
             <div style="padding:12px 14px; display:flex; flex-direction:column; gap:6px;">
@@ -174,13 +174,13 @@
             </div>
           </div>
           <!-- Table row with 24px -->
-          <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:7px 14px; display:flex; align-items:center; gap:8px;">
+          <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
             <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
             <button class="ib ib-24 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+              <i data-icon="edit"></i>
             </button>
             <button class="ib ib-24 ib-tertiary" style="pointer-events:none;" aria-label="Delete">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
             </button>
           </div>
         </div>
@@ -190,22 +190,22 @@
         <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; gap:6px; align-items:stretch; padding:20px;">
           <!-- Table rows with 36px — too large -->
-          <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:7px 14px; display:flex; align-items:center; gap:8px;">
+          <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
             <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+              <i data-icon="edit"></i>
             </button>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Delete">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
             </button>
           </div>
-          <div style="background:#fff; border:1px solid var(--border); border-radius:6px; padding:7px 14px; display:flex; align-items:center; gap:8px;">
+          <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
             <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+              <i data-icon="edit"></i>
             </button>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Delete">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
             </button>
           </div>
         </div>
@@ -220,13 +220,13 @@
         <div class="dd-prev" style="gap: 32px;">
           <div style="position:relative; display:inline-flex;">
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit name">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+              <i data-icon="edit"></i>
             </button>
             <div class="tooltip-mock">Edit name</div>
           </div>
           <div style="position:relative; display:inline-flex;">
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Delete survey">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
             </button>
             <div class="tooltip-mock">Delete survey</div>
           </div>
@@ -238,10 +238,10 @@
         <div class="dd-prev" style="gap: 32px; flex-direction:column;">
           <div style="display:flex; gap:12px;">
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit name">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+              <i data-icon="edit"></i>
             </button>
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Delete survey">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+              <i data-icon="trash"></i>
             </button>
           </div>
           <span style="font-size:11.5px; color:var(--text-3); font-style:italic;">No tooltip — what do these do?</span>
@@ -267,21 +267,21 @@
       <div class="preview-body col">
         <div class="var-row">
           <span class="var-label">Primary</span>
-          <button class="ib ib-36 ib-primary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
-          <button class="ib ib-36 ib-primary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
-          <button class="ib ib-36 ib-primary" aria-label="More options"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+          <button class="ib ib-36 ib-primary" aria-label="Add"><i data-icon="plus"></i></button>
+          <button class="ib ib-36 ib-primary" aria-label="Edit"><i data-icon="edit"></i></button>
+          <button class="ib ib-36 ib-primary" aria-label="More options"><i data-icon="more-vertical"></i></button>
         </div>
         <div class="var-row">
           <span class="var-label">Secondary</span>
-          <button class="ib ib-36 ib-secondary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
-          <button class="ib ib-36 ib-secondary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
-          <button class="ib ib-36 ib-secondary" aria-label="More options"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+          <button class="ib ib-36 ib-secondary" aria-label="Add"><i data-icon="plus"></i></button>
+          <button class="ib ib-36 ib-secondary" aria-label="Edit"><i data-icon="edit"></i></button>
+          <button class="ib ib-36 ib-secondary" aria-label="More options"><i data-icon="more-vertical"></i></button>
         </div>
         <div class="var-row">
           <span class="var-label">Tertiary</span>
-          <button class="ib ib-36 ib-tertiary" aria-label="Add"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
-          <button class="ib ib-36 ib-tertiary" aria-label="Edit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg></button>
-          <button class="ib ib-36 ib-tertiary" aria-label="More options"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="8" cy="4.5" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="11.5" r="1.2"/></svg></button>
+          <button class="ib ib-36 ib-tertiary" aria-label="Add"><i data-icon="plus"></i></button>
+          <button class="ib ib-36 ib-tertiary" aria-label="Edit"><i data-icon="edit"></i></button>
+          <button class="ib ib-36 ib-tertiary" aria-label="More options"><i data-icon="more-vertical"></i></button>
         </div>
       </div>
     </div>
@@ -312,12 +312,12 @@
       </div>
       <div class="preview-body center" style="padding:36px;">
         <div class="size-item">
-          <button class="ib ib-36 ib-primary" aria-label="Action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <button class="ib ib-36 ib-primary" aria-label="Action"><i data-icon="plus"></i></button>
           <span class="size-name">36px</span>
           <span class="size-sub">9px padding · 18px icon</span>
         </div>
         <div class="size-item">
-          <button class="ib ib-24 ib-primary" aria-label="Action"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button>
+          <button class="ib ib-24 ib-primary" aria-label="Action"><i data-icon="plus"></i></button>
           <span class="size-name">24px</span>
           <span class="size-sub">4px padding · 16px icon</span>
         </div>
@@ -352,25 +352,25 @@
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Search">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="7" r="4"/><path d="M11 11l2.5 2.5"/></svg>
+                <i data-icon="search"></i>
               </button>
               <span style="font-size:11px; color:var(--text-3);">Search</span>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Delete">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+                <i data-icon="trash"></i>
               </button>
               <span style="font-size:11px; color:var(--text-3);">Delete</span>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Close">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+                <i data-icon="cross"></i>
               </button>
               <span style="font-size:11px; color:var(--text-3);">Close</span>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Add">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+                <i data-icon="plus"></i>
               </button>
               <span style="font-size:11px; color:var(--text-3);">Add</span>
             </div>
@@ -383,19 +383,19 @@
             <!-- Abstract / unfamiliar icons -->
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="???">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 8h10M10 5l3 3-3 3"/><path d="M6 3v10"/></svg>
+                <i data-icon="log-out"></i>
               </button>
               <span style="font-size:11px; color:var(--red);">Ambiguous</span>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="???">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polygon points="8,2 10,6 14,6.5 11,9.5 11.8,14 8,12 4.2,14 5,9.5 2,6.5 6,6"/></svg>
+                <i data-icon="star"></i>
               </button>
               <span style="font-size:11px; color:var(--red);">Unclear</span>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="???">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 4h3v3H4zM9 4h3v3H9zM4 9h3v3H4zM9 9h3v3H9z"/></svg>
+                <i data-icon="category"></i>
               </button>
               <span style="font-size:11px; color:var(--red);">Non-standard</span>
             </div>
@@ -415,19 +415,19 @@
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Delete survey">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+                <i data-icon="trash"></i>
               </button>
               <code class="ib-code">"Delete survey"</code>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit name">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+                <i data-icon="edit"></i>
               </button>
               <code class="ib-code">"Edit name"</code>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Close dialog">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+                <i data-icon="cross"></i>
               </button>
               <code class="ib-code">"Close dialog"</code>
             </div>
@@ -439,19 +439,19 @@
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Trash">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 14 4"/><path d="M5 4V3h6v1M6 7v5M10 7v5M3 4l1 9h8l1-9"/></svg>
+                <i data-icon="trash"></i>
               </button>
               <code class="ib-code bad">"Trash"</code>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Pencil">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5a1.5 1.5 0 012.1 2.1L5 13H2.5v-2.5L11 2.5z"/></svg>
+                <i data-icon="edit"></i>
               </button>
               <code class="ib-code bad">"Pencil"</code>
             </div>
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="X">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+                <i data-icon="cross"></i>
               </button>
               <code class="ib-code bad">"X"</code>
             </div>
@@ -477,11 +477,11 @@
         <span class="preview-label">Primary variant</span>
       </div>
       <div class="preview-body center">
-        <div class="state-col"><button class="ib ib-36 ib-primary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-primary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-primary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-primary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-primary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-hover" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-pressed" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-focus" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-primary is-disabled" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Disabled</span></div>
       </div>
     </div>
     <div class="tbl-wrap" style="margin-bottom:24px;">
@@ -503,11 +503,11 @@
         <span class="preview-label">Secondary variant</span>
       </div>
       <div class="preview-body center">
-        <div class="state-col"><button class="ib ib-36 ib-secondary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-secondary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-secondary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-secondary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-secondary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-hover" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-pressed" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-focus" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-secondary is-disabled" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Disabled</span></div>
       </div>
     </div>
     <div class="tbl-wrap" style="margin-bottom:24px;">
@@ -529,11 +529,11 @@
         <span class="preview-label">Tertiary variant</span>
       </div>
       <div class="preview-body center">
-        <div class="state-col"><button class="ib ib-36 ib-tertiary" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Default</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-tertiary is-hover" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Hover</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-tertiary is-pressed" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Pressed</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-tertiary is-focus" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Focus</span></div>
-        <div class="state-col"><button class="ib ib-36 ib-tertiary is-disabled" aria-label="x"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></button><span class="state-label">Disabled</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-hover" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-pressed" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-focus" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Focus</span></div>
+        <div class="state-col"><button class="ib ib-36 ib-tertiary is-disabled" aria-label="x"><i data-icon="plus"></i></button><span class="state-label">Disabled</span></div>
       </div>
     </div>
     <div class="tbl-wrap">

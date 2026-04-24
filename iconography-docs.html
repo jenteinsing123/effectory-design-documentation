@@ -28,7 +28,7 @@
     }
     .icon-search {
       flex: 1; min-width: 220px;
-      border: 1px solid var(--border); border-radius: 6px;
+      border: 1px solid var(--border); border-radius: var(--radius-base);
       padding: 8px 12px; font-size: 13px; background: var(--bg);
       font-family: inherit; color: var(--text);
     }
@@ -58,7 +58,7 @@
     .icon-cell {
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       padding: 16px 8px;
-      border: 1px solid var(--border-light); border-radius: 8px;
+      border: 1px solid var(--border-light); border-radius: var(--radius-md);
       background: var(--bg); cursor: pointer;
       transition: border-color .12s ease, background .12s ease;
     }
@@ -87,7 +87,7 @@
     .g-code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px; background: var(--bg-subtle);
-      padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border);
+      padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border);
     }
 
     /* Example usage row */
@@ -108,24 +108,24 @@
     /* Demo primitives */
     .d-btn {
       background: var(--brand); color: #fff; border: none;
-      border-radius: 6px; padding: 9px 14px; font-size: 13px; font-weight: 500;
+      border-radius: var(--radius-base); padding: 9px 14px; font-size: 13px; font-weight: 500;
       display: inline-flex; align-items: center; gap: 8px;
     }
     .d-icon-btn {
       width: 32px; height: 32px; border: 1px solid var(--border);
-      background: var(--bg); border-radius: 6px;
+      background: var(--bg); border-radius: var(--radius-base);
       display: inline-flex; align-items: center; justify-content: center;
       color: var(--text);
     }
     .d-menu-row {
       display: flex; align-items: center; gap: 10px;
       padding: 8px 12px; font-size: 13px; color: var(--text);
-      border-radius: 6px; min-width: 200px;
+      border-radius: var(--radius-base); min-width: 200px;
     }
     .d-menu-row:hover { background: var(--bg-subtle); }
     .d-alert {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px; border-radius: 8px;
+      padding: 10px 14px; border-radius: var(--radius-md);
       background: var(--bg-subtle); color: var(--text);
       font-size: 13px;
       border: 1px solid var(--border);
@@ -168,19 +168,19 @@
     <div class="size-row">
       <div class="size-cell">
         <!-- 16 -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span style="display:inline-flex;width:16px;height:16px;flex-shrink:0"><i data-icon="search"></i></span>
         <span class="size-label">16 px</span>
         <span class="size-use">Inline with body text, dense lists, compact controls.</span>
       </div>
       <div class="size-cell">
         <!-- 24 -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span style="display:inline-flex;width:24px;height:24px;flex-shrink:0"><i data-icon="search"></i></span>
         <span class="size-label">24 px</span>
         <span class="size-use">Default. Buttons, nav items, menu rows, toolbars.</span>
       </div>
       <div class="size-cell">
         <!-- 32 -->
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/></svg>
+        <span style="display:inline-flex;width:32px;height:32px;flex-shrink:0"><i data-icon="search"></i></span>
         <span class="size-label">32 px</span>
         <span class="size-use">Empty states, feature highlights, large header actions.</span>
       </div>
@@ -223,7 +223,7 @@
       <div class="usage-card">
         <div class="usage-demo">
           <button class="d-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span style="display:inline-flex;width:16px;height:16px;flex-shrink:0"><i data-icon="download"></i></span>
             Download report
           </button>
         </div>
@@ -236,9 +236,9 @@
       <div class="usage-card">
         <div class="usage-demo">
           <div style="display:flex; gap:8px;">
-            <button class="d-icon-btn" aria-label="Edit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-            <button class="d-icon-btn" aria-label="Share"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
-            <button class="d-icon-btn" aria-label="Delete"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>
+            <button class="d-icon-btn" aria-label="Edit"><span style="display:inline-flex;width:18px;height:18px"><i data-icon="edit"></i></span></button>
+            <button class="d-icon-btn" aria-label="Share"><span style="display:inline-flex;width:18px;height:18px"><i data-icon="share"></i></span></button>
+            <button class="d-icon-btn" aria-label="Delete"><span style="display:inline-flex;width:18px;height:18px"><i data-icon="trash"></i></span></button>
           </div>
         </div>
         <div class="usage-meta">
@@ -251,15 +251,15 @@
         <div class="usage-demo">
           <div style="display:flex; flex-direction:column; gap:2px; width:100%; max-width:220px;">
             <div class="d-menu-row">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0"><i data-icon="home"></i></span>
               Home
             </div>
             <div class="d-menu-row">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0"><i data-icon="Barchart-1"></i></span>
               Reports
             </div>
             <div class="d-menu-row">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.36.17.73.26 1.1.26H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0"><i data-icon="gear"></i></span>
               Settings
             </div>
           </div>
@@ -273,7 +273,7 @@
       <div class="usage-card">
         <div class="usage-demo">
           <div class="d-alert">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#b48100;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0;color:#b48100"><i data-icon="alert-triangle"></i></span>
             Survey ends in 2 days.
           </div>
         </div>

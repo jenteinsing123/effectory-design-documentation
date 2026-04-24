@@ -1,4 +1,12 @@
 (function () {
+  // Auto-load icons.js so every page has access to the icon library
+  (function loadIconScript() {
+    if (document.querySelector('script[src$="icons.js"]')) return;
+    var s = document.createElement('script');
+    s.src = 'icons.js';
+    document.head.appendChild(s);
+  })();
+
   // Resolve nav.html relative to this script's location
   var scriptSrc = document.querySelector('script[src$="nav.js"]');
   var base = scriptSrc

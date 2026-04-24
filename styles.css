@@ -26,9 +26,36 @@
   --blue:   #2563eb; --blue-bg:   #eff6ff; --blue-bd:   #bfdbfe;
   --amber:  #d97706; --amber-bg:  #fffbeb; --amber-bd:  #fde68a;
 
-  --radius-sm: 5px;
-  --radius:    8px;
-  --radius-lg: 12px;
+  /* Radius — from Border Radius docs */
+  --radius-none:  0;
+  --radius-sm:    4px;
+  --radius-base:  6px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-xl:    16px;
+  --radius-full:  999px;
+  /* legacy alias so existing rules keep working */
+  --radius:       var(--radius-md);
+
+  /* Spacing — from Spacing docs (4 px base) */
+  --sp-extra-tight:       4px;
+  --sp-tight:             8px;
+  --sp-base-tight:        12px;
+  --sp-base:              16px;
+  --sp-loose:             24px;
+  --sp-extra-loose:       32px;
+  --sp-super-loose:       40px;
+  --sp-super-extra-loose: 56px;
+
+  /* Shadows — from Shadows docs (navy #192743 at varying alpha) */
+  --sh-action:        0 1px 2px  rgba(25,39,67,.04);
+  --sh-action-hover:  0 2px 2px  rgba(25,39,67,.06);
+  --sh-card:          0 2px 4px  rgba(25,39,67,.04);
+  --sh-card-hover:    0 2px 9px  rgba(25,39,67,.08);
+  --sh-popovers:      0 2px 12px rgba(25,39,67,.08);
+  --sh-dialogs:       0 4px 12px rgba(25,39,67,.08);
+  --sh-footer:        0 4px 12px rgba(25,39,67,.08);
+  --sh-slide-panel:   -4px 4px 4px rgba(25,39,67,.04);
 }
 
 html { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; line-height: 1.6; color: var(--text); background: var(--bg); }
@@ -59,7 +86,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .brand-name { font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
 .brand-tag {
   font-size: 10px; font-weight: 600; color: var(--brand-dark);
-  background: #e6f7f7; padding: 1px 6px; border-radius: 99px;
+  background: #e6f7f7; padding: 1px 6px; border-radius: var(--radius-full);
   letter-spacing: .02em; margin-left: 2px;
 }
 
@@ -113,7 +140,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .page-badges { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
 .badge {
   display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 500;
+  padding: 3px 9px; border-radius: var(--radius-full); font-size: 11.5px; font-weight: 500;
 }
 .badge-brand { background: #e6f7f7; color: var(--brand-dark); }
 .badge-stable { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-bd); }
@@ -197,14 +224,15 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .preview-body.check { background: var(--bg-subtle); background-image: radial-gradient(circle, var(--border) 1px, transparent 1px); background-size: 18px 18px; }
 
 /* ─── ICON BUTTONS ─── */
-.ib { display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; flex-shrink: 0; transition: all .1s; }
+[data-icon] { display: contents; }
+.ib { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-base); cursor: pointer; flex-shrink: 0; transition: all .1s; }
 .ib svg { display: block; pointer-events: none; }
 .ib-36 { width: 36px; height: 36px; } .ib-36 svg { width: 16px; height: 16px; }
 .ib-24 { width: 24px; height: 24px; } .ib-24 svg { width: 12px; height: 12px; }
-.ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: 0 1px 2px rgba(25,39,67,.06); color: #fff; }
+.ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: var(--sh-action); color: #fff; }
 .ib-primary:hover { background: #0c827f; }
 .ib-primary:active { background: #166764; }
-.ib-secondary { background: #fff; border: 1px solid #bcc1cd; box-shadow: 0 1px 2px rgba(25,39,67,.04); color: rgba(25,39,67,.8); }
+.ib-secondary { background: #fff; border: 1px solid #bcc1cd; box-shadow: var(--sh-action); color: rgba(25,39,67,.8); }
 .ib-secondary:hover { background: #f8f8f9; border-color: #a5adbc; }
 .ib-tertiary { background: transparent; border: 1px solid transparent; color: rgba(25,39,67,.8); }
 .ib-tertiary:hover { background: #f8f8f9; }
@@ -227,20 +255,20 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .size-sub { font-size: 11px; color: var(--text-3); }
 
 /* ─── TABLES ─── */
-.tbl-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+.tbl-wrap { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; }
 table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 thead th { background: var(--bg-subtle); padding: 9px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--border); }
 tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border-light); color: var(--text-2); vertical-align: top; line-height: 1.55; }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: var(--bg-subtle); }
-code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; background: var(--bg-hover); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; background: var(--bg-hover); padding: 1px 5px; border-radius: var(--radius-sm); color: var(--text); }
 
 /* ─── TOKEN CHIP ─── */
 .token { display: inline-flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; background: var(--bg-subtle); border: 1px solid var(--border); padding: 2px 7px; border-radius: 5px; color: var(--text); white-space: nowrap; }
 .swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.08); }
 
 /* ─── VARIANT BADGE ─── */
-.vb { display: inline-flex; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 500; }
+.vb { display: inline-flex; padding: 2px 9px; border-radius: var(--radius-full); font-size: 12px; font-weight: 500; }
 .vb-brand { background: #e6f7f7; color: var(--brand-dark); }
 .vb-neutral { background: var(--bg-hover); color: var(--text-2); border: 1px solid var(--border); }
 
@@ -297,8 +325,8 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 
 /* ─── PAGINATION ─── */
 .pagination { display: flex; justify-content: space-between; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); gap: 16px; }
-.pag-card { text-decoration: none; color: inherit; flex: 1; max-width: 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); transition: border-color .12s, box-shadow .12s; display: flex; flex-direction: column; gap: 3px; }
-.pag-card:hover { border-color: #c0c0c8; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.pag-card { text-decoration: none; color: inherit; flex: 1; max-width: 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color .12s, box-shadow .12s; display: flex; flex-direction: column; gap: 3px; }
+.pag-card:hover { border-color: #c0c0c8; box-shadow: var(--sh-card-hover); }
 .pag-card.right { text-align: right; margin-left: auto; }
 .pag-dir { font-size: 11.5px; color: var(--text-3); }
 .pag-name { font-size: 14px; font-weight: 600; color: var(--text); }
