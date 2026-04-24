@@ -5,6 +5,7 @@
 :root {
   --brand:        #0a9d99;
   --brand-dark:   #0c827f;
+  --brand-text:   #ffffff;   /* text/icon on brand-colored surface */
   --navy:         #192743;
 
   --top-h:        52px;
@@ -241,7 +242,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .ib svg { display: block; pointer-events: none; }
 .ib-36 { width: 36px; height: 36px; } .ib-36 svg { width: 16px; height: 16px; }
 .ib-24 { width: 24px; height: 24px; } .ib-24 svg { width: 12px; height: 12px; }
-.ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: var(--sh-action); color: #fff; }
+.ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: var(--sh-action); color: var(--brand-text); }
 .ib-primary:hover { background: #0c827f; }
 .ib-primary:active { background: #166764; }
 .ib-secondary { background: var(--bg); border: 1px solid #bcc1cd; box-shadow: var(--sh-action); color: rgba(25,39,67,.8); }
@@ -398,3 +399,25 @@ html[data-theme="dark"] {
 }
 .theme-toggle:hover { background: var(--bg-subtle); border-color: var(--border); color: var(--text); }
 .theme-toggle svg { width: 16px; height: 16px; display: block; pointer-events: none; }
+
+/* Portal selector in top nav */
+.portal-select {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: var(--text-2); background: var(--bg);
+  border: 1px solid var(--border); border-radius: var(--radius-base);
+  padding: 0 8px; height: 32px; cursor: pointer;
+  transition: border-color .1s, background .1s;
+  outline: none; margin-right: 8px;
+}
+.portal-select:hover { border-color: var(--border); background: var(--bg-subtle); color: var(--text); }
+.portal-select:focus { border-color: var(--brand); }
+
+/* ─── PERSONAL PORTAL THEME ─── */
+/* Brand color flips from turquoise → yellow; text on brand flips to navy */
+html[data-portal="personal"] {
+  --brand:       #fecd29;   /* color/yellow/300 — button bg */
+  --brand-dark:  #fdbd12;   /* color/yellow/400 — hover     */
+  --brand-text:  #192743;   /* color/neutral/1200 — dark text on yellow */
+}
+/* Personal portal + dark mode: keep teal in dark since no dark-personal mode in Figma */

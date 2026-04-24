@@ -1,8 +1,10 @@
 (function () {
-  // Apply saved theme before nav renders to avoid flash
+  // Apply saved theme + portal before nav renders to avoid flash
   (function applyTheme() {
-    var saved = localStorage.getItem('theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    var theme = localStorage.getItem('theme');
+    if (theme) document.documentElement.setAttribute('data-theme', theme);
+    var portal = localStorage.getItem('portal') || 'coordinator';
+    document.documentElement.setAttribute('data-portal', portal);
   })();
 
   // Auto-load icons.js so every page has access to the icon library
@@ -51,6 +53,19 @@
           link.classList.add('active');
         }
       });
+      // Wire up portal selector
+      var portalSel = document.getElementById('portal-select');
+      function getPortal() { return localStorage.getItem('portal') || 'coordinator'; }
+      function setPortal(val) {
+        localStorage.setItem('portal', val);
+        document.documentElement.setAttribute('data-portal', val);
+        document.dispatchEvent(new CustomEvent('portalchange', { detail: val }));
+      }
+      if (portalSel) {
+        portalSel.value = getPortal();
+        portalSel.addEventListener('change', function () { setPortal(this.value); });
+      }
+
       // Wire up theme toggle
       var btn = document.getElementById('theme-toggle');
       var sunIcon = document.getElementById('theme-icon-sun');
@@ -76,6 +91,7 @@
           localStorage.setItem('theme', next);
           document.documentElement.setAttribute('data-theme', next);
           updateToggleIcon();
+          document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
         });
       }
     })
