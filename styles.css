@@ -56,6 +56,18 @@
   --sh-dialogs:       0 4px 12px rgba(25,39,67,.08);
   --sh-footer:        0 4px 12px rgba(25,39,67,.08);
   --sh-slide-panel:   -4px 4px 4px rgba(25,39,67,.04);
+
+  /* Dark mode primitives — from Figma 2. Primitives collection (color/neutral/dark/*) */
+  --p-nd-0:   #151B26;
+  --p-nd-200: #232A39;
+  --p-nd-300: #313949;
+  --p-nd-400: #454D5F;
+  --p-nd-500: #4D576A;
+  --p-nd-600: #5E6A82;
+  --p-nd-a95: rgba(255,255,255,.95);
+  --p-nd-a65: rgba(255,255,255,.65);
+  --p-nd-a40: rgba(255,255,255,.40);
+  --p-nd-a20: rgba(255,255,255,.20);
 }
 
 html { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; line-height: 1.6; color: var(--text); background: var(--bg); }
@@ -68,7 +80,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--top-h);
-  background: #fff;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center;
   padding: 0 24px 0 20px;
@@ -216,7 +228,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .preview-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
 .preview-label { font-size: 11.5px; font-weight: 500; color: var(--text-3); }
 .preview-body {
-  background: #fff; padding: 28px 32px;
+  background: var(--bg); padding: 28px 32px;
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
 .preview-body.col { flex-direction: column; align-items: flex-start; gap: 20px; }
@@ -232,7 +244,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: var(--sh-action); color: #fff; }
 .ib-primary:hover { background: #0c827f; }
 .ib-primary:active { background: #166764; }
-.ib-secondary { background: #fff; border: 1px solid #bcc1cd; box-shadow: var(--sh-action); color: rgba(25,39,67,.8); }
+.ib-secondary { background: var(--bg); border: 1px solid #bcc1cd; box-shadow: var(--sh-action); color: rgba(25,39,67,.8); }
 .ib-secondary:hover { background: #f8f8f9; border-color: #a5adbc; }
 .ib-tertiary { background: transparent; border: 1px solid transparent; color: rgba(25,39,67,.8); }
 .ib-tertiary:hover { background: #f8f8f9; }
@@ -243,7 +255,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .is-hover.ib-tertiary   { background: #f8f8f9; color: rgba(25,39,67,.95); }
 .is-pressed.ib-tertiary  { background: #f1f2f4; }
 .is-disabled { background: rgba(25,39,67,.07) !important; border-color: transparent !important; box-shadow: none !important; color: rgba(25,39,67,.28) !important; cursor: not-allowed; }
-.is-disabled.ib-secondary { background: #fff !important; border-color: #e1e4e8 !important; }
+.is-disabled.ib-secondary { background: var(--bg) !important; border-color: var(--border) !important; }
 .is-disabled.ib-tertiary  { background: transparent !important; }
 .is-focus { outline: 2px solid rgba(10,157,153,.35); outline-offset: 2px; }
 .var-row { display: flex; align-items: center; gap: 14px; }
@@ -316,7 +328,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .dd-cap {
   padding: 10px 14px;
   font-size: 12.5px; color: var(--text-2); line-height: 1.5;
-  border-top: 1px solid var(--border); background: #fff;
+  border-top: 1px solid var(--border); background: var(--bg);
 }
 
 /* ─── CONTENT GUIDELINE RULES ─── */
@@ -330,3 +342,59 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .pag-card.right { text-align: right; margin-left: auto; }
 .pag-dir { font-size: 11.5px; color: var(--text-3); }
 .pag-name { font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* ─── DARK MODE ─── */
+/* Activated by: OS preference (unless overridden) or [data-theme="dark"] on <html> */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg:           var(--p-nd-0);
+    --bg-subtle:    var(--p-nd-200);
+    --bg-hover:     var(--p-nd-300);
+    --border:       var(--p-nd-400);
+    --border-light: var(--p-nd-300);
+    --text:         var(--p-nd-a95);
+    --text-2:       var(--p-nd-a65);
+    --text-3:       var(--p-nd-a40);
+    --sh-action:       0 1px 2px  rgba(0,0,0,.20);
+    --sh-action-hover: 0 2px 4px  rgba(0,0,0,.28);
+    --sh-card:         0 2px 4px  rgba(0,0,0,.20);
+    --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
+    --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
+    --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
+    --green-bg:  rgba(22,163,74,.15);  --green-bd: rgba(22,163,74,.30);
+    --red-bg:    rgba(220,38,38,.15);  --red-bd:   rgba(220,38,38,.30);
+    --blue-bg:   rgba(37,99,235,.15);  --blue-bd:  rgba(37,99,235,.30);
+    --amber-bg:  rgba(217,119,6,.15);  --amber-bd: rgba(217,119,6,.30);
+  }
+}
+html[data-theme="dark"] {
+  --bg:           var(--p-nd-0);
+  --bg-subtle:    var(--p-nd-200);
+  --bg-hover:     var(--p-nd-300);
+  --border:       var(--p-nd-400);
+  --border-light: var(--p-nd-300);
+  --text:         var(--p-nd-a95);
+  --text-2:       var(--p-nd-a65);
+  --text-3:       var(--p-nd-a40);
+  --sh-action:       0 1px 2px  rgba(0,0,0,.20);
+  --sh-action-hover: 0 2px 4px  rgba(0,0,0,.28);
+  --sh-card:         0 2px 4px  rgba(0,0,0,.20);
+  --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
+  --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
+  --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
+  --green-bg:  rgba(22,163,74,.15);  --green-bd: rgba(22,163,74,.30);
+  --red-bg:    rgba(220,38,38,.15);  --red-bd:   rgba(220,38,38,.30);
+  --blue-bg:   rgba(37,99,235,.15);  --blue-bd:  rgba(37,99,235,.30);
+  --amber-bg:  rgba(217,119,6,.15);  --amber-bd: rgba(217,119,6,.30);
+}
+
+/* Toggle button in top nav */
+.theme-toggle {
+  margin-left: auto; display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: var(--radius-base);
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-2); cursor: pointer; flex-shrink: 0;
+  transition: background .1s, border-color .1s;
+}
+.theme-toggle:hover { background: var(--bg-subtle); border-color: var(--border); color: var(--text); }
+.theme-toggle svg { width: 16px; height: 16px; display: block; pointer-events: none; }

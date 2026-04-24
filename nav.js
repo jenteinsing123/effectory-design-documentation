@@ -1,4 +1,10 @@
 (function () {
+  // Apply saved theme before nav renders to avoid flash
+  (function applyTheme() {
+    var saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  })();
+
   // Auto-load icons.js so every page has access to the icon library
   (function loadIconScript() {
     if (document.querySelector('script[src$="icons.js"]')) return;
@@ -45,6 +51,33 @@
           link.classList.add('active');
         }
       });
+      // Wire up theme toggle
+      var btn = document.getElementById('theme-toggle');
+      var sunIcon = document.getElementById('theme-icon-sun');
+      var moonIcon = document.getElementById('theme-icon-moon');
+
+      function getEffectiveTheme() {
+        var stored = localStorage.getItem('theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function updateToggleIcon() {
+        var isDark = getEffectiveTheme() === 'dark';
+        if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+        if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+      }
+
+      if (btn) {
+        updateToggleIcon();
+        btn.addEventListener('click', function () {
+          var current = getEffectiveTheme();
+          var next = current === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('theme', next);
+          document.documentElement.setAttribute('data-theme', next);
+          updateToggleIcon();
+        });
+      }
     })
     .catch(function (err) {
       console.warn('[nav.js] Could not load nav.html:', err);
