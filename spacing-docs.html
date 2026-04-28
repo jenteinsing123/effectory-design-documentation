@@ -10,9 +10,9 @@
     .scale-list { display: flex; flex-direction: column; margin-bottom: 16px; }
     .scale-item {
       display: grid;
-      grid-template-columns: 200px 1fr 60px;
+      grid-template-columns: 200px 1fr 56px 68px;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
       padding: 14px 0;
       border-bottom: 1px solid var(--border-light);
     }
@@ -37,6 +37,11 @@
     .scale-px {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px; font-weight: 600; color: var(--text-2);
+      text-align: right;
+    }
+    .scale-rem {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; font-weight: 600; color: var(--text-3);
       text-align: right;
     }
 
@@ -149,6 +154,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:4px;"></div></div>
         <div class="scale-px">4 px</div>
+        <div class="scale-rem">0.25 rem</div>
       </div>
 
       <div class="scale-item">
@@ -158,6 +164,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:8px;"></div></div>
         <div class="scale-px">8 px</div>
+        <div class="scale-rem">0.5 rem</div>
       </div>
 
       <div class="scale-item">
@@ -167,6 +174,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:12px;"></div></div>
         <div class="scale-px">12 px</div>
+        <div class="scale-rem">0.75 rem</div>
       </div>
 
       <div class="scale-item">
@@ -176,6 +184,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:16px;"></div></div>
         <div class="scale-px">16 px</div>
+        <div class="scale-rem">1 rem</div>
       </div>
 
       <div class="scale-item">
@@ -185,6 +194,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:24px;"></div></div>
         <div class="scale-px">24 px</div>
+        <div class="scale-rem">1.5 rem</div>
       </div>
 
       <div class="scale-item">
@@ -194,6 +204,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:32px;"></div></div>
         <div class="scale-px">32 px</div>
+        <div class="scale-rem">2 rem</div>
       </div>
 
       <div class="scale-item">
@@ -203,6 +214,7 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:40px;"></div></div>
         <div class="scale-px">40 px</div>
+        <div class="scale-rem">2.5 rem</div>
       </div>
 
       <div class="scale-item">
@@ -212,11 +224,12 @@
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:56px;"></div></div>
         <div class="scale-px">56 px</div>
+        <div class="scale-rem">3.5 rem</div>
       </div>
     </div>
 
     <div class="note">
-      <strong>Beyond 56 px</strong> — the grid continues at 64, 72, 80, 88, 96, 104, 112, and 120 px for component sizing (heights, widths, fixed dimensions). These steps don't have named tokens and are referenced directly by their pixel value.
+      <strong>Beyond 56 px (3.5 rem)</strong> — the grid continues at 64, 72, 80, 88, 96, 104, 112, and 120 px (4–7.5 rem) for component sizing (heights, widths, fixed dimensions). These steps don't have named tokens and are referenced directly as rem values in code.
     </div>
   </section>
 
@@ -255,7 +268,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Icon to label</div>
-          <div class="ex-token">6 px</div>
+          <div class="ex-token">6 px · 0.375 rem</div>
           <div class="ex-desc">Glue an icon to the text it describes. They read as a single unit.</div>
         </div>
       </div>
@@ -270,7 +283,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Label to input</div>
-          <div class="ex-token">spacing-extra-tight · 4 px</div>
+          <div class="ex-token">spacing-extra-tight · 4 px · 0.25 rem</div>
           <div class="ex-desc">Keep a field label close to its control so the pairing stays obvious.</div>
         </div>
       </div>
@@ -287,7 +300,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Inline list items</div>
-          <div class="ex-token">spacing-tight · 8 px</div>
+          <div class="ex-token">spacing-tight · 8 px · 0.5 rem</div>
           <div class="ex-desc">Chip groups, tag rows, and inline controls — breathable but still compact.</div>
         </div>
       </div>
@@ -302,7 +315,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between form fields &amp; actions</div>
-          <div class="ex-token">spacing-base-tight · 12 px</div>
+          <div class="ex-token">spacing-base-tight · 12 px · 0.75 rem</div>
           <div class="ex-desc">Adjacent fields, button groups, and inline actions within a form.</div>
         </div>
       </div>
@@ -317,7 +330,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Card &amp; section padding</div>
-          <div class="ex-token">spacing-loose · 24 px</div>
+          <div class="ex-token">spacing-loose · 24 px · 1.5 rem</div>
           <div class="ex-desc">Inside cards, panels, and grid gaps — enough air to feel like a contained group.</div>
         </div>
       </div>
@@ -338,7 +351,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between form groups</div>
-          <div class="ex-token">spacing-loose · 24 px</div>
+          <div class="ex-token">spacing-loose · 24 px · 1.5 rem</div>
           <div class="ex-desc">Separates distinct groups of fields within one form without feeling disconnected.</div>
         </div>
       </div>
@@ -359,7 +372,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between related sections</div>
-          <div class="ex-token">spacing-super-loose · 40 px</div>
+          <div class="ex-token">spacing-super-loose · 40 px · 2.5 rem</div>
           <div class="ex-desc">Sections of the same page that share a topic but deserve their own reading beat.</div>
         </div>
       </div>
@@ -374,7 +387,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between unrelated sections</div>
-          <div class="ex-token">spacing-super-extra-loose · 56 px</div>
+          <div class="ex-token">spacing-super-extra-loose · 56 px · 3.5 rem</div>
           <div class="ex-desc">Hero padding and transitions between major page areas. Makes a clear topic change.</div>
         </div>
       </div>
