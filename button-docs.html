@@ -161,47 +161,54 @@
     <!-- Do/Don't 1: One primary per view -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev">
           <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
           <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
         </div>
-        <div class="dd-cap">Use one Primary button per view. Pair it with a Secondary for the opposing action.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Use one Primary button per view. Pair it with a Secondary for the opposing action.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="btn btn-primary" style="pointer-events:none;">Save</button>
           <button class="btn btn-primary" style="pointer-events:none;">Publish</button>
         </div>
-        <div class="dd-cap">Avoid two Primary buttons side by side — they create competing calls-to-action with no clear winner.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Avoid two Primary buttons side by side — they create competing calls-to-action with no clear winner.
+        </div>
       </div>
     </div>
 
     <!-- Do/Don't 2: Primary on the right -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev">
           <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
           <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
         </div>
-        <div class="dd-cap">Place the Primary action on the right. This matches the natural reading direction toward confirmation.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Place the Primary action on the right. This matches the natural reading direction toward confirmation.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
         </div>
-        <div class="dd-cap">Don't place the Primary button on the left — users may reach for Cancel by habit and miss it.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't place the Primary button on the left — users may reach for Cancel by habit and miss it.
+        </div>
       </div>
     </div>
 
     <!-- Do/Don't 3: Separate destructive actions -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev spread">
           <button class="btn btn-danger" style="pointer-events:none;">Delete account</button>
           <div style="display:flex; gap:8px;">
@@ -209,22 +216,26 @@
             <button class="btn btn-primary" style="pointer-events:none;">Save</button>
           </div>
         </div>
-        <div class="dd-cap">Give destructive actions visual breathing room — move them to the opposite side of the layout.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Give destructive actions visual breathing room — move them to the opposite side of the layout.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           <button class="btn btn-danger" style="pointer-events:none;">Delete account</button>
         </div>
-        <div class="dd-cap">Never place a Danger button directly next to a Primary — users can accidentally click the wrong one.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Never place a Danger button directly next to a Primary — users can accidentally click the wrong one.
+        </div>
       </div>
     </div>
 
     <!-- Do/Don't 4: Disabled is a last resort -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction: column; gap: 10px; align-items: flex-start; padding: 20px 24px;">
           <input
             type="text" placeholder="Survey name is required"
@@ -233,14 +244,19 @@
           <span style="font-size: 12px; color: #d3353b;">Survey name is required</span>
           <button class="btn btn-primary" style="pointer-events:none;">Save survey</button>
         </div>
-        <div class="dd-cap">Keep the button active and show an inline validation error so users know exactly what's blocking them.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Keep the button active and show an inline validation error so users know exactly what's blocking them.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="btn btn-primary is-disabled" disabled>Save survey</button>
         </div>
-        <div class="dd-cap">Avoid disabled buttons without explanation — users get no feedback on why they can't proceed.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Avoid disabled buttons without explanation — users get no feedback on why they can't proceed.
+        </div>
       </div>
     </div>
 
@@ -248,7 +264,6 @@
     <h3>Alignment and positioning</h3>
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
           <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
             <div style="height:7px; background:#dddde0; border-radius:3px; width:60%;"></div>
@@ -260,10 +275,12 @@
             <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           </div>
         </div>
-        <div class="dd-cap">Right-align button groups in forms and dialogs — this anchors the primary action near the natural endpoint of the reading flow.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Right-align button groups in forms and dialogs — this anchors the primary action near the natural endpoint of the reading flow.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
           <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
             <div style="height:7px; background:#dddde0; border-radius:3px; width:60%;"></div>
@@ -275,13 +292,15 @@
             <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           </div>
         </div>
-        <div class="dd-cap">Avoid center-aligning buttons in forms — it disconnects them from the content edge and creates awkward visual tension.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Avoid center-aligning buttons in forms — it disconnects them from the content edge and creates awkward visual tension.
+        </div>
       </div>
     </div>
 
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
           <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); background:#fff;">
             <div style="height:7px; background:#dddde0; border-radius:3px; width:90px;"></div>
@@ -294,10 +313,12 @@
             <div style="height:7px; background:#dddde0; border-radius:3px; width:50%;"></div>
           </div>
         </div>
-        <div class="dd-cap">In page headers and toolbars, place action buttons on the trailing edge (right) so they don't compete with the page title.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          In page headers and toolbars, place action buttons on the trailing edge (right) so they don't compete with the page title.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background:#f8f8f9;">
           <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--border); background:#fff;">
             <button class="btn btn-secondary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Export</button>
@@ -309,7 +330,10 @@
             <div style="height:7px; background:#dddde0; border-radius:3px; width:50%;"></div>
           </div>
         </div>
-        <div class="dd-cap">Don't scatter buttons across the header — placing them before the title makes the layout feel unstructured and breaks scan order.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't scatter buttons across the header — placing them before the title makes the layout feel unstructured and breaks scan order.
+        </div>
       </div>
     </div>
 
@@ -389,22 +413,26 @@
       <p>Combine an action verb with the object it acts on. This makes the outcome clear without relying on surrounding context.</p>
       <div class="dd-grid">
         <div class="dd-card">
-          <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev" style="gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
             <button class="btn btn-danger" style="pointer-events:none;">Delete survey</button>
             <button class="btn btn-secondary" style="pointer-events:none;">Add member</button>
           </div>
-          <div class="dd-cap">Verb + noun makes the outcome crystal clear, even without visual context.</div>
+          <div class="dd-cap do">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+            Verb + noun makes the outcome crystal clear, even without visual context.
+          </div>
         </div>
         <div class="dd-card">
-          <div class="dd-hd dont">✕ Don't</div>
           <div class="dd-prev" style="gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-primary" style="pointer-events:none;">Submit</button>
             <button class="btn btn-danger" style="pointer-events:none;">Yes</button>
             <button class="btn btn-secondary" style="pointer-events:none;">OK</button>
           </div>
-          <div class="dd-cap">Vague labels like "Submit", "Yes", or "OK" lose all meaning when read out of context.</div>
+          <div class="dd-cap dont">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+            Vague labels like "Submit", "Yes", or "OK" lose all meaning when read out of context.
+          </div>
         </div>
       </div>
     </div>
@@ -415,18 +443,22 @@
       <p>Aim for 1–3 words. If you feel the need for more, consider whether the extra context belongs in nearby helper text instead.</p>
       <div class="dd-grid">
         <div class="dd-card">
-          <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev">
             <button class="btn btn-primary" style="pointer-events:none;">Invite team</button>
           </div>
-          <div class="dd-cap">Short labels scan instantly and fit neatly in the button container.</div>
+          <div class="dd-cap do">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+            Short labels scan instantly and fit neatly in the button container.
+          </div>
         </div>
         <div class="dd-card">
-          <div class="dd-hd dont">✕ Don't</div>
           <div class="dd-prev">
             <button class="btn btn-primary cg-btn-long" style="pointer-events:none;">Click here to invite your team members</button>
           </div>
-          <div class="dd-cap">Long labels are hard to scan and can break layouts on smaller screens.</div>
+          <div class="dd-cap dont">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+            Long labels are hard to scan and can break layouts on smaller screens.
+          </div>
         </div>
       </div>
     </div>
@@ -437,7 +469,6 @@
       <p>Only add an icon when it genuinely aids comprehension — a trash icon on Delete, a plus on Add. When in doubt, leave the icon out.</p>
       <div class="dd-grid">
         <div class="dd-card">
-          <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev" style="gap: 8px;">
             <button class="btn btn-danger" style="pointer-events:none;">
               <i data-icon="trash"></i>
@@ -448,10 +479,12 @@
               Add member
             </button>
           </div>
-          <div class="dd-cap">The trash and plus icons directly reinforce the meaning of their labels.</div>
+          <div class="dd-cap do">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+            The trash and plus icons directly reinforce the meaning of their labels.
+          </div>
         </div>
         <div class="dd-card">
-          <div class="dd-hd dont">✕ Don't</div>
           <div class="dd-prev" style="gap: 8px;">
             <button class="btn btn-primary" style="pointer-events:none;">
               <!-- Star icon - decorative, doesn't reinforce "Save" -->
@@ -464,7 +497,10 @@
               Edit
             </button>
           </div>
-          <div class="dd-cap">Random icons add visual noise without helping users understand the action faster.</div>
+          <div class="dd-cap dont">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+            Random icons add visual noise without helping users understand the action faster.
+          </div>
         </div>
       </div>
     </div>

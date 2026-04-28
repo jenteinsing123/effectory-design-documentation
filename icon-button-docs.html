@@ -124,7 +124,6 @@
     <!-- Do/Don't 1: Toolbar hierarchy -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev">
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Add">
             <i data-icon="plus"></i>
@@ -136,10 +135,12 @@
             <i data-icon="more-vertical"></i>
           </button>
         </div>
-        <div class="dd-cap">Use one Primary icon button per toolbar. Support it with Secondary and Tertiary to create clear visual hierarchy.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Use one Primary icon button per toolbar. Support it with Secondary and Tertiary to create clear visual hierarchy.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev">
           <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Add">
             <i data-icon="plus"></i>
@@ -151,14 +152,16 @@
             <i data-icon="more-vertical"></i>
           </button>
         </div>
-        <div class="dd-cap">Avoid making every toolbar action Primary — all actions become equally loud and users can't tell what matters most.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Avoid making every toolbar action Primary — all actions become equally loud and users can't tell what matters most.
+        </div>
       </div>
     </div>
 
     <!-- Do/Don't 2: Size to context -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="flex-direction:column; gap:12px; align-items:stretch; padding:20px;">
           <!-- Card header with 36px -->
           <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;">
@@ -184,10 +187,12 @@
             </button>
           </div>
         </div>
-        <div class="dd-cap">Match the size to the context: 36px in spacious card headers, 24px in dense table rows.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Match the size to the context: 36px in spacious card headers, 24px in dense table rows.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="flex-direction:column; gap:6px; align-items:stretch; padding:20px;">
           <!-- Table rows with 36px — too large -->
           <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
@@ -209,14 +214,16 @@
             </button>
           </div>
         </div>
-        <div class="dd-cap">Don't use 36px icon buttons in dense table rows — they inflate the row height and make the layout feel heavy.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't use 36px icon buttons in dense table rows — they inflate the row height and make the layout feel heavy.
+        </div>
       </div>
     </div>
 
     <!-- Do/Don't 3: Always pair with a tooltip -->
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-hd do">✓ Do</div>
         <div class="dd-prev" style="gap: 32px;">
           <div style="position:relative; display:inline-flex;">
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit name">
@@ -231,10 +238,12 @@
             <div class="tooltip-mock">Delete survey</div>
           </div>
         </div>
-        <div class="dd-cap">Always pair with a tooltip that appears on both hover and keyboard focus. It is the only text context available to the user.</div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Always pair with a tooltip that appears on both hover and keyboard focus. It is the only text context available to the user.
+        </div>
       </div>
       <div class="dd-card">
-        <div class="dd-hd dont">✕ Don't</div>
         <div class="dd-prev" style="gap: 32px; flex-direction:column;">
           <div style="display:flex; gap:12px;">
             <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit name">
@@ -246,7 +255,10 @@
           </div>
           <span style="font-size:11.5px; color:var(--text-3); font-style:italic;">No tooltip — what do these do?</span>
         </div>
-        <div class="dd-cap">Don't use icon buttons without tooltips. Users must hover or focus to guess the action — a critical UX failure.</div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't use icon buttons without tooltips. Users must hover or focus to guess the action — a critical UX failure.
+        </div>
       </div>
     </div>
 
@@ -348,7 +360,6 @@
       <p>Only use icons whose meaning is immediately clear without a label. When a suitable standard icon doesn't exist, use a labelled button instead.</p>
       <div class="dd-grid">
         <div class="dd-card">
-          <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Search">
@@ -375,10 +386,12 @@
               <span style="font-size:11px; color:var(--text-3);">Add</span>
             </div>
           </div>
-          <div class="dd-cap">Standard icons like magnifier (search), trash (delete), ✕ (close), and + (add) are understood cross-culturally.</div>
+          <div class="dd-cap do">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+            Standard icons like magnifier (search), trash (delete), ✕ (close), and + (add) are understood cross-culturally.
+          </div>
         </div>
         <div class="dd-card">
-          <div class="dd-hd dont">✕ Don't</div>
           <div class="dd-prev" style="gap: 20px;">
             <!-- Abstract / unfamiliar icons -->
             <div class="ib-labeled">
@@ -400,7 +413,10 @@
               <span style="font-size:11px; color:var(--red);">Non-standard</span>
             </div>
           </div>
-          <div class="dd-cap">Custom or decorative icons that don't map to a clear action create confusion — users will hover just to find out what they do.</div>
+          <div class="dd-cap dont">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+            Custom or decorative icons that don't map to a clear action create confusion — users will hover just to find out what they do.
+          </div>
         </div>
       </div>
     </div>
@@ -411,7 +427,6 @@
       <p>The <code>aria-label</code> is read aloud by screen readers in place of a visible label. Write it as verb + object — what will happen when the user clicks.</p>
       <div class="dd-grid">
         <div class="dd-card">
-          <div class="dd-hd do">✓ Do</div>
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Delete survey">
@@ -432,10 +447,12 @@
               <code class="ib-code">"Close dialog"</code>
             </div>
           </div>
-          <div class="dd-cap">Describe the outcome — verb + object — so the label makes sense even without any surrounding context.</div>
+          <div class="dd-cap do">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+            Describe the outcome — verb + object — so the label makes sense even without any surrounding context.
+          </div>
         </div>
         <div class="dd-card">
-          <div class="dd-hd dont">✕ Don't</div>
           <div class="dd-prev" style="gap: 20px;">
             <div class="ib-labeled">
               <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Trash">
@@ -456,7 +473,10 @@
               <code class="ib-code bad">"X"</code>
             </div>
           </div>
-          <div class="dd-cap">Describing the icon shape ("Trash", "Pencil", "X") tells screen reader users what it looks like — not what it does.</div>
+          <div class="dd-cap dont">
+            <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+            Describing the icon shape ("Trash", "Pencil", "X") tells screen reader users what it looks like — not what it does.
+          </div>
         </div>
       </div>
     </div>
