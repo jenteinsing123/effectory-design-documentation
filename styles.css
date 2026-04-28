@@ -1,33 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('./tokens.css');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --brand:         #0a9d99;   /* bg/brand/base        */
-  --brand-hover:   #0c827f;   /* bg/brand/base-hover  */
-  --brand-pressed: #166764;   /* bg/brand/base-pressed */
-  --brand-deep:    #0e4846;   /* turquoise/900         */
-  --brand-border:  #0c827f;   /* border/brand/base     */
-  --brand-text:    #ffffff;   /* content/on/brand-base */
-  --brand-subtle:  #e6f7f7;   /* turquoise tint bg     */
-  --brand-focus:   rgba(10,157,153,.35);
-  --navy:          #192743;
-  --inverse-bg:    #192743;   /* bg/inverse — flips in dark mode */
-  --inverse-text:  #ffffff;
+  --navy: #192743;
 
   --top-h:        52px;
   --sidebar-w:    260px;
   --toc-w:        200px;
-
-  --bg:           #ffffff;
-  --bg-subtle:    #f7f7f8;
-  --bg-hover:     #f1f1f3;
-  --border:       #e8e8ea;
-  --border-light: #f0f0f2;
-
-  --text:         #111111;
-  --text-2:       #555560;
-  --text-3:       #9999a8;
 
   --green:  #16a34a; --green-bg:  #f0fdf4; --green-bd:  #bbf7d0;
   --red:    #dc2626; --red-bg:    #fef2f2; --red-bd:    #fecaca;
@@ -42,7 +23,6 @@
   --radius-lg:    12px;
   --radius-xl:    16px;
   --radius-full:  999px;
-  /* legacy alias so existing rules keep working */
   --radius:       var(--radius-md);
 
   /* Spacing — from Spacing docs (4 px base) */
@@ -64,18 +44,6 @@
   --sh-dialogs:       0 4px 12px rgba(25,39,67,.08);
   --sh-footer:        0 4px 12px rgba(25,39,67,.08);
   --sh-slide-panel:   -4px 4px 4px rgba(25,39,67,.04);
-
-  /* Dark mode primitives — from Figma 2. Primitives collection (color/neutral/dark/*) */
-  --p-nd-0:   #151B26;
-  --p-nd-200: #232A39;
-  --p-nd-300: #313949;
-  --p-nd-400: #454D5F;
-  --p-nd-500: #4D576A;
-  --p-nd-600: #5E6A82;
-  --p-nd-a95: rgba(255,255,255,.95);
-  --p-nd-a65: rgba(255,255,255,.65);
-  --p-nd-a40: rgba(255,255,255,.40);
-  --p-nd-a20: rgba(255,255,255,.20);
 }
 
 html { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; line-height: 1.6; color: var(--text); background: var(--bg); }
@@ -106,7 +74,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .brand-name { font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
 .brand-tag {
   font-size: 10px; font-weight: 600; color: var(--brand-hover);
-  background: #e6f7f7; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--brand-subtle); padding: 1px 6px; border-radius: var(--radius-full);
   letter-spacing: .02em; margin-left: 2px;
 }
 
@@ -351,26 +319,15 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .pag-dir { font-size: 11.5px; color: var(--text-3); }
 .pag-name { font-size: 14px; font-weight: 600; color: var(--text); }
 
-/* ─── DARK MODE ─── */
-/* Activated by: OS preference (unless overridden) or [data-theme="dark"] on <html> */
+/* ─── DARK MODE — shadows + status colors (bg/text/brand handled by tokens.css) ─── */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) {
-    --bg:           var(--p-nd-0);
-    --bg-subtle:    var(--p-nd-200);
-    --bg-hover:     var(--p-nd-300);
-    --border:       var(--p-nd-400);
-    --border-light: var(--p-nd-300);
-    --text:         var(--p-nd-a95);
-    --text-2:       var(--p-nd-a65);
-    --text-3:       var(--p-nd-a40);
     --sh-action:       0 1px 2px  rgba(0,0,0,.20);
     --sh-action-hover: 0 2px 4px  rgba(0,0,0,.28);
     --sh-card:         0 2px 4px  rgba(0,0,0,.20);
     --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
     --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
     --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
-    --inverse-bg:    #f4f4f6;
-    --inverse-text:  #192743;
     --green-bg:  rgba(22,163,74,.15);  --green-bd: rgba(22,163,74,.30);
     --red-bg:    rgba(220,38,38,.15);  --red-bd:   rgba(220,38,38,.30);
     --blue-bg:   rgba(37,99,235,.15);  --blue-bd:  rgba(37,99,235,.30);
@@ -378,14 +335,6 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
   }
 }
 html[data-theme="dark"] {
-  --bg:           var(--p-nd-0);
-  --bg-subtle:    var(--p-nd-200);
-  --bg-hover:     var(--p-nd-300);
-  --border:       var(--p-nd-400);
-  --border-light: var(--p-nd-300);
-  --text:         var(--p-nd-a95);
-  --text-2:       var(--p-nd-a65);
-  --text-3:       var(--p-nd-a40);
   --sh-action:       0 1px 2px  rgba(0,0,0,.20);
   --sh-action-hover: 0 2px 4px  rgba(0,0,0,.28);
   --sh-card:         0 2px 4px  rgba(0,0,0,.20);
@@ -422,15 +371,4 @@ html[data-theme="dark"] {
 .portal-select:hover { border-color: var(--border); background: var(--bg-subtle); color: var(--text); }
 .portal-select:focus { border-color: var(--brand); }
 
-/* ─── PERSONAL PORTAL THEME ─── */
-/* Brand flips from turquoise → yellow; text on brand flips to navy for contrast */
-html[data-portal="personal"] {
-  --brand:         #fecd29;            /* color/yellow/300  — button bg        */
-  --brand-hover:   #fdbd12;            /* color/yellow/400  — hover            */
-  --brand-pressed: #ec9f06;            /* color/yellow/500  — pressed          */
-  --brand-deep:    #d68100;            /* color/yellow/600  — deep pressed     */
-  --brand-border:  #d68100;            /* border/brand/base                    */
-  --brand-text:    #192743;            /* content/on/brand-base — dark on yel  */
-  --brand-subtle:  #ffefc2;            /* color/yellow/100  — tinted bg        */
-  --brand-focus:   rgba(253,189,18,.40);
-}
+/* Personal portal brand overrides are now in tokens.css */
