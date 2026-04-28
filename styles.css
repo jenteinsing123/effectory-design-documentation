@@ -114,14 +114,6 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .content { width: 100%; max-width: 880px; padding: 40px 48px 96px; min-width: 0; }
 .toc-col { width: var(--toc-w); flex-shrink: 0; padding: 44px 0 0 0; }
 
-/* ─── BREADCRUMB ─── */
-.breadcrumb {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12.5px; color: var(--text-3); margin-bottom: 20px;
-}
-.breadcrumb a { color: var(--text-3); text-decoration: none; }
-.breadcrumb a:hover { color: var(--text-2); }
-.breadcrumb-sep { color: var(--border); }
 
 /* ─── PAGE HEADER ─── */
 .page-header { margin-bottom: 32px; }
