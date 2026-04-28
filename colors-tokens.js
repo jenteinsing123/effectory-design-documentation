@@ -177,6 +177,8 @@
     return hex.toUpperCase();
   }
 
+  var MODE_LABELS = { lc: 'Light · Coordinator', lp: 'Light · Personal', dc: 'Dark · Coordinator' };
+
   function updatePage() {
     var mode = getMode();
     document.querySelectorAll('.sem-row[data-token]').forEach(function (row) {
@@ -193,6 +195,8 @@
       var aliasCode = row.querySelector('.sem-alias code:first-child');
       if (aliasCode && val.prim) aliasCode.textContent = val.prim;
     });
+    var label = document.getElementById('sem-mode-label');
+    if (label) label.textContent = MODE_LABELS[mode] || mode;
   }
 
   window.ColorTokens = { update: updatePage, getMode: getMode };
