@@ -3,10 +3,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --brand:        #0a9d99;
-  --brand-dark:   #0c827f;
-  --brand-text:   #ffffff;   /* text/icon on brand-colored surface */
-  --navy:         #192743;
+  --brand:         #0a9d99;   /* bg/brand/base        */
+  --brand-hover:   #0c827f;   /* bg/brand/base-hover  */
+  --brand-pressed: #166764;   /* bg/brand/base-pressed */
+  --brand-deep:    #0e4846;   /* turquoise/900         */
+  --brand-border:  #0c827f;   /* border/brand/base     */
+  --brand-text:    #ffffff;   /* content/on/brand-base */
+  --brand-subtle:  #e6f7f7;   /* turquoise tint bg     */
+  --brand-focus:   rgba(10,157,153,.35);
+  --navy:          #192743;
+  --inverse-bg:    #192743;   /* bg/inverse — flips in dark mode */
+  --inverse-text:  #ffffff;
 
   --top-h:        52px;
   --sidebar-w:    260px;
@@ -98,7 +105,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .brand-logo svg { width: 32px; height: 32px; display: block; }
 .brand-name { font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
 .brand-tag {
-  font-size: 10px; font-weight: 600; color: var(--brand-dark);
+  font-size: 10px; font-weight: 600; color: var(--brand-hover);
   background: #e6f7f7; padding: 1px 6px; border-radius: var(--radius-full);
   letter-spacing: .02em; margin-left: 2px;
 }
@@ -155,7 +162,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
   display: inline-flex; align-items: center; gap: 4px;
   padding: 3px 9px; border-radius: var(--radius-full); font-size: 11.5px; font-weight: 500;
 }
-.badge-brand { background: #e6f7f7; color: var(--brand-dark); }
+.badge-brand { background: var(--brand-subtle); color: var(--brand-hover); }
 .badge-stable { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-bd); }
 .badge-beta { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-bd); }
 .badge-neutral { background: var(--bg-subtle); color: var(--text-2); border: 1px solid var(--border); }
@@ -198,7 +205,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .anatomy-items { display: flex; flex-direction: column; gap: 10px; }
 .anatomy-item { display: flex; gap: 10px; font-size: 14px; color: var(--text-2); line-height: 1.6; }
 .anatomy-num {
-  width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: #fff;
+  width: 20px; height: 20px; border-radius: 50%; background: var(--inverse-bg); color: var(--inverse-text);
   font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; margin-top: 3px;
 }
@@ -242,15 +249,15 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .ib svg { display: block; pointer-events: none; }
 .ib-36 { width: 36px; height: 36px; } .ib-36 svg { width: 16px; height: 16px; }
 .ib-24 { width: 24px; height: 24px; } .ib-24 svg { width: 12px; height: 12px; }
-.ib-primary { background: var(--brand); border: 1px solid var(--brand-dark); box-shadow: var(--sh-action); color: var(--brand-text); }
-.ib-primary:hover { background: #0c827f; }
-.ib-primary:active { background: #166764; }
+.ib-primary { background: var(--brand); border: 1px solid var(--brand-border); box-shadow: var(--sh-action); color: var(--brand-text); }
+.ib-primary:hover { background: var(--brand-hover); }
+.ib-primary:active { background: var(--brand-pressed); }
 .ib-secondary { background: var(--bg); border: 1px solid #bcc1cd; box-shadow: var(--sh-action); color: rgba(25,39,67,.8); }
 .ib-secondary:hover { background: #f8f8f9; border-color: #a5adbc; }
 .ib-tertiary { background: transparent; border: 1px solid transparent; color: rgba(25,39,67,.8); }
 .ib-tertiary:hover { background: #f8f8f9; }
-.is-hover.ib-primary   { background: #0c827f; border-color: #166764; }
-.is-pressed.ib-primary { background: #166764; border-color: #0e4846; }
+.is-hover.ib-primary   { background: var(--brand-hover);   border-color: var(--brand-pressed); }
+.is-pressed.ib-primary { background: var(--brand-pressed); border-color: var(--brand-deep); }
 .is-hover.ib-secondary   { background: #f8f8f9; border-color: #a5adbc; color: rgba(25,39,67,.95); }
 .is-pressed.ib-secondary { background: #f1f2f4; border-color: #7b869e; }
 .is-hover.ib-tertiary   { background: #f8f8f9; color: rgba(25,39,67,.95); }
@@ -258,7 +265,7 @@ h3 { font-size: 15px; font-weight: 500; color: var(--text); text-transform: none
 .is-disabled { background: rgba(25,39,67,.07) !important; border-color: transparent !important; box-shadow: none !important; color: rgba(25,39,67,.28) !important; cursor: not-allowed; }
 .is-disabled.ib-secondary { background: var(--bg) !important; border-color: var(--border) !important; }
 .is-disabled.ib-tertiary  { background: transparent !important; }
-.is-focus { outline: 2px solid rgba(10,157,153,.35); outline-offset: 2px; }
+.is-focus { outline: 2px solid var(--brand-focus); outline-offset: 2px; }
 .var-row { display: flex; align-items: center; gap: 14px; }
 .var-label { font-size: 12px; color: var(--text-3); font-weight: 500; width: 76px; flex-shrink: 0; }
 .state-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -282,7 +289,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 
 /* ─── VARIANT BADGE ─── */
 .vb { display: inline-flex; padding: 2px 9px; border-radius: var(--radius-full); font-size: 12px; font-weight: 500; }
-.vb-brand { background: #e6f7f7; color: var(--brand-dark); }
+.vb-brand { background: var(--brand-subtle); color: var(--brand-hover); }
 .vb-neutral { background: var(--bg-hover); color: var(--text-2); border: 1px solid var(--border); }
 
 /* ─── A11Y ─── */
@@ -362,6 +369,8 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
     --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
     --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
     --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
+    --inverse-bg:    #f4f4f6;
+    --inverse-text:  #192743;
     --green-bg:  rgba(22,163,74,.15);  --green-bd: rgba(22,163,74,.30);
     --red-bg:    rgba(220,38,38,.15);  --red-bd:   rgba(220,38,38,.30);
     --blue-bg:   rgba(37,99,235,.15);  --blue-bd:  rgba(37,99,235,.30);
@@ -414,10 +423,14 @@ html[data-theme="dark"] {
 .portal-select:focus { border-color: var(--brand); }
 
 /* ─── PERSONAL PORTAL THEME ─── */
-/* Brand color flips from turquoise → yellow; text on brand flips to navy */
+/* Brand flips from turquoise → yellow; text on brand flips to navy for contrast */
 html[data-portal="personal"] {
-  --brand:       #fecd29;   /* color/yellow/300 — button bg */
-  --brand-dark:  #fdbd12;   /* color/yellow/400 — hover     */
-  --brand-text:  #192743;   /* color/neutral/1200 — dark text on yellow */
+  --brand:         #fecd29;            /* color/yellow/300  — button bg        */
+  --brand-hover:   #fdbd12;            /* color/yellow/400  — hover            */
+  --brand-pressed: #ec9f06;            /* color/yellow/500  — pressed          */
+  --brand-deep:    #d68100;            /* color/yellow/600  — deep pressed     */
+  --brand-border:  #d68100;            /* border/brand/base                    */
+  --brand-text:    #192743;            /* content/on/brand-base — dark on yel  */
+  --brand-subtle:  #ffefc2;            /* color/yellow/100  — tinted bg        */
+  --brand-focus:   rgba(253,189,18,.40);
 }
-/* Personal portal + dark mode: keep teal in dark since no dark-personal mode in Figma */
