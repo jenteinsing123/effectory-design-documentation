@@ -111,7 +111,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 
 /* ─── CONTENT ─── */
 .content-wrap { flex: 1; display: flex; min-width: 0; justify-content: center; }
-.content { flex: 1; max-width: 960px; padding: 40px 48px 96px; min-width: 0; }
+.content { flex: 1; max-width: 880px; padding: 40px 48px 96px; min-width: 0; }
 .toc-col { width: var(--toc-w); flex-shrink: 0; padding: 44px 0 0 0; }
 
 /* ─── BREADCRUMB ─── */

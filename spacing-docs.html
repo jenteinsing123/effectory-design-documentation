@@ -145,7 +145,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-extra-tight</span>
-          <span class="scale-use">Icon-to-label · l4–l6 to body</span>
+          <span class="scale-use">Label to input · icon padding</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:4px;"></div></div>
         <div class="scale-px">4 px</div>
@@ -154,7 +154,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-tight</span>
-          <span class="scale-use">l1–l3 to body · button vertical padding</span>
+          <span class="scale-use">Inline list items · button vertical padding</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:8px;"></div></div>
         <div class="scale-px">8 px</div>
@@ -163,7 +163,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-base-tight</span>
-          <span class="scale-use">List item · table cell padding</span>
+          <span class="scale-use">Between form fields &amp; actions</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:12px;"></div></div>
         <div class="scale-px">12 px</div>
@@ -172,7 +172,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-base</span>
-          <span class="scale-use">Default · component padding · between form fields</span>
+          <span class="scale-use">Default · component padding · table cell padding</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:16px;"></div></div>
         <div class="scale-px">16 px</div>
@@ -181,7 +181,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-loose</span>
-          <span class="scale-use">Card padding · section padding · grid gap</span>
+          <span class="scale-use">Between form groups · card padding · grid gap</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:24px;"></div></div>
         <div class="scale-px">24 px</div>
@@ -190,7 +190,7 @@
       <div class="scale-item">
         <div class="scale-meta">
           <span class="scale-name">spacing-extra-loose</span>
-          <span class="scale-use">Between major form groups · large cards</span>
+          <span class="scale-use">Large cards · section padding</span>
         </div>
         <div class="scale-bar-wrap"><div class="scale-bar" style="width:32px;"></div></div>
         <div class="scale-px">32 px</div>
@@ -245,37 +245,37 @@
 
     <div class="ex-grid">
 
-      <!-- 4 px -->
+      <!-- 6 px -->
       <div class="ex-card">
         <div class="ex-demo">
-          <div style="display:flex; align-items:center; gap:4px;">
+          <div style="display:flex; align-items:center; gap:6px;">
             <span class="d-icon"></span>
             <span style="font-size:13px; color:var(--text);">Download report</span>
           </div>
         </div>
         <div class="ex-meta">
           <div class="ex-title">Icon to label</div>
-          <div class="ex-token">spacing-extra-tight · 4 px</div>
+          <div class="ex-token">6 px</div>
           <div class="ex-desc">Glue an icon to the text it describes. They read as a single unit.</div>
         </div>
       </div>
 
-      <!-- 8 px -->
+      <!-- 4 px -->
       <div class="ex-card">
         <div class="ex-demo">
-          <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-start;">
             <span class="d-label">Email</span>
             <input class="d-input" value="name@effectory.com" readonly />
           </div>
         </div>
         <div class="ex-meta">
           <div class="ex-title">Label to input</div>
-          <div class="ex-token">spacing-tight · 8 px</div>
+          <div class="ex-token">spacing-extra-tight · 4 px</div>
           <div class="ex-desc">Keep a field label close to its control so the pairing stays obvious.</div>
         </div>
       </div>
 
-      <!-- 12 px -->
+      <!-- 8 px -->
       <div class="ex-card">
         <div class="ex-demo">
           <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
@@ -287,23 +287,23 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Inline list items</div>
-          <div class="ex-token">spacing-base-tight · 12 px</div>
-          <div class="ex-desc">List rows, table cells, and chip groups — breathable but still compact.</div>
+          <div class="ex-token">spacing-tight · 8 px</div>
+          <div class="ex-desc">Chip groups, tag rows, and inline controls — breathable but still compact.</div>
         </div>
       </div>
 
-      <!-- 16 px -->
+      <!-- 12 px -->
       <div class="ex-card">
         <div class="ex-demo">
-          <div style="display:flex; gap:16px;">
+          <div style="display:flex; gap:12px;">
             <button class="d-btn sec">Cancel</button>
             <button class="d-btn">Save changes</button>
           </div>
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between form fields &amp; actions</div>
-          <div class="ex-token">spacing-base · 16 px</div>
-          <div class="ex-desc">The default. Use it between adjacent fields, buttons, and inside most components.</div>
+          <div class="ex-token">spacing-base-tight · 12 px</div>
+          <div class="ex-desc">Adjacent fields, button groups, and inline actions within a form.</div>
         </div>
       </div>
 
@@ -322,15 +322,15 @@
         </div>
       </div>
 
-      <!-- 32 px -->
+      <!-- 24 px form groups -->
       <div class="ex-card">
         <div class="ex-demo">
-          <div style="display:flex; flex-direction:column; gap:32px; width:100%; max-width:240px;">
-            <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; flex-direction:column; gap:24px; width:100%; max-width:240px;">
+            <div style="display:flex; flex-direction:column; gap:4px;">
               <span class="d-label">Account</span>
               <input class="d-input" value="Effectory" readonly />
             </div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; flex-direction:column; gap:4px;">
               <span class="d-label">Billing</span>
               <input class="d-input" value="Monthly" readonly />
             </div>
@@ -338,7 +338,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Between form groups</div>
-          <div class="ex-token">spacing-extra-loose · 32 px</div>
+          <div class="ex-token">spacing-loose · 24 px</div>
           <div class="ex-desc">Separates distinct groups of fields within one form without feeling disconnected.</div>
         </div>
       </div>
