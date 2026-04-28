@@ -9,14 +9,25 @@
     <span class="brand-name">Engage Design System</span>
     <span class="brand-tag">v1.0</span>
   </a>
-  <select class="portal-select" id="portal-select" aria-label="Select portal" title="Switch portal theme">
-    <option value="coordinator">Coordinator</option>
-    <option value="personal">Personal</option>
-  </select>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-    <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-  </button>
+  <div class="topnav-actions">
+    <div class="portal-wrap">
+      <svg class="portal-ico" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M8 1a6.5 6.5 0 1 0 0 13c.55 0 1-.45 1-1 0-.26-.1-.48-.25-.65a.85.85 0 0 1-.25-.6c0-.55.45-1 1-1H10.7A3.8 3.8 0 0 0 14.5 7.8C14.5 4.05 11.59 1 8 1z"/>
+        <circle cx="5.5" cy="5.5" r="1.1"/>
+        <circle cx="8" cy="3.8" r="1.1"/>
+        <circle cx="10.5" cy="5.5" r="1.1"/>
+      </svg>
+      <select class="portal-select" id="portal-select" aria-label="Select portal" title="Switch portal theme">
+        <option value="coordinator">Coordinator</option>
+        <option value="personal">Personal</option>
+      </select>
+      <svg class="portal-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+    </button>
+  </div>
 </header>
 
 <aside class="sidebar">
