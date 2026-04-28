@@ -9,9 +9,9 @@
     .radius-list { display: flex; flex-direction: column; margin-bottom: 16px; }
     .radius-item {
       display: grid;
-      grid-template-columns: 220px 1fr 60px;
+      grid-template-columns: 220px 1fr 56px 68px;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
       padding: 18px 0;
       border-bottom: 1px solid var(--border-light);
     }
@@ -30,6 +30,11 @@
     .radius-px {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px; font-weight: 600; color: var(--text-2);
+      text-align: right;
+    }
+    .radius-rem {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px; font-weight: 600; color: var(--text-3);
       text-align: right;
     }
 
@@ -132,6 +137,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:0;"></div></div>
         <div class="radius-px">0 px</div>
+        <div class="radius-rem">0 rem</div>
       </div>
 
       <div class="radius-item">
@@ -141,6 +147,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:4px;"></div></div>
         <div class="radius-px">4 px</div>
+        <div class="radius-rem">0.25 rem</div>
       </div>
 
       <div class="radius-item">
@@ -150,6 +157,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:6px;"></div></div>
         <div class="radius-px">6 px</div>
+        <div class="radius-rem">0.375 rem</div>
       </div>
 
       <div class="radius-item">
@@ -159,6 +167,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:8px;"></div></div>
         <div class="radius-px">8 px</div>
+        <div class="radius-rem">0.5 rem</div>
       </div>
 
       <div class="radius-item">
@@ -168,6 +177,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:12px;"></div></div>
         <div class="radius-px">12 px</div>
+        <div class="radius-rem">0.75 rem</div>
       </div>
 
       <div class="radius-item">
@@ -177,6 +187,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:16px;"></div></div>
         <div class="radius-px">16 px</div>
+        <div class="radius-rem">1 rem</div>
       </div>
 
       <div class="radius-item">
@@ -186,6 +197,7 @@
         </div>
         <div class="radius-swatch-wrap"><div class="radius-swatch" style="border-radius:999px;"></div></div>
         <div class="radius-px">full</div>
+        <div class="radius-rem">—</div>
       </div>
     </div>
 
@@ -208,7 +220,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Input field</div>
-          <div class="ex-token">radius-sm · 4 px</div>
+          <div class="ex-token">radius-sm · 4 px · 0.25 rem</div>
           <div class="ex-desc">Text inputs and compact form controls stay crisp and dense.</div>
         </div>
       </div>
@@ -219,7 +231,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Button</div>
-          <div class="ex-token">radius-base · 6 px</div>
+          <div class="ex-token">radius-base · 6 px · 0.375 rem</div>
           <div class="ex-desc">Standard buttons — enough curve to feel friendly without going soft.</div>
         </div>
       </div>
@@ -234,7 +246,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Nav items &amp; menu rows</div>
-          <div class="ex-token">radius-md · 8 px</div>
+          <div class="ex-token">radius-md · 8 px · 0.5 rem</div>
           <div class="ex-desc">Sidebar links, dropdown rows, and segmented selections.</div>
         </div>
       </div>
@@ -248,7 +260,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Card &amp; panel</div>
-          <div class="ex-token">radius-lg · 12 px</div>
+          <div class="ex-token">radius-lg · 12 px · 0.75 rem</div>
           <div class="ex-desc">Grouped content surfaces. The workhorse radius for most layouts.</div>
         </div>
       </div>
@@ -263,7 +275,7 @@
         </div>
         <div class="ex-meta">
           <div class="ex-title">Modal / dialog</div>
-          <div class="ex-token">radius-xl · 16 px</div>
+          <div class="ex-token">radius-xl · 16 px · 1 rem</div>
           <div class="ex-desc">Overlays that deserve a softer container than the surfaces below.</div>
         </div>
       </div>
