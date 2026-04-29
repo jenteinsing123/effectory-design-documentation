@@ -12,7 +12,7 @@
       transform: translateX(-50%);
       background: var(--navy); color: var(--brand-text);
       font-size: 11px; font-weight: 500; white-space: nowrap;
-      padding: 4px 9px; border-radius: 5px; pointer-events: none;
+      padding: 4px 9px; border-radius: var(--radius-sm); pointer-events: none;
     }
     .tooltip-mock::before {
       content: ''; position: absolute; bottom: 100%; left: 50%;
@@ -162,13 +162,13 @@
               </button>
             </div>
             <div style="padding:12px 14px; display:flex; flex-direction:column; gap:6px;">
-              <div style="height:6px; background:var(--border); border-radius:3px; width:70%;"></div>
-              <div style="height:6px; background:var(--border); border-radius:3px; width:50%;"></div>
+              <div style="height:6px; background:var(--border); border-radius:var(--radius-sm); width:70%;"></div>
+              <div style="height:6px; background:var(--border); border-radius:var(--radius-sm); width:50%;"></div>
             </div>
           </div>
           <!-- Table row with 24px -->
           <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
-            <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
+            <div style="height:6px; background:var(--border); border-radius:var(--radius-sm); flex:1;"></div>
             <button class="ib ib-24 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
               <i data-icon="edit"></i>
             </button>
@@ -186,7 +186,7 @@
         <div class="dd-prev" style="flex-direction:column; gap:6px; align-items:stretch; padding:20px;">
           <!-- Table rows with 36px — too large -->
           <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
-            <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
+            <div style="height:6px; background:var(--border); border-radius:var(--radius-sm); flex:1;"></div>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
               <i data-icon="edit"></i>
             </button>
@@ -195,7 +195,7 @@
             </button>
           </div>
           <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-base); padding:7px 14px; display:flex; align-items:center; gap:8px;">
-            <div style="height:6px; background:var(--border); border-radius:3px; flex:1;"></div>
+            <div style="height:6px; background:var(--border); border-radius:var(--radius-sm); flex:1;"></div>
             <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="Edit">
               <i data-icon="edit"></i>
             </button>
