@@ -124,6 +124,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .page-header-row > .page-header {
   width: 100%;
   max-width: calc(880px + var(--toc-w));
+  padding-left: 48px;
   margin-bottom: 0;
 }
 
