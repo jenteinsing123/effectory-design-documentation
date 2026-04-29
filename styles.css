@@ -147,7 +147,8 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 .badge-neutral { background: var(--bg-subtle); color: var(--text-2); border: 1px solid var(--border); }
 
 /* Typography — aligned to the type scale */
-h1 { font-size: 32px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; margin-bottom: 12px; }
+/* text-l1: 42px · SemiBold · 1.2 lh — page hero title */
+h1 { font-size: 42px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; margin-bottom: 12px; }
 .page-desc { font-size: 16px; font-weight: 400; color: var(--text-2); line-height: 1.5; }
 .page-updated { font-size: 12px; color: var(--text-3); }
 .divider { border: none; border-top: 1px solid var(--border-light); margin: 32px 0; }
@@ -162,14 +163,16 @@ h1 { font-size: 32px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2
 
 /* ─── SECTIONS ─── */
 .section { margin-bottom: 48px; scroll-margin-top: 80px; }
+/* text-l2: 32px · SemiBold · 1.2 lh — major section headings */
 h2 {
-  font-size: 20px; font-weight: 600; letter-spacing: -.02em; line-height: 1.4;
+  font-size: 32px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
   color: var(--text); margin-bottom: 8px;
   display: flex; align-items: center; gap: 9px;
 }
-h2 .emoji { font-size: 18px; }
+h2 .emoji { font-size: 24px; }
 .section-lead { font-size: 14px; color: var(--text-2); line-height: 1.65; margin-bottom: 20px; }
-h3 { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -.01em; line-height: 1.5; margin: 24px 0 10px; }
+/* text-l3: 26px · SemiBold · 1.3 lh — subsection titles */
+h3 { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -.02em; line-height: 1.3; margin: 32px 0 10px; }
 
 /* ─── TOC ─── */
 .toc { position: sticky; top: calc(var(--top-h) + 24px); }
