@@ -294,22 +294,6 @@
   --logo-bg: #30b3af;
   --logo-content: #ffffff;
 
-  /* ── Aliases for existing component CSS ── */
-  --bg: var(--bg-base);
-  --bg-subtle: var(--bg-secondary);
-  --bg-hover: var(--bg-base-hover);
-  --border: var(--border-base);
-  --border-light: var(--border-base-hover);
-  --text: var(--content-base);
-  --text-2: var(--content-secondary);
-  --text-3: var(--content-subtle);
-  --brand: var(--bg-brand-base);
-  --brand-hover: var(--bg-brand-base-hover);
-  --brand-pressed: var(--bg-brand-base-pressed);
-  --brand-border: var(--border-brand-base);
-  --brand-text: var(--content-on-brand-base);
-  --inverse-bg: var(--bg-inverse-base);
-  --inverse-text: var(--content-inverse-base);
 }
 
 /* Dark mode — Coordinator */
@@ -457,19 +441,6 @@
     --bg-distribution-disagree: #fe9c9c;
     --bg-distribution-strongly-disagree: #f74e50;
     --bg-distribution-no-answer: #5e6a82;
-    --bg: var(--bg-base);
-    --bg-subtle: var(--bg-secondary);
-    --bg-hover: var(--bg-base-hover);
-    --border: var(--border-base);
-    --border-light: var(--border-base-hover);
-    --text: var(--content-base);
-    --text-2: var(--content-secondary);
-    --text-3: var(--content-subtle);
-    --brand-hover: var(--bg-brand-base-hover);
-    --brand-pressed: var(--bg-brand-base-pressed);
-    --brand-border: var(--border-brand-base);
-    --inverse-bg: var(--bg-inverse-base);
-    --inverse-text: var(--content-inverse-base);
   }
 }
 html[data-theme="dark"] {

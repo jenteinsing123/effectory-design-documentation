@@ -9,17 +9,17 @@
     /* Size scale row */
     .size-row {
       display: flex; align-items: flex-end; gap: 48px;
-      padding: 32px; background: var(--bg-subtle);
+      padding: 32px; background: var(--bg-secondary);
       border-radius: var(--radius-lg);
       margin-bottom: 16px;
     }
     .size-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .size-cell svg { color: var(--text); }
+    .size-cell svg { color: var(--content-base); }
     .size-label {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 11.5px; color: var(--text-3); font-weight: 600;
+      font-size: 11.5px; color: var(--content-subtle); font-weight: 600;
     }
-    .size-use { font-size: 12px; color: var(--text-3); max-width: 140px; text-align: center; line-height: 1.5; }
+    .size-use { font-size: 12px; color: var(--content-subtle); max-width: 140px; text-align: center; line-height: 1.5; }
 
     /* Icon grid */
     .icon-toolbar {
@@ -28,25 +28,25 @@
     }
     .icon-search {
       flex: 1; min-width: 220px;
-      border: 1px solid var(--border); border-radius: var(--radius-base);
-      padding: 8px 12px; font-size: 13px; background: var(--bg);
-      font-family: inherit; color: var(--text);
+      border: 1px solid var(--border-base); border-radius: var(--radius-base);
+      padding: 8px 12px; font-size: 13px; background: var(--bg-base);
+      font-family: inherit; color: var(--content-base);
     }
-    .icon-search:focus { outline: none; border-color: var(--brand); }
+    .icon-search:focus { outline: none; border-color: var(--bg-brand-base); }
 
     .icon-count {
-      font-size: 12px; color: var(--text-3);
+      font-size: 12px; color: var(--content-subtle);
       margin: 14px 0 0;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
     }
-    .icon-cell.copied { border-color: var(--brand); background: var(--bg-subtle); }
-    .icon-cell.copied .icon-cell-name::after { content: ' · copied'; color: var(--brand); }
+    .icon-cell.copied { border-color: var(--bg-brand-base); background: var(--bg-secondary); }
+    .icon-cell.copied .icon-cell-name::after { content: ' · copied'; color: var(--bg-brand-base); }
     [aria-busy="true"]::before {
       content: 'Loading icons…';
       display: block; grid-column: 1 / -1;
-      font-size: 12.5px; color: var(--text-3); padding: 24px 0;
+      font-size: 12.5px; color: var(--content-subtle); padding: 24px 0;
     }
-    .icon-cell svg { width: 24px; height: 24px; color: var(--text); }
+    .icon-cell svg { width: 24px; height: 24px; color: var(--content-base); }
     .icon-cell svg [fill]:not([fill="none"]) { fill: currentColor; }
     .icon-cell svg [stroke]:not([stroke="none"]) { stroke: currentColor; }
 
@@ -58,77 +58,77 @@
     .icon-cell {
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       padding: 16px 8px;
-      border: 1px solid var(--border-light); border-radius: var(--radius-md);
-      background: var(--bg); cursor: pointer;
+      border: 1px solid var(--border-base-hover); border-radius: var(--radius-md);
+      background: var(--bg-base); cursor: pointer;
       transition: border-color .12s ease, background .12s ease;
     }
     .icon-cell:hover {
-      border-color: var(--border);
-      background: var(--bg-subtle);
+      border-color: var(--border-base);
+      background: var(--bg-secondary);
     }
-    .icon-cell svg { color: var(--text); flex-shrink: 0; }
+    .icon-cell svg { color: var(--content-base); flex-shrink: 0; }
     .icon-cell-name {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10.5px; color: var(--text-3);
+      font-size: 10.5px; color: var(--content-subtle);
       text-align: center; word-break: break-all; line-height: 1.4;
     }
 
     .note {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
       padding: 16px 18px;
-      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+      font-size: 13.5px; color: var(--content-secondary); line-height: 1.6;
       margin-bottom: 16px;
     }
-    .note strong { color: var(--text); font-weight: 600; }
-    .note a { color: var(--brand); text-decoration: none; font-weight: 500; }
+    .note strong { color: var(--content-base); font-weight: 600; }
+    .note a { color: var(--bg-brand-base); text-decoration: none; font-weight: 500; }
     .note a:hover { text-decoration: underline; }
     .g-code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; background: var(--bg-subtle);
-      padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+      font-size: 12px; background: var(--bg-secondary);
+      padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border-base);
     }
 
     /* Example usage row */
     .usage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
     .usage-card {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
-      background: var(--bg); overflow: hidden;
+      border: 1px solid var(--border-base); border-radius: var(--radius-lg);
+      background: var(--bg-base); overflow: hidden;
     }
     .usage-demo {
-      padding: 24px; background: var(--bg-subtle);
-      border-bottom: 1px solid var(--border);
+      padding: 24px; background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-base);
       min-height: 90px; display: flex; align-items: center; justify-content: center;
     }
     .usage-meta { padding: 12px 16px; }
-    .usage-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .usage-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+    .usage-title { font-size: 13px; font-weight: 600; color: var(--content-base); margin-bottom: 4px; }
+    .usage-desc { font-size: 12.5px; color: var(--content-subtle); line-height: 1.5; }
 
     /* Demo primitives */
     .d-btn {
-      background: var(--brand); color: var(--brand-text); border: none;
+      background: var(--bg-brand-base); color: var(--content-on-brand-base); border: none;
       border-radius: var(--radius-base); padding: 9px 14px; font-size: 13px; font-weight: 500;
       display: inline-flex; align-items: center; gap: 8px;
     }
     .d-icon-btn {
-      width: 32px; height: 32px; border: 1px solid var(--border);
-      background: var(--bg); border-radius: var(--radius-base);
+      width: 32px; height: 32px; border: 1px solid var(--border-base);
+      background: var(--bg-base); border-radius: var(--radius-base);
       display: inline-flex; align-items: center; justify-content: center;
-      color: var(--text);
+      color: var(--content-base);
     }
     .d-menu-row {
       display: flex; align-items: center; gap: 10px;
-      padding: 8px 12px; font-size: 13px; color: var(--text);
+      padding: 8px 12px; font-size: 13px; color: var(--content-base);
       border-radius: var(--radius-base); min-width: 200px;
     }
-    .d-menu-row:hover { background: var(--bg-subtle); }
+    .d-menu-row:hover { background: var(--bg-secondary); }
     .d-alert {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 14px; border-radius: var(--radius-md);
-      background: var(--bg-subtle); color: var(--text);
+      background: var(--bg-secondary); color: var(--content-base);
       font-size: 13px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-base);
     }
   </style>
 </head>
@@ -153,7 +153,7 @@
 <!-- SIZES -->
   <section class="section" id="sizes">
     <h2><span class="emoji">📐</span> Sizes</h2>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:20px;">Three fixed sizes. Pick the one that matches the surrounding text size — icons and text should feel balanced, not dominant.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:20px;">Three fixed sizes. Pick the one that matches the surrounding text size — icons and text should feel balanced, not dominant.</p>
 
     <div class="size-row">
       <div class="size-cell">
@@ -186,7 +186,7 @@
   <!-- LIBRARY -->
   <section class="section" id="library">
     <h2><span class="emoji">📚</span> Library</h2>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:16px;">All 199 general icons, loaded straight from the design system. Search to filter, click any icon to copy its name.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:16px;">All 199 general icons, loaded straight from the design system. Search to filter, click any icon to copy its name.</p>
 
     <div class="note">
       Full set: <a href="https://www.figma.com/design/pQwaTgTOFsS96zxIPZ6SHm/%F0%9F%8D%91-Assets?node-id=2958-169" target="_blank">Figma — Assets · General icons</a> · <a href="https://styleguide.effectory.com/styles/icons" target="_blank">Styleguide</a>
@@ -206,7 +206,7 @@
   <!-- USAGE -->
   <section class="section" id="usage">
     <h2><span class="emoji">🧩</span> Usage</h2>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:20px;">Icons earn their place when they clarify — and get in the way when they don't. A few patterns that hold up everywhere.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:20px;">Icons earn their place when they clarify — and get in the way when they don't. A few patterns that hold up everywhere.</p>
 
     <div class="usage-grid">
 
@@ -263,7 +263,7 @@
       <div class="usage-card">
         <div class="usage-demo">
           <div class="d-alert">
-            <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0;color: var(--amber)"><i data-icon="alert-triangle"></i></span>
+            <span style="display:inline-flex;width:18px;height:18px;flex-shrink:0;color: var(--content-highlight-base)"><i data-icon="alert-triangle"></i></span>
             Survey ends in 2 days.
           </div>
         </div>
@@ -283,16 +283,16 @@
     <h2><span class="emoji">✨</span> Guidance</h2>
 
     <h3>Meaning first, decoration never</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Every icon should clarify something the label alone can't. If you added it for visual flavour, remove it — decorative icons add noise to the scan.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Every icon should clarify something the label alone can't. If you added it for visual flavour, remove it — decorative icons add noise to the scan.</p>
 
     <h3>One icon per meaning</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">The same action always gets the same icon. If <span class="g-code">edit</span> means "edit" in one place, don't use <span class="g-code">pen-tool</span> elsewhere. Consistency builds the visual vocabulary users rely on.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">The same action always gets the same icon. If <span class="g-code">edit</span> means "edit" in one place, don't use <span class="g-code">pen-tool</span> elsewhere. Consistency builds the visual vocabulary users rely on.</p>
 
     <h3>Match the size to the context</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">16&nbsp;px next to body text, 24&nbsp;px in buttons and menu rows, 32&nbsp;px in empty states. Don't free-scale — if nothing fits, the container is likely the wrong size.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">16&nbsp;px next to body text, 24&nbsp;px in buttons and menu rows, 32&nbsp;px in empty states. Don't free-scale — if nothing fits, the container is likely the wrong size.</p>
 
     <h3>Always label icon-only buttons</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">An icon without a visible label still needs an <span class="g-code">aria-label</span> and a tooltip. Assistive tech and first-time users both lose if the meaning lives only in the glyph.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6;">An icon without a visible label still needs an <span class="g-code">aria-label</span> and a tooltip. Assistive tech and first-time users both lose if the meaning lives only in the glyph.</p>
   </section>
 
   <!-- PAGINATION -->

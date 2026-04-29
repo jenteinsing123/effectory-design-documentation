@@ -18,22 +18,22 @@
     .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
     /* Primary */
-    .btn-primary { background: var(--brand); border-color: var(--brand-border); color: var(--brand-text); box-shadow: var(--sh-action); }
-    .btn-primary:hover, .btn-primary.is-hover { background: var(--brand-hover); border-color: var(--brand-pressed); }
-    .btn-primary:active, .btn-primary.is-pressed { background: var(--brand-pressed); border-color: var(--brand-deep); }
+    .btn-primary { background: var(--bg-brand-base); border-color: var(--border-brand-base); color: var(--content-on-brand-base); box-shadow: var(--sh-action); }
+    .btn-primary:hover, .btn-primary.is-hover { background: var(--bg-brand-base-hover); border-color: var(--bg-brand-base-pressed); }
+    .btn-primary:active, .btn-primary.is-pressed { background: var(--bg-brand-base-pressed); border-color: var(--border-brand-base-pressed); }
 
     /* Secondary */
-    .btn-secondary { background: var(--bg); border-color: var(--border-action); color: var(--text-2); box-shadow: var(--sh-action); }
-    .btn-secondary:hover, .btn-secondary.is-hover { background: var(--bg-hover); border-color: var(--border-action-hover); }
-    .btn-secondary:active, .btn-secondary.is-pressed { background: var(--bg-pressed); border-color: var(--border-action-pressed); }
+    .btn-secondary { background: var(--bg-base); border-color: var(--border-action); color: var(--content-secondary); box-shadow: var(--sh-action); }
+    .btn-secondary:hover, .btn-secondary.is-hover { background: var(--bg-base-hover); border-color: var(--border-action-hover); }
+    .btn-secondary:active, .btn-secondary.is-pressed { background: var(--bg-base-pressed); border-color: var(--border-action-pressed); }
 
     /* Tertiary */
-    .btn-tertiary { background: transparent; border-color: transparent; color: var(--text-2); }
-    .btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-hover); }
-    .btn-tertiary:active, .btn-tertiary.is-pressed { background: var(--bg-pressed); }
+    .btn-tertiary { background: transparent; border-color: transparent; color: var(--content-secondary); }
+    .btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-base-hover); }
+    .btn-tertiary:active, .btn-tertiary.is-pressed { background: var(--bg-base-pressed); }
 
     /* Danger */
-    .btn-danger { background: var(--bg-negative-base); border-color: var(--border-negative-base); color: var(--brand-text); box-shadow: var(--sh-action); }
+    .btn-danger { background: var(--bg-negative-base); border-color: var(--border-negative-base); color: var(--content-on-brand-base); box-shadow: var(--sh-action); }
     .btn-danger:hover, .btn-danger.is-hover { background: var(--bg-negative-base-hover); border-color: var(--border-negative-base-hover); }
     .btn-danger:active, .btn-danger.is-pressed { background: var(--bg-negative-base-pressed); border-color: var(--border-negative-base-pressed); }
 
@@ -42,12 +42,12 @@
       background: var(--bg-disabled) !important; border-color: transparent !important;
       color: var(--content-disabled) !important; box-shadow: none !important; cursor: not-allowed;
     }
-    .btn-secondary.is-disabled { background: var(--bg) !important; border-color: var(--border) !important; }
+    .btn-secondary.is-disabled { background: var(--bg-base) !important; border-color: var(--border-base) !important; }
     .btn-tertiary.is-disabled  { background: transparent !important; border-color: transparent !important; }
 
     /* State helpers for docs */
     .state-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .state-label { font-size: 11px; color: var(--text-3); }
+    .state-label { font-size: 11px; color: var(--content-subtle); }
 
     /* ── Content Guidelines extras ── */
     .cg-btn-long {
@@ -88,18 +88,18 @@
           Label
         </button>
         <div style="position:absolute; right:calc(100% - 56px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
-          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">① Container</span>
-          <div style="width:20px; height:1px; background:var(--text-3);"></div>
-          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--text-3);"></div>
+          <span style="font-size:11.5px; font-weight:500; color:var(--content-secondary);">① Container</span>
+          <div style="width:20px; height:1px; background:var(--content-subtle);"></div>
+          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--content-subtle);"></div>
         </div>
         <div style="position:absolute; top:-28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:4px;">
-          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">② Icon (optional)</span>
-          <div style="width:1px; height:16px; background:var(--text-3);"></div>
+          <span style="font-size:11.5px; font-weight:500; color:var(--content-secondary);">② Icon (optional)</span>
+          <div style="width:1px; height:16px; background:var(--content-subtle);"></div>
         </div>
         <div style="position:absolute; left:calc(100% - 72px); top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:4px; white-space:nowrap;">
-          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--text-3);"></div>
-          <div style="width:20px; height:1px; background:var(--text-3);"></div>
-          <span style="font-size:11.5px; font-weight:500; color:var(--text-2);">③ Label</span>
+          <div style="width:5px; height:5px; border-radius:50%; border:1.5px solid var(--content-subtle);"></div>
+          <div style="width:20px; height:1px; background:var(--content-subtle);"></div>
+          <span style="font-size:11.5px; font-weight:500; color:var(--content-secondary);">③ Label</span>
         </div>
       </div>
     </div>
@@ -229,9 +229,9 @@
         <div class="dd-prev" style="flex-direction: column; gap: 10px; align-items: flex-start; padding: 20px 24px;">
           <input
             type="text" placeholder="Survey name is required"
-            style="width:100%; padding: 7px 10px; border: 1px solid var(--border-negative-base); border-radius: var(--radius-base); font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
+            style="width:100%; padding: 7px 10px; border: 1px solid var(--border-negative-base); border-radius: var(--radius-base); font-family:inherit; font-size:13px; background:#fff; color: var(--content-base);"
           />
-          <span style="font-size: 12px; color: var(--red);">Survey name is required</span>
+          <span style="font-size: 12px; color: var(--content-negative-secondary);">Survey name is required</span>
           <button class="btn btn-primary" style="pointer-events:none;">Save survey</button>
         </div>
         <div class="dd-cap do">
@@ -254,13 +254,13 @@
     <h3>Alignment and positioning</h3>
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-hover);">
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-base-hover);">
           <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:60%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:80%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:45%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:60%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:80%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:45%;"></div>
           </div>
-          <div style="padding:12px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:8px; background:#fff;">
+          <div style="padding:12px 20px; border-top:1px solid var(--border-base); display:flex; justify-content:flex-end; gap:8px; background:#fff;">
             <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
             <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           </div>
@@ -271,13 +271,13 @@
         </div>
       </div>
       <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-hover);">
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-base-hover);">
           <div style="padding:16px 20px; display:flex; flex-direction:column; gap:8px;">
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:60%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:80%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:45%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:60%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:80%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:45%;"></div>
           </div>
-          <div style="padding:12px 20px; border-top:1px solid var(--border); display:flex; justify-content:center; gap:8px; background:#fff;">
+          <div style="padding:12px 20px; border-top:1px solid var(--border-base); display:flex; justify-content:center; gap:8px; background:#fff;">
             <button class="btn btn-secondary" style="pointer-events:none;">Cancel</button>
             <button class="btn btn-primary" style="pointer-events:none;">Save changes</button>
           </div>
@@ -291,16 +291,16 @@
 
     <div class="dd-grid">
       <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-hover);">
-          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); background:#fff;">
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:90px;"></div>
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-base-hover);">
+          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border-base); background:#fff;">
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:90px;"></div>
             <div style="flex:1;"></div>
             <button class="btn btn-secondary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Export</button>
             <button class="btn btn-primary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Add member</button>
           </div>
           <div style="padding:16px; display:flex; flex-direction:column; gap:8px;">
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:70%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:50%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:70%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:50%;"></div>
           </div>
         </div>
         <div class="dd-cap do">
@@ -309,15 +309,15 @@
         </div>
       </div>
       <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-hover);">
-          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--border); background:#fff;">
+        <div class="dd-prev" style="flex-direction:column; padding:0; gap:0; min-height:0; background: var(--bg-base-hover);">
+          <div style="padding:12px 16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--border-base); background:#fff;">
             <button class="btn btn-secondary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Export</button>
             <button class="btn btn-primary" style="pointer-events:none; height:30px; font-size:12.5px; padding:0 10px;">Add member</button>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:90px;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:90px;"></div>
           </div>
           <div style="padding:16px; display:flex; flex-direction:column; gap:8px;">
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:70%;"></div>
-            <div style="height:7px; background: var(--border); border-radius:var(--radius-sm); width:50%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:70%;"></div>
+            <div style="height:7px; background: var(--border-base); border-radius:var(--radius-sm); width:50%;"></div>
           </div>
         </div>
         <div class="dd-cap dont">
@@ -363,7 +363,7 @@
             <td>Low-emphasis inline actions in dense layouts — table rows, cards, toolbars. No background or border so it blends into content.</td>
           </tr>
           <tr>
-            <td><span class="vb" style="background: var(--red-bg); color: var(--red);">Danger</span></td>
+            <td><span class="vb" style="background: var(--bg-negative-subtle); color: var(--content-negative-secondary);">Danger</span></td>
             <td>Destructive, irreversible actions: delete, remove, revoke. Always requires an explicit label so users understand the consequence.</td>
           </tr>
         </tbody>
@@ -553,7 +553,7 @@
         <thead><tr><th>STATE</th><th>PRIMARY FILL</th><th>SECONDARY FILL</th><th>BORDER</th></tr></thead>
         <tbody>
           <tr><td>Default</td><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #ddd;"></span>bg/input</span></td><td><span class="token">border/action</span></td></tr>
-          <tr><td>Hover</td><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><span class="token"><span class="swatch" style="background: var(--bg-hover);"></span>bg/input-hover</span></td><td><span class="token">border/action-hover</span></td></tr>
+          <tr><td>Hover</td><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><span class="token"><span class="swatch" style="background: var(--bg-base-hover);"></span>bg/input-hover</span></td><td><span class="token">border/action-hover</span></td></tr>
           <tr><td>Pressed</td><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td><span class="token">border/action-pressed</span></td></tr>
           <tr><td>Disabled</td><td colspan="2"><span class="token"><span class="swatch" style="background: var(--bg-disabled);"></span>bg/disabled</span></td><td>—</td></tr>
         </tbody>
@@ -577,7 +577,7 @@
           <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td>#166764</td><td>Primary pressed fill</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>border/brand/base</span></td><td>#0c827f</td><td>Primary default border</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#ffffff; border:1px solid #ddd;"></span>bg/input</span></td><td>#ffffff</td><td>Secondary default fill</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background: var(--bg-hover);"></span>bg/input-hover</span></td><td>#f8f8f9</td><td>Secondary/Tertiary hover fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background: var(--bg-base-hover);"></span>bg/input-hover</span></td><td>#f8f8f9</td><td>Secondary/Tertiary hover fill</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td>#f1f2f4</td><td>Secondary/Tertiary pressed fill</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td>#bcc1cd</td><td>Secondary default border</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#d3353b;"></span>bg/negative/base</span></td><td>#d3353b</td><td>Danger default fill</td></tr>

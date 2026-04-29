@@ -9,46 +9,46 @@
     /* ── Typeface section ── */
     .tf-weights {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      gap: 1px; background: var(--border-base);
+      border: 1px solid var(--border-base); border-radius: var(--radius-lg);
       overflow: hidden; margin-bottom: 16px;
     }
-    .tf-weight { background: var(--bg); padding: 28px 24px; }
+    .tf-weight { background: var(--bg-base); padding: 28px 24px; }
     .tf-aa {
       font-family: 'Poppins', sans-serif; font-size: 52px; line-height: 1;
-      color: var(--text); margin-bottom: 12px;
+      color: var(--content-base); margin-bottom: 12px;
     }
-    .tf-weight-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-    .tf-weight-num { font-size: 11.5px; color: var(--text-3); }
+    .tf-weight-name { font-size: 13px; font-weight: 600; color: var(--content-base); margin-bottom: 2px; }
+    .tf-weight-num { font-size: 11.5px; color: var(--content-subtle); }
     .tf-alpha {
       font-family: 'Poppins', sans-serif; font-size: 14px;
-      color: var(--text-2); line-height: 2.1;
+      color: var(--content-secondary); line-height: 2.1;
       padding: 20px 24px;
-      background: var(--bg-subtle); border: 1px solid var(--border);
+      background: var(--bg-secondary); border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
     }
 
     /* ── Type specimen ── */
     .specimen {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      border: 1px solid var(--border-base); border-radius: var(--radius-lg);
       overflow: hidden; margin-bottom: 16px;
     }
     .specimen-row {
       display: grid; grid-template-columns: 175px 1fr;
       align-items: baseline; gap: 28px;
-      padding: 22px 24px; border-bottom: 1px solid var(--border-light);
+      padding: 22px 24px; border-bottom: 1px solid var(--border-base-hover);
       transition: background .1s;
     }
     .specimen-row:last-child { border-bottom: none; }
-    .specimen-row:hover { background: var(--bg-subtle); }
+    .specimen-row:hover { background: var(--bg-secondary); }
     .specimen-meta { display: flex; flex-direction: column; gap: 4px; }
     .specimen-token {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10.5px; font-weight: 600; color: var(--text-3);
+      font-size: 10.5px; font-weight: 600; color: var(--content-subtle);
       letter-spacing: .02em;
     }
-    .specimen-specs { font-size: 11px; color: var(--text-3); line-height: 1.6; }
-    .specimen-text { font-family: 'Poppins', sans-serif; color: var(--text); min-width: 0; }
+    .specimen-specs { font-size: 11px; color: var(--content-subtle); line-height: 1.6; }
+    .specimen-text { font-family: 'Poppins', sans-serif; color: var(--content-base); min-width: 0; }
 
     /* ── Body specimen ── */
     .specimen-body .specimen-row { align-items: flex-start; }
@@ -56,81 +56,81 @@
 
     /* ── Responsive scale table ── */
     .scale-table {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      border: 1px solid var(--border-base); border-radius: var(--radius-lg);
       overflow: hidden; margin-bottom: 16px;
     }
     .scale-head {
       display: grid; grid-template-columns: 90px 1fr 1fr 88px;
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border-base);
       font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
+      text-transform: uppercase; color: var(--content-subtle);
     }
     .scale-row {
       display: grid; grid-template-columns: 90px 1fr 1fr 88px;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-base-hover);
       transition: background .1s;
     }
     .scale-row:last-child { border-bottom: none; }
-    .scale-row:hover > div { background: var(--bg-subtle); }
+    .scale-row:hover > div { background: var(--bg-secondary); }
     .scale-head > div, .scale-row > div { padding: 9px 16px; }
     .scale-level {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 11px; color: var(--text-3); display: flex; align-items: center;
+      font-size: 11px; color: var(--content-subtle); display: flex; align-items: center;
     }
-    .scale-val { font-size: 13.5px; font-weight: 500; color: var(--text); display: flex; align-items: center; }
-    .scale-val span { font-size: 11.5px; font-weight: 400; color: var(--text-3); margin-left: 5px; }
-    .scale-delta { font-size: 12px; color: var(--text-3); display: flex; align-items: center; }
-    .scale-delta.change { color: var(--brand); font-weight: 500; }
+    .scale-val { font-size: 13.5px; font-weight: 500; color: var(--content-base); display: flex; align-items: center; }
+    .scale-val span { font-size: 11.5px; font-weight: 400; color: var(--content-subtle); margin-left: 5px; }
+    .scale-delta { font-size: 12px; color: var(--content-subtle); display: flex; align-items: center; }
+    .scale-delta.change { color: var(--bg-brand-base); font-weight: 500; }
     .scale-group-hd {
       grid-column: 1 / -1; padding: 8px 16px;
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border-light);
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border-base-hover);
       font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
+      text-transform: uppercase; color: var(--content-subtle);
     }
     .scale-group-hd + .scale-row,
     .scale-head + .scale-row { border-top: none; }
 
     /* ── Headline–body spacing section ── */
     .hbs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .hbs-card { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg); overflow: hidden; }
-    .hbs-demo { padding: 32px 28px; background: var(--bg-subtle); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .hbs-card { border: 1px solid var(--border-base); border-radius: var(--radius-lg); background: var(--bg-base); overflow: hidden; }
+    .hbs-demo { padding: 32px 28px; background: var(--bg-secondary); border-bottom: 1px solid var(--border-base); display: flex; align-items: center; justify-content: center; }
     .hbs-ex { width: 100%; max-width: 280px; }
     .hbs-gap { display: flex; align-items: center; gap: 8px; }
-    .hbs-gap::before, .hbs-gap::after { content: ''; flex: 1; border-top: 1px dashed var(--border); }
-    .hbs-gap span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--brand); font-weight: 600; white-space: nowrap; }
+    .hbs-gap::before, .hbs-gap::after { content: ''; flex: 1; border-top: 1px dashed var(--border-base); }
+    .hbs-gap span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--bg-brand-base); font-weight: 600; white-space: nowrap; }
     .hbs-gap-lg { margin: 8px 0; }
     .hbs-gap-sm { margin: 4px 0; }
     .hbs-meta { padding: 16px 18px; }
-    .hbs-rule { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
-    .hbs-rule code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--bg-subtle); padding: 1px 5px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-weight: 400; color: var(--text-2); }
-    .hbs-token { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--brand); font-weight: 600; margin-bottom: 6px; }
-    .hbs-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.55; }
+    .hbs-rule { font-size: 13px; font-weight: 600; color: var(--content-base); margin-bottom: 5px; }
+    .hbs-rule code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--bg-secondary); padding: 1px 5px; border-radius: var(--radius-sm); border: 1px solid var(--border-base); font-weight: 400; color: var(--content-secondary); }
+    .hbs-token { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--bg-brand-base); font-weight: 600; margin-bottom: 6px; }
+    .hbs-desc { font-size: 12.5px; color: var(--content-subtle); line-height: 1.55; }
 
     /* ── Usage table ── */
     .usage-table {
-      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      border: 1px solid var(--border-base); border-radius: var(--radius-lg);
       overflow: hidden; margin-bottom: 16px;
     }
     .usage-row {
       display: grid; grid-template-columns: 175px 1fr;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-base-hover);
     }
     .usage-row:last-child { border-bottom: none; }
-    .usage-row:hover > div { background: var(--bg-subtle); }
+    .usage-row:hover > div { background: var(--bg-secondary); }
     .usage-group-hd {
       grid-column: 1 / -1; padding: 8px 16px;
-      background: var(--bg-subtle); border-bottom: 1px solid var(--border-light);
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border-base-hover);
       font-size: 11px; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: var(--text-3);
+      text-transform: uppercase; color: var(--content-subtle);
     }
-    .usage-group-hd:not(:first-child) { border-top: 1px solid var(--border); }
+    .usage-group-hd:not(:first-child) { border-top: 1px solid var(--border-base); }
     .usage-style {
       padding: 13px 16px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10.5px; color: var(--text-3); line-height: 1.7;
-      border-right: 1px solid var(--border-light);
+      font-size: 10.5px; color: var(--content-subtle); line-height: 1.7;
+      border-right: 1px solid var(--border-base-hover);
     }
-    .usage-desc { padding: 13px 16px; font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+    .usage-desc { padding: 13px 16px; font-size: 13.5px; color: var(--content-secondary); line-height: 1.55; }
   </style>
 </head>
 <body>
@@ -248,56 +248,56 @@
           <span class="specimen-token">Large/body-18</span>
           <span class="specimen-specs">18px · Regular · 1.5 lh<br>Para spacing 32px</span>
         </div>
-        <div class="specimen-text" style="font-size:18px; font-weight:400; line-height:1.5; color:var(--text-2);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth.</div>
+        <div class="specimen-text" style="font-size:18px; font-weight:400; line-height:1.5; color:var(--content-secondary);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth.</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-18-SB</span>
           <span class="specimen-specs">18px · SemiBold · 1.5 lh<br>Para spacing 36px</span>
         </div>
-        <div class="specimen-text" style="font-size:18px; font-weight:600; line-height:1.5; color:var(--text-2);">Employee feedback tells a story. When participation is high, organisations make better decisions.</div>
+        <div class="specimen-text" style="font-size:18px; font-weight:600; line-height:1.5; color:var(--content-secondary);">Employee feedback tells a story. When participation is high, organisations make better decisions.</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-16</span>
           <span class="specimen-specs">16px · Regular · 1.5 lh<br>Para spacing 32px</span>
         </div>
-        <div class="specimen-text" style="font-size:16px; font-weight:400; line-height:1.5; color:var(--text-2);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth.</div>
+        <div class="specimen-text" style="font-size:16px; font-weight:400; line-height:1.5; color:var(--content-secondary);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth.</div>
       </div>
-      <div class="specimen-row" style="background: var(--brand-subtle);">
+      <div class="specimen-row" style="background: var(--bg-brand-subtle);">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-14</span>
-          <span class="specimen-specs">14px · Regular · 1.6 lh<br>Para spacing 20px<br><strong style="color:var(--brand); font-weight:600;">Default UI text</strong></span>
+          <span class="specimen-specs">14px · Regular · 1.6 lh<br>Para spacing 20px<br><strong style="color:var(--bg-brand-base); font-weight:600;">Default UI text</strong></span>
         </div>
-        <div class="specimen-text" style="font-size:14px; font-weight:400; line-height:1.6; color:var(--text-2);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth. Clear data leads to meaningful action.</div>
+        <div class="specimen-text" style="font-size:14px; font-weight:400; line-height:1.6; color:var(--content-secondary);">Employee feedback tells a story. When survey participation is high and responses are candid, organisations can make confident decisions about culture, engagement, and growth. Clear data leads to meaningful action.</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-14-SB</span>
           <span class="specimen-specs">14px · SemiBold · 1.6 lh</span>
         </div>
-        <div class="specimen-text" style="font-size:14px; font-weight:600; line-height:1.6; color:var(--text-2);">Employee feedback tells a story. When participation is high, decisions improve significantly.</div>
+        <div class="specimen-text" style="font-size:14px; font-weight:600; line-height:1.6; color:var(--content-secondary);">Employee feedback tells a story. When participation is high, decisions improve significantly.</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-14-M</span>
           <span class="specimen-specs">14px · Medium · 1.6 lh</span>
         </div>
-        <div class="specimen-text" style="font-size:14px; font-weight:500; line-height:1.6; color:var(--text-2);">Employee feedback tells a story. When participation is high, decisions improve significantly.</div>
+        <div class="specimen-text" style="font-size:14px; font-weight:500; line-height:1.6; color:var(--content-secondary);">Employee feedback tells a story. When participation is high, decisions improve significantly.</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-12</span>
           <span class="specimen-specs">12px · Regular · 1.6 lh<br>Para spacing 24px</span>
         </div>
-        <div class="specimen-text" style="font-size:12px; font-weight:400; line-height:1.6; color:var(--text-2);">247 employees responded · Participation 81% · Last updated 2 hours ago · Survey closes Friday</div>
+        <div class="specimen-text" style="font-size:12px; font-weight:400; line-height:1.6; color:var(--content-secondary);">247 employees responded · Participation 81% · Last updated 2 hours ago · Survey closes Friday</div>
       </div>
       <div class="specimen-row">
         <div class="specimen-meta">
           <span class="specimen-token">Large/body-12-M</span>
           <span class="specimen-specs">12px · Medium · 1.6 lh</span>
         </div>
-        <div class="specimen-text" style="font-size:12px; font-weight:500; line-height:1.6; color:var(--text-2);">247 employees responded · Participation 81% · Last updated 2 hours ago · Survey closes Friday</div>
+        <div class="specimen-text" style="font-size:12px; font-weight:500; line-height:1.6; color:var(--content-secondary);">247 employees responded · Participation 81% · Last updated 2 hours ago · Survey closes Friday</div>
       </div>
     </div>
   </section>
@@ -405,9 +405,9 @@
     <div class="dd-grid">
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:10px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2;">Engage your people</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; color:var(--text); line-height:1.4;">Your surveys</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; color:var(--text);">Recent activity</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--content-base); line-height:1.2;">Engage your people</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; color:var(--content-base); line-height:1.4;">Your surveys</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:600; color:var(--content-base);">Recent activity</div>
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
@@ -416,9 +416,9 @@
       </div>
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:10px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2;">Your surveys</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2;">Recent activity</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--text); line-height:1.2;">Team overview</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--content-base); line-height:1.2;">Your surveys</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--content-base); line-height:1.2;">Recent activity</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:22px; font-weight:600; color:var(--content-base); line-height:1.2;">Team overview</div>
         </div>
         <div class="dd-cap dont">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
@@ -432,10 +432,10 @@
     <div class="dd-grid">
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:6px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; color:var(--text); line-height:1.3;">Response rate</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; color:var(--text); line-height:1.4;">By department</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:12px; font-weight:400; color:var(--text-2); line-height:1.5;">Engineering · 84 responses · 79%</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:12px; font-weight:400; color:var(--text-2); line-height:1.5;">Product · 61 responses · 88%</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; color:var(--content-base); line-height:1.3;">Response rate</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; color:var(--content-base); line-height:1.4;">By department</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:12px; font-weight:400; color:var(--content-secondary); line-height:1.5;">Engineering · 84 responses · 79%</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:12px; font-weight:400; color:var(--content-secondary); line-height:1.5;">Product · 61 responses · 88%</div>
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
@@ -444,8 +444,8 @@
       </div>
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:6px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; color:var(--text); line-height:1.3;">Response rate</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--text-2); line-height:1.5; margin-top:2px;">Engineering · 84 responses · 79% · Product · 61 responses · 88% · Marketing · 43 responses · 72%</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:17px; font-weight:600; color:var(--content-base); line-height:1.3;">Response rate</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--content-secondary); line-height:1.5; margin-top:2px;">Engineering · 84 responses · 79% · Product · 61 responses · 88% · Marketing · 43 responses · 72%</div>
         </div>
         <div class="dd-cap dont">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
@@ -460,10 +460,10 @@
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:12px; min-height:108px;">
           <div>
-            <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--text-3); margin-bottom:4px;">Response rate</div>
-            <div style="font-family:'Poppins',sans-serif; font-size:24px; font-weight:600; color:var(--text);">81%</div>
+            <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--content-subtle); margin-bottom:4px;">Response rate</div>
+            <div style="font-family:'Poppins',sans-serif; font-size:24px; font-weight:600; color:var(--content-base);">81%</div>
           </div>
-          <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--text-3); border-top:1px solid var(--border); padding-top:10px; width:100%;">Department &nbsp;·&nbsp; Responses &nbsp;·&nbsp; Rate</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--content-subtle); border-top:1px solid var(--border-base); padding-top:10px; width:100%;">Department &nbsp;·&nbsp; Responses &nbsp;·&nbsp; Rate</div>
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
@@ -472,7 +472,7 @@
       </div>
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:8px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--text-2); line-height:1.7;">The survey has been completed successfully. Thank you for your participation in this quarter's engagement cycle.</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; color:var(--content-secondary); line-height:1.7;">The survey has been completed successfully. Thank you for your participation in this quarter's engagement cycle.</div>
         </div>
         <div class="dd-cap dont">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
@@ -486,8 +486,8 @@
     <div class="dd-grid">
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:6px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:14px; font-weight:400; color:var(--text-2); line-height:1.6;">Describe how your team handled feedback from the last survey cycle and what actions were taken.</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--text-3); margin-top:4px;">0 / 500 characters</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:14px; font-weight:400; color:var(--content-secondary); line-height:1.6;">Describe how your team handled feedback from the last survey cycle and what actions were taken.</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--content-subtle); margin-top:4px;">0 / 500 characters</div>
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
@@ -496,8 +496,8 @@
       </div>
       <div class="dd-card">
         <div class="dd-prev" style="flex-direction:column; align-items:flex-start; gap:6px; min-height:108px;">
-          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--text-2); line-height:1.6;">Describe how your team handled feedback from the last survey cycle and what actions were taken.</div>
-          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--text-3); margin-top:4px;">0 / 500 characters</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--content-secondary); line-height:1.6;">Describe how your team handled feedback from the last survey cycle and what actions were taken.</div>
+          <div style="font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; color:var(--content-subtle); margin-top:4px;">0 / 500 characters</div>
         </div>
         <div class="dd-cap dont">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
@@ -519,9 +519,9 @@
       <div class="hbs-card">
         <div class="hbs-demo">
           <div class="hbs-ex">
-            <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;line-height:1.25;color:var(--text);">Survey results</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;line-height:1.25;color:var(--content-base);">Survey results</div>
             <div class="hbs-gap hbs-gap-lg"><span>8 px</span></div>
-            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--text-2);">Results from 247 respondents across four departments, collected over the last two weeks.</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--content-secondary);">Results from 247 respondents across four departments, collected over the last two weeks.</div>
           </div>
         </div>
         <div class="hbs-meta">
@@ -534,9 +534,9 @@
       <div class="hbs-card">
         <div class="hbs-demo">
           <div class="hbs-ex">
-            <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;line-height:1.4;color:var(--text);">By department</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;line-height:1.4;color:var(--content-base);">By department</div>
             <div class="hbs-gap hbs-gap-sm"><span>4 px</span></div>
-            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--text-2);">Engineering · 84 responses · 79% participation rate across all active employees.</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--content-secondary);">Engineering · 84 responses · 79% participation rate across all active employees.</div>
           </div>
         </div>
         <div class="hbs-meta">

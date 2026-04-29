@@ -27,8 +27,8 @@
       display: flex; flex-direction: column;
     }
     .sh-ov-stage {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-light);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-base-hover);
       border-radius: var(--radius-lg);
       height: 100px;
       display: flex; align-items: center; justify-content: center;
@@ -36,28 +36,28 @@
     }
     .sh-ov-tile {
       width: 52px; height: 52px;
-      background: var(--bg);
+      background: var(--bg-base);
       border-radius: var(--radius-md);
     }
     .sh-ov-tile-wide {
       width: 80px; height: 40px;
-      background: var(--bg);
+      background: var(--bg-base);
       border-radius: var(--radius-md);
     }
     .sh-ov-tile-left {
       width: 60px; height: 80px;
-      background: var(--bg);
+      background: var(--bg-base);
       border-radius: var(--radius-md) 0 0 var(--radius-md);
       margin-left: auto;
     }
     .sh-ov-label {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 11px; font-weight: 600; color: var(--text);
+      font-size: 11px; font-weight: 600; color: var(--content-base);
       margin-bottom: 2px;
     }
     .sh-ov-spec {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10px; color: var(--text-3);
+      font-size: 10px; color: var(--content-subtle);
     }
 
     /* ── Detail cards ── */
@@ -68,16 +68,16 @@
     .sh-detail-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
       overflow: hidden;
     }
     .sh-preview {
-      background: var(--bg-subtle);
+      background: var(--bg-secondary);
       display: flex; align-items: center; justify-content: center;
       padding: 40px 32px;
       min-height: 160px;
-      border-right: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-base-hover);
     }
     .sh-preview.panel-preview {
       justify-content: flex-end;
@@ -89,18 +89,18 @@
     }
     .sh-token {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 13px; font-weight: 700; color: var(--text);
+      font-size: 13px; font-weight: 700; color: var(--content-base);
     }
     .sh-var {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 11px; color: var(--brand);
-      background: var(--brand-subtle);
+      font-size: 11px; color: var(--bg-brand-base);
+      background: var(--bg-brand-subtle);
       display: inline-block; padding: 2px 8px;
       border-radius: var(--radius-sm);
       width: fit-content;
     }
     .sh-desc {
-      font-size: 13px; color: var(--text-2); line-height: 1.6;
+      font-size: 13px; color: var(--content-secondary); line-height: 1.6;
       margin: 2px 0;
     }
     .sh-spec-grid {
@@ -108,73 +108,73 @@
     }
     .sh-spec-pill {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 10.5px; color: var(--text-3);
-      background: var(--bg-hover);
-      border: 1px solid var(--border-light);
+      font-size: 10.5px; color: var(--content-subtle);
+      background: var(--bg-base-hover);
+      border: 1px solid var(--border-base-hover);
       padding: 2px 7px; border-radius: var(--radius-sm);
     }
-    .sh-spec-pill span { color: var(--text-2); }
+    .sh-spec-pill span { color: var(--content-secondary); }
 
     /* ── Demo elements ── */
     .d-btn {
-      background: var(--bg); color: var(--text-2);
-      border: 1px solid var(--border);
+      background: var(--bg-base); color: var(--content-secondary);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-base); padding: 8px 16px;
       font-size: 13px; font-weight: 500; font-family: 'Poppins', sans-serif;
       cursor: pointer;
     }
     .d-btn-primary {
-      background: var(--brand); color: var(--brand-text);
+      background: var(--bg-brand-base); color: var(--content-on-brand-base);
       border: none;
     }
     .d-card {
-      background: var(--bg); border-radius: var(--radius-md);
+      background: var(--bg-base); border-radius: var(--radius-md);
       padding: 16px 20px; min-width: 200px;
     }
-    .d-card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-    .d-card-body  { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .d-card-title { font-size: 13px; font-weight: 600; color: var(--content-base); margin-bottom: 3px; }
+    .d-card-body  { font-size: 12px; color: var(--content-subtle); line-height: 1.5; }
     .d-dropdown {
-      background: var(--bg); border-radius: var(--radius-md);
+      background: var(--bg-base); border-radius: var(--radius-md);
       padding: 5px; min-width: 180px;
       display: flex; flex-direction: column;
     }
     .d-dropdown-row {
-      font-size: 12.5px; color: var(--text); padding: 8px 10px;
+      font-size: 12.5px; color: var(--content-base); padding: 8px 10px;
       border-radius: var(--radius-sm);
     }
-    .d-dropdown-row.active { background: var(--bg-subtle); }
+    .d-dropdown-row.active { background: var(--bg-secondary); }
     .d-dialog {
-      background: var(--bg); border-radius: var(--radius-lg);
+      background: var(--bg-base); border-radius: var(--radius-lg);
       padding: 20px 22px; min-width: 240px;
     }
-    .d-dialog-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-    .d-dialog-body  { font-size: 12.5px; color: var(--text-2); line-height: 1.5; margin-bottom: 14px; }
+    .d-dialog-title { font-size: 14px; font-weight: 600; color: var(--content-base); margin-bottom: 6px; }
+    .d-dialog-body  { font-size: 12.5px; color: var(--content-secondary); line-height: 1.5; margin-bottom: 14px; }
     .d-footer {
-      background: var(--bg); border-radius: var(--radius-md);
+      background: var(--bg-base); border-radius: var(--radius-md);
       padding: 12px 18px; min-width: 280px;
       display: flex; gap: 8px; justify-content: flex-end;
     }
     .d-panel {
-      background: var(--bg); border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+      background: var(--bg-base); border-radius: var(--radius-lg) 0 0 var(--radius-lg);
       padding: 24px 22px; width: 200px;
       display: flex; flex-direction: column; gap: 14px;
     }
-    .d-panel-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .d-panel-title { font-size: 13px; font-weight: 600; color: var(--content-base); }
     .d-panel-filter {
       display: flex; flex-direction: column; gap: 6px;
     }
-    .d-panel-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .05em; }
-    .d-panel-item  { font-size: 12.5px; color: var(--text-2); padding: 5px 0; border-bottom: 1px solid var(--border-light); }
+    .d-panel-label { font-size: 11px; font-weight: 600; color: var(--content-subtle); text-transform: uppercase; letter-spacing: .05em; }
+    .d-panel-item  { font-size: 12.5px; color: var(--content-secondary); padding: 5px 0; border-bottom: 1px solid var(--border-base-hover); }
 
     .note {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
       padding: 16px 20px;
-      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+      font-size: 13.5px; color: var(--content-secondary); line-height: 1.6;
     }
-    .note strong { color: var(--text); }
-    code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; background: var(--bg-hover); padding: 1px 5px; border-radius: var(--radius-sm); }
+    .note strong { color: var(--content-base); }
+    code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px; background: var(--bg-base-hover); padding: 1px 5px; border-radius: var(--radius-sm); }
   </style>
 </head>
 <body>
@@ -454,13 +454,13 @@
     <h2>Guidance</h2>
 
     <h3>Match the token to the surface, not the weight</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Each token is named after what it wraps — <code>card</code>, <code>dialog</code>, <code>popover</code>. Pick the one that describes the element you're styling, not the one that "looks about right." This keeps elevation consistent across every product surface.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Each token is named after what it wraps — <code>card</code>, <code>dialog</code>, <code>popover</code>. Pick the one that describes the element you're styling, not the one that "looks about right." This keeps elevation consistent across every product surface.</p>
 
     <h3>Pair resting and hover tokens</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Interactive elements transition between two tokens: <code>action</code> → <code>action-hover</code> for buttons, <code>card</code> → <code>card-hover</code> for tiles. Don't jump across unrelated tokens on hover — the depth shift feels unmotivated.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Interactive elements transition between two tokens: <code>action</code> → <code>action-hover</code> for buttons, <code>card</code> → <code>card-hover</code> for tiles. Don't jump across unrelated tokens on hover — the depth shift feels unmotivated.</p>
 
     <h3>One layer at a time</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">Nested shadows create visual noise and blur hierarchy. A dialog already casts <code>shadow/dialogs</code> — cards inside it should sit flat. Shadow is a scarce signal; use it only where the surface truly leaves the page.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6;">Nested shadows create visual noise and blur hierarchy. A dialog already casts <code>shadow/dialogs</code> — cards inside it should sit flat. Shadow is a scarce signal; use it only where the surface truly leaves the page.</p>
   </section>
 
   <div class="pagination">

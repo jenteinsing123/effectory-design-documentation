@@ -13,28 +13,28 @@
       align-items: center;
       gap: 20px;
       padding: 18px 0;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-base-hover);
     }
     .radius-item:last-child { border-bottom: none; }
     .radius-meta { display: flex; flex-direction: column; gap: 2px; }
     .radius-name {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; color: var(--text); font-weight: 600;
+      font-size: 12px; color: var(--content-base); font-weight: 600;
     }
-    .radius-use { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .radius-use { font-size: 12px; color: var(--content-subtle); line-height: 1.5; }
     .radius-swatch-wrap { display: flex; align-items: center; }
     .radius-swatch {
       width: 80px; height: 56px;
-      background: var(--brand); opacity: .9;
+      background: var(--bg-brand-base); opacity: .9;
     }
     .radius-px {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; font-weight: 600; color: var(--text-2);
+      font-size: 12px; font-weight: 600; color: var(--content-secondary);
       text-align: right;
     }
     .radius-rem {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; font-weight: 600; color: var(--text-3);
+      font-size: 12px; font-weight: 600; color: var(--content-subtle);
       text-align: right;
     }
 
@@ -43,58 +43,58 @@
       gap: 16px; margin-bottom: 16px;
     }
     .ex-card {
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
-      background: var(--bg);
+      background: var(--bg-base);
       overflow: hidden;
     }
     .ex-demo {
-      padding: 24px; background: var(--bg-subtle);
-      border-bottom: 1px solid var(--border);
+      padding: 24px; background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-base);
       min-height: 120px; display: flex; align-items: center; justify-content: center;
     }
     .ex-meta { padding: 14px 16px; }
-    .ex-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .ex-title { font-size: 13px; font-weight: 600; color: var(--content-base); margin-bottom: 4px; }
     .ex-token {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 11.5px; color: var(--brand); font-weight: 600;
+      font-size: 11.5px; color: var(--bg-brand-base); font-weight: 600;
     }
-    .ex-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.5; margin-top: 4px; }
+    .ex-desc { font-size: 12.5px; color: var(--content-subtle); line-height: 1.5; margin-top: 4px; }
 
     /* Demo primitives */
     .d-input {
-      border: 1px solid var(--border); padding: 8px 10px;
-      font-size: 13px; background: var(--bg); min-width: 200px;
+      border: 1px solid var(--border-base); padding: 8px 10px;
+      font-size: 13px; background: var(--bg-base); min-width: 200px;
     }
-    .d-btn { background: var(--brand); color: var(--brand-text); border: none; padding: 9px 16px; font-size: 13px; font-weight: 500; }
+    .d-btn { background: var(--bg-brand-base); color: var(--content-on-brand-base); border: none; padding: 9px 16px; font-size: 13px; font-weight: 500; }
     .d-tag {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 4px 12px; font-size: 12px; color: var(--text);
+      background: var(--bg-base); border: 1px solid var(--border-base);
+      padding: 4px 12px; font-size: 12px; color: var(--content-base);
     }
     .d-card {
-      background: var(--bg); border: 1px solid var(--border);
+      background: var(--bg-base); border: 1px solid var(--border-base);
       padding: 18px 20px; width: 100%; max-width: 240px;
     }
-    .d-h { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .d-p { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+    .d-h { font-size: 14px; font-weight: 600; color: var(--content-base); margin-bottom: 4px; }
+    .d-p { font-size: 12.5px; color: var(--content-secondary); line-height: 1.5; }
     .d-avatar {
-      width: 44px; height: 44px; background: var(--brand);
+      width: 44px; height: 44px; background: var(--bg-brand-base);
       display: flex; align-items: center; justify-content: center;
-      color: var(--brand-text); font-size: 14px; font-weight: 600;
+      color: var(--content-on-brand-base); font-size: 14px; font-weight: 600;
     }
 
     .note {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
       padding: 16px 18px;
-      font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+      font-size: 13.5px; color: var(--content-secondary); line-height: 1.6;
     }
-    .note strong { color: var(--text); font-weight: 600; }
+    .note strong { color: var(--content-base); font-weight: 600; }
     .g-code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 12px; background: var(--bg-subtle);
-      padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+      font-size: 12px; background: var(--bg-secondary);
+      padding: 1px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border-base);
     }
   </style>
 </head>
@@ -200,7 +200,7 @@
 
   <section class="section" id="examples">
     <h2><span class="emoji">🧩</span> Examples</h2>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:20px;">How the tokens map to real UI. Corners scale with the element — the bigger the surface, the rounder it gets.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:20px;">How the tokens map to real UI. Corners scale with the element — the bigger the surface, the rounder it gets.</p>
 
     <div class="ex-grid">
 
@@ -229,9 +229,9 @@
       <div class="ex-card">
         <div class="ex-demo">
           <div style="display:flex; flex-direction:column; gap:4px; width:100%; max-width:200px;">
-            <div style="padding:8px 12px; font-size:12.5px; color:var(--text); background:var(--bg-subtle); border-radius:var(--radius-md);">Dashboard</div>
-            <div style="padding:8px 12px; font-size:12.5px; color:var(--text-2); border-radius:var(--radius-md);">Reports</div>
-            <div style="padding:8px 12px; font-size:12.5px; color:var(--text-2); border-radius:var(--radius-md);">Settings</div>
+            <div style="padding:8px 12px; font-size:12.5px; color:var(--content-base); background:var(--bg-secondary); border-radius:var(--radius-md);">Dashboard</div>
+            <div style="padding:8px 12px; font-size:12.5px; color:var(--content-secondary); border-radius:var(--radius-md);">Reports</div>
+            <div style="padding:8px 12px; font-size:12.5px; color:var(--content-secondary); border-radius:var(--radius-md);">Settings</div>
           </div>
         </div>
         <div class="ex-meta">
@@ -293,13 +293,13 @@
     <h2><span class="emoji">✨</span> Guidance</h2>
 
     <h3>Scale the radius with the container</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">A 12&nbsp;px radius on a 32&nbsp;px button looks bloated; a 4&nbsp;px radius on a 600&nbsp;px modal looks severe. As elements grow, step up the radius so the curvature stays visually consistent.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">A 12&nbsp;px radius on a 32&nbsp;px button looks bloated; a 4&nbsp;px radius on a 600&nbsp;px modal looks severe. As elements grow, step up the radius so the curvature stays visually consistent.</p>
 
     <h3>Nest tighter inside softer</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Children should have a <em>smaller</em> radius than their parent. A <span class="g-code">radius-base</span> button inside a <span class="g-code">radius-lg</span> card reads cleanly; the reverse creates an awkward gap between the corner shapes.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Children should have a <em>smaller</em> radius than their parent. A <span class="g-code">radius-base</span> button inside a <span class="g-code">radius-lg</span> card reads cleanly; the reverse creates an awkward gap between the corner shapes.</p>
 
     <h3>Stay on the named steps</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6;">Don't introduce one-off values like 5, 7, or 10&nbsp;px. The scale is deliberately short — if nothing fits, it usually means the element is in the wrong size bucket, not the wrong radius.</p>
+    <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6;">Don't introduce one-off values like 5, 7, or 10&nbsp;px. The scale is deliberately short — if nothing fits, it usually means the element is in the wrong size bucket, not the wrong radius.</p>
   </section>
 
   <div class="pagination">
