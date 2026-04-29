@@ -6,7 +6,7 @@
 :root {
   --navy: #192743;
 
-  --top-h:        52px;
+  --top-h:        72px;
   --sidebar-w:    260px;
   --toc-w:        200px;
 
@@ -70,8 +70,8 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.brand-logo svg { width: 32px; height: 32px; display: block; }
-.brand-name { font-size: 13.5px; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
+.brand-logo svg { width: 36px; height: 36px; display: block; }
+.brand-name { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -.02em; }
 .brand-tag {
   font-size: 10px; font-weight: 600; color: var(--brand-hover);
   background: var(--brand-subtle); padding: 1px 6px; border-radius: var(--radius-full);
