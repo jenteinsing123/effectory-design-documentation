@@ -110,19 +110,27 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 }
 
 /* ─── CONTENT ─── */
-.content-wrap { flex: 1; display: flex; min-width: 0; justify-content: center; }
+.content-wrap { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* Full-width page header row */
+.page-header-row {
+  width: 100%;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-light);
+}
+.page-header-row > .page-header {
+  max-width: calc(880px + var(--toc-w));
+  padding: 40px 48px 36px;
+}
+
+/* Content + TOC side by side */
+.content-cols { display: flex; flex: 1; justify-content: center; min-width: 0; }
 .content { width: 100%; max-width: 880px; padding: 40px 48px 96px; min-width: 0; }
-.toc-col { width: var(--toc-w); flex-shrink: 0; padding: 44px 0 0 0; }
+.toc-col { width: var(--toc-w); flex-shrink: 0; padding: 40px 0 0 0; }
 
 
 /* ─── PAGE HEADER ─── */
-.page-header {
-  margin: -40px -48px 0;
-  padding: 40px 48px 36px;
-  background: var(--bg-subtle);
-  border-bottom: 1px solid var(--border-light);
-  margin-bottom: 32px;
-}
+.page-header { margin-bottom: 32px; }
 .page-badges { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
 .badge {
   display: inline-flex; align-items: center; gap: 4px;
@@ -403,3 +411,22 @@ html[data-theme="dark"] {
 .tpop-divider { border: none; border-top: 1px solid var(--border-light); margin: 10px 0; }
 
 /* Personal portal brand overrides are now in tokens.css */
+
+/* ─── PAGE HEADER ROW — portal tints ─── */
+/* Default (coordinator): light teal */
+.page-header-row {
+  --ph-bg: #e8f7f6;
+  --ph-border: #c2e8e6;
+}
+html[data-portal="personal"] .page-header-row {
+  --ph-bg: #fef9e7;
+  --ph-border: #f5e6a3;
+}
+html[data-theme="dark"] .page-header-row {
+  --ph-bg: var(--bg-subtle);
+  --ph-border: var(--border-light);
+}
+.page-header-row {
+  background: var(--ph-bg);
+  border-bottom-color: var(--ph-border);
+}
