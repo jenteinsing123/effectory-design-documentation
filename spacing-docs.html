@@ -30,7 +30,7 @@
       display: flex; align-items: center; min-width: 0;
     }
     .scale-bar {
-      height: 24px; background: var(--brand); border-radius: 3px;
+      height: 24px; background: var(--brand); border-radius: var(--radius-sm);
       opacity: .85;
     }
     .scale-bar.unnamed { opacity: .25; }
@@ -58,7 +58,7 @@
     .note code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 12px; background: var(--bg); padding: 1px 6px;
-      border-radius: 4px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
     }
 
     /* ── Example cards ── */
@@ -88,28 +88,28 @@
     /* Demo primitives */
     .d-label { font-size: 12px; color: var(--text-2); font-weight: 500; }
     .d-input {
-      border: 1px solid var(--border); border-radius: 6px;
+      border: 1px solid var(--border); border-radius: var(--radius-base);
       padding: 8px 10px; font-size: 13px; background: var(--bg);
       min-width: 180px;
     }
     .d-btn {
       background: var(--brand); color: var(--brand-text); border: none;
-      border-radius: 6px; padding: 8px 14px; font-size: 13px; font-weight: 500;
+      border-radius: var(--radius-base); padding: 8px 14px; font-size: 13px; font-weight: 500;
     }
     .d-btn.sec { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
     .d-card-sm {
       background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; width: 100%;
+      border-radius: var(--radius-md); width: 100%;
     }
     .d-h { font-size: 14px; font-weight: 600; color: var(--text); }
     .d-p { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
     .d-icon {
-      width: 14px; height: 14px; border-radius: 3px; background: var(--brand);
+      width: 14px; height: 14px; border-radius: var(--radius-sm); background: var(--brand);
       display: inline-block; flex-shrink: 0;
     }
     .d-chip {
       display: inline-flex; align-items: center;
-      border: 1px solid var(--border); border-radius: 999px;
+      border: 1px solid var(--border); border-radius: var(--radius-full);
       padding: 4px 10px; font-size: 12px; background: var(--bg);
     }
   </style>
@@ -230,7 +230,7 @@
     <h2><span class="emoji">✨</span> Guidance</h2>
 
     <h3>Proximity signals relationship</h3>
-    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Items that belong together should sit closer than items that are independent. Use <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-extra-tight</code> between a label and its input, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-base</code> between adjacent fields, and <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:4px;">spacing-super-loose</code> between sections that aren't directly related.</p>
+    <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Items that belong together should sit closer than items that are independent. Use <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:var(--radius-sm);">spacing-extra-tight</code> between a label and its input, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:var(--radius-sm);">spacing-base</code> between adjacent fields, and <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg-subtle);padding:1px 6px;border-radius:var(--radius-sm);">spacing-super-loose</code> between sections that aren't directly related.</p>
 
     <h3>Stay on the 4 px grid</h3>
     <p style="font-size:13.5px; color:var(--text-2); line-height:1.6; margin-bottom:24px;">Every value in the scale is a multiple of 4. Avoid in-between values like 14, 18, or 22 px — they break visual rhythm and create misalignment with adjacent components. When something feels off, snap to the nearest grid step.</p>
