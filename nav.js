@@ -53,45 +53,64 @@
           link.classList.add('active');
         }
       });
-      // Wire up portal selector
-      var portalSel = document.getElementById('portal-select');
+      // ── Theme popover ──
+      var themeBtn = document.getElementById('theme-btn');
+      var themePop = document.getElementById('theme-popover');
+
       function getPortal() { return localStorage.getItem('portal') || 'coordinator'; }
       function setPortal(val) {
         localStorage.setItem('portal', val);
         document.documentElement.setAttribute('data-portal', val);
         document.dispatchEvent(new CustomEvent('portalchange', { detail: val }));
       }
-      if (portalSel) {
-        portalSel.value = getPortal();
-        portalSel.addEventListener('change', function () { setPortal(this.value); });
-      }
-
-      // Wire up theme toggle
-      var btn = document.getElementById('theme-toggle');
-      var sunIcon = document.getElementById('theme-icon-sun');
-      var moonIcon = document.getElementById('theme-icon-moon');
-
       function getEffectiveTheme() {
-        var stored = localStorage.getItem('theme');
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var s = localStorage.getItem('theme');
+        return s || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      }
+      function setTheme(val) {
+        localStorage.setItem('theme', val);
+        document.documentElement.setAttribute('data-theme', val);
+        document.dispatchEvent(new CustomEvent('themechange', { detail: val }));
       }
 
-      function updateToggleIcon() {
-        var isDark = getEffectiveTheme() === 'dark';
-        if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
-        if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+      function syncRadios() {
+        var theme = getEffectiveTheme();
+        var portal = getPortal();
+        document.querySelectorAll('input[name="tpop-color"]').forEach(function(r) {
+          r.checked = r.value === theme;
+        });
+        document.querySelectorAll('input[name="tpop-portal"]').forEach(function(r) {
+          r.checked = r.value === portal;
+        });
       }
 
-      if (btn) {
-        updateToggleIcon();
-        btn.addEventListener('click', function () {
-          var current = getEffectiveTheme();
-          var next = current === 'dark' ? 'light' : 'dark';
-          localStorage.setItem('theme', next);
-          document.documentElement.setAttribute('data-theme', next);
-          updateToggleIcon();
-          document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+      function openPopover() {
+        syncRadios();
+        themePop.hidden = false;
+        themeBtn.setAttribute('aria-expanded', 'true');
+      }
+      function closePopover() {
+        themePop.hidden = true;
+        themeBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      if (themeBtn && themePop) {
+        themeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          themePop.hidden ? openPopover() : closePopover();
+        });
+
+        themePop.addEventListener('change', function(e) {
+          if (e.target.name === 'tpop-color') setTheme(e.target.value);
+          if (e.target.name === 'tpop-portal') setPortal(e.target.value);
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!document.getElementById('theme-btn-wrap').contains(e.target)) closePopover();
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') closePopover();
         });
       }
     })

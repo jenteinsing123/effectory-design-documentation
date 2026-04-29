@@ -116,7 +116,13 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 
 
 /* ─── PAGE HEADER ─── */
-.page-header { margin-bottom: 32px; }
+.page-header {
+  margin: -40px -48px 0;
+  padding: 40px 48px 36px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 32px;
+}
 .page-badges { display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
 .badge {
   display: inline-flex; align-items: center; gap: 4px;
@@ -342,45 +348,58 @@ html[data-theme="dark"] {
 
 /* Right-side action group in top nav */
 .topnav-actions {
-  margin-left: auto; display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  margin-left: auto; display: flex; align-items: center; flex-shrink: 0;
 }
 
-/* Portal selector wrapper — looks like a secondary button */
-.portal-wrap {
-  position: relative; display: inline-flex; align-items: center;
-  height: 36px; border-radius: var(--radius-base);
+/* Theme button */
+.theme-btn-wrap { position: relative; }
+.theme-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 36px; padding: 0 14px;
+  border-radius: var(--radius-base);
   background: var(--bg); border: 1px solid var(--border);
   box-shadow: 0 1px 2px rgba(25,39,67,.04);
-  color: var(--text-2); cursor: pointer;
-  transition: background .1s, border-color .1s;
-  padding: 0 10px 0 10px;
-}
-.portal-wrap:hover { background: var(--bg-subtle); border-color: var(--border); color: var(--text); }
-.portal-ico {
-  width: 14px; height: 14px; flex-shrink: 0; pointer-events: none;
-}
-.portal-chevron {
-  width: 12px; height: 12px; flex-shrink: 0; pointer-events: none; margin-left: 2px;
-}
-.portal-select {
-  appearance: none; -webkit-appearance: none;
   font-family: 'Poppins', system-ui, sans-serif;
-  font-size: 12px; font-weight: 500;
-  color: inherit; background: transparent; border: none;
-  padding: 0 0 0 7px; height: 100%; cursor: pointer;
-  outline: none;
+  font-size: 13px; font-weight: 500; color: var(--text-2);
+  cursor: pointer; transition: background .1s, border-color .1s, color .1s;
 }
+.theme-btn:hover,
+.theme-btn[aria-expanded="true"] { background: var(--bg-subtle); color: var(--text); border-color: var(--border); }
+.theme-btn svg { flex-shrink: 0; }
 
-/* Dark mode icon button */
-.theme-toggle {
-  display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: var(--radius-base);
+/* Theme popover */
+.theme-popover {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  width: 220px;
   background: var(--bg); border: 1px solid var(--border);
-  box-shadow: 0 1px 2px rgba(25,39,67,.04);
-  color: var(--text-2); cursor: pointer; flex-shrink: 0;
-  transition: background .1s, border-color .1s;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-md);
+  padding: 12px;
+  z-index: 200;
 }
-.theme-toggle:hover { background: var(--bg-subtle); border-color: var(--border); color: var(--text); }
-.theme-toggle svg { width: 15px; height: 15px; display: block; pointer-events: none; }
+.theme-popover[hidden] { display: none; }
+.tpop-label {
+  font-size: 11px; font-weight: 600; color: var(--text-3);
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 2px 4px 8px;
+}
+.tpop-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 8px; border-radius: var(--radius-md);
+  cursor: pointer; transition: background .1s;
+  font-size: 13px; color: var(--text); font-weight: 500;
+  user-select: none;
+}
+.tpop-option:hover { background: var(--bg-subtle); }
+.tpop-option:has(input:checked) { background: var(--brand-subtle, #e6f7f7); color: var(--brand); }
+.tpop-radio { display: none; }
+.tpop-thumb {
+  width: 44px; height: 34px; border-radius: 4px; overflow: hidden; flex-shrink: 0;
+  background: #f5f6f7; border: 1.5px solid #dde0e6;
+}
+.tpop-thumb-dark { background: #1e2130; border-color: #3a3d47; }
+.tpop-thumb-hd { height: 9px; }
+.tpop-thumb-line { height: 3px; border-radius: 2px; margin: 4px 5px 0; }
+.tpop-divider { border: none; border-top: 1px solid var(--border-light); margin: 10px 0; }
 
 /* Personal portal brand overrides are now in tokens.css */
