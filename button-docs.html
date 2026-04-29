@@ -23,9 +23,9 @@
     .btn-primary:active, .btn-primary.is-pressed { background: var(--brand-pressed); border-color: var(--brand-deep); }
 
     /* Secondary */
-    .btn-secondary { background: var(--bg); border-color: var(--tok-border-action); color: var(--text-2); box-shadow: var(--sh-action); }
-    .btn-secondary:hover, .btn-secondary.is-hover { background: var(--bg-hover); border-color: var(--tok-border-action-hover); }
-    .btn-secondary:active, .btn-secondary.is-pressed { background: var(--bg-pressed); border-color: var(--tok-border-action-pressed); }
+    .btn-secondary { background: var(--bg); border-color: var(--border-action); color: var(--text-2); box-shadow: var(--sh-action); }
+    .btn-secondary:hover, .btn-secondary.is-hover { background: var(--bg-hover); border-color: var(--border-action-hover); }
+    .btn-secondary:active, .btn-secondary.is-pressed { background: var(--bg-pressed); border-color: var(--border-action-pressed); }
 
     /* Tertiary */
     .btn-tertiary { background: transparent; border-color: transparent; color: var(--text-2); }
@@ -33,14 +33,14 @@
     .btn-tertiary:active, .btn-tertiary.is-pressed { background: var(--bg-pressed); }
 
     /* Danger */
-    .btn-danger { background: var(--tok-bg-negative-base); border-color: var(--tok-border-negative-base); color: var(--brand-text); box-shadow: var(--sh-action); }
-    .btn-danger:hover, .btn-danger.is-hover { background: var(--tok-bg-negative-base-hover); border-color: var(--tok-border-negative-base-hover); }
-    .btn-danger:active, .btn-danger.is-pressed { background: var(--tok-bg-negative-base-pressed); border-color: var(--tok-border-negative-base-pressed); }
+    .btn-danger { background: var(--bg-negative-base); border-color: var(--border-negative-base); color: var(--brand-text); box-shadow: var(--sh-action); }
+    .btn-danger:hover, .btn-danger.is-hover { background: var(--bg-negative-base-hover); border-color: var(--border-negative-base-hover); }
+    .btn-danger:active, .btn-danger.is-pressed { background: var(--bg-negative-base-pressed); border-color: var(--border-negative-base-pressed); }
 
     /* Disabled */
     .btn.is-disabled {
-      background: var(--tok-bg-disabled) !important; border-color: transparent !important;
-      color: var(--tok-content-disabled) !important; box-shadow: none !important; cursor: not-allowed;
+      background: var(--bg-disabled) !important; border-color: transparent !important;
+      color: var(--content-disabled) !important; box-shadow: none !important; cursor: not-allowed;
     }
     .btn-secondary.is-disabled { background: var(--bg) !important; border-color: var(--border) !important; }
     .btn-tertiary.is-disabled  { background: transparent !important; border-color: transparent !important; }
@@ -229,7 +229,7 @@
         <div class="dd-prev" style="flex-direction: column; gap: 10px; align-items: flex-start; padding: 20px 24px;">
           <input
             type="text" placeholder="Survey name is required"
-            style="width:100%; padding: 7px 10px; border: 1px solid var(--tok-border-negative-base); border-radius: var(--radius-base); font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
+            style="width:100%; padding: 7px 10px; border: 1px solid var(--border-negative-base); border-radius: var(--radius-base); font-family:inherit; font-size:13px; background:#fff; color: var(--text);"
           />
           <span style="font-size: 12px; color: var(--red);">Survey name is required</span>
           <button class="btn btn-primary" style="pointer-events:none;">Save survey</button>
@@ -555,7 +555,7 @@
           <tr><td>Default</td><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #ddd;"></span>bg/input</span></td><td><span class="token">border/action</span></td></tr>
           <tr><td>Hover</td><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><span class="token"><span class="swatch" style="background: var(--bg-hover);"></span>bg/input-hover</span></td><td><span class="token">border/action-hover</span></td></tr>
           <tr><td>Pressed</td><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td><span class="token">border/action-pressed</span></td></tr>
-          <tr><td>Disabled</td><td colspan="2"><span class="token"><span class="swatch" style="background: var(--tok-bg-disabled);"></span>bg/disabled</span></td><td>—</td></tr>
+          <tr><td>Disabled</td><td colspan="2"><span class="token"><span class="swatch" style="background: var(--bg-disabled);"></span>bg/disabled</span></td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -583,7 +583,7 @@
           <tr><td><span class="token"><span class="swatch" style="background:#d3353b;"></span>bg/negative/base</span></td><td>#d3353b</td><td>Danger default fill</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#b9252a;"></span>bg/negative/base-hover</span></td><td>#b9252a</td><td>Danger hover fill</td></tr>
           <tr><td><span class="token"><span class="swatch" style="background:#861a1d;"></span>bg/negative/base-pressed</span></td><td>#861a1d</td><td>Danger pressed fill</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background: var(--tok-bg-disabled);"></span>bg/disabled</span></td><td>#192743 · 7%</td><td>All types disabled fill</td></tr>
+          <tr><td><span class="token"><span class="swatch" style="background: var(--bg-disabled);"></span>bg/disabled</span></td><td>#192743 · 7%</td><td>All types disabled fill</td></tr>
         </tbody>
       </table>
     </div>

@@ -9,22 +9,22 @@
   --toc-w:        200px;
 
   /* Status colors — mapped to design tokens */
-  --green:     var(--tok-content-positive-secondary);
-  --green-bg:  var(--tok-bg-positive-subtle);
-  --green-bd:  var(--tok-border-positive-subtle);
-  --red:       var(--tok-content-negative-secondary);
-  --red-bg:    var(--tok-bg-negative-subtle);
-  --red-bd:    var(--tok-border-negative-subtle);
-  --amber:     var(--tok-content-highlight-base);
-  --amber-bg:  var(--tok-bg-highlight-subtle);
-  --amber-bd:  var(--tok-border-highlight-subtle);
-  --blue:      var(--tok-content-info-base);
-  --blue-bg:   var(--tok-bg-info-subtle);
-  --blue-bd:   var(--tok-border-info-subtle);
+  --green:     var(--content-positive-secondary);
+  --green-bg:  var(--bg-positive-subtle);
+  --green-bd:  var(--border-positive-subtle);
+  --red:       var(--content-negative-secondary);
+  --red-bg:    var(--bg-negative-subtle);
+  --red-bd:    var(--border-negative-subtle);
+  --amber:     var(--content-highlight-base);
+  --amber-bg:  var(--bg-highlight-subtle);
+  --amber-bd:  var(--border-highlight-subtle);
+  --blue:      var(--content-info-base);
+  --blue-bg:   var(--bg-info-subtle);
+  --blue-bd:   var(--border-info-subtle);
 
   /* Extra bg aliases */
-  --bg-pressed: var(--tok-bg-base-pressed);
-  --navy:       var(--tok-bg-inverse-base);
+  --bg-pressed: var(--bg-base-pressed);
+  --navy:       var(--bg-inverse-base);
 
   /* Border radius — from Border Radius docs */
   --radius-none:  0;
@@ -247,17 +247,17 @@ h6 { font-size: 12px; font-weight: 600; color: var(--text-3); letter-spacing: .0
 .ib-primary { background: var(--brand); border: 1px solid var(--brand-border); box-shadow: var(--sh-action); color: var(--brand-text); }
 .ib-primary:hover { background: var(--brand-hover); }
 .ib-primary:active { background: var(--brand-pressed); }
-.ib-secondary { background: var(--bg); border: 1px solid var(--tok-border-action); box-shadow: var(--sh-action); color: var(--text-2); }
-.ib-secondary:hover { background: var(--bg-hover); border-color: var(--tok-border-action-hover); }
+.ib-secondary { background: var(--bg); border: 1px solid var(--border-action); box-shadow: var(--sh-action); color: var(--text-2); }
+.ib-secondary:hover { background: var(--bg-hover); border-color: var(--border-action-hover); }
 .ib-tertiary { background: transparent; border: 1px solid transparent; color: var(--text-2); }
 .ib-tertiary:hover { background: var(--bg-hover); }
 .is-hover.ib-primary   { background: var(--brand-hover);   border-color: var(--brand-pressed); }
 .is-pressed.ib-primary { background: var(--brand-pressed); border-color: var(--brand-deep); }
-.is-hover.ib-secondary   { background: var(--bg-hover); border-color: var(--tok-border-action-hover); color: var(--text); }
-.is-pressed.ib-secondary { background: var(--bg-subtle); border-color: var(--tok-border-action-pressed); }
+.is-hover.ib-secondary   { background: var(--bg-hover); border-color: var(--border-action-hover); color: var(--text); }
+.is-pressed.ib-secondary { background: var(--bg-subtle); border-color: var(--border-action-pressed); }
 .is-hover.ib-tertiary   { background: var(--bg-hover); color: var(--text); }
 .is-pressed.ib-tertiary  { background: var(--bg-subtle); }
-.is-disabled { background: var(--tok-bg-disabled) !important; border-color: transparent !important; box-shadow: none !important; color: var(--tok-content-disabled) !important; cursor: not-allowed; }
+.is-disabled { background: var(--bg-disabled) !important; border-color: transparent !important; box-shadow: none !important; color: var(--content-disabled) !important; cursor: not-allowed; }
 .is-disabled.ib-secondary { background: var(--bg) !important; border-color: var(--border) !important; }
 .is-disabled.ib-tertiary  { background: transparent !important; }
 .is-focus { outline: 2px solid var(--brand-focus); outline-offset: 2px; }
@@ -378,14 +378,14 @@ html[data-theme="dark"] {
   display: inline-flex; align-items: center; gap: 8px;
   height: 36px; padding: 0 14px;
   border-radius: var(--radius-md);
-  background: var(--bg); border: 1px solid var(--tok-border-action);
+  background: var(--bg); border: 1px solid var(--border-action);
   box-shadow: var(--sh-action);
   font-family: 'Poppins', system-ui, sans-serif;
   font-size: 13px; font-weight: 500; color: var(--text-2);
   cursor: pointer; transition: background .1s, border-color .1s, color .1s;
 }
-.theme-btn:hover { background: var(--bg-hover); border-color: var(--tok-border-action-hover); color: var(--text); }
-.theme-btn[aria-expanded="true"] { background: var(--bg-hover); border-color: var(--tok-border-action-hover); color: var(--text); }
+.theme-btn:hover { background: var(--bg-hover); border-color: var(--border-action-hover); color: var(--text); }
+.theme-btn[aria-expanded="true"] { background: var(--bg-hover); border-color: var(--border-action-hover); color: var(--text); }
 .theme-btn svg { flex-shrink: 0; }
 
 /* Theme popover */
@@ -416,7 +416,7 @@ html[data-theme="dark"] {
 .tpop-radio { display: none; }
 .tpop-thumb {
   width: 44px; height: 34px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0;
-  background: #f5f6f7; border: 1.5px solid var(--tok-border-base);
+  background: #f5f6f7; border: 1.5px solid var(--border-base);
 }
 .tpop-thumb-dark { background: #1e2130; border-color: #3a3d47; }
 .tpop-thumb-hd { height: 9px; }
