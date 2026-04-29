@@ -115,12 +115,16 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 /* Full-width page header row */
 .page-header-row {
   width: 100%;
-  background: var(--bg-subtle);
+  background: var(--brand-subtle);
   border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: center;
+  padding: 120px 48px;
 }
 .page-header-row > .page-header {
-  max-width: calc(880px + var(--toc-w));
-  padding: 40px 48px 36px;
+  width: 100%;
+  max-width: 880px;
+  margin-bottom: 0;
 }
 
 /* Content + TOC side by side */
@@ -412,21 +416,3 @@ html[data-theme="dark"] {
 
 /* Personal portal brand overrides are now in tokens.css */
 
-/* ─── PAGE HEADER ROW — portal tints ─── */
-/* Default (coordinator): light teal */
-.page-header-row {
-  --ph-bg: #e8f7f6;
-  --ph-border: #c2e8e6;
-}
-html[data-portal="personal"] .page-header-row {
-  --ph-bg: #fef9e7;
-  --ph-border: #f5e6a3;
-}
-html[data-theme="dark"] .page-header-row {
-  --ph-bg: var(--bg-subtle);
-  --ph-border: var(--border-light);
-}
-.page-header-row {
-  background: var(--ph-bg);
-  border-bottom-color: var(--ph-border);
-}
