@@ -90,6 +90,22 @@
     .scale-group-hd + .scale-row,
     .scale-head + .scale-row { border-top: none; }
 
+    /* ── Headline–body spacing section ── */
+    .hbs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .hbs-card { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg); overflow: hidden; }
+    .hbs-demo { padding: 32px 28px; background: var(--bg-subtle); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .hbs-ex { width: 100%; max-width: 280px; }
+    .hbs-gap { display: flex; align-items: center; gap: 8px; }
+    .hbs-gap::before, .hbs-gap::after { content: ''; flex: 1; border-top: 1px dashed var(--border); }
+    .hbs-gap span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--brand); font-weight: 600; white-space: nowrap; }
+    .hbs-gap-lg { margin: 8px 0; }
+    .hbs-gap-sm { margin: 4px 0; }
+    .hbs-meta { padding: 16px 18px; }
+    .hbs-rule { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .hbs-rule code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--border); font-weight: 400; color: var(--text-2); }
+    .hbs-token { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--brand); font-weight: 600; margin-bottom: 6px; }
+    .hbs-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.55; }
+
     /* ── Usage table ── */
     .usage-table {
       border: 1px solid var(--border); border-radius: var(--radius-lg);
@@ -495,6 +511,48 @@
 
   <hr class="divider" />
 
+  <!-- HEADLINE TO BODY SPACING -->
+  <section class="section" id="headline-spacing">
+    <h2><span class="emoji">↕️</span> Headlines and body copy</h2>
+    <p class="section-lead">The gap between a headline and the body copy that follows it depends on the headline's point size. Larger headlines need more breathing room; smaller ones stay tighter so the label–content pairing reads as a unit.</p>
+
+    <div class="hbs-grid">
+
+      <div class="hbs-card">
+        <div class="hbs-demo">
+          <div class="hbs-ex">
+            <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;line-height:1.25;color:var(--text);">Survey results</div>
+            <div class="hbs-gap hbs-gap-lg"><span>8 px</span></div>
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--text-2);">Results from 247 respondents across four departments, collected over the last two weeks.</div>
+          </div>
+        </div>
+        <div class="hbs-meta">
+          <div class="hbs-rule">Large headlines &nbsp;<code>L1 · L2 · L3</code></div>
+          <div class="hbs-token">spacing-tight · 8 px · 0.5 rem</div>
+          <div class="hbs-desc">A larger headline already signals a clear break — 8 px is enough to separate it from body copy without creating a disconnected gap.</div>
+        </div>
+      </div>
+
+      <div class="hbs-card">
+        <div class="hbs-demo">
+          <div class="hbs-ex">
+            <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;line-height:1.4;color:var(--text);">By department</div>
+            <div class="hbs-gap hbs-gap-sm"><span>4 px</span></div>
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;line-height:1.6;color:var(--text-2);">Engineering · 84 responses · 79% participation rate across all active employees.</div>
+          </div>
+        </div>
+        <div class="hbs-meta">
+          <div class="hbs-rule">Small headlines &nbsp;<code>L4 · L5 · L6</code></div>
+          <div class="hbs-token">spacing-extra-tight · 4 px · 0.25 rem</div>
+          <div class="hbs-desc">Small headlines are close in size to body copy — tighter spacing keeps the headline and its content visually paired as one group.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
   <!-- USAGE -->
   <section class="section" id="usage">
     <h2><span class="emoji">✅</span> Usage</h2>
@@ -643,6 +701,7 @@
     <a class="toc-link" href="#body">Body styles</a>
     <a class="toc-link" href="#responsive">Responsive scale</a>
     <a class="toc-link" href="#best-practices">Best practices</a>
+    <a class="toc-link" href="#headline-spacing">Headlines &amp; body</a>
     <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#tokens">Token reference</a>
   </nav>
