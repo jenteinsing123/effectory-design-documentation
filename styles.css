@@ -22,6 +22,10 @@
   --blue-bg:   var(--tok-bg-info-subtle);
   --blue-bd:   var(--tok-border-info-subtle);
 
+  /* Extra bg aliases */
+  --bg-pressed: var(--tok-bg-base-pressed);
+  --navy:       var(--tok-bg-inverse-base);
+
   /* Border radius — from Border Radius docs */
   --radius-none:  0;
   --radius-sm:    4px;
