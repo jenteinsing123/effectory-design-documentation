@@ -667,6 +667,79 @@
 <div class="content-cols">
 <article class="content">
 
+  <!-- PLAYGROUND -->
+  <section class="section" id="dev-playground">
+    <h2 class="text-l3">Playground</h2>
+    <p class="section-lead">Configure props and see the component update live — the code snippet below reflects your selection.</p>
+
+    <div class="pg-card">
+      <div class="pg-controls">
+        <div class="pg-control">
+          <label class="pg-label" for="pg-variant">variant</label>
+          <select class="pg-select" id="pg-variant">
+            <option value="primary" selected>primary</option>
+            <option value="secondary">secondary</option>
+            <option value="tertiary">tertiary</option>
+            <option value="danger">danger</option>
+          </select>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label" for="pg-size">size</label>
+          <select class="pg-select" id="pg-size">
+            <option value="sm">sm</option>
+            <option value="md" selected>md</option>
+            <option value="lg">lg</option>
+          </select>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label" for="pg-label-text">label</label>
+          <input class="pg-input" type="text" id="pg-label-text" value="Save changes" />
+        </div>
+        <div class="pg-control">
+          <label class="pg-label" for="pg-icon-left">icon-left</label>
+          <select class="pg-select" id="pg-icon-left">
+            <option value="">none</option>
+            <option value="plus">plus</option>
+            <option value="edit">edit</option>
+            <option value="trash">trash</option>
+            <option value="download">download</option>
+            <option value="search">search</option>
+          </select>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label" for="pg-icon-right">icon-right</label>
+          <select class="pg-select" id="pg-icon-right">
+            <option value="">none</option>
+            <option value="plus">plus</option>
+            <option value="edit">edit</option>
+            <option value="trash">trash</option>
+            <option value="download">download</option>
+            <option value="search">search</option>
+          </select>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label">disabled</label>
+          <div class="pg-toggle-wrap">
+            <label class="pg-toggle"><input type="checkbox" id="pg-disabled"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label">loading</label>
+          <div class="pg-toggle-wrap">
+            <label class="pg-toggle"><input type="checkbox" id="pg-loading"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg-preview" id="pg-preview"></div>
+
+      <div class="pg-code-wrap">
+        <button class="dev-copy-btn" id="pg-copy">Copy</button>
+        <pre><code id="pg-code"></code></pre>
+      </div>
+    </div>
+  </section>
+
   <!-- INSTALL -->
   <section class="section" id="dev-install">
     <h2 class="text-l3">Installation</h2>
@@ -975,5 +1048,124 @@
 </div><!-- /shell -->
 
 <script src="nav.js"></script>
+<script>
+(function () {
+  var sizeHeights = { sm: '28px', md: '36px', lg: '44px' };
+  var sizeFonts   = { sm: '12.5px', md: '13.5px', lg: '14.5px' };
+  var sizePads    = { sm: '0 10px', md: '0 12px', lg: '0 16px' };
+
+  function getProps() {
+    return {
+      variant:   document.getElementById('pg-variant').value,
+      size:      document.getElementById('pg-size').value,
+      label:     document.getElementById('pg-label-text').value || 'Button',
+      iconLeft:  document.getElementById('pg-icon-left').value,
+      iconRight: document.getElementById('pg-icon-right').value,
+      disabled:  document.getElementById('pg-disabled').checked,
+      loading:   document.getElementById('pg-loading').checked,
+    };
+  }
+
+  function renderPreview(p) {
+    var cls = 'btn btn-' + p.variant + (p.disabled ? ' is-disabled' : '');
+    var style = 'height:' + sizeHeights[p.size] + ';font-size:' + sizeFonts[p.size] + ';padding:' + sizePads[p.size] + ';pointer-events:none';
+    var iconStyle = 'width:14px;height:14px;display:inline-flex;align-items:center;flex-shrink:0;';
+
+    var btn = document.createElement('button');
+    btn.className = cls;
+    btn.setAttribute('style', style);
+    if (p.disabled) btn.disabled = true;
+
+    if (p.loading) {
+      btn.innerHTML =
+        '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="animation:spin 1s linear infinite;flex-shrink:0">'
+        + '<circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>'
+        + '<path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+      btn.appendChild(document.createTextNode(p.label));
+    } else {
+      if (p.iconLeft)  btn.innerHTML = '<i data-icon="' + p.iconLeft + '" style="' + iconStyle + '"></i>';
+      btn.appendChild(document.createTextNode(p.label));
+      if (p.iconRight) btn.innerHTML += '<i data-icon="' + p.iconRight + '" style="' + iconStyle + '"></i>';
+    }
+
+    var preview = document.getElementById('pg-preview');
+    preview.innerHTML = '';
+    preview.appendChild(btn);
+    if (window.Icons) window.Icons.render(preview);
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function hi(type, text) {
+    var cls = { tag:'ct', attr:'ca', val:'cv', kw:'ck', cm:'cm' }[type] || '';
+    return cls ? '<span class="' + cls + '">' + esc(text) + '</span>' : esc(text);
+  }
+
+  function renderCode(p) {
+    var attrs = [];
+    if (p.variant !== 'primary') attrs.push({ k:'variant', v: p.variant });
+    if (p.size    !== 'md')      attrs.push({ k:'size',    v: p.size });
+    if (p.iconLeft)              attrs.push({ k:'icon-left',  v: p.iconLeft });
+    if (p.iconRight)             attrs.push({ k:'icon-right', v: p.iconRight });
+    if (p.loading)               attrs.push({ k:':loading',   v: 'true' });
+    if (p.disabled)              attrs.push({ k:':disabled',  v: 'true' });
+
+    var open = hi('tag','<EfButton');
+    var close = hi('tag','</EfButton>');
+    var label = esc(p.label);
+
+    if (attrs.length === 0) {
+      document.getElementById('pg-code').innerHTML = open + '>' + label + close;
+      return;
+    }
+    if (attrs.length <= 2) {
+      var attrStr = attrs.map(function(a) {
+        return ' ' + hi('attr', a.k) + '=' + hi('val', '"' + a.v + '"');
+      }).join('');
+      document.getElementById('pg-code').innerHTML = open + attrStr + '>' + label + close;
+      return;
+    }
+    var attrLines = attrs.map(function(a) {
+      return '  ' + hi('attr', a.k) + '=' + hi('val', '"' + a.v + '"');
+    }).join('\n');
+    document.getElementById('pg-code').innerHTML = open + '\n' + attrLines + '\n>' + label + close;
+  }
+
+  function update() {
+    var p = getProps();
+    renderPreview(p);
+    renderCode(p);
+  }
+
+  // Copy button
+  document.getElementById('pg-copy').addEventListener('click', function() {
+    var text = document.getElementById('pg-code').innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      var btn = document.getElementById('pg-copy');
+      btn.textContent = 'Copied!';
+      btn.classList.add('did-copy');
+      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('did-copy'); }, 2000);
+    });
+  });
+
+  // Bind all controls
+  ['pg-variant','pg-size','pg-label-text','pg-icon-left','pg-icon-right'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', update);
+  });
+  ['pg-disabled','pg-loading'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', update);
+  });
+
+  // Initial render (after icons.js loads)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', update);
+  } else {
+    update();
+  }
+})();
+</script>
 </body>
 </html>
