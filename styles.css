@@ -3,6 +3,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+@keyframes spin { to { transform: rotate(360deg); } }
+
 :root {
   --top-h:        72px;
   --sidebar-w:    260px;
@@ -346,10 +348,22 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .page-tab svg { width: 14px; height: 14px; flex-shrink: 0; }
 .tab-panel[hidden] { display: none !important; }
 
+/* ─── DEVELOPER TAB — live preview ─── */
+.dev-preview {
+  background: var(--bg-base); border: 1px solid var(--border-base);
+  border-bottom: none; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--spacing-extra-loose) var(--spacing-extra-loose);
+  display: flex; align-items: center; gap: var(--spacing-base); flex-wrap: wrap;
+  min-height: 80px;
+}
+.dev-preview + .dev-code-wrap { margin-top: 0; }
+.dev-preview + .dev-code-wrap pre { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+
 /* ─── DEVELOPER TAB — code blocks ─── */
 .dev-code-wrap { position: relative; margin: var(--spacing-base) 0 var(--spacing-extra-loose); }
 .dev-code-wrap pre {
-  background: #1b2033; color: #cdd5e0;
+  background: var(--bg-code, #f4f5f7); color: var(--content-base);
+  border: 1px solid var(--border-base);
   border-radius: var(--radius-lg); padding: var(--spacing-extra-loose);
   font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 12.5px; line-height: 1.75;
   overflow-x: auto; margin: 0;
@@ -357,23 +371,23 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .dev-code-wrap code { font-family: inherit; font-size: inherit; }
 .dev-copy-btn {
   position: absolute; top: var(--spacing-tight); right: var(--spacing-tight);
-  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
-  color: #8b99b3; border-radius: var(--radius-base);
+  background: var(--bg-base); border: 1px solid var(--border-action);
+  color: var(--content-subtle); border-radius: var(--radius-base);
   padding: 3px 10px; font-size: 11px; cursor: pointer;
   font-family: 'Poppins', system-ui, sans-serif; font-weight: 500;
-  transition: background .1s, color .1s;
+  transition: background .1s, color .1s, border-color .1s;
 }
-.dev-copy-btn:hover { background: rgba(255,255,255,.15); color: #e2e8f0; }
-.dev-copy-btn.did-copy { color: #4ade80; border-color: rgba(74,222,128,.3); }
+.dev-copy-btn:hover { background: var(--bg-base-hover); color: var(--content-base); border-color: var(--border-action-hover); }
+.dev-copy-btn.did-copy { color: var(--content-positive-secondary); border-color: var(--border-positive-subtle); }
 
-/* syntax tokens */
-.ct { color: #63b3ed; } /* tag / component */
-.ca { color: #f6ad55; } /* attribute / prop name */
-.cv { color: #68d391; } /* string value */
-.ck { color: #b794f4; } /* keyword import/const */
-.cs { color: #fc8181; } /* string import */
-.cm { color: #718096; font-style: italic; } /* comment */
-.cn { color: #f6e05e; } /* number */
+/* syntax tokens — light background */
+.ct { color: #0969da; } /* tag / component — blue */
+.ca { color: #953800; } /* attribute / prop name — orange-brown */
+.cv { color: #116329; } /* string value — green */
+.ck { color: #8250df; } /* keyword import/const — purple */
+.cs { color: #0a3069; } /* import path string — dark blue */
+.cm { color: #6e7781; font-style: italic; } /* comment — grey */
+.cn { color: #0550ae; } /* number — blue */
 
 /* ─── DEVELOPER TAB — props table ─── */
 .dev-props-table { width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-extra-loose); font-size: 13.5px; }

@@ -687,12 +687,21 @@
     <h2 class="text-l3">Usage</h2>
 
     <h3 class="text-l4">Basic</h3>
+    <div class="dev-preview">
+      <button class="btn btn-primary">Save changes</button>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">@click</span>=<span class="cv">"handleSave"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">All variants</h3>
+    <div class="dev-preview">
+      <button class="btn btn-primary">Save changes</button>
+      <button class="btn btn-secondary">Cancel</button>
+      <button class="btn btn-tertiary">Edit</button>
+      <button class="btn btn-danger">Delete survey</button>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">&lt;!-- Primary: highest-emphasis action --&gt;</span>
@@ -709,6 +718,11 @@
     </div>
 
     <h3 class="text-l4">Sizes</h3>
+    <div class="dev-preview" style="align-items: center;">
+      <button class="btn btn-primary" style="height:28px; font-size:12.5px; padding:0 10px;">Small</button>
+      <button class="btn btn-primary">Medium</button>
+      <button class="btn btn-primary" style="height:44px; font-size:14.5px; padding:0 16px;">Large</button>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"sm"</span><span class="ct">&gt;</span>Small<span class="ct">&lt;/EfButton&gt;</span>
@@ -717,6 +731,10 @@
     </div>
 
     <h3 class="text-l4">With icons</h3>
+    <div class="dev-preview">
+      <button class="btn btn-primary"><i data-icon="plus"></i>Add member</button>
+      <button class="btn btn-secondary">Export<i data-icon="download"></i></button>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">&lt;!-- Icon on the left (leading) --&gt;</span>
@@ -727,6 +745,19 @@
     </div>
 
     <h3 class="text-l4">Loading &amp; disabled states</h3>
+    <div class="dev-preview" style="gap: 24px; flex-direction: column; align-items: flex-start;">
+      <div style="display:flex; align-items:center; gap: 12px;">
+        <button class="btn btn-primary" style="gap:8px; pointer-events:none;">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="animation:spin 1s linear infinite;"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Saving…
+        </button>
+        <span style="font-size:12px; color:var(--content-subtle);">:loading="true"</span>
+      </div>
+      <div style="display:flex; align-items:center; gap: 12px;">
+        <button class="btn btn-primary is-disabled" disabled>Save changes</button>
+        <span style="font-size:12px; color:var(--content-subtle);">:disabled="true"</span>
+      </div>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">&lt;!-- Shows a spinner, button stays clickable-width --&gt;</span>
@@ -740,6 +771,9 @@
     </div>
 
     <h3 class="text-l4">As a link</h3>
+    <div class="dev-preview">
+      <a class="btn btn-secondary" href="#" onclick="return false">View report</a>
+    </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">&lt;!-- Renders an &lt;a&gt; tag instead of &lt;button&gt; --&gt;</span>
