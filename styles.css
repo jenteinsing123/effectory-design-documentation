@@ -331,8 +331,19 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 
 /* ─── PAGE TABS (Design / Developer) ─── */
 .page-tabs {
-  display: flex; border-bottom: 1px solid var(--border-base);
-  margin: 0 0 var(--spacing-extra-loose);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border-base);
+  margin: 0;
+  position: sticky; top: var(--top-h); z-index: 90;
+}
+.page-tabs-inner {
+  width: 100%;
+  max-width: calc(880px + var(--toc-w));
+  padding-left: 48px;
+  display: flex;
 }
 .page-tab {
   display: inline-flex; align-items: center; gap: 6px;
