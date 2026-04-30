@@ -109,7 +109,7 @@
     <div class="page-badges">
       <span class="page-updated">Updated Apr 2026</span>
     </div>
-    <h1 class="text-l1">Color</h1>
+    <h1 class="text-l2">Color</h1>
     <p class="page-desc">Engage uses a two-tier color system: a set of primitive color ramps that define every possible value, and a layer of semantic tokens that map those values to specific roles — surfaces, text, borders, and data. Always use a semantic token in product code. Never reference a primitive directly.</p>
   </div>
 </div><!-- /page-header-row -->
@@ -118,7 +118,7 @@
 
 <!-- BRAND PALETTE -->
   <section class="section" id="brand">
-    <h2 class="text-l2"><span class="emoji">🎨</span> Brand palette</h2>
+    <h2 class="text-l3"><span class="emoji">🎨</span> Brand palette</h2>
     <p class="section-lead">Four colors form the core brand identity. Turquoise is the primary action color, Navy anchors dark surfaces and all body text, Yellow is used for highlights and the product logo, and White is the default page surface.</p>
 
     <div class="brand-grid">
@@ -165,7 +165,7 @@
 
   <!-- COLOR RAMPS -->
   <section class="section" id="palette">
-    <h2 class="text-l2"><span class="emoji">🖌️</span> Color ramps</h2>
+    <h2 class="text-l3"><span class="emoji">🖌️</span> Color ramps</h2>
     <p class="section-lead">Each color family runs from 100 (lightest tint) to 1000 (deepest shade). The starred step (★) is the primary interaction value for that family. These are primitive values — reference them only when creating new semantic tokens, never directly in component code.</p>
 
     <!-- Turquoise -->
@@ -319,14 +319,14 @@
 
   <!-- SEMANTIC TOKENS -->
   <section class="section" id="tokens">
-    <h2 class="text-l2"><span class="emoji">🏷️</span> Semantic tokens</h2>
+    <h2 class="text-l3"><span class="emoji">🏷️</span> Semantic tokens</h2>
     <p class="section-lead">Semantic tokens give colors intent. Each is an alias to a primitive that can change per theme. Tokens live in three namespaces: <strong>bg/</strong> for fills, <strong>content/</strong> for text and icons, and <strong>border/</strong> for strokes and dividers. Use the portal and dark-mode controls in the top bar — values update live.</p>
     <p style="font-size:12.5px;color:var(--content-subtle);margin-bottom:20px;">
       Viewing: <span id="sem-mode-label" style="font-weight:600;color:var(--bg-brand-base);">Light · Coordinator</span>
     </p>
 
     <!-- BACKGROUNDS -->
-    <h3 class="text-l3">Backgrounds</h3>
+    <h3 class="text-l4">Backgrounds</h3>
     <p style="font-size:13.5px;color:var(--content-secondary);line-height:1.6;margin-bottom:14px;">Use <code>bg/</code> tokens for fills on frames, cards, inputs, feedback banners, and overlays.</p>
 
     <div class="sem-table">
@@ -381,7 +381,7 @@
     </div>
 
     <!-- DATA VISUALIZATION -->
-    <h3 class="text-l3">Data visualization</h3>
+    <h3 class="text-l4">Data visualization</h3>
     <p style="font-size:13.5px;color:var(--content-secondary);line-height:1.6;margin-bottom:14px;">Dedicated tokens for charts, score cells, and response distribution bars. Using these tokens keeps color-coded data consistent across all survey views.</p>
 
     <div class="sem-table">
@@ -409,7 +409,7 @@
     </div>
 
     <!-- TEXT / CONTENT -->
-    <h3 class="text-l3">Text</h3>
+    <h3 class="text-l4">Text</h3>
     <p style="font-size:13.5px;color:var(--content-secondary);line-height:1.6;margin-bottom:14px;">Use <code>content/</code> tokens for all typographic elements — headings, paragraphs, labels, and icon fills. Alpha-based tokens render correctly on any background color.</p>
 
     <div class="sem-table">
@@ -448,7 +448,7 @@
     </div>
 
     <!-- BORDERS -->
-    <h3 class="text-l3">Borders</h3>
+    <h3 class="text-l4">Borders</h3>
     <p style="font-size:13.5px;color:var(--content-secondary);line-height:1.6;margin-bottom:14px;">Use <code>border/</code> tokens for strokes on inputs, cards, dividers, and focus rings. Interactive elements follow a three-step pattern: resting → hover → pressed.</p>
 
     <div class="sem-table">
@@ -490,9 +490,9 @@
 
   <!-- BEST PRACTICES -->
   <section class="section" id="best-practices">
-    <h2 class="text-l2"><span class="emoji">✨</span> Best practices</h2>
+    <h2 class="text-l3"><span class="emoji">✨</span> Best practices</h2>
 
-    <h3 class="text-l3">Use semantic tokens — never raw primitives</h3>
+    <h3 class="text-l4">Use semantic tokens — never raw primitives</h3>
     <p class="section-lead" style="margin-bottom:14px;">Semantic tokens are theme-aware; primitives are not. Referencing <code>color/red/100</code> directly in a component breaks dark mode and any future rebranding in a single line of code.</p>
     <div class="dd-grid">
       <div class="dd-card">
@@ -523,7 +523,7 @@
       </div>
     </div>
 
-    <h3 class="text-l3">Never use color alone to convey meaning</h3>
+    <h3 class="text-l4">Never use color alone to convey meaning</h3>
     <p class="section-lead" style="margin-bottom:14px;">Color blindness affects roughly 8% of users. Always pair color with a label, icon, or pattern to ensure meaning is accessible to everyone.</p>
     <div class="dd-grid">
       <div class="dd-card">
@@ -565,7 +565,7 @@
       </div>
     </div>
 
-    <h3 class="text-l3">Match the token to the semantic role</h3>
+    <h3 class="text-l4">Match the token to the semantic role</h3>
     <p class="section-lead" style="margin-bottom:14px;">Each semantic token carries an implied meaning — negative for errors, brand for primary actions, highlight for callouts. Using a token outside its intended role confuses users who rely on color to understand context.</p>
     <div class="dd-grid">
       <div class="dd-card">
