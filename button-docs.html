@@ -73,6 +73,21 @@
     <p class="page-desc">A labelled button that triggers an action. Use it whenever an action needs to be clearly named — it scales from low-emphasis ghost actions to high-emphasis primary calls-to-action and destructive confirmations.</p>
   </div>
 </div><!-- /page-header-row -->
+
+<!-- PAGE TABS -->
+<div class="page-tabs">
+  <button class="page-tab" data-tab="design">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+    Design
+  </button>
+  <button class="page-tab" data-tab="developer">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4L1 8l4 4M11 4l4 4-4 4M9 2l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Developer
+  </button>
+</div>
+
+<!-- DESIGN PANEL -->
+<div class="tab-panel" data-panel="design">
 <div class="content-cols">
 <article class="content">
 
@@ -643,6 +658,283 @@
 </div>
 
 </div><!-- /content-cols -->
+</div><!-- /tab-panel design -->
+
+<!-- DEVELOPER PANEL -->
+<div class="tab-panel" data-panel="developer">
+<div class="content-cols">
+<article class="content">
+
+  <!-- INSTALL -->
+  <section class="section" id="dev-install">
+    <h2 class="text-l3">Installation</h2>
+    <p class="section-lead">The Button component is part of <code>@effectory/engage-ui</code>. Install the package once and import per component.</p>
+
+    <div class="dev-install">
+      <span class="dev-install-label">npm</span>
+      <code>npm install @effectory/engage-ui</code>
+    </div>
+
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ck">import</span> { <span class="ct">EfButton</span> } <span class="ck">from</span> <span class="cs">'@effectory/engage-ui'</span>
+<span class="ck">import</span> <span class="cs">'@effectory/engage-ui/dist/style.css'</span> <span class="cm">// once per app entry</span></code></pre>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" id="dev-usage">
+    <h2 class="text-l3">Usage</h2>
+
+    <h3 class="text-l4">Basic</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">@click</span>=<span class="cv">"handleSave"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">All variants</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Primary: highest-emphasis action --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Secondary: supporting action --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span><span class="ct">&gt;</span>Cancel<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Tertiary: low-emphasis inline action --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"tertiary"</span><span class="ct">&gt;</span>Edit<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Danger: destructive / irreversible actions --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"danger"</span><span class="ct">&gt;</span>Delete survey<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Sizes</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"sm"</span><span class="ct">&gt;</span>Small<span class="ct">&lt;/EfButton&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"md"</span><span class="ct">&gt;</span>Medium (default)<span class="ct">&lt;/EfButton&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"lg"</span><span class="ct">&gt;</span>Large<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">With icons</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Icon on the left (leading) --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">icon-left</span>=<span class="cv">"plus"</span><span class="ct">&gt;</span>Add member<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Icon on the right (trailing) --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">icon-right</span>=<span class="cv">"download"</span><span class="ct">&gt;</span>Export<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Loading &amp; disabled states</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Shows a spinner, button stays clickable-width --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:loading</span>=<span class="cv">"isSaving"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Disabled — prefer inline validation instead (see Design tab) --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:disabled</span>=<span class="cv">"!isFormValid"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- aria-disabled keeps keyboard focus while signalling blocked state --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:aria-disabled</span>=<span class="cv">"!isFormValid"</span> <span class="ca">@click</span>=<span class="cv">"showErrors"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">As a link</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Renders an &lt;a&gt; tag instead of &lt;button&gt; --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">href</span>=<span class="cv">"/reports"</span><span class="ct">&gt;</span>View report<span class="ct">&lt;/EfButton&gt;</span>
+
+<span class="cm">&lt;!-- Or with Vue Router --&gt;</span>
+<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">:to</span>=<span class="cv">"{ name: 'reports' }"</span><span class="ct">&gt;</span>View report<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    </div>
+  </section>
+
+  <!-- PROPS -->
+  <section class="section" id="dev-props">
+    <h2 class="text-l3">Props</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead>
+          <tr>
+            <th>PROP</th>
+            <th>TYPE</th>
+            <th>DEFAULT</th>
+            <th>DESCRIPTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>variant</td>
+            <td><span class="dev-type">'primary' | 'secondary' | 'tertiary' | 'danger'</span></td>
+            <td><span class="dev-default">'primary'</span></td>
+            <td>Visual style and emphasis level of the button.</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td><span class="dev-type">'sm' | 'md' | 'lg'</span></td>
+            <td><span class="dev-default">'md'</span></td>
+            <td>Controls height and horizontal padding. <code>sm</code> = 28px, <code>md</code> = 36px, <code>lg</code> = 44px.</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td><span class="dev-type">'button' | 'submit' | 'reset'</span></td>
+            <td><span class="dev-default">'button'</span></td>
+            <td>Native HTML button type. Set to <code>'submit'</code> inside forms.</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><span class="dev-type">boolean</span></td>
+            <td><span class="dev-default">false</span></td>
+            <td>Disables the button. Removes from tab order. Prefer <code>aria-disabled</code> + validation error when possible.</td>
+          </tr>
+          <tr>
+            <td>loading</td>
+            <td><span class="dev-type">boolean</span></td>
+            <td><span class="dev-default">false</span></td>
+            <td>Replaces label with a spinner. Button stays the same width to avoid layout shift.</td>
+          </tr>
+          <tr>
+            <td>icon-left</td>
+            <td><span class="dev-type">string</span></td>
+            <td><span class="dev-default">—</span></td>
+            <td>Name of an Effectory icon to render on the leading side of the label.</td>
+          </tr>
+          <tr>
+            <td>icon-right</td>
+            <td><span class="dev-type">string</span></td>
+            <td><span class="dev-default">—</span></td>
+            <td>Name of an Effectory icon to render on the trailing side of the label.</td>
+          </tr>
+          <tr>
+            <td>href</td>
+            <td><span class="dev-type">string</span></td>
+            <td><span class="dev-default">—</span></td>
+            <td>When set, renders an <code>&lt;a&gt;</code> element instead of <code>&lt;button&gt;</code>.</td>
+          </tr>
+          <tr>
+            <td>to</td>
+            <td><span class="dev-type">string | RouteLocationRaw</span></td>
+            <td><span class="dev-default">—</span></td>
+            <td>Vue Router destination. Renders a <code>&lt;RouterLink&gt;</code> when provided.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section" id="dev-events">
+    <h2 class="text-l3">Events</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>DESCRIPTION</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>click</td>
+            <td><span class="dev-type">MouseEvent</span></td>
+            <td>Fired on click. Not emitted when <code>disabled</code> is true.</td>
+          </tr>
+          <tr>
+            <td>keydown</td>
+            <td><span class="dev-type">KeyboardEvent</span></td>
+            <td>Bubbles from the native element. Space and Enter trigger the action.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SLOTS -->
+  <section class="section" id="dev-slots">
+    <h2 class="text-l3">Slots</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead><tr><th>SLOT</th><th>DESCRIPTION</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>default</td>
+            <td>Button label text. Keep to 1–3 words. Always required — icon-only buttons should use <a href="icon-button-docs.html">Icon Button</a> instead.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DESIGN TOKENS -->
+  <section class="section" id="dev-tokens">
+    <h2 class="text-l3">CSS tokens</h2>
+    <p class="section-lead">Override these tokens at the theme level to restyle all buttons at once. Do not override per-instance with inline styles.</p>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">/* Background */</span>
+<span class="ca">--bg-brand-base</span>:          <span class="cv">#0a9d99</span>;   <span class="cm">/* Primary default */</span>
+<span class="ca">--bg-brand-base-hover</span>:    <span class="cv">#0c827f</span>;   <span class="cm">/* Primary hover   */</span>
+<span class="ca">--bg-brand-base-pressed</span>:  <span class="cv">#166764</span>;   <span class="cm">/* Primary pressed */</span>
+<span class="ca">--bg-negative-base</span>:       <span class="cv">#d3353b</span>;   <span class="cm">/* Danger default  */</span>
+<span class="ca">--bg-disabled</span>:            <span class="cv">rgba(25,39,67,.07)</span>; <span class="cm">/* All disabled    */</span>
+
+<span class="cm">/* Border */</span>
+<span class="ca">--border-action</span>:          <span class="cv">#bcc1cd</span>;   <span class="cm">/* Secondary default border */</span>
+<span class="ca">--border-action-hover</span>:    <span class="cv">#9ca3b0</span>;   <span class="cm">/* Secondary hover border   */</span>
+<span class="ca">--border-brand-base</span>:      <span class="cv">#0c827f</span>;   <span class="cm">/* Primary default border   */</span>
+
+<span class="cm">/* Content */</span>
+<span class="ca">--content-on-brand-base</span>:  <span class="cv">#ffffff</span>;   <span class="cm">/* Label on Primary/Danger  */</span>
+<span class="ca">--content-disabled</span>:       <span class="cv">rgba(25,39,67,.30)</span>;</code></pre>
+    </div>
+  </section>
+
+  <!-- A11Y for devs -->
+  <section class="section" id="dev-a11y">
+    <h2 class="text-l3">Accessibility</h2>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Use <code>type="submit"</code> inside forms.</strong> The default <code>type="button"</code> prevents accidental form submission, but you must explicitly set <code>type="submit"</code> on your submit button.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Prefer <code>aria-disabled</code> over <code>disabled</code>.</strong> The native <code>disabled</code> attribute removes the button from the tab order. Use <code>aria-disabled="true"</code> with a click handler that shows validation errors so keyboard users still get feedback.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Add <code>aria-label</code> when the label alone is ambiguous.</strong> For repeated actions in a table row (e.g. "Delete"), add <code>aria-label="Delete survey: Q4 Engagement"</code> to give screen reader users context.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Mark decorative icons with <code>aria-hidden</code>.</strong> Icons rendered alongside a visible label should have <code>aria-hidden="true"</code> so screen readers don't announce them twice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <div></div>
+    <a class="pag-card right" href="icon-button-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Icon Button</span>
+    </a>
+  </div>
+
+</article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#dev-install">Installation</a>
+    <a class="toc-link" href="#dev-usage">Usage</a>
+    <a class="toc-link" href="#dev-props">Props</a>
+    <a class="toc-link" href="#dev-events">Events</a>
+    <a class="toc-link" href="#dev-slots">Slots</a>
+    <a class="toc-link" href="#dev-tokens">CSS tokens</a>
+    <a class="toc-link" href="#dev-a11y">Accessibility</a>
+  </nav>
+</div>
+
+</div><!-- /content-cols -->
+</div><!-- /tab-panel developer -->
+
 </div><!-- /content-wrap -->
 </div><!-- /shell -->
 

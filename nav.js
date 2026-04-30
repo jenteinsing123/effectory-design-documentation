@@ -113,8 +113,55 @@
           if (e.key === 'Escape') closePopover();
         });
       }
+
+      // ── Page tabs (Design / Developer) ──
+      initPageTabs();
     })
     .catch(function (err) {
       console.warn('[nav.js] Could not load nav.html:', err);
     });
+
+  function initPageTabs() {
+    var tabs = document.querySelectorAll('.page-tab');
+    if (!tabs.length) return;
+
+    // Read active tab from URL param
+    var params = new URLSearchParams(location.search);
+    var active = params.get('tab') || 'design';
+
+    function activateTab(name) {
+      tabs.forEach(function(t) {
+        t.classList.toggle('is-active', t.dataset.tab === name);
+      });
+      document.querySelectorAll('.tab-panel').forEach(function(p) {
+        p.hidden = p.dataset.panel !== name;
+      });
+      // Update URL without reload
+      var url = new URL(location.href);
+      if (name === 'design') url.searchParams.delete('tab');
+      else url.searchParams.set('tab', name);
+      history.replaceState(null, '', url.toString());
+    }
+
+    tabs.forEach(function(t) {
+      t.addEventListener('click', function() { activateTab(t.dataset.tab); });
+    });
+
+    activateTab(active);
+
+    // Copy buttons on code blocks
+    document.querySelectorAll('.dev-copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var pre = btn.closest('.dev-code-wrap').querySelector('pre');
+        navigator.clipboard.writeText(pre ? pre.innerText : '').then(function() {
+          btn.textContent = 'Copied!';
+          btn.classList.add('did-copy');
+          setTimeout(function() {
+            btn.textContent = 'Copy';
+            btn.classList.remove('did-copy');
+          }, 2000);
+        });
+      });
+    });
+  }
 })();
