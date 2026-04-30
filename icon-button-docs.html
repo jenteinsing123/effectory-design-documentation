@@ -45,6 +45,23 @@
     <p class="page-desc">A fixed-size button that uses an icon instead of a text label to represent an action. Use it when space is tight and the icon's meaning is immediately clear to your audience.</p>
   </div>
 </div><!-- /page-header-row -->
+
+<!-- PAGE TABS -->
+<div class="page-tabs">
+  <div class="page-tabs-inner">
+    <button class="page-tab" data-tab="design">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      Design
+    </button>
+    <button class="page-tab" data-tab="developer">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4L1 8l4 4M11 4l4 4-4 4M9 2l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Developer
+    </button>
+  </div>
+</div>
+
+<!-- DESIGN PANEL -->
+<div class="tab-panel" data-panel="design">
 <div class="content-cols">
 <article class="content">
 
@@ -660,6 +677,219 @@
 </div>
 
 </div><!-- /content-cols -->
+</div><!-- /tab-panel design -->
+
+<!-- DEVELOPER PANEL -->
+<div class="tab-panel" data-panel="developer">
+<div class="content-cols">
+<article class="content">
+
+  <!-- INSTALL -->
+  <section class="section" id="dev-install">
+    <h2 class="text-l3">Installation</h2>
+    <p class="section-lead">The Icon Button component is part of <code>@effectory/engage-ui</code>.</p>
+    <div class="dev-install">
+      <span class="dev-install-label">npm</span>
+      <code>npm install @effectory/engage-ui</code>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ck">import</span> { <span class="ct">EfIconButton</span> } <span class="ck">from</span> <span class="cs">'@effectory/engage-ui'</span>
+<span class="ck">import</span> <span class="cs">'@effectory/engage-ui/dist/style.css'</span> <span class="cm">// once per app entry</span></code></pre>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" id="dev-usage">
+    <h2 class="text-l3">Usage</h2>
+
+    <h3 class="text-l4">Basic</h3>
+    <div class="dev-preview">
+      <button class="ib ib-36 ib-primary" aria-label="Add"><i data-icon="plus"></i></button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;EfIconButton</span>
+  <span class="ca">icon</span>=<span class="cv">"plus"</span>
+  <span class="ca">aria-label</span>=<span class="cv">"Add member"</span>
+  <span class="ca">@click</span>=<span class="cv">"handleAdd"</span>
+<span class="ct">/&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">All variants</h3>
+    <div class="dev-preview">
+      <button class="ib ib-36 ib-primary" aria-label="Primary"><i data-icon="plus"></i></button>
+      <button class="ib ib-36 ib-secondary" aria-label="Secondary"><i data-icon="edit"></i></button>
+      <button class="ib ib-36 ib-tertiary" aria-label="Tertiary"><i data-icon="more-vertical"></i></button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Primary: highest-emphasis, one per toolbar --&gt;</span>
+<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"plus"</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span> <span class="ct">/&gt;</span>
+
+<span class="cm">&lt;!-- Secondary: clearly discoverable supporting action --&gt;</span>
+<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit name"</span> <span class="ct">/&gt;</span>
+
+<span class="cm">&lt;!-- Tertiary: low-emphasis, use in toolbars and table rows --&gt;</span>
+<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"more-vertical"</span> <span class="ca">variant</span>=<span class="cv">"tertiary"</span> <span class="ca">aria-label</span>=<span class="cv">"More options"</span> <span class="ct">/&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Sizes</h3>
+    <div class="dev-preview" style="align-items: center;">
+      <button class="ib ib-36 ib-secondary" aria-label="36px"><i data-icon="edit"></i></button>
+      <button class="ib ib-24 ib-secondary" aria-label="24px"><i data-icon="edit"></i></button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- 36px: default, toolbars, cards, modals --&gt;</span>
+<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">size</span>=<span class="cv">"36"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span> <span class="ct">/&gt;</span>
+
+<span class="cm">&lt;!-- 24px: dense layouts, inline table actions --&gt;</span>
+<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">size</span>=<span class="cv">"24"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span> <span class="ct">/&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Disabled</h3>
+    <div class="dev-preview">
+      <button class="ib ib-36 ib-primary is-disabled" aria-label="Add" disabled><i data-icon="plus"></i></button>
+      <button class="ib ib-36 ib-secondary is-disabled" aria-label="Edit" disabled><i data-icon="edit"></i></button>
+      <button class="ib ib-36 ib-tertiary is-disabled" aria-label="More" disabled><i data-icon="more-vertical"></i></button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"plus"</span> <span class="ca">:disabled</span>=<span class="cv">"!canAdd"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span> <span class="ct">/&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">With tooltip (required)</h3>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Always wrap with EfTooltip — icon buttons have no visible label --&gt;</span>
+<span class="ct">&lt;EfTooltip</span> <span class="ca">content</span>=<span class="cv">"Delete survey"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;EfIconButton</span>
+    <span class="ca">icon</span>=<span class="cv">"trash"</span>
+    <span class="ca">variant</span>=<span class="cv">"secondary"</span>
+    <span class="ca">aria-label</span>=<span class="cv">"Delete survey"</span>
+    <span class="ca">@click</span>=<span class="cv">"confirmDelete"</span>
+  <span class="ct">/&gt;</span>
+<span class="ct">&lt;/EfTooltip&gt;</span></code></pre>
+    </div>
+  </section>
+
+  <!-- PROPS -->
+  <section class="section" id="dev-props">
+    <h2 class="text-l3">Props</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead><tr><th>PROP</th><th>TYPE</th><th>DEFAULT</th><th>DESCRIPTION</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>icon</td>
+            <td><span class="dev-type">string</span></td>
+            <td><span class="dev-required">required</span></td>
+            <td>Name of an Effectory icon from the shared icon library (e.g. <code>"plus"</code>, <code>"trash"</code>, <code>"edit"</code>).</td>
+          </tr>
+          <tr>
+            <td>aria-label</td>
+            <td><span class="dev-type">string</span></td>
+            <td><span class="dev-required">required</span></td>
+            <td>Accessible label describing the action. Write as verb + object: <code>"Delete survey"</code>, not <code>"Trash"</code>.</td>
+          </tr>
+          <tr>
+            <td>variant</td>
+            <td><span class="dev-type">'primary' | 'secondary' | 'tertiary'</span></td>
+            <td><span class="dev-default">'secondary'</span></td>
+            <td>Visual emphasis level. Use one Primary per toolbar maximum.</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td><span class="dev-type">'36' | '24'</span></td>
+            <td><span class="dev-default">'36'</span></td>
+            <td>Button dimensions. <code>'36'</code> = 36×36px (default). <code>'24'</code> = 24×24px for dense layouts.</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><span class="dev-type">boolean</span></td>
+            <td><span class="dev-default">false</span></td>
+            <td>Disables the button and removes it from the tab order.</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td><span class="dev-type">'button' | 'submit' | 'reset'</span></td>
+            <td><span class="dev-default">'button'</span></td>
+            <td>Native HTML button type. Rarely needs changing for icon buttons.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section" id="dev-events">
+    <h2 class="text-l3">Events</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>DESCRIPTION</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>click</td>
+            <td><span class="dev-type">MouseEvent</span></td>
+            <td>Fired on click. Not emitted when <code>disabled</code> is true.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- A11Y -->
+  <section class="section" id="dev-a11y">
+    <h2 class="text-l3">Accessibility</h2>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong><code>aria-label</code> is mandatory.</strong> The component will warn in development if it is missing. Write the action, not the icon name: <code>"Delete survey"</code> not <code>"Trash icon"</code>.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Always wrap with <code>EfTooltip</code>.</strong> The tooltip content should match <code>aria-label</code> exactly. It must show on both hover and keyboard focus — the <code>EfTooltip</code> component handles both automatically.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Expand hit area for 24px on touch.</strong> Add <code>touch-target</code> prop or override with CSS <code>padding</code> + negative <code>margin</code> so the tappable area meets the 44×44pt minimum on touch devices.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Toggle state needs <code>aria-pressed</code>.</strong> For bookmark, mute, or pin states pass <code>:aria-pressed="isActive"</code> — the component will update the attribute reactively and announce the state change to screen readers.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <nav class="pagination">
+    <a class="pag-card" href="button-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Button</span>
+    </a>
+    <a class="pag-card right" href="button-big-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Button Big</span>
+    </a>
+  </nav>
+
+</article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#dev-install">Installation</a>
+    <a class="toc-link" href="#dev-usage">Usage</a>
+    <a class="toc-link" href="#dev-props">Props</a>
+    <a class="toc-link" href="#dev-events">Events</a>
+    <a class="toc-link" href="#dev-a11y">Accessibility</a>
+  </nav>
+</div>
+
+</div><!-- /content-cols -->
+</div><!-- /tab-panel developer -->
+
 </div><!-- /content-wrap -->
 </div><!-- /shell -->
 
