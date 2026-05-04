@@ -171,7 +171,7 @@
         <div class="uw-hd dont">✕ Avoid when</div>
         <ul class="uw-list">
           <li><span class="uw-ic x">✕</span>Space is too tight for a label — use <a href="icon-button-docs.html">Icon Button</a> instead</li>
-          <li><span class="uw-ic x">✕</span>The action navigates to a new page — use a <a href="link-button-docs.html">Link Button</a></li>
+          <li><span class="uw-ic x">✕</span>The action is purely inline text navigation — use a plain <code>&lt;a&gt;</code> tag instead</li>
           <li><span class="uw-ic x">✕</span>You need more than two primary buttons side by side — reconsider the hierarchy</li>
         </ul>
       </div>
@@ -373,6 +373,7 @@
         <button class="btn btn-primary">Primary</button>
         <button class="btn btn-secondary">Secondary</button>
         <button class="btn btn-tertiary">Tertiary</button>
+        <button class="btn btn-link">Link</button>
         <button class="btn btn-danger">Danger</button>
       </div>
     </div>
@@ -392,6 +393,10 @@
           <tr>
             <td><span class="vb vb-neutral">Tertiary</span></td>
             <td>Low-emphasis inline actions in dense layouts — table rows, cards, toolbars. No background or border so it blends into content.</td>
+          </tr>
+          <tr>
+            <td><span class="vb vb-neutral">Link</span></td>
+            <td>Lowest-emphasis action that looks like a hyperlink. Use for secondary navigation-like actions within a layout, not for primary page navigation.</td>
           </tr>
           <tr>
             <td><span class="vb" style="background: var(--bg-negative-subtle); color: var(--content-negative-secondary);">Danger</span></td>
@@ -565,6 +570,16 @@
         <div class="state-col"><button class="btn btn-tertiary is-hover">Edit</button><span class="state-label">Hover</span></div>
         <div class="state-col"><button class="btn btn-tertiary is-pressed">Edit</button><span class="state-label">Pressed</span></div>
         <div class="state-col"><button class="btn btn-tertiary is-disabled" disabled>Edit</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
+    <h3 class="text-l4">Link</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-link">View more</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-link" style="color:var(--content-brand-secondary);">View more</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-link is-disabled" disabled>View more</button><span class="state-label">Disabled</span></div>
       </div>
     </div>
 
