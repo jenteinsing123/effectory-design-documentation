@@ -32,10 +32,18 @@
     .btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-base-hover); }
     .btn-tertiary:active, .btn-tertiary.is-pressed { background: var(--bg-base-pressed); }
 
-    /* Danger */
+    /* Danger / delete variants */
     .btn-danger { background: var(--bg-negative-base); border-color: var(--border-negative-base); color: #ffffff; box-shadow: var(--sh-action); }
     .btn-danger:hover, .btn-danger.is-hover { background: var(--bg-negative-base-hover); border-color: var(--border-negative-base-hover); }
     .btn-danger:active, .btn-danger.is-pressed { background: var(--bg-negative-base-pressed); border-color: var(--border-negative-base-pressed); }
+    .btn-danger-secondary { background: var(--bg-base); border-color: var(--border-negative-base); color: var(--content-negative-base); box-shadow: var(--sh-action); }
+    .btn-danger-secondary:hover { background: var(--bg-negative-subtle); border-color: var(--border-negative-base-hover); }
+    .btn-danger-tertiary { background: transparent; border-color: transparent; color: var(--content-negative-base); }
+    .btn-danger-tertiary:hover { background: var(--bg-negative-subtle); }
+    .btn-link { background: transparent; border-color: transparent; color: var(--content-brand-base); text-decoration: underline; padding: 0; height: auto; }
+    .btn-link:hover { color: var(--content-brand-secondary); }
+    .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-base); text-decoration: underline; padding: 0; height: auto; }
+    .btn-link-delete:hover { color: var(--content-negative-secondary); }
 
     /* Disabled */
     .btn.is-disabled {
@@ -759,10 +767,11 @@
     </div>
 
     <h3 class="text-l4">Delete (danger)</h3>
-    <div class="dev-preview">
+    <div class="dev-preview" style="flex-wrap:wrap;">
       <button class="btn btn-danger">Delete button</button>
-      <button class="btn btn-secondary">Secondary delete</button>
-      <button class="btn btn-tertiary">Tertiary delete</button>
+      <button class="btn btn-danger-secondary">Secondary delete</button>
+      <button class="btn btn-danger-tertiary">Tertiary delete</button>
+      <button class="btn btn-link-delete">Link delete</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
@@ -815,16 +824,15 @@
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled link button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Upsell</h3>
+    <h3 class="text-l4">Link</h3>
     <div class="dev-preview">
-      <button class="btn btn-primary"><i data-icon="arrow-up"></i>Upsell button</button>
+      <button class="btn btn-link">Link button</button>
+      <button class="btn btn-link-delete">Link delete</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"upsell"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"svg-container"</span><span class="ct">&gt;&lt;eff-svg-arrow-up</span> <span class="ca">class</span>=<span class="cv">"icon"</span><span class="ct">&gt;&lt;/eff-svg-arrow-up&gt;&lt;/div&gt;</span>
-  Upsell button
-<span class="ct">&lt;/button&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span><span class="ct">&gt;</span>Link button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link delete"</span><span class="ct">&gt;</span>Link delete button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
   </section>
 
