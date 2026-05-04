@@ -789,12 +789,14 @@
       <button class="btn btn-primary">Primary button</button>
       <button class="btn btn-secondary">Secondary button</button>
       <button class="btn btn-tertiary">Tertiary button</button>
+      <button class="btn btn-link">Link button</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary"</span><span class="ct">&gt;</span>Primary button<span class="ct">&lt;/button&gt;</span>
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary"</span><span class="ct">&gt;</span>Secondary button<span class="ct">&lt;/button&gt;</span>
-<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary"</span><span class="ct">&gt;</span>Tertiary button<span class="ct">&lt;/button&gt;</span></code></pre>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary"</span><span class="ct">&gt;</span>Tertiary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span><span class="ct">&gt;</span>Link button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Delete (danger)</h3>
@@ -843,9 +845,11 @@
     </div>
 
     <h3 class="text-l4">Disabled</h3>
-    <div class="dev-preview">
-      <button class="btn btn-primary is-disabled" disabled>Disabled primary</button>
-      <button class="btn btn-secondary is-disabled" disabled>Disabled secondary</button>
+    <div class="dev-preview" style="flex-wrap:wrap;">
+      <button class="btn btn-primary is-disabled" disabled>Primary</button>
+      <button class="btn btn-secondary is-disabled" disabled>Secondary</button>
+      <button class="btn btn-tertiary is-disabled" disabled>Tertiary</button>
+      <button class="btn btn-link is-disabled" disabled>Link</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
@@ -853,18 +857,6 @@
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled secondary button<span class="ct">&lt;/button&gt;</span>
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled tertiary button<span class="ct">&lt;/button&gt;</span>
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled link button<span class="ct">&lt;/button&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">Link</h3>
-    <p style="font-size:13.5px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">For in-platform navigation. No underline, no background — plain text that behaves as a button. For external URLs or inline text, use a regular <code>&lt;a&gt;</code> tag instead.</p>
-    <div class="dev-preview">
-      <button class="btn btn-link">Go to dashboard</button>
-      <button class="btn btn-link-delete"><i data-icon="trash"></i>Delete</button>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span><span class="ct">&gt;</span>Go to dashboard<span class="ct">&lt;/button&gt;</span>
-<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link delete"</span><span class="ct">&gt;</span>Link delete button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
   </section>
 
