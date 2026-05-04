@@ -47,6 +47,7 @@
     .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-secondary); text-decoration: none; }
     .btn-link-delete:hover, .btn-link-delete.is-hover { color: var(--content-negative-base); background: transparent; }
     .btn-link-delete:active, .btn-link-delete.is-pressed { color: var(--content-negative-base); background: transparent; }
+    .btn-link-delete.is-disabled { background: transparent !important; border-color: transparent !important; color: var(--content-disabled) !important; }
 
     /* Disabled */
     .btn.is-disabled {
@@ -587,6 +588,17 @@
       </div>
     </div>
 
+    <h3 class="text-l4">Link — Delete</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:32px; padding:28px 32px;">
+        <div class="state-col"><button class="btn btn-link-delete"><i data-icon="trash"></i>Delete</button><span class="state-label">Default</span></div>
+        <div class="state-col"><button class="btn btn-link-delete is-hover"><i data-icon="trash"></i>Delete</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-link-delete is-pressed"><i data-icon="trash"></i>Delete</button><span class="state-label">Pressed</span></div>
+        <div class="state-col"><button class="btn btn-link-delete is-disabled" disabled><i data-icon="trash"></i>Delete</button><span class="state-label">Disabled</span></div>
+      </div>
+    </div>
+
     <h3 class="text-l4">Danger</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
@@ -717,6 +729,12 @@
           </select>
         </div>
         <div class="pg-control">
+          <label class="pg-label">delete</label>
+          <div class="pg-toggle-wrap">
+            <label class="pg-toggle"><input type="checkbox" id="pg-delete"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-control">
           <label class="pg-label" for="pg-label-text">label</label>
           <input class="pg-input" type="text" id="pg-label-text" value="Save changes" />
         </div>
@@ -738,12 +756,6 @@
             <option value="download">download</option>
             <option value="search">search</option>
           </select>
-        </div>
-        <div class="pg-control">
-          <label class="pg-label">delete</label>
-          <div class="pg-toggle-wrap">
-            <label class="pg-toggle"><input type="checkbox" id="pg-delete"><span class="pg-toggle-track"></span></label>
-          </div>
         </div>
         <div class="pg-control">
           <label class="pg-label">loading</label>
