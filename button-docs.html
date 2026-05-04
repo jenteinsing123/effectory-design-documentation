@@ -986,12 +986,17 @@
     };
   }
 
-  // Map variant to preview classes (docs uses btn btn-* for the design preview)
-  var variantMap = { primary: 'btn-primary', secondary: 'btn-secondary', tertiary: 'btn-tertiary', link: 'btn-tertiary' };
-
   function renderPreview(p) {
-    var cls = 'btn ' + (variantMap[p.variant] || 'btn-primary');
-    if (p.delete) cls += ' btn-danger';  // show danger style for delete
+    // Map the actual CSS classes to the preview doc classes
+    var previewCls;
+    if (p.delete) {
+      var deleteMap = { primary: 'btn-danger', secondary: 'btn-danger-secondary', tertiary: 'btn-danger-tertiary', link: 'btn-link-delete' };
+      previewCls = deleteMap[p.variant] || 'btn-danger';
+    } else {
+      var variantMap = { primary: 'btn-primary', secondary: 'btn-secondary', tertiary: 'btn-tertiary', link: 'btn-link' };
+      previewCls = variantMap[p.variant] || 'btn-primary';
+    }
+    var cls = 'btn ' + previewCls;
     if (p.disabled) cls += ' is-disabled';
 
     var btn = document.createElement('button');
