@@ -111,21 +111,21 @@
     <h2 class="text-l3">Usage</h2>
     <p class="section-lead">Icon buttons work best when space is at a premium and the icon meaning is instantly clear. When in doubt, use a labelled <a href="button-docs.html" style="color:var(--bg-brand-base); text-decoration:none;">Button</a> instead.</p>
 
-    <div class="uw-grid">
-      <div class="uw-card">
-        <div class="uw-hd do">✔ Use when</div>
-        <ul class="uw-list">
-          <li><span class="uw-ic chk">✓</span>The icon alone is universally understood — close, search, add, edit, delete, overflow (⋯)</li>
-          <li><span class="uw-ic chk">✓</span>Space is too tight for a label — toolbars, table row actions, sidebars, floating bars</li>
-          <li><span class="uw-ic chk">✓</span>A tooltip can always be guaranteed to appear on hover and focus</li>
+    <div class="usage-cols">
+      <div>
+        <div class="usage-col-hd do">Use when</div>
+        <ul class="usage-list">
+          <li>The icon alone is universally understood — close, search, add, edit, delete, overflow (⋯)</li>
+          <li>Space is too tight for a label — toolbars, table row actions, sidebars, floating bars</li>
+          <li>A tooltip can always be guaranteed to appear on hover and focus</li>
         </ul>
       </div>
-      <div class="uw-card">
-        <div class="uw-hd dont">✕ Avoid when</div>
-        <ul class="uw-list">
-          <li><span class="uw-ic x">✕</span>The icon is ambiguous — users may not recognise it. Use a <a href="button-docs.html">labelled Button</a> instead</li>
-          <li><span class="uw-ic x">✕</span>It is the primary call-to-action on a screen — labels carry urgency that icons cannot</li>
-          <li><span class="uw-ic x">✕</span>A tooltip cannot be guaranteed — users have no text fallback</li>
+      <div>
+        <div class="usage-col-hd dont">Avoid when</div>
+        <ul class="usage-list">
+          <li>The icon is ambiguous — users may not recognise it. Use a <a href="button-docs.html">labelled Button</a> instead</li>
+          <li>It is the primary call-to-action on a screen — labels carry urgency that icons cannot</li>
+          <li>A tooltip cannot be guaranteed — users have no text fallback</li>
         </ul>
       </div>
     </div>
@@ -282,42 +282,25 @@
     <h2 class="text-l3">Variants</h2>
     <p class="section-lead">Three types control visual hierarchy. Choose the one that matches the importance of the action relative to its surroundings.</p>
 
-    <div class="preview">
-      <div class="preview-bar">
-        <div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div>
-        <span class="preview-label">Default state</span>
+    <div class="variant-rows">
+      <div class="variant-row">
+        <div class="variant-row-btn" style="gap:8px;">
+          <button class="ib ib-36 ib-primary" style="pointer-events:none;" aria-label="Add"><i data-icon="plus"></i></button>
+        </div>
+        <div class="variant-row-desc">Highest emphasis. Solid brand fill. One per toolbar maximum — treat it the same as a primary text button.</div>
       </div>
-      <div class="preview-body col">
-        <div class="var-row">
-          <span class="var-label">Primary</span>
-          <button class="ib ib-36 ib-primary" aria-label="Add"><i data-icon="plus"></i></button>
-          <button class="ib ib-36 ib-primary" aria-label="Edit"><i data-icon="edit"></i></button>
-          <button class="ib ib-36 ib-primary" aria-label="More options"><i data-icon="more-vertical"></i></button>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <button class="ib ib-36 ib-secondary" style="pointer-events:none;" aria-label="Edit"><i data-icon="edit"></i></button>
         </div>
-        <div class="var-row">
-          <span class="var-label">Secondary</span>
-          <button class="ib ib-36 ib-secondary" aria-label="Add"><i data-icon="plus"></i></button>
-          <button class="ib ib-36 ib-secondary" aria-label="Edit"><i data-icon="edit"></i></button>
-          <button class="ib ib-36 ib-secondary" aria-label="More options"><i data-icon="more-vertical"></i></button>
-        </div>
-        <div class="var-row">
-          <span class="var-label">Tertiary</span>
-          <button class="ib ib-36 ib-tertiary" aria-label="Add"><i data-icon="plus"></i></button>
-          <button class="ib ib-36 ib-tertiary" aria-label="Edit"><i data-icon="edit"></i></button>
-          <button class="ib ib-36 ib-tertiary" aria-label="More options"><i data-icon="more-vertical"></i></button>
-        </div>
+        <div class="variant-row-desc">Supporting actions. White background with a subtle border. Use when the button must be clearly discoverable without a label.</div>
       </div>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>VARIANT</th><th>USE FOR</th></tr></thead>
-        <tbody>
-          <tr><td><span class="vb vb-brand">Primary</span></td><td>Highest emphasis. Solid brand fill. One per toolbar maximum — treat it the same as a primary text button.</td></tr>
-          <tr><td><span class="vb vb-neutral">Secondary</span></td><td>Supporting actions. White background with a subtle border. Use below a Primary action or when the button must be clearly discoverable without a label.</td></tr>
-          <tr><td><span class="vb vb-neutral">Tertiary</span></td><td>Lowest emphasis. No background or border in the default state. Use in toolbars and table rows where the interaction pattern is already established.</td></tr>
-        </tbody>
-      </table>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <button class="ib ib-36 ib-tertiary" style="pointer-events:none;" aria-label="More options"><i data-icon="more-vertical"></i></button>
+        </div>
+        <div class="variant-row-desc">Lowest emphasis. No background or border in the default state. Use in toolbars and table rows where the interaction pattern is already established.</div>
+      </div>
     </div>
   </section>
 
@@ -688,155 +671,85 @@
 <div class="content-cols">
 <article class="content">
 
-  <!-- INSTALL -->
-  <section class="section" id="dev-install">
-    <h2 class="text-l3">Installation</h2>
-    <p class="section-lead">The Icon Button component is part of <code>@effectory/engage-ui</code>.</p>
-    <div class="dev-install">
-      <span class="dev-install-label">npm</span>
-      <code>npm install @effectory/engage-ui</code>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ck">import</span> { <span class="ct">EfIconButton</span> } <span class="ck">from</span> <span class="cs">'@effectory/engage-ui'</span>
-<span class="ck">import</span> <span class="cs">'@effectory/engage-ui/dist/style.css'</span> <span class="cm">// once per app entry</span></code></pre>
-    </div>
-  </section>
-
   <!-- USAGE -->
   <section class="section" id="dev-usage">
     <h2 class="text-l3">Usage</h2>
 
-    <h3 class="text-l4">Basic</h3>
-    <div class="dev-preview">
+    <h3 class="text-l4">Variants</h3>
+    <div class="dev-preview" style="align-items:center;">
       <button class="ib ib-36 ib-primary" aria-label="Add"><i data-icon="plus"></i></button>
+      <button class="ib ib-36 ib-secondary" aria-label="Edit"><i data-icon="edit"></i></button>
+      <button class="ib ib-36 ib-tertiary" aria-label="More options"><i data-icon="more-vertical"></i></button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;EfIconButton</span>
-  <span class="ca">icon</span>=<span class="cv">"plus"</span>
-  <span class="ca">aria-label</span>=<span class="cv">"Add member"</span>
-  <span class="ca">@click</span>=<span class="cv">"handleAdd"</span>
-<span class="ct">/&gt;</span></code></pre>
-    </div>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button primary"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'plus'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span>
 
-    <h3 class="text-l4">All variants</h3>
-    <div class="dev-preview">
-      <button class="ib ib-36 ib-primary" aria-label="Primary"><i data-icon="plus"></i></button>
-      <button class="ib ib-36 ib-secondary" aria-label="Secondary"><i data-icon="edit"></i></button>
-      <button class="ib ib-36 ib-tertiary" aria-label="Tertiary"><i data-icon="more-vertical"></i></button>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Primary: highest-emphasis, one per toolbar --&gt;</span>
-<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"plus"</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button secondary"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit name"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'edit'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span>
 
-<span class="cm">&lt;!-- Secondary: clearly discoverable supporting action --&gt;</span>
-<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit name"</span> <span class="ct">/&gt;</span>
-
-<span class="cm">&lt;!-- Tertiary: low-emphasis, use in toolbars and table rows --&gt;</span>
-<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"more-vertical"</span> <span class="ca">variant</span>=<span class="cv">"tertiary"</span> <span class="ca">aria-label</span>=<span class="cv">"More options"</span> <span class="ct">/&gt;</span></code></pre>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button tertiary"</span> <span class="ca">aria-label</span>=<span class="cv">"More options"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'more-vertical'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Sizes</h3>
-    <div class="dev-preview" style="align-items: center;">
+    <div class="dev-preview" style="align-items:center;">
       <button class="ib ib-36 ib-secondary" aria-label="36px"><i data-icon="edit"></i></button>
       <button class="ib ib-24 ib-secondary" aria-label="24px"><i data-icon="edit"></i></button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- 36px: default, toolbars, cards, modals --&gt;</span>
-<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">size</span>=<span class="cv">"36"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span> <span class="ct">/&gt;</span>
+      <pre><code><span class="cm">&lt;!-- 36px: default — toolbars, cards, modals --&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button secondary"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'edit'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span>
 
-<span class="cm">&lt;!-- 24px: dense layouts, inline table actions --&gt;</span>
-<span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"edit"</span> <span class="ca">size</span>=<span class="cv">"24"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span> <span class="ct">/&gt;</span></code></pre>
+<span class="cm">&lt;!-- 24px: dense layouts — inline table actions --&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button secondary size-24"</span> <span class="ca">aria-label</span>=<span class="cv">"Edit"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'edit'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Disabled</h3>
-    <div class="dev-preview">
+    <div class="dev-preview" style="align-items:center;">
       <button class="ib ib-36 ib-primary is-disabled" aria-label="Add" disabled><i data-icon="plus"></i></button>
       <button class="ib ib-36 ib-secondary is-disabled" aria-label="Edit" disabled><i data-icon="edit"></i></button>
       <button class="ib ib-36 ib-tertiary is-disabled" aria-label="More" disabled><i data-icon="more-vertical"></i></button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;EfIconButton</span> <span class="ca">icon</span>=<span class="cv">"plus"</span> <span class="ca">:disabled</span>=<span class="cv">"!canAdd"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span> <span class="ct">/&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">With tooltip (required)</h3>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Always wrap with EfTooltip — icon buttons have no visible label --&gt;</span>
-<span class="ct">&lt;EfTooltip</span> <span class="ca">content</span>=<span class="cv">"Delete survey"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;EfIconButton</span>
-    <span class="ca">icon</span>=<span class="cv">"trash"</span>
-    <span class="ca">variant</span>=<span class="cv">"secondary"</span>
-    <span class="ca">aria-label</span>=<span class="cv">"Delete survey"</span>
-    <span class="ca">@click</span>=<span class="cv">"confirmDelete"</span>
-  <span class="ct">/&gt;</span>
-<span class="ct">&lt;/EfTooltip&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button primary"</span> <span class="ca">aria-label</span>=<span class="cv">"Add member"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'plus'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
   </section>
 
-  <!-- PROPS -->
+  <!-- CSS CLASSES -->
   <section class="section" id="dev-props">
-    <h2 class="text-l3">Props</h2>
+    <h2 class="text-l3">CSS classes</h2>
     <div class="tbl-wrap">
       <table class="dev-props-table">
-        <thead><tr><th>PROP</th><th>TYPE</th><th>DEFAULT</th><th>DESCRIPTION</th></tr></thead>
+        <thead><tr><th>CLASS</th><th>DESCRIPTION</th></tr></thead>
         <tbody>
           <tr>
-            <td>icon</td>
-            <td><span class="dev-type">string</span></td>
-            <td><span class="dev-required">required</span></td>
-            <td>Name of an Effectory icon from the shared icon library (e.g. <code>"plus"</code>, <code>"trash"</code>, <code>"edit"</code>).</td>
+            <td><code>primary</code></td>
+            <td>Solid brand-colour fill. Highest emphasis. One per toolbar maximum.</td>
           </tr>
           <tr>
-            <td>aria-label</td>
-            <td><span class="dev-type">string</span></td>
-            <td><span class="dev-required">required</span></td>
-            <td>Accessible label describing the action. Write as verb + object: <code>"Delete survey"</code>, not <code>"Trash"</code>.</td>
+            <td><code>secondary</code></td>
+            <td>White background with a subtle border. Use for supporting actions that must be clearly discoverable.</td>
           </tr>
           <tr>
-            <td>variant</td>
-            <td><span class="dev-type">'primary' | 'secondary' | 'tertiary'</span></td>
-            <td><span class="dev-default">'secondary'</span></td>
-            <td>Visual emphasis level. Use one Primary per toolbar maximum.</td>
+            <td><code>tertiary</code></td>
+            <td>No background or border. Lowest emphasis. Use in toolbars and dense table rows.</td>
           </tr>
           <tr>
-            <td>size</td>
-            <td><span class="dev-type">'36' | '24'</span></td>
-            <td><span class="dev-default">'36'</span></td>
-            <td>Button dimensions. <code>'36'</code> = 36×36px (default). <code>'24'</code> = 24×24px for dense layouts.</td>
-          </tr>
-          <tr>
-            <td>disabled</td>
-            <td><span class="dev-type">boolean</span></td>
-            <td><span class="dev-default">false</span></td>
-            <td>Disables the button and removes it from the tab order.</td>
-          </tr>
-          <tr>
-            <td>type</td>
-            <td><span class="dev-type">'button' | 'submit' | 'reset'</span></td>
-            <td><span class="dev-default">'button'</span></td>
-            <td>Native HTML button type. Rarely needs changing for icon buttons.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- EVENTS -->
-  <section class="section" id="dev-events">
-    <h2 class="text-l3">Events</h2>
-    <div class="tbl-wrap">
-      <table class="dev-props-table">
-        <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>DESCRIPTION</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>click</td>
-            <td><span class="dev-type">MouseEvent</span></td>
-            <td>Fired on click. Not emitted when <code>disabled</code> is true.</td>
+            <td><code>size-24</code></td>
+            <td>Renders at 24×24px instead of the default 36×36px. Use in dense layouts like table rows.</td>
           </tr>
         </tbody>
       </table>
@@ -849,19 +762,19 @@
     <div class="a11y-list">
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong><code>aria-label</code> is mandatory.</strong> The component will warn in development if it is missing. Write the action, not the icon name: <code>"Delete survey"</code> not <code>"Trash icon"</code>.</div>
+        <div><strong><code>aria-label</code> is mandatory.</strong> Every icon button needs an <code>aria-label</code> describing the action. Write verb + object: <code>"Delete survey"</code>, not <code>"Trash"</code>.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Always wrap with <code>EfTooltip</code>.</strong> The tooltip content should match <code>aria-label</code> exactly. It must show on both hover and keyboard focus — the <code>EfTooltip</code> component handles both automatically.</div>
+        <div><strong>Always pair with a tooltip.</strong> Use <code>role="tooltip"</code> linked via <code>aria-describedby</code>. The tooltip must appear on both hover and keyboard focus.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Expand hit area for 24px on touch.</strong> Add <code>touch-target</code> prop or override with CSS <code>padding</code> + negative <code>margin</code> so the tappable area meets the 44×44pt minimum on touch devices.</div>
+        <div><strong>Expand hit area for 24px on touch.</strong> 24px falls below the 44×44pt minimum. Extend the tappable area with padding or a <code>::before</code> pseudo-element on touch devices.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Toggle state needs <code>aria-pressed</code>.</strong> For bookmark, mute, or pin states pass <code>:aria-pressed="isActive"</code> — the component will update the attribute reactively and announce the state change to screen readers.</div>
+        <div><strong>Toggle state needs <code>aria-pressed</code>.</strong> For bookmark, mute, or pin states add <code>aria-pressed="true"/"false"</code> and update it on every interaction.</div>
       </div>
     </div>
   </section>
@@ -883,10 +796,8 @@
 <div class="toc-col">
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
-    <a class="toc-link" href="#dev-install">Installation</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
-    <a class="toc-link" href="#dev-props">Props</a>
-    <a class="toc-link" href="#dev-events">Events</a>
+    <a class="toc-link" href="#dev-props">CSS classes</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
 </div>
