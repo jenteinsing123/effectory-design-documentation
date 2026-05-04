@@ -155,7 +155,57 @@
     </div>
   </section>
 
-  
+
+
+  <!-- VARIANTS -->
+  <section class="section" id="variants">
+    <h2 class="text-l3">Variants</h2>
+    <p class="section-lead">The <code>Type</code> property controls visual hierarchy. Use one Primary per view maximum.</p>
+
+    <div class="variant-rows">
+      <div class="variant-row">
+        <div class="variant-row-btn"><button class="btn btn-primary" style="pointer-events:none;">Primary</button></div>
+        <div class="variant-row-desc">The single highest-emphasis action on a view. Submit a form, complete an onboarding step, confirm a key decision. Use only once per page section.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn"><button class="btn btn-secondary" style="pointer-events:none;">Secondary</button></div>
+        <div class="variant-row-desc">Supporting actions alongside a Primary — Cancel, Edit, Export. Can appear multiple times without competing with the primary.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn"><button class="btn btn-tertiary" style="pointer-events:none;">Tertiary</button></div>
+        <div class="variant-row-desc">Low-emphasis inline actions in dense layouts — table rows, cards, toolbars. No background or border so it blends into content.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn"><button class="btn btn-link" style="pointer-events:none;">Link</button></div>
+        <div class="variant-row-desc">In-platform navigation to other pages or sections. Looks like plain text — no underline, no background. Use for navigating within the product. <strong>Not</strong> for external URLs or inline text links — use a plain <code>&lt;a&gt;</code> tag for those.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn"><button class="btn btn-danger" style="pointer-events:none;">Danger</button></div>
+        <div class="variant-row-desc">Destructive, irreversible actions: delete, remove, revoke. Always requires an explicit label so users understand the consequence.</div>
+      </div>
+    </div>
+
+    <h3 class="text-l4">With icons</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div><span class="preview-label">Icon left · Icon right</span></div>
+      <div class="preview-body" style="gap:12px; padding: 32px; flex-wrap: wrap;">
+        <button class="btn btn-primary">
+          <i data-icon="plus"></i>
+          Add member
+        </button>
+        <button class="btn btn-secondary">
+          Export
+          <i data-icon="download"></i>
+        </button>
+        <button class="btn btn-danger">
+          <i data-icon="trash"></i>
+          Delete
+        </button>
+      </div>
+    </div>
+  </section>
+
+
 
   <!-- USAGE -->
   <section class="section" id="usage">
@@ -285,7 +335,64 @@
       </div>
     </div>
 
-    <!-- Do/Don't 5: Alignment and positioning -->
+    <!-- Do/Don't 5: Link button vs <a> -->
+    <h3 class="text-l4">Link button vs. &lt;a&gt; tag</h3>
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:80px;"></div>
+            <button class="btn btn-link" style="pointer-events:none; font-size:13px;">View results</button>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:60px;"></div>
+            <button class="btn btn-link" style="pointer-events:none; font-size:13px;">Go to survey</button>
+          </div>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Use a Link button for in-platform navigation — routing to another page or section within the product.
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <p style="font-size:13px; color:var(--content-secondary); line-height:1.5; margin:0;">Need help? Read our <a href="#" style="color:var(--content-action); text-decoration:underline;" onclick="return false;">documentation</a> or <a href="#" style="color:var(--content-action); text-decoration:underline;" onclick="return false;">contact support</a>.</p>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Use a plain <code>&lt;a&gt;</code> tag for inline text links — external URLs or links embedded in a sentence.
+        </div>
+      </div>
+    </div>
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <p style="font-size:13px; color:var(--content-secondary); line-height:1.5; margin:0;">Need help? Read our <button class="btn btn-link" style="pointer-events:none; font-size:13px; padding:0; display:inline; height:auto;">documentation</button> or <button class="btn btn-link" style="pointer-events:none; font-size:13px; padding:0; display:inline; height:auto;">contact support</button>.</p>
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't use a Link button inside a sentence — it's not a text element and breaks the reading flow.
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:80px;"></div>
+            <a href="#" style="color:var(--content-action); text-decoration:underline; font-size:13px;" onclick="return false;">View results</a>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:60px;"></div>
+            <a href="#" style="color:var(--content-action); text-decoration:underline; font-size:13px;" onclick="return false;">Go to survey</a>
+          </div>
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't use a plain <code>&lt;a&gt;</code> tag for standalone in-product navigation — use a Link button so the action is semantically a button, not a hyperlink.
+        </div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 6: Alignment and positioning -->
     <h3 class="text-l4">Alignment and positioning</h3>
     <div class="dd-grid">
       <div class="dd-card">
@@ -362,113 +469,6 @@
       </div>
     </div>
 
-  </section>
-
-  
-
-  <!-- VARIANTS -->
-  <section class="section" id="variants">
-    <h2 class="text-l3">Variants</h2>
-    <p class="section-lead">The <code>Type</code> property controls visual hierarchy. Use one Primary per view maximum.</p>
-
-    <div class="variant-rows">
-      <div class="variant-row">
-        <div class="variant-row-btn"><button class="btn btn-primary" style="pointer-events:none;">Primary</button></div>
-        <div class="variant-row-desc">The single highest-emphasis action on a view. Submit a form, complete an onboarding step, confirm a key decision. Use only once per page section.</div>
-      </div>
-      <div class="variant-row">
-        <div class="variant-row-btn"><button class="btn btn-secondary" style="pointer-events:none;">Secondary</button></div>
-        <div class="variant-row-desc">Supporting actions alongside a Primary — Cancel, Edit, Export. Can appear multiple times without competing with the primary.</div>
-      </div>
-      <div class="variant-row">
-        <div class="variant-row-btn"><button class="btn btn-tertiary" style="pointer-events:none;">Tertiary</button></div>
-        <div class="variant-row-desc">Low-emphasis inline actions in dense layouts — table rows, cards, toolbars. No background or border so it blends into content.</div>
-      </div>
-      <div class="variant-row">
-        <div class="variant-row-btn"><button class="btn btn-link" style="pointer-events:none;">Link</button></div>
-        <div class="variant-row-desc">In-platform navigation to other pages or sections. Looks like plain text — no underline, no background. Use for navigating within the product. <strong>Not</strong> for external URLs or inline text links — use a plain <code>&lt;a&gt;</code> tag for those.</div>
-      </div>
-      <div class="variant-row">
-        <div class="variant-row-btn"><button class="btn btn-danger" style="pointer-events:none;">Danger</button></div>
-        <div class="variant-row-desc">Destructive, irreversible actions: delete, remove, revoke. Always requires an explicit label so users understand the consequence.</div>
-      </div>
-    </div>
-
-    <!-- Do/Don't: Link button -->
-    <h3 class="text-l4">Link button vs. &lt;a&gt; tag</h3>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:80px;"></div>
-            <button class="btn btn-link" style="pointer-events:none; font-size:13px;">View results</button>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:60px;"></div>
-            <button class="btn btn-link" style="pointer-events:none; font-size:13px;">Go to survey</button>
-          </div>
-        </div>
-        <div class="dd-cap do">
-          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-          Use a Link button for in-platform navigation — routing to another page or section within the product.
-        </div>
-      </div>
-      <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
-          <p style="font-size:13px; color:var(--content-secondary); line-height:1.5; margin:0;">Need help? Read our <a href="#" style="color:var(--content-action); text-decoration:underline;" onclick="return false;">documentation</a> or <a href="#" style="color:var(--content-action); text-decoration:underline;" onclick="return false;">contact support</a>.</p>
-        </div>
-        <div class="dd-cap do">
-          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-          Use a plain <code>&lt;a&gt;</code> tag for inline text links — external URLs or links embedded in a sentence.
-        </div>
-      </div>
-    </div>
-    <div class="dd-grid">
-      <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
-          <p style="font-size:13px; color:var(--content-secondary); line-height:1.5; margin:0;">Need help? Read our <button class="btn btn-link" style="pointer-events:none; font-size:13px; padding:0; display:inline; height:auto;">documentation</button> or <button class="btn btn-link" style="pointer-events:none; font-size:13px; padding:0; display:inline; height:auto;">contact support</button>.</p>
-        </div>
-        <div class="dd-cap dont">
-          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
-          Don't use a Link button inside a sentence — it's not a text element and breaks the reading flow.
-        </div>
-      </div>
-      <div class="dd-card">
-        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:80px;"></div>
-            <a href="#" style="color:var(--content-action); text-decoration:underline; font-size:13px;" onclick="return false;">View results</a>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <div style="height:7px; background:var(--border-base); border-radius:var(--radius-sm); width:60px;"></div>
-            <a href="#" style="color:var(--content-action); text-decoration:underline; font-size:13px;" onclick="return false;">Go to survey</a>
-          </div>
-        </div>
-        <div class="dd-cap dont">
-          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
-          Don't use a plain <code>&lt;a&gt;</code> tag for standalone in-product navigation — use a Link button so the action is semantically a button, not a hyperlink.
-        </div>
-      </div>
-    </div>
-
-    <h3 class="text-l4">With icons</h3>
-    <div class="preview">
-      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div><span class="preview-label">Icon left · Icon right</span></div>
-      <div class="preview-body" style="gap:12px; padding: 32px; flex-wrap: wrap;">
-        <button class="btn btn-primary">
-          <i data-icon="plus"></i>
-          Add member
-        </button>
-        <button class="btn btn-secondary">
-          Export
-          <i data-icon="download"></i>
-        </button>
-        <button class="btn btn-danger">
-          <i data-icon="trash"></i>
-          Delete
-        </button>
-      </div>
-    </div>
   </section>
 
   
