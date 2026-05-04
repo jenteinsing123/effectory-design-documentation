@@ -183,16 +183,19 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 
 /* ─── ANATOMY ─── */
 .anatomy-fig {
-  background: var(--bg-secondary); border: 1px solid var(--border-base);
-  border-radius: var(--radius-lg); padding: 48px var(--spacing-extra-loose);
-  display: flex; justify-content: center; margin-bottom: var(--spacing-base);
+  background: var(--bg-base); border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg); padding: 72px var(--spacing-extra-loose);
+  display: flex; justify-content: center; margin-bottom: var(--spacing-loose);
+  box-shadow: var(--sh-card);
 }
-.anatomy-items { display: flex; flex-direction: column; gap: var(--spacing-tight); }
-.anatomy-item { display: flex; gap: var(--spacing-tight); font-size: 14px; color: var(--content-secondary); line-height: 1.6; }
+.anatomy-items { display: flex; flex-direction: column; gap: 12px; margin-top: var(--spacing-tight); }
+.anatomy-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--content-secondary); line-height: 1.65; }
 .anatomy-num {
-  width: 20px; height: 20px; border-radius: 50%; background: var(--bg-inverse-base); color: var(--content-inverse-base);
-  font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 3px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--bg-brand-base); color: var(--content-on-brand-base);
+  font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px; letter-spacing: -.01em;
+  box-shadow: 0 1px 3px rgba(0,0,0,.12);
 }
 .anatomy-term { font-weight: 600; color: var(--content-base); }
 
