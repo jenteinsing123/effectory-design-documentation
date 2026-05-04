@@ -40,11 +40,13 @@
     .btn-danger-secondary:hover { background: var(--bg-negative-subtle); border-color: var(--border-negative-base-hover); }
     .btn-danger-tertiary { background: transparent; border-color: transparent; color: var(--content-negative-base); }
     .btn-danger-tertiary:hover { background: var(--bg-negative-subtle); }
-    .btn-link { background: transparent; border-color: transparent; color: var(--content-brand-base); text-decoration: underline; }
-    .btn-link:hover, .btn-link.is-hover { color: var(--content-brand-secondary); background: transparent; }
-    .btn-link.is-disabled { background: transparent !important; border-color: transparent !important; }
-    .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-base); text-decoration: underline; }
-    .btn-link-delete:hover { color: var(--content-negative-secondary); background: transparent; }
+    .btn-link { background: transparent; border-color: transparent; color: var(--content-action); text-decoration: none; }
+    .btn-link:hover, .btn-link.is-hover { color: var(--content-action-hover); background: transparent; }
+    .btn-link:active, .btn-link.is-pressed { color: var(--content-action-pressed); background: transparent; }
+    .btn-link.is-disabled { background: transparent !important; border-color: transparent !important; color: var(--content-disabled) !important; }
+    .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-secondary); text-decoration: none; }
+    .btn-link-delete:hover, .btn-link-delete.is-hover { color: var(--content-negative-base); background: transparent; }
+    .btn-link-delete:active, .btn-link-delete.is-pressed { color: var(--content-negative-base); background: transparent; }
 
     /* Disabled */
     .btn.is-disabled {
@@ -397,7 +399,7 @@
           </tr>
           <tr>
             <td><span class="vb vb-neutral">Link</span></td>
-            <td>Lowest-emphasis action that looks like a hyperlink. Use for secondary navigation-like actions within a layout, not for primary page navigation.</td>
+            <td>In-platform navigation to other pages or sections. Looks like plain text — no underline, no background. Use for navigating within the product. <strong>Not</strong> for external URLs or inline text links — use a plain <code>&lt;a&gt;</code> tag for those.</td>
           </tr>
           <tr>
             <td><span class="vb" style="background: var(--bg-negative-subtle); color: var(--content-negative-secondary);">Danger</span></td>
@@ -579,7 +581,8 @@
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body center" style="gap:32px; padding:28px 32px;">
         <div class="state-col"><button class="btn btn-link">View more</button><span class="state-label">Default</span></div>
-        <div class="state-col"><button class="btn btn-link" style="color:var(--content-brand-secondary);">View more</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-link is-hover">View more</button><span class="state-label">Hover</span></div>
+        <div class="state-col"><button class="btn btn-link is-pressed">View more</button><span class="state-label">Pressed</span></div>
         <div class="state-col"><button class="btn btn-link is-disabled" disabled>View more</button><span class="state-label">Disabled</span></div>
       </div>
     </div>
@@ -841,13 +844,14 @@
     </div>
 
     <h3 class="text-l4">Link</h3>
+    <p style="font-size:13.5px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">For in-platform navigation. No underline, no background — plain text that behaves as a button. For external URLs or inline text, use a regular <code>&lt;a&gt;</code> tag instead.</p>
     <div class="dev-preview">
-      <button class="btn btn-link">Link button</button>
-      <button class="btn btn-link-delete">Link delete</button>
+      <button class="btn btn-link">Go to dashboard</button>
+      <button class="btn btn-link-delete"><i data-icon="trash"></i>Delete</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span><span class="ct">&gt;</span>Link button<span class="ct">&lt;/button&gt;</span>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span><span class="ct">&gt;</span>Go to dashboard<span class="ct">&lt;/button&gt;</span>
 <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link delete"</span><span class="ct">&gt;</span>Link delete button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
   </section>
@@ -878,7 +882,7 @@
           </tr>
           <tr>
             <td><code>link</code></td>
-            <td>Looks like a text link. Lowest emphasis.</td>
+            <td>In-platform navigation. Plain text, no underline, no background. Use for routing within the product — not for external URLs or inline text (use <code>&lt;a&gt;</code> for those).</td>
           </tr>
           <tr>
             <td><code>delete</code></td>
