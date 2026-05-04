@@ -1044,15 +1044,15 @@
 
     var classAttr = hi('attr','class') + '=' + hi('val','"' + classes.join(' ') + '"');
     var disabledAttr = p.disabled ? ' ' + hi('attr','disabled') + '=' + hi('val','"true"') : '';
-    var openTag = hi('tag','&lt;button') + ' ' + classAttr + disabledAttr + hi('tag','&gt;');
-    var closeTag = hi('tag','&lt;/button&gt;');
+    var openTag = hi('tag','<button') + ' ' + classAttr + disabledAttr + hi('tag','>');
+    var closeTag = hi('tag','</button>');
     var label = esc(p.label);
 
     var inner = '';
     if (p.iconPos === 'icon-before') {
-      inner = '\n  ' + hi('tag','&lt;eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/&gt;') + '\n  ' + label + '\n';
+      inner = '\n  ' + hi('tag','<eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/>') + '\n  ' + label + '\n';
     } else if (p.iconPos === 'icon-after') {
-      inner = '\n  ' + label + '\n  ' + hi('tag','&lt;eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/&gt;') + '\n';
+      inner = '\n  ' + label + '\n  ' + hi('tag','<eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/>') + '\n';
     } else {
       inner = label;
     }
