@@ -630,6 +630,46 @@ html[data-portal="personal"]:not([data-theme="dark"]) {
   --brand-text: var(--content-on-brand-base);
 }
 
+/* Personal portal — dark mode (auto) */
+@media (prefers-color-scheme: dark) {
+  html[data-portal="personal"]:not([data-theme="light"]) {
+    --bg-brand-base: #fecd29;
+    --bg-brand-base-hover: #fdbd12;
+    --bg-brand-base-pressed: #ec9f06;
+    --bg-brand-subtle: #512206;
+    --bg-brand-subtle-selected: #6b310a;
+    --content-on-brand-base: #192743;
+    --content-brand-base: #fecd29;
+    --content-brand-secondary: #fdbd12;
+    --border-brand-base: #d68100;
+    --border-brand-base-hover: #b16107;
+    --border-brand-base-pressed: #8a4b15;
+    --border-brand-secondary: #ec9f06;
+    --border-brand-subtle: #fdbd12;
+    --logo-content: #192743;
+    --logo-bg: #fdbd12;
+  }
+}
+
+/* Personal portal — dark mode (explicit) */
+html[data-portal="personal"][data-theme="dark"] {
+  --bg-brand-base: #fecd29;
+  --bg-brand-base-hover: #fdbd12;
+  --bg-brand-base-pressed: #ec9f06;
+  --bg-brand-subtle: #512206;
+  --bg-brand-subtle-selected: #6b310a;
+  --content-on-brand-base: #192743;
+  --content-brand-base: #fecd29;
+  --content-brand-secondary: #fdbd12;
+  --border-brand-base: #d68100;
+  --border-brand-base-hover: #b16107;
+  --border-brand-base-pressed: #8a4b15;
+  --border-brand-secondary: #ec9f06;
+  --border-brand-subtle: #fdbd12;
+  --logo-content: #192743;
+  --logo-bg: #fdbd12;
+}
+
 /* ── Extra vars used by component CSS, derived from semantic tokens ── */
 :root {
   --brand-subtle:  var(--bg-brand-subtle);

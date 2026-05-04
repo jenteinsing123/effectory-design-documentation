@@ -373,7 +373,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 /* ─── DEVELOPER TAB — code blocks ─── */
 .dev-code-wrap { position: relative; margin: var(--spacing-base) 0 var(--spacing-extra-loose); }
 .dev-code-wrap pre {
-  background: var(--bg-code, #f4f5f7); color: var(--content-base);
+  background: var(--bg-secondary); color: var(--content-base);
   border: 1px solid var(--border-base);
   border-radius: var(--radius-lg); padding: var(--spacing-extra-loose);
   font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 12.5px; line-height: 1.75;
@@ -391,14 +391,23 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .dev-copy-btn:hover { background: var(--bg-base-hover); color: var(--content-base); border-color: var(--border-action-hover); }
 .dev-copy-btn.did-copy { color: var(--content-positive-secondary); border-color: var(--border-positive-subtle); }
 
-/* syntax tokens — light background */
-.ct { color: #0969da; } /* tag / component — blue */
-.ca { color: #953800; } /* attribute / prop name — orange-brown */
-.cv { color: #116329; } /* string value — green */
-.ck { color: #8250df; } /* keyword import/const — purple */
-.cs { color: #0a3069; } /* import path string — dark blue */
-.cm { color: #6e7781; font-style: italic; } /* comment — grey */
-.cn { color: #0550ae; } /* number — blue */
+/* syntax token colors — CSS variables so dark mode can override */
+:root {
+  --syn-tag: #0969da;
+  --syn-attr: #953800;
+  --syn-val: #116329;
+  --syn-kw: #8250df;
+  --syn-str: #0a3069;
+  --syn-cm: #6e7781;
+  --syn-num: #0550ae;
+}
+.ct { color: var(--syn-tag); }
+.ca { color: var(--syn-attr); }
+.cv { color: var(--syn-val); }
+.ck { color: var(--syn-kw); }
+.cs { color: var(--syn-str); }
+.cm { color: var(--syn-cm); font-style: italic; }
+.cn { color: var(--syn-num); }
 
 /* ─── PLAYGROUND ─── */
 .pg-card {
@@ -454,7 +463,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .pg-code-wrap { position: relative; }
 .pg-code-wrap pre {
   margin: 0; border-radius: 0; border: none;
-  background: var(--bg-code, #f4f5f7); color: var(--content-base);
+  background: var(--bg-secondary); color: var(--content-base);
   padding: var(--spacing-extra-loose);
   font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 12.5px; line-height: 1.75;
   overflow-x: auto;
@@ -487,7 +496,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .pag-dir { font-size: 11.5px; color: var(--content-subtle); }
 .pag-name { font-size: 14px; font-weight: 600; color: var(--content-base); }
 
-/* ─── DARK MODE — shadows (bg/text/brand/status all handled by tokens.css) ─── */
+/* ─── DARK MODE — shadows + syntax token colors ─── */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) {
     --sh-action:       0 1px 2px  rgba(0,0,0,.20);
@@ -496,6 +505,13 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
     --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
     --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
     --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
+    --syn-tag:  #79c0ff;
+    --syn-attr: #ffab70;
+    --syn-val:  #7ee787;
+    --syn-kw:   #d2a8ff;
+    --syn-str:  #a5d6ff;
+    --syn-cm:   #8b949e;
+    --syn-num:  #79c0ff;
   }
 }
 html[data-theme="dark"] {
@@ -505,6 +521,13 @@ html[data-theme="dark"] {
   --sh-card-hover:   0 2px 9px  rgba(0,0,0,.32);
   --sh-popovers:     0 2px 12px rgba(0,0,0,.32);
   --sh-dialogs:      0 4px 12px rgba(0,0,0,.32);
+  --syn-tag:  #79c0ff;
+  --syn-attr: #ffab70;
+  --syn-val:  #7ee787;
+  --syn-kw:   #d2a8ff;
+  --syn-str:  #a5d6ff;
+  --syn-cm:   #8b949e;
+  --syn-num:  #79c0ff;
 }
 
 /* ─── TOP NAV ACTIONS ─── */
