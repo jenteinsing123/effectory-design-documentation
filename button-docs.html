@@ -681,20 +681,12 @@
     <div class="pg-card">
       <div class="pg-controls">
         <div class="pg-control">
-          <label class="pg-label" for="pg-variant">variant</label>
+          <label class="pg-label" for="pg-variant">class</label>
           <select class="pg-select" id="pg-variant">
             <option value="primary" selected>primary</option>
             <option value="secondary">secondary</option>
             <option value="tertiary">tertiary</option>
-            <option value="danger">danger</option>
-          </select>
-        </div>
-        <div class="pg-control">
-          <label class="pg-label" for="pg-size">size</label>
-          <select class="pg-select" id="pg-size">
-            <option value="sm">sm</option>
-            <option value="md" selected>md</option>
-            <option value="lg">lg</option>
+            <option value="link">link</option>
           </select>
         </div>
         <div class="pg-control">
@@ -702,9 +694,17 @@
           <input class="pg-input" type="text" id="pg-label-text" value="Save changes" />
         </div>
         <div class="pg-control">
-          <label class="pg-label" for="pg-icon-left">icon-left</label>
-          <select class="pg-select" id="pg-icon-left">
+          <label class="pg-label" for="pg-icon-pos">icon</label>
+          <select class="pg-select" id="pg-icon-pos">
             <option value="">none</option>
+            <option value="icon-before">icon-before</option>
+            <option value="icon-after">icon-after</option>
+          </select>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label" for="pg-icon-name">icon name</label>
+          <select class="pg-select" id="pg-icon-name">
+            <option value="eye">eye</option>
             <option value="plus">plus</option>
             <option value="edit">edit</option>
             <option value="trash">trash</option>
@@ -713,26 +713,21 @@
           </select>
         </div>
         <div class="pg-control">
-          <label class="pg-label" for="pg-icon-right">icon-right</label>
-          <select class="pg-select" id="pg-icon-right">
-            <option value="">none</option>
-            <option value="plus">plus</option>
-            <option value="edit">edit</option>
-            <option value="trash">trash</option>
-            <option value="download">download</option>
-            <option value="search">search</option>
-          </select>
-        </div>
-        <div class="pg-control">
-          <label class="pg-label">disabled</label>
+          <label class="pg-label">delete</label>
           <div class="pg-toggle-wrap">
-            <label class="pg-toggle"><input type="checkbox" id="pg-disabled"><span class="pg-toggle-track"></span></label>
+            <label class="pg-toggle"><input type="checkbox" id="pg-delete"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
         <div class="pg-control">
           <label class="pg-label">loading</label>
           <div class="pg-toggle-wrap">
             <label class="pg-toggle"><input type="checkbox" id="pg-loading"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-control">
+          <label class="pg-label">disabled</label>
+          <div class="pg-toggle-wrap">
+            <label class="pg-toggle"><input type="checkbox" id="pg-disabled"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
       </div>
@@ -746,230 +741,148 @@
     </div>
   </section>
 
-  <!-- INSTALL -->
-  <section class="section" id="dev-install">
-    <h2 class="text-l3">Installation</h2>
-    <p class="section-lead">The Button component is part of <code>@effectory/engage-ui</code>. Install the package once and import per component.</p>
-
-    <div class="dev-install">
-      <span class="dev-install-label">npm</span>
-      <code>npm install @effectory/engage-ui</code>
-    </div>
-
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ck">import</span> { <span class="ct">EfButton</span> } <span class="ck">from</span> <span class="cs">'@effectory/engage-ui'</span>
-<span class="ck">import</span> <span class="cs">'@effectory/engage-ui/dist/style.css'</span> <span class="cm">// once per app entry</span></code></pre>
-    </div>
-  </section>
-
   <!-- USAGE -->
   <section class="section" id="dev-usage">
     <h2 class="text-l3">Usage</h2>
 
-    <h3 class="text-l4">Basic</h3>
+    <h3 class="text-l4">Variants</h3>
     <div class="dev-preview">
-      <button class="btn btn-primary">Save changes</button>
+      <button class="btn btn-primary">Primary button</button>
+      <button class="btn btn-secondary">Secondary button</button>
+      <button class="btn btn-tertiary">Tertiary button</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">@click</span>=<span class="cv">"handleSave"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary"</span><span class="ct">&gt;</span>Primary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary"</span><span class="ct">&gt;</span>Secondary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary"</span><span class="ct">&gt;</span>Tertiary button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">All variants</h3>
+    <h3 class="text-l4">Delete (danger)</h3>
     <div class="dev-preview">
-      <button class="btn btn-primary">Save changes</button>
-      <button class="btn btn-secondary">Cancel</button>
-      <button class="btn btn-tertiary">Edit</button>
-      <button class="btn btn-danger">Delete survey</button>
+      <button class="btn btn-danger">Delete button</button>
+      <button class="btn btn-secondary">Secondary delete</button>
+      <button class="btn btn-tertiary">Tertiary delete</button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Primary: highest-emphasis action --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
-
-<span class="cm">&lt;!-- Secondary: supporting action --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span><span class="ct">&gt;</span>Cancel<span class="ct">&lt;/EfButton&gt;</span>
-
-<span class="cm">&lt;!-- Tertiary: low-emphasis inline action --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"tertiary"</span><span class="ct">&gt;</span>Edit<span class="ct">&lt;/EfButton&gt;</span>
-
-<span class="cm">&lt;!-- Danger: destructive / irreversible actions --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"danger"</span><span class="ct">&gt;</span>Delete survey<span class="ct">&lt;/EfButton&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">Sizes</h3>
-    <div class="dev-preview" style="align-items: center;">
-      <button class="btn btn-primary" style="height:28px; font-size:12.5px; padding:0 10px;">Small</button>
-      <button class="btn btn-primary">Medium</button>
-      <button class="btn btn-primary" style="height:44px; font-size:14.5px; padding:0 16px;">Large</button>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"sm"</span><span class="ct">&gt;</span>Small<span class="ct">&lt;/EfButton&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"md"</span><span class="ct">&gt;</span>Medium (default)<span class="ct">&lt;/EfButton&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">size</span>=<span class="cv">"lg"</span><span class="ct">&gt;</span>Large<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary delete"</span><span class="ct">&gt;</span>Delete button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary delete"</span><span class="ct">&gt;</span>Secondary delete button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary delete"</span><span class="ct">&gt;</span>Tertiary delete button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link delete"</span><span class="ct">&gt;</span>Link delete button<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">With icons</h3>
     <div class="dev-preview">
-      <button class="btn btn-primary"><i data-icon="plus"></i>Add member</button>
-      <button class="btn btn-secondary">Export<i data-icon="download"></i></button>
+      <button class="btn btn-primary"><i data-icon="eye"></i>Icon before</button>
+      <button class="btn btn-secondary">Icon after<i data-icon="eye"></i></button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Icon on the left (leading) --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">icon-left</span>=<span class="cv">"plus"</span><span class="ct">&gt;</span>Add member<span class="ct">&lt;/EfButton&gt;</span>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary icon-before"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'eye'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+  Icon before
+<span class="ct">&lt;/button&gt;</span>
 
-<span class="cm">&lt;!-- Icon on the right (trailing) --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">icon-right</span>=<span class="cv">"download"</span><span class="ct">&gt;</span>Export<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary icon-after"</span><span class="ct">&gt;</span>
+  Icon after
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'eye'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Loading &amp; disabled states</h3>
-    <div class="dev-preview" style="gap: 24px; flex-direction: column; align-items: flex-start;">
-      <div style="display:flex; align-items:center; gap: 12px;">
-        <button class="btn btn-primary" style="gap:8px; pointer-events:none;">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="animation:spin 1s linear infinite;"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Saving…
-        </button>
-        <span style="font-size:12px; color:var(--content-subtle);">:loading="true"</span>
-      </div>
-      <div style="display:flex; align-items:center; gap: 12px;">
-        <button class="btn btn-primary is-disabled" disabled>Save changes</button>
-        <span style="font-size:12px; color:var(--content-subtle);">:disabled="true"</span>
-      </div>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Shows a spinner, button stays clickable-width --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:loading</span>=<span class="cv">"isSaving"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
-
-<span class="cm">&lt;!-- Disabled — prefer inline validation instead (see Design tab) --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:disabled</span>=<span class="cv">"!isFormValid"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span>
-
-<span class="cm">&lt;!-- aria-disabled keeps keyboard focus while signalling blocked state --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"primary"</span> <span class="ca">:aria-disabled</span>=<span class="cv">"!isFormValid"</span> <span class="ca">@click</span>=<span class="cv">"showErrors"</span><span class="ct">&gt;</span>Save changes<span class="ct">&lt;/EfButton&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">As a link</h3>
+    <h3 class="text-l4">Loading</h3>
     <div class="dev-preview">
-      <a class="btn btn-secondary" href="#" onclick="return false">View report</a>
+      <button class="btn btn-primary" style="gap:8px; pointer-events:none;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="animation:spin 1s linear infinite;flex-shrink:0"><circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Loading button
+      </button>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Renders an &lt;a&gt; tag instead of &lt;button&gt; --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">href</span>=<span class="cv">"/reports"</span><span class="ct">&gt;</span>View report<span class="ct">&lt;/EfButton&gt;</span>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary loading"</span><span class="ct">&gt;</span>Loading button<span class="ct">&lt;/button&gt;</span></code></pre>
+    </div>
 
-<span class="cm">&lt;!-- Or with Vue Router --&gt;</span>
-<span class="ct">&lt;EfButton</span> <span class="ca">variant</span>=<span class="cv">"secondary"</span> <span class="ca">:to</span>=<span class="cv">"{ name: 'reports' }"</span><span class="ct">&gt;</span>View report<span class="ct">&lt;/EfButton&gt;</span></code></pre>
+    <h3 class="text-l4">Disabled</h3>
+    <div class="dev-preview">
+      <button class="btn btn-primary is-disabled" disabled>Disabled primary</button>
+      <button class="btn btn-secondary is-disabled" disabled>Disabled secondary</button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"primary"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled primary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"secondary"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled secondary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tertiary"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled tertiary button<span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"link"</span> <span class="ca">disabled</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Disabled link button<span class="ct">&lt;/button&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Upsell</h3>
+    <div class="dev-preview">
+      <button class="btn btn-primary"><i data-icon="arrow-up"></i>Upsell button</button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"upsell"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"svg-container"</span><span class="ct">&gt;&lt;eff-svg-arrow-up</span> <span class="ca">class</span>=<span class="cv">"icon"</span><span class="ct">&gt;&lt;/eff-svg-arrow-up&gt;&lt;/div&gt;</span>
+  Upsell button
+<span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
   </section>
 
-  <!-- PROPS -->
+  <!-- CSS CLASSES -->
   <section class="section" id="dev-props">
-    <h2 class="text-l3">Props</h2>
+    <h2 class="text-l3">CSS classes</h2>
     <div class="tbl-wrap">
       <table class="dev-props-table">
         <thead>
           <tr>
-            <th>PROP</th>
-            <th>TYPE</th>
-            <th>DEFAULT</th>
+            <th>CLASS</th>
             <th>DESCRIPTION</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>variant</td>
-            <td><span class="dev-type">'primary' | 'secondary' | 'tertiary' | 'danger'</span></td>
-            <td><span class="dev-default">'primary'</span></td>
-            <td>Visual style and emphasis level of the button.</td>
+            <td><code>primary</code></td>
+            <td>Filled brand-colour button. Highest emphasis. Use for the main action on a page.</td>
           </tr>
           <tr>
-            <td>size</td>
-            <td><span class="dev-type">'sm' | 'md' | 'lg'</span></td>
-            <td><span class="dev-default">'md'</span></td>
-            <td>Controls height and horizontal padding. <code>sm</code> = 28px, <code>md</code> = 36px, <code>lg</code> = 44px.</td>
+            <td><code>secondary</code></td>
+            <td>Outlined button. Supporting action alongside a primary.</td>
           </tr>
           <tr>
-            <td>type</td>
-            <td><span class="dev-type">'button' | 'submit' | 'reset'</span></td>
-            <td><span class="dev-default">'button'</span></td>
-            <td>Native HTML button type. Set to <code>'submit'</code> inside forms.</td>
+            <td><code>tertiary</code></td>
+            <td>Ghost button. Low-emphasis inline action.</td>
           </tr>
           <tr>
-            <td>disabled</td>
-            <td><span class="dev-type">boolean</span></td>
-            <td><span class="dev-default">false</span></td>
-            <td>Disables the button. Removes from tab order. Prefer <code>aria-disabled</code> + validation error when possible.</td>
+            <td><code>link</code></td>
+            <td>Looks like a text link. Lowest emphasis.</td>
           </tr>
           <tr>
-            <td>loading</td>
-            <td><span class="dev-type">boolean</span></td>
-            <td><span class="dev-default">false</span></td>
-            <td>Replaces label with a spinner. Button stays the same width to avoid layout shift.</td>
+            <td><code>delete</code></td>
+            <td>Combined with a variant class (e.g. <code>primary delete</code>) to render the destructive / danger style.</td>
           </tr>
           <tr>
-            <td>icon-left</td>
-            <td><span class="dev-type">string</span></td>
-            <td><span class="dev-default">—</span></td>
-            <td>Name of an Effectory icon to render on the leading side of the label.</td>
+            <td><code>loading</code></td>
+            <td>Shows a spinner inside the button. Button stays the same width to avoid layout shift.</td>
           </tr>
           <tr>
-            <td>icon-right</td>
-            <td><span class="dev-type">string</span></td>
-            <td><span class="dev-default">—</span></td>
-            <td>Name of an Effectory icon to render on the trailing side of the label.</td>
+            <td><code>icon-before</code></td>
+            <td>Place an <code>&lt;eff-mat-icon&gt;</code> as the first child. Adds correct spacing between icon and label.</td>
           </tr>
           <tr>
-            <td>href</td>
-            <td><span class="dev-type">string</span></td>
-            <td><span class="dev-default">—</span></td>
-            <td>When set, renders an <code>&lt;a&gt;</code> element instead of <code>&lt;button&gt;</code>.</td>
+            <td><code>icon-after</code></td>
+            <td>Place an <code>&lt;eff-mat-icon&gt;</code> as the last child. Adds correct spacing between label and icon.</td>
           </tr>
           <tr>
-            <td>to</td>
-            <td><span class="dev-type">string | RouteLocationRaw</span></td>
-            <td><span class="dev-default">—</span></td>
-            <td>Vue Router destination. Renders a <code>&lt;RouterLink&gt;</code> when provided.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- EVENTS -->
-  <section class="section" id="dev-events">
-    <h2 class="text-l3">Events</h2>
-    <div class="tbl-wrap">
-      <table class="dev-props-table">
-        <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>DESCRIPTION</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>click</td>
-            <td><span class="dev-type">MouseEvent</span></td>
-            <td>Fired on click. Not emitted when <code>disabled</code> is true.</td>
+            <td><code>upsell</code></td>
+            <td>Special upsell treatment. Include an <code>&lt;eff-svg-arrow-up&gt;</code> in a <code>.svg-container</code> wrapper.</td>
           </tr>
           <tr>
-            <td>keydown</td>
-            <td><span class="dev-type">KeyboardEvent</span></td>
-            <td>Bubbles from the native element. Space and Enter trigger the action.</td>
+            <td><code>cta-button</code></td>
+            <td>Combined with <code>primary</code> or <code>secondary</code> for call-to-action styling.</td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- SLOTS -->
-  <section class="section" id="dev-slots">
-    <h2 class="text-l3">Slots</h2>
-    <div class="tbl-wrap">
-      <table class="dev-props-table">
-        <thead><tr><th>SLOT</th><th>DESCRIPTION</th></tr></thead>
-        <tbody>
           <tr>
-            <td>default</td>
-            <td>Button label text. Keep to 1–3 words. Always required — icon-only buttons should use <a href="icon-button-docs.html">Icon Button</a> instead.</td>
+            <td><code>icon-button</code></td>
+            <td>Square icon-only button. Combine with <code>primary</code> or <code>secondary</code> for coloured variants. See <a href="icon-button-docs.html">Icon Button</a>.</td>
           </tr>
         </tbody>
       </table>
@@ -1037,11 +950,8 @@
 <div class="toc-col">
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
-    <a class="toc-link" href="#dev-install">Installation</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
-    <a class="toc-link" href="#dev-props">Props</a>
-    <a class="toc-link" href="#dev-events">Events</a>
-    <a class="toc-link" href="#dev-slots">Slots</a>
+    <a class="toc-link" href="#dev-props">CSS classes</a>
     <a class="toc-link" href="#dev-tokens">CSS tokens</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
@@ -1056,30 +966,29 @@
 <script src="nav.js"></script>
 <script>
 (function () {
-  var sizeHeights = { sm: '28px', md: '36px', lg: '44px' };
-  var sizeFonts   = { sm: '12.5px', md: '13.5px', lg: '14.5px' };
-  var sizePads    = { sm: '0 10px', md: '0 12px', lg: '0 16px' };
-
   function getProps() {
     return {
-      variant:   document.getElementById('pg-variant').value,
-      size:      document.getElementById('pg-size').value,
-      label:     document.getElementById('pg-label-text').value || 'Button',
-      iconLeft:  document.getElementById('pg-icon-left').value,
-      iconRight: document.getElementById('pg-icon-right').value,
-      disabled:  document.getElementById('pg-disabled').checked,
-      loading:   document.getElementById('pg-loading').checked,
+      variant:  document.getElementById('pg-variant').value,
+      label:    document.getElementById('pg-label-text').value || 'Button',
+      iconPos:  document.getElementById('pg-icon-pos').value,
+      iconName: document.getElementById('pg-icon-name').value,
+      delete:   document.getElementById('pg-delete').checked,
+      loading:  document.getElementById('pg-loading').checked,
+      disabled: document.getElementById('pg-disabled').checked,
     };
   }
 
+  // Map variant to preview classes (docs uses btn btn-* for the design preview)
+  var variantMap = { primary: 'btn-primary', secondary: 'btn-secondary', tertiary: 'btn-tertiary', link: 'btn-tertiary' };
+
   function renderPreview(p) {
-    var cls = 'btn btn-' + p.variant + (p.disabled ? ' is-disabled' : '');
-    var style = 'height:' + sizeHeights[p.size] + ';font-size:' + sizeFonts[p.size] + ';padding:' + sizePads[p.size] + ';pointer-events:none';
-    var iconStyle = 'width:14px;height:14px;display:inline-flex;align-items:center;flex-shrink:0;';
+    var cls = 'btn ' + (variantMap[p.variant] || 'btn-primary');
+    if (p.delete) cls += ' btn-danger';  // show danger style for delete
+    if (p.disabled) cls += ' is-disabled';
 
     var btn = document.createElement('button');
     btn.className = cls;
-    btn.setAttribute('style', style);
+    btn.setAttribute('style', 'pointer-events:none');
     if (p.disabled) btn.disabled = true;
 
     if (p.loading) {
@@ -1087,11 +996,15 @@
         '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="animation:spin 1s linear infinite;flex-shrink:0">'
         + '<circle cx="7" cy="7" r="5.5" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>'
         + '<path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+      btn.appendChild(document.createTextNode(' ' + p.label));
+    } else if (p.iconPos === 'icon-before') {
+      btn.innerHTML = '<i data-icon="' + p.iconName + '"></i>';
       btn.appendChild(document.createTextNode(p.label));
+    } else if (p.iconPos === 'icon-after') {
+      btn.appendChild(document.createTextNode(p.label));
+      btn.innerHTML += '<i data-icon="' + p.iconName + '"></i>';
     } else {
-      if (p.iconLeft)  btn.innerHTML = '<i data-icon="' + p.iconLeft + '" style="' + iconStyle + '"></i>';
-      btn.appendChild(document.createTextNode(p.label));
-      if (p.iconRight) btn.innerHTML += '<i data-icon="' + p.iconRight + '" style="' + iconStyle + '"></i>';
+      btn.textContent = p.label;
     }
 
     var preview = document.getElementById('pg-preview');
@@ -1104,38 +1017,32 @@
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function hi(type, text) {
-    var cls = { tag:'ct', attr:'ca', val:'cv', kw:'ck', cm:'cm' }[type] || '';
+    var cls = { tag:'ct', attr:'ca', val:'cv', cm:'cm' }[type] || '';
     return cls ? '<span class="' + cls + '">' + esc(text) + '</span>' : esc(text);
   }
 
   function renderCode(p) {
-    var attrs = [];
-    if (p.variant !== 'primary') attrs.push({ k:'variant', v: p.variant });
-    if (p.size    !== 'md')      attrs.push({ k:'size',    v: p.size });
-    if (p.iconLeft)              attrs.push({ k:'icon-left',  v: p.iconLeft });
-    if (p.iconRight)             attrs.push({ k:'icon-right', v: p.iconRight });
-    if (p.loading)               attrs.push({ k:':loading',   v: 'true' });
-    if (p.disabled)              attrs.push({ k:':disabled',  v: 'true' });
+    var classes = [p.variant];
+    if (p.delete)  classes.push('delete');
+    if (p.loading) classes.push('loading');
+    if (p.iconPos) classes.push(p.iconPos);
 
-    var open = hi('tag','<EfButton');
-    var close = hi('tag','</EfButton>');
+    var classAttr = hi('attr','class') + '=' + hi('val','"' + classes.join(' ') + '"');
+    var disabledAttr = p.disabled ? ' ' + hi('attr','disabled') + '=' + hi('val','"true"') : '';
+    var openTag = hi('tag','&lt;button') + ' ' + classAttr + disabledAttr + hi('tag','&gt;');
+    var closeTag = hi('tag','&lt;/button&gt;');
     var label = esc(p.label);
 
-    if (attrs.length === 0) {
-      document.getElementById('pg-code').innerHTML = open + '>' + label + close;
-      return;
+    var inner = '';
+    if (p.iconPos === 'icon-before') {
+      inner = '\n  ' + hi('tag','&lt;eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/&gt;') + '\n  ' + label + '\n';
+    } else if (p.iconPos === 'icon-after') {
+      inner = '\n  ' + label + '\n  ' + hi('tag','&lt;eff-mat-icon') + ' ' + hi('attr','[iconName]') + '=' + hi('val',"\"'" + p.iconName + "'\"") + ' ' + hi('attr','class') + '=' + hi('val','"icon"') + ' ' + hi('tag','/&gt;') + '\n';
+    } else {
+      inner = label;
     }
-    if (attrs.length <= 2) {
-      var attrStr = attrs.map(function(a) {
-        return ' ' + hi('attr', a.k) + '=' + hi('val', '"' + a.v + '"');
-      }).join('');
-      document.getElementById('pg-code').innerHTML = open + attrStr + '>' + label + close;
-      return;
-    }
-    var attrLines = attrs.map(function(a) {
-      return '  ' + hi('attr', a.k) + '=' + hi('val', '"' + a.v + '"');
-    }).join('\n');
-    document.getElementById('pg-code').innerHTML = open + '\n' + attrLines + '\n>' + label + close;
+
+    document.getElementById('pg-code').innerHTML = openTag + inner + closeTag;
   }
 
   function update() {
@@ -1156,11 +1063,11 @@
   });
 
   // Bind all controls
-  ['pg-variant','pg-size','pg-label-text','pg-icon-left','pg-icon-right'].forEach(function(id) {
+  ['pg-variant','pg-label-text','pg-icon-pos','pg-icon-name'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('input', update);
   });
-  ['pg-disabled','pg-loading'].forEach(function(id) {
+  ['pg-delete','pg-disabled','pg-loading'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', update);
   });
