@@ -40,10 +40,11 @@
     .btn-danger-secondary:hover { background: var(--bg-negative-subtle); border-color: var(--border-negative-base-hover); }
     .btn-danger-tertiary { background: transparent; border-color: transparent; color: var(--content-negative-base); }
     .btn-danger-tertiary:hover { background: var(--bg-negative-subtle); }
-    .btn-link { background: transparent; border-color: transparent; color: var(--content-brand-base); text-decoration: underline; padding: 0; height: auto; }
-    .btn-link:hover { color: var(--content-brand-secondary); }
-    .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-base); text-decoration: underline; padding: 0; height: auto; }
-    .btn-link-delete:hover { color: var(--content-negative-secondary); }
+    .btn-link { background: transparent; border-color: transparent; color: var(--content-brand-base); text-decoration: underline; }
+    .btn-link:hover, .btn-link.is-hover { color: var(--content-brand-secondary); background: transparent; }
+    .btn-link.is-disabled { background: transparent !important; border-color: transparent !important; }
+    .btn-link-delete { background: transparent; border-color: transparent; color: var(--content-negative-base); text-decoration: underline; }
+    .btn-link-delete:hover { color: var(--content-negative-secondary); background: transparent; }
 
     /* Disabled */
     .btn.is-disabled {
