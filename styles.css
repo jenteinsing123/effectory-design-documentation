@@ -540,23 +540,30 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 /* ─── DEV GAP NOTE ─── */
 .dev-gap {
   display: flex; gap: 12px; align-items: flex-start;
-  background: #fffbeb; border: 1px solid #f5d87a;
+  background: #fffbeb;
+  border: 1px solid #f0c840;
+  border-left: 4px solid #e6a800;
   border-radius: var(--radius-lg); padding: 14px 16px;
   margin-bottom: var(--spacing-extra-loose);
 }
 [data-theme="dark"] .dev-gap {
-  background: rgba(245,216,122,.07); border-color: rgba(245,216,122,.3);
+  background: rgba(245,216,122,.07);
+  border-color: rgba(245,216,122,.25);
+  border-left-color: #d4a017;
 }
 .dev-gap-icon {
-  font-size: 15px; line-height: 1; flex-shrink: 0; margin-top: 1px;
+  font-size: 16px; line-height: 1.4; flex-shrink: 0;
 }
-.dev-gap-body { display: flex; flex-direction: column; gap: 3px; }
+.dev-gap-body { display: flex; flex-direction: column; gap: 5px; }
 .dev-gap-label {
-  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  display: inline-flex; align-items: center;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .07em;
   text-transform: uppercase; color: #92660a;
+  background: #fde68a; border-radius: 4px; padding: 1px 7px;
+  width: fit-content;
 }
-[data-theme="dark"] .dev-gap-label { color: #d4a017; }
-.dev-gap-text { font-size: 13.5px; color: var(--content-secondary); line-height: 1.55; }
+[data-theme="dark"] .dev-gap-label { color: #92660a; background: rgba(253,230,138,.7); }
+.dev-gap-text { font-size: 13.5px; color: var(--content-secondary); line-height: 1.6; }
 
 /* ─── PAGINATION ─── */
 .pagination { display: flex; justify-content: space-between; margin-top: 64px; padding-top: var(--spacing-loose); border-top: 1px solid var(--border-base); gap: var(--spacing-base); }
