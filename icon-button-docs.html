@@ -671,6 +671,73 @@
 <div class="content-cols">
 <article class="content">
 
+  <!-- PLAYGROUND -->
+  <section class="section" id="ib-dev-playground">
+    <h2 class="text-l3">Playground</h2>
+    <p class="section-lead">Configure props and see the component update live — the code snippet below reflects your selection.</p>
+
+    <div class="pg-card">
+      <div class="pg-preview" id="ib-pg-preview"></div>
+
+      <div class="pg-bottom">
+        <div class="pg-tab-bar">
+          <button class="pg-tab is-active" data-ibtab="props">Properties</button>
+          <button class="pg-tab" data-ibtab="code">Code</button>
+          <button class="pg-reset" id="ib-pg-reset">Reset</button>
+        </div>
+
+        <div class="pg-panel" id="ib-pg-panel-props">
+          <div class="pg-row">
+            <div class="pg-row-name">variant</div>
+            <div class="pg-row-ctrl">
+              <label class="pg-radio"><input type="radio" name="ib-pg-variant" value="primary"> primary</label>
+              <label class="pg-radio"><input type="radio" name="ib-pg-variant" value="secondary" checked> secondary</label>
+              <label class="pg-radio"><input type="radio" name="ib-pg-variant" value="tertiary"> tertiary</label>
+            </div>
+          </div>
+          <div class="pg-row">
+            <div class="pg-row-name">icon</div>
+            <div class="pg-row-ctrl">
+              <select class="pg-select" id="ib-pg-icon">
+                <option value="plus">plus</option>
+                <option value="edit" selected>edit</option>
+                <option value="trash">trash</option>
+                <option value="search">search</option>
+                <option value="download">download</option>
+                <option value="more-vertical">more-vertical</option>
+                <option value="cross">cross</option>
+              </select>
+            </div>
+          </div>
+          <div class="pg-row">
+            <div class="pg-row-name">aria-label</div>
+            <div class="pg-row-ctrl">
+              <input class="pg-input" type="text" id="ib-pg-label" value="Edit name" />
+            </div>
+          </div>
+          <div class="pg-row">
+            <div class="pg-row-name">size</div>
+            <div class="pg-row-ctrl">
+              <label class="pg-radio"><input type="radio" name="ib-pg-size" value="36" checked> 36px</label>
+              <label class="pg-radio"><input type="radio" name="ib-pg-size" value="24"> 24px</label>
+            </div>
+          </div>
+          <div class="pg-row">
+            <div class="pg-row-name">disabled</div>
+            <div class="pg-row-ctrl">
+              <label class="pg-toggle"><input type="checkbox" id="ib-pg-disabled"><span class="pg-toggle-track"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="pg-panel pg-code-wrap" id="ib-pg-panel-code" hidden>
+          <button class="dev-copy-btn" id="ib-pg-copy">Copy</button>
+          <pre><code id="ib-pg-code"></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- USAGE -->
   <section class="section" id="dev-usage">
     <h2 class="text-l3">Usage</h2>
@@ -796,6 +863,7 @@
 <div class="toc-col">
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#ib-dev-playground">Playground</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
     <a class="toc-link" href="#dev-props">CSS classes</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
@@ -809,5 +877,101 @@
 </div><!-- /shell -->
 
 <script src="nav.js"></script>
+<script>
+(function () {
+  var IB_DEFAULTS = { variant: 'secondary', icon: 'edit', label: 'Edit name', size: '36', disabled: false };
+
+  function ibGetProps() {
+    return {
+      variant:  document.querySelector('input[name="ib-pg-variant"]:checked').value,
+      icon:     document.getElementById('ib-pg-icon').value,
+      label:    document.getElementById('ib-pg-label').value || 'Action',
+      size:     document.querySelector('input[name="ib-pg-size"]:checked').value,
+      disabled: document.getElementById('ib-pg-disabled').checked,
+    };
+  }
+
+  function ibRenderPreview(p) {
+    var varMap = { primary: 'ib-primary', secondary: 'ib-secondary', tertiary: 'ib-tertiary' };
+    var sizeMap = { '36': 'ib-36', '24': 'ib-24' };
+    var cls = 'ib ' + (sizeMap[p.size] || 'ib-36') + ' ' + (varMap[p.variant] || 'ib-secondary');
+    if (p.disabled) cls += ' is-disabled';
+
+    var btn = document.createElement('button');
+    btn.className = cls;
+    btn.setAttribute('aria-label', p.label);
+    btn.setAttribute('style', 'pointer-events:none');
+    if (p.disabled) btn.disabled = true;
+    btn.innerHTML = '<i data-icon="' + p.icon + '"></i>';
+
+    var preview = document.getElementById('ib-pg-preview');
+    preview.innerHTML = '';
+    preview.appendChild(btn);
+    if (window.Icons) window.Icons.render(preview);
+  }
+
+  function ibEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function ibHi(type, text) {
+    var cls = { tag:'ct', attr:'ca', val:'cv', cm:'cm' }[type] || '';
+    return cls ? '<span class="' + cls + '">' + ibEsc(text) + '</span>' : ibEsc(text);
+  }
+
+  function ibRenderCode(p) {
+    var classes = ['icon-button', p.variant];
+    if (p.size === '24') classes.push('size-24');
+    var classAttr = ibHi('attr','class') + '=' + ibHi('val','"' + classes.join(' ') + '"');
+    var labelAttr = ' ' + ibHi('attr','aria-label') + '=' + ibHi('val','"' + ibEsc(p.label) + '"');
+    var disabledAttr = p.disabled ? ' ' + ibHi('attr','disabled') + '=' + ibHi('val','"true"') : '';
+    var openTag = ibHi('tag','<button') + ' ' + classAttr + labelAttr + disabledAttr + ibHi('tag','>');
+    var iconLine = '\n  ' + ibHi('tag','<eff-mat-icon') + ' ' + ibHi('attr','[iconName]') + '=' + ibHi('val',"\"'" + p.icon + "'\"") + ' ' + ibHi('attr','class') + '=' + ibHi('val','"icon"') + ' ' + ibHi('tag','/>') + '\n';
+    document.getElementById('ib-pg-code').innerHTML = openTag + iconLine + ibHi('tag','</button>');
+  }
+
+  function ibUpdate() { var p = ibGetProps(); ibRenderPreview(p); ibRenderCode(p); }
+
+  // Tab switching
+  document.querySelectorAll('[data-ibtab]').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('[data-ibtab]').forEach(function(t) { t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      var target = tab.dataset.ibtab;
+      document.getElementById('ib-pg-panel-props').hidden = (target !== 'props');
+      document.getElementById('ib-pg-panel-code').hidden  = (target !== 'code');
+    });
+  });
+
+  // Reset
+  document.getElementById('ib-pg-reset').addEventListener('click', function() {
+    document.querySelector('input[name="ib-pg-variant"][value="' + IB_DEFAULTS.variant + '"]').checked = true;
+    document.getElementById('ib-pg-icon').value = IB_DEFAULTS.icon;
+    document.getElementById('ib-pg-label').value = IB_DEFAULTS.label;
+    document.querySelector('input[name="ib-pg-size"][value="' + IB_DEFAULTS.size + '"]').checked = true;
+    document.getElementById('ib-pg-disabled').checked = IB_DEFAULTS.disabled;
+    ibUpdate();
+  });
+
+  // Copy
+  document.getElementById('ib-pg-copy').addEventListener('click', function() {
+    navigator.clipboard.writeText(document.getElementById('ib-pg-code').innerText).then(function() {
+      var btn = document.getElementById('ib-pg-copy');
+      btn.textContent = 'Copied!'; btn.classList.add('did-copy');
+      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('did-copy'); }, 2000);
+    });
+  });
+
+  // Bind controls
+  document.querySelectorAll('input[name="ib-pg-variant"], input[name="ib-pg-size"]').forEach(function(el) {
+    el.addEventListener('change', ibUpdate);
+  });
+  ['ib-pg-icon','ib-pg-label'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.addEventListener('input', ibUpdate);
+  });
+  document.getElementById('ib-pg-disabled').addEventListener('change', ibUpdate);
+
+  // Init
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ibUpdate);
+  else ibUpdate();
+})();
+</script>
 </body>
 </html>
