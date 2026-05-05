@@ -823,6 +823,34 @@
     </div>
   </section>
 
+  <!-- CSS TOKENS -->
+  <section class="section" id="ib-dev-tokens">
+    <h2 class="text-l3">CSS tokens</h2>
+    <p class="section-lead">Override these tokens at the theme level to restyle all icon buttons at once. Do not override per-instance with inline styles.</p>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">/* Background */</span>
+<span class="ca">--bg-brand-base</span>:          <span class="cv">#0a9d99</span>;   <span class="cm">/* Primary default */</span>
+<span class="ca">--bg-brand-base-hover</span>:    <span class="cv">#0c827f</span>;   <span class="cm">/* Primary hover   */</span>
+<span class="ca">--bg-brand-base-pressed</span>:  <span class="cv">#166764</span>;   <span class="cm">/* Primary pressed */</span>
+<span class="ca">--bg-base</span>:                <span class="cv">#ffffff</span>;   <span class="cm">/* Secondary default */</span>
+<span class="ca">--bg-base-hover</span>:          <span class="cv">#f4f5f7</span>;   <span class="cm">/* Secondary/tertiary hover */</span>
+
+<span class="cm">/* Border */</span>
+<span class="ca">--border-action</span>:          <span class="cv">#bcc1cd</span>;   <span class="cm">/* Secondary default border */</span>
+<span class="ca">--border-action-hover</span>:    <span class="cv">#9ca3b0</span>;   <span class="cm">/* Secondary hover border   */</span>
+<span class="ca">--border-brand-base</span>:      <span class="cv">#0c827f</span>;   <span class="cm">/* Primary default border   */</span>
+
+<span class="cm">/* Content */</span>
+<span class="ca">--content-on-brand-base</span>:  <span class="cv">#ffffff</span>;   <span class="cm">/* Icon on Primary          */</span>
+<span class="ca">--content-secondary</span>:      <span class="cv">rgba(25,39,67,.60)</span>; <span class="cm">/* Icon on Secondary/Tertiary */</span>
+<span class="ca">--content-disabled</span>:       <span class="cv">rgba(25,39,67,.30)</span>;
+
+<span class="cm">/* Shape */</span>
+<span class="ca">--radius-md</span>:              <span class="cv">8px</span>;       <span class="cm">/* Container corner radius  */</span></code></pre>
+    </div>
+  </section>
+
   <!-- A11Y -->
   <section class="section" id="dev-a11y">
     <h2 class="text-l3">Accessibility</h2>
@@ -866,6 +894,7 @@
     <a class="toc-link" href="#ib-dev-playground">Playground</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
     <a class="toc-link" href="#dev-props">CSS classes</a>
+    <a class="toc-link" href="#ib-dev-tokens">CSS tokens</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
 </div>
