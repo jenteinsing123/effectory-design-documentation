@@ -758,7 +758,7 @@
   <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'edit'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
 <span class="ct">&lt;/button&gt;</span>
 
-<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button tertiary"</span> <span class="ca">aria-label</span>=<span class="cv">"More options"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"icon-button"</span> <span class="ca">aria-label</span>=<span class="cv">"More options"</span><span class="ct">&gt;</span>
   <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'more-vertical'"</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ct">/&gt;</span>
 <span class="ct">&lt;/button&gt;</span></code></pre>
     </div>
@@ -803,16 +803,16 @@
         <thead><tr><th>CLASS</th><th>DESCRIPTION</th></tr></thead>
         <tbody>
           <tr>
+            <td><code>icon-button</code></td>
+            <td>Base class required on every icon button. No modifier = no background or border (lowest emphasis). Use in toolbars and dense table rows.</td>
+          </tr>
+          <tr>
             <td><code>primary</code></td>
             <td>Solid brand-colour fill. Highest emphasis. One per toolbar maximum.</td>
           </tr>
           <tr>
             <td><code>secondary</code></td>
             <td>White background with a subtle border. Use for supporting actions that must be clearly discoverable.</td>
-          </tr>
-          <tr>
-            <td><code>tertiary</code></td>
-            <td>No background or border. Lowest emphasis. Use in toolbars and dense table rows.</td>
           </tr>
           <tr>
             <td><code>size-24</code></td>
@@ -946,7 +946,7 @@
   }
 
   function ibRenderCode(p) {
-    var classes = ['icon-button', p.variant];
+    var classes = p.variant === 'tertiary' ? ['icon-button'] : ['icon-button', p.variant];
     if (p.size === '24') classes.push('size-24');
     var classAttr = ibHi('attr','class') + '=' + ibHi('val','"' + classes.join(' ') + '"');
     var labelAttr = ' ' + ibHi('attr','aria-label') + '=' + ibHi('val','"' + ibEsc(p.label) + '"');
