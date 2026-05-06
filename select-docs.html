@@ -126,9 +126,9 @@
 <!-- ANATOMY -->
 <section class="section" id="anatomy">
   <h2 class="text-l3">Anatomy</h2>
-  <p class="section-lead">Single Select and Multi Select share the same form-field shell. Selection Button is a standalone inline trigger with no label above it.</p>
+  <p class="section-lead">All three variants share the same underlying <code>&lt;select&gt;</code> element. Single and Multi Select use a stacked form-field layout. The inline variant wraps the select with a semibold name prefix and an optional leading icon — no separate component needed.</p>
 
-  <h3 class="text-l4">Form field (Single &amp; Multi Select)</h3>
+  <h3 class="text-l4">Single &amp; Multi Select</h3>
 
   <!-- Anatomy visual -->
   <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start;justify-content:center;">
@@ -176,42 +176,36 @@
     <div class="anatomy-item"><div class="anatomy-num" style="background:#3174db;">5</div><div><span class="anatomy-term">Chip</span> (Multi Select only) — a blue pill showing a selected value. Each chip has an ✕ to remove that value individually.</div></div>
   </div>
 
-  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Selection Button</h3>
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Inline select</h3>
+  <p>The inline variant adds a wrapper around a normal <code>&lt;select&gt;</code>. The wrapper holds an optional leading icon and a semibold name prefix. The native select renders the value and chevron. No separate component — just a styled wrapper.</p>
 
-  <!-- Selection Button anatomy visual -->
+  <!-- Inline select anatomy visual -->
   <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;">
     <div style="position:relative;display:inline-block;">
-      <button class="sel-btn" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="sel-btn" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:16px;height:16px;flex-shrink:0;"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <!-- Container -->
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
       <span style="position:absolute;top:-10px;left:-8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">1</span>
-      <!-- Icon -->
       <span style="position:absolute;bottom:-10px;left:8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">2</span>
-      <!-- Name -->
       <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">3</span>
-      <!-- Value -->
-      <span style="position:absolute;bottom:-10px;right:24px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">4</span>
-      <!-- Chevron -->
-      <span style="position:absolute;top:-10px;right:-8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">5</span>
+      <span style="position:absolute;bottom:-10px;right:4px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">4</span>
     </div>
   </div>
 
   <div class="anatomy-items">
-    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Container</span> — 36px tall, 6px border radius. Bordered or transparent depending on appearance.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Wrapper</span> — 36px tall, 6px border radius. Bordered or ghost depending on context. Wraps the icon, name, and native select.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Icon</span> (optional) — 16×16px leading icon to reinforce the filter or sort role.</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Name</span> — SemiBold label for the dimension being controlled. One word ending in a colon: "Sort:", "Status:".</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Value</span> — Medium weight. The currently active selection. Updates when the user makes a new choice.</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Chevron</span> — always required. Signals a dropdown or popover will open on click.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Name</span> — SemiBold prefix label for the dimension being controlled. One word ending in a colon: "Sort:", "Status:".</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Select</span> — a native <code>&lt;select&gt;</code> that shows the current value and the browser-native chevron. The wrapper styles it to look inline.</div></div>
   </div>
 </section>
 
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Three variants cover different contexts of use.</p>
+  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -247,7 +241,7 @@
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <div class="variant-row-desc"><strong>Selection Button</strong> — a compact inline trigger that always shows its active value. No label above. Use in toolbars and filter bars where space is tight and the current selection must stay visible. Comes in bordered and inline appearances.</div>
+      <div class="variant-row-desc"><strong>Inline select</strong> — a native <code>&lt;select&gt;</code> wrapped with a semibold name prefix and an optional leading icon. No stacked label above. Use in toolbars and filter bars where horizontal space is tight and the current value must always be visible. Comes in bordered and ghost appearances.</div>
     </div>
   </div>
 </section>
@@ -261,15 +255,15 @@
       <ul class="usage-list">
         <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> A user must pick from a predefined list too long to show as radio buttons or checkboxes (4+ options)</li>
         <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple values are valid (Multi Select) — tags, categories, filters</li>
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters appear side by side in a toolbar (Selection Button)</li>
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The active selection should always stay visible without opening a panel</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters sit side by side in a toolbar — use the inline select variant</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The current value must always be visible without opening a panel first</li>
       </ul>
     </div>
     <div>
       <div class="usage-col-hd dont">Avoid when</div>
       <ul class="usage-list">
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> Fewer than 4 options are available — use radio buttons or a segmented control instead</li>
-        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 Selection Buttons appear in a row — consider a dedicated filter panel</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 inline selects appear in a row — consider a dedicated filter panel</li>
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> The action triggers immediately rather than changing a view setting — use a button</li>
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> A free-text answer is also valid — use a combobox or text field instead</li>
       </ul>
@@ -309,20 +303,41 @@
   <div class="dd-grid" style="margin-top:16px;">
     <div class="dd-card">
       <div class="dd-prev" style="gap:8px;">
-        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="dd-cap do">
         <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-        Keep the Selection Button name to one word ending with a colon — "Sort:", "Status:", "Filter:". Values should match the exact option label from the dropdown.
+        Keep the name prefix to one word ending with a colon — "Sort:", "Status:", "Filter:". The value should match the exact option label.
       </div>
     </div>
     <div class="dd-card">
       <div class="dd-prev" style="gap:8px;">
-        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sorted by:</span><span class="sel-btn-value">Newest first</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sorted by:</span><span class="sel-btn-value">Newest first</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
       <div class="dd-cap dont">
         <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
-        Don't use multi-word or verb names for the Selection Button. Don't truncate or rephrase the active value.
+        Don't use multi-word or verb name prefixes. Don't truncate or rephrase the active value.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd-grid" style="margin-top:16px;">
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">3 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="dd-cap do">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+        When multiple values are active, summarise as a count — "3 selected". Show "All" when nothing is filtered.
+      </div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <div class="sel-btn" style="pointer-events:none;max-width:200px;overflow:hidden;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Active, Draft, Pending</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="dd-cap dont">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+        Don't list every active value in the select — it overflows and becomes impossible to scan.
       </div>
     </div>
   </div>
@@ -469,94 +484,6 @@
   </div>
 </section>
 
-<!-- SELECTION BUTTON -->
-<section class="section" id="selection-button">
-  <h2 class="text-l3">Selection Button</h2>
-  <p class="section-lead">A compact inline trigger for toolbars and filter bars. Always shows the active value without opening a panel first. No disabled state — if the filter cannot be changed, hide the button or replace it with static text.</p>
-
-  <h3 class="text-l4">Appearances</h3>
-  <div class="variant-rows" style="margin-bottom:var(--spacing-loose);">
-    <div class="variant-row">
-      <div class="variant-row-btn">
-        <button class="sel-btn" style="pointer-events:none;">
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <div class="variant-row-desc"><strong>Bordered</strong> — white background with a subtle border and shadow. Default appearance. Use in toolbars and filter bars on plain backgrounds.</div>
-    </div>
-    <div class="variant-row">
-      <div class="variant-row-btn">
-        <button class="sel-btn sel-btn-inline" style="pointer-events:none;">
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <div class="variant-row-desc"><strong>Inline</strong> — no border or background at rest. Background appears only on hover and press. Use inside table headers and card sections where a visible border would add too much visual noise.</div>
-    </div>
-  </div>
-
-  <h3 class="text-l4">States</h3>
-  <div class="states-row">
-    <div class="state-col">
-      <div class="state-lbl">Default</div>
-      <button class="sel-btn" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-    <div class="state-col">
-      <div class="state-lbl">Hover</div>
-      <button class="sel-btn is-hover" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-    <div class="state-col">
-      <div class="state-lbl">Pressed</div>
-      <button class="sel-btn is-pressed" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-    <div class="state-col">
-      <div class="state-lbl">Multi-value</div>
-      <button class="sel-btn" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="sel-btn-name">Status:</span><span class="sel-btn-value">3 selected</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <h3 class="text-l4">Best practices</h3>
-  <div class="dd-grid">
-    <div class="dd-card">
-      <div class="dd-prev" style="gap:8px;">
-        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">3 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>
-      <div class="dd-cap do">
-        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-        Summarise multiple active values as a count — "3 selected". Show "All" when nothing is filtered.
-      </div>
-    </div>
-    <div class="dd-card">
-      <div class="dd-prev" style="gap:8px;">
-        <button class="sel-btn" style="pointer-events:none;max-width:180px;overflow:hidden;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Active, Draft, Pending</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>
-      <div class="dd-cap dont">
-        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
-        Don't list every selected value — the button overflows and becomes impossible to scan.
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ACCESSIBILITY -->
 <section class="section" id="accessibility">
   <h2 class="text-l3">Accessibility</h2>
@@ -565,7 +492,7 @@
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Always associate a visible label.</strong> Use <code>&lt;label for="..."&gt;</code> or <code>aria-labelledby</code>. Never rely on placeholder text as the label — it disappears on interaction.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Link validation messages with <code>aria-describedby</code>.</strong> Set the attribute on the field so screen readers announce the error or warning after reading the label.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need accessible names.</strong> <code>aria-label="Remove Result"</code> — the visible ✕ alone is not sufficient for screen readers.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selection Button needs <code>aria-label</code>.</strong> Since there is no form label above, use <code>aria-label="Sort: Newest first"</code> so the full meaning is announced, not just "button".</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Inline select needs an accessible name.</strong> Since there is no stacked label, use <code>aria-label="Sort"</code> on the <code>&lt;select&gt;</code> so screen readers announce the full context, not just the current value.</div></div>
   </div>
 </section>
 
@@ -580,7 +507,6 @@
     <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#states-single">Single Select states</a>
     <a class="toc-link" href="#states-multi">Multi Select states</a>
-    <a class="toc-link" href="#selection-button">Selection Button</a>
     <a class="toc-link" href="#accessibility">Accessibility</a>
   </nav>
 </aside>
@@ -609,7 +535,7 @@
           <select class="pg-sel" id="sl-variant">
             <option value="single">Single Select</option>
             <option value="multi">Multi Select</option>
-            <option value="selbtn">Selection Button</option>
+            <option value="selbtn">Inline select</option>
           </select>
         </div>
         <div class="pg-row" id="sl-row-state">
@@ -701,40 +627,46 @@
 &lt;/div&gt;</pre>
   </div>
 
-  <h3 class="text-l4">Selection Button — bordered</h3>
+  <h3 class="text-l4">Inline select — bordered</h3>
   <div class="dev-preview" style="gap:8px;">
-    <button class="sel-btn">
+    <div class="sel-btn">
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest first</span>
+      <span class="sel-btn-name">Sort:</span>
+      <span class="sel-btn-value">Newest first</span>
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+    </div>
   </div>
   <div class="code-block-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;button class="selection-button" aria-label="Sort: Newest first"&gt;
-  &lt;i data-icon="filter"&gt;&lt;/i&gt;
-  &lt;span class="selection-button__name"&gt;Sort:&lt;/span&gt;
-  &lt;span class="selection-button__value"&gt;Newest first&lt;/span&gt;
-  &lt;i data-icon="chevron-down"&gt;&lt;/i&gt;
-&lt;/button&gt;</pre>
+<pre class="code-block">&lt;div class="inline-select"&gt;
+  &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
+  &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
+  &lt;select class="inline-select__field" aria-label="Sort"&gt;
+    &lt;option value="newest"&gt;Newest first&lt;/option&gt;
+    &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
   </div>
 
-  <h3 class="text-l4">Selection Button — inline</h3>
+  <h3 class="text-l4">Inline select — ghost</h3>
   <div class="dev-preview">
-    <button class="sel-btn sel-btn-inline">
+    <div class="sel-btn sel-btn-inline">
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest first</span>
+      <span class="sel-btn-name">Sort:</span>
+      <span class="sel-btn-value">Newest first</span>
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+    </div>
   </div>
   <div class="code-block-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;button class="selection-button inline" aria-label="Sort: Newest first"&gt;
-  &lt;i data-icon="filter"&gt;&lt;/i&gt;
-  &lt;span class="selection-button__name"&gt;Sort:&lt;/span&gt;
-  &lt;span class="selection-button__value"&gt;Newest first&lt;/span&gt;
-  &lt;i data-icon="chevron-down"&gt;&lt;/i&gt;
-&lt;/button&gt;</pre>
+<pre class="code-block">&lt;div class="inline-select ghost"&gt;
+  &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
+  &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
+  &lt;select class="inline-select__field" aria-label="Sort"&gt;
+    &lt;option value="newest"&gt;Newest first&lt;/option&gt;
+    &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
   </div>
 
   <div class="dev-gap">
@@ -757,10 +689,10 @@
         <tr><td><code>select-label</code></td><td>label</td><td>14px SemiBold label above the field</td></tr>
         <tr><td><code>select</code></td><td>select</td><td>Single Select field</td></tr>
         <tr><td><code>multi-select</code></td><td>select[multiple]</td><td>Multi Select — renders chips per selection</td></tr>
-        <tr><td><code>selection-button</code></td><td>button</td><td>Inline filter trigger, bordered appearance</td></tr>
-        <tr><td><code>selection-button inline</code></td><td>button</td><td>Inline appearance — no border at rest</td></tr>
-        <tr><td><code>selection-button__name</code></td><td>span</td><td>Dimension label (SemiBold)</td></tr>
-        <tr><td><code>selection-button__value</code></td><td>span</td><td>Active value (Medium weight)</td></tr>
+        <tr><td><code>inline-select</code></td><td>div</td><td>Wrapper for inline select — bordered appearance</td></tr>
+        <tr><td><code>inline-select ghost</code></td><td>div</td><td>Ghost wrapper — no border at rest, background on hover</td></tr>
+        <tr><td><code>inline-select__name</code></td><td>span</td><td>Semibold name prefix (e.g. "Sort:")</td></tr>
+        <tr><td><code>inline-select__field</code></td><td>select</td><td>The native select element inside the wrapper</td></tr>
         <tr><td><code>is-error</code></td><td>select</td><td>Red border, shows error message</td></tr>
         <tr><td><code>is-warning</code></td><td>select</td><td>Orange border, shows warning message</td></tr>
         <tr><td><code>disabled</code></td><td>select, button</td><td>Disabled styling + prevents interaction</td></tr>
@@ -798,7 +730,7 @@
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Form fields need a <code>&lt;label&gt;</code>.</strong> Use <code>&lt;label for="id"&gt;</code> linked to the field's <code>id</code>. Never rely on placeholder text alone.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Error messages need <code>aria-describedby</code>.</strong> <code>aria-describedby="field-error"</code> on the field + <code>id="field-error"</code> on the message element.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need a label.</strong> <code>&lt;button aria-label="Remove Design"&gt;</code> — the ✕ glyph alone isn't descriptive enough.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selection Button needs <code>aria-label</code>.</strong> <code>aria-label="Sort: Newest first"</code> describes the full control, not just "button".</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Inline select needs <code>aria-label</code>.</strong> Add <code>aria-label="Sort"</code> directly on the <code>&lt;select&gt;</code> element. The visible name prefix is decorative — mark it <code>aria-hidden="true"</code> so it isn't read twice.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Custom dropdowns must manage focus.</strong> Move focus to the first option when the dropdown opens. Close on <kbd>Escape</kbd> and return focus to the trigger. Arrow keys navigate between options.</div></div>
   </div>
 </section>
@@ -943,12 +875,14 @@
            + '    <option value="a">Option A</option>\n'
            + '  </select>\n</div>';
     } else {
-      var inline = p.sbinline ? ' inline' : '';
-      code = '<button class="selection-button' + inline + '" aria-label="' + p.sbname + ' ' + p.sbvalue + '">\n'
-           + '  <i data-icon="filter"></i>\n'
-           + '  <span class="selection-button__name">' + p.sbname + '</span>\n'
-           + '  <span class="selection-button__value">' + p.sbvalue + '</span>\n'
-           + '  <i data-icon="chevron-down"></i>\n</button>';
+      var ghost = p.sbinline ? ' ghost' : '';
+      var nameClean = p.sbname.replace(/:$/, '');
+      code = '<div class="inline-select' + ghost + '">\n'
+           + '  <i data-icon="filter" aria-hidden="true"></i>\n'
+           + '  <span class="inline-select__name" aria-hidden="true">' + p.sbname + '</span>\n'
+           + '  <select class="inline-select__field" aria-label="' + nameClean + '">\n'
+           + '    <option>' + p.sbvalue + '</option>\n'
+           + '  </select>\n</div>';
     }
     document.getElementById('sl-code-out').textContent = code;
   }
