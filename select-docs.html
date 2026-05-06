@@ -60,12 +60,12 @@
       padding:2px 8px; border-radius:4px;
       font-size:13px; font-weight:500; line-height:20px;
       display:inline-flex; align-items:center; gap:4px;
-      color:#fff; background:#3174db; /* default = info/blue */
+      color:#fff; background:var(--bg-info-base);
     }
     .chip svg { width:10px; height:10px; flex-shrink:0; opacity:.8; }
-    .chip-error   { background:#d3353b; }
-    .chip-warning { background:#fa8324; }
-    .chip-user    { background:#e1e4e8; color:#192743; }
+    .chip-error   { background:var(--bg-negative-base); }
+    .chip-warning { background:var(--bg-warning-bold); }
+    .chip-user    { background:var(--bg-tertiary); color:var(--content-base); }
     .ms-text-val  { color:var(--content-base); font-size:14px; }
 
     /* ── Selection Button ── */
@@ -181,7 +181,7 @@
   </div>
 
   <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Named select</h3>
-  <p>A wrapper around a normal <code>&lt;select&gt;</code> that adds a semibold name prefix and an optional leading icon. The name prefix is what makes it "named" — not whether it has a border. The bordered appearance is the default; a ghost appearance (no border at rest) is used in table headers and dense UI.</p>
+  <p>A wrapper around a normal <code>&lt;select&gt;</code> that adds a semibold name prefix and an optional leading icon. The name prefix is what makes it "named" — not whether it has a border. The bordered appearance is the default; a inline appearance (no border at rest) is used in table headers and dense UI.</p>
 
   <!-- Named select anatomy visual -->
   <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;">
@@ -199,7 +199,7 @@
   </div>
 
   <div class="anatomy-items">
-    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Wrapper</span> — 36px tall, 6px border radius. Bordered or ghost depending on context. Wraps the icon, name, and native select.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Wrapper</span> — 36px tall, 6px border radius. Bordered or inline depending on context. Wraps the icon, name, and native select.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Icon</span> (optional) — 16×16px leading icon to reinforce the filter or sort role.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Name</span> — SemiBold prefix label for the dimension being controlled. One word ending in a colon: "Sort:", "Status:".</div></div>
     <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Select</span> — a native <code>&lt;select&gt;</code> that shows the current value and the browser-native chevron. The wrapper styles it to look inline.</div></div>
@@ -245,7 +245,7 @@
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      <div class="variant-row-desc"><strong>Named select</strong> — a native <code>&lt;select&gt;</code> with a semibold name prefix and an optional leading icon placed inline before the value. No stacked label above. The name prefix is what makes it distinct from a regular select. Use in toolbars and filter bars. Comes in bordered and ghost appearances.</div>
+      <div class="variant-row-desc"><strong>Named select</strong> — a native <code>&lt;select&gt;</code> with a semibold name prefix and an optional leading icon placed inline before the value. No stacked label above. The name prefix is what makes it distinct from a regular select. Use in toolbars and filter bars. Comes in bordered and inline appearances.</div>
     </div>
   </div>
 </section>
@@ -565,22 +565,22 @@
     <div class="state-col">
       <div class="state-lbl">Default</div>
       <div class="chip">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">#3174db</div>
+      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-info-base</div>
     </div>
     <div class="state-col">
       <div class="state-lbl">Error</div>
       <div class="chip chip-error">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">#d3353b</div>
+      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-negative-base</div>
     </div>
     <div class="state-col">
       <div class="state-lbl">Warning</div>
       <div class="chip chip-warning">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">#fa8324</div>
+      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-warning-bold</div>
     </div>
     <div class="state-col">
       <div class="state-lbl">User</div>
-      <div class="chip chip-user">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="#192743" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">#e1e4e8</div>
+      <div class="chip chip-user">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-tertiary</div>
     </div>
   </div>
 
@@ -779,7 +779,7 @@
 &lt;/div&gt;</pre>
   </div>
 
-  <h3 class="text-l4">Named select — ghost</h3>
+  <h3 class="text-l4">Named select — inline</h3>
   <div class="dev-preview">
     <div class="sel-btn sel-btn-inline">
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -790,7 +790,7 @@
   </div>
   <div class="code-block-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;div class="inline-select ghost"&gt;
+<pre class="code-block">&lt;div class="inline-select inline"&gt;
   &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
   &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
   &lt;select class="inline-select__field" aria-label="Sort"&gt;
@@ -821,7 +821,7 @@
         <tr><td><code>select</code></td><td>select</td><td>Single Select field</td></tr>
         <tr><td><code>multi-select</code></td><td>select[multiple]</td><td>Multi Select — renders chips per selection</td></tr>
         <tr><td><code>inline-select</code></td><td>div</td><td>Wrapper for named select — bordered appearance</td></tr>
-        <tr><td><code>inline-select ghost</code></td><td>div</td><td>Ghost wrapper — no border at rest, background on hover</td></tr>
+        <tr><td><code>inline-select inline</code></td><td>div</td><td>Ghost wrapper — no border at rest, background on hover</td></tr>
         <tr><td><code>inline-select__name</code></td><td>span</td><td>Semibold name prefix (e.g. "Sort:")</td></tr>
         <tr><td><code>inline-select__field</code></td><td>select</td><td>The native select element inside the wrapper</td></tr>
         <tr><td><code>is-error</code></td><td>select</td><td>Red border, shows error message</td></tr>
@@ -1006,9 +1006,9 @@
            + '    <option value="a">Option A</option>\n'
            + '  </select>\n</div>';
     } else {
-      var ghost = p.sbinline ? ' ghost' : '';
+      var inline = p.sbinline ? ' inline' : '';
       var nameClean = p.sbname.replace(/:$/, '');
-      code = '<div class="inline-select' + ghost + '">\n'
+      code = '<div class="inline-select' + inline + '">\n'
            + '  <i data-icon="filter" aria-hidden="true"></i>\n'
            + '  <span class="inline-select__name" aria-hidden="true">' + p.sbname + '</span>\n'
            + '  <select class="inline-select__field" aria-label="' + nameClean + '">\n'
