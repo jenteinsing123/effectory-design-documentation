@@ -129,15 +129,76 @@
   <p class="section-lead">Single Select and Multi Select share the same form-field shell. Selection Button is a standalone inline trigger with no label above it.</p>
 
   <h3 class="text-l4">Form field (Single &amp; Multi Select)</h3>
+
+  <!-- Anatomy visual -->
+  <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start;justify-content:center;">
+    <!-- Single Select anatomy -->
+    <div style="position:relative;display:inline-flex;flex-direction:column;gap:4px;">
+      <!-- Label callout -->
+      <div style="position:relative;">
+        <div class="slt-lbl" style="display:inline-block;">Country</div>
+        <span style="position:absolute;top:-8px;left:-20px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">1</span>
+      </div>
+      <!-- Field callout -->
+      <div style="position:relative;">
+        <div class="slt" style="pointer-events:none;width:200px;">
+          <div class="slt-left"><span class="slt-ph">Select...</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <!-- Container badge -->
+        <span style="position:absolute;top:-8px;right:-20px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">2</span>
+        <!-- Placeholder badge -->
+        <span style="position:absolute;bottom:-10px;left:20px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">3</span>
+        <!-- Chevron badge -->
+        <span style="position:absolute;bottom:-10px;right:4px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">4</span>
+      </div>
+    </div>
+
+    <!-- Multi Select anatomy -->
+    <div style="position:relative;display:inline-flex;flex-direction:column;gap:4px;">
+      <div class="slt-lbl">Tags</div>
+      <div style="position:relative;">
+        <div class="ms" style="pointer-events:none;width:200px;flex-wrap:nowrap;">
+          <div class="chip">Design <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="chip">Dev <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span style="position:absolute;top:50%;transform:translateY(-50%);left:-20px;background:#3174db;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">5</span>
+      </div>
+    </div>
+  </div>
+
   <div class="anatomy-items">
     <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Label</span> — 14px SemiBold above the field. Describes what the user is choosing. Always required.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Container</span> — 36px tall, 6px border radius. Border and shadow communicate interactive state.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Placeholder / Value</span> — shows "Select…" when empty; shows the selected value at 14px Regular once filled.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Chevron</span> — always present. Points down at rest, up when the dropdown is open.</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Chip</span> (Multi Select only) — a blue pill showing a selected value. Each chip has an ✕ to remove that value individually.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num" style="background:#3174db;">5</div><div><span class="anatomy-term">Chip</span> (Multi Select only) — a blue pill showing a selected value. Each chip has an ✕ to remove that value individually.</div></div>
   </div>
 
-  <h3 class="text-l4">Selection Button</h3>
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Selection Button</h3>
+
+  <!-- Selection Button anatomy visual -->
+  <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;">
+    <div style="position:relative;display:inline-block;">
+      <button class="sel-btn" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <!-- Container -->
+      <span style="position:absolute;top:-10px;left:-8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">1</span>
+      <!-- Icon -->
+      <span style="position:absolute;bottom:-10px;left:8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">2</span>
+      <!-- Name -->
+      <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">3</span>
+      <!-- Value -->
+      <span style="position:absolute;bottom:-10px;right:24px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">4</span>
+      <!-- Chevron -->
+      <span style="position:absolute;top:-10px;right:-8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">5</span>
+    </div>
+  </div>
+
   <div class="anatomy-items">
     <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Container</span> — 36px tall, 6px border radius. Bordered or transparent depending on appearance.</div></div>
     <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Icon</span> (optional) — 16×16px leading icon to reinforce the filter or sort role.</div></div>
@@ -169,7 +230,7 @@
       <div class="variant-row-btn" style="padding:20px;">
         <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
           <div class="slt-lbl">Label text</div>
-          <div class="ms" style="pointer-events:none;">
+          <div class="ms" style="pointer-events:none;flex-wrap:nowrap;">
             <div class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
             <div class="chip">Option <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
             <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -187,6 +248,82 @@
         </button>
       </div>
       <div class="variant-row-desc"><strong>Selection Button</strong> — a compact inline trigger that always shows its active value. No label above. Use in toolbars and filter bars where space is tight and the current selection must stay visible. Comes in bordered and inline appearances.</div>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section class="section" id="usage">
+  <h2 class="text-l3">Usage</h2>
+  <div class="usage-cols">
+    <div>
+      <div class="usage-col-hd do">Use when</div>
+      <ul class="usage-list">
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> A user must pick from a predefined list too long to show as radio buttons or checkboxes (4+ options)</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple values are valid (Multi Select) — tags, categories, filters</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters appear side by side in a toolbar (Selection Button)</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The active selection should always stay visible without opening a panel</li>
+      </ul>
+    </div>
+    <div>
+      <div class="usage-col-hd dont">Avoid when</div>
+      <ul class="usage-list">
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> Fewer than 4 options are available — use radio buttons or a segmented control instead</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 Selection Buttons appear in a row — consider a dedicated filter panel</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> The action triggers immediately rather than changing a view setting — use a button</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> A free-text answer is also valid — use a combobox or text field instead</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Content guidelines</h3>
+  <p class="section-lead" style="margin-bottom:20px;">Good label copy reduces errors and makes forms faster to complete.</p>
+
+  <div class="dd-grid">
+    <div class="dd-card">
+      <div class="dd-prev" style="flex-direction:column;gap:12px;align-items:flex-start;">
+        <div class="slt-wrap" style="width:180px;">
+          <div class="slt-lbl">Country</div>
+          <div class="slt" style="pointer-events:none;"><div class="slt-left"><span class="slt-ph">Select...</span></div><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+      <div class="dd-cap do">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+        Use 1–3 word noun labels in sentence case. Describe the dimension — "Country", "Job level", "Team".
+      </div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-prev" style="flex-direction:column;gap:12px;align-items:flex-start;">
+        <div class="slt-wrap" style="width:200px;">
+          <div class="slt-lbl">Please select your country</div>
+          <div class="slt" style="pointer-events:none;"><div class="slt-left"><span class="slt-ph">Choose an option...</span></div><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+      <div class="dd-cap dont">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+        Don't start labels with a verb or write them as instructions. Don't replace "Select…" with custom placeholder text.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd-grid" style="margin-top:16px;">
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="dd-cap do">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+        Keep the Selection Button name to one word ending with a colon — "Sort:", "Status:", "Filter:". Values should match the exact option label from the dropdown.
+      </div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sorted by:</span><span class="sel-btn-value">Newest first</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="dd-cap dont">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+        Don't use multi-word or verb names for the Selection Button. Don't truncate or rephrase the active value.
+      </div>
     </div>
   </div>
 </section>
@@ -420,32 +557,6 @@
   </div>
 </section>
 
-<!-- USAGE -->
-<section class="section" id="usage">
-  <h2 class="text-l3">Usage</h2>
-  <div class="usage-cols">
-    <div>
-      <div class="usage-col-hd do">Use when</div>
-      <ul class="usage-list">
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> A user must pick from a predefined list too long to show as radio buttons or checkboxes</li>
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters appear side by side in a toolbar (Selection Button)</li>
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The active selection should always stay visible without opening a panel</li>
-      </ul>
-    </div>
-    <div>
-      <div class="usage-col-hd dont">Avoid when</div>
-      <ul class="usage-list">
-        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> Fewer than 4 options are available — use radio buttons or a segmented control instead</li>
-        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 Selection Buttons appear in a row — consider a dedicated filter panel</li>
-        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> The action triggers immediately rather than changing a view setting</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3 class="text-l4">Content guidelines</h3>
-  <p>Form field labels: 1–3 words, sentence case. Describe the dimension being selected — "Country" not "Select a country". Use "Select…" as the standard placeholder, never custom prompts. Selection Button names: one word ending in a colon. Values should mirror the exact label from the dropdown — don't abbreviate.</p>
-</section>
-
 <!-- ACCESSIBILITY -->
 <section class="section" id="accessibility">
   <h2 class="text-l3">Accessibility</h2>
@@ -466,10 +577,10 @@
     <div class="toc-label">On this page</div>
     <a class="toc-link" href="#anatomy">Anatomy</a>
     <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#states-single">Single Select states</a>
     <a class="toc-link" href="#states-multi">Multi Select states</a>
     <a class="toc-link" href="#selection-button">Selection Button</a>
-    <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#accessibility">Accessibility</a>
   </nav>
 </aside>
