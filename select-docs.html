@@ -1,42 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Select — Engage Design System</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
+  <script src="nav.js" defer></script>
+  <script src="icons.js" defer></script>
+  <style>
+    /* ── Single Select ── */
+    .slt-wrap { display:flex; flex-direction:column; gap:4px; }
+    .slt-lbl  { font-size:14px; font-weight:600; color:var(--content-base); line-height:1.6; }
+    .slt {
+      height:36px; border:1px solid var(--border-action); border-radius:6px;
+      background:var(--bg-base); padding:0 12px; box-shadow:var(--sh-action);
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+      font-size:14px; cursor:pointer; width:100%;
+    }
+    .slt-left { display:flex; align-items:center; gap:8px; min-width:0; }
+    .slt-ph   { color:var(--content-subtle); white-space:nowrap; }
+    .slt-val  { color:var(--content-base); white-space:nowrap; }
+    .slt svg  { width:16px; height:16px; flex-shrink:0; color:var(--content-subtle); }
+    .slt.is-hover  { border-color:var(--border-action-hover); }
+    .slt.is-focus,
+    .slt.is-typing { border-color:var(--border-action-focus); }
+    .slt.is-warning { border-color:#ec6e0a; }
+    .slt.is-error   { border-color:#b9252a; }
+    .slt.is-disabled{
+      background:rgba(25,39,67,.08); border-color:var(--border-action);
+      box-shadow:none; cursor:not-allowed;
+    }
+    .slt.is-disabled .slt-ph { color:var(--content-disabled); }
+    .slt.is-disabled svg     { color:var(--content-disabled); }
+    .slt-err  { display:flex; align-items:center; gap:4px; font-size:13px; color:#b9252a; margin-top:4px; }
+    .slt-err svg { width:14px; height:14px; flex-shrink:0; }
+    .slt-warn { display:flex; align-items:center; gap:4px; font-size:13px; color:#ec6e0a; margin-top:4px; }
+    .slt-warn svg { width:14px; height:14px; flex-shrink:0; }
+
+    /* ── Multi Select ── */
+    .ms {
+      min-height:36px; border:1px solid var(--border-action); border-radius:6px;
+      background:var(--bg-base); padding:6px 36px 6px 12px; position:relative;
+      display:flex; align-items:center; flex-wrap:wrap; gap:6px;
+      font-size:14px; box-shadow:var(--sh-action); cursor:pointer; width:100%;
+    }
+    .ms.is-hover { border-color:var(--border-action-hover); }
+    .ms.is-focus,
+    .ms.is-typing { border-color:var(--border-action-focus); }
+    .ms.is-disabled {
+      background:rgba(25,39,67,.08); border-color:var(--border-action);
+      box-shadow:none; cursor:not-allowed;
+    }
+    .ms-ph  { color:var(--content-subtle); }
+    .ms-ch  { position:absolute; right:11px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--content-subtle); }
+    .ms.is-focus .ms-ch, .ms.is-typing .ms-ch { transform:translateY(-50%) rotate(180deg); color:var(--border-action-focus); }
+    .ms.is-disabled .ms-ph { color:var(--content-disabled); }
+    .ms.is-disabled .ms-ch { color:var(--content-disabled); }
+    .chip {
+      background:#3174db; color:#fff;
+      padding:2px 8px; border-radius:4px;
+      font-size:13px; font-weight:500; line-height:20px;
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .chip svg { width:10px; height:10px; flex-shrink:0; opacity:.8; }
+
+    /* ── Selection Button ── */
+    .sel-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      height:36px; padding:0 12px;
+      border:1px solid var(--border-action); border-radius:6px;
+      background:var(--bg-base); box-shadow:var(--sh-action);
+      font-size:13.5px; cursor:pointer; white-space:nowrap;
+    }
+    .sel-btn:hover, .sel-btn.is-hover { background:var(--bg-base-hover); border-color:var(--border-action-hover); }
+    .sel-btn:active, .sel-btn.is-pressed { background:var(--bg-base-pressed); border-color:var(--border-action-pressed); }
+    .sel-btn-inline { border-color:transparent; background:transparent; box-shadow:none; }
+    .sel-btn-inline:hover, .sel-btn-inline.is-hover { background:var(--bg-base-hover); border-color:transparent; }
+    .sel-btn-inline:active, .sel-btn-inline.is-pressed { background:var(--bg-base-pressed); border-color:transparent; }
+    .sel-btn-name  { font-weight:600; color:var(--content-base); }
+    .sel-btn-value { font-weight:500; color:var(--content-secondary); }
+    .sel-btn svg   { width:16px; height:16px; flex-shrink:0; color:var(--content-subtle); }
+
+    /* ── State display helpers ── */
+    .states-row { display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; margin-bottom:var(--spacing-loose); }
+    .state-col  { display:flex; flex-direction:column; gap:8px; }
+    .state-lbl  { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--content-subtle); }
+  </style>
 </head>
 <body>
 
 <div id="topnav-placeholder"></div>
-
 <div class="shell">
 <div id="sidebar-placeholder"></div>
 
 <div class="content-wrap">
 <div class="page-header-row">
 <div class="page-header">
-    <div class="page-badges">
-    </div>
-    <h1 class="text-l1">Select</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
+  <div class="page-badges">
+    <span class="page-updated">Updated May 2026</span>
   </div>
-</div><!-- /page-header-row -->
+  <h1 class="text-l1">Select</h1>
+  <p class="page-desc">A family of controls that let users choose one or more options from a list. Three variants: <strong>Single Select</strong> for picking one option in a form, <strong>Multi Select</strong> for picking several, and <strong>Selection Button</strong> — a compact inline trigger for toolbars and filter bars.</p>
+</div>
+</div>
+
+<!-- PAGE TABS -->
+<div class="page-tabs">
+  <div class="page-tabs-inner">
+    <button class="page-tab" data-tab="design">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      Design
+    </button>
+    <button class="page-tab" data-tab="developer">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M5 4L1 8l4 4M11 4l4 4-4 4M9 2l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Developer
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════ DESIGN PANEL ═══════════ -->
+<div class="tab-panel" data-panel="design">
 <div class="content-cols">
 <article class="content">
 
+<!-- ANATOMY -->
+<section class="section" id="anatomy">
+  <h2 class="text-l3">Anatomy</h2>
+  <p class="section-lead">Single Select and Multi Select share the same form-field shell. Selection Button is a standalone inline trigger with no label above it.</p>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+  <h3 class="text-l4">Form field (Single &amp; Multi Select)</h3>
+  <div class="anatomy-items">
+    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Label</span> — 14px SemiBold above the field. Describes what the user is choosing. Always required.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Container</span> — 36px tall, 6px border radius. Border and shadow communicate interactive state.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Placeholder / Value</span> — shows "Select…" when empty; shows the selected value at 14px Regular once filled.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Chevron</span> — always present. Points down at rest, up when the dropdown is open.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Chip</span> (Multi Select only) — a blue pill showing a selected value. Each chip has an ✕ to remove that value individually.</div></div>
   </div>
 
-</article>
-</div><!-- /content-cols -->
-</div><!-- /content-wrap -->
-</div><!-- /shell -->
+  <h3 class="text-l4">Selection Button</h3>
+  <div class="anatomy-items">
+    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Container</span> — 36px tall, 6px border radius. Bordered or transparent depending on appearance.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Icon</span> (optional) — 16×16px leading icon to reinforce the filter or sort role.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Name</span> — SemiBold label for the dimension being controlled. One word ending in a colon: "Sort:", "Status:".</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Value</span> — Medium weight. The currently active selection. Updates when the user makes a new choice.</div></div>
+    <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Chevron</span> — always required. Signals a dropdown or popover will open on click.</div></div>
+  </div>
+</section>
 
-<script src="nav.js"></script>
+<!-- VARIANTS -->
+<section class="section" id="variants">
+  <h2 class="text-l3">Variants</h2>
+  <p class="section-lead">Three variants cover different contexts of use.</p>
+
+  <div class="variant-rows">
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="slt-wrap" style="width:200px;">
+          <div class="slt-lbl">Label text</div>
+          <div class="slt" style="pointer-events:none;">
+            <div class="slt-left"><span class="slt-ph">Select...</span></div>
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="variant-row-desc"><strong>Single Select</strong> — pick exactly one option. Use inside forms, settings panels, and dialogs. Shows the current value once filled; chevron opens the dropdown.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+          <div class="slt-lbl">Label text</div>
+          <div class="ms" style="pointer-events:none;">
+            <div class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div class="chip">Option <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="variant-row-desc"><strong>Multi Select</strong> — pick one or more options. Selected values appear as dismissible chips inside the field. The field grows vertically as chips accumulate. Use for tags, categories, or any filter where multiple answers are valid.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn">
+        <button class="sel-btn" style="pointer-events:none;">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="variant-row-desc"><strong>Selection Button</strong> — a compact inline trigger that always shows its active value. No label above. Use in toolbars and filter bars where space is tight and the current selection must stay visible. Comes in bordered and inline appearances.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SINGLE SELECT STATES -->
+<section class="section" id="states-single">
+  <h2 class="text-l3">Single Select — States</h2>
+  <p class="section-lead">Seven states cover every interaction and validation scenario.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Default</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-ph">Select...</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Hover</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt is-hover" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-ph">Select...</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Focus / Open</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt is-focus" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-ph" style="color:var(--border-action-focus);">Select...</span></div>
+          <svg viewBox="0 0 16 16" fill="none" style="color:var(--border-action-focus);transform:rotate(180deg);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Filled in</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-val">Value</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Warning</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt is-warning" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-val">Value</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="slt-warn"><svg viewBox="0 0 16 16" fill="none"><path d="M8 6v3M8 11h.01M8 2L1 14h14L8 2z" stroke="#ec6e0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Warning</div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Error</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl">Label</div>
+        <div class="slt is-error" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-val">Value</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="slt-err"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#b9252a" stroke-width="1.5"/><path d="M8 5v3M8 11h.01" stroke="#b9252a" stroke-width="1.5" stroke-linecap="round"/></svg> Error message</div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Disabled</div>
+      <div class="slt-wrap" style="width:168px;">
+        <div class="slt-lbl" style="color:var(--content-disabled);">Label</div>
+        <div class="slt is-disabled" style="pointer-events:none;">
+          <div class="slt-left"><span class="slt-ph">Select...</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTI SELECT STATES -->
+<section class="section" id="states-multi">
+  <h2 class="text-l3">Multi Select — States</h2>
+  <p class="section-lead">Adds a chip state for when selections have been made. Shares error and disabled behaviour with Single Select.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Default</div>
+      <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+        <div class="slt-lbl">Label</div>
+        <div class="ms" style="pointer-events:none;">
+          <span class="ms-ph">Select...</span>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Hover</div>
+      <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+        <div class="slt-lbl">Label</div>
+        <div class="ms is-hover" style="pointer-events:none;">
+          <span class="ms-ph">Select...</span>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">With chips</div>
+      <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+        <div class="slt-lbl">Label</div>
+        <div class="ms" style="pointer-events:none;">
+          <div class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="chip">Option <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Chips + focus</div>
+      <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+        <div class="slt-lbl">Label</div>
+        <div class="ms is-focus" style="pointer-events:none;">
+          <div class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Disabled</div>
+      <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+        <div class="slt-lbl" style="color:var(--content-disabled);">Label</div>
+        <div class="ms is-disabled" style="pointer-events:none;">
+          <span class="ms-ph">Select...</span>
+          <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTION BUTTON -->
+<section class="section" id="selection-button">
+  <h2 class="text-l3">Selection Button</h2>
+  <p class="section-lead">A compact inline trigger for toolbars and filter bars. Always shows the active value without opening a panel first. No disabled state — if the filter cannot be changed, hide the button or replace it with static text.</p>
+
+  <h3 class="text-l4">Appearances</h3>
+  <div class="variant-rows" style="margin-bottom:var(--spacing-loose);">
+    <div class="variant-row">
+      <div class="variant-row-btn">
+        <button class="sel-btn" style="pointer-events:none;">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="variant-row-desc"><strong>Bordered</strong> — white background with a subtle border and shadow. Default appearance. Use in toolbars and filter bars on plain backgrounds.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-row-btn">
+        <button class="sel-btn sel-btn-inline" style="pointer-events:none;">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="variant-row-desc"><strong>Inline</strong> — no border or background at rest. Background appears only on hover and press. Use inside table headers and card sections where a visible border would add too much visual noise.</div>
+    </div>
+  </div>
+
+  <h3 class="text-l4">States</h3>
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Default</div>
+      <button class="sel-btn" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Hover</div>
+      <button class="sel-btn is-hover" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Pressed</div>
+      <button class="sel-btn is-pressed" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="sel-btn-name">Filter:</span><span class="sel-btn-value">Men</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Multi-value</div>
+      <button class="sel-btn" style="pointer-events:none;">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="sel-btn-name">Status:</span><span class="sel-btn-value">3 selected</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <h3 class="text-l4">Best practices</h3>
+  <div class="dd-grid">
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <button class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">3 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="dd-cap do">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+        Summarise multiple active values as a count — "3 selected". Show "All" when nothing is filtered.
+      </div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-prev" style="gap:8px;">
+        <button class="sel-btn" style="pointer-events:none;max-width:180px;overflow:hidden;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Active, Draft, Pending</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="dd-cap dont">
+        <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+        Don't list every selected value — the button overflows and becomes impossible to scan.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section class="section" id="usage">
+  <h2 class="text-l3">Usage</h2>
+  <div class="usage-cols">
+    <div>
+      <div class="usage-col-hd do">Use when</div>
+      <ul class="usage-list">
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> A user must pick from a predefined list too long to show as radio buttons or checkboxes</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters appear side by side in a toolbar (Selection Button)</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The active selection should always stay visible without opening a panel</li>
+      </ul>
+    </div>
+    <div>
+      <div class="usage-col-hd dont">Avoid when</div>
+      <ul class="usage-list">
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> Fewer than 4 options are available — use radio buttons or a segmented control instead</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 Selection Buttons appear in a row — consider a dedicated filter panel</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> The action triggers immediately rather than changing a view setting</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="text-l4">Content guidelines</h3>
+  <p>Form field labels: 1–3 words, sentence case. Describe the dimension being selected — "Country" not "Select a country". Use "Select…" as the standard placeholder, never custom prompts. Selection Button names: one word ending in a colon. Values should mirror the exact label from the dropdown — don't abbreviate.</p>
+</section>
+
+<!-- ACCESSIBILITY -->
+<section class="section" id="accessibility">
+  <h2 class="text-l3">Accessibility</h2>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Use a native <code>&lt;select&gt;</code> or a proper ARIA combobox.</strong> Native selects get keyboard and screen-reader support for free. Custom dropdowns must have <code>role="combobox"</code>, <code>aria-expanded</code>, and <code>aria-haspopup="listbox"</code>.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Always associate a visible label.</strong> Use <code>&lt;label for="..."&gt;</code> or <code>aria-labelledby</code>. Never rely on placeholder text as the label — it disappears on interaction.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Link validation messages with <code>aria-describedby</code>.</strong> Set the attribute on the field so screen readers announce the error or warning after reading the label.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need accessible names.</strong> <code>aria-label="Remove Result"</code> — the visible ✕ alone is not sufficient for screen readers.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selection Button needs <code>aria-label</code>.</strong> Since there is no form label above, use <code>aria-label="Sort: Newest first"</code> so the full meaning is announced, not just "button".</div></div>
+  </div>
+</section>
+
+</article>
+
+<!-- DESIGN TOC -->
+<aside class="toc">
+  <nav class="toc-nav">
+    <div class="toc-label">On this page</div>
+    <a class="toc-link" href="#anatomy">Anatomy</a>
+    <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#states-single">Single Select states</a>
+    <a class="toc-link" href="#states-multi">Multi Select states</a>
+    <a class="toc-link" href="#selection-button">Selection Button</a>
+    <a class="toc-link" href="#usage">Usage</a>
+    <a class="toc-link" href="#accessibility">Accessibility</a>
+  </nav>
+</aside>
+</div>
+</div><!-- design panel -->
+
+<!-- ═══════════ DEVELOPER PANEL ═══════════ -->
+<div class="tab-panel hidden" data-panel="developer">
+<div class="content-cols">
+<article class="content">
+
+<!-- PLAYGROUND -->
+<section class="section" id="dev-playground">
+  <h2 class="text-l3">Playground</h2>
+  <p class="section-lead">Configure props and see the component update live.</p>
+  <div class="pg-card">
+    <div class="pg-preview" id="sl-pg-preview"></div>
+    <div class="pg-bottom">
+      <div class="pg-tab-bar">
+        <button class="pg-tab is-active" data-sltab="props">Properties</button>
+        <button class="pg-tab" data-sltab="code">Code</button>
+      </div>
+      <div class="pg-pane" id="sl-pane-props">
+        <div class="pg-row">
+          <label class="pg-lbl">Variant</label>
+          <select class="pg-sel" id="sl-variant">
+            <option value="single">Single Select</option>
+            <option value="multi">Multi Select</option>
+            <option value="selbtn">Selection Button</option>
+          </select>
+        </div>
+        <div class="pg-row" id="sl-row-state">
+          <label class="pg-lbl">State</label>
+          <select class="pg-sel" id="sl-state">
+            <option value="">Default</option>
+            <option value="is-hover">Hover</option>
+            <option value="is-focus">Focus</option>
+            <option value="is-filled">Filled in</option>
+            <option value="is-error">Error</option>
+            <option value="is-disabled">Disabled</option>
+          </select>
+        </div>
+        <div class="pg-row" id="sl-row-label">
+          <label class="pg-lbl">Label</label>
+          <input class="pg-input" id="sl-label" type="text" value="Label text">
+        </div>
+        <div class="pg-row hidden" id="sl-row-chips">
+          <label class="pg-lbl">Show chips</label>
+          <input type="checkbox" id="sl-chips">
+        </div>
+        <div class="pg-row hidden" id="sl-row-sbname">
+          <label class="pg-lbl">Name</label>
+          <input class="pg-input" id="sl-sbname" type="text" value="Sort:">
+        </div>
+        <div class="pg-row hidden" id="sl-row-sbvalue">
+          <label class="pg-lbl">Value</label>
+          <input class="pg-input" id="sl-sbvalue" type="text" value="Newest">
+        </div>
+        <div class="pg-row hidden" id="sl-row-sbinline">
+          <label class="pg-lbl">Inline</label>
+          <input type="checkbox" id="sl-sbinline">
+        </div>
+      </div>
+      <div class="pg-pane hidden" id="sl-pane-code">
+        <div style="position:relative;">
+          <button class="dev-copy-btn" id="sl-copy-btn" onclick="(function(){var c=document.getElementById('sl-code-out').textContent;navigator.clipboard.writeText(c);var b=document.getElementById('sl-copy-btn');b.textContent='Copied!';b.classList.add('did-copy');setTimeout(function(){b.textContent='Copy';b.classList.remove('did-copy');},1500);})()">Copy</button>
+          <pre class="code-block" id="sl-code-out" style="margin:0;min-height:60px;"></pre>
+        </div>
+      </div>
+    </div>
+    <div class="pg-footer">
+      <button class="pg-reset" id="sl-reset-btn">↺ Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section class="section" id="dev-usage">
+  <h2 class="text-l3">Usage</h2>
+
+  <h3 class="text-l4">Single Select</h3>
+  <div class="dev-preview">
+    <div class="slt-wrap" style="width:240px;">
+      <div class="slt-lbl">Country</div>
+      <div class="slt"><div class="slt-left"><span class="slt-ph">Select...</span></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+  <div class="code-block-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre class="code-block">&lt;div class="select-field"&gt;
+  &lt;label class="select-label" for="country"&gt;Country&lt;/label&gt;
+  &lt;select class="select" id="country" name="country"&gt;
+    &lt;option value="" disabled selected&gt;Select...&lt;/option&gt;
+    &lt;option value="nl"&gt;Netherlands&lt;/option&gt;
+    &lt;option value="de"&gt;Germany&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <h3 class="text-l4">Multi Select</h3>
+  <div class="dev-preview">
+    <div style="display:flex;flex-direction:column;gap:4px;width:240px;">
+      <div class="slt-lbl">Tags</div>
+      <div class="ms">
+        <div class="chip">Design <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+  <div class="code-block-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre class="code-block">&lt;div class="select-field"&gt;
+  &lt;label class="select-label" for="tags"&gt;Tags&lt;/label&gt;
+  &lt;select class="multi-select" id="tags" name="tags" multiple&gt;
+    &lt;option value="design"&gt;Design&lt;/option&gt;
+    &lt;option value="dev"&gt;Development&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <h3 class="text-l4">Selection Button — bordered</h3>
+  <div class="dev-preview" style="gap:8px;">
+    <button class="sel-btn">
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest first</span>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="code-block-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre class="code-block">&lt;button class="selection-button" aria-label="Sort: Newest first"&gt;
+  &lt;i data-icon="filter"&gt;&lt;/i&gt;
+  &lt;span class="selection-button__name"&gt;Sort:&lt;/span&gt;
+  &lt;span class="selection-button__value"&gt;Newest first&lt;/span&gt;
+  &lt;i data-icon="chevron-down"&gt;&lt;/i&gt;
+&lt;/button&gt;</pre>
+  </div>
+
+  <h3 class="text-l4">Selection Button — inline</h3>
+  <div class="dev-preview">
+    <button class="sel-btn sel-btn-inline">
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest first</span>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="code-block-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre class="code-block">&lt;button class="selection-button inline" aria-label="Sort: Newest first"&gt;
+  &lt;i data-icon="filter"&gt;&lt;/i&gt;
+  &lt;span class="selection-button__name"&gt;Sort:&lt;/span&gt;
+  &lt;span class="selection-button__value"&gt;Newest first&lt;/span&gt;
+  &lt;i data-icon="chevron-down"&gt;&lt;/i&gt;
+&lt;/button&gt;</pre>
+  </div>
+
+  <div class="dev-gap">
+    <span class="dev-gap-icon">⚠️</span>
+    <div class="dev-gap-body">
+      <span class="dev-gap-label">Figma gap</span>
+      <span class="dev-gap-text">The Single Select and Multi Select components are not yet available as self-contained dev components. Currently teams implement custom dropdowns. The class names above reflect the intended naming convention once the component is released.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CSS CLASSES -->
+<section class="section" id="dev-classes">
+  <h2 class="text-l3">CSS classes</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>CLASS</th><th>ELEMENT</th><th>DESCRIPTION</th></tr></thead>
+      <tbody>
+        <tr><td><code>select-field</code></td><td>div</td><td>Flex column wrapper — label above, field below</td></tr>
+        <tr><td><code>select-label</code></td><td>label</td><td>14px SemiBold label above the field</td></tr>
+        <tr><td><code>select</code></td><td>select</td><td>Single Select field</td></tr>
+        <tr><td><code>multi-select</code></td><td>select[multiple]</td><td>Multi Select — renders chips per selection</td></tr>
+        <tr><td><code>selection-button</code></td><td>button</td><td>Inline filter trigger, bordered appearance</td></tr>
+        <tr><td><code>selection-button inline</code></td><td>button</td><td>Inline appearance — no border at rest</td></tr>
+        <tr><td><code>selection-button__name</code></td><td>span</td><td>Dimension label (SemiBold)</td></tr>
+        <tr><td><code>selection-button__value</code></td><td>span</td><td>Active value (Medium weight)</td></tr>
+        <tr><td><code>is-error</code></td><td>select</td><td>Red border, shows error message</td></tr>
+        <tr><td><code>is-warning</code></td><td>select</td><td>Orange border, shows warning message</td></tr>
+        <tr><td><code>disabled</code></td><td>select, button</td><td>Disabled styling + prevents interaction</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CSS TOKENS -->
+<section class="section" id="dev-tokens">
+  <h2 class="text-l3">CSS tokens</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
+      <tbody>
+        <tr><td><span class="token"><span class="swatch" style="background:#fff;border:1px solid #ddd;"></span>bg/base</span></td><td>#ffffff</td><td>Field background (default)</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.08);"></span>bg/disabled</span></td><td>rgba(25,39,67,.08)</td><td>Disabled background</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td>#bcc1cd</td><td>Default border</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#a5adbc;"></span>border/action-hover</span></td><td>#a5adbc</td><td>Hover border</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>border/action-focus</span></td><td>#0a9d99</td><td>Focus / open border (teal)</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#b9252a;"></span>border/negative/base</span></td><td>#b9252a</td><td>Error border</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#ec6e0a;"></span>border/warning/base</span></td><td>#ec6e0a</td><td>Warning border</td></tr>
+        <tr><td><span class="token"><span class="swatch" style="background:#3174db;"></span>bg/info/base</span></td><td>#3174db</td><td>Chip background (Multi Select)</td></tr>
+        <tr><td><span class="token">radius/md</span></td><td>6px</td><td>Field corner radius</td></tr>
+        <tr><td><span class="token">shadow/action</span></td><td>var(--sh-action)</td><td>Field drop shadow</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- A11Y -->
+<section class="section" id="dev-a11y">
+  <h2 class="text-l3">Accessibility</h2>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Form fields need a <code>&lt;label&gt;</code>.</strong> Use <code>&lt;label for="id"&gt;</code> linked to the field's <code>id</code>. Never rely on placeholder text alone.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Error messages need <code>aria-describedby</code>.</strong> <code>aria-describedby="field-error"</code> on the field + <code>id="field-error"</code> on the message element.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need a label.</strong> <code>&lt;button aria-label="Remove Design"&gt;</code> — the ✕ glyph alone isn't descriptive enough.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selection Button needs <code>aria-label</code>.</strong> <code>aria-label="Sort: Newest first"</code> describes the full control, not just "button".</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Custom dropdowns must manage focus.</strong> Move focus to the first option when the dropdown opens. Close on <kbd>Escape</kbd> and return focus to the trigger. Arrow keys navigate between options.</div></div>
+  </div>
+</section>
+
+</article>
+
+<!-- DEVELOPER TOC -->
+<aside class="toc">
+  <nav class="toc-nav">
+    <div class="toc-label">On this page</div>
+    <a class="toc-link" href="#dev-playground">Playground</a>
+    <a class="toc-link" href="#dev-usage">Usage</a>
+    <a class="toc-link" href="#dev-classes">CSS classes</a>
+    <a class="toc-link" href="#dev-tokens">CSS tokens</a>
+    <a class="toc-link" href="#dev-a11y">Accessibility</a>
+  </nav>
+</aside>
+</div>
+</div><!-- developer panel -->
+
+<!-- PAGINATION -->
+<nav class="pagination">
+  <a class="pag-card" href="button-big-docs.html">
+    <span class="pag-dir">← Previous</span>
+    <span class="pag-name">Button Big</span>
+  </a>
+  <a class="pag-card" href="sentiment-button-docs.html">
+    <span class="pag-dir">Next →</span>
+    <span class="pag-name">Sentiment Button</span>
+  </a>
+</nav>
+
+</div><!-- .content-wrap -->
+</div><!-- .shell -->
+
+<script>
+(function() {
+  // Playground tab switching
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-sltab]');
+    if (!btn) return;
+    var tab = btn.dataset.sltab;
+    btn.closest('.pg-tab-bar').querySelectorAll('.pg-tab').forEach(function(t){ t.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    var bottom = btn.closest('.pg-bottom');
+    bottom.querySelectorAll('.pg-pane').forEach(function(p){ p.classList.add('hidden'); });
+    bottom.querySelector('#sl-pane-' + tab).classList.remove('hidden');
+    if (tab === 'code') slUpdateCode();
+  });
+
+  var CHEVRON = '<svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var FILTER  = '<svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  var CHIPX   = '<svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;flex-shrink:0;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  var MSCHEV  = '<svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function slGetProps() {
+    return {
+      variant:  document.getElementById('sl-variant').value,
+      state:    document.getElementById('sl-state').value,
+      label:    document.getElementById('sl-label').value || 'Label text',
+      chips:    document.getElementById('sl-chips').checked,
+      sbname:   document.getElementById('sl-sbname').value || 'Sort:',
+      sbvalue:  document.getElementById('sl-sbvalue').value || 'Newest',
+      sbinline: document.getElementById('sl-sbinline').checked
+    };
+  }
+
+  function slRender() {
+    var p = slGetProps();
+
+    // Toggle property rows
+    document.getElementById('sl-row-label').classList.toggle('hidden', p.variant === 'selbtn');
+    document.getElementById('sl-row-chips').classList.toggle('hidden', p.variant !== 'multi');
+    document.getElementById('sl-row-sbname').classList.toggle('hidden', p.variant !== 'selbtn');
+    document.getElementById('sl-row-sbvalue').classList.toggle('hidden', p.variant !== 'selbtn');
+    document.getElementById('sl-row-sbinline').classList.toggle('hidden', p.variant !== 'selbtn');
+
+    // Update state options per variant
+    var stateEl = document.getElementById('sl-state');
+    var cur = stateEl.value;
+    if (p.variant === 'selbtn') {
+      stateEl.innerHTML = '<option value="">Default</option><option value="is-hover">Hover</option><option value="is-pressed">Pressed</option>';
+    } else {
+      stateEl.innerHTML = '<option value="">Default</option><option value="is-hover">Hover</option><option value="is-focus">Focus</option><option value="is-filled">Filled in</option><option value="is-error">Error</option><option value="is-disabled">Disabled</option>';
+    }
+    if (stateEl.querySelector('[value="'+cur+'"]')) stateEl.value = cur;
+
+    var state = stateEl.value;
+    var isFilled = state === 'is-filled' || state === 'is-error';
+    var isDisabled = state === 'is-disabled';
+    var html = '';
+
+    if (p.variant === 'single') {
+      html = '<div class="slt-wrap" style="width:240px;">'
+           + '<div class="slt-lbl"' + (isDisabled ? ' style="color:var(--content-disabled);"' : '') + '>' + p.label + '</div>'
+           + '<div class="slt ' + state + '" style="pointer-events:none;">'
+           + '<div class="slt-left">' + (isFilled ? '<span class="slt-val">Value</span>' : '<span class="slt-ph">Select...</span>') + '</div>'
+           + CHEVRON + '</div>';
+      if (state === 'is-error') {
+        html += '<div class="slt-err"><svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px;"><circle cx="8" cy="8" r="6" stroke="#b9252a" stroke-width="1.5"/><path d="M8 5v3M8 11h.01" stroke="#b9252a" stroke-width="1.5" stroke-linecap="round"/></svg> Error message</div>';
+      }
+      html += '</div>';
+    } else if (p.variant === 'multi') {
+      html = '<div style="display:flex;flex-direction:column;gap:4px;width:240px;">'
+           + '<div class="slt-lbl"' + (isDisabled ? ' style="color:var(--content-disabled);"' : '') + '>' + p.label + '</div>'
+           + '<div class="ms ' + state + '" style="pointer-events:none;">';
+      if (p.chips && !isDisabled) {
+        html += '<div class="chip">Result ' + CHIPX + '</div><div class="chip">Option ' + CHIPX + '</div>';
+      } else {
+        html += '<span class="ms-ph">Select...</span>';
+      }
+      html += MSCHEV + '</div></div>';
+    } else {
+      var cls = 'sel-btn' + (p.sbinline ? ' sel-btn-inline' : '') + (state ? ' ' + state : '');
+      html = '<button class="' + cls + '" style="pointer-events:none;">'
+           + FILTER
+           + '<span class="sel-btn-name">' + p.sbname + '</span>'
+           + '<span class="sel-btn-value">' + p.sbvalue + '</span>'
+           + CHEVRON + '</button>';
+    }
+
+    document.getElementById('sl-pg-preview').innerHTML = html;
+    slUpdateCode();
+  }
+
+  function slUpdateCode() {
+    var p = slGetProps();
+    var state = document.getElementById('sl-state').value;
+    var code = '';
+    if (p.variant === 'single') {
+      code = '<div class="select-field">\n'
+           + '  <label class="select-label" for="field">' + p.label + '</label>\n'
+           + '  <select class="select' + (state === 'is-error' ? ' is-error' : '') + '"'
+           + (state === 'is-disabled' ? ' disabled' : '') + ' id="field">\n'
+           + '    <option value="" disabled selected>Select...</option>\n'
+           + '  </select>\n</div>';
+    } else if (p.variant === 'multi') {
+      code = '<div class="select-field">\n'
+           + '  <label class="select-label" for="field">' + p.label + '</label>\n'
+           + '  <select class="multi-select" id="field" multiple'
+           + (state === 'is-disabled' ? ' disabled' : '') + '>\n'
+           + '    <option value="a">Option A</option>\n'
+           + '  </select>\n</div>';
+    } else {
+      var inline = p.sbinline ? ' inline' : '';
+      code = '<button class="selection-button' + inline + '" aria-label="' + p.sbname + ' ' + p.sbvalue + '">\n'
+           + '  <i data-icon="filter"></i>\n'
+           + '  <span class="selection-button__name">' + p.sbname + '</span>\n'
+           + '  <span class="selection-button__value">' + p.sbvalue + '</span>\n'
+           + '  <i data-icon="chevron-down"></i>\n</button>';
+    }
+    document.getElementById('sl-code-out').textContent = code;
+  }
+
+  ['sl-variant','sl-state','sl-chips','sl-sbinline'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', slRender);
+  });
+  ['sl-label','sl-sbname','sl-sbvalue'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', slRender);
+  });
+
+  document.getElementById('sl-reset-btn').addEventListener('click', function() {
+    document.getElementById('sl-variant').value = 'single';
+    document.getElementById('sl-label').value = 'Label text';
+    document.getElementById('sl-chips').checked = false;
+    document.getElementById('sl-sbname').value = 'Sort:';
+    document.getElementById('sl-sbvalue').value = 'Newest';
+    document.getElementById('sl-sbinline').checked = false;
+    slRender();
+    document.getElementById('sl-state').value = '';
+    slRender();
+  });
+
+  slRender();
+
+  function copyCode(btn) {
+    var pre = btn.nextElementSibling;
+    navigator.clipboard.writeText(pre.textContent);
+    btn.textContent = 'Copied!';
+    btn.classList.add('did-copy');
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('did-copy'); }, 1500);
+  }
+  window.copyCode = copyCode;
+})();
+</script>
+
 </body>
 </html>
