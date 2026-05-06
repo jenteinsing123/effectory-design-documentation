@@ -912,6 +912,7 @@
       <div class="pg-tab-bar">
         <button class="pg-tab is-active" data-sltab="props">Properties</button>
         <button class="pg-tab" data-sltab="code">Code</button>
+        <button class="pg-reset" id="sl-reset-btn">Reset</button>
       </div>
       <div class="pg-panel" id="sl-pane-props">
         <div class="pg-row">
@@ -966,15 +967,10 @@
           </div>
         </div>
       </div>
-      <div class="pg-panel hidden" id="sl-pane-code">
-        <div style="position:relative;">
-          <button class="dev-copy-btn" id="sl-copy-btn" onclick="(function(){var c=document.getElementById('sl-code-out').textContent;navigator.clipboard.writeText(c);var b=document.getElementById('sl-copy-btn');b.textContent='Copied!';b.classList.add('did-copy');setTimeout(function(){b.textContent='Copy';b.classList.remove('did-copy');},1500);})()">Copy</button>
-          <pre class="code-block" id="sl-code-out" style="margin:0;min-height:60px;"></pre>
-        </div>
+      <div class="pg-panel pg-code-wrap hidden" id="sl-pane-code">
+        <button class="dev-copy-btn" id="sl-copy-btn" onclick="(function(){var c=document.getElementById('sl-code-out').textContent;navigator.clipboard.writeText(c);var b=document.getElementById('sl-copy-btn');b.textContent='Copied!';b.classList.add('did-copy');setTimeout(function(){b.textContent='Copy';b.classList.remove('did-copy');},1500);})()">Copy</button>
+        <pre><code id="sl-code-out"></code></pre>
       </div>
-    </div>
-    <div class="pg-footer">
-      <button class="pg-reset" id="sl-reset-btn">↺ Reset</button>
     </div>
   </div>
 </section>
@@ -990,16 +986,16 @@
       <div class="slt"><div class="slt-left"><span class="slt-ph">Select...</span></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
-  <div class="code-block-wrap">
+  <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;div class="select-field"&gt;
+<pre><code>&lt;div class="select-field"&gt;
   &lt;label class="select-label" for="country"&gt;Country&lt;/label&gt;
   &lt;select class="select" id="country" name="country"&gt;
     &lt;option value="" disabled selected&gt;Select...&lt;/option&gt;
     &lt;option value="nl"&gt;Netherlands&lt;/option&gt;
     &lt;option value="de"&gt;Germany&lt;/option&gt;
   &lt;/select&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">Multi Select</h3>
@@ -1012,15 +1008,15 @@
       </div>
     </div>
   </div>
-  <div class="code-block-wrap">
+  <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;div class="select-field"&gt;
+<pre><code>&lt;div class="select-field"&gt;
   &lt;label class="select-label" for="tags"&gt;Tags&lt;/label&gt;
   &lt;select class="multi-select" id="tags" name="tags" multiple&gt;
     &lt;option value="design"&gt;Design&lt;/option&gt;
     &lt;option value="dev"&gt;Development&lt;/option&gt;
   &lt;/select&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">Named select — bordered</h3>
@@ -1032,16 +1028,16 @@
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
-  <div class="code-block-wrap">
+  <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;div class="inline-select"&gt;
+<pre><code>&lt;div class="inline-select"&gt;
   &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
   &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
   &lt;select class="inline-select__field" aria-label="Sort"&gt;
     &lt;option value="newest"&gt;Newest first&lt;/option&gt;
     &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
   &lt;/select&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">Named select — inline</h3>
@@ -1053,16 +1049,16 @@
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
-  <div class="code-block-wrap">
+  <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre class="code-block">&lt;div class="inline-select inline"&gt;
+<pre><code>&lt;div class="inline-select inline"&gt;
   &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
   &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
   &lt;select class="inline-select__field" aria-label="Sort"&gt;
     &lt;option value="newest"&gt;Newest first&lt;/option&gt;
     &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
   &lt;/select&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
   </div>
 
   <div class="dev-gap">
