@@ -60,12 +60,12 @@
       padding:2px 8px; border-radius:4px;
       font-size:13px; font-weight:500; line-height:20px;
       display:inline-flex; align-items:center; gap:4px;
-      color:#fff; background:var(--bg-info-base);
+      background:var(--bg-tertiary); color:var(--content-base);
     }
     .chip svg { width:10px; height:10px; flex-shrink:0; opacity:.8; }
-    .chip-error   { background:var(--bg-negative-base); }
-    .chip-warning { background:var(--bg-warning-bold); }
-    .chip-user    { background:var(--bg-tertiary); color:var(--content-base); }
+    .chip-info    { background:var(--bg-info-base); color:#fff; }
+    .chip-error   { background:var(--bg-negative-base); color:#fff; }
+    .chip-warning { background:var(--bg-warning-bold); color:#fff; }
     .ms-text-val  { color:var(--content-base); font-size:14px; }
 
     /* ── Selection Button ── */
@@ -565,6 +565,11 @@
     <div class="state-col">
       <div class="state-lbl">Default</div>
       <div class="chip">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-tertiary</div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Info</div>
+      <div class="chip chip-info">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-info-base</div>
     </div>
     <div class="state-col">
@@ -576,11 +581,6 @@
       <div class="state-lbl">Warning</div>
       <div class="chip chip-warning">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-warning-bold</div>
-    </div>
-    <div class="state-col">
-      <div class="state-lbl">User</div>
-      <div class="chip chip-user">Label <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div style="font-size:12px;color:var(--content-subtle);margin-top:4px;">bg-tertiary</div>
     </div>
   </div>
 
