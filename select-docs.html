@@ -89,6 +89,81 @@
     .states-row { display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; margin-bottom:var(--spacing-loose); }
     .state-col  { display:flex; flex-direction:column; gap:8px; }
     .state-lbl  { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--content-subtle); }
+
+    /* ── Dropdown menu (open state) ── */
+    .menu-stack { display:flex; flex-direction:column; gap:6px; width:280px; }
+    .menu {
+      background:var(--bg-base);
+      border:1px solid var(--border-default);
+      border-radius:8px;
+      box-shadow:0 8px 24px rgba(25,39,67,.12), 0 2px 6px rgba(25,39,67,.08);
+      padding:4px;
+      width:280px;
+      max-height:280px;
+      overflow:auto;
+      font-size:14px;
+    }
+    .menu-search {
+      display:flex; align-items:center; gap:8px;
+      padding:6px 8px; margin-bottom:4px;
+      border-bottom:1px solid var(--border-default);
+    }
+    .menu-search svg { width:14px; height:14px; color:var(--content-subtle); flex-shrink:0; }
+    .menu-search input {
+      border:0; outline:0; background:transparent; flex:1;
+      font-size:14px; color:var(--content-base);
+    }
+    .menu-search input::placeholder { color:var(--content-subtle); }
+    .menu-group-lbl {
+      font-size:11px; font-weight:700; text-transform:uppercase;
+      letter-spacing:.06em; color:var(--content-subtle);
+      padding:8px 10px 4px;
+    }
+    .menu-divider { height:1px; background:var(--border-default); margin:4px 0; }
+    .menu-item {
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:6px;
+      cursor:pointer; color:var(--content-base);
+      line-height:20px;
+    }
+    .menu-item:hover { background:var(--bg-hover); }
+    .menu-item.is-selected { background:var(--bg-selected, rgba(10,157,153,.10)); color:var(--content-base); }
+    .menu-item.is-focus  { background:var(--bg-hover); box-shadow:inset 0 0 0 2px var(--border-action-focus); }
+    .menu-item.is-disabled { color:var(--content-disabled); cursor:not-allowed; }
+    .menu-item-text { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .menu-item-check { width:14px; height:14px; color:var(--content-action); flex-shrink:0; }
+    .menu-item .flag {
+      width:18px; height:14px; border-radius:2px; flex-shrink:0; overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(25,39,67,.08);
+    }
+    .menu-item-icon { width:16px; height:16px; color:var(--content-subtle); flex-shrink:0; }
+    /* multi-select option uses a checkbox */
+    .menu-cb {
+      width:16px; height:16px; border:1.5px solid var(--border-action);
+      border-radius:4px; background:var(--bg-base);
+      display:inline-flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .menu-item.is-selected .menu-cb {
+      background:var(--bg-action-base); border-color:var(--bg-action-base);
+    }
+    .menu-cb svg { width:10px; height:10px; color:#fff; opacity:0; }
+    .menu-item.is-selected .menu-cb svg { opacity:1; }
+    .menu-empty { padding:14px 10px; color:var(--content-subtle); font-size:13px; text-align:center; }
+    .menu-footer {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:6px 8px; margin-top:4px;
+      border-top:1px solid var(--border-default);
+      font-size:13px;
+    }
+    .menu-footer button {
+      border:0; background:transparent; color:var(--content-action);
+      font-weight:500; cursor:pointer; padding:4px 6px; border-radius:4px;
+    }
+    .menu-footer button:hover { background:var(--bg-hover); }
+
+    /* trigger + menu container for visual demo */
+    .open-demo { display:flex; flex-direction:column; gap:6px; width:280px; }
   </style>
 </head>
 <body>
@@ -614,6 +689,172 @@
   </div>
 </section>
 
+<!-- DROPDOWN MENU -->
+<section class="section" id="dropdown-menu">
+  <h2 class="text-l3">Dropdown menu</h2>
+  <p class="section-lead">When the trigger is opened, a floating menu appears below it with the available options. The menu is anchored to the trigger and matches its width by default.</p>
+
+  <h3 class="text-l4">Single Select menu</h3>
+  <p>Options are listed vertically. Hovering an option highlights it; the currently selected value is marked with a check icon. Keyboard users navigate with <kbd>↑</kbd>/<kbd>↓</kbd> and confirm with <kbd>Enter</kbd>.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Default</div>
+      <div class="open-demo">
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">Most relevant</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="menu" role="listbox">
+          <div class="menu-item" role="option"><span class="menu-item-text">Most relevant</span><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="menu-item is-focus" role="option"><span class="menu-item-text">Newest first</span></div>
+          <div class="menu-item" role="option"><span class="menu-item-text">Oldest first</span></div>
+          <div class="menu-item" role="option"><span class="menu-item-text">A → Z</span></div>
+          <div class="menu-item is-disabled" role="option" aria-disabled="true"><span class="menu-item-text">Custom order</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">With search</div>
+      <div class="open-demo">
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">Netherlands</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="menu" role="listbox">
+          <div class="menu-search">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="Search countries…" aria-label="Search countries">
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="flag" style="background:linear-gradient(to bottom,#ae1c28 33%,#fff 33% 66%,#21468b 66%);"></span>
+            <span class="menu-item-text">Netherlands</span>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option">
+            <span class="flag" style="background:linear-gradient(to right,#000 33%,#dd0000 33% 66%,#ffce00 66%);"></span>
+            <span class="menu-item-text">Germany</span>
+          </div>
+          <div class="menu-item" role="option">
+            <span class="flag" style="background:linear-gradient(to right,#0055a4 33%,#fff 33% 66%,#ef4135 66%);"></span>
+            <span class="menu-item-text">France</span>
+          </div>
+          <div class="menu-item" role="option">
+            <span class="flag" style="background:linear-gradient(135deg,#012169 50%,#fff 50%);"></span>
+            <span class="menu-item-text">United Kingdom</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Grouped</div>
+      <div class="open-demo">
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">Engineering</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="menu" role="listbox">
+          <div class="menu-group-lbl">Product</div>
+          <div class="menu-item" role="option"><span class="menu-item-text">Design</span></div>
+          <div class="menu-item" role="option"><span class="menu-item-text">Research</span></div>
+          <div class="menu-divider"></div>
+          <div class="menu-group-lbl">Tech</div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="menu-item-text">Engineering</span>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option"><span class="menu-item-text">DevOps</span></div>
+          <div class="menu-item" role="option"><span class="menu-item-text">Data</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Multi Select menu</h3>
+  <p>Each option has a checkbox so users can toggle multiple values without closing the menu. A search field appears when the list is long. An optional footer offers a clear-all action and shows the selection count.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Checkboxes</div>
+      <div class="open-demo">
+        <div class="ms is-focus">
+          <span class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <span class="chip">Engagement <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="menu-item-text">Result</span>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="menu-item-text">Engagement</span>
+          </div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Leadership</span></div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Wellbeing</span></div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Collaboration</span></div>
+          <div class="menu-footer">
+            <span style="color:var(--content-subtle);">2 selected</span>
+            <button type="button">Clear all</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">With search</div>
+      <div class="open-demo">
+        <div class="ms is-focus">
+          <span class="chip">Q1 2026 <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-search">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" value="Q1" aria-label="Filter options">
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="menu-item-text">Q1 2026</span>
+          </div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Q1 2025</span></div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Q1 2024</span></div>
+          <div class="menu-footer">
+            <span style="color:var(--content-subtle);">1 selected</span>
+            <button type="button">Clear all</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Empty result</div>
+      <div class="open-demo">
+        <div class="ms is-focus">
+          <span class="slt-ph">Pick one or more…</span>
+        </div>
+        <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-search">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" value="xyz" aria-label="Filter options">
+          </div>
+          <div class="menu-empty">No options match “xyz”.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Behaviour</h3>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Anchored to the trigger.</strong> The menu opens directly below the field by default, flipping above when there is not enough space.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Width.</strong> Menu matches trigger width. For Named selects in toolbars, the menu may be wider than the trigger to fit longer option labels.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Search threshold.</strong> Show the search input when the list has more than 7 options or contains free-form values like countries, languages or users.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Closing.</strong> Single Select closes on selection. Multi Select stays open so users can toggle several values; it closes on outside click, <kbd>Esc</kbd>, or focus moving away.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Max height.</strong> Constrain to ~280px and scroll inside the menu rather than letting it grow off-screen.</div></div>
+  </div>
+</section>
+
 <!-- ACCESSIBILITY -->
 <section class="section" id="accessibility">
   <h2 class="text-l3">Accessibility</h2>
@@ -626,21 +867,33 @@
   </div>
 </section>
 
+<!-- PAGINATION -->
+<div class="pagination">
+  <a class="pag-card" href="textarea-docs.html">
+    <span class="pag-dir">← Previous</span>
+    <span class="pag-name">Textarea</span>
+  </a>
+  <a class="pag-card right" href="checkbox-docs.html">
+    <span class="pag-dir">Next →</span>
+    <span class="pag-name">Checkbox</span>
+  </a>
+</div>
+
 </article>
 
-<!-- DESIGN TOC -->
-<aside class="toc">
-  <nav class="toc-nav">
-    <div class="toc-label">On this page</div>
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#anatomy">Anatomy</a>
     <a class="toc-link" href="#variants">Variants</a>
     <a class="toc-link" href="#usage">Usage</a>
     <a class="toc-link" href="#states-single">Single Select states</a>
     <a class="toc-link" href="#select-with-icon">Select with icon</a>
     <a class="toc-link" href="#states-multi">Multi Select states</a>
+    <a class="toc-link" href="#dropdown-menu">Dropdown menu</a>
     <a class="toc-link" href="#accessibility">Accessibility</a>
   </nav>
-</aside>
+</div>
 </div>
 </div><!-- design panel -->
 
@@ -660,48 +913,60 @@
         <button class="pg-tab is-active" data-sltab="props">Properties</button>
         <button class="pg-tab" data-sltab="code">Code</button>
       </div>
-      <div class="pg-pane" id="sl-pane-props">
+      <div class="pg-panel" id="sl-pane-props">
         <div class="pg-row">
-          <label class="pg-lbl">Variant</label>
-          <select class="pg-sel" id="sl-variant">
-            <option value="single">Single Select</option>
-            <option value="multi">Multi Select</option>
-            <option value="selbtn">Named select</option>
-          </select>
+          <div class="pg-row-name">variant</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-radio"><input type="radio" name="sl-variant" value="single" checked> single</label>
+            <label class="pg-radio"><input type="radio" name="sl-variant" value="multi"> multi</label>
+            <label class="pg-radio"><input type="radio" name="sl-variant" value="selbtn"> named</label>
+          </div>
         </div>
         <div class="pg-row" id="sl-row-state">
-          <label class="pg-lbl">State</label>
-          <select class="pg-sel" id="sl-state">
-            <option value="">Default</option>
-            <option value="is-hover">Hover</option>
-            <option value="is-focus">Focus</option>
-            <option value="is-filled">Filled in</option>
-            <option value="is-error">Error</option>
-            <option value="is-disabled">Disabled</option>
-          </select>
+          <div class="pg-row-name">state</div>
+          <div class="pg-row-ctrl">
+            <select class="pg-select" id="sl-state">
+              <option value="">Default</option>
+              <option value="is-hover">Hover</option>
+              <option value="is-focus">Focus</option>
+              <option value="is-filled">Filled in</option>
+              <option value="is-error">Error</option>
+              <option value="is-disabled">Disabled</option>
+            </select>
+          </div>
         </div>
         <div class="pg-row" id="sl-row-label">
-          <label class="pg-lbl">Label</label>
-          <input class="pg-input" id="sl-label" type="text" value="Label text">
+          <div class="pg-row-name">label</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-label" type="text" value="Label text">
+          </div>
         </div>
         <div class="pg-row hidden" id="sl-row-chips">
-          <label class="pg-lbl">Show chips</label>
-          <input type="checkbox" id="sl-chips">
+          <div class="pg-row-name">show chips</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-chips"><span class="pg-toggle-track"></span></label>
+          </div>
         </div>
         <div class="pg-row hidden" id="sl-row-sbname">
-          <label class="pg-lbl">Name</label>
-          <input class="pg-input" id="sl-sbname" type="text" value="Sort:">
+          <div class="pg-row-name">name</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-sbname" type="text" value="Sort:">
+          </div>
         </div>
         <div class="pg-row hidden" id="sl-row-sbvalue">
-          <label class="pg-lbl">Value</label>
-          <input class="pg-input" id="sl-sbvalue" type="text" value="Newest">
+          <div class="pg-row-name">value</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-sbvalue" type="text" value="Newest">
+          </div>
         </div>
         <div class="pg-row hidden" id="sl-row-sbinline">
-          <label class="pg-lbl">Inline</label>
-          <input type="checkbox" id="sl-sbinline">
+          <div class="pg-row-name">inline</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-sbinline"><span class="pg-toggle-track"></span></label>
+          </div>
         </div>
       </div>
-      <div class="pg-pane hidden" id="sl-pane-code">
+      <div class="pg-panel hidden" id="sl-pane-code">
         <div style="position:relative;">
           <button class="dev-copy-btn" id="sl-copy-btn" onclick="(function(){var c=document.getElementById('sl-code-out').textContent;navigator.clipboard.writeText(c);var b=document.getElementById('sl-copy-btn');b.textContent='Copied!';b.classList.add('did-copy');setTimeout(function(){b.textContent='Copy';b.classList.remove('did-copy');},1500);})()">Copy</button>
           <pre class="code-block" id="sl-code-out" style="margin:0;min-height:60px;"></pre>
@@ -866,33 +1131,32 @@
   </div>
 </section>
 
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <a class="pag-card" href="textarea-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Textarea</span>
+    </a>
+    <a class="pag-card right" href="checkbox-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Checkbox</span>
+    </a>
+  </div>
+
 </article>
 
-<!-- DEVELOPER TOC -->
-<aside class="toc">
-  <nav class="toc-nav">
-    <div class="toc-label">On this page</div>
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#dev-playground">Playground</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
     <a class="toc-link" href="#dev-classes">CSS classes</a>
     <a class="toc-link" href="#dev-tokens">CSS tokens</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
-</aside>
+</div>
 </div>
 </div><!-- developer panel -->
-
-<!-- PAGINATION -->
-<nav class="pagination">
-  <a class="pag-card" href="button-big-docs.html">
-    <span class="pag-dir">← Previous</span>
-    <span class="pag-name">Button Big</span>
-  </a>
-  <a class="pag-card" href="sentiment-button-docs.html">
-    <span class="pag-dir">Next →</span>
-    <span class="pag-name">Sentiment Button</span>
-  </a>
-</nav>
 
 </div><!-- .content-wrap -->
 </div><!-- .shell -->
@@ -907,7 +1171,7 @@
     btn.closest('.pg-tab-bar').querySelectorAll('.pg-tab').forEach(function(t){ t.classList.remove('is-active'); });
     btn.classList.add('is-active');
     var bottom = btn.closest('.pg-bottom');
-    bottom.querySelectorAll('.pg-pane').forEach(function(p){ p.classList.add('hidden'); });
+    bottom.querySelectorAll('.pg-panel').forEach(function(p){ p.classList.add('hidden'); });
     bottom.querySelector('#sl-pane-' + tab).classList.remove('hidden');
     if (tab === 'code') slUpdateCode();
   });
@@ -917,9 +1181,13 @@
   var CHIPX   = '<svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;flex-shrink:0;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
   var MSCHEV  = '<svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+  function slGetVariant() {
+    var r = document.querySelector('input[name="sl-variant"]:checked');
+    return r ? r.value : 'single';
+  }
   function slGetProps() {
     return {
-      variant:  document.getElementById('sl-variant').value,
+      variant:  slGetVariant(),
       state:    document.getElementById('sl-state').value,
       label:    document.getElementById('sl-label').value || 'Label text',
       chips:    document.getElementById('sl-chips').checked,
@@ -1018,7 +1286,8 @@
     document.getElementById('sl-code-out').textContent = code;
   }
 
-  ['sl-variant','sl-state','sl-chips','sl-sbinline'].forEach(function(id) {
+  document.querySelectorAll('input[name="sl-variant"]').forEach(function(r){ r.addEventListener('change', slRender); });
+  ['sl-state','sl-chips','sl-sbinline'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
@@ -1028,7 +1297,7 @@
   });
 
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
-    document.getElementById('sl-variant').value = 'single';
+    var rv = document.querySelector('input[name="sl-variant"][value="single"]'); if (rv) rv.checked = true;
     document.getElementById('sl-label').value = 'Label text';
     document.getElementById('sl-chips').checked = false;
     document.getElementById('sl-sbname').value = 'Sort:';
