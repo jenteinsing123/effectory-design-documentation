@@ -164,6 +164,8 @@
 
     /* trigger + menu container for visual demo */
     .open-demo { display:flex; flex-direction:column; gap:6px; width:280px; }
+
+    .hidden { display:none !important; }
   </style>
 </head>
 <body>
@@ -179,7 +181,7 @@
     <span class="page-updated">Updated May 2026</span>
   </div>
   <h1 class="text-l1">Select</h1>
-  <p class="page-desc">A family of controls that let users choose one or more options from a list. Three variants: <strong>Single Select</strong> for picking one option in a form, <strong>Multi Select</strong> for picking several, and <strong>Selection Button</strong> — a compact inline trigger for toolbars and filter bars.</p>
+  <p class="page-desc">A control that lets users choose one or more options from a list. Two variants: <strong>Single Select</strong> for picking one option and <strong>Multi Select</strong> for picking several. A <code>name</code> property renders the field with an inline semibold prefix instead of a stacked label.</p>
 </div>
 </div>
 
@@ -205,7 +207,7 @@
 <!-- ANATOMY -->
 <section class="section" id="anatomy">
   <h2 class="text-l3">Anatomy</h2>
-  <p class="section-lead">All three variants share the same underlying <code>&lt;select&gt;</code> element. Single and Multi Select use a stacked form-field layout. The Named select wraps the select with a semibold name prefix and an optional leading icon — no separate component needed.</p>
+  <p class="section-lead">Both variants share the same underlying <code>&lt;select&gt;</code> element wrapped in a stacked form-field layout. A <code>name</code> property is available to render the field with a semibold prefix label inline instead of stacked above — useful in toolbars and filter bars.</p>
 
   <h3 class="text-l4">Single &amp; Multi Select</h3>
 
@@ -255,36 +257,12 @@
     <div class="anatomy-item"><div class="anatomy-num" style="background:#3174db;">5</div><div><span class="anatomy-term">Chip</span> (Multi Select only) — a blue pill showing a selected value. Each chip has an ✕ to remove that value individually.</div></div>
   </div>
 
-  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Named select</h3>
-  <p>A wrapper around a normal <code>&lt;select&gt;</code> that adds a semibold name prefix and an optional leading icon. The name prefix is what makes it "named" — not whether it has a border. The bordered appearance is the default; a inline appearance (no border at rest) is used in table headers and dense UI.</p>
-
-  <!-- Named select anatomy visual -->
-  <div style="background:var(--bg-secondary);border-radius:10px;padding:32px 24px 40px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;">
-    <div style="position:relative;display:inline-block;">
-      <div class="sel-btn" style="pointer-events:none;">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:16px;height:16px;flex-shrink:0;"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" style="width:16px;height:16px;flex-shrink:0;color:var(--content-subtle);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <span style="position:absolute;top:-10px;left:-8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">1</span>
-      <span style="position:absolute;bottom:-10px;left:8px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">2</span>
-      <span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">3</span>
-      <span style="position:absolute;bottom:-10px;right:4px;background:#192743;color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;line-height:1;">4</span>
-    </div>
-  </div>
-
-  <div class="anatomy-items">
-    <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Wrapper</span> — 36px tall, 6px border radius. Bordered or inline depending on context. Wraps the icon, name, and native select.</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Icon</span> (optional) — 16×16px leading icon to reinforce the filter or sort role.</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Name</span> — SemiBold prefix label for the dimension being controlled. One word ending in a colon: "Sort:", "Status:".</div></div>
-    <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Select</span> — a native <code>&lt;select&gt;</code> that shows the current value and the browser-native chevron. The wrapper styles it to look inline.</div></div>
-  </div>
 </section>
 
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>.</p>
+  <p class="section-lead">Two variants — both built on a native <code>&lt;select&gt;</code>.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -312,16 +290,6 @@
       </div>
       <div class="variant-row-desc"><strong>Multi Select</strong> — pick one or more options. Selected values appear as dismissible chips inside the field. The field grows vertically as chips accumulate. Use for tags, categories, or any filter where multiple answers are valid.</div>
     </div>
-    <div class="variant-row" style="grid-template-columns:240px 1fr;">
-      <div class="variant-row-btn">
-        <button class="sel-btn" style="pointer-events:none;">
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span>
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <div class="variant-row-desc"><strong>Named select</strong> — a native <code>&lt;select&gt;</code> with a semibold name prefix and an optional leading icon placed inline before the value. No stacked label above. The name prefix is what makes it distinct from a regular select. Use in toolbars and filter bars. Comes in bordered and inline appearances.</div>
-    </div>
   </div>
 </section>
 
@@ -334,7 +302,7 @@
       <ul class="usage-list">
         <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> A user must pick from a predefined list too long to show as radio buttons or checkboxes (4+ options)</li>
         <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple values are valid (Multi Select) — tags, categories, filters</li>
-        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters sit side by side in a toolbar — use the named select variant</li>
+        <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> Multiple independent filters sit side by side in a toolbar — set the <code>name</code> property to render them inline</li>
         <li><span style="color:var(--content-positive-secondary);margin-right:4px;">✓</span> The current value must always be visible without opening a panel first</li>
       </ul>
     </div>
@@ -342,7 +310,7 @@
       <div class="usage-col-hd dont">Avoid when</div>
       <ul class="usage-list">
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> Fewer than 4 options are available — use radio buttons or a segmented control instead</li>
-        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 named selects appear in a row — consider a dedicated filter panel</li>
+        <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> More than 3 named selects appear next to each other — consider a dedicated filter panel</li>
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> The action triggers immediately rather than changing a view setting — use a button</li>
         <li><span style="color:var(--content-negative-secondary);margin-right:4px;">✗</span> A free-text answer is also valid — use a combobox or text field instead</li>
       </ul>
@@ -848,7 +816,7 @@
   <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Behaviour</h3>
   <div class="a11y-list">
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Anchored to the trigger.</strong> The menu opens directly below the field by default, flipping above when there is not enough space.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Width.</strong> Menu matches trigger width. For Named selects in toolbars, the menu may be wider than the trigger to fit longer option labels.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Width.</strong> Menu matches trigger width. For named selects in toolbars, the menu may be wider than the trigger to fit longer option labels.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Search threshold.</strong> Show the search input when the list has more than 7 options or contains free-form values like countries, languages or users.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Closing.</strong> Single Select closes on selection. Multi Select stays open so users can toggle several values; it closes on outside click, <kbd>Esc</kbd>, or focus moving away.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Max height.</strong> Constrain to ~280px and scroll inside the menu rather than letting it grow off-screen.</div></div>
@@ -863,7 +831,7 @@
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Always associate a visible label.</strong> Use <code>&lt;label for="..."&gt;</code> or <code>aria-labelledby</code>. Never rely on placeholder text as the label — it disappears on interaction.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Link validation messages with <code>aria-describedby</code>.</strong> Set the attribute on the field so screen readers announce the error or warning after reading the label.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need accessible names.</strong> <code>aria-label="Remove Result"</code> — the visible ✕ alone is not sufficient for screen readers.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Named select needs an accessible name.</strong> Since there is no stacked label, use <code>aria-label="Sort"</code> on the <code>&lt;select&gt;</code> so screen readers announce the full context, not just the current value.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selects with the <code>name</code> property need an accessible name.</strong> The visible name prefix is decorative — mark it <code>aria-hidden="true"</code> and add <code>aria-label="Sort"</code> on the <code>&lt;select&gt;</code> so screen readers announce the full context, not just the current value.</div></div>
   </div>
 </section>
 
@@ -920,20 +888,6 @@
           <div class="pg-row-ctrl">
             <label class="pg-radio"><input type="radio" name="sl-variant" value="single" checked> single</label>
             <label class="pg-radio"><input type="radio" name="sl-variant" value="multi"> multi</label>
-            <label class="pg-radio"><input type="radio" name="sl-variant" value="selbtn"> named</label>
-          </div>
-        </div>
-        <div class="pg-row" id="sl-row-state">
-          <div class="pg-row-name">state</div>
-          <div class="pg-row-ctrl">
-            <select class="pg-select" id="sl-state">
-              <option value="">Default</option>
-              <option value="is-hover">Hover</option>
-              <option value="is-focus">Focus</option>
-              <option value="is-filled">Filled in</option>
-              <option value="is-error">Error</option>
-              <option value="is-disabled">Disabled</option>
-            </select>
           </div>
         </div>
         <div class="pg-row" id="sl-row-label">
@@ -948,22 +902,16 @@
             <label class="pg-toggle"><input type="checkbox" id="sl-chips"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
-        <div class="pg-row hidden" id="sl-row-sbname">
+        <div class="pg-row">
           <div class="pg-row-name">name</div>
           <div class="pg-row-ctrl">
-            <input class="pg-input" id="sl-sbname" type="text" value="Sort:">
+            <label class="pg-toggle"><input type="checkbox" id="sl-hasname"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
-        <div class="pg-row hidden" id="sl-row-sbvalue">
-          <div class="pg-row-name">value</div>
+        <div class="pg-row hidden" id="sl-row-nametext">
+          <div class="pg-row-name">name text</div>
           <div class="pg-row-ctrl">
-            <input class="pg-input" id="sl-sbvalue" type="text" value="Newest">
-          </div>
-        </div>
-        <div class="pg-row hidden" id="sl-row-sbinline">
-          <div class="pg-row-name">inline</div>
-          <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-sbinline"><span class="pg-toggle-track"></span></label>
+            <input class="pg-input" id="sl-nametext" type="text" value="Sort:">
           </div>
         </div>
       </div>
@@ -1019,7 +967,8 @@
 &lt;/div&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">Named select — bordered</h3>
+  <h3 class="text-l4">With name (inline prefix)</h3>
+  <p>Add the <code>has-name</code> modifier and a <code>select-name</code> span to render a semibold prefix inline before the value. Useful in toolbars and filter bars. Combine with <code>multi-select</code> for the multi variant.</p>
   <div class="dev-preview" style="gap:8px;">
     <div class="sel-btn">
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1030,31 +979,9 @@
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;div class="inline-select"&gt;
-  &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
-  &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
-  &lt;select class="inline-select__field" aria-label="Sort"&gt;
-    &lt;option value="newest"&gt;Newest first&lt;/option&gt;
-    &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
-  </div>
-
-  <h3 class="text-l4">Named select — inline</h3>
-  <div class="dev-preview">
-    <div class="sel-btn sel-btn-inline">
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="sel-btn-name">Sort:</span>
-      <span class="sel-btn-value">Newest first</span>
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </div>
-  <div class="dev-code-wrap">
-    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;div class="inline-select inline"&gt;
-  &lt;i data-icon="filter" aria-hidden="true"&gt;&lt;/i&gt;
-  &lt;span class="inline-select__name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
-  &lt;select class="inline-select__field" aria-label="Sort"&gt;
+<pre><code>&lt;div class="select-field has-name"&gt;
+  &lt;span class="select-name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
+  &lt;select class="select" aria-label="Sort"&gt;
     &lt;option value="newest"&gt;Newest first&lt;/option&gt;
     &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
   &lt;/select&gt;
@@ -1081,10 +1008,8 @@
         <tr><td><code>select-label</code></td><td>label</td><td>14px SemiBold label above the field</td></tr>
         <tr><td><code>select</code></td><td>select</td><td>Single Select field</td></tr>
         <tr><td><code>multi-select</code></td><td>select[multiple]</td><td>Multi Select — renders chips per selection</td></tr>
-        <tr><td><code>inline-select</code></td><td>div</td><td>Wrapper for named select — bordered appearance</td></tr>
-        <tr><td><code>inline-select inline</code></td><td>div</td><td>Ghost wrapper — no border at rest, background on hover</td></tr>
-        <tr><td><code>inline-select__name</code></td><td>span</td><td>Semibold name prefix (e.g. "Sort:")</td></tr>
-        <tr><td><code>inline-select__field</code></td><td>select</td><td>The native select element inside the wrapper</td></tr>
+        <tr><td><code>has-name</code></td><td>.select-field</td><td>Modifier — renders the field with an inline semibold name prefix instead of a stacked label</td></tr>
+        <tr><td><code>select-name</code></td><td>span</td><td>Semibold name prefix shown inline before the value (e.g. "Sort:")</td></tr>
         <tr><td><code>is-error</code></td><td>select</td><td>Red border, shows error message</td></tr>
         <tr><td><code>is-warning</code></td><td>select</td><td>Orange border, shows warning message</td></tr>
         <tr><td><code>disabled</code></td><td>select, button</td><td>Disabled styling + prevents interaction</td></tr>
@@ -1122,7 +1047,7 @@
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Form fields need a <code>&lt;label&gt;</code>.</strong> Use <code>&lt;label for="id"&gt;</code> linked to the field's <code>id</code>. Never rely on placeholder text alone.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Error messages need <code>aria-describedby</code>.</strong> <code>aria-describedby="field-error"</code> on the field + <code>id="field-error"</code> on the message element.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need a label.</strong> <code>&lt;button aria-label="Remove Design"&gt;</code> — the ✕ glyph alone isn't descriptive enough.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Named select needs <code>aria-label</code>.</strong> Add <code>aria-label="Sort"</code> directly on the <code>&lt;select&gt;</code> element. The visible name prefix is decorative — mark it <code>aria-hidden="true"</code> so it isn't read twice.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selects with <code>name</code> need <code>aria-label</code>.</strong> Add <code>aria-label="Sort"</code> directly on the <code>&lt;select&gt;</code> element. The visible name prefix is decorative — mark it <code>aria-hidden="true"</code> so it isn't read twice.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Custom dropdowns must manage focus.</strong> Move focus to the first option when the dropdown opens. Close on <kbd>Escape</kbd> and return focus to the trigger. Arrow keys navigate between options.</div></div>
   </div>
 </section>
@@ -1184,12 +1109,10 @@
   function slGetProps() {
     return {
       variant:  slGetVariant(),
-      state:    document.getElementById('sl-state').value,
       label:    document.getElementById('sl-label').value || 'Label text',
       chips:    document.getElementById('sl-chips').checked,
-      sbname:   document.getElementById('sl-sbname').value || 'Sort:',
-      sbvalue:  document.getElementById('sl-sbvalue').value || 'Newest',
-      sbinline: document.getElementById('sl-sbinline').checked
+      hasName:  document.getElementById('sl-hasname').checked,
+      nameText: document.getElementById('sl-nametext').value || 'Sort:'
     };
   }
 
@@ -1197,54 +1120,33 @@
     var p = slGetProps();
 
     // Toggle property rows
-    document.getElementById('sl-row-label').classList.toggle('hidden', p.variant === 'selbtn');
     document.getElementById('sl-row-chips').classList.toggle('hidden', p.variant !== 'multi');
-    document.getElementById('sl-row-sbname').classList.toggle('hidden', p.variant !== 'selbtn');
-    document.getElementById('sl-row-sbvalue').classList.toggle('hidden', p.variant !== 'selbtn');
-    document.getElementById('sl-row-sbinline').classList.toggle('hidden', p.variant !== 'selbtn');
+    document.getElementById('sl-row-label').classList.toggle('hidden', p.hasName);
+    document.getElementById('sl-row-nametext').classList.toggle('hidden', !p.hasName);
 
-    // Update state options per variant
-    var stateEl = document.getElementById('sl-state');
-    var cur = stateEl.value;
-    if (p.variant === 'selbtn') {
-      stateEl.innerHTML = '<option value="">Default</option><option value="is-hover">Hover</option><option value="is-pressed">Pressed</option>';
-    } else {
-      stateEl.innerHTML = '<option value="">Default</option><option value="is-hover">Hover</option><option value="is-focus">Focus</option><option value="is-filled">Filled in</option><option value="is-error">Error</option><option value="is-disabled">Disabled</option>';
-    }
-    if (stateEl.querySelector('[value="'+cur+'"]')) stateEl.value = cur;
-
-    var state = stateEl.value;
-    var isFilled = state === 'is-filled' || state === 'is-error';
-    var isDisabled = state === 'is-disabled';
     var html = '';
-
-    if (p.variant === 'single') {
+    if (p.hasName) {
+      // Inline named appearance
+      html = '<button class="sel-btn" style="pointer-events:none;">'
+           + '<span class="sel-btn-name">' + p.nameText + '</span>'
+           + '<span class="sel-btn-value">' + (p.variant === 'multi' ? '3 selected' : 'Newest') + '</span>'
+           + CHEVRON + '</button>';
+    } else if (p.variant === 'single') {
       html = '<div class="slt-wrap" style="width:240px;">'
-           + '<div class="slt-lbl"' + (isDisabled ? ' style="color:var(--content-disabled);"' : '') + '>' + p.label + '</div>'
-           + '<div class="slt ' + state + '" style="pointer-events:none;">'
-           + '<div class="slt-left">' + (isFilled ? '<span class="slt-val">Value</span>' : '<span class="slt-ph">Select...</span>') + '</div>'
-           + CHEVRON + '</div>';
-      if (state === 'is-error') {
-        html += '<div class="slt-err"><svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px;"><circle cx="8" cy="8" r="6" stroke="#b9252a" stroke-width="1.5"/><path d="M8 5v3M8 11h.01" stroke="#b9252a" stroke-width="1.5" stroke-linecap="round"/></svg> Error message</div>';
-      }
-      html += '</div>';
-    } else if (p.variant === 'multi') {
+           + '<div class="slt-lbl">' + p.label + '</div>'
+           + '<div class="slt" style="pointer-events:none;">'
+           + '<div class="slt-left"><span class="slt-ph">Select...</span></div>'
+           + CHEVRON + '</div></div>';
+    } else {
       html = '<div style="display:flex;flex-direction:column;gap:4px;width:240px;">'
-           + '<div class="slt-lbl"' + (isDisabled ? ' style="color:var(--content-disabled);"' : '') + '>' + p.label + '</div>'
-           + '<div class="ms ' + state + '" style="pointer-events:none;">';
-      if (p.chips && !isDisabled) {
+           + '<div class="slt-lbl">' + p.label + '</div>'
+           + '<div class="ms" style="pointer-events:none;">';
+      if (p.chips) {
         html += '<div class="chip">Result ' + CHIPX + '</div><div class="chip">Option ' + CHIPX + '</div>';
       } else {
         html += '<span class="ms-ph">Select...</span>';
       }
       html += MSCHEV + '</div></div>';
-    } else {
-      var cls = 'sel-btn' + (p.sbinline ? ' sel-btn-inline' : '') + (state ? ' ' + state : '');
-      html = '<button class="' + cls + '" style="pointer-events:none;">'
-           + FILTER
-           + '<span class="sel-btn-name">' + p.sbname + '</span>'
-           + '<span class="sel-btn-value">' + p.sbvalue + '</span>'
-           + CHEVRON + '</button>';
     }
 
     document.getElementById('sl-pg-preview').innerHTML = html;
@@ -1253,41 +1155,38 @@
 
   function slUpdateCode() {
     var p = slGetProps();
-    var state = document.getElementById('sl-state').value;
     var code = '';
-    if (p.variant === 'single') {
+    if (p.hasName) {
+      var nameClean = p.nameText.replace(/:$/, '');
+      var multi = p.variant === 'multi' ? ' multiple' : '';
+      var cls = p.variant === 'multi' ? 'multi-select' : 'select';
+      code = '<div class="select-field has-name">\n'
+           + '  <span class="select-name" aria-hidden="true">' + p.nameText + '</span>\n'
+           + '  <select class="' + cls + '"' + multi + ' aria-label="' + nameClean + '">\n'
+           + '    <option>Option A</option>\n'
+           + '  </select>\n</div>';
+    } else if (p.variant === 'single') {
       code = '<div class="select-field">\n'
            + '  <label class="select-label" for="field">' + p.label + '</label>\n'
-           + '  <select class="select' + (state === 'is-error' ? ' is-error' : '') + '"'
-           + (state === 'is-disabled' ? ' disabled' : '') + ' id="field">\n'
+           + '  <select class="select" id="field">\n'
            + '    <option value="" disabled selected>Select...</option>\n'
            + '  </select>\n</div>';
-    } else if (p.variant === 'multi') {
+    } else {
       code = '<div class="select-field">\n'
            + '  <label class="select-label" for="field">' + p.label + '</label>\n'
-           + '  <select class="multi-select" id="field" multiple'
-           + (state === 'is-disabled' ? ' disabled' : '') + '>\n'
+           + '  <select class="multi-select" id="field" multiple>\n'
            + '    <option value="a">Option A</option>\n'
-           + '  </select>\n</div>';
-    } else {
-      var inline = p.sbinline ? ' inline' : '';
-      var nameClean = p.sbname.replace(/:$/, '');
-      code = '<div class="inline-select' + inline + '">\n'
-           + '  <i data-icon="filter" aria-hidden="true"></i>\n'
-           + '  <span class="inline-select__name" aria-hidden="true">' + p.sbname + '</span>\n'
-           + '  <select class="inline-select__field" aria-label="' + nameClean + '">\n'
-           + '    <option>' + p.sbvalue + '</option>\n'
            + '  </select>\n</div>';
     }
     document.getElementById('sl-code-out').textContent = code;
   }
 
   document.querySelectorAll('input[name="sl-variant"]').forEach(function(r){ r.addEventListener('change', slRender); });
-  ['sl-state','sl-chips','sl-sbinline'].forEach(function(id) {
+  ['sl-chips','sl-hasname'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
-  ['sl-label','sl-sbname','sl-sbvalue'].forEach(function(id) {
+  ['sl-label','sl-nametext'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('input', slRender);
   });
@@ -1296,11 +1195,8 @@
     var rv = document.querySelector('input[name="sl-variant"][value="single"]'); if (rv) rv.checked = true;
     document.getElementById('sl-label').value = 'Label text';
     document.getElementById('sl-chips').checked = false;
-    document.getElementById('sl-sbname').value = 'Sort:';
-    document.getElementById('sl-sbvalue').value = 'Newest';
-    document.getElementById('sl-sbinline').checked = false;
-    slRender();
-    document.getElementById('sl-state').value = '';
+    document.getElementById('sl-hasname').checked = false;
+    document.getElementById('sl-nametext').value = 'Sort:';
     slRender();
   });
 
