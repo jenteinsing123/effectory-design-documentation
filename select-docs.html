@@ -21,15 +21,17 @@
     .slt-ph   { color:var(--content-subtle); white-space:nowrap; }
     .slt-val  { color:var(--content-base); white-space:nowrap; }
     .slt svg  { width:16px; height:16px; flex-shrink:0; color:var(--content-subtle); }
-    .slt.is-hover  { border-color:var(--border-action-hover); }
-    .slt.is-focus,
-    .slt.is-typing { border-color:var(--border-action-focus); }
+    .slt:hover, .slt.is-hover  { border-color:var(--border-action-hover); background:var(--bg-base-hover, var(--bg-base)); }
+    .slt:active, .slt.is-pressed { border-color:var(--border-action-pressed, var(--border-action-hover)); background:var(--bg-base-pressed, var(--bg-base)); }
+    .slt:focus-visible, .slt.is-focus,
+    .slt.is-typing { border-color:var(--border-action-focus); outline:2px solid var(--border-action-focus); outline-offset:1px; }
     .slt.is-warning { border-color:#ec6e0a; }
     .slt.is-error   { border-color:#b9252a; }
     .slt.is-disabled{
       background:rgba(25,39,67,.08); border-color:var(--border-action);
       box-shadow:none; cursor:not-allowed;
     }
+    .slt.is-disabled:hover { border-color:var(--border-action); background:rgba(25,39,67,.08); }
     .slt.is-disabled .slt-ph { color:var(--content-disabled); }
     .slt.is-disabled svg     { color:var(--content-disabled); }
     .slt-err  { display:flex; align-items:center; gap:4px; font-size:13px; color:#b9252a; margin-top:4px; }
@@ -44,9 +46,10 @@
       display:flex; align-items:center; flex-wrap:wrap; gap:6px;
       font-size:14px; box-shadow:var(--sh-action); cursor:pointer; width:100%;
     }
-    .ms.is-hover { border-color:var(--border-action-hover); }
-    .ms.is-focus,
-    .ms.is-typing { border-color:var(--border-action-focus); }
+    .ms:hover, .ms.is-hover { border-color:var(--border-action-hover); background:var(--bg-base-hover, var(--bg-base)); }
+    .ms:active, .ms.is-pressed { border-color:var(--border-action-pressed, var(--border-action-hover)); background:var(--bg-base-pressed, var(--bg-base)); }
+    .ms:focus-visible, .ms.is-focus,
+    .ms.is-typing { border-color:var(--border-action-focus); outline:2px solid var(--border-action-focus); outline-offset:1px; }
     .ms.is-disabled {
       background:rgba(25,39,67,.08); border-color:var(--border-action);
       box-shadow:none; cursor:not-allowed;
@@ -54,6 +57,7 @@
     .ms-ph  { color:var(--content-subtle); }
     .ms-ch  { position:absolute; right:11px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--content-subtle); }
     .ms.is-focus .ms-ch, .ms.is-typing .ms-ch { transform:translateY(-50%) rotate(180deg); color:var(--border-action-focus); }
+    .ms.is-disabled:hover { border-color:var(--border-action); background:rgba(25,39,67,.08); }
     .ms.is-disabled .ms-ph { color:var(--content-disabled); }
     .ms.is-disabled .ms-ch { color:var(--content-disabled); }
     .chip {
@@ -1210,6 +1214,23 @@
     setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('did-copy'); }, 1500);
   }
   window.copyCode = copyCode;
+})();
+
+(function(){
+  // Make dev/playground triggers keyboard-focusable so :focus-visible state works
+  function makeFocusable(){
+    document.querySelectorAll('[data-panel="developer"] .slt, [data-panel="developer"] .ms, #sl-pg-preview .slt, #sl-pg-preview .ms').forEach(function(el){
+      if (!el.hasAttribute('tabindex') && !el.classList.contains('is-disabled')) {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+      }
+    });
+  }
+  makeFocusable();
+  var pg = document.getElementById('sl-pg-preview');
+  if (pg) {
+    new MutationObserver(makeFocusable).observe(pg, { childList: true, subtree: true });
+  }
 })();
 
 (function(){
