@@ -1223,43 +1223,12 @@
 &lt;/mat-select&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">Option with action button</h3>
-  <p>An option slot can host arbitrary content — for example, an "add option" button at the bottom of the list using <code>add-option-container</code>.</p>
-  <div class="dev-preview" style="align-items:flex-start;gap:24px;">
-    <div class="slt" style="width:280px;">
-      <div class="slt-left"><span class="slt-ph">Please select an option</span></div>
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;transform:rotate(180deg);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="menu" style="position:static;width:280px;max-height:none;">
-      <div class="menu-item">Option 1</div>
-      <div class="menu-item">Option 2</div>
-      <div class="menu-item">Option 3</div>
-      <div class="menu-divider"></div>
-      <button class="sel-btn" style="width:100%;justify-content:flex-start;border:0;box-shadow:none;background:transparent;color:var(--content-subtle);">
-        <svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px;" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span>Add something</span>
-      </button>
-    </div>
-  </div>
-  <div class="dev-code-wrap">
-    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;mat-select disableRipple placeholder="Please select an option"&gt;
-  &lt;mat-option value="1"&gt;Option 1&lt;/mat-option&gt;
-  &lt;mat-option value="2"&gt;Option 2&lt;/mat-option&gt;
-  &lt;mat-option value="3"&gt;Option 3&lt;/mat-option&gt;
-  &lt;button class="add-option-container text-subdued icon-before" (click)="buttonClicked()"&gt;
-    &lt;eff-mat-icon [iconName]="'plus'" class="icon"&gt;&lt;/eff-mat-icon&gt;
-    &lt;span&gt;Add something&lt;/span&gt;
-  &lt;/button&gt;
-&lt;/mat-select&gt;</code></pre>
-  </div>
-
   <h3 class="text-l4">Inline</h3>
   <p>Add the <code>inline</code> class and set <code>panelWidth=""</code> so the dropdown can size to its content. Useful for toolbars and filter bars.</p>
   <div class="dev-preview">
-    <div class="sel-btn">
+    <div class="sel-btn sel-btn-inline">
       <span class="sel-btn-value">Please select an option</span>
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
   <div class="dev-code-wrap">
