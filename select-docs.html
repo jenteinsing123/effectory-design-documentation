@@ -1462,6 +1462,25 @@ export class MyFormComponent { /* ... */ }</code></pre>
     var existingVal = trigger.querySelector('.slt-val, .sel-btn-value');
     var initialValue = existingVal ? existingVal.textContent.trim() : null;
 
+    // Capture leading icon HTML (svg or non-flag span) so we can preserve it across renders
+    var leadingIcon = '';
+    var iconSource = isInline ? trigger : trigger.querySelector('.slt-left, .ms');
+    if (iconSource && !isLang) {
+      var first = iconSource.firstElementChild;
+      while (first && (first.classList.contains('slt-ph') || first.classList.contains('slt-val')
+                      || first.classList.contains('ms-ph') || first.classList.contains('chip')
+                      || first.classList.contains('ms-ch') || first.classList.contains('sel-btn-value')
+                      || first.classList.contains('sel-btn-name'))) {
+        first = first.nextElementSibling;
+      }
+      if (first && (first.tagName === 'SVG' || first.tagName === 'svg' || (first.tagName === 'SPAN' && !first.className))) {
+        // Skip the trailing chevron in .slt
+        if (!(first.tagName.toLowerCase() === 'svg' && first === iconSource.lastElementChild && !isInline)) {
+          leadingIcon = first.outerHTML;
+        }
+      }
+    }
+
     var options;
     if (isLang) {
       options = LANGS.map(function(l){
@@ -1476,7 +1495,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
         return { label: label, checked: initialValue === label };
       });
     }
-    s = { isMulti: isMulti, isLang: isLang, isInline: isInline, options: options };
+    s = { isMulti: isMulti, isLang: isLang, isInline: isInline, options: options, leadingIcon: leadingIcon };
     stateMap.set(trigger, s);
     return s;
   }
@@ -1487,19 +1506,20 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
   function renderTrigger(trigger, state, isOpen) {
     var selected = state.options.filter(function(o){ return o.checked; });
+    var icon = state.leadingIcon || '';
     if (state.isMulti) {
-      var inner = '';
+      var inner = icon;
       if (selected.length === 0) {
-        inner = '<span class="ms-ph">Please select an option</span>';
+        inner += '<span class="ms-ph">Please select an option</span>';
       } else {
-        inner = selected.map(function(o){
+        inner += selected.map(function(o){
           return '<div class="chip">' + o.label + ' ' + chipSvg() + '</div>';
         }).join('');
       }
       trigger.innerHTML = inner + '<svg class="ms-ch" viewBox="0 0 16 16" fill="none" style="' + (isOpen ? 'transform:translateY(-50%) rotate(180deg);' : '') + '"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     } else if (state.isInline) {
       var val = selected[0] ? selected[0].label : 'Please select an option';
-      trigger.innerHTML = '<span class="sel-btn-value">' + val + '</span>' + chevronSvg(isOpen);
+      trigger.innerHTML = icon + '<span class="sel-btn-value">' + val + '</span>' + chevronSvg(isOpen);
     } else {
       // .slt
       var label;
@@ -1507,14 +1527,10 @@ export class MyFormComponent { /* ... */ }</code></pre>
         if (state.isLang) {
           label = flagSpan(selected[0].flag) + '<span class="slt-val">' + selected[0].label + '</span>';
         } else {
-          label = '<span class="slt-val">' + selected[0].label + '</span>';
+          label = icon + '<span class="slt-val">' + selected[0].label + '</span>';
         }
       } else {
-        // Preserve existing leading icon if any
-        var preIcon = '';
-        var firstSpan = trigger.querySelector('.slt-left > svg, .slt-left > span:not(.slt-ph):not(.slt-val)');
-        if (firstSpan && firstSpan.tagName !== 'SPAN') { /* no-op */ }
-        label = '<span class="slt-ph">Please select an option</span>';
+        label = (state.isLang ? '' : icon) + '<span class="slt-ph">Please select an option</span>';
       }
       trigger.innerHTML = '<div class="slt-left">' + label + '</div>' + chevronSvg(isOpen);
     }
