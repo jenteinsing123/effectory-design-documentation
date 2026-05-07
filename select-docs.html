@@ -1589,14 +1589,29 @@ export class MyFormComponent { /* ... */ }</code></pre>
   }
   function reqAsterisk(req) { return req ? ' <span style="color:#b9252a;">*</span>' : ''; }
 
+  function attrsHtml(map) {
+    return Object.keys(map).filter(function(k){ return map[k] != null && map[k] !== ''; })
+      .map(function(k){ return ' ' + k + '="' + String(map[k]).replace(/"/g, '&quot;') + '"'; })
+      .join('');
+  }
+
   function slRender() {
     var p = slGetProps();
     slApplyVisibility(p);
 
     var dis = p.disabled ? ' is-disabled' : '';
     var icon = iconSvg(p.icon);
-    var search = p.searchable ? ' data-searchable="true"' : '';
     var html = '';
+
+    // Common data attributes consumed by the dropdown system so it can preserve
+    // the trigger's appearance across opens/closes.
+    var commonAttrs = {
+      'data-searchable': p.searchable ? 'true' : null,
+      'data-multi':      p.multiple ? 'true' : null,
+      'data-display':    p.multiple ? p.display : null,
+      'data-name-label': p.named && p.name ? p.name : null,
+      'data-empty-text': p.named ? (p.value || 'Select…') : p.placeholder
+    };
 
     // --- Inline variants: transparent ghost trigger built on .sel-btn-inline ---
     if (p.inline) {
@@ -1615,14 +1630,14 @@ export class MyFormComponent { /* ... */ }</code></pre>
       } else {
         inner += '<span class="sel-btn-value">' + p.placeholder + '</span>';
       }
-      html = '<button class="' + btnCls + '" type="button"' + search + '>'
+      html = '<button class="' + btnCls + '" type="button"' + attrsHtml(commonAttrs) + '>'
            + inner + CHEVRON + '</button>';
 
     // --- Named, bordered: .sel-btn toolbar button ---
     } else if (p.named) {
       var nameHtml = p.name ? '<span class="sel-btn-name">' + p.name + ':</span>' : '';
       var valueHtml = '<span class="sel-btn-value">' + (p.value || 'Select…') + '</span>';
-      html = '<button class="sel-btn' + dis + '" type="button"' + search + '>'
+      html = '<button class="sel-btn' + dis + '" type="button"' + attrsHtml(commonAttrs) + '>'
            + icon + nameHtml + valueHtml + CHEVRON + '</button>';
 
     // --- Multi, stacked form field with label ---
@@ -1636,14 +1651,14 @@ export class MyFormComponent { /* ... */ }</code></pre>
       }
       html = '<div class="slt-wrap" style="width:280px;">'
            + '<div class="slt-lbl">' + p.label + reqAsterisk(p.required) + '</div>'
-           + '<div class="ms' + dis + '"' + search + ' style="width:280px;">'
+           + '<div class="ms' + dis + '"' + attrsHtml(commonAttrs) + ' style="width:280px;">'
            + msInner + MSCHEV + '</div></div>';
 
     // --- Single, stacked form field with label ---
     } else {
       html = '<div class="slt-wrap" style="width:280px;">'
            + '<div class="slt-lbl">' + p.label + reqAsterisk(p.required) + '</div>'
-           + '<div class="slt' + dis + '"' + search + ' style="width:280px;">'
+           + '<div class="slt' + dis + '"' + attrsHtml(commonAttrs) + ' style="width:280px;">'
            + '<div class="slt-left">' + icon
            + '<span class="slt-ph">' + p.placeholder + '</span>'
            + '</div>' + CHEVRON + '</div></div>';
@@ -1797,12 +1812,33 @@ export class MyFormComponent { /* ... */ }</code></pre>
   function getState(trigger) {
     var s = stateMap.get(trigger);
     if (s) return s;
-    var isMulti = trigger.classList.contains('ms');
-    var isLang  = !!trigger.querySelector('span[style*="linear-gradient"]');
+    var ds = trigger.dataset;
     var isInline = trigger.classList.contains('sel-btn');
+    var isMulti  = ds.multi === 'true' || trigger.classList.contains('ms');
+    var isLang   = !!trigger.querySelector('span[style*="linear-gradient"]');
+    var isSearchable = ds.searchable === 'true';
+    var display  = ds.display || 'chips'; // multi only
+
     var existingChips = [...trigger.querySelectorAll('.chip')].map(c => c.textContent.trim().replace(/\s*$/, ''));
-    var existingVal = trigger.querySelector('.slt-val, .sel-btn-value');
-    var initialValue = existingVal ? existingVal.textContent.trim() : null;
+    var slotVal      = trigger.querySelector('.slt-val');
+    var inlineValEl  = trigger.querySelector('.sel-btn-value');
+    var nameEl       = trigger.querySelector('.sel-btn-name');
+
+    // Name prefix (Named variant)
+    var nameLabel = ds.nameLabel || (nameEl ? nameEl.textContent.replace(/:\s*$/, '').trim() : null);
+
+    // Empty-state text — stays the same when nothing is selected
+    var phEl = trigger.querySelector('.slt-ph, .ms-ph');
+    var emptyText = ds.emptyText
+      || (phEl ? phEl.textContent.trim() : null)
+      || (inlineValEl && !nameEl ? inlineValEl.textContent.trim() : null)
+      || 'Please select an option';
+
+    // Initial selection (only treat the value text as a real selection if it's a Named trigger
+    // or a .slt with .slt-val. Plain inline placeholders are NOT selections.)
+    var initialValue = null;
+    if (slotVal) initialValue = slotVal.textContent.trim();
+    else if (nameEl && inlineValEl) initialValue = inlineValEl.textContent.trim();
 
     // Capture leading icon HTML (svg or non-flag span) so we can preserve it across renders
     var leadingIcon = '';
@@ -1812,11 +1848,11 @@ export class MyFormComponent { /* ... */ }</code></pre>
       while (first && (first.classList.contains('slt-ph') || first.classList.contains('slt-val')
                       || first.classList.contains('ms-ph') || first.classList.contains('chip')
                       || first.classList.contains('ms-ch') || first.classList.contains('sel-btn-value')
-                      || first.classList.contains('sel-btn-name'))) {
+                      || first.classList.contains('sel-btn-name')
+                      || first.classList.contains('ms-text-val'))) {
         first = first.nextElementSibling;
       }
       if (first && (first.tagName === 'SVG' || first.tagName === 'svg' || (first.tagName === 'SPAN' && !first.className))) {
-        // Skip the trailing chevron in .slt
         if (!(first.tagName.toLowerCase() === 'svg' && first === iconSource.lastElementChild && !isInline)) {
           leadingIcon = first.outerHTML;
         }
@@ -1837,8 +1873,12 @@ export class MyFormComponent { /* ... */ }</code></pre>
         return { label: label, checked: initialValue === label };
       });
     }
-    var isSearchable = trigger.dataset.searchable === 'true';
-    s = { isMulti: isMulti, isLang: isLang, isInline: isInline, isSearchable: isSearchable, options: options, leadingIcon: leadingIcon };
+    s = {
+      isMulti: isMulti, isLang: isLang, isInline: isInline,
+      isSearchable: isSearchable, display: display,
+      nameLabel: nameLabel, emptyText: emptyText,
+      options: options, leadingIcon: leadingIcon
+    };
     stateMap.set(trigger, s);
     return s;
   }
@@ -1850,21 +1890,48 @@ export class MyFormComponent { /* ... */ }</code></pre>
   function renderTrigger(trigger, state, isOpen) {
     var selected = state.options.filter(function(o){ return o.checked; });
     var icon = state.leadingIcon || '';
-    if (state.isMulti) {
+    var emptyText = state.emptyText || 'Please select an option';
+
+    if (state.isInline) {
+      // .sel-btn (named bordered) OR .sel-btn-inline (ghost). Same rendering rules.
+      var nameHtml = state.nameLabel
+        ? '<span class="sel-btn-name">' + state.nameLabel + ':</span>'
+        : '';
+      var contentHtml;
+      if (state.isMulti) {
+        if (state.display === 'text') {
+          contentHtml = '<span class="sel-btn-value">'
+            + (selected.length > 0 ? selected.length + ' selected' : emptyText)
+            + '</span>';
+        } else if (selected.length === 0) {
+          contentHtml = '<span class="sel-btn-value">' + emptyText + '</span>';
+        } else {
+          contentHtml = selected.map(function(o){
+            return '<div class="chip">' + o.label + ' ' + chipSvg() + '</div>';
+          }).join('');
+        }
+      } else {
+        var val = selected[0] ? selected[0].label : emptyText;
+        contentHtml = '<span class="sel-btn-value">' + val + '</span>';
+      }
+      trigger.innerHTML = icon + nameHtml + contentHtml + chevronSvg(isOpen);
+
+    } else if (state.isMulti) {
+      // .ms — bordered multi field
       var inner = icon;
       if (selected.length === 0) {
-        inner += '<span class="ms-ph">Please select an option</span>';
+        inner += '<span class="ms-ph">' + emptyText + '</span>';
+      } else if (state.display === 'text') {
+        inner += '<span class="ms-text-val">' + selected.length + ' selected</span>';
       } else {
         inner += selected.map(function(o){
           return '<div class="chip">' + o.label + ' ' + chipSvg() + '</div>';
         }).join('');
       }
       trigger.innerHTML = inner + '<svg class="ms-ch" viewBox="0 0 16 16" fill="none" style="' + (isOpen ? 'transform:translateY(-50%) rotate(180deg);' : '') + '"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    } else if (state.isInline) {
-      var val = selected[0] ? selected[0].label : 'Please select an option';
-      trigger.innerHTML = icon + '<span class="sel-btn-value">' + val + '</span>' + chevronSvg(isOpen);
+
     } else {
-      // .slt
+      // .slt — bordered single field
       var label;
       if (selected[0]) {
         if (state.isLang) {
@@ -1873,7 +1940,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
           label = icon + '<span class="slt-val">' + selected[0].label + '</span>';
         }
       } else {
-        label = (state.isLang ? '' : icon) + '<span class="slt-ph">Please select an option</span>';
+        label = (state.isLang ? '' : icon) + '<span class="slt-ph">' + emptyText + '</span>';
       }
       trigger.innerHTML = '<div class="slt-left">' + label + '</div>' + chevronSvg(isOpen);
     }
