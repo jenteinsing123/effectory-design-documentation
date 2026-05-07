@@ -312,7 +312,7 @@
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Four variants — all built on a native <code>&lt;select&gt;</code>. The <strong>inline</strong> style is an orthogonal modifier that can be applied to any of them.</p>
+  <p class="section-lead">Two selection modes — <strong>Single</strong> and <strong>Multi</strong> — with two orthogonal modifiers: <strong>Named</strong> adds a one-word <code>name:</code> prefix for toolbar use, and <strong>Inline</strong> drops the border and label for body-copy use. Both modifiers work on either selection mode.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -356,7 +356,19 @@
       <div class="variant-row-btn" style="padding:20px;">
         <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
-      <div class="variant-row-desc"><strong>Named</strong> — sized to its value with a one-word <code>name:</code> prefix. Use in toolbars and filter rows where multiple selects sit side by side. The label sits inline with the value instead of stacked above the field.</div>
+      <div class="variant-row-desc"><strong>Named — single</strong> — sized to its value with a one-word <code>name:</code> prefix. Use in toolbars and filter rows where multiple selects sit side by side. The label sits inline with the value instead of stacked above the field.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Filter:</span><div class="chip">Active <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chip">Pending <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Named — multi, chips</strong> — same toolbar trigger but accepts multiple values, each rendered as a dismissible chip after the prefix. Use for filter rows where users want to see (and remove) every active filter without opening the picker.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Filter:</span><span class="sel-btn-value">2 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Named — multi, text</strong> — multi-select toolbar trigger that collapses the selection to a count ("2 selected"). Use when the trigger needs a fixed width or sits in a dense filter row where chips would push other controls around.</div>
     </div>
   </div>
 
@@ -380,7 +392,13 @@
       <div class="variant-row-btn" style="padding:20px;">
         <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">All</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
-      <div class="variant-row-desc"><strong>Named, inline</strong> — keeps the <code>name:</code> prefix but loses the border. Used for filter rows that sit directly above a list, where stacking bordered controls would compete with the list itself.</div>
+      <div class="variant-row-desc"><strong>Named, inline — single</strong> — keeps the <code>name:</code> prefix but loses the border. Used for filter rows that sit directly above a list, where stacking bordered controls would compete with the list itself.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-name">Filter:</span><span class="sel-btn-value">2 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Named, inline — multi</strong> — same ghost trigger with a <code>name:</code> prefix and a count for the selection. Use in dense filter rows above lists or tables where every pixel of vertical space matters and chips would wrap.</div>
     </div>
   </div>
 </section>
@@ -1060,19 +1078,26 @@
         <button class="pg-reset" id="sl-reset-btn">Reset</button>
       </div>
       <div class="pg-panel" id="sl-pane-props">
-        <!-- Variant: how many values can be picked & whether the trigger has a name: prefix -->
+        <!-- Variant: how many values can be picked -->
         <div class="pg-row" data-row="variant">
           <div class="pg-row-name">variant</div>
           <div class="pg-row-ctrl">
             <select class="pg-select" id="sl-variant">
               <option value="single">Single</option>
               <option value="multi">Multi</option>
-              <option value="named">Named (with prefix)</option>
             </select>
           </div>
         </div>
 
-        <!-- Inline: independent style toggle — drops border, padding and label -->
+        <!-- Named: orthogonal modifier — adds a "Sort:"-style prefix; works on single AND multi -->
+        <div class="pg-row" data-row="named">
+          <div class="pg-row-name">named</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-named"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+
+        <!-- Inline: orthogonal style toggle — drops border, padding and label -->
         <div class="pg-row" data-row="inline">
           <div class="pg-row-name">inline</div>
           <div class="pg-row-ctrl">
@@ -1534,13 +1559,12 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
   function slGetProps() {
     var v = document.getElementById('sl-variant').value;
-    var inline = document.getElementById('sl-inline').checked;
     return {
-      variant:     v,                            // 'single' | 'multi' | 'named'
+      variant:     v,                                              // 'single' | 'multi'
       multiple:    v === 'multi',
-      named:       v === 'named',
-      inline:      inline,                       // independent style toggle
-      display:     document.getElementById('sl-display').value, // 'chips' | 'text'
+      named:       document.getElementById('sl-named').checked,    // orthogonal modifier
+      inline:      document.getElementById('sl-inline').checked,   // orthogonal style toggle
+      display:     document.getElementById('sl-display').value,    // 'chips' | 'text'
       required:    document.getElementById('sl-required').checked,
       searchable:  document.getElementById('sl-searchable').checked,
       disabled:    document.getElementById('sl-disabled').checked,
@@ -1553,13 +1577,16 @@ export class MyFormComponent { /* ... */ }</code></pre>
   }
 
   // Determine which prop rows should be visible given current state.
+  // The model is three orthogonal axes:
+  //   variant (single|multi)  ×  named (bool)  ×  inline (bool)
   // Rules:
-  //   - display:      multi only
-  //   - required:     stacked (i.e. has a label) → single/multi AND not inline
-  //   - label:        single/multi AND not inline  (inline drops the label)
-  //   - placeholder:  single/multi  (not named — named has explicit value instead)
-  //   - name, value:  named only
-  //   - variant, inline, searchable, disabled, icon: always
+  //   - display:      multi only (chips vs "X selected" text)
+  //   - required:     stacked form field only → !named && !inline
+  //   - label:        stacked form field only → !named && !inline
+  //   - placeholder:  any non-named trigger (single/multi, stacked or inline)
+  //   - name:         named only
+  //   - value:        named single only (named multi derives its text from the selection)
+  //   - variant, named, inline, searchable, disabled, icon: always
   function slRowVisible(row, p) {
     switch (row) {
       case 'display':     return p.multiple;
@@ -1567,7 +1594,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
       case 'label':       return !p.named && !p.inline;
       case 'placeholder': return !p.named;
       case 'name':        return p.named;
-      case 'value':       return p.named;
+      case 'value':       return p.named && !p.multiple;
       default:            return true;
     }
   }
@@ -1606,6 +1633,10 @@ export class MyFormComponent { /* ... */ }</code></pre>
     var icon = iconSvg(p.icon);
     var html = '';
 
+    // Empty-state text the dropdown system shows when nothing is selected.
+    // Named single → user-provided value. Anything else → placeholder.
+    var emptyText = (p.named && !p.multiple) ? (p.value || 'Select…') : p.placeholder;
+
     // Common data attributes consumed by the dropdown system so it can preserve
     // the trigger's appearance across opens/closes.
     var commonAttrs = {
@@ -1613,49 +1644,39 @@ export class MyFormComponent { /* ... */ }</code></pre>
       'data-multi':      p.multiple ? 'true' : null,
       'data-display':    p.multiple ? p.display : null,
       'data-name-label': p.named && p.name ? p.name : null,
-      'data-empty-text': p.named ? (p.value || 'Select…') : p.placeholder
+      'data-empty-text': emptyText
     };
 
-    // --- Inline variants: transparent ghost trigger built on .sel-btn-inline ---
-    if (p.inline) {
-      var btnCls = 'sel-btn sel-btn-inline' + dis;
-      var inner = icon;
-      if (p.named) {
-        if (p.name) inner += '<span class="sel-btn-name">' + p.name + ':</span>';
-        inner += '<span class="sel-btn-value">' + (p.value || 'Select…') + '</span>';
-      } else if (p.multiple) {
+    // Builds the value/chip portion of the trigger (everything between the optional
+    // name prefix and the trailing chevron). `valKlass` selects the wrapping span class
+    // so .ms triggers can use .ms-text-val for the "X selected" text mode.
+    function buildContent(valKlass) {
+      if (p.multiple) {
         if (p.display === 'text') {
-          inner += '<span class="sel-btn-value">2 selected</span>';
-        } else {
-          inner += '<div class="chip">Option 1 ' + CHIPX + '</div>'
-                +  '<div class="chip">Option 2 ' + CHIPX + '</div>';
+          return '<span class="' + valKlass + '">2 selected</span>';
         }
-      } else {
-        inner += '<span class="sel-btn-value">' + p.placeholder + '</span>';
+        return '<div class="chip">Option 1 ' + CHIPX + '</div>'
+             + '<div class="chip">Option 2 ' + CHIPX + '</div>';
       }
-      html = '<button class="' + btnCls + '" type="button"' + attrsHtml(commonAttrs) + '>'
-           + inner + CHEVRON + '</button>';
+      // Single
+      if (p.named) return '<span class="sel-btn-value">' + (p.value || 'Select…') + '</span>';
+      return '<span class="' + valKlass + '">' + p.placeholder + '</span>';
+    }
 
-    // --- Named, bordered: .sel-btn toolbar button ---
-    } else if (p.named) {
-      var nameHtml = p.name ? '<span class="sel-btn-name">' + p.name + ':</span>' : '';
-      var valueHtml = '<span class="sel-btn-value">' + (p.value || 'Select…') + '</span>';
-      html = '<button class="sel-btn' + dis + '" type="button"' + attrsHtml(commonAttrs) + '>'
-           + icon + nameHtml + valueHtml + CHEVRON + '</button>';
+    // --- Button-style trigger: inline OR named (with or without border) ---
+    // Both flavours share the same DOM:  [icon?] [name?:] [content] [chevron]
+    if (p.inline || p.named) {
+      var btnCls = 'sel-btn' + (p.inline ? ' sel-btn-inline' : '') + dis;
+      var nameHtml = (p.named && p.name) ? '<span class="sel-btn-name">' + p.name + ':</span>' : '';
+      html = '<button class="' + btnCls + '" type="button"' + attrsHtml(commonAttrs) + '>'
+           + icon + nameHtml + buildContent('sel-btn-value') + CHEVRON + '</button>';
 
     // --- Multi, stacked form field with label ---
     } else if (p.multiple) {
-      var msInner = icon;
-      if (p.display === 'text') {
-        msInner += '<span class="ms-text-val">2 selected</span>';
-      } else {
-        msInner += '<div class="chip">Option 1 ' + CHIPX + '</div>'
-                +  '<div class="chip">Option 2 ' + CHIPX + '</div>';
-      }
       html = '<div class="slt-wrap" style="width:280px;">'
            + '<div class="slt-lbl">' + p.label + reqAsterisk(p.required) + '</div>'
            + '<div class="ms' + dis + '"' + attrsHtml(commonAttrs) + ' style="width:280px;">'
-           + msInner + MSCHEV + '</div></div>';
+           + icon + buildContent('ms-text-val') + MSCHEV + '</div></div>';
 
     // --- Single, stacked form field with label ---
     } else {
@@ -1740,7 +1761,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
   }
 
   // Toggles
-  ['sl-inline','sl-required','sl-searchable','sl-disabled'].forEach(function(id) {
+  ['sl-named','sl-inline','sl-required','sl-searchable','sl-disabled'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
@@ -1758,7 +1779,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
     document.getElementById('sl-variant').value = 'single';
     document.getElementById('sl-display').value = 'chips';
-    ['sl-inline','sl-required','sl-searchable','sl-disabled'].forEach(function(id){
+    ['sl-named','sl-inline','sl-required','sl-searchable','sl-disabled'].forEach(function(id){
       document.getElementById(id).checked = false;
     });
     document.getElementById('sl-icon').value = '';
