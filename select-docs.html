@@ -912,9 +912,15 @@
           </div>
         </div>
         <div class="pg-row">
-          <div class="pg-row-name">prefix-icon</div>
+          <div class="pg-row-name">with icon</div>
           <div class="pg-row-ctrl">
             <label class="pg-toggle"><input type="checkbox" id="sl-prefixicon"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-row">
+          <div class="pg-row-name">inline</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-inline"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
         <div class="pg-row">
@@ -1192,23 +1198,44 @@
   </div>
 </section>
 
-<!-- CSS TOKENS -->
-<section class="section" id="dev-tokens">
-  <h2 class="text-l3">CSS tokens</h2>
+<!-- SETUP -->
+<section class="section" id="dev-setup">
+  <h2 class="text-l3">Setup</h2>
+  <p class="section-lead">Import the Material modules directly. The Effectory wrappers are exported from the shared UI module.</p>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  EffSelectComponent,
+  EffSelectVirtualComponent,
+  EffSelectLanguageComponent,
+  EffMatIconComponent
+} from '@effectory/ui';
+
+@Component({
+  standalone: true,
+  imports: [
+    MatSelectModule, MatAutocompleteModule,
+    FormsModule, ReactiveFormsModule,
+    EffSelectComponent, EffSelectVirtualComponent,
+    EffSelectLanguageComponent, EffMatIconComponent,
+  ],
+})
+export class MyFormComponent { /* ... */ }</code></pre>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:24px;">When to use which</h3>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
+      <thead><tr><th>COMPONENT</th><th>USE WHEN</th></tr></thead>
       <tbody>
-        <tr><td><span class="token"><span class="swatch" style="background:#fff;border:1px solid #ddd;"></span>bg/base</span></td><td>#ffffff</td><td>Field background (default)</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.08);"></span>bg/disabled</span></td><td>rgba(25,39,67,.08)</td><td>Disabled background</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td>#bcc1cd</td><td>Default border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#a5adbc;"></span>border/action-hover</span></td><td>#a5adbc</td><td>Hover border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>border/action-focus</span></td><td>#0a9d99</td><td>Focus / open border (teal)</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#b9252a;"></span>border/negative/base</span></td><td>#b9252a</td><td>Error border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#ec6e0a;"></span>border/warning/base</span></td><td>#ec6e0a</td><td>Warning border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#3174db;"></span>bg/info/base</span></td><td>#3174db</td><td>Chip background (Multi Select)</td></tr>
-        <tr><td><span class="token">radius/md</span></td><td>6px</td><td>Field corner radius</td></tr>
-        <tr><td><span class="token">shadow/action</span></td><td>var(--sh-action)</td><td>Field drop shadow</td></tr>
+        <tr><td><code>&lt;mat-select&gt;</code></td><td>Short, static option lists. No search needed. Standard Material API.</td></tr>
+        <tr><td><code>&lt;eff-select&gt;</code></td><td>You need search, validation labels, or programmatic <code>options[]</code>.</td></tr>
+        <tr><td><code>&lt;eff-select-virtual&gt;</code></td><td>Hundreds or thousands of options. Same API as <code>eff-select</code>, with virtual scrolling.</td></tr>
+        <tr><td><code>&lt;eff-select-language&gt;</code></td><td>Locale picking. Renders flag glyph + auto-translates option text.</td></tr>
+        <tr><td><code>&lt;mat-autocomplete&gt;</code></td><td>Free-text input where users can also pick a suggested value.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1218,11 +1245,12 @@
 <section class="section" id="dev-a11y">
   <h2 class="text-l3">Accessibility</h2>
   <div class="a11y-list">
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Form fields need a <code>&lt;label&gt;</code>.</strong> Use <code>&lt;label for="id"&gt;</code> linked to the field's <code>id</code>. Never rely on placeholder text alone.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Error messages need <code>aria-describedby</code>.</strong> <code>aria-describedby="field-error"</code> on the field + <code>id="field-error"</code> on the message element.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Chip remove buttons need a label.</strong> <code>&lt;button aria-label="Remove Design"&gt;</code> — the ✕ glyph alone isn't descriptive enough.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Selects with <code>name</code> need <code>aria-label</code>.</strong> Add <code>aria-label="Sort"</code> directly on the <code>&lt;select&gt;</code> element. The visible name prefix is decorative — mark it <code>aria-hidden="true"</code> so it isn't read twice.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Custom dropdowns must manage focus.</strong> Move focus to the first option when the dropdown opens. Close on <kbd>Escape</kbd> and return focus to the trigger. Arrow keys navigate between options.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Wrap the field in <code>&lt;mat-form-field&gt;</code> with a <code>&lt;mat-label&gt;</code>.</strong> Material wires the label to the field automatically — never rely on <code>placeholder</code> as the only descriptor.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Standalone triggers need <code>aria-label</code>.</strong> When you don't render a visible label (e.g. inline <code>class="inline"</code> selects in a toolbar), add <code>aria-label="Sort"</code> directly on the <code>&lt;mat-select&gt;</code>.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Validation errors need <code>&lt;mat-error&gt;</code>.</strong> Place inside the <code>&lt;mat-form-field&gt;</code>. Material handles <code>aria-describedby</code> wiring. For <code>&lt;eff-select&gt;</code>, use <code>invalidValueError</code> for invalid-option messaging.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Icon-only triggers need a label.</strong> <code>&lt;eff-mat-icon&gt;</code> is decorative by default. If the icon carries meaning, set <code>aria-label</code> on the option, not on the icon.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't reach for <code>disableRipple</code> for a11y reasons.</strong> It's a visual choice — Material's keyboard handling (arrow keys, Enter/Space, Escape, type-ahead) and focus management are unaffected.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Async lists must announce loading.</strong> When using <code>[isLoading]="true"</code> with <code>disableLocalSearch</code>, ensure the loading region is announced — Material's listbox role + the live status text covers most cases, but verify with a screen reader.</div></div>
   </div>
 </section>
 
@@ -1247,7 +1275,7 @@
     <a class="toc-link" href="#dev-usage">Usage</a>
     <a class="toc-link" href="#dev-props">Properties</a>
     <a class="toc-link" href="#dev-events">Events</a>
-    <a class="toc-link" href="#dev-tokens">CSS tokens</a>
+    <a class="toc-link" href="#dev-setup">Setup</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
 </div>
@@ -1284,6 +1312,7 @@
       required:    document.getElementById('sl-required').checked,
       disabled:    document.getElementById('sl-disabled').checked,
       prefixIcon:  document.getElementById('sl-prefixicon').checked,
+      inline:      document.getElementById('sl-inline').checked,
       placeholder: document.getElementById('sl-placeholder').value || 'Please select an option'
     };
   }
@@ -1295,7 +1324,12 @@
 
     var dis = p.disabled ? ' is-disabled' : '';
     var html = '';
-    if (p.multiple) {
+    if (p.inline && !p.multiple) {
+      html = '<button class="sel-btn' + dis + '" type="button">'
+           + (p.prefixIcon ? GLOBE : '')
+           + '<span class="sel-btn-value">' + p.placeholder + '</span>'
+           + CHEVRON + '</button>';
+    } else if (p.multiple) {
       html = '<div class="ms' + dis + '" style="width:280px;">'
            + (p.prefixIcon ? GLOBE : '')
            + '<span class="ms-ph">' + p.placeholder + '</span>'
@@ -1335,6 +1369,7 @@
       var matAttrs = ['disableRipple'];
       if (p.multiple) matAttrs.push('multiple');
       if (p.disabled) matAttrs.push('disabled');
+      if (p.inline)   matAttrs.push('class="inline" panelWidth=""');
       matAttrs.push('placeholder="' + p.placeholder + '"');
       var trigger = '';
       if (p.prefixIcon) {
@@ -1357,7 +1392,7 @@
     document.getElementById('sl-code-out').textContent = code;
   }
 
-  ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon'].forEach(function(id) {
+  ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon','sl-inline'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
@@ -1367,7 +1402,7 @@
   });
 
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
-    ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon'].forEach(function(id){
+    ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon','sl-inline'].forEach(function(id){
       document.getElementById(id).checked = false;
     });
     document.getElementById('sl-placeholder').value = 'Please select an option';
