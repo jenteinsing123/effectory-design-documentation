@@ -146,6 +146,8 @@
     /* title + subtitle stack inside an option */
     .menu-item-body { display:flex; flex-direction:column; min-width:0; flex:1; gap:2px; }
     .menu-item-title { font-weight:500; font-size:14px; line-height:1.6; color:#192743; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    /* Title sits alone (no description) → Regular 400 */
+    .menu-item-title:only-child { font-weight:400; }
     .menu-item-sub   { font-weight:400; font-size:12px; line-height:1.6; color:#192743cc; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .menu-item-check { width:16px; height:16px; color:#0a7d7a; flex-shrink:0; }
     .menu-item .flag {
