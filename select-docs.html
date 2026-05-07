@@ -309,7 +309,7 @@
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>.</p>
+  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>. The <strong>inline</strong> style is an orthogonal modifier that can be applied to any of them.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -339,12 +339,33 @@
     </div>
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
       <div class="variant-row-btn" style="padding:20px;">
-        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
-          <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">All</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
+        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
-      <div class="variant-row-desc"><strong>Named (toolbar / inline)</strong> — sized to its value with a one-word <code>name:</code> prefix. Use in toolbars and filter rows where multiple selects sit side by side. The bordered version reads as a control; the inline variant has a transparent background for use directly inside body copy or list headers.</div>
+      <div class="variant-row-desc"><strong>Named</strong> — sized to its value with a one-word <code>name:</code> prefix. Use in toolbars and filter rows where multiple selects sit side by side. The label sits inline with the value instead of stacked above the field.</div>
+    </div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:64px;">Inline style</h3>
+  <p class="section-lead">A transparent, padding-less ghost trigger that can be dropped directly into body copy, list headers, or anywhere a bordered field would feel heavy. Available on all three variants.</p>
+
+  <div class="variant-rows">
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Single, inline</strong> — drops the label and border. Use when the surrounding context already explains what's being chosen — e.g. a sentence like "Sorted by <em>Newest ▾</em>" or a list header where the column name is already visible.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-value">2 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Multi, inline</strong> — same ghost trigger but renders the selection as a count ("2 selected") instead of chips, since chips would feel out of place in body copy. The full picker still opens on click.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">All</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="variant-row-desc"><strong>Named, inline</strong> — keeps the <code>name:</code> prefix but loses the border. Used for filter rows that sit directly above a list, where stacking bordered controls would compete with the list itself.</div>
     </div>
   </div>
 </section>
