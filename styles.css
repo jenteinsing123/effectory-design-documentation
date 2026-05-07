@@ -171,8 +171,14 @@ h5 { font-size: 16px; font-weight: 600; color: var(--content-base); letter-spaci
 h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; margin: var(--spacing-base) 0 var(--spacing-extra-tight); }
 
 /* ─── SECTIONS ─── */
-.section { margin-bottom: 80px; scroll-margin-top: 80px; }
-.section-lead { font-size: 14px; color: var(--content-secondary); line-height: 1.65; margin-bottom: var(--spacing-base); }
+.section { margin-bottom: 96px; scroll-margin-top: 80px; }
+.section-lead { font-size: 14px; color: var(--content-secondary); line-height: 1.65; margin-bottom: var(--spacing-loose); }
+.content p { margin-bottom: var(--spacing-base); line-height: 1.65; }
+.content p:last-child { margin-bottom: 0; }
+.content h3.text-l4 { margin-top: var(--spacing-extra-loose); margin-bottom: var(--spacing-tight); }
+.content h3.text-l4:first-of-type,
+.content section > h3.text-l4:first-child { margin-top: 0; }
+.content h2.text-l3 { margin-bottom: var(--spacing-tight); }
 
 /* ─── TOC ─── */
 .toc { position: sticky; top: calc(var(--top-h) + var(--spacing-loose)); }
@@ -254,7 +260,7 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 .is-focus { outline: 2px solid var(--border-action-focus); outline-offset: 2px; }
 .var-row { display: flex; align-items: center; gap: var(--spacing-base); }
 .var-label { font-size: 12px; color: var(--content-subtle); font-weight: 500; width: 76px; flex-shrink: 0; }
-.state-col { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-tight); }
+.state-col { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-base); }
 .state-label { font-size: 11px; color: var(--content-subtle); }
 .size-item { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-tight); }
 .size-name { font-size: 12px; font-weight: 600; color: var(--content-base); }
