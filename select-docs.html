@@ -1127,20 +1127,20 @@
     var html = '';
     if (p.hasName) {
       // Inline named appearance
-      html = '<button class="sel-btn" style="pointer-events:none;">'
+      html = '<button class="sel-btn" type="button">'
            + '<span class="sel-btn-name">' + p.nameText + '</span>'
            + '<span class="sel-btn-value">' + (p.variant === 'multi' ? '3 selected' : 'Newest') + '</span>'
            + CHEVRON + '</button>';
     } else if (p.variant === 'single') {
       html = '<div class="slt-wrap" style="width:240px;">'
            + '<div class="slt-lbl">' + p.label + '</div>'
-           + '<div class="slt" style="pointer-events:none;">'
+           + '<div class="slt">'
            + '<div class="slt-left"><span class="slt-ph">Select...</span></div>'
            + CHEVRON + '</div></div>';
     } else {
       html = '<div style="display:flex;flex-direction:column;gap:4px;width:240px;">'
            + '<div class="slt-lbl">' + p.label + '</div>'
-           + '<div class="ms" style="pointer-events:none;">';
+           + '<div class="ms">';
       if (p.chips) {
         html += '<div class="chip">Result ' + CHIPX + '</div><div class="chip">Option ' + CHIPX + '</div>';
       } else {
@@ -1210,6 +1210,89 @@
     setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('did-copy'); }, 1500);
   }
   window.copyCode = copyCode;
+})();
+
+(function(){
+  var SINGLE_OPTS = [
+    { label: 'Newest first', checked: true },
+    { label: 'Oldest first' },
+    { label: 'A → Z' },
+    { label: 'Z → A' },
+    { label: 'Most relevant' }
+  ];
+  var MULTI_OPTS = [
+    { label: 'Design', checked: true },
+    { label: 'Engineering', checked: true },
+    { label: 'Product' },
+    { label: 'Marketing' },
+    { label: 'Operations' }
+  ];
+  var openMenu = null;
+  var openTrigger = null;
+  function closeMenu(){
+    if(openMenu){ openMenu.remove(); openMenu = null; openTrigger = null; }
+  }
+  function buildMenu(isMulti){
+    var menu = document.createElement('div');
+    menu.className = 'menu';
+    var opts = isMulti ? MULTI_OPTS.map(function(o){return {label:o.label,checked:o.checked};})
+                       : SINGLE_OPTS.map(function(o){return {label:o.label,checked:o.checked};});
+    opts.forEach(function(opt, idx){
+      var item = document.createElement('div');
+      item.className = 'menu-item' + (opt.checked ? ' is-selected' : '');
+      if (isMulti) {
+        item.innerHTML = '<span class="menu-cb" aria-hidden="true">'
+          + (opt.checked ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '')
+          + '</span><span>' + opt.label + '</span>';
+        item.addEventListener('click', function(e){
+          e.stopPropagation();
+          opt.checked = !opt.checked;
+          item.classList.toggle('is-selected', opt.checked);
+          var cb = item.querySelector('.menu-cb');
+          cb.innerHTML = opt.checked ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '';
+        });
+      } else {
+        item.innerHTML = '<span>' + opt.label + '</span>'
+          + (opt.checked ? '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '');
+        item.addEventListener('click', function(e){
+          e.stopPropagation();
+          opts.forEach(function(o){ o.checked = false; });
+          opt.checked = true;
+          closeMenu();
+        });
+      }
+      menu.appendChild(item);
+    });
+    return menu;
+  }
+  document.addEventListener('click', function(e){
+    if (e.target.closest('.menu')) return;
+    var trigger = e.target.closest('.slt, .ms, .sel-btn, .select-field');
+    var inScope = trigger && (
+      trigger.closest('[data-panel="developer"]') ||
+      trigger.closest('#sl-pg-preview')
+    );
+    if (!trigger || !inScope) { closeMenu(); return; }
+    e.preventDefault();
+    if (openTrigger === trigger) { closeMenu(); return; }
+    closeMenu();
+    var isMulti = trigger.classList.contains('ms')
+      || !!trigger.querySelector('.tag, .chip')
+      || (trigger.closest('.select-field') && trigger.closest('.select-field').classList.contains('multi'));
+    var menu = buildMenu(isMulti);
+    var rect = trigger.getBoundingClientRect();
+    menu.style.position = 'fixed';
+    menu.style.top = (rect.bottom + 4) + 'px';
+    menu.style.left = rect.left + 'px';
+    menu.style.minWidth = Math.max(rect.width, 240) + 'px';
+    menu.style.zIndex = '1000';
+    document.body.appendChild(menu);
+    openMenu = menu;
+    openTrigger = trigger;
+  });
+  window.addEventListener('resize', closeMenu);
+  window.addEventListener('scroll', closeMenu, true);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
 })();
 </script>
 
