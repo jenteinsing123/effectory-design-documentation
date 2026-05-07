@@ -1439,50 +1439,127 @@ export class MyFormComponent { /* ... */ }</code></pre>
 })();
 
 (function(){
-  var SINGLE_OPTS = [
-    { label: 'Newest first', checked: true },
-    { label: 'Oldest first' },
-    { label: 'A → Z' },
-    { label: 'Z → A' },
-    { label: 'Most relevant' }
+  var DEFAULT_SINGLE = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  var DEFAULT_MULTI  = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  var LANGS = [
+    { label: 'English (United Kingdom)', flag: 'linear-gradient(to bottom,#012169 33%,#fff 33% 66%,#C8102E 66%)' },
+    { label: 'English (United States)',  flag: 'linear-gradient(to bottom,#B22234 33%,#fff 33% 66%,#3C3B6E 66%)' },
+    { label: 'Dutch',                    flag: 'linear-gradient(to bottom,#AE1C28 33%,#fff 33% 66%,#21468B 66%)' },
+    { label: 'German',                   flag: 'linear-gradient(to bottom,#000 33%,#DD0000 33% 66%,#FFCE00 66%)' },
+    { label: 'Portuguese',               flag: 'linear-gradient(to right,#006600 33%,#FF0000 33%)' }
   ];
-  var MULTI_OPTS = [
-    { label: 'Design', checked: true },
-    { label: 'Engineering', checked: true },
-    { label: 'Product' },
-    { label: 'Marketing' },
-    { label: 'Operations' }
-  ];
+
+  // Per-trigger state keyed by element
+  var stateMap = new WeakMap();
+
+  function getState(trigger) {
+    var s = stateMap.get(trigger);
+    if (s) return s;
+    var isMulti = trigger.classList.contains('ms');
+    var isLang  = !!trigger.querySelector('span[style*="linear-gradient"]');
+    var isInline = trigger.classList.contains('sel-btn');
+    var existingChips = [...trigger.querySelectorAll('.chip')].map(c => c.textContent.trim().replace(/\s*$/, ''));
+    var existingVal = trigger.querySelector('.slt-val, .sel-btn-value');
+    var initialValue = existingVal ? existingVal.textContent.trim() : null;
+
+    var options;
+    if (isLang) {
+      options = LANGS.map(function(l){
+        return { label: l.label, flag: l.flag, checked: initialValue === l.label };
+      });
+    } else if (isMulti) {
+      options = DEFAULT_MULTI.map(function(label){
+        return { label: label, checked: existingChips.indexOf(label) !== -1 };
+      });
+    } else {
+      options = DEFAULT_SINGLE.map(function(label){
+        return { label: label, checked: initialValue === label };
+      });
+    }
+    s = { isMulti: isMulti, isLang: isLang, isInline: isInline, options: options };
+    stateMap.set(trigger, s);
+    return s;
+  }
+
+  function chipSvg(){ return '<svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;flex-shrink:0;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'; }
+  function chevronSvg(rotate){ return '<svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;' + (rotate ? 'transform:rotate(180deg);' : '') + '"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
+  function flagSpan(grad){ return '<span style="display:inline-flex;width:18px;height:14px;border-radius:2px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(25,39,67,.08);background:' + grad + ';" aria-hidden="true"></span>'; }
+
+  function renderTrigger(trigger, state, isOpen) {
+    var selected = state.options.filter(function(o){ return o.checked; });
+    if (state.isMulti) {
+      var inner = '';
+      if (selected.length === 0) {
+        inner = '<span class="ms-ph">Please select an option</span>';
+      } else {
+        inner = selected.map(function(o){
+          return '<div class="chip">' + o.label + ' ' + chipSvg() + '</div>';
+        }).join('');
+      }
+      trigger.innerHTML = inner + '<svg class="ms-ch" viewBox="0 0 16 16" fill="none" style="' + (isOpen ? 'transform:translateY(-50%) rotate(180deg);' : '') + '"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    } else if (state.isInline) {
+      var val = selected[0] ? selected[0].label : 'Please select an option';
+      trigger.innerHTML = '<span class="sel-btn-value">' + val + '</span>' + chevronSvg(isOpen);
+    } else {
+      // .slt
+      var label;
+      if (selected[0]) {
+        if (state.isLang) {
+          label = flagSpan(selected[0].flag) + '<span class="slt-val">' + selected[0].label + '</span>';
+        } else {
+          label = '<span class="slt-val">' + selected[0].label + '</span>';
+        }
+      } else {
+        // Preserve existing leading icon if any
+        var preIcon = '';
+        var firstSpan = trigger.querySelector('.slt-left > svg, .slt-left > span:not(.slt-ph):not(.slt-val)');
+        if (firstSpan && firstSpan.tagName !== 'SPAN') { /* no-op */ }
+        label = '<span class="slt-ph">Please select an option</span>';
+      }
+      trigger.innerHTML = '<div class="slt-left">' + label + '</div>' + chevronSvg(isOpen);
+    }
+  }
+
   var openMenu = null;
   var openTrigger = null;
   function closeMenu(){
-    if(openMenu){ openMenu.remove(); openMenu = null; openTrigger = null; }
+    if (openMenu) {
+      openMenu.remove();
+      var t = openTrigger;
+      openMenu = null; openTrigger = null;
+      if (t) {
+        var s = stateMap.get(t);
+        if (s) renderTrigger(t, s, false);
+      }
+    }
   }
-  function buildMenu(isMulti){
+
+  function buildMenu(trigger, state){
     var menu = document.createElement('div');
     menu.className = 'menu';
-    var opts = isMulti ? MULTI_OPTS.map(function(o){return {label:o.label,checked:o.checked};})
-                       : SINGLE_OPTS.map(function(o){return {label:o.label,checked:o.checked};});
-    opts.forEach(function(opt, idx){
+    state.options.forEach(function(opt){
       var item = document.createElement('div');
       item.className = 'menu-item' + (opt.checked ? ' is-selected' : '');
-      if (isMulti) {
+      var prefix = state.isLang ? flagSpan(opt.flag) + ' ' : '';
+      if (state.isMulti) {
         item.innerHTML = '<span class="menu-cb" aria-hidden="true">'
           + (opt.checked ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '')
-          + '</span><span>' + opt.label + '</span>';
+          + '</span>' + prefix + '<span>' + opt.label + '</span>';
         item.addEventListener('click', function(e){
           e.stopPropagation();
           opt.checked = !opt.checked;
           item.classList.toggle('is-selected', opt.checked);
-          var cb = item.querySelector('.menu-cb');
-          cb.innerHTML = opt.checked ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '';
+          item.querySelector('.menu-cb').innerHTML = opt.checked
+            ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+            : '';
+          renderTrigger(trigger, state, true);
         });
       } else {
-        item.innerHTML = '<span>' + opt.label + '</span>'
+        item.innerHTML = prefix + '<span style="flex:1;">' + opt.label + '</span>'
           + (opt.checked ? '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '');
         item.addEventListener('click', function(e){
           e.stopPropagation();
-          opts.forEach(function(o){ o.checked = false; });
+          state.options.forEach(function(o){ o.checked = false; });
           opt.checked = true;
           closeMenu();
         });
@@ -1491,21 +1568,21 @@ export class MyFormComponent { /* ... */ }</code></pre>
     });
     return menu;
   }
+
   document.addEventListener('click', function(e){
     if (e.target.closest('.menu')) return;
-    var trigger = e.target.closest('.slt, .ms, .sel-btn, .select-field');
+    var trigger = e.target.closest('.slt, .ms, .sel-btn');
     var inScope = trigger && (
       trigger.closest('[data-panel="developer"]') ||
       trigger.closest('#sl-pg-preview')
     );
     if (!trigger || !inScope) { closeMenu(); return; }
+    if (trigger.classList.contains('is-disabled')) return;
     e.preventDefault();
     if (openTrigger === trigger) { closeMenu(); return; }
     closeMenu();
-    var isMulti = trigger.classList.contains('ms')
-      || !!trigger.querySelector('.tag, .chip')
-      || (trigger.closest('.select-field') && trigger.closest('.select-field').classList.contains('multi'));
-    var menu = buildMenu(isMulti);
+    var state = getState(trigger);
+    var menu = buildMenu(trigger, state);
     var rect = trigger.getBoundingClientRect();
     menu.style.position = 'fixed';
     menu.style.top = (rect.bottom + 4) + 'px';
@@ -1515,6 +1592,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
     document.body.appendChild(menu);
     openMenu = menu;
     openTrigger = trigger;
+    renderTrigger(trigger, state, true);
   });
   window.addEventListener('resize', closeMenu);
   window.addEventListener('scroll', closeMenu, true);
