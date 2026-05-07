@@ -114,7 +114,7 @@
       margin:4px 8px 4px;
       border-bottom:1px solid #d0d4dc;
     }
-    .menu-search:focus-within { border-bottom-color:var(--border-action-focus); }
+    .menu-search:focus-within { border-bottom-color:#192743; }
     .menu-search svg { width:14px; height:14px; color:var(--content-subtle); flex-shrink:0; }
     .menu-search input {
       border:0; outline:0; background:transparent; flex:1;
@@ -145,10 +145,8 @@
     .menu-item.is-disabled { color:var(--content-disabled); cursor:not-allowed; }
     /* title + subtitle stack inside an option */
     .menu-item-body { display:flex; flex-direction:column; min-width:0; flex:1; gap:2px; }
-    .menu-item-title { font-weight:400; font-size:14px; line-height:1.6; color:#192743; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .menu-item-title { font-weight:500; font-size:14px; line-height:1.6; color:#192743; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .menu-item-sub   { font-weight:400; font-size:12px; line-height:1.6; color:#192743cc; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .menu-item.is-selected .menu-item-title { font-weight:500; }
-    .menu-item.is-selected .menu-item-sub { color:#192743cc; }
     .menu-item-check { width:16px; height:16px; color:#0a7d7a; flex-shrink:0; }
     .menu-item .flag {
       width:18px; height:14px; border-radius:2px; flex-shrink:0; overflow:hidden;
@@ -171,7 +169,7 @@
     .menu-action-row {
       display:flex; align-items:center; gap:10px;
       padding:8px 12px; border-radius:6px;
-      cursor:pointer; font-weight:600;
+      cursor:pointer; font-weight:500;
       border-top:1px solid var(--border-default);
       margin-top:4px;
     }
@@ -892,7 +890,7 @@
       <div class="state-lbl">Filtering</div>
       <div class="open-demo">
         <div class="menu" role="listbox" style="position:static;">
-          <div class="menu-search" style="border-bottom-color:var(--border-action-focus);">
+          <div class="menu-search" style="border-bottom-color:#192743;">
             <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <input type="text" value="amst" aria-label="Search">
           </div>
