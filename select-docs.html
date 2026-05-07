@@ -1024,22 +1024,43 @@
         <button class="pg-reset" id="sl-reset-btn">Reset</button>
       </div>
       <div class="pg-panel" id="sl-pane-props">
+        <!-- Variant — root prop. All other rows are conditional on this. -->
         <div class="pg-row">
-          <div class="pg-row-name">multiple</div>
+          <div class="pg-row-name">variant</div>
           <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-multiple"><span class="pg-toggle-track"></span></label>
+            <select class="pg-select" id="sl-variant">
+              <option value="single">Single — stacked form</option>
+              <option value="multi">Multi — stacked form</option>
+              <option value="toolbar">Toolbar — named (bordered)</option>
+              <option value="ghost">Ghost — named (inline)</option>
+            </select>
           </div>
         </div>
+
+        <!-- Multi only: how to display selected values -->
+        <div class="pg-row" data-when="multi">
+          <div class="pg-row-name">display</div>
+          <div class="pg-row-ctrl">
+            <select class="pg-select" id="sl-display">
+              <option value="chips">chips</option>
+              <option value="text">text (e.g. "2 selected")</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Stacked variants only: required field with red asterisk -->
+        <div class="pg-row" data-when="single,multi">
+          <div class="pg-row-name">required</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-required"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+
+        <!-- Always available -->
         <div class="pg-row">
           <div class="pg-row-name">searchable</div>
           <div class="pg-row-ctrl">
             <label class="pg-toggle"><input type="checkbox" id="sl-searchable"><span class="pg-toggle-track"></span></label>
-          </div>
-        </div>
-        <div class="pg-row">
-          <div class="pg-row-name">required</div>
-          <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-required"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
         <div class="pg-row">
@@ -1062,28 +1083,32 @@
             </select>
           </div>
         </div>
-        <div class="pg-row">
-          <div class="pg-row-name">inline</div>
+
+        <!-- Stacked variants: label + placeholder -->
+        <div class="pg-row" data-when="single,multi">
+          <div class="pg-row-name">label</div>
           <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-inline"><span class="pg-toggle-track"></span></label>
+            <input class="pg-input" id="sl-label" type="text" value="Label">
           </div>
         </div>
-        <div class="pg-row">
-          <div class="pg-row-name">value as text</div>
-          <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-astext"><span class="pg-toggle-track"></span></label>
-          </div>
-        </div>
-        <div class="pg-row">
+        <div class="pg-row" data-when="single,multi">
           <div class="pg-row-name">placeholder</div>
           <div class="pg-row-ctrl">
             <input class="pg-input" id="sl-placeholder" type="text" value="Please select an option">
           </div>
         </div>
-        <div class="pg-row">
+
+        <!-- Named variants (toolbar / ghost): name + value -->
+        <div class="pg-row" data-when="toolbar,ghost">
           <div class="pg-row-name">name</div>
           <div class="pg-row-ctrl">
-            <input class="pg-input" id="sl-name" type="text" placeholder="e.g. Sort">
+            <input class="pg-input" id="sl-name" type="text" value="Sort" placeholder="e.g. Sort">
+          </div>
+        </div>
+        <div class="pg-row" data-when="toolbar,ghost">
+          <div class="pg-row-name">value</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-value" type="text" value="Newest">
           </div>
         </div>
       </div>
@@ -1463,17 +1488,31 @@ export class MyFormComponent { /* ... */ }</code></pre>
   var MSCHEV  = '<svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   function slGetProps() {
+    var v = document.getElementById('sl-variant').value;
     return {
-      multiple:    document.getElementById('sl-multiple').checked,
-      searchable:  document.getElementById('sl-searchable').checked,
+      variant:     v,                                // 'single' | 'multi' | 'toolbar' | 'ghost'
+      stacked:     v === 'single' || v === 'multi',  // form layout (label + field)
+      multiple:    v === 'multi',
+      named:       v === 'toolbar' || v === 'ghost', // sel-btn pattern
+      ghost:       v === 'ghost',
+      display:     document.getElementById('sl-display').value, // 'chips' | 'text'
       required:    document.getElementById('sl-required').checked,
+      searchable:  document.getElementById('sl-searchable').checked,
       disabled:    document.getElementById('sl-disabled').checked,
       icon:        document.getElementById('sl-icon').value,
-      inline:      document.getElementById('sl-inline').checked,
-      asText:      document.getElementById('sl-astext').checked,
+      label:       document.getElementById('sl-label').value || 'Label',
       placeholder: document.getElementById('sl-placeholder').value || 'Please select an option',
-      name:        (document.getElementById('sl-name').value || '').trim()
+      name:        (document.getElementById('sl-name').value || '').trim(),
+      value:       (document.getElementById('sl-value').value || '').trim()
     };
+  }
+
+  function slApplyVisibility() {
+    var v = document.getElementById('sl-variant').value;
+    document.querySelectorAll('#sl-pane-props .pg-row[data-when]').forEach(function(row) {
+      var allowed = row.dataset.when.split(',');
+      row.style.display = allowed.indexOf(v) !== -1 ? '' : 'none';
+    });
   }
 
   var ICON_PATHS = {
@@ -1491,6 +1530,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
   function reqAsterisk(req) { return req ? ' <span style="color:#b9252a;">*</span>' : ''; }
 
   function slRender() {
+    slApplyVisibility();
     var p = slGetProps();
 
     var dis = p.disabled ? ' is-disabled' : '';
@@ -1498,37 +1538,32 @@ export class MyFormComponent { /* ... */ }</code></pre>
     var search = p.searchable ? ' data-searchable="true"' : '';
     var html = '';
 
-    // Inline-named or inline-only render as a sel-btn
-    if ((p.name || p.inline) && !p.multiple) {
-      var btnCls = 'sel-btn' + (p.inline ? ' sel-btn-inline' : '') + dis;
+    if (p.named) {
+      // Toolbar (bordered) or Ghost (transparent inline) named trigger
+      var btnCls = 'sel-btn' + (p.ghost ? ' sel-btn-inline' : '') + dis;
+      var nameHtml = p.name ? '<span class="sel-btn-name">' + p.name + ':</span>' : '';
+      var valueHtml = p.value
+        ? '<span class="sel-btn-value">' + p.value + '</span>'
+        : '<span class="sel-btn-value" style="color:var(--content-subtle);">Select…</span>';
       html = '<button class="' + btnCls + '" type="button"' + search + '>'
-           + icon
-           + (p.name ? '<span class="sel-btn-name">' + p.name + ':</span>' : '')
-           + '<span class="sel-btn-value">' + p.placeholder + '</span>'
-           + CHEVRON + '</button>';
+           + icon + nameHtml + valueHtml + CHEVRON + '</button>';
     } else if (p.multiple) {
+      // Multi — stacked form field with label
       var msInner = icon;
-      if (p.asText) {
+      if (p.display === 'text') {
         msInner += '<span class="ms-text-val">2 selected</span>';
       } else {
         msInner += '<div class="chip">Option 1 ' + CHIPX + '</div>'
                 +  '<div class="chip">Option 2 ' + CHIPX + '</div>';
       }
-      var labelHtml = '';
-      if (p.required) {
-        labelHtml = '<div class="slt-lbl">Label' + reqAsterisk(true) + '</div>';
-      }
       html = '<div class="slt-wrap" style="width:280px;">'
-           + labelHtml
+           + '<div class="slt-lbl">' + p.label + reqAsterisk(p.required) + '</div>'
            + '<div class="ms' + dis + '"' + search + ' style="width:280px;">'
            + msInner + MSCHEV + '</div></div>';
     } else {
-      var labelHtml2 = '';
-      if (p.required) {
-        labelHtml2 = '<div class="slt-lbl">Label' + reqAsterisk(true) + '</div>';
-      }
+      // Single — stacked form field with label
       html = '<div class="slt-wrap" style="width:280px;">'
-           + labelHtml2
+           + '<div class="slt-lbl">' + p.label + reqAsterisk(p.required) + '</div>'
            + '<div class="slt' + dis + '"' + search + ' style="width:280px;">'
            + '<div class="slt-left">' + icon
            + '<span class="slt-ph">' + p.placeholder + '</span>'
@@ -1541,9 +1576,30 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
   function slUpdateCode() {
     var p = slGetProps();
-    var useEff = p.searchable || p.required;
     var code = '';
-    if (useEff) {
+
+    if (p.named) {
+      // mat-select with class="inline" (and the named pattern via mat-select-trigger)
+      var matAttrs = ['#select','disableRipple'];
+      if (p.disabled) matAttrs.push('disabled');
+      if (p.ghost)    matAttrs.push('class="inline" panelWidth=""');
+      var optionPrefix = p.icon
+        ? '<eff-mat-icon [iconName]="\'' + p.icon + '\'" class="icon-before"></eff-mat-icon>'
+        : '';
+      var optionClass = p.icon ? ' class="with-icon"' : '';
+      var triggerInner = (p.icon ? optionPrefix : '')
+        + (p.name ? '<span class="select-name">' + p.name + ':</span> ' : '')
+        + '{{select.triggerValue}}';
+      code = '<mat-select ' + matAttrs.join(' ') + '>\n'
+           + '  <mat-select-trigger>\n'
+           + '    ' + triggerInner + '\n'
+           + '  </mat-select-trigger>\n'
+           + '  <mat-option' + optionClass + ' value="newest">' + optionPrefix + 'Newest</mat-option>\n'
+           + '  <mat-option' + optionClass + ' value="oldest">' + optionPrefix + 'Oldest</mat-option>\n'
+           + '  <mat-option' + optionClass + ' value="popular">' + optionPrefix + 'Most popular</mat-option>\n'
+           + '</mat-select>';
+    } else if (p.searchable || p.required) {
+      // eff-select handles searchable + required
       var attrs = [];
       attrs.push('[required]="' + (p.required ? 'true' : 'false') + '"');
       attrs.push('[multiple]="' + (p.multiple ? 'true' : 'false') + '"');
@@ -1551,6 +1607,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
       attrs.push('[disabled]="' + (p.disabled ? 'true' : 'false') + '"');
       attrs.push('[(ngModel)]="value"');
       code = '<eff-select ' + attrs.join(' ') + '\n'
+           + '  label="' + p.label + '"\n'
            + '  [options]="[\n'
            + '    {value: 1, text: \'Option 1\'},\n'
            + '    {value: 2, text: \'Option 2\'},\n'
@@ -1559,49 +1616,57 @@ export class MyFormComponent { /* ... */ }</code></pre>
            + '  placeholderSelect="' + p.placeholder + '" placeholderSearch="Search value">\n'
            + '</eff-select>';
     } else {
-      var matAttrs = ['disableRipple'];
-      if (p.multiple) matAttrs.push('multiple');
-      if (p.disabled) matAttrs.push('disabled');
-      if (p.inline)   matAttrs.push('class="inline" panelWidth=""');
-      if (p.name)     matAttrs.push('name="' + p.name + '"');
-      matAttrs.push('placeholder="' + p.placeholder + '"');
-      var trigger = '';
+      // Plain mat-select stacked
+      var ms = ['#select','disableRipple'];
+      if (p.multiple) ms.push('multiple');
+      if (p.disabled) ms.push('disabled');
+      ms.push('placeholder="' + p.placeholder + '"');
+      var trig = '';
       if (p.icon) {
-        trigger = '  <mat-select-trigger>\n'
-                + '    <eff-mat-icon [iconName]="\'' + p.icon + '\'" class="icon-before"></eff-mat-icon>\n'
-                + '    {{select.triggerValue}}\n'
-                + '  </mat-select-trigger>\n';
+        trig = '  <mat-select-trigger>\n'
+             + '    <eff-mat-icon [iconName]="\'' + p.icon + '\'" class="icon-before"></eff-mat-icon>\n'
+             + '    {{select.triggerValue}}\n'
+             + '  </mat-select-trigger>\n';
       }
-      var optionPrefix = p.icon
-        ? '<eff-mat-icon [iconName]="\'' + p.icon + '\'" class="icon-before"></eff-mat-icon>'
-        : '';
-      var optionClass = p.icon ? ' class="with-icon"' : '';
-      code = '<mat-select #select ' + matAttrs.join(' ') + '>\n'
-           + trigger
-           + '  <mat-option' + optionClass + ' value="1">' + optionPrefix + 'Option 1</mat-option>\n'
-           + '  <mat-option' + optionClass + ' value="2">' + optionPrefix + 'Option 2</mat-option>\n'
-           + '  <mat-option' + optionClass + ' value="3">' + optionPrefix + 'Option 3</mat-option>\n'
+      var op = p.icon ? '<eff-mat-icon [iconName]="\'' + p.icon + '\'" class="icon-before"></eff-mat-icon>' : '';
+      var opCls = p.icon ? ' class="with-icon"' : '';
+      code = '<mat-select ' + ms.join(' ') + '>\n'
+           + trig
+           + '  <mat-option' + opCls + ' value="1">' + op + 'Option 1</mat-option>\n'
+           + '  <mat-option' + opCls + ' value="2">' + op + 'Option 2</mat-option>\n'
+           + '  <mat-option' + opCls + ' value="3">' + op + 'Option 3</mat-option>\n'
            + '</mat-select>';
     }
     document.getElementById('sl-code-out').textContent = code;
   }
 
-  ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-icon','sl-inline','sl-astext'].forEach(function(id) {
+  // Toggles
+  ['sl-required','sl-searchable','sl-disabled'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
-  ['sl-placeholder','sl-name'].forEach(function(id) {
+  // Selects
+  ['sl-variant','sl-display','sl-icon'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', slRender);
+  });
+  // Text inputs
+  ['sl-label','sl-placeholder','sl-name','sl-value'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('input', slRender);
   });
 
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
-    ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-inline','sl-astext'].forEach(function(id){
+    document.getElementById('sl-variant').value = 'single';
+    document.getElementById('sl-display').value = 'chips';
+    ['sl-required','sl-searchable','sl-disabled'].forEach(function(id){
       document.getElementById(id).checked = false;
     });
     document.getElementById('sl-icon').value = '';
+    document.getElementById('sl-label').value = 'Label';
     document.getElementById('sl-placeholder').value = 'Please select an option';
-    document.getElementById('sl-name').value = '';
+    document.getElementById('sl-name').value = 'Sort';
+    document.getElementById('sl-value').value = 'Newest';
     slRender();
   });
 
