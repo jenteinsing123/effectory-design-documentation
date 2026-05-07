@@ -137,6 +137,10 @@
     .menu-item:hover { background:#f8f8f9; }
     .menu-item.is-selected { background:#d2f8f6; color:#192743; }
     .menu-item.is-selected:hover { background:#c2f1ee; }
+    /* Multi-select rows: no background fill for selected state — checkbox alone signals selection */
+    .menu[aria-multiselectable="true"] .menu-item.is-selected,
+    .menu[aria-multiselectable="true"] .menu-item.is-selected:hover { background:transparent; }
+    .menu[aria-multiselectable="true"] .menu-item:hover { background:#f8f8f9; }
     .menu-item.is-focus  { background:#f8f8f9; box-shadow:inset 0 0 0 2px var(--border-action-focus); }
     .menu-item.is-disabled { color:var(--content-disabled); cursor:not-allowed; }
     /* title + subtitle stack inside an option */
@@ -1664,6 +1668,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
   function buildMenu(trigger, state){
     var menu = document.createElement('div');
     menu.className = 'menu';
+    if (state.isMulti) menu.setAttribute('aria-multiselectable', 'true');
     state.options.forEach(function(opt){
       var item = document.createElement('div');
       item.className = 'menu-item' + (opt.checked ? ' is-selected' : '');
