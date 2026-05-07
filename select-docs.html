@@ -309,7 +309,7 @@
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>. The <strong>inline</strong> style is an orthogonal modifier that can be applied to any of them.</p>
+  <p class="section-lead">Four variants — all built on a native <code>&lt;select&gt;</code>. The <strong>inline</strong> style is an orthogonal modifier that can be applied to any of them.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -335,7 +335,19 @@
           </div>
         </div>
       </div>
-      <div class="variant-row-desc"><strong>Multi Select</strong> — pick one or more options. Selected values appear as dismissible chips inside the field. The field grows vertically as chips accumulate. Use for tags, categories, or any filter where multiple answers are valid.</div>
+      <div class="variant-row-desc"><strong>Multi Select — chips</strong> — pick one or more options; selected values appear as dismissible chips inside the field. The field grows vertically as chips accumulate. Use when each value is short and users need to see and dismiss them individually — tags, categories, recipients.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div style="display:flex;flex-direction:column;gap:4px;width:200px;">
+          <div class="slt-lbl">Label text</div>
+          <div class="ms" style="pointer-events:none;flex-wrap:nowrap;">
+            <span class="ms-text-val">2 selected</span>
+            <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="variant-row-desc"><strong>Multi Select — text</strong> — same picker, but the field shows a count ("2 selected") instead of chips. Use when individual values are long, the count matters more than the names, or a fixed-height field is required (e.g. dense filter rows or table headers).</div>
     </div>
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
       <div class="variant-row-btn" style="padding:20px;">
