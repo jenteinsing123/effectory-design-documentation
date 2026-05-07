@@ -935,29 +935,31 @@
 <!-- USAGE -->
 <section class="section" id="dev-usage">
   <h2 class="text-l3">Usage</h2>
-  <p class="section-lead">The Select is implemented as the <code>&lt;ent-select&gt;</code> web component. Options are declared as <code>&lt;ent-option&gt;</code> children. The element forwards its value via the standard <code>(selectionChange)</code> event.</p>
+  <p class="section-lead">Two implementations are available. <code>&lt;mat-select&gt;</code> (Angular Material) covers the basic stacked, inline and multi cases. For richer needs (search, validation, large lists, locale picking) use the Effectory wrappers <code>&lt;eff-select&gt;</code>, <code>&lt;eff-select-virtual&gt;</code>, and <code>&lt;eff-select-language&gt;</code>.</p>
 
-  <h3 class="text-l4">Basic</h3>
+  <h3 class="text-l4">Select</h3>
   <div class="dev-preview">
-    <div class="slt-wrap" style="width:240px;">
-      <div class="slt"><div class="slt-left"><span class="slt-ph">Please select an option</span></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="slt" style="width:280px;">
+      <div class="slt-left"><span class="slt-ph">Please select an option</span></div>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select disablingDate placeholder="Please select an option"&gt;
-  &lt;ent-option value="1"&gt;Option 1&lt;/ent-option&gt;
-  &lt;ent-option value="2"&gt;Option 2&lt;/ent-option&gt;
-  &lt;ent-option disabled value="3"&gt;Option 3&lt;/ent-option&gt;
-&lt;/ent-select&gt;</code></pre>
+<pre><code>&lt;mat-select disableRipple placeholder="Please select an option"&gt;
+  &lt;mat-option value="1"&gt;Option 1&lt;/mat-option&gt;
+  &lt;mat-option value="2"&gt;Option 2&lt;/mat-option&gt;
+  &lt;mat-option value="3"&gt;Option 3&lt;/mat-option&gt;
+  &lt;mat-option disabled value="4"&gt;Option 4&lt;/mat-option&gt;
+&lt;/mat-select&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">With icon</h3>
-  <p>Use the <code>prefix-icon</code> attribute to render an icon before the value. Combine with <code>icon-after</code> to swap the chevron with a custom trailing icon.</p>
+  <p>Use a <code>&lt;mat-select-trigger&gt;</code> to render an icon before the value, and add <code>&lt;eff-mat-icon&gt;</code> with class <code>icon-before</code> to each <code>&lt;mat-option&gt;</code>.</p>
   <div class="dev-preview">
     <div class="slt" style="width:280px;">
       <div class="slt-left">
-        <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;" aria-hidden="true"><path d="M3 8h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span class="slt-ph">Please select an option</span>
       </div>
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -965,54 +967,74 @@
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select #selectIcon prefix-icon placeholder="Please select an option"&gt;
-  &lt;ent-option value="1"&gt;
-    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 1
-  &lt;/ent-option&gt;
-  &lt;ent-option value="2"&gt;
-    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 2
-  &lt;/ent-option&gt;
-  &lt;ent-option value="3"&gt;
-    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 3
-  &lt;/ent-option&gt;
-&lt;/ent-select&gt;</code></pre>
+<pre><code>&lt;mat-select #selectWithIcon disableRipple placeholder="Please select an option"&gt;
+  &lt;mat-select-trigger&gt;
+    &lt;eff-mat-icon [iconName]="'arrow-right'" class="icon-before"&gt;&lt;/eff-mat-icon&gt;
+    {{selectWithIcon.triggerValue}}
+  &lt;/mat-select-trigger&gt;
+  &lt;mat-option class="with-icon" value="1"&gt;
+    &lt;eff-mat-icon [iconName]="'arrow-right'" class="icon-before"&gt;&lt;/eff-mat-icon&gt;Option 1
+  &lt;/mat-option&gt;
+  &lt;mat-option class="with-icon" value="2"&gt;
+    &lt;eff-mat-icon [iconName]="'arrow-right'" class="icon-before"&gt;&lt;/eff-mat-icon&gt;Option 2
+  &lt;/mat-option&gt;
+  &lt;mat-option class="with-icon" value="3"&gt;
+    &lt;eff-mat-icon [iconName]="'arrow-right'" class="icon-before"&gt;&lt;/eff-mat-icon&gt;Option 3
+  &lt;/mat-option&gt;
+&lt;/mat-select&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">Option in select dropdown</h3>
-  <p>An option can render arbitrary content via the default slot or via the trailing <code>action</code> slot (e.g. an inline button).</p>
+  <h3 class="text-l4">Option with action button</h3>
+  <p>An option slot can host arbitrary content — for example, an "add option" button at the bottom of the list using <code>add-option-container</code>.</p>
   <div class="dev-preview" style="align-items:flex-start;gap:24px;">
     <div class="slt" style="width:280px;">
-      <div class="slt-left"><span class="slt-val">Option 3</span></div>
+      <div class="slt-left"><span class="slt-ph">Please select an option</span></div>
       <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;transform:rotate(180deg);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <div class="menu" style="position:static;width:280px;max-height:none;">
       <div class="menu-item">Option 1</div>
       <div class="menu-item">Option 2</div>
-      <div class="menu-item is-selected" style="display:flex;align-items:center;justify-content:space-between;">
-        <span>Option 3</span>
-        <button class="sel-btn" style="height:24px;padding:0 8px;font-size:12px;gap:4px;">
-          <span>Something here</span>
-          <svg viewBox="0 0 16 16" fill="none" style="width:12px;height:12px;" aria-hidden="true"><path d="M6 2h6m0 0v6m0-6L6 8M2 6v8h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
+      <div class="menu-item">Option 3</div>
+      <div class="menu-divider"></div>
+      <button class="sel-btn" style="width:100%;justify-content:flex-start;border:0;box-shadow:none;background:transparent;color:var(--content-subtle);">
+        <svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px;" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Add something</span>
+      </button>
     </div>
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select disablingApp placeholder="Please select an option"&gt;
-  &lt;ent-option value="1"&gt;Option 1&lt;/ent-option&gt;
-  &lt;ent-option value="2"&gt;Option 2&lt;/ent-option&gt;
-  &lt;ent-option value="3"&gt;
-    &lt;button class="ent-button neutral icon-only" (click)="customClick()"&gt;
-      &lt;span&gt;Something here&lt;/span&gt;
-      &lt;ent-icon icon="link"&gt;&lt;/ent-icon&gt;
-    &lt;/button&gt;
-  &lt;/ent-option&gt;
-&lt;/ent-select&gt;</code></pre>
+<pre><code>&lt;mat-select disableRipple placeholder="Please select an option"&gt;
+  &lt;mat-option value="1"&gt;Option 1&lt;/mat-option&gt;
+  &lt;mat-option value="2"&gt;Option 2&lt;/mat-option&gt;
+  &lt;mat-option value="3"&gt;Option 3&lt;/mat-option&gt;
+  &lt;button class="add-option-container text-subdued icon-before" (click)="buttonClicked()"&gt;
+    &lt;eff-mat-icon [iconName]="'plus'" class="icon"&gt;&lt;/eff-mat-icon&gt;
+    &lt;span&gt;Add something&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/mat-select&gt;</code></pre>
+  </div>
+
+  <h3 class="text-l4">Inline</h3>
+  <p>Add the <code>inline</code> class and set <code>panelWidth=""</code> so the dropdown can size to its content. Useful for toolbars and filter bars.</p>
+  <div class="dev-preview">
+    <div class="sel-btn">
+      <span class="sel-btn-value">Please select an option</span>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;mat-select class="inline" disableRipple panelWidth="" placeholder="Please select an option"&gt;
+  &lt;mat-option value="1"&gt;Option 1&lt;/mat-option&gt;
+  &lt;mat-option value="2"&gt;Option 2&lt;/mat-option&gt;
+  &lt;mat-option value="3"&gt;Option 3&lt;/mat-option&gt;
+  &lt;mat-option disabled value="4"&gt;Option 4&lt;/mat-option&gt;
+&lt;/mat-select&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">Multi-select</h3>
-  <p>Add <code>multiple="true"</code> to allow multiple selections. The component renders chips for each selected option.</p>
+  <p>Add the <code>multiple</code> attribute to allow several values to be selected at once.</p>
   <div class="dev-preview">
     <div class="ms" style="width:320px;">
       <div class="chip">Option 1 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
@@ -1022,20 +1044,59 @@
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
-  *ngFor="let option of #options" #ent="ent" [invalid]="invalid" [readonly]="false"
-  [(value)] = "tem: 'Option 1'},
-  [{value: 1, text: 'Option 1'},
-  [{value: 2, text: 'Option 2'},
-  [{value: 3, text: 'Option 3'},
-  [{value: 4, text: 'Option 4', disabled: true}]
-  placeholder="Please select an option" placeholderSearch="Search value"
-  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
-&lt;/ent-select&gt;</code></pre>
+<pre><code>&lt;mat-select multiple disableRipple placeholder="Please select an option"&gt;
+  &lt;mat-option value="1"&gt;Option 1&lt;/mat-option&gt;
+  &lt;mat-option value="2"&gt;Option 2&lt;/mat-option&gt;
+  &lt;mat-option value="3"&gt;Option 3&lt;/mat-option&gt;
+  &lt;mat-option disabled value="4"&gt;Option 4&lt;/mat-option&gt;
+&lt;/mat-select&gt;</code></pre>
+  </div>
+
+  <h3 class="text-l4">Effectory Select (with search &amp; validation)</h3>
+  <p>The <code>&lt;eff-select&gt;</code> wrapper accepts an <code>options</code> array, supports search via <code>[searchable]="true"</code>, and surfaces validation labels for invalid values.</p>
+  <div class="dev-preview">
+    <div class="ms" style="width:320px;">
+      <div class="chip">Option 1 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="chip chip-error">Invalid Option <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;eff-select [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="values"
+  [options]="[
+    {value: 0, text: 'Invalid Option', invalid: true},
+    {value: 1, text: 'Option 1'},
+    {value: 2, text: 'Option 2'},
+    {value: 3, text: 'Option 3'},
+    {value: 4, text: 'Option 4', disabled: true}
+  ]"
+  placeholderSelect="Please select an option" placeholderSearch="Search value"
+  validValueLabel="Valid options" invalidValueLabel="Invalid options"
+  invalidValueError="Invalid value selected"&gt;
+&lt;/eff-select&gt;</code></pre>
+  </div>
+
+  <h3 class="text-l4">With virtual scrolling</h3>
+  <p>For large data sets, use <code>&lt;eff-select-virtual&gt;</code> — same API as <code>&lt;eff-select&gt;</code>, options render lazily.</p>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;eff-select-virtual [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="values"
+  [options]="[
+    {value: 0, text: 'Invalid Option', invalid: true},
+    {value: 1, text: 'Option 1'},
+    {value: 2, text: 'Option 2'},
+    {value: 3, text: 'Option 3'},
+    {value: 4, text: 'Option 4', disabled: true}
+  ]"
+  placeholderSelect="Please select an option" placeholderSearch="Search value"
+  validValueLabel="Valid options" invalidValueLabel="Invalid options"
+  invalidValueError="Invalid value selected"&gt;
+&lt;/eff-select-virtual&gt;</code></pre>
   </div>
 
   <h3 class="text-l4">Language picker</h3>
-  <p>For locale selection use <code>&lt;ent-select-language&gt;</code>. Each option's <code>text</code> is auto-translated; <code>description</code> overrides the displayed label.</p>
+  <p>For locale selection use <code>&lt;eff-select-language&gt;</code> — values are BCP-47 locale codes; flags are rendered automatically.</p>
   <div class="dev-preview">
     <div class="slt" style="width:280px;">
       <div class="slt-left">
@@ -1047,57 +1108,57 @@
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select-language [required]="true" [multiple]="false" [searchable]="true" [disabled]="false" [(ngModel)]="value"
+<pre><code>&lt;eff-select-language [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="values"
   [options]="[
-    {value: 'en-GB', text: 'English (United Kingdom)'},
     {value: 'en-US', text: 'English (United States)'},
+    {value: 'en-GB', text: 'English (United Kingdom)'},
     {value: 'nl-NL', text: 'Dutch'},
-    {value: 'de-DE', text: 'German', disabled: true}
+    {value: 'de-DE', text: 'German'},
+    {value: 'pt-PT', text: 'Portuguese', disabled: true}
   ]"
-  placeholder="Please select an option"
-  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
-&lt;/ent-select-language&gt;</code></pre>
+  placeholderSelect="Please select an option" placeholderSearch="Search value"
+  validValueLabel="Valid options" invalidValueLabel="Invalid options"
+  invalidValueError="Invalid value selected"&gt;
+&lt;/eff-select-language&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">With virtual scrolling</h3>
-  <p>For large data sets, use <code>&lt;ent-select-virtual&gt;</code>. It accepts the same API as <code>&lt;ent-select&gt;</code> but renders items lazily.</p>
-  <div class="dev-preview">
-    <div class="ms" style="width:320px;">
-      <div class="chip">Option 1 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="chip">Option 12 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="chip">Option 47 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </div>
+  <h3 class="text-l4">Autocomplete</h3>
+  <p>For free-text input with suggestions, combine a Material <code>matInput</code> with <code>&lt;mat-autocomplete&gt;</code>.</p>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;ent-select-virtual [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
-  [options]="options"
-  placeholder="Please select an option"
-  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
-&lt;/ent-select-virtual&gt;</code></pre>
+<pre><code>&lt;input type="text" placeholder="Pick one" aria-label="Number" matInput
+  [formControl]="myControl" [matAutocomplete]="auto"&gt;
+&lt;mat-autocomplete #auto="matAutocomplete"&gt;
+  @for (option of filteredOptions | async; track option) {
+    &lt;mat-option [value]="option"&gt;{{ option }}&lt;/mat-option&gt;
+  }
+&lt;/mat-autocomplete&gt;</code></pre>
   </div>
 </section>
 
 <!-- PROPERTIES -->
 <section class="section" id="dev-props">
   <h2 class="text-l3">Properties</h2>
+  <p class="section-lead">Inputs available on <code>&lt;eff-select&gt;</code>, <code>&lt;eff-select-virtual&gt;</code> and <code>&lt;eff-select-language&gt;</code>. All boolean inputs default to <code>false</code>.</p>
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>PROPERTY</th><th>TYPE</th><th>DEFAULT</th><th>DESCRIPTION</th></tr></thead>
       <tbody>
-        <tr><td><code>initial</code></td><td>boolean</td><td><code>false</code></td><td>Marks the component as not yet touched — suppresses validation styling on first render.</td></tr>
-        <tr><td><code>multiple</code></td><td>boolean</td><td><code>false</code></td><td>Allows multiple options to be selected. Renders chips for each selection.</td></tr>
-        <tr><td><code>searchable</code></td><td>boolean</td><td><code>false</code></td><td>Shows a search field at the top of the dropdown to filter options.</td></tr>
+        <tr><td><code>inline</code></td><td>boolean</td><td><code>false</code></td><td>Render the field inline (no fixed width); panel sizes to its content.</td></tr>
+        <tr><td><code>multiple</code></td><td>boolean</td><td><code>false</code></td><td>Allow multiple options to be selected. Renders chips for each selection.</td></tr>
+        <tr><td><code>searchable</code></td><td>boolean</td><td><code>false</code></td><td>Shows a search field at the top of the dropdown.</td></tr>
         <tr><td><code>required</code></td><td>boolean</td><td><code>false</code></td><td>Marks the field as required for form validation.</td></tr>
         <tr><td><code>disabled</code></td><td>boolean</td><td><code>false</code></td><td>Disables interaction and applies disabled styling.</td></tr>
-        <tr><td><code>readonly</code></td><td>boolean</td><td><code>false</code></td><td>Read-only — value is shown but not editable.</td></tr>
-        <tr><td><code>previousMatch</code></td><td>boolean</td><td><code>false</code></td><td>When typing, jumps to the previously matched option instead of the next.</td></tr>
-        <tr><td><code>placeholder</code></td><td>string</td><td>—</td><td>Placeholder shown when no option is selected.</td></tr>
-        <tr><td><code>placeholderSearch</code></td><td>string</td><td>—</td><td>Placeholder for the search input (when <code>searchable</code> is true).</td></tr>
-        <tr><td><code>validValueLabel</code></td><td>string</td><td>—</td><td>Aria-friendly label announced when the value is valid.</td></tr>
-        <tr><td><code>invalidNoticeLabel</code></td><td>string</td><td>—</td><td>Message shown when the value fails validation.</td></tr>
-        <tr><td><code>options</code></td><td><code>EffectoryOption[]</code></td><td><code>[]</code></td><td>Programmatic option list (alternative to <code>&lt;ent-option&gt;</code> children).</td></tr>
+        <tr><td><code>previewData</code></td><td>boolean</td><td><code>false</code></td><td>Shows the option's <code>dataPreview</code> values inline next to its label.</td></tr>
+        <tr><td><code>disableLocalSearch</code></td><td>boolean</td><td><code>false</code></td><td>Prevents the component from filtering options locally — emit search via <code>searchTermChange</code> and update <code>options</code> from the host instead.</td></tr>
+        <tr><td><code>searchInDescription</code></td><td>boolean</td><td><code>false</code></td><td>Match the search term against an option's <code>description</code> as well as its <code>text</code>.</td></tr>
+        <tr><td><code>isLoading</code></td><td>boolean</td><td><code>false</code></td><td>Shows a loading state inside the dropdown — pair with <code>disableLocalSearch</code> for async lists.</td></tr>
+        <tr><td><code>placeholderSelect</code></td><td>string</td><td>—</td><td>Placeholder shown when no option is selected.</td></tr>
+        <tr><td><code>placeholderSearch</code></td><td>string</td><td>—</td><td>Placeholder for the search input.</td></tr>
+        <tr><td><code>validValueLabel</code></td><td>string</td><td>—</td><td>Group label shown above valid options in the dropdown.</td></tr>
+        <tr><td><code>invalidValueLabel</code></td><td>string</td><td>—</td><td>Group label shown above options marked <code>invalid</code>.</td></tr>
+        <tr><td><code>invalidValueError</code></td><td>string</td><td>—</td><td>Error message shown when an invalid option is selected.</td></tr>
+        <tr><td><code>options</code></td><td><code>EffectoryOption[]</code></td><td><code>[]</code></td><td>Programmatic option list (required for <code>eff-select</code> family).</td></tr>
       </tbody>
     </table>
   </div>
@@ -1110,8 +1171,8 @@
   description?: string;
   value: string;
   disabled?: boolean;
-  visible?: boolean;
-  dataPreview?: string;
+  invalid?: boolean;
+  dataPreview?: string[];
 }</code></pre>
   </div>
 </section>
@@ -1123,9 +1184,9 @@
     <table>
       <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>WHEN</th></tr></thead>
       <tbody>
-        <tr><td><code>selectionChange</code></td><td><code>EntSelectChange</code></td><td>The selected value changes (single or multi).</td></tr>
-        <tr><td><code>closeListChange</code></td><td><code>void</code></td><td>The dropdown panel closes.</td></tr>
-        <tr><td><code>searchTermChange</code></td><td><code>string</code></td><td>The user types in the search field.</td></tr>
+        <tr><td><code>selectionChange</code></td><td><code>MatSelectChange</code></td><td>The selected value changes (single or multi).</td></tr>
+        <tr><td><code>closedWithChange</code></td><td><code>void</code></td><td>The dropdown panel closes after a value change.</td></tr>
+        <tr><td><code>searchTermChange</code></td><td><code>string</code></td><td>The user types in the search field — useful with <code>disableLocalSearch</code>.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1253,19 +1314,46 @@
 
   function slUpdateCode() {
     var p = slGetProps();
-    var attrs = [];
-    if (p.required)   attrs.push('[required]="true"');
-    if (p.multiple)   attrs.push('[multiple]="true"');
-    if (p.searchable) attrs.push('[searchable]="true"');
-    if (p.disabled)   attrs.push('[disabled]="true"');
-    if (p.prefixIcon) attrs.push('prefix-icon');
-    attrs.push('placeholder="' + p.placeholder + '"');
-    var attrStr = attrs.length ? ' ' + attrs.join(' ') : '';
-    var code = '<ent-select' + attrStr + '>\n'
-             + '  <ent-option value="1">Option 1</ent-option>\n'
-             + '  <ent-option value="2">Option 2</ent-option>\n'
-             + '  <ent-option disabled value="3">Option 3</ent-option>\n'
-             + '</ent-select>';
+    var useEff = p.searchable || p.required;
+    var code = '';
+    if (useEff) {
+      var attrs = [];
+      attrs.push('[required]="' + (p.required ? 'true' : 'false') + '"');
+      attrs.push('[multiple]="' + (p.multiple ? 'true' : 'false') + '"');
+      attrs.push('[searchable]="' + (p.searchable ? 'true' : 'false') + '"');
+      attrs.push('[disabled]="' + (p.disabled ? 'true' : 'false') + '"');
+      attrs.push('[(ngModel)]="value"');
+      code = '<eff-select ' + attrs.join(' ') + '\n'
+           + '  [options]="[\n'
+           + '    {value: 1, text: \'Option 1\'},\n'
+           + '    {value: 2, text: \'Option 2\'},\n'
+           + '    {value: 3, text: \'Option 3\'}\n'
+           + '  ]"\n'
+           + '  placeholderSelect="' + p.placeholder + '" placeholderSearch="Search value">\n'
+           + '</eff-select>';
+    } else {
+      var matAttrs = ['disableRipple'];
+      if (p.multiple) matAttrs.push('multiple');
+      if (p.disabled) matAttrs.push('disabled');
+      matAttrs.push('placeholder="' + p.placeholder + '"');
+      var trigger = '';
+      if (p.prefixIcon) {
+        trigger = '  <mat-select-trigger>\n'
+                + '    <eff-mat-icon [iconName]="\'arrow-right\'" class="icon-before"></eff-mat-icon>\n'
+                + '    {{select.triggerValue}}\n'
+                + '  </mat-select-trigger>\n';
+      }
+      var optionPrefix = p.prefixIcon
+        ? '<eff-mat-icon [iconName]="\'arrow-right\'" class="icon-before"></eff-mat-icon>'
+        : '';
+      var optionClass = p.prefixIcon ? ' class="with-icon"' : '';
+      code = '<mat-select #select ' + matAttrs.join(' ') + '>\n'
+           + trigger
+           + '  <mat-option' + optionClass + ' value="1">' + optionPrefix + 'Option 1</mat-option>\n'
+           + '  <mat-option' + optionClass + ' value="2">' + optionPrefix + 'Option 2</mat-option>\n'
+           + '  <mat-option' + optionClass + ' value="3">' + optionPrefix + 'Option 3</mat-option>\n'
+           + '</mat-select>';
+    }
     document.getElementById('sl-code-out').textContent = code;
   }
 
