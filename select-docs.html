@@ -109,16 +109,17 @@
     }
     /* search input — bottom-underline style per Figma */
     .menu-search {
-      display:flex; align-items:center; gap:10px;
-      padding:10px 16px 10px 16px;
-      margin:4px 4px;
+      display:flex; align-items:center; gap:12px;
+      padding:14px 16px;
+      margin:-4px -4px 4px;
       border-bottom:1px solid #d0d4dc;
     }
     .menu-search:focus-within { border-bottom-color:#192743; }
-    .menu-search svg { width:14px; height:14px; color:var(--content-subtle); flex-shrink:0; }
+    .menu-search svg { width:20px; height:20px; color:#192743cc; flex-shrink:0; }
     .menu-search input {
       border:0; outline:0; background:transparent; flex:1;
-      font-size:14px; color:var(--content-base);
+      font-size:16px; line-height:1.5; color:#192743;
+      font-weight:400;
     }
     .menu-search input::placeholder { color:var(--content-subtle); }
     .menu-group-lbl {
