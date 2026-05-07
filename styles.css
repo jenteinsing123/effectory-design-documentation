@@ -260,7 +260,24 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 .is-focus { outline: 2px solid var(--border-action-focus); outline-offset: 2px; }
 .var-row { display: flex; align-items: center; gap: var(--spacing-base); }
 .var-label { font-size: 12px; color: var(--content-subtle); font-weight: 500; width: 76px; flex-shrink: 0; }
-.state-col { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-base); }
+.states-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 4px;
+  margin: 24px 0 40px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.state-col {
+  display: flex; flex-direction: column; gap: var(--spacing-base);
+  background: var(--bg-secondary);
+  border: 0;
+  border-radius: 0;
+  padding: 24px 28px 28px;
+  align-items: flex-start;
+  min-width: 0;
+}
+.state-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--content-subtle); margin-bottom: 2px; align-self: flex-start; }
 .state-label { font-size: 11px; color: var(--content-subtle); }
 .size-item { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-tight); }
 .size-name { font-size: 12px; font-weight: 600; color: var(--content-base); }
