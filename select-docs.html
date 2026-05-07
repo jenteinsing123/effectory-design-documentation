@@ -306,7 +306,7 @@
 <!-- VARIANTS -->
 <section class="section" id="variants">
   <h2 class="text-l3">Variants</h2>
-  <p class="section-lead">Two variants — both built on a native <code>&lt;select&gt;</code>.</p>
+  <p class="section-lead">Three variants — all built on a native <code>&lt;select&gt;</code>.</p>
 
   <div class="variant-rows">
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
@@ -333,6 +333,15 @@
         </div>
       </div>
       <div class="variant-row-desc"><strong>Multi Select</strong> — pick one or more options. Selected values appear as dismissible chips inside the field. The field grows vertically as chips accumulate. Use for tags, categories, or any filter where multiple answers are valid.</div>
+    </div>
+    <div class="variant-row" style="grid-template-columns:240px 1fr;">
+      <div class="variant-row-btn" style="padding:20px;">
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;">
+          <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Sort:</span><span class="sel-btn-value">Newest</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="sel-btn sel-btn-inline" style="pointer-events:none;"><span class="sel-btn-name">Status:</span><span class="sel-btn-value">All</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+      <div class="variant-row-desc"><strong>Named (toolbar / inline)</strong> — sized to its value with a one-word <code>name:</code> prefix. Use in toolbars and filter rows where multiple selects sit side by side. The bordered version reads as a control; the inline variant has a transparent background for use directly inside body copy or list headers.</div>
     </div>
   </div>
 </section>
@@ -1054,6 +1063,12 @@
             <input class="pg-input" id="sl-placeholder" type="text" value="Please select an option">
           </div>
         </div>
+        <div class="pg-row">
+          <div class="pg-row-name">name</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-name" type="text" placeholder="e.g. Sort">
+          </div>
+        </div>
       </div>
       <div class="pg-panel pg-code-wrap hidden" id="sl-pane-code">
         <button class="dev-copy-btn" id="sl-copy-btn" onclick="(function(){var c=document.getElementById('sl-code-out').textContent;navigator.clipboard.writeText(c);var b=document.getElementById('sl-copy-btn');b.textContent='Copied!';b.classList.add('did-copy');setTimeout(function(){b.textContent='Copy';b.classList.remove('did-copy');},1500);})()">Copy</button>
@@ -1438,7 +1453,8 @@ export class MyFormComponent { /* ... */ }</code></pre>
       disabled:    document.getElementById('sl-disabled').checked,
       prefixIcon:  document.getElementById('sl-prefixicon').checked,
       inline:      document.getElementById('sl-inline').checked,
-      placeholder: document.getElementById('sl-placeholder').value || 'Please select an option'
+      placeholder: document.getElementById('sl-placeholder').value || 'Please select an option',
+      name:        (document.getElementById('sl-name').value || '').trim()
     };
   }
 
@@ -1449,8 +1465,16 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
     var dis = p.disabled ? ' is-disabled' : '';
     var html = '';
-    if (p.inline && !p.multiple) {
-      html = '<button class="sel-btn' + dis + '" type="button">'
+    if (p.name && !p.multiple) {
+      // Named toolbar trigger — bordered by default, transparent when inline
+      var btnCls = 'sel-btn' + (p.inline ? ' sel-btn-inline' : '') + dis;
+      html = '<button class="' + btnCls + '" type="button">'
+           + (p.prefixIcon ? GLOBE : '')
+           + '<span class="sel-btn-name">' + p.name + ':</span>'
+           + '<span class="sel-btn-value">' + p.placeholder + '</span>'
+           + CHEVRON + '</button>';
+    } else if (p.inline && !p.multiple) {
+      html = '<button class="sel-btn sel-btn-inline' + dis + '" type="button">'
            + (p.prefixIcon ? GLOBE : '')
            + '<span class="sel-btn-value">' + p.placeholder + '</span>'
            + CHEVRON + '</button>';
@@ -1495,6 +1519,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
       if (p.multiple) matAttrs.push('multiple');
       if (p.disabled) matAttrs.push('disabled');
       if (p.inline)   matAttrs.push('class="inline" panelWidth=""');
+      if (p.name)     matAttrs.push('name="' + p.name + '"');
       matAttrs.push('placeholder="' + p.placeholder + '"');
       var trigger = '';
       if (p.prefixIcon) {
@@ -1521,7 +1546,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
-  ['sl-placeholder'].forEach(function(id) {
+  ['sl-placeholder','sl-name'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('input', slRender);
   });
@@ -1531,6 +1556,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
       document.getElementById(id).checked = false;
     });
     document.getElementById('sl-placeholder').value = 'Please select an option';
+    document.getElementById('sl-name').value = '';
     slRender();
   });
 
