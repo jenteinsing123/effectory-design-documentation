@@ -1576,7 +1576,10 @@ export class MyFormComponent { /* ... */ }</code></pre>
       case 'display':     return p.multiple && !p.named;
       case 'required':    return !p.named && !p.inline;
       case 'label':       return !p.named && !p.inline;
-      case 'placeholder': return !p.named;
+      // Named single uses `value` instead of a placeholder. Every other combination
+      // (including named multi, where the trigger shows "X selected" / empty text)
+      // exposes the placeholder so it can be customised.
+      case 'placeholder': return !(p.named && !p.multiple);
       case 'name':        return p.named;
       case 'value':       return p.named && !p.multiple;
       default:            return true;
