@@ -123,7 +123,6 @@
       background:var(--bg-base);
       z-index:1;
     }
-    .menu-search:focus-within { border-bottom-color:#192743; }
     .menu-search svg { width:16px; height:16px; color:#19274380; flex-shrink:0; }
     .menu-search input {
       border:0; outline:0; background:transparent; flex:1;
@@ -1104,8 +1103,8 @@
           <div class="pg-row-name">display</div>
           <div class="pg-row-ctrl">
             <select class="pg-select" id="sl-display">
-              <option value="chips">chips</option>
               <option value="text">text (e.g. "2 selected")</option>
+              <option value="chips">chips</option>
             </select>
           </div>
         </div>
@@ -1778,7 +1777,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
     document.getElementById('sl-variant').value = 'single';
-    document.getElementById('sl-display').value = 'chips';
+    document.getElementById('sl-display').value = 'text';
     ['sl-named','sl-inline','sl-required','sl-searchable','sl-disabled'].forEach(function(id){
       document.getElementById(id).checked = false;
     });
