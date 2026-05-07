@@ -360,15 +360,9 @@
     </div>
     <div class="variant-row" style="grid-template-columns:240px 1fr;">
       <div class="variant-row-btn" style="padding:20px;">
-        <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Filter:</span><div class="chip">Active <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chip">Pending <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </div>
-      <div class="variant-row-desc"><strong>Named — multi, chips</strong> — same toolbar trigger but accepts multiple values, each rendered as a dismissible chip after the prefix. Use for filter rows where users want to see (and remove) every active filter without opening the picker.</div>
-    </div>
-    <div class="variant-row" style="grid-template-columns:240px 1fr;">
-      <div class="variant-row-btn" style="padding:20px;">
         <div class="sel-btn" style="pointer-events:none;"><span class="sel-btn-name">Filter:</span><span class="sel-btn-value">2 selected</span><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;flex-shrink:0;color:#192743cc;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
-      <div class="variant-row-desc"><strong>Named — multi, text</strong> — multi-select toolbar trigger that collapses the selection to a count ("2 selected"). Use when the trigger needs a fixed width or sits in a dense filter row where chips would push other controls around.</div>
+      <div class="variant-row-desc"><strong>Named — multi</strong> — multi-select toolbar trigger that collapses the selection to a count ("2 selected"). Named multi always uses text — chips next to a <code>name:</code> prefix would compete visually and overflow on narrow toolbars.</div>
     </div>
   </div>
 
@@ -1589,7 +1583,10 @@ export class MyFormComponent { /* ... */ }</code></pre>
   //   - variant, named, inline, searchable, disabled, icon: always
   function slRowVisible(row, p) {
     switch (row) {
-      case 'display':     return p.multiple;
+      // Named multi is always text — chips next to a "Filter:" prefix would compete
+      // visually and overflow on narrow toolbars — so the display picker only applies
+      // to non-named multi.
+      case 'display':     return p.multiple && !p.named;
       case 'required':    return !p.named && !p.inline;
       case 'label':       return !p.named && !p.inline;
       case 'placeholder': return !p.named;
@@ -1639,10 +1636,13 @@ export class MyFormComponent { /* ... */ }</code></pre>
 
     // Common data attributes consumed by the dropdown system so it can preserve
     // the trigger's appearance across opens/closes.
+    // Named-multi forces text display — chips next to a name: prefix don't read well.
+    var effectiveDisplay = (p.multiple && p.named) ? 'text' : p.display;
+
     var commonAttrs = {
       'data-searchable': p.searchable ? 'true' : null,
       'data-multi':      p.multiple ? 'true' : null,
-      'data-display':    p.multiple ? p.display : null,
+      'data-display':    p.multiple ? effectiveDisplay : null,
       'data-name-label': p.named && p.name ? p.name : null,
       'data-empty-text': emptyText
     };
@@ -1652,7 +1652,7 @@ export class MyFormComponent { /* ... */ }</code></pre>
     // so .ms triggers can use .ms-text-val for the "X selected" text mode.
     function buildContent(valKlass) {
       if (p.multiple) {
-        if (p.display === 'text') {
+        if (effectiveDisplay === 'text') {
           return '<span class="' + valKlass + '">2 selected</span>';
         }
         return '<div class="chip">Option 1 ' + CHIPX + '</div>'
@@ -1899,14 +1899,25 @@ export class MyFormComponent { /* ... */ }</code></pre>
       }
     }
 
+    // For multi-text mode there are no chips to read; instead the trigger shows
+    // "X selected". Parse that count so the menu opens with the matching number
+    // of options pre-checked (otherwise re-rendering the trigger drops the
+    // selection back to the empty placeholder).
+    var preselectedCount = 0;
+    if (isMulti && existingChips.length === 0) {
+      var textValEl = trigger.querySelector('.ms-text-val, .sel-btn-value');
+      var m = textValEl && textValEl.textContent.match(/^(\d+)\s+selected$/i);
+      if (m) preselectedCount = parseInt(m[1], 10);
+    }
+
     var options;
     if (isLang) {
       options = LANGS.map(function(l){
         return { label: l.label, flag: l.flag, checked: initialValue === l.label };
       });
     } else if (isMulti) {
-      options = DEFAULT_MULTI.map(function(label){
-        return { label: label, checked: existingChips.indexOf(label) !== -1 };
+      options = DEFAULT_MULTI.map(function(label, i){
+        return { label: label, checked: existingChips.indexOf(label) !== -1 || i < preselectedCount };
       });
     } else {
       options = DEFAULT_SINGLE.map(function(label){
