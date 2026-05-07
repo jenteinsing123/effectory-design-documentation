@@ -107,11 +107,14 @@
       overflow:auto;
       font-size:14px;
     }
+    /* search input — bottom-underline style per Figma */
     .menu-search {
       display:flex; align-items:center; gap:8px;
-      padding:6px 8px; margin-bottom:4px;
-      border-bottom:1px solid var(--border-default);
+      padding:10px 12px 10px 0;
+      margin:4px 8px 4px;
+      border-bottom:1px solid #d0d4dc;
     }
+    .menu-search:focus-within { border-bottom-color:var(--border-action-focus); }
     .menu-search svg { width:14px; height:14px; color:var(--content-subtle); flex-shrink:0; }
     .menu-search input {
       border:0; outline:0; background:transparent; flex:1;
@@ -124,18 +127,24 @@
       padding:8px 10px 4px;
     }
     .menu-divider { height:1px; background:var(--border-default); margin:4px 0; }
+    /* option row */
     .menu-item {
-      display:flex; align-items:center; gap:8px;
-      padding:8px 10px; border-radius:6px;
+      display:flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:6px;
       cursor:pointer; color:var(--content-base);
       line-height:20px;
     }
-    .menu-item:hover { background:var(--bg-hover); }
-    .menu-item.is-selected { background:var(--bg-selected, rgba(10,157,153,.10)); color:var(--content-base); }
-    .menu-item.is-focus  { background:var(--bg-hover); box-shadow:inset 0 0 0 2px var(--border-action-focus); }
+    .menu-item:hover { background:#f3f4f6; }
+    .menu-item.is-selected { background:#d6f1ef; color:var(--content-base); }
+    .menu-item.is-selected:hover { background:#c7ecea; }
+    .menu-item.is-focus  { background:#f3f4f6; box-shadow:inset 0 0 0 2px var(--border-action-focus); }
     .menu-item.is-disabled { color:var(--content-disabled); cursor:not-allowed; }
-    .menu-item-text { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .menu-item-check { width:14px; height:14px; color:var(--content-action); flex-shrink:0; }
+    /* title + subtitle stack inside an option */
+    .menu-item-body { display:flex; flex-direction:column; min-width:0; flex:1; gap:2px; }
+    .menu-item-title { font-weight:600; font-size:14px; line-height:18px; color:var(--content-base); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .menu-item-sub   { font-size:12px; line-height:16px; color:var(--content-subtle); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .menu-item.is-selected .menu-item-sub { color:#0a7d7a; }
+    .menu-item-check { width:16px; height:16px; color:#0a7d7a; flex-shrink:0; }
     .menu-item .flag {
       width:18px; height:14px; border-radius:2px; flex-shrink:0; overflow:hidden;
       box-shadow:inset 0 0 0 1px rgba(25,39,67,.08);
@@ -143,16 +152,31 @@
     .menu-item-icon { width:16px; height:16px; color:var(--content-subtle); flex-shrink:0; }
     /* multi-select option uses a checkbox */
     .menu-cb {
-      width:16px; height:16px; border:1.5px solid var(--border-action);
+      width:18px; height:18px; border:1.5px solid #b1b6c0;
       border-radius:4px; background:var(--bg-base);
       display:inline-flex; align-items:center; justify-content:center;
       flex-shrink:0;
     }
     .menu-item.is-selected .menu-cb {
-      background:var(--bg-action-base); border-color:var(--bg-action-base);
+      background:#0a9d99; border-color:#0a9d99;
     }
     .menu-cb svg { width:10px; height:10px; color:#fff; opacity:0; }
     .menu-item.is-selected .menu-cb svg { opacity:1; }
+    /* Select all / deselect all row */
+    .menu-action-row {
+      display:flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:6px;
+      cursor:pointer; font-weight:600;
+      border-top:1px solid var(--border-default);
+      margin-top:4px;
+    }
+    .menu-action-row:hover { background:#f3f4f6; }
+    .menu-action-row .menu-cb-outline {
+      width:18px; height:18px; border:1.5px solid #0a9d99; border-radius:4px;
+      display:inline-flex; align-items:center; justify-content:center;
+      color:#0a9d99; flex-shrink:0; background:transparent;
+    }
+    .menu-action-row .menu-cb-outline svg { width:10px; height:10px; }
     .menu-empty { padding:14px 10px; color:var(--content-subtle); font-size:13px; text-align:center; }
     .menu-footer {
       display:flex; justify-content:space-between; align-items:center;
@@ -667,22 +691,56 @@
   <p class="section-lead">When the trigger is opened, a floating menu appears below it with the available options. The menu is anchored to the trigger and matches its width by default.</p>
 
   <h3 class="text-l4">Single Select menu</h3>
-  <p>Options are listed vertically. Hovering an option highlights it; the currently selected value is marked with a check icon. Keyboard users navigate with <kbd>↑</kbd>/<kbd>↓</kbd> and confirm with <kbd>Enter</kbd>.</p>
+  <p>Options are listed vertically. Hovering an option highlights it (<code>#f3f4f6</code>); the currently selected value gets a teal background (<code>#d6f1ef</code>) and a check icon. Keyboard users navigate with <kbd>↑</kbd>/<kbd>↓</kbd> and confirm with <kbd>Enter</kbd>.</p>
 
   <div class="states-row">
     <div class="state-col">
-      <div class="state-lbl">Default</div>
+      <div class="state-lbl">Title only</div>
       <div class="open-demo">
         <div class="slt is-focus">
           <div class="slt-left"><span class="slt-val">Most relevant</span></div>
           <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox">
-          <div class="menu-item" role="option"><span class="menu-item-text">Most relevant</span><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="menu-item is-focus" role="option"><span class="menu-item-text">Newest first</span></div>
-          <div class="menu-item" role="option"><span class="menu-item-text">Oldest first</span></div>
-          <div class="menu-item" role="option"><span class="menu-item-text">A → Z</span></div>
-          <div class="menu-item is-disabled" role="option" aria-disabled="true"><span class="menu-item-text">Custom order</span></div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <div class="menu-item-body"><span class="menu-item-title">Most relevant</span></div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option"><div class="menu-item-body"><span class="menu-item-title">Newest first</span></div></div>
+          <div class="menu-item" role="option"><div class="menu-item-body"><span class="menu-item-title">Oldest first</span></div></div>
+          <div class="menu-item" role="option"><div class="menu-item-body"><span class="menu-item-title">A → Z</span></div></div>
+          <div class="menu-item is-disabled" role="option" aria-disabled="true"><div class="menu-item-body"><span class="menu-item-title">Custom order</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">With description</div>
+      <div class="open-demo">
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">Pulse survey</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="menu" role="listbox">
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <div class="menu-item-body">
+              <span class="menu-item-title">Pulse survey</span>
+              <span class="menu-item-sub">Short, recurring check-in (5–10 questions)</span>
+            </div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option">
+            <div class="menu-item-body">
+              <span class="menu-item-title">Engagement survey</span>
+              <span class="menu-item-sub">Annual, in-depth engagement measurement</span>
+            </div>
+          </div>
+          <div class="menu-item" role="option">
+            <div class="menu-item-body">
+              <span class="menu-item-title">Custom survey</span>
+              <span class="menu-item-sub">Build your own questionnaire from scratch</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -691,7 +749,7 @@
       <div class="state-lbl">With search</div>
       <div class="open-demo">
         <div class="slt is-focus">
-          <div class="slt-left"><span class="slt-val">Netherlands</span></div>
+          <div class="slt-left"><span class="flag" style="display:inline-block;width:18px;height:14px;border-radius:2px;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(25,39,67,.08);background:linear-gradient(to bottom,#ae1c28 33%,#fff 33% 66%,#21468b 66%);"></span><span class="slt-val">Netherlands</span></div>
           <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox">
@@ -701,115 +759,149 @@
           </div>
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="flag" style="background:linear-gradient(to bottom,#ae1c28 33%,#fff 33% 66%,#21468b 66%);"></span>
-            <span class="menu-item-text">Netherlands</span>
+            <div class="menu-item-body"><span class="menu-item-title">Netherlands</span><span class="menu-item-sub">nl-NL</span></div>
             <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="menu-item" role="option">
             <span class="flag" style="background:linear-gradient(to right,#000 33%,#dd0000 33% 66%,#ffce00 66%);"></span>
-            <span class="menu-item-text">Germany</span>
+            <div class="menu-item-body"><span class="menu-item-title">Germany</span><span class="menu-item-sub">de-DE</span></div>
           </div>
           <div class="menu-item" role="option">
             <span class="flag" style="background:linear-gradient(to right,#0055a4 33%,#fff 33% 66%,#ef4135 66%);"></span>
-            <span class="menu-item-text">France</span>
+            <div class="menu-item-body"><span class="menu-item-title">France</span><span class="menu-item-sub">fr-FR</span></div>
           </div>
           <div class="menu-item" role="option">
             <span class="flag" style="background:linear-gradient(135deg,#012169 50%,#fff 50%);"></span>
-            <span class="menu-item-text">United Kingdom</span>
+            <div class="menu-item-body"><span class="menu-item-title">United Kingdom</span><span class="menu-item-sub">en-GB</span></div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="state-col">
-      <div class="state-lbl">Grouped</div>
-      <div class="open-demo">
-        <div class="slt is-focus">
-          <div class="slt-left"><span class="slt-val">Engineering</span></div>
-          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="menu" role="listbox">
-          <div class="menu-group-lbl">Product</div>
-          <div class="menu-item" role="option"><span class="menu-item-text">Design</span></div>
-          <div class="menu-item" role="option"><span class="menu-item-text">Research</span></div>
-          <div class="menu-divider"></div>
-          <div class="menu-group-lbl">Tech</div>
-          <div class="menu-item is-selected" role="option" aria-selected="true">
-            <span class="menu-item-text">Engineering</span>
-            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="menu-item" role="option"><span class="menu-item-text">DevOps</span></div>
-          <div class="menu-item" role="option"><span class="menu-item-text">Data</span></div>
         </div>
       </div>
     </div>
   </div>
 
   <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Multi Select menu</h3>
-  <p>Each option has a checkbox so users can toggle multiple values without closing the menu. A search field appears when the list is long. An optional footer offers a clear-all action and shows the selection count.</p>
+  <p>Each option has a checkbox so users can toggle multiple values without closing the menu. The selected row gets a teal background; the checkbox fills with the same teal. Long lists get a search field and a <strong>Select all / Deselect all</strong> action row at the bottom.</p>
 
   <div class="states-row">
     <div class="state-col">
-      <div class="state-lbl">Checkboxes</div>
+      <div class="state-lbl">Title only</div>
       <div class="open-demo">
-        <div class="ms is-focus">
-          <span class="chip">Result <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <span class="chip">Engagement <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">2 selected</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="menu-item-text">Result</span>
+            <div class="menu-item-body"><span class="menu-item-title">Result</span></div>
           </div>
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="menu-item-text">Engagement</span>
+            <div class="menu-item-body"><span class="menu-item-title">Engagement</span></div>
           </div>
-          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Leadership</span></div>
-          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Wellbeing</span></div>
-          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Collaboration</span></div>
-          <div class="menu-footer">
-            <span style="color:var(--content-subtle);">2 selected</span>
-            <button type="button">Clear all</button>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Leadership</span></div></div>
+          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Wellbeing</span></div></div>
+          <div class="menu-action-row">
+            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Select all</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="state-col">
-      <div class="state-lbl">With search</div>
+      <div class="state-lbl">With description</div>
       <div class="open-demo">
-        <div class="ms is-focus">
-          <span class="chip">Q1 2026 <svg viewBox="0 0 12 12" fill="none"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">2 selected</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
-          <div class="menu-search">
-            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <input type="text" value="Q1" aria-label="Filter options">
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="menu-item-body">
+              <span class="menu-item-title">Amsterdam HQ</span>
+              <span class="menu-item-sub">142 people · NL</span>
+            </div>
           </div>
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="menu-item-text">Q1 2026</span>
+            <div class="menu-item-body">
+              <span class="menu-item-title">Berlin office</span>
+              <span class="menu-item-sub">38 people · DE</span>
+            </div>
           </div>
-          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Q1 2025</span></div>
-          <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="menu-item-text">Q1 2024</span></div>
-          <div class="menu-footer">
-            <span style="color:var(--content-subtle);">1 selected</span>
-            <button type="button">Clear all</button>
+          <div class="menu-item" role="option">
+            <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="menu-item-body">
+              <span class="menu-item-title">Paris office</span>
+              <span class="menu-item-sub">21 people · FR</span>
+            </div>
+          </div>
+          <div class="menu-action-row">
+            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Select all</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="state-col">
-      <div class="state-lbl">Empty result</div>
+      <div class="state-lbl">All selected</div>
       <div class="open-demo">
-        <div class="ms is-focus">
-          <span class="slt-ph">Pick one or more…</span>
+        <div class="slt is-focus">
+          <div class="slt-left"><span class="slt-val">3 selected</span></div>
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2026</span></div></div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2025</span></div></div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2024</span></div></div>
+          <div class="menu-action-row">
+            <span class="menu-cb-outline" style="background:#0a9d99;border-color:#0a9d99;color:#fff;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Deselect all</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Search input</h3>
+  <p>The search field uses a <strong>bottom-underline only</strong> style — not a bordered input box — so it visually belongs to the menu rather than competing with the option rows. The underline switches to <code>--border-action-focus</code> on focus.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Empty</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
           <div class="menu-search">
             <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <input type="text" value="xyz" aria-label="Filter options">
+            <input type="text" placeholder="Search…" aria-label="Search">
+          </div>
+          <div class="menu-item" role="option"><div class="menu-item-body"><span class="menu-item-title">Option A</span></div></div>
+          <div class="menu-item" role="option"><div class="menu-item-body"><span class="menu-item-title">Option B</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">Filtering</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-search" style="border-bottom-color:var(--border-action-focus);">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" value="amst" aria-label="Search">
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><div class="menu-item-body"><span class="menu-item-title">Amsterdam HQ</span><span class="menu-item-sub">142 people · NL</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="state-col">
+      <div class="state-lbl">No results</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-search">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 14l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" value="xyz" aria-label="Search">
           </div>
           <div class="menu-empty">No options match “xyz”.</div>
         </div>
@@ -817,13 +909,31 @@
     </div>
   </div>
 
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">When to use search</h3>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>More than ~7 options.</strong> Below that, scanning is faster than typing. Above that, scrolling becomes painful and search pays off.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Open-ended or unfamiliar values.</strong> Countries, languages, users, locations, projects — anything the user already knows by name. Set <code>searchable</code> on <code>&lt;eff-select&gt;</code>.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Async or remote data.</strong> When options come from a backend (people, organisations, surveys), use <code>&lt;eff-select&gt;</code> with <code>disableLocalSearch</code> and listen to <code>searchTermChange</code>.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't add search</strong> for short, fixed lists (sort orders, statuses, 3–5 categories). It only adds visual noise and a tab stop.</div></div>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">When to use a description</h3>
+  <p>A description (subtitle) clarifies an option when the title alone is ambiguous, technical or otherwise insufficient. It is always optional — most lists do not need one.</p>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Disambiguating similar titles.</strong> Two offices both called "Amsterdam" — show the address or team size as a subtitle.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Pairing a human label with a technical code.</strong> Locale codes (<code>nl-NL</code>), API keys, IDs, role slugs. Title carries meaning; subtitle carries the precise value.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Explaining a choice with consequences.</strong> Survey types, plan tiers, permission levels — short subtitle helps users understand what they'd actually be picking.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Adding context, not detail.</strong> Keep the subtitle to one line — it must truncate cleanly. Long-form explanations belong in a tooltip or in a separate help link.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't add a description</strong> when the title is already self-evident (countries, sort orders, simple categories). Empty subtitles add visual weight without value. To opt-in per option, set <code>description</code> on the <code>EffectoryOption</code>.</div></div>
+  </div>
+
   <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Behaviour</h3>
   <div class="a11y-list">
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Anchored to the trigger.</strong> The menu opens directly below the field by default, flipping above when there is not enough space.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Anchored to the trigger.</strong> Opens directly below the field by default, flipping above when there is not enough space.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Width.</strong> Menu matches trigger width. For named selects in toolbars, the menu may be wider than the trigger to fit longer option labels.</div></div>
-    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Search threshold.</strong> Show the search input when the list has more than 7 options or contains free-form values like countries, languages or users.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Closing.</strong> Single Select closes on selection. Multi Select stays open so users can toggle several values; it closes on outside click, <kbd>Esc</kbd>, or focus moving away.</div></div>
     <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Max height.</strong> Constrain to ~280px and scroll inside the menu rather than letting it grow off-screen.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Select all / Deselect all.</strong> For multi-select lists, the action row at the bottom flips between "Select all" and "Deselect all" depending on current state. Filling the outline checkbox indicates everything visible is selected.</div></div>
   </div>
 </section>
 
@@ -1557,22 +1667,22 @@ export class MyFormComponent { /* ... */ }</code></pre>
       var item = document.createElement('div');
       item.className = 'menu-item' + (opt.checked ? ' is-selected' : '');
       var prefix = state.isLang ? flagSpan(opt.flag) + ' ' : '';
+      var body = '<div class="menu-item-body"><span class="menu-item-title">' + opt.label + '</span>'
+        + (opt.description ? '<span class="menu-item-sub">' + opt.description + '</span>' : '')
+        + '</div>';
       if (state.isMulti) {
         item.innerHTML = '<span class="menu-cb" aria-hidden="true">'
-          + (opt.checked ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '')
-          + '</span>' + prefix + '<span>' + opt.label + '</span>';
+          + '<svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+          + '</span>' + prefix + body;
         item.addEventListener('click', function(e){
           e.stopPropagation();
           opt.checked = !opt.checked;
           item.classList.toggle('is-selected', opt.checked);
-          item.querySelector('.menu-cb').innerHTML = opt.checked
-            ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L5 9.5L10 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-            : '';
           renderTrigger(trigger, state, true);
         });
       } else {
-        item.innerHTML = prefix + '<span style="flex:1;">' + opt.label + '</span>'
-          + (opt.checked ? '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '');
+        item.innerHTML = prefix + body
+          + (opt.checked ? '<svg class="menu-item-check" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '');
         item.addEventListener('click', function(e){
           e.stopPropagation();
           state.options.forEach(function(o){ o.checked = false; });
