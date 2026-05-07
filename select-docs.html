@@ -173,8 +173,6 @@
       display:flex; align-items:center; gap:12px;
       padding:8px 16px; border-radius:6px;
       cursor:pointer; font-weight:500;
-      border-top:1px solid var(--border-default);
-      margin-top:4px;
     }
     .menu-action-row:hover { background:#f3f4f6; }
     .menu-action-row .menu-cb-outline {
@@ -796,6 +794,10 @@
           <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-action-row">
+            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Select all</span>
+          </div>
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <div class="menu-item-body"><span class="menu-item-title">Result</span></div>
@@ -806,10 +808,6 @@
           </div>
           <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Leadership</span></div></div>
           <div class="menu-item" role="option"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Wellbeing</span></div></div>
-          <div class="menu-action-row">
-            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Select all</span>
-          </div>
         </div>
       </div>
     </div>
@@ -822,6 +820,10 @@
           <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
+          <div class="menu-action-row">
+            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Select all</span>
+          </div>
           <div class="menu-item is-selected" role="option" aria-selected="true">
             <span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <div class="menu-item-body">
@@ -843,10 +845,6 @@
               <span class="menu-item-sub">21 people · FR</span>
             </div>
           </div>
-          <div class="menu-action-row">
-            <span class="menu-cb-outline"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Select all</span>
-          </div>
         </div>
       </div>
     </div>
@@ -859,13 +857,13 @@
           <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="menu" role="listbox" aria-multiselectable="true">
-          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2026</span></div></div>
-          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2025</span></div></div>
-          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2024</span></div></div>
           <div class="menu-action-row">
             <span class="menu-cb-outline" style="background:#0a9d99;border-color:#0a9d99;color:#fff;"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <span>Deselect all</span>
           </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2026</span></div></div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2025</span></div></div>
+          <div class="menu-item is-selected" role="option" aria-selected="true"><span class="menu-cb"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div class="menu-item-body"><span class="menu-item-title">Q1 2024</span></div></div>
         </div>
       </div>
     </div>
