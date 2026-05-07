@@ -1640,10 +1640,15 @@ export class MyFormComponent { /* ... */ }</code></pre>
     // Builds the value/chip portion of the trigger (everything between the optional
     // name prefix and the trailing chevron). `valKlass` selects the wrapping span class
     // so .ms triggers can use .ms-text-val for the "X selected" text mode.
+    //
+    // Named-multi renders the placeholder (= the empty state) so the user can see
+    // edits to that prop reflected immediately. Non-named multi-text renders a
+    // populated "2 selected" sample so users can see the count form.
     function buildContent(valKlass) {
       if (p.multiple) {
         if (effectiveDisplay === 'text') {
-          return '<span class="' + valKlass + '">2 selected</span>';
+          var txt = p.named ? p.placeholder : '2 selected';
+          return '<span class="' + valKlass + '">' + txt + '</span>';
         }
         return '<div class="chip">Option 1 ' + CHIPX + '</div>'
              + '<div class="chip">Option 2 ' + CHIPX + '</div>';
