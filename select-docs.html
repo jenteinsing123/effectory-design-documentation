@@ -954,6 +954,15 @@
 
   <h3 class="text-l4">With icon</h3>
   <p>Use the <code>prefix-icon</code> attribute to render an icon before the value. Combine with <code>icon-after</code> to swap the chevron with a custom trailing icon.</p>
+  <div class="dev-preview">
+    <div class="slt" style="width:280px;">
+      <div class="slt-left">
+        <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="slt-ph">Please select an option</span>
+      </div>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>&lt;ent-select #selectIcon prefix-icon placeholder="Please select an option"&gt;
@@ -971,6 +980,23 @@
 
   <h3 class="text-l4">Option in select dropdown</h3>
   <p>An option can render arbitrary content via the default slot or via the trailing <code>action</code> slot (e.g. an inline button).</p>
+  <div class="dev-preview" style="align-items:flex-start;gap:24px;">
+    <div class="slt" style="width:280px;">
+      <div class="slt-left"><span class="slt-val">Option 3</span></div>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;transform:rotate(180deg);"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="menu" style="position:static;width:280px;max-height:none;">
+      <div class="menu-item">Option 1</div>
+      <div class="menu-item">Option 2</div>
+      <div class="menu-item is-selected" style="display:flex;align-items:center;justify-content:space-between;">
+        <span>Option 3</span>
+        <button class="sel-btn" style="height:24px;padding:0 8px;font-size:12px;gap:4px;">
+          <span>Something here</span>
+          <svg viewBox="0 0 16 16" fill="none" style="width:12px;height:12px;" aria-hidden="true"><path d="M6 2h6m0 0v6m0-6L6 8M2 6v8h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>&lt;ent-select disablingApp placeholder="Please select an option"&gt;
@@ -987,6 +1013,13 @@
 
   <h3 class="text-l4">Multi-select</h3>
   <p>Add <code>multiple="true"</code> to allow multiple selections. The component renders chips for each selected option.</p>
+  <div class="dev-preview">
+    <div class="ms" style="width:320px;">
+      <div class="chip">Option 1 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="chip">Option 2 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>&lt;ent-select [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
@@ -1003,6 +1036,15 @@
 
   <h3 class="text-l4">Language picker</h3>
   <p>For locale selection use <code>&lt;ent-select-language&gt;</code>. Each option's <code>text</code> is auto-translated; <code>description</code> overrides the displayed label.</p>
+  <div class="dev-preview">
+    <div class="slt" style="width:280px;">
+      <div class="slt-left">
+        <span style="display:inline-flex;width:18px;height:14px;border-radius:2px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(25,39,67,.08);background:linear-gradient(to bottom,#012169 33%,#fff 33% 66%,#C8102E 66%);" aria-hidden="true"></span>
+        <span class="slt-val">English (United Kingdom)</span>
+      </div>
+      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>&lt;ent-select-language [required]="true" [multiple]="false" [searchable]="true" [disabled]="false" [(ngModel)]="value"
@@ -1019,6 +1061,14 @@
 
   <h3 class="text-l4">With virtual scrolling</h3>
   <p>For large data sets, use <code>&lt;ent-select-virtual&gt;</code>. It accepts the same API as <code>&lt;ent-select&gt;</code> but renders items lazily.</p>
+  <div class="dev-preview">
+    <div class="ms" style="width:320px;">
+      <div class="chip">Option 1 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="chip">Option 12 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="chip">Option 47 <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
 <pre><code>&lt;ent-select-virtual [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
