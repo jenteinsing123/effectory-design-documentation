@@ -90,17 +90,24 @@
     .sel-btn svg   { width:16px; height:16px; flex-shrink:0; color:var(--content-subtle); }
 
     /* ── State display helpers ── */
-    .states-row { display:flex; gap:24px; row-gap:24px; flex-wrap:wrap; align-items:stretch; margin:24px 0 40px; }
-    .state-col  {
+    .states-row {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:4px;
+      margin:24px 0 40px;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .state-col {
       display:flex; flex-direction:column; gap:16px;
       background:var(--bg-secondary);
-      border:1px solid var(--border-base);
-      border-radius:12px;
+      border:0;
+      border-radius:0;
       padding:24px 28px 28px;
       align-items:flex-start;
-      min-width:280px;
+      min-width:0;
     }
-    .state-lbl  { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--content-subtle); margin-bottom:2px; align-self:flex-start; }
+    .state-lbl { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--content-subtle); margin-bottom:2px; align-self:flex-start; }
 
     /* ── Dropdown menu (open state) ── */
     .menu-stack { display:flex; flex-direction:column; gap:6px; width:280px; }
