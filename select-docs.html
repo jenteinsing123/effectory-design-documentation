@@ -79,8 +79,11 @@
       height:36px; padding:0 12px;
       border:1px solid var(--border-action); border-radius:6px;
       background:var(--bg-base); box-shadow:var(--sh-action);
-      font-size:13.5px; cursor:pointer; white-space:nowrap;
+      font-family:inherit; font-size:13.5px; color:var(--content-base);
+      cursor:pointer; white-space:nowrap;
     }
+    /* button[].sel-btn loses font-family without inherit — also needed for input fields used as triggers */
+    button.sel-btn { font: inherit; font-size:13.5px; }
     .sel-btn:hover, .sel-btn.is-hover { background:var(--bg-base-hover); border-color:var(--border-action-hover); }
     .sel-btn:active, .sel-btn.is-pressed { background:var(--bg-base-pressed); border-color:var(--border-action-pressed); }
     .sel-btn-inline {
@@ -1840,21 +1843,37 @@ export class MyFormComponent { /* ... */ }</code></pre>
     if (slotVal) initialValue = slotVal.textContent.trim();
     else if (nameEl && inlineValEl) initialValue = inlineValEl.textContent.trim();
 
-    // Capture leading icon HTML (svg or non-flag span) so we can preserve it across renders
+    // Capture leading icon HTML (svg or non-flag span) so we can preserve it across renders.
+    // The leading icon, when present, is ALWAYS the very first child of the icon-source, and
+    // must NOT be the only/last element (otherwise we'd grab the trailing chevron).
     var leadingIcon = '';
-    var iconSource = isInline ? trigger : trigger.querySelector('.slt-left, .ms');
-    if (iconSource && !isLang) {
-      var first = iconSource.firstElementChild;
-      while (first && (first.classList.contains('slt-ph') || first.classList.contains('slt-val')
-                      || first.classList.contains('ms-ph') || first.classList.contains('chip')
-                      || first.classList.contains('ms-ch') || first.classList.contains('sel-btn-value')
-                      || first.classList.contains('sel-btn-name')
-                      || first.classList.contains('ms-text-val'))) {
-        first = first.nextElementSibling;
+    if (!isLang) {
+      var iconSource;
+      if (isInline) {
+        // .sel-btn / .sel-btn-inline: [icon?] [name?] [value|chips] [chevron]
+        iconSource = trigger;
+      } else if (isMulti) {
+        // .ms: [icon?] [chips|ms-ph|ms-text-val] [ms-ch chevron]
+        iconSource = trigger;
+      } else {
+        // .slt: <div.slt-left>[icon?][slt-ph|slt-val]</div> <svg.chevron>
+        iconSource = trigger.querySelector('.slt-left');
       }
-      if (first && (first.tagName === 'SVG' || first.tagName === 'svg' || (first.tagName === 'SPAN' && !first.className))) {
-        if (!(first.tagName.toLowerCase() === 'svg' && first === iconSource.lastElementChild && !isInline)) {
-          leadingIcon = first.outerHTML;
+      if (iconSource) {
+        var first = iconSource.firstElementChild;
+        // Must exist, must NOT be the last element (= must have siblings after, so it's not the chevron),
+        // and must be either an <svg> or an unclassed <span>.
+        if (first && first !== iconSource.lastElementChild) {
+          var tag = first.tagName.toLowerCase();
+          var isClassless = first.tagName === 'SPAN' && !first.className;
+          var hasContentClass =
+            first.classList.contains('slt-ph') || first.classList.contains('slt-val') ||
+            first.classList.contains('ms-ph') || first.classList.contains('chip') ||
+            first.classList.contains('ms-ch') || first.classList.contains('sel-btn-value') ||
+            first.classList.contains('sel-btn-name') || first.classList.contains('ms-text-val');
+          if (!hasContentClass && (tag === 'svg' || isClassless)) {
+            leadingIcon = first.outerHTML;
+          }
         }
       }
     }
