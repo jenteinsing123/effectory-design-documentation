@@ -888,34 +888,39 @@
       </div>
       <div class="pg-panel" id="sl-pane-props">
         <div class="pg-row">
-          <div class="pg-row-name">variant</div>
+          <div class="pg-row-name">multiple</div>
           <div class="pg-row-ctrl">
-            <label class="pg-radio"><input type="radio" name="sl-variant" value="single" checked> single</label>
-            <label class="pg-radio"><input type="radio" name="sl-variant" value="multi"> multi</label>
-          </div>
-        </div>
-        <div class="pg-row" id="sl-row-label">
-          <div class="pg-row-name">label</div>
-          <div class="pg-row-ctrl">
-            <input class="pg-input" id="sl-label" type="text" value="Label text">
-          </div>
-        </div>
-        <div class="pg-row hidden" id="sl-row-chips">
-          <div class="pg-row-name">show chips</div>
-          <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-chips"><span class="pg-toggle-track"></span></label>
+            <label class="pg-toggle"><input type="checkbox" id="sl-multiple"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
         <div class="pg-row">
-          <div class="pg-row-name">name</div>
+          <div class="pg-row-name">searchable</div>
           <div class="pg-row-ctrl">
-            <label class="pg-toggle"><input type="checkbox" id="sl-hasname"><span class="pg-toggle-track"></span></label>
+            <label class="pg-toggle"><input type="checkbox" id="sl-searchable"><span class="pg-toggle-track"></span></label>
           </div>
         </div>
-        <div class="pg-row hidden" id="sl-row-nametext">
-          <div class="pg-row-name">name text</div>
+        <div class="pg-row">
+          <div class="pg-row-name">required</div>
           <div class="pg-row-ctrl">
-            <input class="pg-input" id="sl-nametext" type="text" value="Sort:">
+            <label class="pg-toggle"><input type="checkbox" id="sl-required"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-row">
+          <div class="pg-row-name">disabled</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-disabled"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-row">
+          <div class="pg-row-name">prefix-icon</div>
+          <div class="pg-row-ctrl">
+            <label class="pg-toggle"><input type="checkbox" id="sl-prefixicon"><span class="pg-toggle-track"></span></label>
+          </div>
+        </div>
+        <div class="pg-row">
+          <div class="pg-row-name">placeholder</div>
+          <div class="pg-row-ctrl">
+            <input class="pg-input" id="sl-placeholder" type="text" value="Please select an option">
           </div>
         </div>
       </div>
@@ -930,93 +935,147 @@
 <!-- USAGE -->
 <section class="section" id="dev-usage">
   <h2 class="text-l3">Usage</h2>
+  <p class="section-lead">The Select is implemented as the <code>&lt;ent-select&gt;</code> web component. Options are declared as <code>&lt;ent-option&gt;</code> children. The element forwards its value via the standard <code>(selectionChange)</code> event.</p>
 
-  <h3 class="text-l4">Single Select</h3>
+  <h3 class="text-l4">Basic</h3>
   <div class="dev-preview">
     <div class="slt-wrap" style="width:240px;">
-      <div class="slt-lbl">Country</div>
-      <div class="slt"><div class="slt-left"><span class="slt-ph">Select...</span></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="slt"><div class="slt-left"><span class="slt-ph">Please select an option</span></div><svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;div class="select-field"&gt;
-  &lt;label class="select-label" for="country"&gt;Country&lt;/label&gt;
-  &lt;select class="select" id="country" name="country"&gt;
-    &lt;option value="" disabled selected&gt;Select...&lt;/option&gt;
-    &lt;option value="nl"&gt;Netherlands&lt;/option&gt;
-    &lt;option value="de"&gt;Germany&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
+<pre><code>&lt;ent-select disablingDate placeholder="Please select an option"&gt;
+  &lt;ent-option value="1"&gt;Option 1&lt;/ent-option&gt;
+  &lt;ent-option value="2"&gt;Option 2&lt;/ent-option&gt;
+  &lt;ent-option disabled value="3"&gt;Option 3&lt;/ent-option&gt;
+&lt;/ent-select&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">Multi Select</h3>
-  <div class="dev-preview">
-    <div style="display:flex;flex-direction:column;gap:4px;width:240px;">
-      <div class="slt-lbl">Tags</div>
-      <div class="ms">
-        <div class="chip">Design <svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-    </div>
-  </div>
+  <h3 class="text-l4">With icon</h3>
+  <p>Use the <code>prefix-icon</code> attribute to render an icon before the value. Combine with <code>icon-after</code> to swap the chevron with a custom trailing icon.</p>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;div class="select-field"&gt;
-  &lt;label class="select-label" for="tags"&gt;Tags&lt;/label&gt;
-  &lt;select class="multi-select" id="tags" name="tags" multiple&gt;
-    &lt;option value="design"&gt;Design&lt;/option&gt;
-    &lt;option value="dev"&gt;Development&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
+<pre><code>&lt;ent-select #selectIcon prefix-icon placeholder="Please select an option"&gt;
+  &lt;ent-option value="1"&gt;
+    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 1
+  &lt;/ent-option&gt;
+  &lt;ent-option value="2"&gt;
+    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 2
+  &lt;/ent-option&gt;
+  &lt;ent-option value="3"&gt;
+    &lt;ent-icon icon="info-circle" slot="icon-before"&gt;&lt;/ent-icon&gt;Option 3
+  &lt;/ent-option&gt;
+&lt;/ent-select&gt;</code></pre>
   </div>
 
-  <h3 class="text-l4">With name (inline prefix)</h3>
-  <p>Add the <code>has-name</code> modifier and a <code>select-name</code> span to render a semibold prefix inline before the value. Useful in toolbars and filter bars. Combine with <code>multi-select</code> for the multi variant.</p>
-  <div class="dev-preview" style="gap:8px;">
-    <div class="sel-btn">
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="sel-btn-name">Sort:</span>
-      <span class="sel-btn-value">Newest first</span>
-      <svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </div>
+  <h3 class="text-l4">Option in select dropdown</h3>
+  <p>An option can render arbitrary content via the default slot or via the trailing <code>action</code> slot (e.g. an inline button).</p>
   <div class="dev-code-wrap">
     <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
-<pre><code>&lt;div class="select-field has-name"&gt;
-  &lt;span class="select-name" aria-hidden="true"&gt;Sort:&lt;/span&gt;
-  &lt;select class="select" aria-label="Sort"&gt;
-    &lt;option value="newest"&gt;Newest first&lt;/option&gt;
-    &lt;option value="oldest"&gt;Oldest first&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
+<pre><code>&lt;ent-select disablingApp placeholder="Please select an option"&gt;
+  &lt;ent-option value="1"&gt;Option 1&lt;/ent-option&gt;
+  &lt;ent-option value="2"&gt;Option 2&lt;/ent-option&gt;
+  &lt;ent-option value="3"&gt;
+    &lt;button class="ent-button neutral icon-only" (click)="customClick()"&gt;
+      &lt;span&gt;Something here&lt;/span&gt;
+      &lt;ent-icon icon="link"&gt;&lt;/ent-icon&gt;
+    &lt;/button&gt;
+  &lt;/ent-option&gt;
+&lt;/ent-select&gt;</code></pre>
   </div>
 
-  <div class="dev-gap">
-    <span class="dev-gap-icon">⚠️</span>
-    <div class="dev-gap-body">
-      <span class="dev-gap-label">Figma gap</span>
-      <span class="dev-gap-text">The Single Select and Multi Select components are not yet available as self-contained dev components. Currently teams implement custom dropdowns. The class names above reflect the intended naming convention once the component is released.</span>
-    </div>
+  <h3 class="text-l4">Multi-select</h3>
+  <p>Add <code>multiple="true"</code> to allow multiple selections. The component renders chips for each selected option.</p>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;ent-select [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
+  *ngFor="let option of #options" #ent="ent" [invalid]="invalid" [readonly]="false"
+  [(value)] = "tem: 'Option 1'},
+  [{value: 1, text: 'Option 1'},
+  [{value: 2, text: 'Option 2'},
+  [{value: 3, text: 'Option 3'},
+  [{value: 4, text: 'Option 4', disabled: true}]
+  placeholder="Please select an option" placeholderSearch="Search value"
+  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
+&lt;/ent-select&gt;</code></pre>
+  </div>
+
+  <h3 class="text-l4">Language picker</h3>
+  <p>For locale selection use <code>&lt;ent-select-language&gt;</code>. Each option's <code>text</code> is auto-translated; <code>description</code> overrides the displayed label.</p>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;ent-select-language [required]="true" [multiple]="false" [searchable]="true" [disabled]="false" [(ngModel)]="value"
+  [options]="[
+    {value: 'en-GB', text: 'English (United Kingdom)'},
+    {value: 'en-US', text: 'English (United States)'},
+    {value: 'nl-NL', text: 'Dutch'},
+    {value: 'de-DE', text: 'German', disabled: true}
+  ]"
+  placeholder="Please select an option"
+  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
+&lt;/ent-select-language&gt;</code></pre>
+  </div>
+
+  <h3 class="text-l4">With virtual scrolling</h3>
+  <p>For large data sets, use <code>&lt;ent-select-virtual&gt;</code>. It accepts the same API as <code>&lt;ent-select&gt;</code> but renders items lazily.</p>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;ent-select-virtual [required]="true" [multiple]="true" [searchable]="true" [disabled]="false" [(ngModel)]="value"
+  [options]="options"
+  placeholder="Please select an option"
+  validValueLabel="Valid options" invalidNoticeLabel="Invalid value selected"&gt;
+&lt;/ent-select-virtual&gt;</code></pre>
   </div>
 </section>
 
-<!-- CSS CLASSES -->
-<section class="section" id="dev-classes">
-  <h2 class="text-l3">CSS classes</h2>
+<!-- PROPERTIES -->
+<section class="section" id="dev-props">
+  <h2 class="text-l3">Properties</h2>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>CLASS</th><th>ELEMENT</th><th>DESCRIPTION</th></tr></thead>
+      <thead><tr><th>PROPERTY</th><th>TYPE</th><th>DEFAULT</th><th>DESCRIPTION</th></tr></thead>
       <tbody>
-        <tr><td><code>select-field</code></td><td>div</td><td>Flex column wrapper — label above, field below</td></tr>
-        <tr><td><code>select-label</code></td><td>label</td><td>14px SemiBold label above the field</td></tr>
-        <tr><td><code>select</code></td><td>select</td><td>Single Select field</td></tr>
-        <tr><td><code>multi-select</code></td><td>select[multiple]</td><td>Multi Select — renders chips per selection</td></tr>
-        <tr><td><code>has-name</code></td><td>.select-field</td><td>Modifier — renders the field with an inline semibold name prefix instead of a stacked label</td></tr>
-        <tr><td><code>select-name</code></td><td>span</td><td>Semibold name prefix shown inline before the value (e.g. "Sort:")</td></tr>
-        <tr><td><code>is-error</code></td><td>select</td><td>Red border, shows error message</td></tr>
-        <tr><td><code>is-warning</code></td><td>select</td><td>Orange border, shows warning message</td></tr>
-        <tr><td><code>disabled</code></td><td>select, button</td><td>Disabled styling + prevents interaction</td></tr>
+        <tr><td><code>initial</code></td><td>boolean</td><td><code>false</code></td><td>Marks the component as not yet touched — suppresses validation styling on first render.</td></tr>
+        <tr><td><code>multiple</code></td><td>boolean</td><td><code>false</code></td><td>Allows multiple options to be selected. Renders chips for each selection.</td></tr>
+        <tr><td><code>searchable</code></td><td>boolean</td><td><code>false</code></td><td>Shows a search field at the top of the dropdown to filter options.</td></tr>
+        <tr><td><code>required</code></td><td>boolean</td><td><code>false</code></td><td>Marks the field as required for form validation.</td></tr>
+        <tr><td><code>disabled</code></td><td>boolean</td><td><code>false</code></td><td>Disables interaction and applies disabled styling.</td></tr>
+        <tr><td><code>readonly</code></td><td>boolean</td><td><code>false</code></td><td>Read-only — value is shown but not editable.</td></tr>
+        <tr><td><code>previousMatch</code></td><td>boolean</td><td><code>false</code></td><td>When typing, jumps to the previously matched option instead of the next.</td></tr>
+        <tr><td><code>placeholder</code></td><td>string</td><td>—</td><td>Placeholder shown when no option is selected.</td></tr>
+        <tr><td><code>placeholderSearch</code></td><td>string</td><td>—</td><td>Placeholder for the search input (when <code>searchable</code> is true).</td></tr>
+        <tr><td><code>validValueLabel</code></td><td>string</td><td>—</td><td>Aria-friendly label announced when the value is valid.</td></tr>
+        <tr><td><code>invalidNoticeLabel</code></td><td>string</td><td>—</td><td>Message shown when the value fails validation.</td></tr>
+        <tr><td><code>options</code></td><td><code>EffectoryOption[]</code></td><td><code>[]</code></td><td>Programmatic option list (alternative to <code>&lt;ent-option&gt;</code> children).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="text-l4" style="margin-top:24px;">EffectoryOption interface</h3>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>interface EffectoryOption {
+  text: string;
+  description?: string;
+  value: string;
+  disabled?: boolean;
+  visible?: boolean;
+  dataPreview?: string;
+}</code></pre>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section" id="dev-events">
+  <h2 class="text-l3">Events</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>EVENT</th><th>PAYLOAD</th><th>WHEN</th></tr></thead>
+      <tbody>
+        <tr><td><code>selectionChange</code></td><td><code>EntSelectChange</code></td><td>The selected value changes (single or multi).</td></tr>
+        <tr><td><code>closeListChange</code></td><td><code>void</code></td><td>The dropdown panel closes.</td></tr>
+        <tr><td><code>searchTermChange</code></td><td><code>string</code></td><td>The user types in the search field.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1075,7 +1134,8 @@
     <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#dev-playground">Playground</a>
     <a class="toc-link" href="#dev-usage">Usage</a>
-    <a class="toc-link" href="#dev-classes">CSS classes</a>
+    <a class="toc-link" href="#dev-props">Properties</a>
+    <a class="toc-link" href="#dev-events">Events</a>
     <a class="toc-link" href="#dev-tokens">CSS tokens</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
@@ -1106,51 +1166,35 @@
   var CHIPX   = '<svg viewBox="0 0 12 12" fill="none" style="width:10px;height:10px;flex-shrink:0;"><path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
   var MSCHEV  = '<svg class="ms-ch" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  function slGetVariant() {
-    var r = document.querySelector('input[name="sl-variant"]:checked');
-    return r ? r.value : 'single';
-  }
   function slGetProps() {
     return {
-      variant:  slGetVariant(),
-      label:    document.getElementById('sl-label').value || 'Label text',
-      chips:    document.getElementById('sl-chips').checked,
-      hasName:  document.getElementById('sl-hasname').checked,
-      nameText: document.getElementById('sl-nametext').value || 'Sort:'
+      multiple:    document.getElementById('sl-multiple').checked,
+      searchable:  document.getElementById('sl-searchable').checked,
+      required:    document.getElementById('sl-required').checked,
+      disabled:    document.getElementById('sl-disabled').checked,
+      prefixIcon:  document.getElementById('sl-prefixicon').checked,
+      placeholder: document.getElementById('sl-placeholder').value || 'Please select an option'
     };
   }
+
+  var GLOBE = '<svg viewBox="0 0 16 16" fill="none" style="width:16px;height:16px;color:var(--content-subtle);flex-shrink:0;" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h12M8 2c2 2 2 10 0 12M8 2c-2 2-2 10 0 12" stroke="currentColor" stroke-width="1.2"/></svg>';
 
   function slRender() {
     var p = slGetProps();
 
-    // Toggle property rows
-    document.getElementById('sl-row-chips').classList.toggle('hidden', p.variant !== 'multi');
-    document.getElementById('sl-row-label').classList.toggle('hidden', p.hasName);
-    document.getElementById('sl-row-nametext').classList.toggle('hidden', !p.hasName);
-
+    var dis = p.disabled ? ' is-disabled' : '';
     var html = '';
-    if (p.hasName) {
-      // Inline named appearance
-      html = '<button class="sel-btn" type="button">'
-           + '<span class="sel-btn-name">' + p.nameText + '</span>'
-           + '<span class="sel-btn-value">' + (p.variant === 'multi' ? '3 selected' : 'Newest') + '</span>'
-           + CHEVRON + '</button>';
-    } else if (p.variant === 'single') {
-      html = '<div class="slt-wrap" style="width:240px;">'
-           + '<div class="slt-lbl">' + p.label + '</div>'
-           + '<div class="slt">'
-           + '<div class="slt-left"><span class="slt-ph">Select...</span></div>'
-           + CHEVRON + '</div></div>';
+    if (p.multiple) {
+      html = '<div class="ms' + dis + '" style="width:280px;">'
+           + (p.prefixIcon ? GLOBE : '')
+           + '<span class="ms-ph">' + p.placeholder + '</span>'
+           + MSCHEV + '</div>';
     } else {
-      html = '<div style="display:flex;flex-direction:column;gap:4px;width:240px;">'
-           + '<div class="slt-lbl">' + p.label + '</div>'
-           + '<div class="ms">';
-      if (p.chips) {
-        html += '<div class="chip">Result ' + CHIPX + '</div><div class="chip">Option ' + CHIPX + '</div>';
-      } else {
-        html += '<span class="ms-ph">Select...</span>';
-      }
-      html += MSCHEV + '</div></div>';
+      html = '<div class="slt' + dis + '" style="width:280px;">'
+           + '<div class="slt-left">'
+           + (p.prefixIcon ? GLOBE : '')
+           + '<span class="slt-ph">' + p.placeholder + '</span>'
+           + '</div>' + CHEVRON + '</div>';
     }
 
     document.getElementById('sl-pg-preview').innerHTML = html;
@@ -1159,48 +1203,36 @@
 
   function slUpdateCode() {
     var p = slGetProps();
-    var code = '';
-    if (p.hasName) {
-      var nameClean = p.nameText.replace(/:$/, '');
-      var multi = p.variant === 'multi' ? ' multiple' : '';
-      var cls = p.variant === 'multi' ? 'multi-select' : 'select';
-      code = '<div class="select-field has-name">\n'
-           + '  <span class="select-name" aria-hidden="true">' + p.nameText + '</span>\n'
-           + '  <select class="' + cls + '"' + multi + ' aria-label="' + nameClean + '">\n'
-           + '    <option>Option A</option>\n'
-           + '  </select>\n</div>';
-    } else if (p.variant === 'single') {
-      code = '<div class="select-field">\n'
-           + '  <label class="select-label" for="field">' + p.label + '</label>\n'
-           + '  <select class="select" id="field">\n'
-           + '    <option value="" disabled selected>Select...</option>\n'
-           + '  </select>\n</div>';
-    } else {
-      code = '<div class="select-field">\n'
-           + '  <label class="select-label" for="field">' + p.label + '</label>\n'
-           + '  <select class="multi-select" id="field" multiple>\n'
-           + '    <option value="a">Option A</option>\n'
-           + '  </select>\n</div>';
-    }
+    var attrs = [];
+    if (p.required)   attrs.push('[required]="true"');
+    if (p.multiple)   attrs.push('[multiple]="true"');
+    if (p.searchable) attrs.push('[searchable]="true"');
+    if (p.disabled)   attrs.push('[disabled]="true"');
+    if (p.prefixIcon) attrs.push('prefix-icon');
+    attrs.push('placeholder="' + p.placeholder + '"');
+    var attrStr = attrs.length ? ' ' + attrs.join(' ') : '';
+    var code = '<ent-select' + attrStr + '>\n'
+             + '  <ent-option value="1">Option 1</ent-option>\n'
+             + '  <ent-option value="2">Option 2</ent-option>\n'
+             + '  <ent-option disabled value="3">Option 3</ent-option>\n'
+             + '</ent-select>';
     document.getElementById('sl-code-out').textContent = code;
   }
 
-  document.querySelectorAll('input[name="sl-variant"]').forEach(function(r){ r.addEventListener('change', slRender); });
-  ['sl-chips','sl-hasname'].forEach(function(id) {
+  ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('change', slRender);
   });
-  ['sl-label','sl-nametext'].forEach(function(id) {
+  ['sl-placeholder'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.addEventListener('input', slRender);
   });
 
   document.getElementById('sl-reset-btn').addEventListener('click', function() {
-    var rv = document.querySelector('input[name="sl-variant"][value="single"]'); if (rv) rv.checked = true;
-    document.getElementById('sl-label').value = 'Label text';
-    document.getElementById('sl-chips').checked = false;
-    document.getElementById('sl-hasname').checked = false;
-    document.getElementById('sl-nametext').value = 'Sort:';
+    ['sl-multiple','sl-searchable','sl-required','sl-disabled','sl-prefixicon'].forEach(function(id){
+      document.getElementById(id).checked = false;
+    });
+    document.getElementById('sl-placeholder').value = 'Please select an option';
     slRender();
   });
 
