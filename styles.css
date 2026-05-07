@@ -175,10 +175,11 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 .section-lead { font-size: 14px; color: var(--content-secondary); line-height: 1.65; margin-bottom: var(--spacing-loose); }
 .content p { margin-bottom: var(--spacing-base); line-height: 1.65; }
 .content p:last-child { margin-bottom: 0; }
-.content h3.text-l4 { margin-top: var(--spacing-extra-loose); margin-bottom: var(--spacing-tight); }
+.content h3.text-l4 { margin-top: 64px; margin-bottom: var(--spacing-base); }
 .content h3.text-l4:first-of-type,
 .content section > h3.text-l4:first-child { margin-top: 0; }
 .content h2.text-l3 { margin-bottom: var(--spacing-tight); }
+.content .a11y-list { margin-bottom: var(--spacing-extra-loose); }
 
 /* ─── TOC ─── */
 .toc { position: sticky; top: calc(var(--top-h) + var(--spacing-loose)); }
