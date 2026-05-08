@@ -902,6 +902,145 @@
     </div>
   </div>
 
+  <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Option content</h3>
+  <p>An option is, at its simplest, a title — but the body can also carry a short <strong>tag</strong>, a numeric <strong>count</strong>, an <strong>avatar</strong>, or a secondary line. These extras let the menu communicate categorisation, scale or identity without forcing the user to open a tooltip or a second screen.</p>
+
+  <div class="states-row">
+    <div class="state-col">
+      <div class="state-lbl">Title + tag</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-item" role="option">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;gap:8px;">
+              <span class="menu-item-title" style="flex:0 0 auto;">Engagement</span>
+              <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">label</span>
+            </div>
+          </div>
+          <div class="menu-item" role="option">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;gap:8px;">
+              <span class="menu-item-title" style="flex:0 0 auto;">Wellbeing</span>
+              <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">new</span>
+            </div>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;gap:8px;">
+              <span class="menu-item-title" style="flex:0 0 auto;">Leadership</span>
+              <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">beta</span>
+            </div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Title + count</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-item" role="option">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;justify-content:space-between;">
+              <span class="menu-item-title">Amsterdam HQ</span>
+              <span style="font-size:12px;color:#5D6D87;flex-shrink:0;margin-left:12px;">142</span>
+            </div>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;justify-content:space-between;">
+              <span class="menu-item-title">Berlin office</span>
+              <span style="font-size:12px;color:#5D6D87;flex-shrink:0;margin-left:12px;">38</span>
+            </div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option">
+            <div class="menu-item-body" style="flex-direction:row;align-items:center;justify-content:space-between;">
+              <span class="menu-item-title">Paris office</span>
+              <span style="font-size:12px;color:#5D6D87;flex-shrink:0;margin-left:12px;">112</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Title + avatar (20px)</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-item" role="option">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:10px;font-weight:600;flex-shrink:0;">JI</span>
+            <div class="menu-item-body"><span class="menu-item-title">Jente Ipema</span></div>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:10px;font-weight:600;flex-shrink:0;">SK</span>
+            <div class="menu-item-body"><span class="menu-item-title">Sara Klein</span></div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="menu-item" role="option">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:10px;font-weight:600;flex-shrink:0;">MR</span>
+            <div class="menu-item-body"><span class="menu-item-title">Marco Rossi</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Title + subtitle + avatar (32px)</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-item" role="option" style="align-items:center;">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:13px;font-weight:600;flex-shrink:0;">JI</span>
+            <div class="menu-item-body">
+              <span class="menu-item-title">Jente Ipema</span>
+              <span class="menu-item-sub">jente@effectory.com</span>
+            </div>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true" style="align-items:center;">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:13px;font-weight:600;flex-shrink:0;">SK</span>
+            <div class="menu-item-body">
+              <span class="menu-item-title">Sara Klein</span>
+              <span class="menu-item-sub">sara@effectory.com</span>
+            </div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-col">
+      <div class="state-lbl">Title + subtitle + tag</div>
+      <div class="open-demo">
+        <div class="menu" role="listbox" style="position:static;">
+          <div class="menu-item" role="option">
+            <div class="menu-item-body">
+              <span class="menu-item-title" style="display:inline-flex;align-items:center;gap:8px;">
+                Pulse survey
+                <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">new</span>
+              </span>
+              <span class="menu-item-sub">Short, recurring check-in</span>
+            </div>
+          </div>
+          <div class="menu-item is-selected" role="option" aria-selected="true">
+            <div class="menu-item-body">
+              <span class="menu-item-title" style="display:inline-flex;align-items:center;gap:8px;">
+                Engagement survey
+                <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">beta</span>
+              </span>
+              <span class="menu-item-sub">Annual, in-depth measurement</span>
+            </div>
+            <svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="text-l5" style="margin-top:var(--spacing-base);">When to use which</h4>
+  <div class="a11y-list">
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Tag</strong> — categorise or annotate the option (<em>new</em>, <em>beta</em>, plan tier, owner team). Use sparingly; if every option carries a tag, it stops being a signal. Tag uses <code>bg/info/base</code> background with white SemiBold 12px text.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Count</strong> — show a numeric attribute attached to the option (people in a team, items in a category). Right-aligned in <code>content/secondary</code> 12px so it never competes with the title.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Avatar</strong> — pick a person or organisation. Use the 20px size for compact lists; 32px when the option also has a subtitle (email, role) and the menu has room to breathe.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Combine sparingly.</strong> A subtitle <em>plus</em> a tag is fine. Avatar <em>plus</em> tag <em>plus</em> count is too much — pick the one signal that matters most.</div></div>
+    <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't replace the title.</strong> Tag, count and avatar are decorations on the title — they never stand alone. The title must always carry the meaning of the option.</div></div>
+  </div>
+
   <h3 class="text-l4" style="margin-top:var(--spacing-loose);">Search input</h3>
   <p>The search field uses a <strong>bottom-underline only</strong> style — not a bordered input box — so it visually belongs to the menu rather than competing with the option rows. The underline switches to <code>--border-action-focus</code> on focus.</p>
 
@@ -1233,6 +1372,79 @@
   &lt;mat-option disabled value="4"&gt;Option 4&lt;/mat-option&gt;
 &lt;/mat-select&gt;</code></pre>
   </div>
+
+  <h3 class="text-l4">Option content (tag, count, avatar)</h3>
+  <p>Options can carry a <strong>tag</strong>, a <strong>count</strong>, or an <strong>avatar</strong> next to the title. These patterns exist in Figma but are not yet shipped as first-class option styles in <code>styleguide.effectory.com</code>, so they're applied with custom markup inside the <code>&lt;mat-option&gt;</code> body until the styleguide adds dedicated slots.</p>
+
+  <div class="dev-gap">
+    <span class="dev-gap-icon">⚠️</span>
+    <div class="dev-gap-body">
+      <span class="dev-gap-label">Figma gap</span>
+      <span class="dev-gap-text">The <code>option-tag</code>, <code>option-count</code> and <code>option-avatar</code> styles exist in the Figma component but are not yet available in <code>styleguide.effectory.com</code>. Until they ship as first-class option types on <code>&lt;eff-select&gt;</code>, apply them with the inline markup shown below.</span>
+    </div>
+  </div>
+
+  <div class="dev-preview" style="flex-direction:column;align-items:flex-start;gap:12px;">
+    <div class="menu" role="listbox" style="position:static;width:280px;">
+      <div class="menu-item" role="option">
+        <div class="menu-item-body" style="flex-direction:row;align-items:center;gap:8px;">
+          <span class="menu-item-title" style="flex:0 0 auto;">Engagement</span>
+          <span style="display:inline-flex;align-items:center;background:#3174db;color:#fff;font-size:12px;font-weight:600;line-height:1;padding:3px 8px;border-radius:999px;">new</span>
+        </div>
+      </div>
+      <div class="menu-item" role="option">
+        <div class="menu-item-body" style="flex-direction:row;align-items:center;justify-content:space-between;">
+          <span class="menu-item-title">Amsterdam HQ</span>
+          <span style="font-size:12px;color:#5D6D87;flex-shrink:0;margin-left:12px;">142</span>
+        </div>
+      </div>
+      <div class="menu-item" role="option">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:10px;font-weight:600;flex-shrink:0;">JI</span>
+        <div class="menu-item-body"><span class="menu-item-title">Jente Ipema</span></div>
+      </div>
+      <div class="menu-item" role="option" style="align-items:center;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#d6e6ff;color:#205bb9;font-size:13px;font-weight:600;flex-shrink:0;">SK</span>
+        <div class="menu-item-body">
+          <span class="menu-item-title">Sara Klein</span>
+          <span class="menu-item-sub">sara@effectory.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dev-code-wrap">
+    <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+<pre><code>&lt;!-- Tag --&gt;
+&lt;mat-option value="engagement"&gt;
+  &lt;span class="option-row"&gt;
+    Engagement
+    &lt;span class="option-tag"&gt;new&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/mat-option&gt;
+
+&lt;!-- Count --&gt;
+&lt;mat-option value="amsterdam"&gt;
+  &lt;span class="option-row option-row-justify"&gt;
+    Amsterdam HQ
+    &lt;span class="option-count"&gt;142&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/mat-option&gt;
+
+&lt;!-- Avatar (20px) --&gt;
+&lt;mat-option value="jente"&gt;
+  &lt;eff-avatar size="sm" initials="JI" class="icon-before"&gt;&lt;/eff-avatar&gt;
+  Jente Ipema
+&lt;/mat-option&gt;
+
+&lt;!-- Avatar (32px) + subtitle --&gt;
+&lt;mat-option value="sara" class="with-subtitle"&gt;
+  &lt;eff-avatar size="md" initials="SK" class="icon-before"&gt;&lt;/eff-avatar&gt;
+  &lt;span class="option-body"&gt;
+    &lt;span class="option-title"&gt;Sara Klein&lt;/span&gt;
+    &lt;span class="option-sub"&gt;sara@effectory.com&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/mat-option&gt;</code></pre>
+  </div>
+  <p style="font-size:13px;color:var(--content-subtle);margin-top:8px;">The <code>option-tag</code>, <code>option-count</code>, <code>option-row</code>, <code>option-body</code>, <code>option-title</code> and <code>option-sub</code> classes shown above are <strong>not</strong> shipped by the styleguide — define them locally in your component until the design tokens land. Recommended values: tag uses <code>--bg-info-base</code> (<code>#3174db</code>) with white SemiBold 12px text, count uses <code>--content-secondary</code> (<code>#5D6D87</code>) Regular 12px right-aligned, avatars use <code>--bg-info-subtle</code> (<code>#d6e6ff</code>) with <code>#205bb9</code> initials.</p>
 
   <h3 class="text-l4">Effectory Select (with search &amp; validation)</h3>
   <p>The <code>&lt;eff-select&gt;</code> wrapper accepts an <code>options</code> array, supports search via <code>[searchable]="true"</code>, and surfaces validation labels for invalid values.</p>
