@@ -278,6 +278,14 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
   align-items: flex-start;
   min-width: 0;
 }
+/* Inside .preview blocks the grey card chrome is provided by the preview itself,
+   so state-cols sit transparent and centred to match the button states layout. */
+.preview-body .state-col {
+  background: transparent;
+  padding: 0;
+  align-items: center;
+  gap: var(--spacing-tight);
+}
 .state-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--content-subtle); margin-bottom: 2px; align-self: flex-start; }
 .state-label { font-size: 11px; color: var(--content-subtle); }
 .size-item { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-tight); }
