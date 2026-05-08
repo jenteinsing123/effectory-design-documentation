@@ -214,6 +214,14 @@
     <h2 class="text-l3">Variants</h2>
     <p class="section-lead">Inline links are text-only — they should flow with the surrounding copy. The one exception is an external link, which gets a small "↗" arrow appended to signal that it leaves the product.</p>
 
+    <div class="dev-gap">
+      <span class="dev-gap-icon">⚠️</span>
+      <div class="dev-gap-body">
+        <span class="dev-gap-label">Figma gap</span>
+        <span class="dev-gap-text">The Figma component (<code>link-inline</code>, node <code>22459:545</code>) currently exposes leading and trailing icon slots. These variants should be removed: inline links are text-only in code, with a "↗" character used for external links instead of an SVG icon.</span>
+      </div>
+    </div>
+
     <div class="variant-rows">
       <div class="variant-row">
         <div class="variant-row-btn"><a href="#" onclick="return false;" class="link-inline">Link label</a></div>
