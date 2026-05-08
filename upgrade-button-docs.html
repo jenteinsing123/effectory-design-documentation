@@ -39,6 +39,21 @@
       outline: 2px solid var(--border-brand-base);
       outline-offset: 2px;
     }
+    .btn-upgrade.is-disabled,
+    .btn-upgrade[disabled],
+    .btn-upgrade[aria-disabled="true"] {
+      background: var(--bg-disabled) !important;
+      border-color: transparent !important;
+      color: var(--content-disabled) !important;
+      box-shadow: none !important;
+      cursor: not-allowed; pointer-events: none;
+    }
+    .btn-upgrade.is-disabled .btn-upgrade-badge,
+    .btn-upgrade[disabled] .btn-upgrade-badge,
+    .btn-upgrade[aria-disabled="true"] .btn-upgrade-badge {
+      background: var(--bg-disabled);
+      color: var(--content-disabled);
+    }
 
     /* Yellow badge wrapping the arrow-up icon */
     .btn-upgrade-badge {
@@ -286,15 +301,7 @@
   <!-- STATES -->
   <section class="section" id="states">
     <h2 class="text-l3">States</h2>
-    <p class="section-lead">Three states. The border darkens on hover and pressed; pressed also fills the background with a soft amber tint to confirm the click.</p>
-
-    <div class="dev-gap">
-      <span class="dev-gap-icon">⚠️</span>
-      <div class="dev-gap-body">
-        <span class="dev-gap-label">Figma gap</span>
-        <span class="dev-gap-text">The Figma component (node <code>18043:48213</code>) only documents <em>default</em>, <em>hover</em>, and <em>pressed</em>. There is no disabled state. In code we ship a <code>.is-disabled</code> override for parity with the rest of the button family — but the design source needs a disabled variant added so visual specs match implementation.</span>
-      </div>
-    </div>
+    <p class="section-lead">Four states. The border darkens on hover and pressed; pressed also fills the background with a soft amber tint to confirm the click. Disabled drops the amber treatment entirely — border and badge fade into the disabled grey so the button reads as inactive.</p>
 
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
@@ -320,18 +327,26 @@
           </button>
           <span class="state-label">Pressed</span>
         </div>
+        <div class="state-col">
+          <button type="button" class="btn-upgrade is-disabled" disabled>
+            <span class="btn-upgrade-badge"><i data-icon="arrow-up"></i></span>
+            Upgrade
+          </button>
+          <span class="state-label">Disabled</span>
+        </div>
       </div>
     </div>
 
     <div class="tbl-wrap" style="margin-top:16px;">
       <table>
-        <thead><tr><th>STATE</th><th>BORDER</th><th>BACKGROUND</th><th>LABEL</th><th>SHADOW</th></tr></thead>
+        <thead><tr><th>STATE</th><th>BORDER</th><th>BACKGROUND</th><th>LABEL</th><th>BADGE</th><th>SHADOW</th></tr></thead>
         <tbody>
           <tr>
             <td>Default</td>
             <td><span class="token">border/highlight/base</span></td>
             <td><span class="token">bg/interface/body</span></td>
             <td><span class="token">content/secondary</span></td>
+            <td><span class="token">bg/highlight/base</span></td>
             <td><span class="token">shadow/action</span></td>
           </tr>
           <tr>
@@ -339,6 +354,7 @@
             <td><span class="token">border/highlight/base-hover</span></td>
             <td><span class="token">bg/interface/body</span></td>
             <td><span class="token">content/secondary-hover</span></td>
+            <td><span class="token">bg/highlight/base</span></td>
             <td><span class="token">shadow/action-hover</span></td>
           </tr>
           <tr>
@@ -346,7 +362,16 @@
             <td><span class="token">border/highlight/base-hover</span></td>
             <td><span class="token">bg/highlight/subtle</span></td>
             <td><span class="token">content/secondary-hover</span></td>
+            <td><span class="token">bg/highlight/base</span></td>
             <td><span class="token">shadow/action-hover</span></td>
+          </tr>
+          <tr>
+            <td>Disabled</td>
+            <td>None</td>
+            <td><span class="token">bg/disabled</span></td>
+            <td><span class="token">content/disabled</span></td>
+            <td><span class="token">bg/disabled</span> · icon <span class="token">content/disabled</span></td>
+            <td>None</td>
           </tr>
         </tbody>
       </table>
@@ -371,6 +396,8 @@
           <tr><td><span class="token">content/secondary-hover</span></td><td>#192743</td><td>Hover and pressed label colour</td></tr>
           <tr><td><span class="token">shadow/action</span></td><td>0 1 2 #1927430A</td><td>Default container shadow</td></tr>
           <tr><td><span class="token">shadow/action-hover</span></td><td>0 2 2 #1927430F</td><td>Hover and pressed container shadow</td></tr>
+          <tr><td><span class="token">bg/disabled</span></td><td>#192743 · 10%</td><td>Disabled container and badge background</td></tr>
+          <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>Disabled label and arrow icon colour</td></tr>
         </tbody>
       </table>
     </div>
@@ -467,6 +494,21 @@
   See plans
 <span class="ct">&lt;/a&gt;</span></code></pre>
     </div>
+
+    <h3 class="text-l4">Disabled</h3>
+    <div class="dev-preview" style="padding:24px 28px; justify-content:flex-start;">
+      <button type="button" class="btn-upgrade is-disabled" disabled>
+        <span class="btn-upgrade-badge"><i data-icon="arrow-up"></i></span>
+        Upgrade
+      </button>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;button</span> <span class="ca">type</span>=<span class="cv">"button"</span> <span class="ca">class</span>=<span class="cv">"btn-upgrade is-disabled"</span> <span class="ca">disabled</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"btn-upgrade-badge"</span><span class="ct">&gt;&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"arrow-up"</span><span class="ct">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+  Upgrade
+<span class="ct">&lt;/button&gt;</span></code></pre>
+    </div>
   </section>
 
   <!-- CSS CLASSES -->
@@ -501,6 +543,10 @@
             <td><code>is-pressed</code></td>
             <td>Forces pressed styling. Use only in static documentation/state previews.</td>
           </tr>
+          <tr>
+            <td><code>is-disabled</code></td>
+            <td>Disables the button visually and removes pointer events. On <code>&lt;button&gt;</code> pair with the native <code>disabled</code> attribute; on <code>&lt;a&gt;</code> pair with <code>aria-disabled="true"</code>.</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -527,7 +573,11 @@
 
 <span class="cm">/* Shadow */</span>
 <span class="ca">--sh-action</span>:                     <span class="cv">0 1px 2px rgba(25,39,67,.04)</span>; <span class="cm">/* Default shadow                 */</span>
-<span class="ca">--sh-action-hover</span>:               <span class="cv">0 2px 2px rgba(25,39,67,.06)</span>; <span class="cm">/* Hover & pressed shadow         */</span></code></pre>
+<span class="ca">--sh-action-hover</span>:               <span class="cv">0 2px 2px rgba(25,39,67,.06)</span>; <span class="cm">/* Hover & pressed shadow         */</span>
+
+<span class="cm">/* Disabled */</span>
+<span class="ca">--bg-disabled</span>:                   <span class="cv">rgba(25, 39, 67, 0.10)</span>;      <span class="cm">/* Disabled container & badge fill */</span>
+<span class="ca">--content-disabled</span>:              <span class="cv">rgba(25, 39, 67, 0.30)</span>;      <span class="cm">/* Disabled label & icon colour    */</span></code></pre>
     </div>
   </section>
 
