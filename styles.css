@@ -258,7 +258,7 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 .is-disabled { background: var(--bg-disabled) !important; border-color: transparent !important; box-shadow: none !important; color: var(--content-disabled) !important; cursor: not-allowed; }
 .is-disabled.ib-secondary { background: var(--bg-base) !important; border-color: var(--border-base) !important; }
 .is-disabled.ib-tertiary  { background: transparent !important; }
-.is-focus { outline: 2px solid var(--border-action-focus); outline-offset: 2px; }
+.is-focus { outline: 2px solid var(--border-brand-base); outline-offset: 2px; }
 .var-row { display: flex; align-items: center; gap: var(--spacing-base); }
 .var-label { font-size: 12px; color: var(--content-subtle); font-weight: 500; width: 76px; flex-shrink: 0; }
 .states-row {
