@@ -348,8 +348,8 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .uw-ic { flex-shrink: 0; margin-top: 1px; font-size: 13px; }
 .uw-ic.chk { color: var(--content-positive-secondary); }
 .uw-ic.x   { color: var(--content-negative-secondary); }
-.uw-list a { color: var(--content-brand-base); text-decoration: none; }
-.uw-list a:hover { text-decoration: underline; }
+.uw-list a { color: var(--content-action); text-decoration: underline; text-underline-offset: 2px; }
+.uw-list a:hover { color: var(--content-action-hover); }
 
 /* ─── DO / DON'T CARDS ─── */
 .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-base); margin-bottom: var(--spacing-loose); }
@@ -377,6 +377,62 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 /* ─── CONTENT GUIDELINE RULES ─── */
 .cg-rule { margin-bottom: var(--spacing-extra-loose); }
 .cg-rule > p { font-size: 13.5px; color: var(--content-secondary); line-height: 1.6; margin-bottom: var(--spacing-base); }
+
+/* ─── LINK INLINE ─── */
+/* Inline link for use inside body copy. Always underlined; colour shifts on
+   hover/pressed using the --content-action ramp. Use .link-inline-inverse on
+   dark backgrounds. */
+.link-inline {
+  color: var(--content-action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  transition: color .1s ease;
+}
+.link-inline:hover,
+.link-inline.is-hover {
+  color: var(--content-action-hover);
+  text-decoration: underline;
+}
+.link-inline:active,
+.link-inline.is-pressed {
+  color: var(--content-action-pressed);
+  text-decoration: underline;
+}
+.link-inline:focus-visible {
+  outline: 2px solid var(--border-brand-base);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.link-inline.is-disabled,
+.link-inline[disabled],
+.link-inline[aria-disabled="true"] {
+  color: var(--content-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: underline;
+}
+
+/* Inverse — for use on dark/brand backgrounds. The --content-action ramp is
+   automatically remapped to white-based opacities by the dark/inverse contexts
+   set on the parent (e.g. data-theme="dark" or .surface-inverse). */
+.surface-inverse {
+  --content-action: rgba(255, 255, 255, 0.80);
+  --content-action-hover: rgba(255, 255, 255, 0.95);
+  --content-action-pressed: rgba(255, 255, 255, 0.95);
+  --content-disabled: rgba(255, 255, 255, 0.30);
+}
+.link-inline-inverse {
+  --content-action: rgba(255, 255, 255, 0.80);
+  --content-action-hover: rgba(255, 255, 255, 0.95);
+  --content-action-pressed: rgba(255, 255, 255, 0.95);
+  --content-disabled: rgba(255, 255, 255, 0.30);
+}
 
 /* ─── PAGE TABS (Design / Developer) ─── */
 .page-tabs {
