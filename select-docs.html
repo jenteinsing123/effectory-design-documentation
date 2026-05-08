@@ -25,7 +25,7 @@
     .slt:hover, .slt.is-hover  { border-color:var(--border-action-hover); }
     .slt:active, .slt.is-pressed { border-color:var(--border-action-pressed, var(--border-action-hover)); }
     .slt:focus-visible, .slt.is-focus,
-    .slt.is-typing { border-color:var(--border-brand-base); outline:2px solid var(--border-brand-base); outline-offset:1px; }
+    .slt.is-typing { border-color:var(--border-brand-base); outline:none; }
     .slt.is-warning { border-color:#ec6e0a; }
     .slt.is-error   { border-color:#b9252a; }
     .slt.is-disabled{
@@ -50,7 +50,7 @@
     .ms:hover, .ms.is-hover { border-color:var(--border-action-hover); }
     .ms:active, .ms.is-pressed { border-color:var(--border-action-pressed, var(--border-action-hover)); }
     .ms:focus-visible, .ms.is-focus,
-    .ms.is-typing { border-color:var(--border-brand-base); outline:2px solid var(--border-brand-base); outline-offset:1px; }
+    .ms.is-typing { border-color:var(--border-brand-base); outline:none; }
     .ms.is-disabled {
       background:rgba(25,39,67,.08); border-color:var(--border-action);
       box-shadow:none; cursor:not-allowed;
@@ -104,7 +104,7 @@
     .menu-stack { display:flex; flex-direction:column; gap:6px; width:100%; }
     .menu {
       background:var(--bg-base);
-      border:1px solid var(--border-default);
+      border:1px solid var(--border-base);
       border-radius:8px;
       box-shadow:0 8px 24px rgba(25,39,67,.12), 0 2px 6px rgba(25,39,67,.08);
       padding:8px;
@@ -136,7 +136,7 @@
       letter-spacing:.06em; color:var(--content-subtle);
       padding:8px 10px 4px;
     }
-    .menu-divider { height:1px; background:var(--border-default); margin:4px 0; }
+    .menu-divider { height:1px; background:var(--border-base); margin:4px 0; }
     /* option row */
     .menu-item {
       display:flex; align-items:center; gap:12px;
@@ -202,7 +202,7 @@
     .menu-footer {
       display:flex; justify-content:space-between; align-items:center;
       padding:6px 8px; margin-top:4px;
-      border-top:1px solid var(--border-default);
+      border-top:1px solid var(--border-base);
       font-size:13px;
     }
     .menu-footer button {
