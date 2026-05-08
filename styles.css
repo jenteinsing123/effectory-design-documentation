@@ -274,7 +274,7 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
   background: var(--bg-secondary);
   border: 0;
   border-radius: 0;
-  padding: 24px 28px 28px;
+  padding: 40px;
   align-items: flex-start;
   min-width: 0;
 }
