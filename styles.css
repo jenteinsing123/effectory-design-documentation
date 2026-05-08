@@ -380,9 +380,12 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 
 /* ─── LINK INLINE ─── */
 /* Inline link for use inside body copy. Always underlined; colour shifts on
-   hover/pressed using the --content-action ramp. Use .link-inline-inverse on
-   dark backgrounds. */
+   hover/pressed using the --content-action ramp. Dark mode is handled
+   automatically by the design tokens. */
 .link-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--content-action);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -421,20 +424,15 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
   text-decoration: underline;
 }
 
-/* Inverse — for use on dark/brand backgrounds. The --content-action ramp is
-   automatically remapped to white-based opacities by the dark/inverse contexts
-   set on the parent (e.g. data-theme="dark" or .surface-inverse). */
-.surface-inverse {
-  --content-action: rgba(255, 255, 255, 0.80);
-  --content-action-hover: rgba(255, 255, 255, 0.95);
-  --content-action-pressed: rgba(255, 255, 255, 0.95);
-  --content-disabled: rgba(255, 255, 255, 0.30);
-}
-.link-inline-inverse {
-  --content-action: rgba(255, 255, 255, 0.80);
-  --content-action-hover: rgba(255, 255, 255, 0.95);
-  --content-action-pressed: rgba(255, 255, 255, 0.95);
-  --content-disabled: rgba(255, 255, 255, 0.30);
+/* Icon — sits before or after the label. 14×14, inherits link colour. */
+.link-inline > svg,
+.link-inline > i,
+.link-inline > [data-icon],
+.link-inline .link-inline-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: currentColor;
 }
 
 /* ─── PAGE TABS (Design / Developer) ─── */

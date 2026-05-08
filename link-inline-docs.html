@@ -13,18 +13,8 @@
       font-size: 14px; line-height: 1.6; color: var(--content-secondary);
       max-width: 540px; text-align: left;
     }
-    .li-sample.inv { color: rgba(255,255,255,.80); }
-
-    .li-inverse-bg {
-      background: #192743;
-      border-radius: var(--radius-base);
-      padding: 24px 28px;
-    }
 
     .state-label { font-size: 11px; color: var(--content-subtle); }
-
-    /* For the inverse state row only — flip the label colour */
-    .state-col.inv .state-label { color: rgba(255,255,255,.55); }
   </style>
 </head>
 <body>
@@ -195,21 +185,57 @@
         </div>
       </div>
     </div>
+
+    <!-- Do/Don't 4: icons -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <p class="li-sample">Open the <a href="#" onclick="return false;" class="link-inline">full report<i data-icon="external-link"></i></a> in a new tab.</p>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Add a trailing icon when it predicts what happens next — an external-link glyph for "opens in a new tab", a chevron for "go to".
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <p class="li-sample">Read the <a href="#" onclick="return false;" class="link-inline"><i data-icon="star"></i>setup guide<i data-icon="chevron-right"></i></a>.</p>
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't stack icons on both sides, and don't add decorative icons that don't reinforce the destination. One icon, with a reason.
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- VARIANTS -->
   <section class="section" id="variants">
     <h2 class="text-l3">Variants</h2>
-    <p class="section-lead">There is one inline link with two surface modes — light and inverse. Inverse is automatic when the link sits inside a dark surface.</p>
+    <p class="section-lead">A single inline link with three icon configurations. Pick the one that helps users predict where the link goes.</p>
 
     <div class="variant-rows">
       <div class="variant-row">
         <div class="variant-row-btn"><a href="#" onclick="return false;" class="link-inline">Link label</a></div>
-        <div class="variant-row-desc">Default surface — for use on light backgrounds (the standard product UI). Uses the <code>--content-action</code> ramp at 80% opacity by default.</div>
+        <div class="variant-row-desc">Default — text only. The most common usage; reach for this whenever the link words alone describe the destination.</div>
       </div>
       <div class="variant-row">
-        <div class="variant-row-btn" style="background:#192743; padding:8px 14px; border-radius:var(--radius-base);"><a href="#" onclick="return false;" class="link-inline link-inline-inverse">Link label</a></div>
-        <div class="variant-row-desc">Inverse — for use on dark or brand-coloured backgrounds. Uses a white-based ramp at the same opacities so contrast stays consistent across surfaces.</div>
+        <div class="variant-row-btn">
+          <a href="#" onclick="return false;" class="link-inline">
+            <i data-icon="external-link"></i>
+            Link label
+          </a>
+        </div>
+        <div class="variant-row-desc">Icon before — use a leading icon to flag the link's nature (e.g. a download arrow, an external-link glyph). The icon sits 6px before the label and inherits the link colour.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <a href="#" onclick="return false;" class="link-inline">
+            Link label
+            <i data-icon="external-link"></i>
+          </a>
+        </div>
+        <div class="variant-row-desc">Icon after — use a trailing icon to indicate forward motion: chevron right for "go to", arrow up-right for "opens in a new tab". 6px gap, inherits the link colour.</div>
       </div>
     </div>
   </section>
@@ -217,9 +243,8 @@
   <!-- STATES -->
   <section class="section" id="states">
     <h2 class="text-l3">States</h2>
-    <p class="section-lead">Both surface modes share the same four states. The underline never disappears — colour and opacity are the only things that change.</p>
+    <p class="section-lead">Four states across the colour ramp. The underline never disappears — colour and opacity are the only things that change.</p>
 
-    <h3 class="text-l4">Default surface</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body center" style="gap:48px; padding:32px;">
@@ -230,25 +255,14 @@
       </div>
     </div>
 
-    <h3 class="text-l4">Inverse surface</h3>
-    <div class="preview">
-      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
-      <div class="preview-body center" style="gap:48px; padding:32px; background:#192743;">
-        <div class="state-col inv"><a href="#" onclick="return false;" class="link-inline link-inline-inverse">Link label</a><span class="state-label">Default</span></div>
-        <div class="state-col inv"><a href="#" onclick="return false;" class="link-inline link-inline-inverse is-hover">Link label</a><span class="state-label">Hover</span></div>
-        <div class="state-col inv"><a href="#" onclick="return false;" class="link-inline link-inline-inverse is-pressed">Link label</a><span class="state-label">Pressed</span></div>
-        <div class="state-col inv"><a href="#" onclick="return false;" class="link-inline link-inline-inverse is-disabled" aria-disabled="true">Link label</a><span class="state-label">Disabled</span></div>
-      </div>
-    </div>
-
     <div class="tbl-wrap" style="margin-top:16px;">
       <table>
-        <thead><tr><th>STATE</th><th>DEFAULT TOKEN</th><th>INVERSE TOKEN</th><th>UNDERLINE</th></tr></thead>
+        <thead><tr><th>STATE</th><th>TOKEN</th><th>UNDERLINE</th></tr></thead>
         <tbody>
-          <tr><td>Default</td><td><span class="token">content/action</span></td><td><span class="token">content/action (inverse)</span></td><td>Visible</td></tr>
-          <tr><td>Hover</td><td><span class="token">content/action-hover</span></td><td><span class="token">content/action-hover (inverse)</span></td><td>Visible</td></tr>
-          <tr><td>Pressed</td><td><span class="token">content/action-pressed</span></td><td><span class="token">content/action-pressed (inverse)</span></td><td>Visible</td></tr>
-          <tr><td>Disabled</td><td><span class="token">content/disabled</span></td><td><span class="token">content/disabled (inverse)</span></td><td>Visible</td></tr>
+          <tr><td>Default</td><td><span class="token">content/action</span></td><td>Visible</td></tr>
+          <tr><td>Hover</td><td><span class="token">content/action-hover</span></td><td>Visible</td></tr>
+          <tr><td>Pressed</td><td><span class="token">content/action-pressed</span></td><td>Visible</td></tr>
+          <tr><td>Disabled</td><td><span class="token">content/disabled</span></td><td>Visible</td></tr>
         </tbody>
       </table>
     </div>
@@ -257,16 +271,16 @@
   <!-- DESIGN TOKENS -->
   <section class="section" id="tokens">
     <h2 class="text-l3">Design Tokens</h2>
-    <p class="section-lead">Token names and their resolved values for both surface modes.</p>
+    <p class="section-lead">Token names and their resolved values. Dark mode is handled automatically by the design tokens.</p>
 
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>TOKEN</th><th>VALUE (LIGHT)</th><th>VALUE (INVERSE)</th><th>USED ON</th></tr></thead>
+        <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
         <tbody>
-          <tr><td><span class="token">content/action</span></td><td>#192743 · 80%</td><td>#ffffff · 80%</td><td>Default label colour</td></tr>
-          <tr><td><span class="token">content/action-hover</span></td><td>#192743 · 95%</td><td>#ffffff · 95%</td><td>Hover label colour</td></tr>
-          <tr><td><span class="token">content/action-pressed</span></td><td>#192743 · 95%</td><td>#ffffff · 95%</td><td>Pressed label colour</td></tr>
-          <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>#ffffff · 30%</td><td>Disabled label colour</td></tr>
+          <tr><td><span class="token">content/action</span></td><td>#192743 · 80%</td><td>Default label and icon colour</td></tr>
+          <tr><td><span class="token">content/action-hover</span></td><td>#192743 · 95%</td><td>Hover label and icon colour</td></tr>
+          <tr><td><span class="token">content/action-pressed</span></td><td>#192743 · 95%</td><td>Pressed label and icon colour</td></tr>
+          <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>Disabled label and icon colour</td></tr>
         </tbody>
       </table>
     </div>
@@ -351,9 +365,33 @@
 <span class="ct">&lt;/p&gt;</span></code></pre>
     </div>
 
+    <h3 class="text-l4">Icon before</h3>
+    <div class="dev-preview" style="padding:24px 28px;">
+      <p class="li-sample" style="margin:0;">Open the <a href="#" onclick="return false;" class="link-inline"><i data-icon="external-link"></i>full report</a> in a new tab.</p>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/report"</span> <span class="ca">class</span>=<span class="cv">"link-inline"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'external-link'"</span> <span class="ct">/&gt;</span>
+  full report
+<span class="ct">&lt;/a&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Icon after</h3>
+    <div class="dev-preview" style="padding:24px 28px;">
+      <p class="li-sample" style="margin:0;">Continue to <a href="#" onclick="return false;" class="link-inline">team settings<i data-icon="chevron-right"></i></a>.</p>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/team-settings"</span> <span class="ca">class</span>=<span class="cv">"link-inline"</span><span class="ct">&gt;</span>
+  team settings
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'chevron-right'"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;/a&gt;</span></code></pre>
+    </div>
+
     <h3 class="text-l4">External link</h3>
     <div class="dev-preview" style="padding:24px 28px;">
-      <p class="li-sample" style="margin:0;">Read the <a href="#" onclick="return false;" class="link-inline" target="_blank" rel="noopener noreferrer">WCAG 2.2 specification<span aria-hidden="true">&nbsp;↗</span></a> for the full requirements.</p>
+      <p class="li-sample" style="margin:0;">Read the <a href="#" onclick="return false;" class="link-inline" target="_blank" rel="noopener noreferrer">WCAG 2.2 specification<i data-icon="external-link"></i></a> for the full requirements.</p>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
@@ -362,17 +400,9 @@
   <span class="ca">class</span>=<span class="cv">"link-inline"</span>
   <span class="ca">target</span>=<span class="cv">"_blank"</span>
   <span class="ca">rel</span>=<span class="cv">"noopener noreferrer"</span><span class="ct">&gt;</span>
-  WCAG 2.2 specification<span class="ct">&lt;span</span> <span class="ca">aria-hidden</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>↗<span class="ct">&lt;/span&gt;</span>
+  WCAG 2.2 specification
+  <span class="ct">&lt;eff-mat-icon</span> <span class="ca">[iconName]</span>=<span class="cv">"'external-link'"</span> <span class="ct">/&gt;</span>
 <span class="ct">&lt;/a&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">Inverse (dark surface)</h3>
-    <div class="dev-preview" style="padding:24px 28px; background:#192743;">
-      <p class="li-sample inv" style="margin:0;">Need help? Read our <a href="#" onclick="return false;" class="link-inline link-inline-inverse">setup guide</a> or <a href="#" onclick="return false;" class="link-inline link-inline-inverse">contact support</a>.</p>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/docs/setup"</span> <span class="ca">class</span>=<span class="cv">"link-inline link-inline-inverse"</span><span class="ct">&gt;</span>setup guide<span class="ct">&lt;/a&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Disabled</h3>
@@ -399,11 +429,15 @@
         <tbody>
           <tr>
             <td><code>link-inline</code></td>
-            <td>The base inline link. Apply to any <code>&lt;a&gt;</code> sitting inside body copy. Inherits font-size, weight and line-height from the parent.</td>
+            <td>The base inline link. Apply to any <code>&lt;a&gt;</code> sitting inside body copy. Inherits font-size and line-height from the parent; weight is fixed at 500.</td>
           </tr>
           <tr>
-            <td><code>link-inline-inverse</code></td>
-            <td>Modifier for use on dark or brand-coloured surfaces. Remaps the <code>--content-action</code> ramp to white-based opacities.</td>
+            <td><code>&lt;eff-mat-icon&gt;</code> as first child</td>
+            <td>Renders a 14×14 leading icon with a 6px gap. The icon inherits the link colour automatically.</td>
+          </tr>
+          <tr>
+            <td><code>&lt;eff-mat-icon&gt;</code> as last child</td>
+            <td>Renders a 14×14 trailing icon with a 6px gap. Useful for "go to" or "opens in new tab" affordances.</td>
           </tr>
           <tr>
             <td><code>is-hover</code></td>
@@ -432,13 +466,7 @@
 <span class="ca">--content-action</span>:          <span class="cv">rgba(25, 39, 67, 0.80)</span>;  <span class="cm">/* Default       */</span>
 <span class="ca">--content-action-hover</span>:    <span class="cv">rgba(25, 39, 67, 0.95)</span>;  <span class="cm">/* Hover         */</span>
 <span class="ca">--content-action-pressed</span>:  <span class="cv">rgba(25, 39, 67, 0.95)</span>;  <span class="cm">/* Pressed       */</span>
-<span class="ca">--content-disabled</span>:       <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled      */</span>
-
-<span class="cm">/* Inverse — automatically remapped on dark surfaces */</span>
-<span class="ca">--content-action</span>:          <span class="cv">rgba(255, 255, 255, 0.80)</span>;
-<span class="ca">--content-action-hover</span>:    <span class="cv">rgba(255, 255, 255, 0.95)</span>;
-<span class="ca">--content-action-pressed</span>:  <span class="cv">rgba(255, 255, 255, 0.95)</span>;
-<span class="ca">--content-disabled</span>:       <span class="cv">rgba(255, 255, 255, 0.30)</span>;</code></pre>
+<span class="ca">--content-disabled</span>:       <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled      */</span></code></pre>
     </div>
   </section>
 
