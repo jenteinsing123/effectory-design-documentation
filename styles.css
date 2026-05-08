@@ -432,10 +432,20 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .link-inline > i,
 .link-inline > [data-icon],
 .link-inline .link-inline-icon {
+  display: inline-block;
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+  line-height: 0;
   color: currentColor;
+}
+.link-inline > svg { display: block; }
+.link-inline > i > svg,
+.link-inline > [data-icon] > svg,
+.link-inline .link-inline-icon > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* ─── PAGE TABS (Design / Developer) ─── */
