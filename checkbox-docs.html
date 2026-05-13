@@ -158,9 +158,15 @@
       color: var(--content-disabled) !important;
       cursor: not-allowed; pointer-events: none;
     }
+    /* Ghost disabled: no bg on the inner checkbox control either */
+    .cb-btn.is-disabled input[type="checkbox"].cb,
+    .cb-btn.is-disabled input[type="checkbox"].cb.is-disabled {
+      background-color: transparent !important;
+      border-color: var(--border-base) !important;
+    }
 
-    /* ── Checkbox button secondary (bordered — proposed, not yet in Figma) ── */
-    .cb-btn-secondary {
+    /* ── Checkbox button bordered (proposed, not yet in Figma) ── */
+    .cb-btn-bordered {
       display: inline-flex; align-items: center; gap: 6px;
       height: 32px; padding: 0 10px;
       background: var(--bg-base);
@@ -171,28 +177,28 @@
       cursor: pointer; user-select: none;
       transition: all .1s;
     }
-    .cb-btn-secondary input[type="checkbox"].cb { pointer-events: none; }
-    .cb-btn-secondary:hover,
-    .cb-btn-secondary.is-hover {
+    .cb-btn-bordered input[type="checkbox"].cb { pointer-events: none; }
+    .cb-btn-bordered:hover,
+    .cb-btn-bordered.is-hover {
       background: var(--bg-base-hover);
       border-color: var(--border-action-hover);
     }
-    .cb-btn-secondary.is-checked,
-    .cb-btn-secondary:has(input:checked) {
+    .cb-btn-bordered.is-checked,
+    .cb-btn-bordered:has(input:checked) {
       border-color: var(--border-brand-base);
     }
-    .cb-btn-secondary.is-checked:hover,
-    .cb-btn-secondary.is-checked.is-hover {
+    .cb-btn-bordered.is-checked:hover,
+    .cb-btn-bordered.is-checked.is-hover {
       background: var(--bg-base-hover);
       border-color: var(--border-brand-base-hover);
     }
-    .cb-btn-secondary.is-pressed {
+    .cb-btn-bordered.is-pressed {
       background: var(--bg-base-pressed);
       border-color: var(--border-action-pressed);
     }
-    .cb-btn-secondary.is-disabled {
-      background: var(--bg-disabled) !important;
-      border-color: transparent !important;
+    .cb-btn-bordered.is-disabled {
+      background: var(--bg-base) !important;
+      border-color: var(--border-base) !important;
       color: var(--content-disabled) !important;
       cursor: not-allowed; pointer-events: none;
     }
@@ -549,35 +555,35 @@
       </div>
     </div>
 
-    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — secondary (bordered)</h3>
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — bordered</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body center" style="gap:10px; padding:24px 28px; flex-wrap:wrap;">
         <div class="state-col">
-          <label class="cb-btn-secondary"><input type="checkbox" class="cb" />Label</label>
+          <label class="cb-btn-bordered"><input type="checkbox" class="cb" />Label</label>
           <span class="state-label">Default</span>
         </div>
         <div class="state-col">
-          <label class="cb-btn-secondary is-checked"><input type="checkbox" class="cb is-checked" />Label</label>
+          <label class="cb-btn-bordered is-checked"><input type="checkbox" class="cb is-checked" />Label</label>
           <span class="state-label">Checked</span>
         </div>
         <div class="state-col">
-          <label class="cb-btn-secondary is-hover"><input type="checkbox" class="cb" />Label</label>
+          <label class="cb-btn-bordered is-hover"><input type="checkbox" class="cb" />Label</label>
           <span class="state-label">Hover</span>
         </div>
         <div class="state-col">
-          <label class="cb-btn-secondary is-pressed"><input type="checkbox" class="cb" />Label</label>
+          <label class="cb-btn-bordered is-pressed"><input type="checkbox" class="cb" />Label</label>
           <span class="state-label">Pressed</span>
         </div>
         <div class="state-col">
-          <label class="cb-btn-secondary is-disabled"><input type="checkbox" class="cb is-disabled" />Label</label>
+          <label class="cb-btn-bordered is-disabled"><input type="checkbox" class="cb is-disabled" />Label</label>
           <span class="state-label">Disabled</span>
         </div>
       </div>
     </div>
     <div class="gap-callout">
       <span class="gap-callout-icon">⚠️</span>
-      <div><strong>Design / dev gap — Secondary (bordered) checkbox button</strong>The Figma component only defines a ghost style (no border, transparent background). The bordered secondary variant above is proposed to match the secondary radio button pattern — it does not yet exist in the component set. Needs design sign-off before use in product.</div>
+      <div><strong>Design / dev gap — Bordered checkbox button</strong>The Figma component only defines a ghost style (no border, transparent background). The bordered variant above is proposed to match the bordered radio button pattern — it does not yet exist in the component set. Needs design sign-off before use in product.</div>
     </div>
 
     <div class="tbl-wrap" style="margin-top:28px;">
@@ -858,25 +864,25 @@
 <span class="ct">&gt;</span>Benchmarks<span class="ct">&lt;/eff-checkbox-button&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — secondary (bordered)</h3>
-    <p class="section-lead">Bordered version. Suitable when the button needs more visual weight, e.g. in a row with other bordered controls. Mirrors the secondary radio button pattern.</p>
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — bordered</h3>
+    <p class="section-lead">Bordered version. Suitable when the button needs more visual weight, e.g. in a row alongside other bordered controls.</p>
     <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
-      <label class="cb-btn-secondary">
+      <label class="cb-btn-bordered">
         <input type="checkbox" class="cb" />
         Weekly digest
       </label>
-      <label class="cb-btn-secondary is-checked">
+      <label class="cb-btn-bordered is-checked">
         <input type="checkbox" class="cb is-checked" />
         Benchmarks
       </label>
-      <label class="cb-btn-secondary is-disabled">
+      <label class="cb-btn-bordered is-disabled">
         <input type="checkbox" class="cb is-disabled" />
         Alerts
       </label>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- variant="secondary" is proposed, not yet shipped --&gt;</span>
+      <pre><code><span class="cm">&lt;!-- variant="bordered" is proposed, not yet shipped --&gt;</span>
 <span class="ct">&lt;eff-checkbox-button</span>
   <span class="ca">[checked]</span>=<span class="cv">"false"</span>
   <span class="ca">[variant]</span>=<span class="cv">"'secondary'"</span>
@@ -885,7 +891,7 @@
     </div>
     <div class="gap-callout">
       <span class="gap-callout-icon">⚠️</span>
-      <div><strong>Design / dev gap — Secondary checkbox button</strong>The Figma component only defines a ghost (borderless) style. The bordered secondary variant is proposed here for parity with the secondary radio button, but it does not exist in the component set or the Angular component API yet. Needs design and dev sign-off before use.</div>
+      <div><strong>Design / dev gap — Bordered checkbox button</strong>The Figma component only defines a ghost (borderless) style. The bordered variant is proposed here for parity with the bordered radio button, but it does not exist in the component set or the Angular component API yet. Needs design and dev sign-off before use.</div>
     </div>
   </section>
 
