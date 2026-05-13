@@ -24,7 +24,7 @@
       margin: 0;
       flex-shrink: 0;
     }
-    /* inner dot via ::after on wrapper */
+    /* inner dot via ::after on wrapper — teal when selected */
     .rb-wrap::after {
       content: '';
       position: absolute;
@@ -32,26 +32,32 @@
       transform: translate(-50%, -50%);
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: white;
+      background: var(--bg-brand-base);
       opacity: 0;
       pointer-events: none;
+      transition: opacity .1s;
     }
     .rb-wrap:has(input:checked)::after,
     .rb-wrap:has(input.is-checked)::after { opacity: 1; }
 
-    /* Selected */
+    /* Selected — ring stays visible, dot is brand-coloured */
     input[type="radio"].rb:checked,
     input[type="radio"].rb.is-checked {
-      background: var(--bg-brand-base);
-      border-color: var(--bg-brand-base);
+      background: var(--bg-base);
+      border-color: var(--border-brand-base);
+      border-width: 1.5px;
     }
-    /* Hover */
+    /* Hover — unselected */
     input[type="radio"].rb:hover,
     input[type="radio"].rb.is-hover { border-color: var(--border-action-hover); }
+    /* Hover — selected: ring darkens, dot darkens */
     input[type="radio"].rb.is-checked:hover,
     input[type="radio"].rb.is-checked.is-hover {
-      background: var(--bg-brand-hover, #0b8280);
-      border-color: var(--bg-brand-hover, #0b8280);
+      border-color: var(--border-brand-base-hover);
+    }
+    .rb-wrap:has(input.is-checked.is-hover)::after,
+    .rb-wrap:has(input.is-checked:hover)::after {
+      background: var(--bg-brand-base-hover);
     }
     /* Disabled */
     input[type="radio"].rb.is-disabled,
