@@ -674,13 +674,44 @@
     <p class="section-lead">Use <code>[intermediate]</code> (note: <em>not</em> <code>[indeterminate]</code>) to show a dash when a subset of items is selected. The component maps this to the native indeterminate state internally.</p>
     <div class="dev-preview" style="flex-direction:column; gap:8px; align-items:flex-start; padding:20px 28px;">
       <label class="cb-label-wrap" style="font-weight:600;"><input type="checkbox" class="cb" id="dev-select-all" />All surveys</label>
-      <div style="padding-left:24px; display:flex; flex-direction:column; gap:6px;">
-        <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Q2 Employee survey</label>
-        <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Onboarding pulse</label>
-        <label class="cb-label-wrap"><input type="checkbox" class="cb" />Exit interviews</label>
+      <div id="dev-select-all-children" style="padding-left:24px; display:flex; flex-direction:column; gap:6px;">
+        <label class="cb-label-wrap"><input type="checkbox" class="cb dev-child-cb" checked />Q2 Employee survey</label>
+        <label class="cb-label-wrap"><input type="checkbox" class="cb dev-child-cb" checked />Onboarding pulse</label>
+        <label class="cb-label-wrap"><input type="checkbox" class="cb dev-child-cb" />Exit interviews</label>
       </div>
     </div>
-    <script>document.getElementById('dev-select-all').indeterminate = true;</script>
+    <script>
+    (function() {
+      var parent = document.getElementById('dev-select-all');
+      var children = document.querySelectorAll('#dev-select-all-children .dev-child-cb');
+
+      function updateParent() {
+        var total = children.length;
+        var checked = Array.from(children).filter(function(c) { return c.checked; }).length;
+        if (checked === 0) {
+          parent.checked = false;
+          parent.indeterminate = false;
+        } else if (checked === total) {
+          parent.checked = true;
+          parent.indeterminate = false;
+        } else {
+          parent.checked = false;
+          parent.indeterminate = true;
+        }
+      }
+
+      parent.addEventListener('change', function() {
+        children.forEach(function(c) { c.checked = parent.checked; });
+        parent.indeterminate = false;
+      });
+
+      children.forEach(function(c) {
+        c.addEventListener('change', updateParent);
+      });
+
+      updateParent();
+    })();
+    </script>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="ct">&lt;eff-checkbox</span>
