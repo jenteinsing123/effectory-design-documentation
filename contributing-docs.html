@@ -9,12 +9,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
 <div id="topnav-placeholder"></div>
-
 <div class="shell">
 <div id="sidebar-placeholder"></div>
-
 <div class="content-wrap">
 <div class="page-header-row">
 <div class="page-header">
@@ -30,42 +27,109 @@
   <div class="section">
     <h2 class="text-l3">Ways to contribute</h2>
     <p class="section-lead">The design system is a shared resource — anyone on the product team can contribute to it.</p>
-    <p>The Engage Design System is not maintained exclusively by the DS team. It improves when the people using it daily — designers, developers, and PMs — flag problems and bring ideas. There are three main ways to contribute:</p>
-    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;margin-top:12px;">
-      <li><strong>Report a bug or inconsistency</strong> — something in the system behaves or looks wrong, either in Figma or in code.</li>
-      <li><strong>Propose a new component or variant</strong> — a UI pattern you need doesn't exist yet, or an existing component is missing a state or variant that would be broadly useful.</li>
-      <li><strong>Improve documentation</strong> — a usage guideline is unclear, an example is missing, or a code snippet is out of date.</li>
-    </ul>
-    <p style="margin-top:16px;">All three routes go through Jira. The DS team triages new tickets weekly and brings larger proposals to the bi-weekly sync.</p>
+    <p style="margin-bottom:24px;">The Engage Design System is not maintained exclusively by the DS team. It improves when the people using it daily — designers, developers, and PMs — flag problems and bring ideas. All three routes go through Jira. The DS team triages new tickets weekly and brings larger proposals to the bi-weekly sync.</p>
+
+    <!-- Three contribution-type cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px;">
+
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><ellipse cx="10" cy="12" rx="4" ry="5" stroke="currentColor" stroke-width="1.6"/><path d="M10 7V4M7 8.5L4 7M13 8.5l3-1.5M6 12H3M17 12h-3M6 15l-2 2M14 15l2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="5.5" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:4px;">Report a bug</div>
+          <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0 0 12px;">Found something broken? File a Jira ticket with the details below.</p>
+          <a href="#reporting-a-bug" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--content-brand-base);text-decoration:none;">
+            See checklist
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3a5 5 0 013.54 8.54C12.9 12.17 12.5 13 12.5 14H7.5c0-1-.4-1.83-1.04-2.46A5 5 0 0110 3z" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 14v1.5A1.5 1.5 0 009 17h2a1.5 1.5 0 001.5-1.5V14" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:4px;">Propose a component</div>
+          <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0 0 12px;">Have a new pattern in mind? Walk us through the proposal template.</p>
+          <a href="#proposing-a-new-component" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--content-brand-base);text-decoration:none;">
+            View template
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:4px;">Improve docs</div>
+          <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0 0 12px;">Spotted a gap or inaccuracy? All contributions are welcome.</p>
+          <a href="#design-contributions-figma" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--content-brand-base);text-decoration:none;">
+            How to contribute
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- Reporting a bug -->
-  <div class="section">
+  <div class="section" id="reporting-a-bug">
     <h2 class="text-l3">Reporting a bug</h2>
     <p class="section-lead">A clear bug report saves significant back-and-forth. Include enough context to reproduce it without asking follow-up questions.</p>
     <p>Create a Jira ticket with the label <code>design-system</code> and include the following:</p>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
-      <div>
-        <strong style="font-size:14px;">Which component</strong>
-        <p style="font-size:14px;color:var(--content-secondary);margin-top:4px;">Name the component (e.g. <code>eff-select</code>) and, if relevant, the Angular selector or Figma component path.</p>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <span style="color:var(--content-brand-base);margin-top:1px;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <span style="font-size:14px;font-weight:600;color:var(--content-base);">Which component</span>
+          <span style="font-size:14px;color:var(--content-secondary);"> — name the component (e.g. <code>eff-select</code>) and, if relevant, the Angular selector or Figma component path.</span>
+        </div>
       </div>
-      <div>
-        <strong style="font-size:14px;">Which state or variant</strong>
-        <p style="font-size:14px;color:var(--content-secondary);margin-top:4px;">Be specific: disabled state, focus ring on hover, the "bordered" checkbox variant, etc.</p>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <span style="color:var(--content-brand-base);margin-top:1px;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <span style="font-size:14px;font-weight:600;color:var(--content-base);">Which state or variant</span>
+          <span style="font-size:14px;color:var(--content-secondary);"> — be specific: disabled state, focus ring on hover, the "bordered" checkbox variant, etc.</span>
+        </div>
       </div>
-      <div>
-        <strong style="font-size:14px;">A screenshot or recording</strong>
-        <p style="font-size:14px;color:var(--content-secondary);margin-top:4px;">Annotate it if the issue is subtle. For code bugs, a Storybook link or a minimal reproduction is ideal.</p>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <span style="color:var(--content-brand-base);margin-top:1px;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <span style="font-size:14px;font-weight:600;color:var(--content-base);">A screenshot or recording</span>
+          <span style="font-size:14px;color:var(--content-secondary);"> — annotate it if the issue is subtle. For code bugs, a Storybook link or a minimal reproduction is ideal.</span>
+        </div>
       </div>
-      <div>
-        <strong style="font-size:14px;">Where the issue lives</strong>
-        <p style="font-size:14px;color:var(--content-secondary);margin-top:4px;">Figma, code (Angular component), the documentation site, or a combination. This determines who picks it up first.</p>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <span style="color:var(--content-brand-base);margin-top:1px;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <span style="font-size:14px;font-weight:600;color:var(--content-base);">Where the issue lives</span>
+          <span style="font-size:14px;color:var(--content-secondary);"> — Figma, code (Angular component), the documentation site, or a combination. This determines who picks it up first.</span>
+        </div>
       </div>
+
     </div>
   </div>
 
   <!-- Proposing a new component -->
-  <div class="section">
+  <div class="section" id="proposing-a-new-component">
     <h2 class="text-l3">Proposing a new component</h2>
     <p class="section-lead">New components are added deliberately — each one carries a long-term maintenance cost.</p>
     <p>Use the <strong>"Component proposal"</strong> Jira template and fill in the following fields:</p>
@@ -101,31 +165,100 @@
   </div>
 
   <!-- Design contributions (Figma) -->
-  <div class="section">
+  <div class="section" id="design-contributions-figma">
     <h2 class="text-l3">Design contributions (Figma)</h2>
     <p class="section-lead">All Figma contributions work through branching off the main library file.</p>
-    <p>The main Figma library file is the source of truth for all design specifications. To propose a change:</p>
-    <ol style="display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;margin-top:12px;">
-      <li>Create a branch off the main library file. Name it after your Jira ticket (e.g. <code>ENG-1234-checkbox-indeterminate</code>).</li>
-      <li>Follow the existing naming conventions for all layers and components: <code>Component / Variant / State</code> (e.g. <code>Checkbox / Bordered / Indeterminate</code>).</li>
-      <li>Use only library variables for every colour and spacing value. Do not introduce raw hex values or hardcoded numbers — if a token doesn't exist for what you need, that is a separate proposal.</li>
-      <li>Request a review from the DS team by tagging them in a Figma comment on the branch. At least one DS team member must approve before a branch is merged.</li>
-    </ol>
-    <p style="margin-top:16px;">Documentation updates (usage guidelines, anatomy annotations) in Figma follow the same branching flow.</p>
+    <p style="margin-bottom:20px;">The main Figma library file is the source of truth for all design specifications. To propose a change:</p>
+
+    <div style="display:flex;flex-direction:column;gap:0;margin-top:16px;">
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Branch off the main library</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Create a branch off the main library file. Name it after your Jira ticket (e.g. <code>ENG-1234-checkbox-indeterminate</code>).</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Follow naming conventions</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Follow the existing naming conventions for all layers and components: <code>Component / Variant / State</code> (e.g. <code>Checkbox / Bordered / Indeterminate</code>).</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Use only library variables</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Use only library variables for every colour and spacing value. Do not introduce raw hex values or hardcoded numbers — if a token doesn't exist for what you need, that is a separate proposal.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
+        <div style="flex:1;padding-bottom:0;border-left:2px solid transparent;margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Request a DS review</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Request a review from the DS team by tagging them in a Figma comment on the branch. At least one DS team member must approve before a branch is merged.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="margin-top:8px;">Documentation updates (usage guidelines, anatomy annotations) in Figma follow the same branching flow.</p>
   </div>
 
   <!-- Development contributions -->
   <div class="section">
     <h2 class="text-l3">Development contributions</h2>
     <p class="section-lead">Follow the existing API conventions and add Storybook coverage before opening a PR.</p>
-    <ol style="display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;margin-top:12px;">
-      <li>Fork the component library repository and branch off <code>main</code>. Branch names should follow <code>feat/eff-component-name</code> or <code>fix/eff-component-name-issue</code>.</li>
-      <li>Follow the existing component API conventions: Angular <code>[input]</code> bindings use descriptive noun names (<code>[disabled]</code>, <code>[size]</code>); <code>(output)</code> events use past-tense verbs (<code>(valueChange)</code>, <code>(closed)</code>).</li>
-      <li>Style exclusively through CSS custom properties — no raw colour values or hardcoded pixel values in component stylesheets. Every visual property must map to a token.</li>
-      <li>Add or update Storybook stories. Each variant and each interactive state should have its own story. Stories serve as the live API documentation.</li>
-      <li>Open a PR against <code>main</code> and tag it with the <code>design-system</code> label. Link to the corresponding Jira ticket and, if applicable, the Figma branch that specifies the design.</li>
-    </ol>
-    <p style="margin-top:16px;">PRs require at least one approval from the DS team and passing CI (lint, unit tests, visual regression) before merging.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0;margin-top:16px;">
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Fork and branch</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Fork the component library repository and branch off <code>main</code>. Branch names should follow <code>feat/eff-component-name</code> or <code>fix/eff-component-name-issue</code>.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Follow API conventions</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Follow the existing component API conventions: Angular <code>[input]</code> bindings use descriptive noun names (<code>[disabled]</code>, <code>[size]</code>); <code>(output)</code> events use past-tense verbs (<code>(valueChange)</code>, <code>(closed)</code>).</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Style via CSS custom properties only</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">No raw colour values or hardcoded pixel values in component stylesheets. Every visual property must map to a token.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
+        <div style="flex:1;padding-bottom:24px;border-left:2px solid var(--border-base);margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Add Storybook stories</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Add or update Storybook stories. Each variant and each interactive state should have its own story. Stories serve as the live API documentation.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-brand-base);color:var(--content-on-brand-base);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div>
+        <div style="flex:1;padding-bottom:0;border-left:2px solid transparent;margin-left:-14px;padding-left:28px;">
+          <div style="font-weight:600;font-size:14px;color:var(--content-base);margin-bottom:4px;">Open a PR</div>
+          <div style="font-size:13px;color:var(--content-secondary);line-height:1.6;">Open a PR against <code>main</code> and tag it with the <code>design-system</code> label. Link to the corresponding Jira ticket and, if applicable, the Figma branch that specifies the design.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="margin-top:8px;">PRs require at least one approval from the DS team and passing CI (lint, unit tests, visual regression) before merging.</p>
   </div>
 
   <!-- Versioning and deprecation -->
@@ -146,7 +279,6 @@
 </div>
 </div>
 </div>
-
 <script src="nav.js"></script>
 </body>
 </html>

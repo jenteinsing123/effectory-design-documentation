@@ -9,12 +9,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
 <div id="topnav-placeholder"></div>
-
 <div class="shell">
 <div id="sidebar-placeholder"></div>
-
 <div class="content-wrap">
 <div class="page-header-row">
 <div class="page-header">
@@ -26,6 +23,78 @@
 <div class="content-cols">
 <article class="content">
 
+  <!-- Opening hero card -->
+  <div style="background:#192743;border-radius:16px;padding:48px 56px;margin-bottom:56px;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1.5px,transparent 1.5px);background-size:28px 28px;pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;">
+      <span style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.06em;display:inline-block;">v1.4.0</span>
+      <h2 style="color:#fff;font-size:28px;font-weight:700;margin:16px 0 12px;line-height:1.25;">A single source of truth that connects design decisions to production components.</h2>
+      <p style="color:rgba(255,255,255,0.65);max-width:500px;font-size:15px;line-height:1.65;margin:0 0 28px;">The Engage Design System bridges Figma and Angular — shared tokens, shared vocabulary, shared components — so what is designed is exactly what ships.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="design-principles-docs.html" style="display:inline-flex;align-items:center;gap:7px;background:#fdbd12;color:#192743;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.01em;">
+          Design Principles
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="contributing-docs.html" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);letter-spacing:.01em;">
+          Contributing
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works flow strip -->
+  <div style="background:var(--bg-base-secondary);border-radius:12px;padding:32px 40px;margin-bottom:56px;">
+    <div style="font-size:11px;font-weight:600;color:var(--content-subtle);letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px;">How it works</div>
+    <div style="display:flex;align-items:center;gap:0;">
+
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".9"/><rect x="11" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="2" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="11" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".3"/></svg>
+        </div>
+        <div style="font-weight:600;font-size:13px;color:var(--content-base);">Figma</div>
+        <div style="font-size:12px;color:var(--content-subtle);">Design source</div>
+      </div>
+
+      <div style="color:var(--content-subtle);flex-shrink:0;padding:0 12px;margin-top:-16px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="15" r="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 7.5V12a3 3 0 003 3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div style="font-weight:600;font-size:13px;color:var(--content-base);">Tokens</div>
+        <div style="font-size:12px;color:var(--content-subtle);">CSS variables</div>
+      </div>
+
+      <div style="color:var(--content-subtle);flex-shrink:0;padding:0 12px;margin-top:-16px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="12" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="12" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 15h2m2 0h-2m0 0v-2m0 2v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div style="font-weight:600;font-size:13px;color:var(--content-base);">Components</div>
+        <div style="font-size:12px;color:var(--content-subtle);">Angular library</div>
+      </div>
+
+      <div style="color:var(--content-subtle);flex-shrink:0;padding:0 12px;margin-top:-16px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3c3 0 6 2.5 6 7 0 3-1.5 5.5-4 6.5l-2-3-2 3C5.5 15.5 4 13 4 10c0-4.5 3-7 6-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <div style="font-weight:600;font-size:13px;color:var(--content-base);">Product</div>
+        <div style="font-size:12px;color:var(--content-subtle);">Engage product</div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- What is the Engage Design System? -->
   <div class="section">
     <h2 class="text-l3">What is the Engage Design System?</h2>
@@ -35,19 +104,38 @@
     <p style="margin-top:16px;">The practical benefit is speed and consistency. Teams don't rebuild common UI primitives for each feature. They reach for a tested, accessible component, configure it with props, and ship. When a token changes — say, the brand colour shifts — it propagates everywhere at once, in both Figma and the browser.</p>
   </div>
 
-  <!-- Who it's for -->
+  <!-- Who it's for — audience cards -->
   <div class="section">
     <h2 class="text-l3">Who it's for</h2>
     <p class="section-lead">The system serves two primary audiences, with a third benefiting alongside them.</p>
 
-    <h3 class="text-l4">Designers</h3>
-    <p>The Figma component library contains every component in the system, documented with anatomy diagrams, usage guidelines, variant breakdowns, and annotated states. All colour, spacing, and typography values are bound to Figma variables that map 1:1 to CSS custom properties, so designs are token-native from the start. The library is organised into the same Foundations → Components hierarchy used on this site.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;margin-bottom:48px;">
 
-    <h3 class="text-l4" style="margin-top:24px;">Developers</h3>
-    <p>The Angular component library exposes each component via an <code>eff-*</code> selector (e.g. <code>&lt;eff-button&gt;</code>, <code>&lt;eff-checkbox&gt;</code>). All visual properties are expressed through CSS custom properties — no magic values hard-coded in component stylesheets. Each component page on this site includes a Developer tab with a live example, the full Angular input/output API table, and copy-ready code snippets.</p>
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;border-top:3px solid var(--border-brand-base);">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".9"/><rect x="11" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="2" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="11" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".3"/></svg>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:8px;">Designers</div>
+        <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0;">The Figma component library contains every component with anatomy diagrams, usage guidelines, and variant breakdowns. All colour, spacing, and typography values are bound to Figma variables that map 1:1 to CSS custom properties.</p>
+      </div>
 
-    <h3 class="text-l4" style="margin-top:24px;">Product managers</h3>
-    <p>PMs reviewing interaction patterns or checking what already exists before speccing a feature will find the component pages useful. The usage guidelines on each page describe intended behaviour, edge cases, and when <em>not</em> to use a component — context that saves back-and-forth during review.</p>
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;border-top:3px solid var(--border-brand-base);">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 6L3 10l4 4M13 6l4 4-4 4M11 4l-2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:8px;">Developers</div>
+        <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0;">The Angular component library exposes each component via an <code>eff-*</code> selector. Each component page includes a Developer tab with a live example, the full Angular input/output API table, and copy-ready code snippets.</p>
+      </div>
+
+      <div style="border:1px solid var(--border-base);border-radius:12px;padding:24px;border-top:3px solid var(--border-brand-base);">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-brand-subtle);color:var(--content-brand-base);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div style="font-size:14px;font-weight:700;color:var(--content-base);margin-bottom:8px;">Product Managers</div>
+        <p style="font-size:13px;color:var(--content-secondary);line-height:1.6;margin:0;">PMs reviewing interaction patterns will find the component pages useful. The usage guidelines describe intended behaviour, edge cases, and when not to use a component — context that saves back-and-forth during review.</p>
+      </div>
+
+    </div>
   </div>
 
   <!-- How it's organised -->
@@ -60,17 +148,53 @@
 
     <h3 class="text-l4" style="margin-top:24px;">Components</h3>
     <p>Components are grouped into functional categories:</p>
-    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;margin-top:12px;">
-      <li><strong>Buttons</strong> — Button, Icon Button, Button Big, Sentiment Button, Upgrade Button, Segmented Control</li>
-      <li><strong>Navigation</strong> — Link Inline, Tabs, Breadcrumb, Pagination, Stepper</li>
-      <li><strong>Forms</strong> — Text Field, Textarea, Select, Checkbox, Radio Group, Toggle, Date Picker, File Upload, Slider</li>
-      <li><strong>Feedback</strong> — Alert, Toast, Dialog, Tooltip, Loading, Progress Bar, Skeleton</li>
-      <li><strong>Data Display</strong> — Table, Card, Badge, Tag, Avatar, Avatar Group, List, Metric</li>
-      <li><strong>Overlays</strong> — Dropdown Menu, Popover, Context Menu, Drawer</li>
-      <li><strong>Layout</strong> — Container, Divider, Section Header, Empty State</li>
-    </ul>
 
-    <h3 class="text-l4" style="margin-top:24px;">Each component page</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Button</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Icon Button</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Button Big</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Sentiment Button</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Segmented Control</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Link Inline</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Tabs</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Breadcrumb</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Pagination</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Stepper</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Text Field</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Textarea</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Select</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Checkbox</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Radio Group</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Toggle</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Date Picker</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">File Upload</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Slider</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Alert</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Toast</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Dialog</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Tooltip</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Loading</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Progress Bar</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Skeleton</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Table</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Card</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Badge</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Tag</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Avatar</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Avatar Group</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">List</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Metric</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Dropdown Menu</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Popover</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Context Menu</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Drawer</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Container</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Divider</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Section Header</span>
+      <span style="padding:5px 12px;background:var(--bg-base-secondary);border:1px solid var(--border-base);border-radius:20px;font-size:12px;color:var(--content-secondary);">Empty State</span>
+    </div>
+
+    <h3 class="text-l4" style="margin-top:32px;">Each component page</h3>
     <p>Every component page is split into two tabs. The <strong>Design tab</strong> covers anatomy, usage guidelines, variants, interactive states, and the component-level token list. The <strong>Developer tab</strong> provides a live rendered example, the full Angular <code>@Input</code> / <code>@Output</code> API table, and code snippets ready to paste.</p>
   </div>
 
@@ -78,10 +202,11 @@
   <div class="section">
     <h2 class="text-l3">Tech stack</h2>
     <p class="section-lead">Angular components, CSS custom properties, and Figma as the design source of truth.</p>
-    <div class="tbl-wrap">
+    <div class="tbl-wrap" style="border-left:3px solid var(--border-brand-base);padding-left:0;">
       <table>
         <thead>
           <tr>
+            <th style="width:32px;padding-right:0;"></th>
             <th>Layer</th>
             <th>Technology</th>
             <th>Notes</th>
@@ -89,26 +214,41 @@
         </thead>
         <tbody>
           <tr>
+            <td style="padding-right:0;color:var(--content-brand-base);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="12" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="12" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 15h2m2 0h-2m0 0v-2m0 2v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </td>
             <td>Components</td>
             <td>Angular (<code>eff-*</code> selectors)</td>
             <td>Compiled into a shared library consumed by the Coordinator and Personal portals</td>
           </tr>
           <tr>
+            <td style="padding-right:0;color:var(--content-brand-base);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="15" r="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 7.5V12a3 3 0 003 3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </td>
             <td>Tokens</td>
             <td>CSS custom properties</td>
             <td>Defined in <code>tokens.css</code>; base layer plus portal overrides for Coordinator (teal <code>#0a9d99</code>) and Personal (yellow <code>#fdbd12</code>)</td>
           </tr>
           <tr>
+            <td style="padding-right:0;color:var(--content-brand-base);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".9"/><rect x="11" y="2" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="2" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".6"/><rect x="11" y="11" width="7" height="7" rx="2" fill="currentColor" opacity=".3"/></svg>
+            </td>
             <td>Design source</td>
             <td>Figma</td>
             <td>Main library file is the authoritative design spec; component pages link directly to Figma frames</td>
           </tr>
           <tr>
+            <td style="padding-right:0;color:var(--content-brand-base);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </td>
             <td>Documentation</td>
             <td>GitHub Pages</td>
             <td>This site — static HTML/CSS, no build step required to contribute</td>
           </tr>
           <tr>
+            <td style="padding-right:0;color:var(--content-brand-base);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 6L3 10l4 4M13 6l4 4-4 4M11 4l-2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </td>
             <td>Component sandbox</td>
             <td>Storybook</td>
             <td>Live Angular components with controls; linked from each Developer tab</td>
@@ -131,7 +271,6 @@
 </div>
 </div>
 </div>
-
 <script src="nav.js"></script>
 </body>
 </html>
