@@ -304,26 +304,22 @@
     <div class="anatomy-items">
       <div class="anatomy-item">
         <div class="anatomy-num">1</div>
-        <div><span class="anatomy-term">Container</span> — the square control box with rounded corners. Unchecked: white background + <code>border/action</code> border. Indeterminate: white background + <code>border/brand/base</code> border. Checked: filled <code>bg/brand/base</code>, no border. Available in default and large sizes.</div>
+        <div><span class="anatomy-term">Container</span> — the square control box with rounded corners. Shows a border when unchecked, a brand-coloured border when indeterminate, and a filled brand background when checked. Available in default and large sizes.</div>
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">2</div>
-        <div><span class="anatomy-term">Indicator</span> — a check icon (<code>content/on-brand/base</code>) when checked; a dash icon (<code>border/brand/base</code>) when indeterminate. Hidden when unchecked.</div>
+        <div><span class="anatomy-term">Indicator</span> — a check icon when checked; a dash icon when indeterminate. Hidden when unchecked.</div>
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">3</div>
-        <div><span class="anatomy-term">Label</span> — text placed to the right of the container, vertically centred with it. Rendered in <code>content/base</code>; dims to <code>content/disabled</code> when disabled.</div>
+        <div><span class="anatomy-term">Label</span> — text placed to the right of the container, vertically centred with it. Appears muted when disabled.</div>
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">4</div>
-        <div><span class="anatomy-term">Description</span> <em>(optional)</em> — secondary text below the label row, indented to align with the label text. Used only in the "with description" variant. Rendered in <code>content/secondary</code>.</div>
+        <div><span class="anatomy-term">Description</span> <em>(optional)</em> — secondary text below the label row, indented to align with the label text. Used only in the "with description" variant.</div>
       </div>
     </div>
 
-    <div class="gap-callout" style="margin-top:20px;">
-      <span class="gap-callout-icon">⚠️</span>
-      <div><strong>Figma gap — large size</strong> The large size is defined in Figma for the bare checkbox container only. The "Labeled" and "With description" compositions do not have a large-size variant in the design file. Use the large size in code for custom layouts; expect to design the composition manually in Figma.</div>
-    </div>
   </section>
 
   <!-- USAGE -->
@@ -467,17 +463,17 @@
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" checked />Send weekly summary emails
           </label>
-          <!-- 8px gap annotation -->
-          <div style="display:flex; align-items:center; gap:8px; padding:0 0 0 2px; opacity:0.55;">
-            <div style="width:1px; height:8px; background:var(--border-brand-base);"></div>
-            <span style="font-size:10px; font-weight:600; color:var(--border-brand-base); white-space:nowrap;">8 px</span>
+          <!-- 12px gap annotation -->
+          <div style="display:flex; align-items:center; gap:6px; padding:0 0 0 2px;">
+            <div style="width:1px; height:12px; background:var(--content-subtle);"></div>
+            <span style="font-size:10px; font-weight:600; color:var(--content-subtle); white-space:nowrap;">12 px</span>
           </div>
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" />Include benchmark comparisons
           </label>
-          <div style="display:flex; align-items:center; gap:8px; padding:0 0 0 2px; opacity:0.55;">
-            <div style="width:1px; height:8px; background:var(--border-brand-base);"></div>
-            <span style="font-size:10px; font-weight:600; color:var(--border-brand-base); white-space:nowrap;">8 px</span>
+          <div style="display:flex; align-items:center; gap:6px; padding:0 0 0 2px;">
+            <div style="width:1px; height:12px; background:var(--content-subtle);"></div>
+            <span style="font-size:10px; font-weight:600; color:var(--content-subtle); white-space:nowrap;">12 px</span>
           </div>
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" />Notify me of survey responses
@@ -485,7 +481,7 @@
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-          Use consistent 8 px spacing between items in a vertical checkbox list to keep the group feeling cohesive and easy to scan.
+          Use consistent 12 px spacing between items in a vertical checkbox list to keep the group feeling cohesive and easy to scan.
         </div>
       </div>
       <div class="dd-card">
@@ -493,11 +489,11 @@
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" checked />Send weekly summary emails
           </label>
-          <div style="height:24px;"></div>
+          <div style="height:28px;"></div>
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" />Include benchmark comparisons
           </label>
-          <div style="height:2px;"></div>
+          <div style="height:4px;"></div>
           <label class="cb-label-wrap" style="padding:4px 0;">
             <input type="checkbox" class="cb" />Notify me of survey responses
           </label>
@@ -558,6 +554,11 @@
           <strong>Checkbox button</strong> — a pill-shaped card where the entire surface is the tap target. Used in compact horizontal filter bars or tag pickers. The embedded checkbox indicator shows selection state; no separate label element needed outside the button.
         </div>
       </div>
+    </div>
+
+    <div class="gap-callout" style="margin-top:20px;">
+      <span class="gap-callout-icon">⚠️</span>
+      <div><strong>Figma gap — large size</strong> The large size is defined in Figma for the bare checkbox container only. The "Labeled" and "With description" variants do not have a large-size composition in the design file. Use the large size in code for custom layouts; design the composition manually in Figma when needed.</div>
     </div>
   </section>
 
