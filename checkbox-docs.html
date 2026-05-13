@@ -33,31 +33,34 @@
     input[type="checkbox"].cb.is-hover {
       border-color: var(--border-action-hover);
     }
-    /* Checked */
+    /* Checked — stroke color = --content-on-brand-base (#ffffff light / #192743 dark) */
     input[type="checkbox"].cb:checked,
     input[type="checkbox"].cb.is-checked {
       background-color: var(--bg-brand-base);
       border-color: var(--border-brand-base);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      /* SVG stroke hardcoded to resolved value of --content-on-brand-base */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%23ffffff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
     }
     input[type="checkbox"].cb:checked:hover,
     input[type="checkbox"].cb.is-checked.is-hover {
       background-color: var(--bg-brand-base-hover);
       border-color: var(--border-brand-base-hover);
     }
-    /* Indeterminate — white bg, teal border, teal dash */
+    /* Indeterminate — white bg, teal border, dash color = --border-brand-base */
     input[type="checkbox"].cb:indeterminate,
     input[type="checkbox"].cb.is-indeterminate {
       background-color: var(--bg-base);
       border-color: var(--border-brand-base);
       background-size: 10px 2px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%230a9d99' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      /* SVG stroke hardcoded to resolved value of --border-brand-base */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%230c827f' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
-    /* Select-all: outlined teal (used in table-header select-all) */
+    /* Select-all: outlined teal, check color = --border-brand-base */
     input[type="checkbox"].cb.is-select-all {
       background-color: var(--bg-base);
       border-color: var(--border-brand-base);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%230a9d99' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      /* SVG stroke hardcoded to resolved value of --border-brand-base */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%230c827f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
     }
     /* Disabled */
     input[type="checkbox"].cb:disabled,
@@ -754,8 +757,8 @@
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">/* Control fill */</span>
-<span class="ca">--bg-brand</span>:              <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / intermediate fill   */</span>
-<span class="ca">--bg-base</span>:               <span class="cv">#ffffff</span>;                 <span class="cm">/* Unchecked fill                */</span>
+<span class="ca">--bg-brand-base</span>:         <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked fill                  */</span>
+<span class="ca">--bg-base</span>:               <span class="cv">#ffffff</span>;                 <span class="cm">/* Unchecked / intermediate fill */</span>
 <span class="ca">--bg-disabled</span>:           <span class="cv">rgba(25, 39, 67, 0.10)</span>;  <span class="cm">/* Disabled fill                 */</span>
 
 <span class="cm">/* Border */</span>
@@ -763,13 +766,13 @@
 <span class="ca">--border-action</span>:         <span class="cv">#bcc1cd</span>;                 <span class="cm">/* Unchecked border              */</span>
 <span class="ca">--border-action-hover</span>:   <span class="cv">#a5adbc</span>;                 <span class="cm">/* Hover border                  */</span>
 
+<span class="cm">/* Indicator (checkmark / dash) */</span>
+<span class="ca">--content-on-brand-base</span>: <span class="cv">#ffffff</span>;                 <span class="cm">/* Check color on filled bg      */</span>
+
 <span class="cm">/* Content */</span>
 <span class="ca">--content-base</span>:          <span class="cv">#192743</span>;                 <span class="cm">/* Label text                    */</span>
 <span class="ca">--content-secondary</span>:     <span class="cv">rgba(25, 39, 67, 0.80)</span>;  <span class="cm">/* Description text              */</span>
-<span class="ca">--content-disabled</span>:      <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled text & indicator     */</span>
-
-<span class="cm">/* Checkmark image */</span>
-<span class="ca">--checkbox-svg</span>:          <span class="cv">url("...")</span>;              <span class="cm">/* White checkmark data URI      */</span></code></pre>
+<span class="ca">--content-disabled</span>:      <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled text & indicator     */</span></code></pre>
     </div>
   </section>
 
