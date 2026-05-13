@@ -28,6 +28,13 @@
       box-sizing: border-box;
       margin: 0;
     }
+    /* Large size: 20×20 px */
+    input[type="checkbox"].cb.cb-large {
+      width: 20px; height: 20px;
+    }
+    .cb-wrap:has(input.cb-large)::after {
+      -webkit-mask-size: 16px 16px; mask-size: 16px 16px;
+    }
     input[type="checkbox"].cb.cb-lg {
       width: 20px; height: 20px;
     }
@@ -249,26 +256,35 @@
   <!-- ANATOMY -->
   <section class="section" id="anatomy">
     <h2 class="text-l3">Anatomy</h2>
-    <p class="section-lead">The bare checkbox is three layers — a container, a selection indicator (check or dash), and an optional border ring. The label, description, and button variants wrap this control with additional content.</p>
+    <p class="section-lead">The checkbox is built from a container and indicator at its core, paired with a label and an optional description.</p>
 
     <div class="anatomy-fig">
-      <div style="position:relative; display:inline-flex; align-items:center; padding: 40px 120px;">
-        <input type="checkbox" class="cb is-checked" style="pointer-events:none;" />
+      <div style="position:relative; display:inline-flex; align-items:center; padding: 48px 160px 48px 80px; gap: 8px;">
+        <input type="checkbox" class="cb is-checked" style="pointer-events:none; flex-shrink:0;" />
+        <span style="font-size:14px; color:var(--content-base); white-space:nowrap; pointer-events:none;">Label</span>
 
-        <!-- 1 Container -->
-        <div style="position:absolute; top:4px; left:50%; transform:translateX(-60%); display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <!-- 1 Container — callout above left -->
+        <div style="position:absolute; top:6px; left:40px; display:flex; flex-direction:column; align-items:center; gap:4px;">
           <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--content-secondary);white-space:nowrap;">
             <span style="width:20px;height:20px;border-radius:50%;background:var(--content-base);color:var(--bg-base);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>Container
           </span>
-          <div style="width:1px; height:14px; background:var(--content-subtle);"></div>
+          <div style="width:1px; height:18px; background:var(--content-subtle);"></div>
         </div>
 
-        <!-- 2 Checkmark -->
-        <div style="position:absolute; bottom:4px; left:50%; transform:translateX(-60%); display:flex; flex-direction:column; align-items:center; gap:4px;">
-          <div style="width:1px; height:14px; background:var(--content-subtle);"></div>
+        <!-- 2 Indicator — callout below left -->
+        <div style="position:absolute; bottom:6px; left:40px; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div style="width:1px; height:18px; background:var(--content-subtle);"></div>
           <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--content-secondary);white-space:nowrap;">
             <span style="width:20px;height:20px;border-radius:50%;background:var(--content-base);color:var(--bg-base);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>Indicator
           </span>
+        </div>
+
+        <!-- 3 Label — callout above right -->
+        <div style="position:absolute; top:6px; right:48px; display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--content-secondary);white-space:nowrap;">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--content-base);color:var(--bg-base);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>Label
+          </span>
+          <div style="width:1px; height:18px; background:var(--content-subtle);"></div>
         </div>
       </div>
     </div>
@@ -276,11 +292,23 @@
     <div class="anatomy-items">
       <div class="anatomy-item">
         <div class="anatomy-num">1</div>
-        <div><span class="anatomy-term">Container</span> — 16×16 px square (20×20 in large size), 4 px radius. Unchecked: white background + 1.5 px <code>border/action</code> border. Indeterminate: white background + 1.5 px <code>border/brand/base</code> border. Checked: filled <code>bg/brand/base</code> with no visible border.</div>
+        <div><span class="anatomy-term">Container</span> — 16×16 px (default) or 20×20 px (large), 4 px corner radius. Unchecked: white background + 1.5 px <code>border/action</code> border. Indeterminate: white background + 1.5 px <code>border/brand/base</code> border. Checked: filled <code>bg/brand/base</code>, border removed.</div>
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">2</div>
-        <div><span class="anatomy-term">Indicator</span> — a white check SVG when checked; a teal dash when indeterminate (the container stays white). In the "select all" variant the container also stays white with a teal border and a teal check. Hidden when unchecked.</div>
+        <div><span class="anatomy-term">Indicator</span> — 12×12 px check icon (<code>content/on-brand/base</code>) when checked; 10×10 px dash icon (<code>border/brand/base</code>) when indeterminate. Hidden when unchecked.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">3</div>
+        <div><span class="anatomy-term">Label</span> — required text placed 8 px to the right of the container, vertically centred. Vertically centred with the container. Rendered in <code>content/base</code>; <code>content/disabled</code> when disabled.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">4</div>
+        <div><span class="anatomy-term">Description</span> <em>(optional)</em> — secondary text displayed 2 px below the label row, indented 24 px (= 16 px box + 8 px gap) to align with the label. Used only in the "with description" variant. Rendered in <code>content/secondary</code>.</div>
+      </div>
+      <div class="anatomy-item" style="border-top: 1px solid var(--border-subtle); padding-top: 14px; margin-top: 4px;">
+        <div class="anatomy-num" style="background: var(--bg-base-secondary); color: var(--content-secondary);">↕</div>
+        <div><span class="anatomy-term">Group spacing</span> — when stacking multiple checkboxes vertically, use <strong>8 px</strong> gap between items for the default size. For "with description" items the built-in 2 px sub-label gap is included inside each item, so the 8 px applies between items.</div>
       </div>
     </div>
   </section>
@@ -711,6 +739,34 @@
 <span class="ct">&lt;eff-checkbox</span>
   <span class="ca">[checked]</span>=<span class="cv">"true"</span>
   <span class="ca">(checkedChange)</span>=<span class="cv">"onChecked($event)"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4" style="margin-top:28px;">Sizes</h3>
+    <p class="section-lead">Two sizes are available. Default (16×16 px) covers most use cases. Use large (20×20 px) when the checkbox is the primary interactive element or when the surrounding UI uses larger touch targets.</p>
+    <div class="dev-preview" style="gap:24px; align-items:center; padding:24px 28px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Default</label>
+        <span style="font-size:11px;color:var(--content-subtle);">16×16 px</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <label class="cb-label-wrap" style="gap:8px;"><input type="checkbox" class="cb cb-large" checked />Large</label>
+        <span style="font-size:11px;color:var(--content-subtle);">20×20 px</span>
+      </div>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Default (16×16 px) --&gt;</span>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"true"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'Default'"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span>
+
+<span class="cm">&lt;!-- Large (20×20 px) --&gt;</span>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"true"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'Large'"</span>
+  <span class="ca">[size]</span>=<span class="cv">"'large'"</span>
 <span class="ct">&gt;&lt;/eff-checkbox&gt;</span></code></pre>
     </div>
 
