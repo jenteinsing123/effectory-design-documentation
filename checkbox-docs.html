@@ -597,6 +597,7 @@
   <!-- USAGE -->
   <section class="section" id="dev-usage">
     <h2 class="text-l3">Usage</h2>
+    <p class="section-lead">Import <code>EffCheckboxModule</code> and use the <code>&lt;eff-checkbox&gt;</code> component. The component renders a native <code>&lt;input type="checkbox"&gt;</code> internally and handles all accessibility wiring.</p>
 
     <h3 class="text-l4">Bare checkbox</h3>
     <div class="dev-preview" style="padding:24px 28px; gap:12px; justify-content:flex-start;">
@@ -607,19 +608,16 @@
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">&lt;!-- Unchecked --&gt;</span>
-<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"option-1"</span> <span class="ca">name</span>=<span class="cv">"option-1"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"false"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"onChecked($event)"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span>
 
 <span class="cm">&lt;!-- Checked --&gt;</span>
-<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"option-2"</span> <span class="ca">name</span>=<span class="cv">"option-2"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
-
-<span class="cm">&lt;!-- Indeterminate (set via JS) --&gt;</span>
-<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"select-all"</span> <span class="ct">/&gt;</span>
-<span class="ct">&lt;script&gt;</span>
-  document.getElementById(<span class="cv">'select-all'</span>).indeterminate = <span class="cv">true</span>;
-<span class="ct">&lt;/script&gt;</span>
-
-<span class="cm">&lt;!-- Large size --&gt;</span>
-<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb cb-lg"</span> <span class="ca">id</span>=<span class="cv">"option-3"</span> <span class="ct">/&gt;</span></code></pre>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"true"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"onChecked($event)"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Labeled</h3>
@@ -630,19 +628,22 @@
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">name</span>=<span class="cv">"summary"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
-  Send me weekly summary emails
-<span class="ct">&lt;/label&gt;</span>
+      <pre><code><span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"true"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'Send me weekly summary emails'"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"onChecked($event)"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span>
 
 <span class="cm">&lt;!-- Disabled --&gt;</span>
-<span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap is-disabled"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">disabled</span> <span class="ct">/&gt;</span>
-  Disabled option
-<span class="ct">&lt;/label&gt;</span></code></pre>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"false"</span>
+  <span class="ca">[disabled]</span>=<span class="cv">"true"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'Disabled option'"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">With description</h3>
+    <p class="section-lead">The With description variant wraps <code>&lt;eff-checkbox&gt;</code> with your own label and description markup alongside it. The checkbox component itself only covers the control and its inline label text.</p>
     <div class="dev-preview" style="flex-direction:column; gap:16px; align-items:flex-start; padding:24px 28px;">
       <div class="cb-info-wrap">
         <input type="checkbox" class="cb" checked id="dev-info-1" />
@@ -661,46 +662,16 @@
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"cb-info-wrap"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"visibility"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
-  <span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-info-body"</span> <span class="ca">for</span>=<span class="cv">"visibility"</span><span class="ct">&gt;</span>
-    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-label"</span><span class="ct">&gt;</span>Manager visibility<span class="ct">&lt;/span&gt;</span>
-    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-desc"</span><span class="ct">&gt;</span>Managers can view their team's anonymised results.<span class="ct">&lt;/span&gt;</span>
-  <span class="ct">&lt;/label&gt;</span>
-<span class="ct">&lt;/div&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"isManagerVisible"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'Manager visibility'"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"isManagerVisible = $event"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span>
+<span class="ct">&lt;p</span> <span class="ca">class</span>=<span class="cv">"checkbox-description"</span><span class="ct">&gt;</span>Managers can view their team's anonymised results.<span class="ct">&lt;/p&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Chip</h3>
-    <p class="section-lead">The entire <code>&lt;label&gt;</code> surface is the click target. The nested <code>&lt;input&gt;</code> drives state; <code>pointer-events: none</code> stops it from capturing its own clicks.</p>
-    <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
-      <label class="cb-btn" id="cbtn-1">
-        <input type="checkbox" class="cb" />
-        Weekly digest
-      </label>
-      <label class="cb-btn is-checked" id="cbtn-2">
-        <input type="checkbox" class="cb is-checked" />
-        Benchmarks
-      </label>
-      <label class="cb-btn" id="cbtn-3">
-        <input type="checkbox" class="cb" />
-        Alerts
-      </label>
-    </div>
-    <div class="dev-code-wrap">
-      <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-btn"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">name</span>=<span class="cv">"digest"</span> <span class="ct">/&gt;</span>
-  Weekly digest
-<span class="ct">&lt;/label&gt;</span>
-
-<span class="cm">&lt;!-- Disabled --&gt;</span>
-<span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-btn is-disabled"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb is-disabled"</span> <span class="ca">disabled</span> <span class="ct">/&gt;</span>
-  Alerts
-<span class="ct">&lt;/label&gt;</span></code></pre>
-    </div>
-
-    <h3 class="text-l4">Select all with indeterminate</h3>
+    <h3 class="text-l4">Select all with intermediate</h3>
+    <p class="section-lead">Use <code>[intermediate]</code> (note: <em>not</em> <code>[indeterminate]</code>) to show a dash when a subset of items is selected. The component maps this to the native indeterminate state internally.</p>
     <div class="dev-preview" style="flex-direction:column; gap:8px; align-items:flex-start; padding:20px 28px;">
       <label class="cb-label-wrap" style="font-weight:600;"><input type="checkbox" class="cb" id="dev-select-all" />All surveys</label>
       <div style="padding-left:24px; display:flex; flex-direction:column; gap:6px;">
@@ -712,38 +683,35 @@
     <script>document.getElementById('dev-select-all').indeterminate = true;</script>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"select-all"</span> <span class="ct">/&gt;</span>
-  All surveys
-<span class="ct">&lt;/label&gt;</span>
-<span class="ct">&lt;script&gt;</span>
-  <span class="cm">// Set indeterminate when some (not all) children are checked</span>
-  document.getElementById(<span class="cv">'select-all'</span>).indeterminate = <span class="cv">true</span>;
-<span class="ct">&lt;/script&gt;</span></code></pre>
+      <pre><code><span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">[checked]</span>=<span class="cv">"allChecked"</span>
+  <span class="ca">[intermediate]</span>=<span class="cv">"someChecked &amp;&amp; !allChecked"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"'All surveys'"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"toggleAll($event)"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span>
+
+<span class="cm">&lt;!-- Child items --&gt;</span>
+<span class="ct">&lt;eff-checkbox</span>
+  <span class="ca">*ngFor</span>=<span class="cv">"let survey of surveys"</span>
+  <span class="ca">[checked]</span>=<span class="cv">"survey.selected"</span>
+  <span class="ca">[labelText]</span>=<span class="cv">"survey.name"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"survey.selected = $event; updateParent()"</span>
+<span class="ct">&gt;&lt;/eff-checkbox&gt;</span></code></pre>
     </div>
   </section>
 
-  <!-- CSS CLASSES -->
+  <!-- API -->
   <section class="section" id="dev-props">
-    <h2 class="text-l3">CSS classes</h2>
+    <h2 class="text-l3">API reference</h2>
     <div class="tbl-wrap">
       <table class="dev-props-table">
-        <thead><tr><th>CLASS</th><th>DESCRIPTION</th></tr></thead>
+        <thead><tr><th>NAME</th><th>TYPE</th><th>DEFAULT</th><th>DESCRIPTION</th></tr></thead>
         <tbody>
-          <tr><td><code>cb</code></td><td>Base checkbox control. Apply to <code>&lt;input type="checkbox"&gt;</code>. Replaces the native appearance with a custom-styled 16×16 px control.</td></tr>
-          <tr><td><code>cb-lg</code></td><td>Large size modifier — increases the control to 20×20 px. Stack with <code>cb</code>.</td></tr>
-          <tr><td><code>cb-label-wrap</code></td><td>Labeled variant wrapper. Apply to a <code>&lt;label&gt;</code>; lays out a <code>.cb</code> and its text inline. Handles cursor and disabled styling.</td></tr>
-          <tr><td><code>cb-info-wrap</code></td><td>With description variant wrapper. Contains a <code>.cb</code> and a <code>.cb-info-body</code>.</td></tr>
-          <tr><td><code>cb-info-body</code></td><td>Column container for the label and description inside the With description variant.</td></tr>
-          <tr><td><code>cb-info-label</code></td><td>The bold primary label inside the With description variant.</td></tr>
-          <tr><td><code>cb-info-desc</code></td><td>The secondary description text inside the With description variant. An inline link (<code>.link-inline</code>) can optionally be appended.</td></tr>
-          <tr><td><code>cb-btn</code></td><td>Chip variant. Apply to a <code>&lt;label&gt;</code>. The entire pill surface is the click target. Contains a <code>.cb</code> and a text label.</td></tr>
-          <tr><td><code>is-checked</code></td><td>Forces checked styling in docs/state-preview contexts. In production, drive state via the native <code>checked</code> attribute.</td></tr>
-          <tr><td><code>is-indeterminate</code></td><td>Forces indeterminate styling. In production use <code>input.indeterminate = true</code> in JS instead.</td></tr>
-          <tr><td><code>is-select-all</code></td><td>Outlined teal style — white container with teal border and teal check. Used for table-header "select all" controls.</td></tr>
-          <tr><td><code>is-hover</code></td><td>Forces hover styling. Docs/state previews only.</td></tr>
-          <tr><td><code>is-pressed</code></td><td>Forces pressed styling on <code>.cb-btn</code>. Docs/state previews only.</td></tr>
-          <tr><td><code>is-disabled</code></td><td>Visually disables the control. Pair with the native <code>disabled</code> attribute on the <code>&lt;input&gt;</code> and add <code>is-disabled</code> to the parent wrapper.</td></tr>
+          <tr><td><code>[checked]</code></td><td>boolean</td><td><code>false</code></td><td>Whether the checkbox is checked.</td></tr>
+          <tr><td><code>[intermediate]</code></td><td>boolean</td><td><code>false</code></td><td>Shows the indeterminate (dash) state. Use when a subset of child options is selected. Note the spelling — the input is <code>intermediate</code>, not <code>indeterminate</code>.</td></tr>
+          <tr><td><code>[disabled]</code></td><td>boolean</td><td><code>false</code></td><td>Disables the control and applies muted styling. Removes the element from the tab order.</td></tr>
+          <tr><td><code>[labelText]</code></td><td>string</td><td><code>undefined</code></td><td>Inline label rendered next to the control. Omit for a bare checkbox.</td></tr>
+          <tr><td><code>(checkedChange)</code></td><td>EventEmitter&lt;boolean&gt;</td><td>—</td><td>Emits the new checked value whenever the user toggles the control.</td></tr>
         </tbody>
       </table>
     </div>
@@ -755,22 +723,22 @@
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
       <pre><code><span class="cm">/* Control fill */</span>
-<span class="ca">--bg-brand-base</span>:         <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / indeterminate fill  */</span>
-<span class="ca">--bg-brand-base-hover</span>:   <span class="cv">#0c827f</span>;                 <span class="cm">/* Checked hover fill            */</span>
+<span class="ca">--bg-brand</span>:              <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / intermediate fill   */</span>
 <span class="ca">--bg-base</span>:               <span class="cv">#ffffff</span>;                 <span class="cm">/* Unchecked fill                */</span>
-<span class="ca">--bg-base-hover</span>:         <span class="cv">#f8f8f9</span>;                 <span class="cm">/* Button hover fill             */</span>
-<span class="ca">--bg-base-pressed</span>:       <span class="cv">#f1f2f4</span>;                 <span class="cm">/* Button pressed fill           */</span>
 <span class="ca">--bg-disabled</span>:           <span class="cv">rgba(25, 39, 67, 0.10)</span>;  <span class="cm">/* Disabled fill                 */</span>
 
 <span class="cm">/* Border */</span>
+<span class="ca">--border-brand</span>:          <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / intermediate border */</span>
 <span class="ca">--border-action</span>:         <span class="cv">#bcc1cd</span>;                 <span class="cm">/* Unchecked border              */</span>
 <span class="ca">--border-action-hover</span>:   <span class="cv">#a5adbc</span>;                 <span class="cm">/* Hover border                  */</span>
-<span class="ca">--border-action-pressed</span>: <span class="cv">#7b869e</span>;                 <span class="cm">/* Button pressed border         */</span>
 
 <span class="cm">/* Content */</span>
 <span class="ca">--content-base</span>:          <span class="cv">#192743</span>;                 <span class="cm">/* Label text                    */</span>
 <span class="ca">--content-secondary</span>:     <span class="cv">rgba(25, 39, 67, 0.80)</span>;  <span class="cm">/* Description text              */</span>
-<span class="ca">--content-disabled</span>:      <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled text & indicator     */</span></code></pre>
+<span class="ca">--content-disabled</span>:      <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled text & indicator     */</span>
+
+<span class="cm">/* Checkmark image */</span>
+<span class="ca">--checkbox-svg</span>:          <span class="cv">url("...")</span>;              <span class="cm">/* White checkmark data URI      */</span></code></pre>
     </div>
   </section>
 
@@ -780,23 +748,23 @@
     <div class="a11y-list">
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Always use <code>&lt;input type="checkbox"&gt;</code>.</strong> Never substitute a <code>&lt;div role="checkbox"&gt;</code> — the native element provides keyboard interaction, AT announcements, and form participation for free.</div>
+        <div><strong>The component handles native semantics.</strong> <code>&lt;eff-checkbox&gt;</code> renders a real <code>&lt;input type="checkbox"&gt;</code> internally — keyboard interaction, AT announcements, and form participation work out of the box.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Wrap in <code>&lt;label&gt;</code> or use <code>for</code>/<code>id</code>.</strong> Either approach links the visible text to the input so screen readers announce the label when the control is focused.</div>
+        <div><strong>Use <code>[labelText]</code> for the accessible label.</strong> This wires the visible text to the internal input so screen readers announce it on focus. If you need richer label content, ensure the input still has an accessible name via <code>aria-label</code> on a wrapper.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Indeterminate requires JavaScript.</strong> There is no HTML attribute for the indeterminate state — set it with <code>el.indeterminate = true</code>. Screen readers will announce it as "mixed".</div>
+        <div><strong><code>[intermediate]</code> announces as "mixed".</strong> Assistive technologies read the indeterminate state as "mixed" — use it only for genuine partial-selection scenarios like select-all controls.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Group with <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>.</strong> The legend names the group — screen readers read it before each option so users always know what they're selecting.</div>
+        <div><strong>Group related checkboxes with <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>.</strong> The legend names the group — screen readers read it before each option so users always know what they're selecting.</div>
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Add <code>disabled</code> to the <code>&lt;input&gt;</code>, not just the wrapper.</strong> The native attribute removes it from the tab order and prevents form submission. The <code>.is-disabled</code> class handles the visual only.</div>
+        <div><strong>Disabled removes the item from tab order.</strong> Setting <code>[disabled]="true"</code> applies the <code>disabled</code> attribute to the underlying input — the control is skipped during keyboard navigation and excluded from form submissions.</div>
       </div>
     </div>
   </section>
@@ -819,7 +787,7 @@
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
     <a class="toc-link" href="#dev-usage">Usage</a>
-    <a class="toc-link" href="#dev-props">CSS classes</a>
+    <a class="toc-link" href="#dev-props">API reference</a>
     <a class="toc-link" href="#dev-tokens">CSS tokens</a>
     <a class="toc-link" href="#dev-a11y">Accessibility</a>
   </nav>
