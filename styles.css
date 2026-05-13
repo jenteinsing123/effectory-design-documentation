@@ -194,6 +194,19 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
   border-radius: var(--radius-lg); padding: 96px var(--spacing-extra-loose);
   display: flex; justify-content: center; margin-bottom: var(--spacing-loose);
 }
+/* Design/Dev gap callout */
+.gap-callout {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg-warning-subtle, #fffbeb);
+  border: 1px solid var(--border-warning-subtle, #fde68a);
+  border-radius: var(--radius-base);
+  font-size: 13.5px; line-height: 1.55; color: var(--content-base);
+  margin-top: 16px;
+}
+.gap-callout-icon { flex-shrink: 0; margin-top: 1px; font-size: 15px; }
+.gap-callout strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
 .anatomy-items { display: flex; flex-direction: column; gap: 12px; margin-top: var(--spacing-tight); }
 .anatomy-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--content-secondary); line-height: 1.65; }
 .anatomy-num {
