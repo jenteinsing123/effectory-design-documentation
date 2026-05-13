@@ -75,7 +75,7 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%231927434d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
 
-    /* ── Checkbox with label ── */
+    /* ── Labeled ── */
     .cb-label-wrap {
       display: inline-flex; align-items: center; gap: 8px;
       cursor: pointer;
@@ -85,7 +85,7 @@
     }
     .cb-label-wrap.is-disabled { color: var(--content-disabled); cursor: not-allowed; }
 
-    /* ── Info checkbox (with description) ── */
+    /* ── With description ── */
     .cb-info-wrap {
       display: flex; align-items: flex-start; gap: 10px;
       cursor: pointer;
@@ -103,7 +103,7 @@
     .cb-info-wrap.is-disabled .cb-info-label,
     .cb-info-wrap.is-disabled .cb-info-desc { color: var(--content-disabled); }
 
-    /* ── Checkbox button ── */
+    /* ── Chip ── */
     .cb-btn {
       display: inline-flex; align-items: center; gap: 6px;
       height: 32px; padding: 0 10px;
@@ -258,9 +258,9 @@
         <thead><tr><th>VARIANT</th><th>WHEN TO USE</th></tr></thead>
         <tbody>
           <tr><td><strong>Checkbox</strong></td><td>Table cells, dense lists, custom layouts where you supply your own label. Comes in default (16 px) and large (20 px).</td></tr>
-          <tr><td><strong>Checkbox with label</strong></td><td>Standard form fields and settings lists. The label is always to the right; check left-aligns with the first line of text so wrapping labels stay readable.</td></tr>
-          <tr><td><strong>Info checkbox</strong></td><td>When each option needs a short description or a "Learn more" link — onboarding flows, survey builders, plan selection. Has a responsive desktop/mobile layout.</td></tr>
-          <tr><td><strong>Checkbox button</strong></td><td>Compact horizontal filter bars or tag-picker rows where the entire pill surface is the tap target. Combines a checkbox indicator with a full-bleed clickable area.</td></tr>
+          <tr><td><strong>Labeled</strong></td><td>Standard form fields and settings lists. The label is always to the right; check left-aligns with the first line of text so wrapping labels stay readable.</td></tr>
+          <tr><td><strong>With description</strong></td><td>When each option needs a short explanation — onboarding flows, survey builders, plan selection. Has a responsive desktop/mobile layout. An inline link can optionally be appended to the description text.</td></tr>
+          <tr><td><strong>Chip</strong></td><td>Compact horizontal filter bars or tag-picker rows where the entire pill surface is the tap target. Combines a checkbox indicator with a full-bleed clickable area.</td></tr>
         </tbody>
       </table>
     </div>
@@ -346,7 +346,7 @@
         </div>
         <div class="dd-cap do">
           <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
-          Use the Info Checkbox variant when the option needs a short description — keeps the label scannable while the description adds context below.
+          Use the With description variant when the option needs a short explanation — keeps the label scannable while the description adds context below.
         </div>
       </div>
       <div class="dd-card">
@@ -382,7 +382,7 @@
           <label class="cb-label-wrap" style="pointer-events:none;"><input type="checkbox" class="cb" checked />Label</label>
         </div>
         <div class="variant-row-desc">
-          <strong>Checkbox with label</strong> — wraps the control with a right-aligned text label. The label and checkbox share a single click target — always use a semantic <code>&lt;label&gt;</code> element.
+          <strong>Labeled</strong> — wraps the control with a right-aligned text label. The label and checkbox share a single click target — always use a semantic <code>&lt;label&gt;</code> element.
         </div>
       </div>
       <div class="variant-row">
@@ -391,12 +391,12 @@
             <input type="checkbox" class="cb" checked />
             <div class="cb-info-body">
               <span class="cb-info-label">Label</span>
-              <span class="cb-info-desc">Subtitle with a short explanation. <a class="link-inline" href="#" onclick="return false;" style="font-size:13px;">Learn more ↗</a></span>
+              <span class="cb-info-desc">Subtitle with a short explanation.</span>
             </div>
           </div>
         </div>
         <div class="variant-row-desc">
-          <strong>Info checkbox</strong> — adds a secondary description line and optional "Learn more" link below the label. Responds to desktop and mobile widths.
+          <strong>With description</strong> — adds a secondary description line below the label. Responds to desktop and mobile widths. An inline link can optionally be appended to the description text.
         </div>
       </div>
       <div class="variant-row">
@@ -407,7 +407,7 @@
           </label>
         </div>
         <div class="variant-row-desc">
-          <strong>Checkbox button</strong> — a pill-shaped card where the entire surface is the tap target. Used in compact horizontal filter bars or tag pickers. The embedded checkbox indicator shows selection state; you don't need a separate label element outside the button.
+          <strong>Chip</strong> — a pill-shaped card where the entire surface is the tap target. Used in compact horizontal filter bars or tag pickers. The embedded checkbox indicator shows selection state; no separate label element needed outside the button.
         </div>
       </div>
     </div>
@@ -465,7 +465,7 @@
       </div>
     </div>
 
-    <h3 class="text-l4" style="margin-top:28px;">Checkbox button</h3>
+    <h3 class="text-l4" style="margin-top:28px;">Chip</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body center" style="gap:10px; padding:24px 28px; flex-wrap:wrap;">
@@ -502,7 +502,7 @@
           <tr><td>Select all</td><td><span class="token">bg/brand/base</span></td><td><span class="token">bg/base</span></td><td>Teal check on white — table header "select all"</td></tr>
           <tr><td>Hover</td><td><span class="token">border/action-hover</span></td><td>–</td><td>Checked hover: <span class="token">bg/brand/base-hover</span></td></tr>
           <tr><td>Disabled</td><td>–</td><td><span class="token">bg/disabled</span></td><td>Indicators use <span class="token">content/disabled</span> colour</td></tr>
-          <tr><td>Button pressed</td><td><span class="token">border/action-pressed</span></td><td><span class="token">bg/base-pressed</span></td><td>Checkbox button only</td></tr>
+          <tr><td>Button pressed</td><td><span class="token">border/action-pressed</span></td><td><span class="token">bg/base-pressed</span></td><td>Chip only</td></tr>
         </tbody>
       </table>
     </div>
@@ -526,7 +526,7 @@
           <tr><td><span class="token">border/action-pressed</span></td><td>#7b869e</td><td>Button pressed border</td></tr>
           <tr><td><span class="token">content/on/brand-base</span></td><td>#ffffff</td><td>Check and dash SVG stroke colour</td></tr>
           <tr><td><span class="token">content/base</span></td><td>#192743</td><td>Label text</td></tr>
-          <tr><td><span class="token">content/secondary</span></td><td>#192743 · 80%</td><td>Info checkbox description text</td></tr>
+          <tr><td><span class="token">content/secondary</span></td><td>#192743 · 80%</td><td>With description — description text</td></tr>
           <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>Disabled indicator and label colour</td></tr>
         </tbody>
       </table>
@@ -555,7 +555,7 @@
       </div>
       <div class="a11y-item">
         <span class="a11y-arrow">→</span>
-        <div><strong>Checkbox button still needs a semantic input.</strong> The <code>&lt;label&gt;</code> pill wraps a real <code>&lt;input type="checkbox"&gt;</code> — don't replace it with a <code>&lt;div role="checkbox"&gt;</code>. The native element handles keyboard and AT for free.</div>
+        <div><strong>The Chip still needs a semantic input.</strong> The <code>&lt;label&gt;</code> pill wraps a real <code>&lt;input type="checkbox"&gt;</code> — don't replace it with a <code>&lt;div role="checkbox"&gt;</code>. The native element handles keyboard and AT for free.</div>
       </div>
     </div>
   </section>
@@ -622,7 +622,7 @@
 <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb cb-lg"</span> <span class="ca">id</span>=<span class="cv">"option-3"</span> <span class="ct">/&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Checkbox with label</h3>
+    <h3 class="text-l4">Labeled</h3>
     <div class="dev-preview" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
       <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Send me weekly summary emails</label>
       <label class="cb-label-wrap"><input type="checkbox" class="cb" />Include benchmark comparisons</label>
@@ -642,13 +642,13 @@
 <span class="ct">&lt;/label&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Info checkbox</h3>
+    <h3 class="text-l4">With description</h3>
     <div class="dev-preview" style="flex-direction:column; gap:16px; align-items:flex-start; padding:24px 28px;">
       <div class="cb-info-wrap">
         <input type="checkbox" class="cb" checked id="dev-info-1" />
         <label class="cb-info-body" for="dev-info-1">
           <span class="cb-info-label">Manager visibility</span>
-          <span class="cb-info-desc">Managers can view their team's anonymised results. <a class="link-inline" href="#" onclick="return false;" style="font-size:13px;">Learn more ↗</a></span>
+          <span class="cb-info-desc">Managers can view their team's anonymised results.</span>
         </label>
       </div>
       <div class="cb-info-wrap">
@@ -665,16 +665,12 @@
   <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"visibility"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
   <span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-info-body"</span> <span class="ca">for</span>=<span class="cv">"visibility"</span><span class="ct">&gt;</span>
     <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-label"</span><span class="ct">&gt;</span>Manager visibility<span class="ct">&lt;/span&gt;</span>
-    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-desc"</span><span class="ct">&gt;</span>
-      Managers can view their team's anonymised results.
-      <span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/help/visibility"</span> <span class="ca">class</span>=<span class="cv">"link-inline"</span>
-         <span class="ca">target</span>=<span class="cv">"_blank"</span> <span class="ca">rel</span>=<span class="cv">"noopener noreferrer"</span><span class="ct">&gt;</span>Learn more<span class="ct">&lt;span</span> <span class="ca">aria-hidden</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>&amp;nbsp;↗<span class="ct">&lt;/span&gt;&lt;/a&gt;</span>
-    <span class="ct">&lt;/span&gt;</span>
+    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-desc"</span><span class="ct">&gt;</span>Managers can view their team's anonymised results.<span class="ct">&lt;/span&gt;</span>
   <span class="ct">&lt;/label&gt;</span>
 <span class="ct">&lt;/div&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Checkbox button</h3>
+    <h3 class="text-l4">Chip</h3>
     <p class="section-lead">The entire <code>&lt;label&gt;</code> surface is the click target. The nested <code>&lt;input&gt;</code> drives state; <code>pointer-events: none</code> stops it from capturing its own clicks.</p>
     <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
       <label class="cb-btn" id="cbtn-1">
@@ -736,12 +732,12 @@
         <tbody>
           <tr><td><code>cb</code></td><td>Base checkbox control. Apply to <code>&lt;input type="checkbox"&gt;</code>. Replaces the native appearance with a custom-styled 16×16 px control.</td></tr>
           <tr><td><code>cb-lg</code></td><td>Large size modifier — increases the control to 20×20 px. Stack with <code>cb</code>.</td></tr>
-          <tr><td><code>cb-label-wrap</code></td><td>Wrapper <code>&lt;label&gt;</code> that lays out a <code>.cb</code> and its text label inline. Handles cursor and disabled styling.</td></tr>
-          <tr><td><code>cb-info-wrap</code></td><td>Flex wrapper for the info checkbox variant. Contains a <code>.cb</code> and a <code>.cb-info-body</code>.</td></tr>
-          <tr><td><code>cb-info-body</code></td><td>Column container for the label and description text inside an info checkbox.</td></tr>
-          <tr><td><code>cb-info-label</code></td><td>The bold primary label inside an info checkbox.</td></tr>
-          <tr><td><code>cb-info-desc</code></td><td>The secondary description text inside an info checkbox. May contain a <code>.link-inline</code> "Learn more" link.</td></tr>
-          <tr><td><code>cb-btn</code></td><td>Pill-shaped checkbox button. Apply to a <code>&lt;label&gt;</code>. The entire surface is the click target. Contains a <code>.cb</code> and a text label.</td></tr>
+          <tr><td><code>cb-label-wrap</code></td><td>Labeled variant wrapper. Apply to a <code>&lt;label&gt;</code>; lays out a <code>.cb</code> and its text inline. Handles cursor and disabled styling.</td></tr>
+          <tr><td><code>cb-info-wrap</code></td><td>With description variant wrapper. Contains a <code>.cb</code> and a <code>.cb-info-body</code>.</td></tr>
+          <tr><td><code>cb-info-body</code></td><td>Column container for the label and description inside the With description variant.</td></tr>
+          <tr><td><code>cb-info-label</code></td><td>The bold primary label inside the With description variant.</td></tr>
+          <tr><td><code>cb-info-desc</code></td><td>The secondary description text inside the With description variant. An inline link (<code>.link-inline</code>) can optionally be appended.</td></tr>
+          <tr><td><code>cb-btn</code></td><td>Chip variant. Apply to a <code>&lt;label&gt;</code>. The entire pill surface is the click target. Contains a <code>.cb</code> and a text label.</td></tr>
           <tr><td><code>is-checked</code></td><td>Forces checked styling in docs/state-preview contexts. In production, drive state via the native <code>checked</code> attribute.</td></tr>
           <tr><td><code>is-indeterminate</code></td><td>Forces indeterminate styling. In production use <code>input.indeterminate = true</code> in JS instead.</td></tr>
           <tr><td><code>is-select-all</code></td><td>Outlined teal style — white container with teal border and teal check. Used for table-header "select all" controls.</td></tr>
