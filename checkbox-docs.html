@@ -37,26 +37,26 @@
     input[type="checkbox"].cb:checked,
     input[type="checkbox"].cb.is-checked {
       background-color: var(--bg-brand-base);
-      border-color: var(--bg-brand-base);
+      border-color: var(--border-brand-base);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
     }
     input[type="checkbox"].cb:checked:hover,
     input[type="checkbox"].cb.is-checked.is-hover {
       background-color: var(--bg-brand-base-hover);
-      border-color: var(--bg-brand-base-hover);
+      border-color: var(--border-brand-base-hover);
     }
     /* Indeterminate — white bg, teal border, teal dash */
     input[type="checkbox"].cb:indeterminate,
     input[type="checkbox"].cb.is-indeterminate {
       background-color: var(--bg-base);
-      border-color: var(--bg-brand-base);
+      border-color: var(--border-brand-base);
       background-size: 10px 2px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%230a9d99' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
     }
     /* Select-all: outlined teal (used in table-header select-all) */
     input[type="checkbox"].cb.is-select-all {
       background-color: var(--bg-base);
-      border-color: var(--bg-brand-base);
+      border-color: var(--border-brand-base);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%230a9d99' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
     }
     /* Disabled */
@@ -218,7 +218,7 @@
     <div class="anatomy-items">
       <div class="anatomy-item">
         <div class="anatomy-num">1</div>
-        <div><span class="anatomy-term">Container</span> — 16×16 px square (20×20 in large size), 4 px radius. Unchecked: white background + 1.5 px <code>border/action</code> border. Indeterminate: white background + 1.5 px <code>border/brand</code> border. Checked: filled <code>bg/brand/base</code> with no visible border.</div>
+        <div><span class="anatomy-term">Container</span> — 16×16 px square (20×20 in large size), 4 px radius. Unchecked: white background + 1.5 px <code>border/action</code> border. Indeterminate: white background + 1.5 px <code>border/brand/base</code> border. Checked: filled <code>bg/brand/base</code> with no visible border.</div>
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">2</div>
@@ -759,7 +759,7 @@
 <span class="ca">--bg-disabled</span>:           <span class="cv">rgba(25, 39, 67, 0.10)</span>;  <span class="cm">/* Disabled fill                 */</span>
 
 <span class="cm">/* Border */</span>
-<span class="ca">--border-brand</span>:          <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / intermediate border */</span>
+<span class="ca">--border-brand-base</span>:     <span class="cv">#0c827f</span>;                 <span class="cm">/* Checked / intermediate border */</span>
 <span class="ca">--border-action</span>:         <span class="cv">#bcc1cd</span>;                 <span class="cm">/* Unchecked border              */</span>
 <span class="ca">--border-action-hover</span>:   <span class="cv">#a5adbc</span>;                 <span class="cm">/* Hover border                  */</span>
 
