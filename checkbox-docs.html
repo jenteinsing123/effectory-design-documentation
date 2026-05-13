@@ -138,8 +138,29 @@
     .cb-info-wrap.is-disabled .cb-info-label,
     .cb-info-wrap.is-disabled .cb-info-desc { color: var(--content-disabled); }
 
-    /* ── Checkbox button ── */
+    /* ── Checkbox button (ghost — matches Figma) ── */
     .cb-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 10px;
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-base);
+      font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 400;
+      color: var(--content-base);
+      cursor: pointer; user-select: none;
+      transition: background .1s;
+    }
+    .cb-btn input[type="checkbox"].cb { pointer-events: none; }
+    .cb-btn:hover,
+    .cb-btn.is-hover { background: var(--bg-base-hover); }
+    .cb-btn.is-pressed { background: var(--bg-base-pressed); }
+    .cb-btn.is-disabled {
+      color: var(--content-disabled) !important;
+      cursor: not-allowed; pointer-events: none;
+    }
+
+    /* ── Checkbox button secondary (bordered — proposed, not yet in Figma) ── */
+    .cb-btn-secondary {
       display: inline-flex; align-items: center; gap: 6px;
       height: 32px; padding: 0 10px;
       background: var(--bg-base);
@@ -150,29 +171,26 @@
       cursor: pointer; user-select: none;
       transition: all .1s;
     }
-    .cb-btn input[type="checkbox"].cb {
-      pointer-events: none;
-    }
-    .cb-btn:hover,
-    .cb-btn.is-hover {
+    .cb-btn-secondary input[type="checkbox"].cb { pointer-events: none; }
+    .cb-btn-secondary:hover,
+    .cb-btn-secondary.is-hover {
       background: var(--bg-base-hover);
       border-color: var(--border-action-hover);
     }
-    .cb-btn.is-checked,
-    .cb-btn:has(input:checked) {
-      background: var(--bg-base);
+    .cb-btn-secondary.is-checked,
+    .cb-btn-secondary:has(input:checked) {
       border-color: var(--border-brand-base);
     }
-    .cb-btn.is-checked:hover,
-    .cb-btn.is-checked.is-hover {
+    .cb-btn-secondary.is-checked:hover,
+    .cb-btn-secondary.is-checked.is-hover {
       background: var(--bg-base-hover);
       border-color: var(--border-brand-base-hover);
     }
-    .cb-btn.is-pressed {
+    .cb-btn-secondary.is-pressed {
       background: var(--bg-base-pressed);
       border-color: var(--border-action-pressed);
     }
-    .cb-btn.is-disabled {
+    .cb-btn-secondary.is-disabled {
       background: var(--bg-disabled) !important;
       border-color: transparent !important;
       color: var(--content-disabled) !important;
@@ -504,7 +522,7 @@
       <div><strong>Design / dev gap — Select all style</strong>The outlined teal "select all" style exists in the Figma component but has no corresponding input or modifier in <code>&lt;eff-checkbox&gt;</code>. It is unclear whether this is a separate visual treatment applied externally (e.g. via a CSS class on a table header) or a planned component feature. Needs alignment with the dev team before shipping.</div>
     </div>
 
-    <h3 class="text-l4" style="margin-top:28px;">Checkbox button</h3>
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — ghost</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body center" style="gap:10px; padding:24px 28px; flex-wrap:wrap;">
@@ -531,17 +549,47 @@
       </div>
     </div>
 
-    <div class="tbl-wrap" style="margin-top:20px;">
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — secondary (bordered)</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:10px; padding:24px 28px; flex-wrap:wrap;">
+        <div class="state-col">
+          <label class="cb-btn-secondary"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn-secondary is-checked"><input type="checkbox" class="cb is-checked" />Label</label>
+          <span class="state-label">Checked</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn-secondary is-hover"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Hover</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn-secondary is-pressed"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Pressed</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn-secondary is-disabled"><input type="checkbox" class="cb is-disabled" />Label</label>
+          <span class="state-label">Disabled</span>
+        </div>
+      </div>
+    </div>
+    <div class="gap-callout">
+      <span class="gap-callout-icon">⚠️</span>
+      <div><strong>Design / dev gap — Secondary (bordered) checkbox button</strong>The Figma component only defines a ghost style (no border, transparent background). The bordered secondary variant above is proposed to match the secondary radio button pattern — it does not yet exist in the component set. Needs design sign-off before use in product.</div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:28px;">
       <table>
         <thead><tr><th>STATE</th><th>BORDER</th><th>BACKGROUND</th><th>NOTES</th></tr></thead>
         <tbody>
           <tr><td>Default unchecked</td><td><span class="token">border/action</span></td><td><span class="token">bg/base</span></td><td>–</td></tr>
           <tr><td>Default checked</td><td><span class="token">border/brand/base</span></td><td><span class="token">bg/brand/base</span></td><td><span class="token">content/on-brand/base</span> checkmark indicator</td></tr>
           <tr><td>Default indeterminate</td><td><span class="token">border/brand/base</span></td><td><span class="token">bg/base</span></td><td><span class="token">border/brand/base</span> dash indicator</td></tr>
-          <tr><td>Select all</td><td><span class="token">border/brand/base</span></td><td><span class="token">bg/base</span></td><td>Teal check on white — table header "select all"</td></tr>
-          <tr><td>Hover</td><td><span class="token">border/action-hover</span></td><td>–</td><td>Checked hover: <span class="token">bg/brand/base-hover</span> fill + <span class="token">border/brand/base-hover</span></td></tr>
-          <tr><td>Disabled</td><td>–</td><td><span class="token">bg/disabled</span></td><td>Indicators use <span class="token">content/disabled</span> colour</td></tr>
-          <tr><td>Button pressed</td><td><span class="token">border/action-pressed</span></td><td><span class="token">bg/base-pressed</span></td><td>Checkbox button only</td></tr>
+          <tr><td>Hover</td><td>–</td><td><span class="token">bg/base-hover</span></td><td>Ghost; secondary: <span class="token">border/action-hover</span></td></tr>
+          <tr><td>Pressed</td><td>–</td><td><span class="token">bg/base-pressed</span></td><td>Ghost; secondary: <span class="token">border/action-pressed</span></td></tr>
+          <tr><td>Disabled</td><td>–</td><td>–</td><td>Ghost; secondary: <span class="token">bg/disabled</span>. Label uses <span class="token">content/disabled</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -781,8 +829,8 @@
       <div><strong>Design / dev gap — Select all style</strong>The Figma component includes an outlined teal "select all" visual style (white background, teal border, teal checkmark). This modifier is not exposed on <code>&lt;eff-checkbox&gt;</code> and is undocumented in the component API. Use <code>[intermediate]</code> for partial-selection state; the visual treatment of the parent "select all" control needs to be confirmed with the dev team.</div>
     </div>
 
-    <h3 class="text-l4">Checkbox button</h3>
-    <p class="section-lead">The entire pill surface is the click target. Pass no <code>[labelText]</code> — the text is slotted as content next to the indicator inside the button.</p>
+    <h3 class="text-l4">Checkbox button — ghost</h3>
+    <p class="section-lead">The entire pill surface is the click target. No border — transparent background with a hover fill. Matches the current Figma component.</p>
     <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
       <label class="cb-btn" id="cbtn-1">
         <input type="checkbox" class="cb" />
@@ -792,30 +840,52 @@
         <input type="checkbox" class="cb is-checked" />
         Benchmarks
       </label>
-      <label class="cb-btn" id="cbtn-3">
-        <input type="checkbox" class="cb" />
+      <label class="cb-btn is-disabled">
+        <input type="checkbox" class="cb is-disabled" />
         Alerts
       </label>
     </div>
     <div class="dev-code-wrap">
       <button class="dev-copy-btn">Copy</button>
-      <pre><code><span class="cm">&lt;!-- Unchecked --&gt;</span>
-<span class="ct">&lt;eff-checkbox-button</span>
+      <pre><code><span class="ct">&lt;eff-checkbox-button</span>
   <span class="ca">[checked]</span>=<span class="cv">"false"</span>
   <span class="ca">(checkedChange)</span>=<span class="cv">"onFilter($event)"</span>
 <span class="ct">&gt;</span>Weekly digest<span class="ct">&lt;/eff-checkbox-button&gt;</span>
 
-<span class="cm">&lt;!-- Checked --&gt;</span>
 <span class="ct">&lt;eff-checkbox-button</span>
   <span class="ca">[checked]</span>=<span class="cv">"true"</span>
   <span class="ca">(checkedChange)</span>=<span class="cv">"onFilter($event)"</span>
-<span class="ct">&gt;</span>Benchmarks<span class="ct">&lt;/eff-checkbox-button&gt;</span>
+<span class="ct">&gt;</span>Benchmarks<span class="ct">&lt;/eff-checkbox-button&gt;</span></code></pre>
+    </div>
 
-<span class="cm">&lt;!-- Disabled --&gt;</span>
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button — secondary (bordered)</h3>
+    <p class="section-lead">Bordered version. Suitable when the button needs more visual weight, e.g. in a row with other bordered controls. Mirrors the secondary radio button pattern.</p>
+    <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
+      <label class="cb-btn-secondary">
+        <input type="checkbox" class="cb" />
+        Weekly digest
+      </label>
+      <label class="cb-btn-secondary is-checked">
+        <input type="checkbox" class="cb is-checked" />
+        Benchmarks
+      </label>
+      <label class="cb-btn-secondary is-disabled">
+        <input type="checkbox" class="cb is-disabled" />
+        Alerts
+      </label>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- variant="secondary" is proposed, not yet shipped --&gt;</span>
 <span class="ct">&lt;eff-checkbox-button</span>
   <span class="ca">[checked]</span>=<span class="cv">"false"</span>
-  <span class="ca">[disabled]</span>=<span class="cv">"true"</span>
-<span class="ct">&gt;</span>Alerts<span class="ct">&lt;/eff-checkbox-button&gt;</span></code></pre>
+  <span class="ca">[variant]</span>=<span class="cv">"'secondary'"</span>
+  <span class="ca">(checkedChange)</span>=<span class="cv">"onFilter($event)"</span>
+<span class="ct">&gt;</span>Weekly digest<span class="ct">&lt;/eff-checkbox-button&gt;</span></code></pre>
+    </div>
+    <div class="gap-callout">
+      <span class="gap-callout-icon">⚠️</span>
+      <div><strong>Design / dev gap — Secondary checkbox button</strong>The Figma component only defines a ghost (borderless) style. The bordered secondary variant is proposed here for parity with the secondary radio button, but it does not exist in the component set or the Angular component API yet. Needs design and dev sign-off before use.</div>
     </div>
   </section>
 
