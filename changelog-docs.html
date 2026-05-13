@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Changelog — Engage Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -18,24 +18,137 @@
 <div class="content-wrap">
 <div class="page-header-row">
 <div class="page-header">
-    <div class="page-badges">
-    </div>
-    <h1 class="text-l1">Changelog</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
-  </div>
-</div><!-- /page-header-row -->
+  <div class="page-badges"></div>
+  <h1 class="text-l1">Changelog</h1>
+  <p class="page-desc">A record of additions, changes, and fixes to the Engage Design System.</p>
+</div>
+</div>
 <div class="content-cols">
 <article class="content">
 
+  <!-- v1.4.0 -->
+  <div class="section">
+    <h2 class="text-l3">v1.4.0 — May 2025</h2>
+    <p class="section-lead">New form components — Checkbox and Slider — alongside File Upload, and a harmonised button size token set.</p>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+    <h3 class="text-l4">New</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Checkbox</strong> — all variants (default, bordered, ghost) across all states (unchecked, checked, indeterminate, disabled). Full documentation with anatomy, usage guidelines, and Angular API.</li>
+      <li><strong>Checkbox button ghost + bordered</strong> — two additional Checkbox button variants for use in filter bars and selection lists.</li>
+      <li><strong>Slider</strong> — single-thumb and range variants with step support, min/max labels, and value tooltip. Accessible via keyboard arrow keys.</li>
+      <li><strong>File Upload</strong> — drag-and-drop zone with file type validation, upload progress state, and error handling for rejected files.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Changed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Button sizes harmonised</strong> — small, medium, and large Button sizes now use the new <code>--size-*</code> token set, replacing the ad-hoc height values from v1.1. No visual change for default (medium) buttons; small and large now align exactly with the spacing scale.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Fixed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Toggle</strong> — disabled state thumb colour was using <code>--content-disabled</code> instead of <code>--bg-disabled</code>, causing the thumb to be invisible on the disabled track in light mode.</li>
+      <li><strong>Select</strong> — dropdown overlay was rendered with a stacking context below modals (<code>z-index</code> conflict). The dropdown now correctly appears above <code>eff-dialog</code> when Select is used inside a dialog.</li>
+    </ul>
   </div>
 
+  <hr style="border:none;border-top:1px solid var(--border-base);margin:0 0 64px;">
+
+  <!-- v1.3.0 -->
+  <div class="section">
+    <h2 class="text-l3">v1.3.0 — March 2025</h2>
+    <p class="section-lead">Four new components for progress, structure, and empty states, plus Avatar Group overflow improvements.</p>
+
+    <h3 class="text-l4">New</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Progress Bar</strong> — linear progress indicator with determinate and indeterminate modes, label, and optional percentage display. Used in survey completion flows and bulk action feedback.</li>
+      <li><strong>Skeleton</strong> — loading placeholder component with text, circle, and rectangle variants. Replaces ad-hoc spinner usage in content-heavy pages.</li>
+      <li><strong>Empty State</strong> — structured layout for zero-content screens: illustration slot, heading, body text, and optional primary + secondary action. Covers first-use, no-results, and error-state scenarios.</li>
+      <li><strong>Section Header</strong> — standard heading + optional description + optional action button layout for use above content sections within a page.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Changed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Avatar Group</strong> — the overflow indicator now supports up to 99+ as a label (previously capped at +9). The overflow count renders as a Badge-style pill aligned to the Avatar size.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Fixed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Tooltip</strong> — rapid mouse enter/leave events were causing the tooltip to flicker visible/hidden because the show and hide animations were interrupting each other. Debounce logic has been added to the show trigger.</li>
+      <li><strong>Badge</strong> — <code>positive</code> and <code>warning</code> colour variants did not meet WCAG AA contrast on the <code>--bg-subtle</code> surface used inside Cards. Token values updated; no API change.</li>
+    </ul>
+  </div>
+
+  <hr style="border:none;border-top:1px solid var(--border-base);margin:0 0 64px;">
+
+  <!-- v1.2.0 -->
+  <div class="section">
+    <h2 class="text-l3">v1.2.0 — January 2025</h2>
+    <p class="section-lead">Overlay and data display additions, plus an important Dialog accessibility change.</p>
+
+    <h3 class="text-l4">New</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Drawer</strong> — slide-in panel anchored to the right edge, with configurable width, backdrop, and close button. Suitable for detail views and secondary workflows that don't warrant a full page navigation.</li>
+      <li><strong>Context Menu</strong> — right-click / kebab-triggered action list with icon support, dividers, and a destructive item variant.</li>
+      <li><strong>Popover</strong> — positioned overlay for rich non-modal content (forms, filter panels, previews). Uses the <code>--sh-popovers</code> shadow token and supports arrow positioning.</li>
+      <li><strong>Metric</strong> — display component for a single KPI number with label, trend indicator (up/down/neutral), and optional comparison value. Used on dashboard and report summary screens.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Changed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Dialog</strong> — dialogs that confirm destructive or irreversible actions now render with <code>role="alertdialog"</code> instead of <code>role="dialog"</code>, which causes screen readers to announce the dialog immediately on open. The <code>[destructive]</code> input boolean controls this automatically.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Fixed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Tabs</strong> — the active tab underline indicator was rendering 1px below the correct baseline in Safari due to a subpixel rounding issue on the containing flex row. Fixed by switching to an absolutely positioned pseudo-element.</li>
+      <li><strong>Breadcrumb</strong> — long breadcrumb trails were overflowing their container rather than truncating the intermediate items with an ellipsis. The overflow behaviour now correctly collapses intermediate items and shows a <code>…</code> expander.</li>
+    </ul>
+  </div>
+
+  <hr style="border:none;border-top:1px solid var(--border-base);margin:0 0 64px;">
+
+  <!-- v1.1.0 -->
+  <div class="section">
+    <h2 class="text-l3">v1.1.0 — November 2024</h2>
+    <p class="section-lead">Initial public release — Foundations and the full core component set.</p>
+
+    <h3 class="text-l4">New</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li><strong>Foundations</strong> — colour tokens (semantic + raw), typography scale (Poppins, 6 levels), spacing scale (4 px base), shadow levels, border radius scale, motion tokens (duration + easing), iconography set, and the 12-column grid system. All values exposed as CSS custom properties in <code>tokens.css</code>.</li>
+      <li><strong>Button</strong> — primary, secondary, tertiary, danger, danger-secondary, danger-tertiary, link, and link-delete variants across default, hover, pressed, focused, and disabled states.</li>
+      <li><strong>Text Field</strong> — with prefix/suffix slot, character count, helper text, and error state.</li>
+      <li><strong>Select</strong> — single and multi-select with search, grouped options, and async loading state.</li>
+      <li><strong>Radio Group</strong> — horizontal and vertical orientations, with optional descriptions per option.</li>
+      <li><strong>Toggle</strong> — with label, helper text, and disabled state.</li>
+      <li><strong>Alert</strong> — informational, positive, warning, and negative variants with optional dismiss and action link.</li>
+      <li><strong>Toast</strong> — same four variants, auto-dismiss with configurable duration, and a persistent mode.</li>
+      <li><strong>Dialog</strong> — with header, body, footer action slots, configurable width, and backdrop dismiss toggle.</li>
+      <li><strong>Tooltip</strong> — four placement positions, delay-on-show, and a wide variant for longer descriptions.</li>
+      <li><strong>Table</strong> — sortable columns, row selection, pagination integration, and an empty/loading state.</li>
+      <li><strong>Card</strong> — with optional header, footer, and interactive (clickable) variant.</li>
+      <li><strong>Badge</strong> and <strong>Tag</strong> — semantic colour variants and dismissible Tag.</li>
+      <li><strong>Avatar</strong> — image, initials, and icon fallbacks across five sizes.</li>
+      <li><strong>Tabs</strong> — with overflow scrolling and optional icon per tab.</li>
+      <li><strong>Breadcrumb</strong>, <strong>Pagination</strong> — standard navigation components.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Changed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li>Initial release — no prior version to compare against.</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Fixed</h3>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;">
+      <li>Initial release — no prior version to compare against.</li>
+    </ul>
+  </div>
+
+  <p style="font-size:13px;color:var(--content-tertiary);margin-top:0;">Earlier changes are recorded in the internal Confluence changelog.</p>
+
 </article>
-</div><!-- /content-cols -->
-</div><!-- /content-wrap -->
-</div><!-- /shell -->
+</div>
+</div>
+</div>
 
 <script src="nav.js"></script>
 </body>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introduction — Engage Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -18,24 +18,119 @@
 <div class="content-wrap">
 <div class="page-header-row">
 <div class="page-header">
-    <div class="page-badges">
-    </div>
-    <h1 class="text-l1">Introduction</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
-  </div>
-</div><!-- /page-header-row -->
+  <div class="page-badges"></div>
+  <h1 class="text-l1">Introduction</h1>
+  <p class="page-desc">What the Engage Design System is, who it's for, and how to get started.</p>
+</div>
+</div>
 <div class="content-cols">
 <article class="content">
 
+  <!-- What is the Engage Design System? -->
+  <div class="section">
+    <h2 class="text-l3">What is the Engage Design System?</h2>
+    <p class="section-lead">A single source of truth that connects design decisions to production components.</p>
+    <p>The Engage Design System is a shared library of components, patterns, design tokens, and usage guidelines built specifically for Effectory's Engage product — the platform that powers employee feedback and engagement surveys across organisations.</p>
+    <p style="margin-top:16px;">It bridges two worlds: the Figma component library that designers work in and the Angular component library that developers ship from. Both sides share the same vocabulary — the same token names, the same component names, the same interaction patterns — so decisions made in design translate directly into code without re-interpretation at every handoff.</p>
+    <p style="margin-top:16px;">The practical benefit is speed and consistency. Teams don't rebuild common UI primitives for each feature. They reach for a tested, accessible component, configure it with props, and ship. When a token changes — say, the brand colour shifts — it propagates everywhere at once, in both Figma and the browser.</p>
+  </div>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+  <!-- Who it's for -->
+  <div class="section">
+    <h2 class="text-l3">Who it's for</h2>
+    <p class="section-lead">The system serves two primary audiences, with a third benefiting alongside them.</p>
+
+    <h3 class="text-l4">Designers</h3>
+    <p>The Figma component library contains every component in the system, documented with anatomy diagrams, usage guidelines, variant breakdowns, and annotated states. All colour, spacing, and typography values are bound to Figma variables that map 1:1 to CSS custom properties, so designs are token-native from the start. The library is organised into the same Foundations → Components hierarchy used on this site.</p>
+
+    <h3 class="text-l4" style="margin-top:24px;">Developers</h3>
+    <p>The Angular component library exposes each component via an <code>eff-*</code> selector (e.g. <code>&lt;eff-button&gt;</code>, <code>&lt;eff-checkbox&gt;</code>). All visual properties are expressed through CSS custom properties — no magic values hard-coded in component stylesheets. Each component page on this site includes a Developer tab with a live example, the full Angular input/output API table, and copy-ready code snippets.</p>
+
+    <h3 class="text-l4" style="margin-top:24px;">Product managers</h3>
+    <p>PMs reviewing interaction patterns or checking what already exists before speccing a feature will find the component pages useful. The usage guidelines on each page describe intended behaviour, edge cases, and when <em>not</em> to use a component — context that saves back-and-forth during review.</p>
+  </div>
+
+  <!-- How it's organised -->
+  <div class="section">
+    <h2 class="text-l3">How it's organised</h2>
+    <p class="section-lead">Two layers: Foundations first, then Components built on top of them.</p>
+
+    <h3 class="text-l4">Foundations</h3>
+    <p>Foundations define the raw material: colour tokens, typography scale, spacing scale, motion (duration and easing), iconography, shadow levels, border radii, and the grid system. Every component is built exclusively from foundation tokens — no component introduces a raw value that isn't already in the token set.</p>
+
+    <h3 class="text-l4" style="margin-top:24px;">Components</h3>
+    <p>Components are grouped into functional categories:</p>
+    <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--content-secondary);line-height:1.6;padding-left:20px;margin-top:12px;">
+      <li><strong>Buttons</strong> — Button, Icon Button, Button Big, Sentiment Button, Upgrade Button, Segmented Control</li>
+      <li><strong>Navigation</strong> — Link Inline, Tabs, Breadcrumb, Pagination, Stepper</li>
+      <li><strong>Forms</strong> — Text Field, Textarea, Select, Checkbox, Radio Group, Toggle, Date Picker, File Upload, Slider</li>
+      <li><strong>Feedback</strong> — Alert, Toast, Dialog, Tooltip, Loading, Progress Bar, Skeleton</li>
+      <li><strong>Data Display</strong> — Table, Card, Badge, Tag, Avatar, Avatar Group, List, Metric</li>
+      <li><strong>Overlays</strong> — Dropdown Menu, Popover, Context Menu, Drawer</li>
+      <li><strong>Layout</strong> — Container, Divider, Section Header, Empty State</li>
+    </ul>
+
+    <h3 class="text-l4" style="margin-top:24px;">Each component page</h3>
+    <p>Every component page is split into two tabs. The <strong>Design tab</strong> covers anatomy, usage guidelines, variants, interactive states, and the component-level token list. The <strong>Developer tab</strong> provides a live rendered example, the full Angular <code>@Input</code> / <code>@Output</code> API table, and code snippets ready to paste.</p>
+  </div>
+
+  <!-- Tech stack -->
+  <div class="section">
+    <h2 class="text-l3">Tech stack</h2>
+    <p class="section-lead">Angular components, CSS custom properties, and Figma as the design source of truth.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Technology</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Components</td>
+            <td>Angular (<code>eff-*</code> selectors)</td>
+            <td>Compiled into a shared library consumed by the Coordinator and Personal portals</td>
+          </tr>
+          <tr>
+            <td>Tokens</td>
+            <td>CSS custom properties</td>
+            <td>Defined in <code>tokens.css</code>; base layer plus portal overrides for Coordinator (teal <code>#0a9d99</code>) and Personal (yellow <code>#fdbd12</code>)</td>
+          </tr>
+          <tr>
+            <td>Design source</td>
+            <td>Figma</td>
+            <td>Main library file is the authoritative design spec; component pages link directly to Figma frames</td>
+          </tr>
+          <tr>
+            <td>Documentation</td>
+            <td>GitHub Pages</td>
+            <td>This site — static HTML/CSS, no build step required to contribute</td>
+          </tr>
+          <tr>
+            <td>Component sandbox</td>
+            <td>Storybook</td>
+            <td>Live Angular components with controls; linked from each Developer tab</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Getting help -->
+  <div class="section">
+    <h2 class="text-l3">Getting help</h2>
+    <p class="section-lead">The system is a living product — questions, gaps, and contributions are all welcome.</p>
+    <p>If you're unsure how a component should behave or whether one exists for your use case, the <a href="contributing-docs.html" style="color:var(--content-action);">Contributing page</a> explains how to raise a question, file a bug, or propose something new. The DS team reviews proposals in a bi-weekly sync open to all product team members.</p>
+    <p style="margin-top:16px;">For a full record of what has changed, see the <a href="changelog-docs.html" style="color:var(--content-action);">Changelog</a>. It covers every release with new additions, breaking changes, and fixes.</p>
+    <p style="margin-top:16px;">Where a gap exists between what is designed in Figma and what is shipped in code — for example, a variant that is specced but not yet built — the relevant component page will include a <strong>⚠️ callout</strong> explaining the discrepancy and the expected resolution timeline. Nothing is silently missing.</p>
   </div>
 
 </article>
-</div><!-- /content-cols -->
-</div><!-- /content-wrap -->
-</div><!-- /shell -->
+</div>
+</div>
+</div>
 
 <script src="nav.js"></script>
 </body>
