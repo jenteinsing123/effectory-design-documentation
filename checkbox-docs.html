@@ -7,6 +7,149 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Checkbox: bare control ── */
+    input[type="checkbox"].cb {
+      -webkit-appearance: none; appearance: none;
+      display: inline-flex; flex-shrink: 0;
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--border-action);
+      border-radius: 4px;
+      background: var(--bg-base);
+      cursor: pointer;
+      vertical-align: middle;
+      transition: border-color .1s, background .1s;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 10px 8px;
+    }
+    input[type="checkbox"].cb.cb-lg {
+      width: 20px; height: 20px;
+      background-size: 12px 10px;
+    }
+
+    /* Hover */
+    input[type="checkbox"].cb:hover,
+    input[type="checkbox"].cb.is-hover {
+      border-color: var(--border-action-hover);
+    }
+    /* Checked */
+    input[type="checkbox"].cb:checked,
+    input[type="checkbox"].cb.is-checked {
+      background-color: var(--bg-brand-base);
+      border-color: var(--bg-brand-base);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    }
+    input[type="checkbox"].cb:checked:hover,
+    input[type="checkbox"].cb.is-checked.is-hover {
+      background-color: var(--bg-brand-base-hover);
+      border-color: var(--bg-brand-base-hover);
+    }
+    /* Indeterminate */
+    input[type="checkbox"].cb:indeterminate,
+    input[type="checkbox"].cb.is-indeterminate {
+      background-color: var(--bg-brand-base);
+      border-color: var(--bg-brand-base);
+      background-size: 10px 2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    /* Select-all: outlined teal (used in table-header select-all) */
+    input[type="checkbox"].cb.is-select-all {
+      background-color: var(--bg-base);
+      border-color: var(--bg-brand-base);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%230a9d99' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    }
+    /* Disabled */
+    input[type="checkbox"].cb:disabled,
+    input[type="checkbox"].cb.is-disabled {
+      background-color: var(--bg-disabled) !important;
+      border-color: transparent !important;
+      cursor: not-allowed; pointer-events: none;
+    }
+    input[type="checkbox"].cb:disabled:checked,
+    input[type="checkbox"].cb.is-disabled.is-checked {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-5' stroke='%231927434d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    }
+    input[type="checkbox"].cb.is-disabled.is-indeterminate {
+      background-size: 10px 2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 2'%3E%3Cpath d='M1 1h8' stroke='%231927434d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    /* ── Checkbox with label ── */
+    .cb-label-wrap {
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 400;
+      line-height: 1.6; color: var(--content-base);
+      user-select: none;
+    }
+    .cb-label-wrap.is-disabled { color: var(--content-disabled); cursor: not-allowed; }
+
+    /* ── Info checkbox (with description) ── */
+    .cb-info-wrap {
+      display: flex; align-items: flex-start; gap: 10px;
+      cursor: pointer;
+    }
+    .cb-info-wrap .cb { margin-top: 3px; }
+    .cb-info-body { display: flex; flex-direction: column; gap: 2px; }
+    .cb-info-label {
+      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
+      line-height: 1.5; color: var(--content-base);
+    }
+    .cb-info-desc {
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 400;
+      line-height: 1.5; color: var(--content-secondary);
+    }
+    .cb-info-wrap.is-disabled .cb-info-label,
+    .cb-info-wrap.is-disabled .cb-info-desc { color: var(--content-disabled); }
+
+    /* ── Checkbox button ── */
+    .cb-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 10px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-action);
+      border-radius: var(--radius-base);
+      font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 400;
+      color: var(--content-base);
+      cursor: pointer; user-select: none;
+      transition: all .1s;
+    }
+    .cb-btn input[type="checkbox"].cb {
+      pointer-events: none; /* button surface handles the click */
+    }
+    .cb-btn:hover,
+    .cb-btn.is-hover {
+      background: var(--bg-base-hover);
+      border-color: var(--border-action-hover);
+    }
+    .cb-btn.is-checked,
+    .cb-btn:has(input:checked) {
+      background: var(--bg-base);
+      border-color: var(--bg-brand-base);
+    }
+    .cb-btn.is-checked:hover,
+    .cb-btn.is-checked.is-hover {
+      background: var(--bg-base-hover);
+      border-color: var(--bg-brand-base-hover);
+    }
+    .cb-btn.is-pressed {
+      background: var(--bg-base-pressed);
+      border-color: var(--border-action-pressed);
+    }
+    .cb-btn.is-disabled {
+      background: var(--bg-disabled) !important;
+      border-color: transparent !important;
+      color: var(--content-disabled) !important;
+      cursor: not-allowed; pointer-events: none;
+    }
+
+    /* ── Doc helpers ── */
+    .state-label { font-size: 11px; color: var(--content-subtle); }
+    .cb-demo-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .cb-demo-col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .cb-demo-col .state-label { text-align: left; }
+  </style>
 </head>
 <body>
 
@@ -19,21 +162,676 @@
 <div class="page-header-row">
 <div class="page-header">
     <div class="page-badges">
+      <span class="page-updated">Updated May 2026</span>
     </div>
     <h1 class="text-l1">Checkbox</h1>
-    <p class="page-desc">Documentation for this component is being written.</p>
+    <p class="page-desc">A binary toggle for selecting one or more options from a set. Four variants cover everything from a bare control in a table cell to a full card button in a filter bar.</p>
   </div>
 </div><!-- /page-header-row -->
+
+<!-- PAGE TABS -->
+<div class="page-tabs">
+  <div class="page-tabs-inner">
+    <button class="page-tab" data-tab="design">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      Design
+    </button>
+    <button class="page-tab" data-tab="developer">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4L1 8l4 4M11 4l4 4-4 4M9 2l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Developer
+    </button>
+  </div>
+</div>
+
+<!-- DESIGN PANEL -->
+<div class="tab-panel" data-panel="design">
 <div class="content-cols">
 <article class="content">
 
+  <!-- ANATOMY -->
+  <section class="section" id="anatomy">
+    <h2 class="text-l3">Anatomy</h2>
+    <p class="section-lead">The bare checkbox is three layers — a container, a selection indicator (check or dash), and an optional border ring. The label, description, and button variants wrap this control with additional content.</p>
 
-  <div class="coming-soon-box">
-    <p>✍️ This page is a placeholder. Documentation will be added here.</p>
+    <div class="anatomy-fig">
+      <div style="position:relative; display:inline-flex; align-items:center; padding: 40px 120px;">
+        <input type="checkbox" class="cb is-checked" style="pointer-events:none;" />
+
+        <!-- 1 Container -->
+        <div style="position:absolute; top:4px; left:50%; transform:translateX(-60%); display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--content-secondary);white-space:nowrap;">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--content-base);color:var(--bg-base);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>Container
+          </span>
+          <div style="width:1px; height:14px; background:var(--content-subtle);"></div>
+        </div>
+
+        <!-- 2 Checkmark -->
+        <div style="position:absolute; bottom:4px; left:50%; transform:translateX(-60%); display:flex; flex-direction:column; align-items:center; gap:4px;">
+          <div style="width:1px; height:14px; background:var(--content-subtle);"></div>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--content-secondary);white-space:nowrap;">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--content-base);color:var(--bg-base);font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>Indicator
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="anatomy-items">
+      <div class="anatomy-item">
+        <div class="anatomy-num">1</div>
+        <div><span class="anatomy-term">Container</span> — 16×16 px square (20×20 in large size), 4 px radius. Unchecked: white background + 1.5 px <code>border/action</code> border. Checked or indeterminate: filled <code>bg/brand/base</code> with no visible border.</div>
+      </div>
+      <div class="anatomy-item">
+        <div class="anatomy-num">2</div>
+        <div><span class="anatomy-term">Indicator</span> — a white check SVG when checked, a white dash SVG when indeterminate. In the "select all" variant the container stays white and the indicator is teal instead of white. Hidden when unchecked.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="section" id="usage">
+    <h2 class="text-l3">Usage</h2>
+    <p class="section-lead">Checkboxes let users make independent binary choices. Use them when selections are non-exclusive — multiple items can be chosen at once. For a single on/off toggle, use the <a class="link-inline" href="toggle-docs.html">Toggle</a> instead.</p>
+
+    <div class="usage-cols">
+      <div>
+        <div class="usage-col-hd do">Use when</div>
+        <ul class="usage-list">
+          <li>Users can select zero, one, or many items from a list</li>
+          <li>Each option is independent — selecting one doesn't affect others</li>
+          <li>Options need a label and optionally a short description</li>
+          <li>You're building a filter row and need compact togglable chips</li>
+        </ul>
+      </div>
+      <div>
+        <div class="usage-col-hd dont">Avoid when</div>
+        <ul class="usage-list">
+          <li>Only one option can be active at a time — use <a class="link-inline" href="radio-group-docs.html">Radio Group</a></li>
+          <li>The action takes effect immediately without a "Save" step — use <a class="link-inline" href="toggle-docs.html">Toggle</a></li>
+          <li>You have more than ~8 options — consider a multi-select <a class="link-inline" href="select-docs.html">Select</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="text-l4">Choosing a variant</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>VARIANT</th><th>WHEN TO USE</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Checkbox</strong></td><td>Table cells, dense lists, custom layouts where you supply your own label. Comes in default (16 px) and large (20 px).</td></tr>
+          <tr><td><strong>Checkbox with label</strong></td><td>Standard form fields and settings lists. The label is always to the right; check left-aligns with the first line of text so wrapping labels stay readable.</td></tr>
+          <tr><td><strong>Info checkbox</strong></td><td>When each option needs a short description or a "Learn more" link — onboarding flows, survey builders, plan selection. Has a responsive desktop/mobile layout.</td></tr>
+          <tr><td><strong>Checkbox button</strong></td><td>Compact horizontal filter bars or tag-picker rows where the entire pill surface is the tap target. Combines a checkbox indicator with a full-bleed clickable area.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-l4" style="margin-top:28px;">Best practices</h3>
+
+    <!-- Do/Don't 1: label every checkbox -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+          <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Send me weekly summary emails</label>
+          <label class="cb-label-wrap"><input type="checkbox" class="cb" />Include benchmark comparisons</label>
+          <label class="cb-label-wrap"><input type="checkbox" class="cb" />Notify me of survey responses</label>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Give every checkbox a visible text label that describes exactly what selecting it does.
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:12px; align-items:flex-start; padding:24px 28px;">
+          <input type="checkbox" class="cb" checked />
+          <input type="checkbox" class="cb" />
+          <input type="checkbox" class="cb" />
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Never render checkboxes without labels — screen readers will announce the control with no context, and sighted users won't know what they're selecting.
+        </div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 2: select-all with indeterminate -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:8px; align-items:flex-start; padding:20px 28px;">
+          <label class="cb-label-wrap" style="font-weight:600;"><input type="checkbox" class="cb is-indeterminate" />All surveys</label>
+          <div style="padding-left:24px; display:flex;flex-direction:column; gap:6px;">
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Q2 Employee survey</label>
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Onboarding pulse</label>
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" />Exit interviews</label>
+          </div>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Show the indeterminate state on a "select all" checkbox when only <em>some</em> children are selected — it tells users the list is partially checked.
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:8px; align-items:flex-start; padding:20px 28px;">
+          <label class="cb-label-wrap" style="font-weight:600;"><input type="checkbox" class="cb" />All surveys</label>
+          <div style="padding-left:24px; display:flex;flex-direction:column; gap:6px;">
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Q2 Employee survey</label>
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Onboarding pulse</label>
+            <label class="cb-label-wrap"><input type="checkbox" class="cb" />Exit interviews</label>
+          </div>
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't leave the parent checkbox unchecked when children are partially selected — the state is ambiguous and users can't tell whether any items are chosen.
+        </div>
+      </div>
+    </div>
+
+    <!-- Do/Don't 3: info checkbox for complex options -->
+    <div class="dd-grid">
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:14px; align-items:flex-start; padding:20px 28px;">
+          <div class="cb-info-wrap">
+            <input type="checkbox" class="cb" checked />
+            <div class="cb-info-body">
+              <span class="cb-info-label">Manager visibility</span>
+              <span class="cb-info-desc">Managers can view their team's anonymised results.</span>
+            </div>
+          </div>
+          <div class="cb-info-wrap">
+            <input type="checkbox" class="cb" />
+            <div class="cb-info-body">
+              <span class="cb-info-label">Public results</span>
+              <span class="cb-info-desc">Publish results on your company's public page.</span>
+            </div>
+          </div>
+        </div>
+        <div class="dd-cap do">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Do</div>
+          Use the Info Checkbox variant when the option needs a short description — keeps the label scannable while the description adds context below.
+        </div>
+      </div>
+      <div class="dd-card">
+        <div class="dd-prev" style="flex-direction:column; gap:10px; align-items:flex-start; padding:20px 28px;">
+          <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Manager visibility — Managers can view their team's anonymised results in the dashboard</label>
+          <label class="cb-label-wrap"><input type="checkbox" class="cb" />Public results — Publish results on your company's public page for all employees to see</label>
+        </div>
+        <div class="dd-cap dont">
+          <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg> Don't</div>
+          Don't cram a label and description into a single long label string — it's hard to scan and the checkbox aligns to the first line only.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="section" id="variants">
+    <h2 class="text-l3">Variants</h2>
+    <p class="section-lead">Four variants cover the full range of checkbox use cases — from bare controls in data tables to full-surface button chips in filter bars.</p>
+
+    <div class="variant-rows">
+      <div class="variant-row">
+        <div class="variant-row-btn" style="gap:12px;">
+          <input type="checkbox" class="cb" style="pointer-events:none;" />
+          <input type="checkbox" class="cb cb-lg" style="pointer-events:none;" />
+        </div>
+        <div class="variant-row-desc">
+          <strong>Checkbox</strong> — the bare control. Default size is 16×16 px; Large is 20×20 px. Use in table cells, custom layouts, or anywhere you supply your own label markup.
+        </div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <label class="cb-label-wrap" style="pointer-events:none;"><input type="checkbox" class="cb" checked />Label</label>
+        </div>
+        <div class="variant-row-desc">
+          <strong>Checkbox with label</strong> — wraps the control with a right-aligned text label. The label and checkbox share a single click target — always use a semantic <code>&lt;label&gt;</code> element.
+        </div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn" style="align-items:flex-start; padding:14px 20px;">
+          <div class="cb-info-wrap" style="pointer-events:none; max-width:220px;">
+            <input type="checkbox" class="cb" checked />
+            <div class="cb-info-body">
+              <span class="cb-info-label">Label</span>
+              <span class="cb-info-desc">Subtitle with a short explanation. <a class="link-inline" href="#" onclick="return false;" style="font-size:13px;">Learn more ↗</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="variant-row-desc">
+          <strong>Info checkbox</strong> — adds a secondary description line and optional "Learn more" link below the label. Responds to desktop and mobile widths.
+        </div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <label class="cb-btn" style="pointer-events:none;">
+            <input type="checkbox" class="cb is-checked" />
+            Label
+          </label>
+        </div>
+        <div class="variant-row-desc">
+          <strong>Checkbox button</strong> — a pill-shaped card where the entire surface is the tap target. Used in compact horizontal filter bars or tag pickers. The embedded checkbox indicator shows selection state; you don't need a separate label element outside the button.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="section" id="states">
+    <h2 class="text-l3">States</h2>
+    <p class="section-lead">Every variant shares the same state model. The checkbox button also has a pressed state for the brief moment the surface is held down.</p>
+
+    <h3 class="text-l4">Checkbox (bare)</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:0; padding:20px 0; flex-direction:column; align-items:stretch;">
+        <!-- header row -->
+        <div style="display:grid; grid-template-columns: 120px repeat(4,1fr); padding: 0 24px 12px; border-bottom: 1px solid var(--border-base);">
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);"></span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">DEFAULT</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">HOVER</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">DISABLED</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">DISABLED CHECKED</span>
+        </div>
+        <!-- unchecked row -->
+        <div style="display:grid; grid-template-columns: 120px repeat(4,1fr); padding: 14px 24px; align-items:center; border-bottom: 1px solid var(--border-base);">
+          <span style="font-size:12px;color:var(--content-subtle);">Unchecked</span>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-hover" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled" /></div>
+        </div>
+        <!-- checked row -->
+        <div style="display:grid; grid-template-columns: 120px repeat(4,1fr); padding: 14px 24px; align-items:center; border-bottom: 1px solid var(--border-base);">
+          <span style="font-size:12px;color:var(--content-subtle);">Checked</span>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-checked" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-checked is-hover" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled is-checked" /></div>
+        </div>
+        <!-- indeterminate row -->
+        <div style="display:grid; grid-template-columns: 120px repeat(4,1fr); padding: 14px 24px; align-items:center; border-bottom: 1px solid var(--border-base);">
+          <span style="font-size:12px;color:var(--content-subtle);">Indeterminate</span>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-indeterminate" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-indeterminate is-hover" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-disabled is-indeterminate" /></div>
+        </div>
+        <!-- select all row -->
+        <div style="display:grid; grid-template-columns: 120px repeat(4,1fr); padding: 14px 24px; align-items:center;">
+          <span style="font-size:12px;color:var(--content-subtle);">Select all</span>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-select-all" /></div>
+          <div style="display:flex;justify-content:center;"><input type="checkbox" class="cb is-select-all is-hover" /></div>
+          <div style="display:flex;justify-content:center;">—</div>
+          <div style="display:flex;justify-content:center;">—</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-l4" style="margin-top:28px;">Checkbox button</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:10px; padding:24px 28px; flex-wrap:wrap;">
+        <div class="state-col">
+          <label class="cb-btn"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn is-checked"><input type="checkbox" class="cb is-checked" />Label</label>
+          <span class="state-label">Checked</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn is-hover"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Hover</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn is-pressed"><input type="checkbox" class="cb" />Label</label>
+          <span class="state-label">Pressed</span>
+        </div>
+        <div class="state-col">
+          <label class="cb-btn is-disabled"><input type="checkbox" class="cb is-disabled" />Label</label>
+          <span class="state-label">Disabled</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:20px;">
+      <table>
+        <thead><tr><th>STATE</th><th>BORDER</th><th>BACKGROUND</th><th>NOTES</th></tr></thead>
+        <tbody>
+          <tr><td>Default unchecked</td><td><span class="token">border/action</span></td><td><span class="token">bg/base</span></td><td>–</td></tr>
+          <tr><td>Default checked</td><td>–</td><td><span class="token">bg/brand/base</span></td><td>White check SVG indicator</td></tr>
+          <tr><td>Default indeterminate</td><td>–</td><td><span class="token">bg/brand/base</span></td><td>White dash SVG indicator</td></tr>
+          <tr><td>Select all</td><td><span class="token">bg/brand/base</span></td><td><span class="token">bg/base</span></td><td>Teal check on white — table header "select all"</td></tr>
+          <tr><td>Hover</td><td><span class="token">border/action-hover</span></td><td>–</td><td>Checked hover: <span class="token">bg/brand/base-hover</span></td></tr>
+          <tr><td>Disabled</td><td>–</td><td><span class="token">bg/disabled</span></td><td>Indicators use <span class="token">content/disabled</span> colour</td></tr>
+          <tr><td>Button pressed</td><td><span class="token">border/action-pressed</span></td><td><span class="token">bg/base-pressed</span></td><td>Checkbox button only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DESIGN TOKENS -->
+  <section class="section" id="tokens">
+    <h2 class="text-l3">Design Tokens</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
+        <tbody>
+          <tr><td><span class="token">bg/brand/base</span></td><td>#0a9d99</td><td>Checked and indeterminate container fill; select-all border</td></tr>
+          <tr><td><span class="token">bg/brand/base-hover</span></td><td>#0c827f</td><td>Checked hover container fill</td></tr>
+          <tr><td><span class="token">bg/base</span></td><td>#ffffff</td><td>Unchecked container fill; select-all container fill</td></tr>
+          <tr><td><span class="token">bg/base-hover</span></td><td>#f8f8f9</td><td>Button hover background</td></tr>
+          <tr><td><span class="token">bg/base-pressed</span></td><td>#f1f2f4</td><td>Button pressed background</td></tr>
+          <tr><td><span class="token">bg/disabled</span></td><td>#192743 · 10%</td><td>All disabled state container fills</td></tr>
+          <tr><td><span class="token">border/action</span></td><td>#bcc1cd</td><td>Unchecked border; button default border</td></tr>
+          <tr><td><span class="token">border/action-hover</span></td><td>#a5adbc</td><td>Hover border</td></tr>
+          <tr><td><span class="token">border/action-pressed</span></td><td>#7b869e</td><td>Button pressed border</td></tr>
+          <tr><td><span class="token">content/on/brand-base</span></td><td>#ffffff</td><td>Check and dash SVG stroke colour</td></tr>
+          <tr><td><span class="token">content/base</span></td><td>#192743</td><td>Label text</td></tr>
+          <tr><td><span class="token">content/secondary</span></td><td>#192743 · 80%</td><td>Info checkbox description text</td></tr>
+          <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>Disabled indicator and label colour</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" id="accessibility">
+    <h2 class="text-l3">Accessibility</h2>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Always use a native <code>&lt;input type="checkbox"&gt;</code>.</strong> You get keyboard focus, Space to toggle, and correct announcements ("checkbox, checked") for free.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Link every checkbox to its label.</strong> Use a wrapping <code>&lt;label&gt;</code> or pair <code>id</code> on the input with <code>for</code> on the label — both expand the tap target and make the association audible to screen readers.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Programmatic indeterminate only.</strong> The indeterminate state has no HTML attribute — set it in JavaScript with <code>input.indeterminate = true</code>. Screen readers announce it as "mixed".</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Group related checkboxes in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>.</strong> The legend becomes the group label that screen readers read before each option.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Checkbox button still needs a semantic input.</strong> The <code>&lt;label&gt;</code> pill wraps a real <code>&lt;input type="checkbox"&gt;</code> — don't replace it with a <code>&lt;div role="checkbox"&gt;</code>. The native element handles keyboard and AT for free.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <a class="pag-card left" href="select-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Select</span>
+    </a>
+    <a class="pag-card right" href="radio-group-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Radio Group</span>
+    </a>
   </div>
 
 </article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#anatomy">Anatomy</a>
+    <a class="toc-link" href="#usage">Usage</a>
+    <a class="toc-link" href="#variants">Variants</a>
+    <a class="toc-link" href="#states">States</a>
+    <a class="toc-link" href="#tokens">Design Tokens</a>
+    <a class="toc-link" href="#accessibility">Accessibility</a>
+  </nav>
+</div>
+
 </div><!-- /content-cols -->
+</div><!-- /tab-panel design -->
+
+<!-- DEVELOPER PANEL -->
+<div class="tab-panel" data-panel="developer">
+<div class="content-cols">
+<article class="content">
+
+  <!-- USAGE -->
+  <section class="section" id="dev-usage">
+    <h2 class="text-l3">Usage</h2>
+
+    <h3 class="text-l4">Bare checkbox</h3>
+    <div class="dev-preview" style="padding:24px 28px; gap:12px; justify-content:flex-start;">
+      <input type="checkbox" class="cb" id="demo-bare-1" />
+      <input type="checkbox" class="cb" id="demo-bare-2" checked />
+      <input type="checkbox" class="cb" id="demo-bare-3" />
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">&lt;!-- Unchecked --&gt;</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"option-1"</span> <span class="ca">name</span>=<span class="cv">"option-1"</span> <span class="ct">/&gt;</span>
+
+<span class="cm">&lt;!-- Checked --&gt;</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"option-2"</span> <span class="ca">name</span>=<span class="cv">"option-2"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
+
+<span class="cm">&lt;!-- Indeterminate (set via JS) --&gt;</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"select-all"</span> <span class="ct">/&gt;</span>
+<span class="ct">&lt;script&gt;</span>
+  document.getElementById(<span class="cv">'select-all'</span>).indeterminate = <span class="cv">true</span>;
+<span class="ct">&lt;/script&gt;</span>
+
+<span class="cm">&lt;!-- Large size --&gt;</span>
+<span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb cb-lg"</span> <span class="ca">id</span>=<span class="cv">"option-3"</span> <span class="ct">/&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Checkbox with label</h3>
+    <div class="dev-preview" style="flex-direction:column; gap:10px; align-items:flex-start; padding:24px 28px;">
+      <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Send me weekly summary emails</label>
+      <label class="cb-label-wrap"><input type="checkbox" class="cb" />Include benchmark comparisons</label>
+      <label class="cb-label-wrap"><input type="checkbox" class="cb" disabled />Disabled option</label>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">name</span>=<span class="cv">"summary"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
+  Send me weekly summary emails
+<span class="ct">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- Disabled --&gt;</span>
+<span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap is-disabled"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">disabled</span> <span class="ct">/&gt;</span>
+  Disabled option
+<span class="ct">&lt;/label&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Info checkbox</h3>
+    <div class="dev-preview" style="flex-direction:column; gap:16px; align-items:flex-start; padding:24px 28px;">
+      <div class="cb-info-wrap">
+        <input type="checkbox" class="cb" checked id="dev-info-1" />
+        <label class="cb-info-body" for="dev-info-1">
+          <span class="cb-info-label">Manager visibility</span>
+          <span class="cb-info-desc">Managers can view their team's anonymised results. <a class="link-inline" href="#" onclick="return false;" style="font-size:13px;">Learn more ↗</a></span>
+        </label>
+      </div>
+      <div class="cb-info-wrap">
+        <input type="checkbox" class="cb" id="dev-info-2" />
+        <label class="cb-info-body" for="dev-info-2">
+          <span class="cb-info-label">Public results</span>
+          <span class="cb-info-desc">Publish results on your company's public page.</span>
+        </label>
+      </div>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"cb-info-wrap"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"visibility"</span> <span class="ca">checked</span> <span class="ct">/&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-info-body"</span> <span class="ca">for</span>=<span class="cv">"visibility"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-label"</span><span class="ct">&gt;</span>Manager visibility<span class="ct">&lt;/span&gt;</span>
+    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"cb-info-desc"</span><span class="ct">&gt;</span>
+      Managers can view their team's anonymised results.
+      <span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/help/visibility"</span> <span class="ca">class</span>=<span class="cv">"link-inline"</span>
+         <span class="ca">target</span>=<span class="cv">"_blank"</span> <span class="ca">rel</span>=<span class="cv">"noopener noreferrer"</span><span class="ct">&gt;</span>Learn more<span class="ct">&lt;span</span> <span class="ca">aria-hidden</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>&amp;nbsp;↗<span class="ct">&lt;/span&gt;&lt;/a&gt;</span>
+    <span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;/label&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Checkbox button</h3>
+    <p class="section-lead">The entire <code>&lt;label&gt;</code> surface is the click target. The nested <code>&lt;input&gt;</code> drives state; <code>pointer-events: none</code> stops it from capturing its own clicks.</p>
+    <div class="dev-preview" style="gap:8px; padding:24px 28px; flex-wrap:wrap; justify-content:flex-start;">
+      <label class="cb-btn" id="cbtn-1">
+        <input type="checkbox" class="cb" />
+        Weekly digest
+      </label>
+      <label class="cb-btn is-checked" id="cbtn-2">
+        <input type="checkbox" class="cb is-checked" />
+        Benchmarks
+      </label>
+      <label class="cb-btn" id="cbtn-3">
+        <input type="checkbox" class="cb" />
+        Alerts
+      </label>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-btn"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">name</span>=<span class="cv">"digest"</span> <span class="ct">/&gt;</span>
+  Weekly digest
+<span class="ct">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- Disabled --&gt;</span>
+<span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-btn is-disabled"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb is-disabled"</span> <span class="ca">disabled</span> <span class="ct">/&gt;</span>
+  Alerts
+<span class="ct">&lt;/label&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Select all with indeterminate</h3>
+    <div class="dev-preview" style="flex-direction:column; gap:8px; align-items:flex-start; padding:20px 28px;">
+      <label class="cb-label-wrap" style="font-weight:600;"><input type="checkbox" class="cb" id="dev-select-all" />All surveys</label>
+      <div style="padding-left:24px; display:flex; flex-direction:column; gap:6px;">
+        <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Q2 Employee survey</label>
+        <label class="cb-label-wrap"><input type="checkbox" class="cb" checked />Onboarding pulse</label>
+        <label class="cb-label-wrap"><input type="checkbox" class="cb" />Exit interviews</label>
+      </div>
+    </div>
+    <script>document.getElementById('dev-select-all').indeterminate = true;</script>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"cb-label-wrap"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span>=<span class="cv">"checkbox"</span> <span class="ca">class</span>=<span class="cv">"cb"</span> <span class="ca">id</span>=<span class="cv">"select-all"</span> <span class="ct">/&gt;</span>
+  All surveys
+<span class="ct">&lt;/label&gt;</span>
+<span class="ct">&lt;script&gt;</span>
+  <span class="cm">// Set indeterminate when some (not all) children are checked</span>
+  document.getElementById(<span class="cv">'select-all'</span>).indeterminate = <span class="cv">true</span>;
+<span class="ct">&lt;/script&gt;</span></code></pre>
+    </div>
+  </section>
+
+  <!-- CSS CLASSES -->
+  <section class="section" id="dev-props">
+    <h2 class="text-l3">CSS classes</h2>
+    <div class="tbl-wrap">
+      <table class="dev-props-table">
+        <thead><tr><th>CLASS</th><th>DESCRIPTION</th></tr></thead>
+        <tbody>
+          <tr><td><code>cb</code></td><td>Base checkbox control. Apply to <code>&lt;input type="checkbox"&gt;</code>. Replaces the native appearance with a custom-styled 16×16 px control.</td></tr>
+          <tr><td><code>cb-lg</code></td><td>Large size modifier — increases the control to 20×20 px. Stack with <code>cb</code>.</td></tr>
+          <tr><td><code>cb-label-wrap</code></td><td>Wrapper <code>&lt;label&gt;</code> that lays out a <code>.cb</code> and its text label inline. Handles cursor and disabled styling.</td></tr>
+          <tr><td><code>cb-info-wrap</code></td><td>Flex wrapper for the info checkbox variant. Contains a <code>.cb</code> and a <code>.cb-info-body</code>.</td></tr>
+          <tr><td><code>cb-info-body</code></td><td>Column container for the label and description text inside an info checkbox.</td></tr>
+          <tr><td><code>cb-info-label</code></td><td>The bold primary label inside an info checkbox.</td></tr>
+          <tr><td><code>cb-info-desc</code></td><td>The secondary description text inside an info checkbox. May contain a <code>.link-inline</code> "Learn more" link.</td></tr>
+          <tr><td><code>cb-btn</code></td><td>Pill-shaped checkbox button. Apply to a <code>&lt;label&gt;</code>. The entire surface is the click target. Contains a <code>.cb</code> and a text label.</td></tr>
+          <tr><td><code>is-checked</code></td><td>Forces checked styling in docs/state-preview contexts. In production, drive state via the native <code>checked</code> attribute.</td></tr>
+          <tr><td><code>is-indeterminate</code></td><td>Forces indeterminate styling. In production use <code>input.indeterminate = true</code> in JS instead.</td></tr>
+          <tr><td><code>is-select-all</code></td><td>Outlined teal style — white container with teal border and teal check. Used for table-header "select all" controls.</td></tr>
+          <tr><td><code>is-hover</code></td><td>Forces hover styling. Docs/state previews only.</td></tr>
+          <tr><td><code>is-pressed</code></td><td>Forces pressed styling on <code>.cb-btn</code>. Docs/state previews only.</td></tr>
+          <tr><td><code>is-disabled</code></td><td>Visually disables the control. Pair with the native <code>disabled</code> attribute on the <code>&lt;input&gt;</code> and add <code>is-disabled</code> to the parent wrapper.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DESIGN TOKENS -->
+  <section class="section" id="dev-tokens">
+    <h2 class="text-l3">CSS tokens</h2>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cm">/* Control fill */</span>
+<span class="ca">--bg-brand-base</span>:         <span class="cv">#0a9d99</span>;                 <span class="cm">/* Checked / indeterminate fill  */</span>
+<span class="ca">--bg-brand-base-hover</span>:   <span class="cv">#0c827f</span>;                 <span class="cm">/* Checked hover fill            */</span>
+<span class="ca">--bg-base</span>:               <span class="cv">#ffffff</span>;                 <span class="cm">/* Unchecked fill                */</span>
+<span class="ca">--bg-base-hover</span>:         <span class="cv">#f8f8f9</span>;                 <span class="cm">/* Button hover fill             */</span>
+<span class="ca">--bg-base-pressed</span>:       <span class="cv">#f1f2f4</span>;                 <span class="cm">/* Button pressed fill           */</span>
+<span class="ca">--bg-disabled</span>:           <span class="cv">rgba(25, 39, 67, 0.10)</span>;  <span class="cm">/* Disabled fill                 */</span>
+
+<span class="cm">/* Border */</span>
+<span class="ca">--border-action</span>:         <span class="cv">#bcc1cd</span>;                 <span class="cm">/* Unchecked border              */</span>
+<span class="ca">--border-action-hover</span>:   <span class="cv">#a5adbc</span>;                 <span class="cm">/* Hover border                  */</span>
+<span class="ca">--border-action-pressed</span>: <span class="cv">#7b869e</span>;                 <span class="cm">/* Button pressed border         */</span>
+
+<span class="cm">/* Content */</span>
+<span class="ca">--content-base</span>:          <span class="cv">#192743</span>;                 <span class="cm">/* Label text                    */</span>
+<span class="ca">--content-secondary</span>:     <span class="cv">rgba(25, 39, 67, 0.80)</span>;  <span class="cm">/* Description text              */</span>
+<span class="ca">--content-disabled</span>:      <span class="cv">rgba(25, 39, 67, 0.30)</span>;  <span class="cm">/* Disabled text & indicator     */</span></code></pre>
+    </div>
+  </section>
+
+  <!-- A11Y -->
+  <section class="section" id="dev-a11y">
+    <h2 class="text-l3">Accessibility</h2>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Always use <code>&lt;input type="checkbox"&gt;</code>.</strong> Never substitute a <code>&lt;div role="checkbox"&gt;</code> — the native element provides keyboard interaction, AT announcements, and form participation for free.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Wrap in <code>&lt;label&gt;</code> or use <code>for</code>/<code>id</code>.</strong> Either approach links the visible text to the input so screen readers announce the label when the control is focused.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Indeterminate requires JavaScript.</strong> There is no HTML attribute for the indeterminate state — set it with <code>el.indeterminate = true</code>. Screen readers will announce it as "mixed".</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Group with <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>.</strong> The legend names the group — screen readers read it before each option so users always know what they're selecting.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Add <code>disabled</code> to the <code>&lt;input&gt;</code>, not just the wrapper.</strong> The native attribute removes it from the tab order and prevents form submission. The <code>.is-disabled</code> class handles the visual only.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <a class="pag-card left" href="select-docs.html">
+      <span class="pag-dir">← Previous</span>
+      <span class="pag-name">Select</span>
+    </a>
+    <a class="pag-card right" href="radio-group-docs.html">
+      <span class="pag-dir">Next →</span>
+      <span class="pag-name">Radio Group</span>
+    </a>
+  </div>
+
+</article>
+
+<div class="toc-col">
+  <nav class="toc">
+    <div class="toc-title">ON THIS PAGE</div>
+    <a class="toc-link" href="#dev-usage">Usage</a>
+    <a class="toc-link" href="#dev-props">CSS classes</a>
+    <a class="toc-link" href="#dev-tokens">CSS tokens</a>
+    <a class="toc-link" href="#dev-a11y">Accessibility</a>
+  </nav>
+</div>
+
+</div><!-- /content-cols -->
+</div><!-- /tab-panel developer -->
+
 </div><!-- /content-wrap -->
 </div><!-- /shell -->
 
