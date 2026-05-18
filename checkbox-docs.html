@@ -230,7 +230,7 @@
       <span class="page-updated">Updated May 2026</span>
     </div>
     <h1 class="text-l1">Checkbox</h1>
-    <p class="page-desc">A binary toggle for selecting one or more options from a set. Four variants cover everything from a bare control in a table cell to a labeled item with description and link.</p>
+    <p class="page-desc">A binary toggle for selecting one or more options from a set. Five variants cover everything from a bare control in a table cell to pill-shaped button chips in filter bars.</p>
   </div>
 </div><!-- /page-header-row -->
 
@@ -355,7 +355,8 @@
           <tr><td><strong>Checkbox</strong></td><td>Table cells, dense lists, custom layouts where you supply your own label. Available in default and large sizes.</td></tr>
           <tr><td><strong>Labeled</strong></td><td>Standard form fields and settings lists. The label is always to the right; check left-aligns with the first line of text so wrapping labels stay readable.</td></tr>
           <tr><td><strong>With description</strong></td><td>When each option needs a short explanation — onboarding flows, survey builders, plan selection. Has a responsive desktop/mobile layout. An inline link can optionally be appended to the description text.</td></tr>
-          <tr><td><strong>Checkbox button</strong></td><td>Compact horizontal filter bars or tag-picker rows where the entire pill surface is the tap target. Combines a checkbox indicator with a full-bleed clickable area.</td></tr>
+          <tr><td><strong>Checkbox button — ghost</strong></td><td>Compact filter bars or tag pickers. No border in default state — low visual weight. Use when it should blend into a toolbar.</td></tr>
+          <tr><td><strong>Checkbox button — bordered</strong></td><td>Same as ghost but always shows a border. More visual weight — use alongside other bordered controls or when the ghost style is too subtle.</td></tr>
         </tbody>
       </table>
     </div>
@@ -509,7 +510,7 @@
   <!-- VARIANTS -->
   <section class="section" id="variants">
     <h2 class="text-l3">Variants</h2>
-    <p class="section-lead">Four variants cover the full range of checkbox use cases — from bare controls in data tables to full-surface button chips in filter bars.</p>
+    <p class="section-lead">Five variants cover the full range of checkbox use cases — from bare controls in data tables to pill-shaped button chips in filter bars.</p>
 
     <div class="variant-rows">
       <div class="variant-row">
@@ -546,14 +547,27 @@
         </div>
       </div>
       <div class="variant-row">
-        <div class="variant-row-btn">
-          <label class="cb-btn" style="pointer-events:none;">
-            <input type="checkbox" class="cb is-checked" />
-            Label
-          </label>
+        <div class="variant-row-btn" style="gap:8px; flex-wrap:wrap;">
+          <label class="cb-btn" style="pointer-events:none;"><input type="checkbox" class="cb" />Label</label>
+          <label class="cb-btn" style="pointer-events:none;"><input type="checkbox" class="cb is-checked" />Label</label>
+          <label class="cb-btn is-disabled" style="pointer-events:none;"><input type="checkbox" class="cb" />Label</label>
         </div>
         <div class="variant-row-desc">
-          <strong>Checkbox button</strong> — a pill-shaped card where the entire surface is the tap target. Used in compact horizontal filter bars or tag pickers. The embedded checkbox indicator shows selection state; no separate label element needed outside the button.
+          <p style="margin:0 0 6px;"><strong style="color:var(--content-base);">Checkbox button — ghost</strong></p>
+          <p style="margin:0 0 10px;">No border in default state — just a transparent background with a hover fill. Low visual weight; blends into a toolbar or filter bar.</p>
+          <p style="margin:0;font-size:12.5px;color:var(--content-subtle);">Use for: compact filter bars, tag pickers, toolbar toggles</p>
+        </div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn" style="gap:8px; flex-wrap:wrap;">
+          <label class="cb-btn-bordered" style="pointer-events:none;"><input type="checkbox" class="cb" />Label</label>
+          <label class="cb-btn-bordered is-checked" style="pointer-events:none;"><input type="checkbox" class="cb is-checked" />Label</label>
+          <label class="cb-btn-bordered is-disabled" style="pointer-events:none;"><input type="checkbox" class="cb" />Label</label>
+        </div>
+        <div class="variant-row-desc">
+          <p style="margin:0 0 6px;"><strong style="color:var(--content-base);">Checkbox button — bordered</strong></p>
+          <p style="margin:0 0 10px;">Always shows a border. Selected state uses a brand-coloured border. More visual weight — use alongside other bordered controls or when the ghost style is too subtle.</p>
+          <p style="margin:0;font-size:12.5px;color:var(--content-subtle);">Use for: standalone filter chips, side-by-side with bordered inputs</p>
         </div>
       </div>
     </div>
