@@ -302,7 +302,7 @@
       </div>
       <div class="anatomy-item">
         <div class="anatomy-num">4</div>
-        <div><span class="anatomy-term">Description</span> <em>(tile variant only)</em> — secondary text below the label, providing additional context. The entire tile surface is the click target.</div>
+        <div><span class="anatomy-term">Description</span> <em>(tile and with-description variants)</em> — secondary text below the label, providing additional context. In the tile variant the entire card surface is the click target.</div>
       </div>
     </div>
   </section>
@@ -328,7 +328,7 @@
           <li>Multiple selections are valid — use <a class="link-inline" href="checkbox-docs.html">Checkbox</a> instead</li>
           <li>There are more than ~7 options — use <a class="link-inline" href="select-docs.html">Select</a></li>
           <li>It's a single binary on/off choice — use <a class="link-inline" href="toggle-docs.html">Toggle</a></li>
-          <li>Options are too similar and need more context — use Radio tiles</li>
+          <li>Options need extra context — use the <strong>With description</strong> or <strong>Radio tiles</strong> variant</li>
         </ul>
       </div>
     </div>
@@ -514,7 +514,7 @@
   <!-- STATES -->
   <section class="section" id="states">
     <h2 class="text-l3">States</h2>
-    <p class="section-lead">Both variants share the same state model on the radio circle itself.</p>
+    <p class="section-lead">All variants share the same state model on the radio circle itself.</p>
 
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
@@ -537,14 +537,48 @@
           <div style="display:flex;justify-content:center;"><span class="rb-wrap"><input type="radio" class="rb is-checked is-hover" /></span></div>
           <div style="display:flex;justify-content:center;"><span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span></div>
         </div>
-        <!-- With label -->
+        <!-- Labeled -->
         <div style="display:grid; grid-template-columns:120px repeat(5,1fr); padding:16px 24px; align-items:center; border-bottom:1px solid var(--border-base);">
-          <span style="font-size:12px;color:var(--content-subtle);">With label</span>
+          <span style="font-size:12px;color:var(--content-subtle);">Labeled</span>
           <div style="display:flex;justify-content:center;"><label class="rb-label-wrap" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb" /></span>Option</label></div>
           <div style="display:flex;justify-content:center;"><label class="rb-label-wrap" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-hover" /></span>Option</label></div>
           <div style="display:flex;justify-content:center;"><label class="rb-label-wrap" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-checked" /></span>Option</label></div>
           <div style="display:flex;justify-content:center;"><label class="rb-label-wrap" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-checked is-hover" /></span>Option</label></div>
           <div style="display:flex;justify-content:center;"><label class="rb-label-wrap is-disabled" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span>Option</label></div>
+        </div>
+        <!-- With description -->
+        <div style="display:grid; grid-template-columns:120px repeat(5,1fr); padding:16px 24px; align-items:center; border-bottom:1px solid var(--border-base);">
+          <span style="font-size:12px;color:var(--content-subtle);">With desc.</span>
+          <div style="display:flex;justify-content:center;">
+            <div class="rb-info-wrap" style="pointer-events:none;">
+              <span class="rb-wrap"><input type="radio" class="rb" /></span>
+              <div class="rb-info-body"><span class="rb-info-label">Label</span><span class="rb-info-desc">Description</span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <div class="rb-info-wrap" style="pointer-events:none;">
+              <span class="rb-wrap"><input type="radio" class="rb is-hover" /></span>
+              <div class="rb-info-body"><span class="rb-info-label">Label</span><span class="rb-info-desc">Description</span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <div class="rb-info-wrap" style="pointer-events:none;">
+              <span class="rb-wrap"><input type="radio" class="rb is-checked" /></span>
+              <div class="rb-info-body"><span class="rb-info-label">Label</span><span class="rb-info-desc">Description</span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <div class="rb-info-wrap" style="pointer-events:none;">
+              <span class="rb-wrap"><input type="radio" class="rb is-checked is-hover" /></span>
+              <div class="rb-info-body"><span class="rb-info-label">Label</span><span class="rb-info-desc">Description</span></div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <div class="rb-info-wrap is-disabled" style="pointer-events:none;">
+              <span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span>
+              <div class="rb-info-body"><span class="rb-info-label">Label</span><span class="rb-info-desc">Description</span></div>
+            </div>
+          </div>
         </div>
         <!-- Tile -->
         <div style="display:grid; grid-template-columns:120px repeat(5,1fr); padding:16px 24px; align-items:center;">
@@ -629,12 +663,12 @@
 <div class="content-cols">
 <article class="content">
 
-  <!-- RADIO GROUP -->
+  <!-- BASIC USAGE -->
   <section class="section" id="dev-basic">
-    <h2 class="text-l3">Radio group</h2>
+    <h2 class="text-l3">Basic usage</h2>
     <p class="section-lead">Use Angular Material's <code>mat-radio-group</code> with <code>mat-radio-button</code> children. Bind the group value with <code>[(ngModel)]</code> or reactive forms.</p>
 
-    <h3 class="text-l4">Basic</h3>
+    <h3 class="text-l4">Labeled</h3>
     <div class="dev-preview" style="flex-direction:column; gap:10px; align-items:flex-start;">
       <div class="rb-group">
         <label class="rb-label-wrap"><span class="rb-wrap"><input type="radio" class="rb is-checked" name="dev-basic" /></span>Option 1</label>
@@ -651,6 +685,42 @@
   <span class="ct">&lt;mat-radio-button</span> <span class="ca">value</span>=<span class="cv">"option1"</span><span class="ct">&gt;</span>Option 1<span class="ct">&lt;/mat-radio-button&gt;</span>
   <span class="ct">&lt;mat-radio-button</span> <span class="ca">value</span>=<span class="cv">"option2"</span><span class="ct">&gt;</span>Option 2<span class="ct">&lt;/mat-radio-button&gt;</span>
   <span class="ct">&lt;mat-radio-button</span> <span class="ca">value</span>=<span class="cv">"option3"</span> <span class="ca">[disabled]</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>Option 3<span class="ct">&lt;/mat-radio-button&gt;</span>
+<span class="ct">&lt;/mat-radio-group&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">With description</h3>
+    <p class="section-lead">Pair each <code>mat-radio-button</code> with a description element. Use <code>aria-labelledby</code> to associate the button with its label text for screen reader accessibility.</p>
+    <div class="dev-preview" style="flex-direction:column; gap:14px; align-items:flex-start; padding:24px 28px;">
+      <div class="rb-info-wrap">
+        <span class="rb-wrap"><input type="radio" class="rb is-checked" id="dev-info-1" name="dev-info" /></span>
+        <label class="rb-info-body" for="dev-info-1">
+          <span class="rb-info-label">Send immediately</span>
+          <span class="rb-info-desc">The survey goes live as soon as you confirm.</span>
+        </label>
+      </div>
+      <div class="rb-info-wrap">
+        <span class="rb-wrap"><input type="radio" class="rb" id="dev-info-2" name="dev-info" /></span>
+        <label class="rb-info-body" for="dev-info-2">
+          <span class="rb-info-label">Schedule for later</span>
+          <span class="rb-info-desc">Pick a date and time — the survey launches automatically.</span>
+        </label>
+      </div>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="ct">&lt;mat-radio-group</span> <span class="ca">[(ngModel)]</span>=<span class="cv">"delivery"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"radio-info"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;mat-radio-button</span>
+      <span class="ca">class</span>=<span class="cv">"no-label"</span>
+      <span class="ca">id</span>=<span class="cv">"send-now"</span>
+      <span class="ca">value</span>=<span class="cv">"immediate"</span>
+      <span class="ca">aria-labelledby</span>=<span class="cv">"send-now-label"</span>
+    <span class="ct">&gt;&lt;/mat-radio-button&gt;</span>
+    <span class="ct">&lt;label</span> <span class="ca">id</span>=<span class="cv">"send-now-label"</span><span class="ct">&gt;</span>
+      <span class="ct">&lt;strong&gt;</span>Send immediately<span class="ct">&lt;/strong&gt;</span>
+      <span class="ct">&lt;p&gt;</span>The survey goes live as soon as you confirm.<span class="ct">&lt;/p&gt;</span>
+    <span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;/div&gt;</span>
 <span class="ct">&lt;/mat-radio-group&gt;</span></code></pre>
     </div>
 
@@ -859,7 +929,7 @@ deliveryControl = <span class="ca">new</span> FormControl(<span class="cv">'sche
 <div class="toc-col">
   <nav class="toc">
     <div class="toc-title">ON THIS PAGE</div>
-    <a class="toc-link" href="#dev-basic">Radio group</a>
+    <a class="toc-link" href="#dev-basic">Basic usage</a>
     <a class="toc-link" href="#dev-tiles">Radio tiles</a>
     <a class="toc-link" href="#dev-radio-btn">Radio button</a>
     <a class="toc-link" href="#dev-disabled">Disabled states</a>
