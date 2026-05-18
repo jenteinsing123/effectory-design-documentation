@@ -98,6 +98,8 @@
       font-size: 14px; font-weight: 600; color: var(--content-base);
       margin-bottom: 4px; font-family: 'Poppins', sans-serif;
     }
+    /* No description below → remove bottom gap */
+    .rb-tile-title:last-child { margin-bottom: 0; }
     .rb-tile-desc {
       font-size: 13px; color: var(--content-secondary);
       line-height: 1.55; font-family: 'Poppins', sans-serif;
@@ -419,32 +421,32 @@
         <div style="display:grid; grid-template-columns:120px repeat(5,1fr); padding:16px 24px; align-items:center;">
           <span style="font-size:12px;color:var(--content-subtle);">Tile</span>
           <div style="display:flex;justify-content:center;padding:0 8px;">
-            <div class="rb-tile" style="pointer-events:none;padding:10px 12px;min-width:80px;">
-              <div class="rb-tile-radio" style="padding-top:1px;margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb" /></span></div>
+            <div class="rb-tile" style="pointer-events:none;padding:10px 12px;min-width:80px;align-items:center;">
+              <div class="rb-tile-radio" style="margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb" /></span></div>
               <div class="rb-tile-body"><div class="rb-tile-title">Value</div></div>
             </div>
           </div>
           <div style="display:flex;justify-content:center;padding:0 8px;">
             <div class="rb-tile" style="pointer-events:none;padding:10px 12px;min-width:80px;border-color:var(--border-action-hover);background:var(--bg-base-hover);">
-              <div class="rb-tile-radio" style="padding-top:1px;margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-hover" /></span></div>
+              <div class="rb-tile-radio" style="margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-hover" /></span></div>
               <div class="rb-tile-body"><div class="rb-tile-title">Value</div></div>
             </div>
           </div>
           <div style="display:flex;justify-content:center;padding:0 8px;">
-            <div class="rb-tile is-selected" style="pointer-events:none;padding:10px 12px;min-width:80px;">
-              <div class="rb-tile-radio" style="padding-top:1px;margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-checked" /></span></div>
+            <div class="rb-tile is-selected" style="pointer-events:none;padding:10px 12px;min-width:80px;align-items:center;">
+              <div class="rb-tile-radio" style="margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-checked" /></span></div>
               <div class="rb-tile-body"><div class="rb-tile-title">Value</div></div>
             </div>
           </div>
           <div style="display:flex;justify-content:center;padding:0 8px;">
-            <div class="rb-tile is-selected" style="pointer-events:none;padding:10px 12px;min-width:80px;border-color:var(--bg-brand-base);">
-              <div class="rb-tile-radio" style="padding-top:1px;margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-checked is-hover" /></span></div>
+            <div class="rb-tile is-selected" style="pointer-events:none;padding:10px 12px;min-width:80px;border-color:var(--bg-brand-base);align-items:center;">
+              <div class="rb-tile-radio" style="margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-checked is-hover" /></span></div>
               <div class="rb-tile-body"><div class="rb-tile-title">Value</div></div>
             </div>
           </div>
           <div style="display:flex;justify-content:center;padding:0 8px;">
-            <div class="rb-tile is-disabled" style="pointer-events:none;padding:10px 12px;min-width:80px;">
-              <div class="rb-tile-radio" style="padding-top:1px;margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span></div>
+            <div class="rb-tile is-disabled" style="pointer-events:none;padding:10px 12px;min-width:80px;align-items:center;">
+              <div class="rb-tile-radio" style="margin-right:8px;"><span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span></div>
               <div class="rb-tile-body"><div class="rb-tile-title">Value</div></div>
             </div>
           </div>
