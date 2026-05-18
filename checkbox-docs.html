@@ -230,7 +230,7 @@
       <span class="page-updated">Updated May 2026</span>
     </div>
     <h1 class="text-l1">Checkbox</h1>
-    <p class="page-desc">A binary toggle for selecting one or more options from a set. Four variants cover everything from a bare control in a table cell to a full card button in a filter bar.</p>
+    <p class="page-desc">A binary toggle for selecting one or more options from a set. Four variants cover everything from a bare control in a table cell to a labeled item with description and link.</p>
   </div>
 </div><!-- /page-header-row -->
 
@@ -531,16 +531,18 @@
       </div>
       <div class="variant-row">
         <div class="variant-row-btn" style="align-items:flex-start; padding:14px 20px;">
-          <div class="cb-info-wrap" style="pointer-events:none; max-width:220px;">
+          <div class="cb-info-wrap" style="pointer-events:none; max-width:240px;">
             <input type="checkbox" class="cb" checked />
             <div class="cb-info-body">
               <span class="cb-info-label">Label</span>
-              <span class="cb-info-desc">Subtitle with a short explanation.</span>
+              <span class="cb-info-desc">Subtitle with a short explanation. <a class="link-inline" href="#" tabindex="-1" style="pointer-events:none;">Learn more ↗</a></span>
             </div>
           </div>
         </div>
         <div class="variant-row-desc">
-          <strong>With description</strong> — adds a secondary description line below the label. Responds to desktop and mobile widths. An inline link can optionally be appended to the description text.
+          <p style="margin:0 0 6px;"><strong style="color:var(--content-base);">With description</strong></p>
+          <p style="margin:0 0 10px;">Adds a secondary description line below the label. An inline link can optionally be appended to the description text for additional context.</p>
+          <p style="margin:0;font-size:12.5px;color:var(--content-subtle);">Use for: onboarding flows, survey builders, plan selection</p>
         </div>
       </div>
       <div class="variant-row">
@@ -559,6 +561,11 @@
     <div class="gap-callout" style="margin-top:20px;">
       <span class="gap-callout-icon">⚠️</span>
       <div><strong>Figma gap — large size</strong> The large size is defined in Figma for the bare checkbox container only. The "Labeled" and "With description" variants do not have a large-size composition in the design file. Use the large size in code for custom layouts; design the composition manually in Figma when needed.</div>
+    </div>
+
+    <div class="gap-callout" style="margin-top:12px;">
+      <span class="gap-callout-icon">⚠️</span>
+      <div><strong>Figma gap — no tile/card variant</strong> Unlike <a class="link-inline" href="radio-group-docs.html">Radio Group</a>, there is no card-style tile variant for checkboxes in the Figma design system. The closest equivalent is the <strong>With description</strong> variant above (inline label + subtitle + optional link). If your use case requires a bordered card selection, consider the <a class="link-inline" href="radio-group-docs.html">Radio tile</a> pattern or discuss adding a new variant.</div>
     </div>
   </section>
 

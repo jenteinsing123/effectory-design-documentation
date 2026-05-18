@@ -105,6 +105,36 @@
       line-height: 1.55; font-family: 'Poppins', sans-serif;
     }
 
+    /* ── Radio button (pill) ── */
+    .rb-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 34px; padding: 0 12px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-action);
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif; font-size: 14px;
+      color: var(--content-base);
+      cursor: pointer; user-select: none;
+      transition: border-color .1s, background .1s;
+    }
+    .rb-btn input[type="radio"].rb { pointer-events: none; }
+    .rb-btn:hover,
+    .rb-btn.is-hover { background: var(--bg-base-hover); border-color: var(--border-action-hover); }
+    .rb-btn.is-selected,
+    .rb-btn:has(input.is-checked) {
+      background: var(--bg-brand-subtle);
+      border-color: var(--border-brand-subtle);
+    }
+    .rb-btn.is-selected:hover,
+    .rb-btn:has(input.is-checked):hover,
+    .rb-btn.is-selected.is-hover { border-color: var(--bg-brand-base); }
+    .rb-btn.is-disabled {
+      background: var(--bg-base);
+      border-color: var(--border-disabled);
+      color: var(--content-disabled);
+      cursor: not-allowed; pointer-events: none;
+    }
+
     /* ── Dev tab code blocks ── */
     .dev-preview {
       display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
@@ -151,7 +181,7 @@
     <span class="badge badge-stable">Stable</span>
   </div>
   <h1 class="text-l1">Radio Group</h1>
-  <p class="page-desc">Radio buttons let users select exactly one option from a set. Two display variants are available: a standard labeled list and a card-style tile layout.</p>
+  <p class="page-desc">Radio buttons let users select exactly one option from a set. Three display variants are available: a standard labeled list, a card-style tile, and a compact pill button.</p>
 </div>
 </div><!-- /page-header-row -->
 
@@ -265,6 +295,7 @@
         <tbody>
           <tr><td><strong>Radio group</strong></td><td>Standard form fields, settings, and filters. Labels are short (1–4 words). Compact vertical or horizontal layout.</td></tr>
           <tr><td><strong>Radio tiles</strong></td><td>When each option needs a short description to be understood — plan selection, onboarding flows, survey question types. The larger click target also helps on touch screens.</td></tr>
+          <tr><td><strong>Radio button</strong></td><td>Compact pill-shaped buttons in a horizontal row. Ideal for 2–5 short options in filter bars or mode toggles where space is limited.</td></tr>
         </tbody>
       </table>
     </div>
@@ -379,6 +410,23 @@
           <p style="margin:0;font-size:12.5px;color:var(--content-subtle);">Use when options need more context to compare, or when the choice carries more weight.</p>
         </div>
       </div>
+      <div class="variant-row">
+        <div class="variant-row-btn" style="gap:8px; flex-wrap:wrap;">
+          <label class="rb-btn" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb" /></span>Option A</label>
+          <label class="rb-btn is-selected" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-checked" /></span>Option B</label>
+          <label class="rb-btn is-disabled" style="pointer-events:none;"><span class="rb-wrap"><input type="radio" class="rb is-disabled" /></span>Option C</label>
+        </div>
+        <div class="variant-row-desc">
+          <p style="margin:0 0 6px;"><strong style="color:var(--content-base);">Radio button</strong></p>
+          <p style="margin:0 0 10px;">A pill-shaped button where the entire surface is the click target. Selected state uses a soft teal background. Best for compact horizontal filter groups.</p>
+          <p style="margin:0;font-size:12.5px;color:var(--content-subtle);">Use for: 2–5 short options in a horizontal row, mode toggles, compact filter bars</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-callout" style="margin-top:20px;">
+      <span class="gap-callout-icon">⚠️</span>
+      <div><strong>Figma gap — radio button card</strong> The Figma "Radio button card" variant includes a <em>View details →</em> action link inside the tile body. This is not part of <code>mat-radio-button</code> — implement it as a separate <code>&lt;a&gt;</code> or <code>&lt;button&gt;</code> element inside the tile template, outside the radio button's click target.</div>
     </div>
   </section>
 
@@ -607,6 +655,34 @@ deliveryControl = <span class="ca">new</span> FormControl(<span class="cv">'sche
     </div>
   </section>
 
+  <!-- RADIO BUTTON PILL -->
+  <section class="section" id="dev-radio-btn">
+    <h2 class="text-l3">Radio button</h2>
+    <p class="section-lead">Pill-shaped radio buttons for compact horizontal groups. Wrap each <code>mat-radio-button</code> in a <code>.radio-button</code> label element and add <code>no-label</code> to suppress the built-in label.</p>
+
+    <div class="dev-preview" style="gap:8px; align-items:center; flex-wrap:wrap;">
+      <label class="rb-btn"><span class="rb-wrap"><input type="radio" class="rb" name="dev-pill" /></span>Option A</label>
+      <label class="rb-btn is-selected"><span class="rb-wrap"><input type="radio" class="rb is-checked" name="dev-pill" /></span>Option B</label>
+      <label class="rb-btn"><span class="rb-wrap"><input type="radio" class="rb" name="dev-pill" /></span>Option C</label>
+      <label class="rb-btn is-disabled"><span class="rb-wrap"><input type="radio" class="rb is-disabled" name="dev-pill" /></span>Option D</label>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn" onclick="copyCode(this)">Copy</button>
+      <pre><code>&lt;mat-radio-group formControlName="option"&gt;
+  &lt;label class="radio-button"&gt;
+    &lt;mat-radio-button class="no-label" value="a"
+      aria-labelledby="opt-a"&gt;&lt;/mat-radio-button&gt;
+    &lt;span id="opt-a"&gt;Option A&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class="radio-button"&gt;
+    &lt;mat-radio-button class="no-label" value="b"
+      aria-labelledby="opt-b"&gt;&lt;/mat-radio-button&gt;
+    &lt;span id="opt-b"&gt;Option B&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/mat-radio-group&gt;</code></pre>
+    </div>
+  </section>
+
   <!-- DISABLED -->
   <section class="section" id="dev-disabled">
     <h2 class="text-l3">Disabled states</h2>
@@ -676,6 +752,7 @@ deliveryControl = <span class="ca">new</span> FormControl(<span class="cv">'sche
   <div class="toc-title">ON THIS PAGE</div>
   <a class="toc-link" href="#dev-basic">Radio group</a>
   <a class="toc-link" href="#dev-tiles">Radio tiles</a>
+  <a class="toc-link" href="#dev-radio-btn">Radio button</a>
   <a class="toc-link" href="#dev-disabled">Disabled states</a>
   <a class="toc-link" href="#dev-api">API reference</a>
 </nav>
