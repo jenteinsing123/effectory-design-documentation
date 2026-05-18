@@ -15,7 +15,7 @@
     input[type="radio"].rb {
       -webkit-appearance: none; appearance: none;
       width: 16px; height: 16px;
-      border: 1.5px solid var(--border-action);
+      border: 1px solid var(--border-action);   /* 1px, matches Figma */
       border-radius: 50%;
       background: var(--bg-base);
       cursor: pointer;
@@ -24,7 +24,7 @@
       margin: 0;
       flex-shrink: 0;
     }
-    /* inner dot via ::after on wrapper — teal when selected */
+    /* white inner dot — revealed when selected */
     .rb-wrap::after {
       content: '';
       position: absolute;
@@ -32,7 +32,7 @@
       transform: translate(-50%, -50%);
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--bg-brand-base);
+      background: #ffffff;
       opacity: 0;
       pointer-events: none;
       transition: opacity .1s;
@@ -40,32 +40,27 @@
     .rb-wrap:has(input:checked)::after,
     .rb-wrap:has(input.is-checked)::after { opacity: 1; }
 
-    /* Selected — ring stays visible, dot is brand-coloured */
+    /* Selected — full teal fill + teal border + white dot */
     input[type="radio"].rb:checked,
     input[type="radio"].rb.is-checked {
-      background: var(--bg-base);
-      border-color: var(--border-brand-base);
-      border-width: 1.5px;
+      background: var(--bg-brand-base);      /* #0a9d99 */
+      border-color: var(--bg-brand-base);    /* #0a9d99 */
     }
     /* Hover — unselected */
     input[type="radio"].rb:hover,
     input[type="radio"].rb.is-hover { border-color: var(--border-action-hover); }
-    /* Hover — selected: ring darkens, dot darkens */
+    /* Hover — selected: darker teal fill + darker border */
     input[type="radio"].rb.is-checked:hover,
     input[type="radio"].rb.is-checked.is-hover {
-      border-color: var(--border-brand-base-hover);
+      background: var(--bg-brand-base-hover);     /* #0c827f */
+      border-color: var(--bg-brand-base-pressed); /* #166764 */
     }
-    .rb-wrap:has(input.is-checked.is-hover)::after,
-    .rb-wrap:has(input.is-checked:hover)::after {
-      background: var(--bg-brand-base-hover);
-    }
-    /* Disabled */
+    /* Disabled — light navy fill, no border, no separate opacity */
     input[type="radio"].rb.is-disabled,
     input[type="radio"].rb:disabled {
-      background: var(--bg-disabled);
-      border-color: var(--border-action);
+      background: var(--bg-disabled);  /* rgba(25,39,67,0.10) */
+      border: none;
       cursor: not-allowed;
-      opacity: 0.45;
     }
 
     /* ── Radio label wrap ── */
