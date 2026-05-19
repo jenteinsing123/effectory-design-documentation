@@ -43,17 +43,25 @@
     /* Selected — full teal fill + teal border + white dot */
     input[type="radio"].rb:checked,
     input[type="radio"].rb.is-checked {
-      background: var(--bg-brand-base);      /* #0a9d99 */
-      border-color: var(--bg-brand-base);    /* #0a9d99 */
+      background: var(--bg-brand-base);         /* #0a9d99 */
+      border-color: var(--border-brand-base);   /* #0c827f */
     }
     /* Hover — unselected */
     input[type="radio"].rb:hover,
     input[type="radio"].rb.is-hover { border-color: var(--border-action-hover); }
+    /* Propagate hover to input when hovering anywhere on the label */
+    .rb-label-wrap:hover .rb:not(.is-disabled),
+    .rb-info-wrap:hover .rb:not(.is-disabled) { border-color: var(--border-action-hover); }
+    .rb-label-wrap:hover .rb.is-checked:not(.is-disabled),
+    .rb-info-wrap:hover .rb.is-checked:not(.is-disabled) {
+      background: var(--bg-brand-base-hover);
+      border-color: var(--border-brand-base-hover);
+    }
     /* Hover — selected: darker teal fill + darker border */
     input[type="radio"].rb.is-checked:hover,
     input[type="radio"].rb.is-checked.is-hover {
-      background: var(--bg-brand-base-hover);     /* #0c827f */
-      border-color: var(--bg-brand-base-pressed); /* #166764 */
+      background: var(--bg-brand-base-hover);       /* #0c827f */
+      border-color: var(--border-brand-base-hover); /* #166764 */
     }
     /* Disabled — light navy fill, no border, no separate opacity */
     input[type="radio"].rb.is-disabled,
