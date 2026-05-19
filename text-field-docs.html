@@ -534,6 +534,14 @@
     <h2 class="text-l3">States</h2>
     <p class="section-lead">Both the standard and inline variants share the same state model. All elements below have <code>pointer-events: none</code> — they are static illustrations.</p>
 
+    <div class="gap-callout">
+      <span class="gap-callout-icon">⚠️</span>
+      <div class="gap-callout-body">
+        <span class="gap-callout-label">Design gap</span>
+        <span class="gap-callout-text">The live Angular component triggers the error state with <code>class="error"</code> directly on the <code>&lt;input&gt;</code>, not <code>class="is-error"</code>. The design system convention uses <code>is-error</code> to match the <code>is-*</code> state-class pattern. These need to be aligned — either update the CSS to also respond to <code>class="error"</code>, or migrate the codebase to use <code>is-error</code>.</span>
+      </div>
+    </div>
+
     <h3 class="text-l4">Standard</h3>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
@@ -587,16 +595,16 @@
         <div style="display:grid; grid-template-columns:110px repeat(4,1fr); padding:16px 20px; align-items:center; gap:8px 4px;">
           <span style="font-size:12px;color:var(--content-subtle);">Inline</span>
           <div style="display:flex;justify-content:center;padding:0 4px;">
-            <input class="tf-inline" type="text" value="Jente" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
+            <input class="tf-inline" type="text" value="Q3 Pulse" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
           </div>
           <div style="display:flex;justify-content:center;padding:0 4px;">
-            <input class="tf-inline is-hover" type="text" value="Jente" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
+            <input class="tf-inline is-hover" type="text" value="Q3 Pulse" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
           </div>
           <div style="display:flex;justify-content:center;padding:0 4px;">
-            <input class="tf-inline is-focus" type="text" value="Jente" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
+            <input class="tf-inline is-focus" type="text" value="Q3 Pulse" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
           </div>
           <div style="display:flex;justify-content:center;padding:0 4px;">
-            <input class="tf-inline is-disabled" type="text" value="Jente" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
+            <input class="tf-inline is-disabled" type="text" value="Q3 Pulse" style="pointer-events:none;width:100%;min-width:0;" tabindex="-1" />
           </div>
         </div>
       </div>
@@ -840,6 +848,13 @@
     </div>
 
     <h3 class="text-l4">Error state</h3>
+    <div class="dev-gap">
+      <span class="dev-gap-icon">⚠️</span>
+      <div class="dev-gap-body">
+        <span class="dev-gap-label">Figma gap</span>
+        <span class="dev-gap-text">The live styleguide component uses <code>class="error"</code> on the <code>&lt;input&gt;</code> for the error state — not <code>class="is-error"</code> as documented here. Until the codebase is updated to follow the <code>is-*</code> convention, use <code>class="error"</code> in production Angular templates and add support for both classes in the shared CSS.</span>
+      </div>
+    </div>
     <div class="dev-preview" style="padding:24px 28px; gap:20px; align-items:flex-start; flex-wrap:wrap;">
       <div class="tf-wrap" style="width:240px;">
         <label class="tf-lbl" for="tf-demo-4">Email address</label>
@@ -876,6 +891,15 @@
   <span class="ct">&lt;label</span> <span class="ca">class</span>=<span class="cv">"tf-lbl"</span> <span class="ca">for</span>=<span class="cv">"org"</span><span class="ct">&gt;</span>Organisation<span class="ct">&lt;/label&gt;</span>
   <span class="ct">&lt;input</span> <span class="ca">class</span>=<span class="cv">"tf"</span> <span class="ca">type</span>=<span class="cv">"text"</span> <span class="ca">id</span>=<span class="cv">"org"</span> <span class="ca">disabled</span> <span class="ct">/&gt;</span>
 <span class="ct">&lt;/div&gt;</span></code></pre>
+    </div>
+
+    <h3 class="text-l4">Number input</h3>
+    <div class="dev-gap">
+      <span class="dev-gap-icon">⚠️</span>
+      <div class="dev-gap-body">
+        <span class="dev-gap-label">Figma gap</span>
+        <span class="dev-gap-text"><code>&lt;input type="number"&gt;</code> is used in production (with disabled and error states) but has no corresponding Figma component or documentation here yet. It shares the same CSS classes as the text variant. Add a dedicated number input frame to the Figma file and a usage example here in a future iteration.</span>
+      </div>
     </div>
 
     <h3 class="text-l4">Inline variant</h3>
@@ -915,7 +939,7 @@
           <tr><td><code>.tf.is-disabled</code></td><td><code>input</code></td><td>Static disabled state — muted background, no border; prefer the native <code>disabled</code> attribute</td></tr>
           <tr><td><code>.tf-help</code></td><td><code>span</code></td><td>Helper text — 13px, subtle colour; link to input via <code>aria-describedby</code></td></tr>
           <tr><td><code>.tf-err</code></td><td><code>div</code></td><td>Error message row — icon + 13px red text; link via <code>aria-describedby</code></td></tr>
-          <tr><td><code>.tf-inline</code></td><td><code>input</code></td><td>Inline variant — transparent border until hover/focus, 28px height, no label</td></tr>
+          <tr><td><code>.tf-inline</code></td><td><code>input</code></td><td>Inline variant — transparent border until hover/focus, 36px height, no label</td></tr>
           <tr><td><code>.tf-inline.is-hover</code></td><td><code>input</code></td><td>Static hover for inline</td></tr>
           <tr><td><code>.tf-inline.is-focus</code></td><td><code>input</code></td><td>Static focus for inline</td></tr>
           <tr><td><code>.tf-inline.is-disabled</code></td><td><code>input</code></td><td>Static disabled for inline</td></tr>
