@@ -80,7 +80,7 @@
     /* Error message */
     .ta-err {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 4px;
       font-size: 12px;
       line-height: 1.4;
@@ -92,6 +92,7 @@
       width: 14px;
       height: 14px;
       flex-shrink: 0;
+      align-self: flex-start;
       margin-top: calc((1.4em - 14px) / 2);
     }
   </style>
@@ -319,11 +320,11 @@
     <h2 class="text-l3">States</h2>
     <p class="section-lead">The textarea shares the same state model as the standard text field. All elements below are static illustrations.</p>
 
-    <div class="gap-callout">
-      <span class="gap-callout-icon">⚠️</span>
-      <div class="gap-callout-body">
-        <span class="gap-callout-label">Design gap</span>
-        <span class="gap-callout-text">The error message styling in Figma does not yet reflect the current spec: text should be 12px and the warning icon 14px. Update the Figma component to match.</span>
+    <div class="dev-gap">
+      <span class="dev-gap-icon">⚠️</span>
+      <div class="dev-gap-body">
+        <span class="dev-gap-label">Figma gap</span>
+        <span class="dev-gap-text">The error message styling in Figma does not yet reflect the current spec: text should be 12px and the warning icon 14px. Update the Figma component to match.</span>
       </div>
     </div>
 
