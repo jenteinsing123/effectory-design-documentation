@@ -334,6 +334,15 @@ Each example in the dev Usage section is a preview block followed immediately by
 </div>
 ```
 
+### Code snippet integrity — never invent class names or APIs
+
+**The `dev-code-wrap` snippet must only contain code that actually exists in the Angular codebase.** Verify against the live styleguide at `styleguide.effectory.com` before writing any snippet.
+
+- **Do not invent class names**, component selectors, wrapper elements, or HTML patterns. If you cannot confirm a class or selector exists in the live styleguide, do not include it.
+- **`dev-preview` HTML may use internal documentation-only CSS classes** for visual rendering (e.g. `.tf-inline` for demo purposes). Those classes must **never** appear in the `dev-code-wrap` code snippet.
+- **If the Angular API is unknown or not yet documented**, omit the code snippet and add a `dev-gap` callout explaining what needs to be confirmed before the snippet can be written.
+- **The playground `buildCode()` function** must follow the same rule — it generates code the user will copy into their app. No invented class names.
+
 Syntax highlight classes inside `<code>`:
 - `<span class="ct">` — tag names (`<button`, `/>`)
 - `<span class="ca">` — attribute names (`class`, `type`)
@@ -511,3 +520,5 @@ TOC `href`s must exactly match the section `id`. Standard IDs:
 | Setting `layoutSizingHorizontal = 'FILL'` before `appendChild` | Not applicable here (Figma SDK rule), but mirrors the flex rule: set sizing after the parent relationship is established. |
 | Mixing `flex:1` and `flex:none` incorrectly in `dd-card` | `dd-prev` gets `flex:1` (grows to fill height); `dd-cap` gets `flex:none` (natural height, pins to bottom). |
 | Missing `is-` prefix on state classes | All state classes are `is-hover`, `is-pressed`, `is-checked`, `is-disabled`, etc. Never `hover`, `active`, `checked`. |
+| Inventing class names in `dev-code-wrap` snippets | Only use class names / selectors confirmed in the live Angular styleguide (`styleguide.effectory.com`). If the API is unknown, add a `dev-gap` callout instead of guessing. |
+| Using internal demo CSS classes in code snippets | Classes written in the page `<style>` block for visual demos (e.g. `.tf-inline`, `.tf-num-wrap`) must never appear in copyable code snippets — they are documentation scaffolding, not production code. |
