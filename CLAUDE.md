@@ -244,16 +244,45 @@ Don't (red X): `<circle cx="9" cy="9" r="9" fill="#dc2626"/>` + `<path d="M6 6l6
 
 ## 8. Variants Section
 
-Use `state-col` groups or a free layout depending on the component. Each variant is shown live with a label below:
+Every Variants section uses the `variant-rows` / `variant-row` pattern — a live component preview on the left and a **when-to-use description** on the right. This is the canonical layout for all component pages.
 
 ```html
-<div class="state-col">
-  <!-- component instance -->
-  <span class="state-label">[Variant name]</span>
-</div>
+<section class="section" id="variants">
+  <h2 class="text-l3">Variants</h2>
+  <p class="section-lead">[One sentence describing what the variants control, e.g. "The Type property controls visual hierarchy."]</p>
+
+  <div class="variant-rows">
+    <div class="variant-row">
+      <div class="variant-row-btn">
+        <!-- live component demo, pointer-events:none -->
+      </div>
+      <div class="variant-row-desc">[When to use this variant. Keep it 1–3 sentences. Include the Figma property name in the first sentence where relevant.]</div>
+    </div>
+    <!-- repeat for each variant -->
+  </div>
+</section>
 ```
 
-Group related variants in a `<div class="cb-demo-row">` (row wrap) or `<div class="cb-demo-col">` (column).
+Rules:
+- **One row per variant.** Do not show multiple states (hover, focus, etc.) inside the Variants section — that is what the States section is for.
+- **`variant-row-btn` contains only the default / rest state** of the component. No `is-hover`, `is-focus`, `is-error` classes here.
+- **`variant-row-desc` explains when to use it** — not what it looks like. Start with the use case, not the visual description.
+- All components inside `variant-row-btn` must have `pointer-events:none`.
+- If a component has sub-groups (e.g. a text field with Standard, Inline text, and Inline number sub-variants), use an `<h3 class="text-l4">` heading before the relevant `variant-rows` block for each sub-group.
+
+Example from the Button page:
+```html
+<div class="variant-rows">
+  <div class="variant-row">
+    <div class="variant-row-btn"><button class="btn btn-primary" style="pointer-events:none;">Primary</button></div>
+    <div class="variant-row-desc">The single highest-emphasis action on a view. Submit a form, complete an onboarding step, confirm a key decision. Use only once per page section.</div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-row-btn"><button class="btn btn-secondary" style="pointer-events:none;">Secondary</button></div>
+    <div class="variant-row-desc">Supporting actions alongside a Primary — Cancel, Edit, Export. Can appear multiple times without competing with the primary.</div>
+  </div>
+</div>
+```
 
 ---
 
@@ -276,35 +305,41 @@ State class naming: always `is-[statename]` (kebab-case, prefixed with `is-`).
 
 ### States layout — grey cards
 
-States are always displayed using the `states-row` + `state-col` pattern. Each state gets its own grey card. The label (`state-lbl`) goes **above** the component inside the card.
+States are **always** displayed using the `states-row` + `state-col` pattern. Every state gets its own individual grey card. The label (`state-lbl`) goes **above** the component inside the card.
 
 ```html
 <div class="states-row">
   <div class="state-col">
     <span class="state-lbl">Default</span>
-    <!-- component instance -->
+    <!-- component instance, pointer-events:none, tabindex="-1" -->
   </div>
   <div class="state-col">
     <span class="state-lbl">Hover</span>
-    <!-- component instance with is-hover -->
+    <!-- component instance with is-hover class -->
+  </div>
+  <div class="state-col">
+    <span class="state-lbl">Focus</span>
+    <!-- component instance with is-focus class -->
+  </div>
+  <div class="state-col">
+    <span class="state-lbl">Disabled</span>
+    <!-- component instance with is-disabled class + pointer-events:none -->
   </div>
   <!-- … one state-col per state … -->
 </div>
 ```
 
-`states-row` is a CSS grid with `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))`, `gap: 4px`, `border-radius: 12px`, and `overflow: hidden`. Each `state-col` has `background: var(--bg-secondary)` and `padding: 40px`.
+CSS behind the pattern (defined in `styles.css`, do not redefine inline):
+- `states-row` — CSS grid, `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))`, `gap: 4px`, `border-radius: 12px`, `overflow: hidden`
+- `state-col` — `background: var(--bg-secondary)`, `padding: 40px`
+- `state-lbl` — `font-size: 11px`, uppercase, sits above the component
 
-**Never wrap states in a `preview` / `preview-bar` / `preview-body` container** — that is the old browser-chrome style and is no longer used for states.
-
-For components whose states are shown as a **multi-variant grid table** (e.g. Text Field, bare Checkbox, bare Radio) rather than individual cards, wrap the entire table in a single plain grey card:
-
-```html
-<div style="background:var(--bg-secondary);border-radius:12px;overflow:hidden;margin:24px 0 40px;padding-top:20px;">
-  <!-- grid table with header row + data rows -->
-</div>
-```
-
-**Every variant must be shown for every applicable state.** If a component has multiple variants (e.g. Standard, Inline, Number picker), each variant gets its own states grid row or sub-section. Never document states for only one variant and leave others incomplete. If a state genuinely does not apply to a variant (e.g. Error on an inline editor), omit that column only for that variant — but make a conscious decision, not an oversight.
+Rules:
+- **Never wrap states in a `preview` / `preview-bar` / `preview-body` container** — that is the old browser-chrome style and must not be used for states.
+- **Never use a grid table or matrix layout** — every state is its own card, even for components with sub-variants (e.g. unchecked / checked / indeterminate inside a single "Default" card is acceptable when they represent visual sub-states of the same interaction state, but each interactive state — Default, Hover, Disabled — still gets its own card).
+- **Every variant must be shown for every applicable state.** If a component has multiple variants (e.g. Standard, Inline text, Inline number), use a separate `states-row` block per variant, preceded by an `<h3 class="text-l4">` heading. Never document states for only one variant and leave others without states.
+- If a state genuinely does not apply to a specific variant (e.g. Error on an inline editor), omit that card only for that variant — but make a deliberate decision, not an oversight.
+- All component instances inside `state-col` must have `pointer-events:none` and `tabindex="-1"` — they are static illustrations.
 
 ---
 
