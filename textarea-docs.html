@@ -131,7 +131,7 @@
       flex-shrink: 0;
       position: relative;
     }
-    .ta-info-btn:hover { background: var(--bg-secondary); color: var(--content-base); }
+    .ta-info-btn:hover { color: var(--content-base); }
     .ta-tooltip {
       display: none;
       position: absolute;
@@ -386,7 +386,7 @@
         <div class="variant-row-btn">
           <div class="ta-wrap" style="width:240px;">
             <div class="ta-lbl-row">
-              <span class="ta-lbl-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/></svg></span>
+              <span class="ta-lbl-icon"><i data-icon="tag" style="display:flex;width:16px;height:16px;"></i></span>
               <label class="ta-lbl">Survey description</label>
             </div>
             <textarea class="ta" rows="3" placeholder="Describe the purpose…"></textarea>
@@ -400,7 +400,7 @@
             <div class="ta-lbl-row">
               <label class="ta-lbl">Additional context</label>
               <button class="ta-info-btn" aria-label="More information">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 7v4M8 5.5v.5"/></svg>
+                <i data-icon="info" style="display:flex;width:16px;height:16px;"></i>
                 <span class="ta-tooltip">Shown to respondents below the survey title.</span>
               </button>
             </div>

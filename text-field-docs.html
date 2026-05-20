@@ -302,7 +302,7 @@
       flex-shrink: 0;
       position: relative;
     }
-    .tf-info-btn:hover { background: var(--bg-secondary); color: var(--content-base); }
+    .tf-info-btn:hover { color: var(--content-base); }
     .tf-tooltip {
       display: none;
       position: absolute;
@@ -674,7 +674,7 @@
         <div class="variant-row-btn">
           <div class="tf-wrap" style="width:220px;">
             <div class="tf-lbl-row">
-              <span class="tf-lbl-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/></svg></span>
+              <span class="tf-lbl-icon"><i data-icon="tag" style="display:flex;width:16px;height:16px;"></i></span>
               <label class="tf-lbl">Survey name</label>
             </div>
             <input class="tf" type="text" placeholder="Enter a name…" />
@@ -688,7 +688,7 @@
             <div class="tf-lbl-row">
               <label class="tf-lbl">Response deadline</label>
               <button class="tf-info-btn" aria-label="More information">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 7v4M8 5.5v.5"/></svg>
+                <i data-icon="info" style="display:flex;width:16px;height:16px;"></i>
                 <span class="tf-tooltip">The date after which responses are no longer accepted.</span>
               </button>
             </div>
