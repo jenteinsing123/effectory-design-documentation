@@ -369,7 +369,7 @@ code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11.5px
 .dd-card { border: 1px solid var(--border-base); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; }
 .dd-prev {
   padding: var(--spacing-extra-loose) var(--spacing-loose); background: var(--bg-base);
-  display: flex; align-items: center; justify-content: center; gap: var(--spacing-tight);
+  display: flex; align-items: center; align-content: center; justify-content: center; gap: var(--spacing-tight);
   min-height: 200px; flex-wrap: wrap; overflow: hidden;
   border-bottom: 1px solid var(--border-base);
 }
