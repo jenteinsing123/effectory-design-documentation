@@ -560,6 +560,36 @@
         <div class="variant-row-desc"><strong>Inline number</strong> — a compact numeric field with custom stepper controls. The border is transparent at rest, like the inline text variant. Use for numeric entry in dense layouts such as table cells or configuration panels. An optional label prefix can be placed inside the field for context.</div>
       </div>
     </div>
+
+    <h3 class="text-l4" style="margin-top:32px;">With icons</h3>
+    <p style="font-size:14px; color:var(--content-secondary); line-height:1.6; margin-bottom:12px;">Icons are placed inside the field using <code>.tf-field-icon</code> with either <code>.tf-icon-left</code> or <code>.tf-icon-right</code>. Only applies to the Standard variant.</p>
+    <div class="variant-rows">
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <div class="tf-wrap" style="width:220px; pointer-events:none;">
+            <label class="tf-lbl">Search</label>
+            <div class="tf-field">
+              <div class="tf-field-icon tf-icon-left"><i data-icon="search" style="display:flex;width:16px;height:16px;"></i></div>
+              <input class="tf" type="search" placeholder="Search surveys…" style="padding-left:34px;" tabindex="-1" />
+            </div>
+          </div>
+        </div>
+        <div class="variant-row-desc"><strong>Leading icon</strong> — a single icon on the left side of the input. Use to reinforce the field's purpose at a glance — a search glass for search fields, an envelope for email, a lock for passwords.</div>
+      </div>
+      <div class="variant-row">
+        <div class="variant-row-btn">
+          <div class="tf-wrap" style="width:220px; pointer-events:none;">
+            <label class="tf-lbl">Password</label>
+            <div class="tf-field">
+              <div class="tf-field-icon tf-icon-left"><i data-icon="lock" style="display:flex;width:16px;height:16px;"></i></div>
+              <div class="tf-field-icon tf-icon-right"><i data-icon="eye" style="display:flex;width:16px;height:16px;"></i></div>
+              <input class="tf" type="password" placeholder="••••••••" style="padding-left:34px;padding-right:34px;" tabindex="-1" />
+            </div>
+          </div>
+        </div>
+        <div class="variant-row-desc"><strong>Leading + trailing icon</strong> — icons on both sides. Use the leading icon to identify the field type and the trailing icon for an interactive affordance, such as a show/hide toggle on a password field.</div>
+      </div>
+    </div>
   </section>
 
   <!-- STATES -->
