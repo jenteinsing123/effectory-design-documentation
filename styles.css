@@ -268,7 +268,8 @@ h6 { font-size: 12px; font-weight: 600; color: var(--content-subtle); letter-spa
 .is-pressed.ib-secondary { background: var(--bg-secondary); border-color: var(--border-action-pressed); }
 .is-hover.ib-tertiary   { background: var(--bg-base-hover); color: var(--content-base); }
 .is-pressed.ib-tertiary  { background: var(--bg-secondary); }
-.is-disabled { background: var(--bg-disabled) !important; border-color: transparent !important; box-shadow: none !important; color: var(--content-disabled) !important; cursor: not-allowed; }
+.is-disabled { background: var(--bg-disabled) !important; box-shadow: none !important; color: var(--content-disabled) !important; cursor: not-allowed; }
+.is-disabled.ib-primary, .is-disabled.ib-secondary, .is-disabled.ib-tertiary { border-color: transparent !important; }
 .is-disabled.ib-secondary { background: var(--bg-base) !important; border-color: var(--border-base) !important; }
 .is-disabled.ib-tertiary  { background: transparent !important; }
 .is-focus { outline: 2px solid var(--border-action-focus); outline-offset: 2px; }
