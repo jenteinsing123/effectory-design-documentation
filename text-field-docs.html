@@ -214,13 +214,14 @@
       align-items: stretch;
     }
     .tf-num-btn {
-      flex: 1;
+      flex: 1 0 0;
+      min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       border: none;
       background: transparent;
-      padding: 2px 4px;
+      padding: 0 4px;
       cursor: pointer;
       border-radius: 4px;
       color: var(--content-secondary);
@@ -653,8 +654,8 @@
           <div class="tf-num-wrap" style="pointer-events:none;">
             <input class="tf-num" type="text" placeholder="08:00" tabindex="-1" />
             <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
           <span class="state-label">Default</span>
@@ -664,8 +665,8 @@
           <div class="tf-num-wrap is-hover" style="pointer-events:none;">
             <input class="tf-num" type="text" value="08:00" tabindex="-1" />
             <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
           <span class="state-label">Hover</span>
@@ -675,8 +676,8 @@
           <div class="tf-num-wrap is-focus" style="pointer-events:none;">
             <input class="tf-num" type="text" value="08:00" tabindex="-1" />
             <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
           <span class="state-label">Focus</span>
@@ -686,8 +687,8 @@
           <div class="tf-num-wrap is-error" style="pointer-events:none;">
             <input class="tf-num" type="text" value="08:00" tabindex="-1" />
             <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
           <span class="state-label">Error</span>
@@ -697,8 +698,8 @@
           <div class="tf-num-wrap is-disabled" style="pointer-events:none;">
             <input class="tf-num" type="text" value="08:00" tabindex="-1" />
             <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
           <span class="state-label">Disabled</span>
@@ -710,8 +711,8 @@
               <span class="tf-num-lbl">H:</span>
               <input class="tf-num" type="text" value="08" style="width:2ch;" tabindex="-1" />
               <div class="tf-num-stepper">
-                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               </div>
             </div>
             <span style="font-size:14px;font-weight:600;color:var(--content-secondary);">:</span>
@@ -719,8 +720,8 @@
               <span class="tf-num-lbl">M:</span>
               <input class="tf-num" type="text" value="30" style="width:2ch;" tabindex="-1" />
               <div class="tf-num-stepper">
-                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               </div>
             </div>
           </div>
@@ -832,49 +833,49 @@
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Hover -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-hover" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Focus -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-focus" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Error -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-error" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Error Hover -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-error is-hover" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Error Focus -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-error is-focus" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
           <!-- Disabled -->
           <div style="display:flex;justify-content:center;padding:0 4px;">
             <div class="tf-num-wrap is-disabled" style="pointer-events:none;width:100%;min-width:0;">
               <input class="tf-num" type="text" value="08:00" tabindex="-1" />
-              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
             </div>
           </div>
         </div>
@@ -1170,8 +1171,8 @@
       <div class="tf-num-wrap">
         <input class="tf-num" type="number" min="0" max="23" placeholder="08" />
         <div class="tf-num-stepper">
-          <button class="tf-num-btn" aria-label="Increment"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="tf-num-btn" aria-label="Decrement"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="tf-num-btn" aria-label="Increment"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="tf-num-btn" aria-label="Decrement"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       </div>
       <!-- Time picker: H + M pair -->
@@ -1180,8 +1181,8 @@
           <span class="tf-num-lbl">H:</span>
           <input class="tf-num" type="number" min="0" max="23" value="08" style="width:2ch;" />
           <div class="tf-num-stepper">
-            <button class="tf-num-btn" aria-label="Increment hours"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="tf-num-btn" aria-label="Decrement hours"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Increment hours"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Decrement hours"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
         <span style="font-size:14px;font-weight:600;color:var(--content-secondary);">:</span>
@@ -1189,8 +1190,8 @@
           <span class="tf-num-lbl">M:</span>
           <input class="tf-num" type="number" min="0" max="59" value="30" style="width:2ch;" />
           <div class="tf-num-stepper">
-            <button class="tf-num-btn" aria-label="Increment minutes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="tf-num-btn" aria-label="Decrement minutes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Increment minutes"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Decrement minutes"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
       </div>
@@ -1486,7 +1487,7 @@
     if (props.iconLeft || props.iconRight) html += '</div>';
 
     if (s === 'error') {
-      html += '<div class="tf-err"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="6"/><path d="M7 4.5v3M7 9.5v.5"/></svg>This field is required</div>';
+      html += '<div class="tf-err"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="6"/><path d="M7 4.5v3M7 9.5v.5"/></svg>This field is required</div>';
     } else if (props.helper) {
       html += '<span class="tf-help">Helper text for extra context</span>';
     }
