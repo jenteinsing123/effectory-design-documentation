@@ -214,10 +214,12 @@ Use a `dd-grid` for each Do/Don't pair. Always come in pairs of exactly two: one
 
 ### dd-prev layout rules
 
+The global `.dd-prev` CSS uses `min-height: 200px`, `display: flex`, `align-items: center`, `align-content: center`, and `flex-wrap: wrap`. Content is always vertically and horizontally centred. Do not add a fixed `height` or override `align-content`.
+
 **Default** (horizontal, single-line previews):
 ```html
 <div class="dd-prev">
-  <!-- inline-flex by default, items in a row -->
+  <!-- items in a centred row, vertically and horizontally -->
 </div>
 ```
 
@@ -229,7 +231,7 @@ Use a `dd-grid` for each Do/Don't pair. Always come in pairs of exactly two: one
 Critical: when `flex-direction:column`, always add **all five** of these inline overrides:
 - `flex-wrap:nowrap` — prevents items overflowing into a phantom right column
 - `flex:1` — lets the preview grow to fill the card height (captions then align via `flex:none` on `.dd-cap`)
-- `height:auto` — removes the global fixed height that causes overflow
+- `height:auto` — overrides the global `min-height` so the container shrinks to content
 - `justify-content:flex-start` — items pin to the top
 - `align-items:flex-start` — items align left
 
@@ -584,6 +586,8 @@ TOC `href`s must exactly match the section `id`. Standard IDs:
 | Mistake | Fix |
 |---------|-----|
 | `flex-direction:column` on `dd-prev` without `flex-wrap:nowrap` + `height:auto` | Items overflow into phantom right column. Add all five column overrides (see §7). |
+| Adding a fixed `height` to `dd-prev` | Use the global `min-height: 200px` instead. A fixed height clips tall content and breaks the column-layout override. |
+| Wrapping a component in a `div` inside `state-col` without `width:100%` | `.state-col` has `align-items: flex-start`, so a wrapper `div` will shrink to its content width instead of stretching. Always add `width:100%` to any block wrapper (e.g. `.tf-wrap`) placed directly inside a `state-col`. |
 | Using `--bg-brand-base` as a border color | Use `--border-brand-base` for borders. Different values. |
 | Dark background override on `.dev-code-wrap` or `.dev-preview` | Remove it. `styles.css` handles the light theme globally. |
 | Setting `layoutSizingHorizontal = 'FILL'` before `appendChild` | Not applicable here (Figma SDK rule), but mirrors the flex rule: set sizing after the parent relationship is established. |
