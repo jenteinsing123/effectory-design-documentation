@@ -164,6 +164,87 @@
       cursor: not-allowed;
     }
 
+    /* ── Number / time-picker variant ── */
+    .tf-num-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 104px;
+      height: 36px;
+      padding: 0 44px 0 12px;
+      gap: 4px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-base);
+      background: transparent;
+      box-sizing: border-box;
+      transition: border-color .1s, background .1s;
+    }
+    input.tf-num {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--content-base);
+      outline: none;
+      padding: 0;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+    }
+    input.tf-num::-webkit-inner-spin-button,
+    input.tf-num::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input.tf-num::placeholder { color: var(--content-placeholder); }
+    .tf-num-lbl {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--content-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tf-num-stepper {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      bottom: 2px;
+      width: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .tf-num-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      padding: 2px 4px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: var(--content-secondary);
+      line-height: 1;
+      transition: background .1s;
+    }
+    .tf-num-btn:hover { background: var(--bg-secondary); }
+    /* Hover */
+    .tf-num-wrap:hover,
+    .tf-num-wrap.is-hover { border-color: var(--border-action-hover); }
+    /* Focus */
+    .tf-num-wrap:focus-within,
+    .tf-num-wrap.is-focus { border-color: var(--border-brand-base); }
+    /* Error */
+    .tf-num-wrap.is-error { background: var(--bg-negative-subtle); }
+    .tf-num-wrap.is-error:hover,
+    .tf-num-wrap.is-error.is-hover { border-color: var(--border-negative-base); }
+    .tf-num-wrap.is-error:focus-within,
+    .tf-num-wrap.is-error.is-focus { border-color: var(--border-negative-base); }
+    .tf-num-wrap.is-error input.tf-num { color: var(--content-negative-secondary); }
+    /* Disabled */
+    .tf-num-wrap.is-disabled,
+    .tf-num-wrap:has(input:disabled) { opacity: 0.4; pointer-events: none; }
+
     /* ── Doc helpers ── */
     .state-label { font-size: 11px; color: var(--content-subtle); }
     .tf-demo-row { display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
@@ -544,12 +625,98 @@
         </div>
       </div>
     </div>
+
+    <h3 class="text-l4" style="margin-top:28px;">Number / time picker</h3>
+    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">A compact inline number field with custom up/down stepper controls. Used for numeric entry and time pickers (HH:MM). Follows the same transparent-border-until-interaction model as the inline variant. An optional label prefix (e.g. <code>H:</code> or <code>M:</code>) can be placed inside the field for context.</p>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body" style="gap:16px; padding:24px 28px; flex-wrap:wrap; align-items:center; justify-content:flex-start;">
+        <!-- Default -->
+        <div class="tf-demo-col">
+          <div class="tf-num-wrap" style="pointer-events:none;">
+            <input class="tf-num" type="text" placeholder="08:00" tabindex="-1" />
+            <div class="tf-num-stepper">
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <span class="state-label">Default</span>
+        </div>
+        <!-- Hover -->
+        <div class="tf-demo-col">
+          <div class="tf-num-wrap is-hover" style="pointer-events:none;">
+            <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+            <div class="tf-num-stepper">
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <span class="state-label">Hover</span>
+        </div>
+        <!-- Focus -->
+        <div class="tf-demo-col">
+          <div class="tf-num-wrap is-focus" style="pointer-events:none;">
+            <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+            <div class="tf-num-stepper">
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <span class="state-label">Focus</span>
+        </div>
+        <!-- Error -->
+        <div class="tf-demo-col">
+          <div class="tf-num-wrap is-error" style="pointer-events:none;">
+            <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+            <div class="tf-num-stepper">
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <span class="state-label">Error</span>
+        </div>
+        <!-- Disabled -->
+        <div class="tf-demo-col">
+          <div class="tf-num-wrap is-disabled" style="pointer-events:none;">
+            <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+            <div class="tf-num-stepper">
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+          <span class="state-label">Disabled</span>
+        </div>
+        <!-- Time picker pair -->
+        <div class="tf-demo-col">
+          <div style="display:flex; align-items:center; gap:4px; pointer-events:none;">
+            <div class="tf-num-wrap">
+              <span class="tf-num-lbl">H:</span>
+              <input class="tf-num" type="text" value="08" style="width:2ch;" tabindex="-1" />
+              <div class="tf-num-stepper">
+                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+            <span style="font-size:14px;font-weight:600;color:var(--content-secondary);">:</span>
+            <div class="tf-num-wrap">
+              <span class="tf-num-lbl">M:</span>
+              <input class="tf-num" type="text" value="30" style="width:2ch;" tabindex="-1" />
+              <div class="tf-num-stepper">
+                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <span class="state-label">Time picker (H + M)</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- STATES -->
   <section class="section" id="states">
     <h2 class="text-l3">States</h2>
-    <p class="section-lead">Both the standard and inline variants share the same state model. All elements below have <code>pointer-events: none</code> — they are static illustrations.</p>
+    <p class="section-lead">All variants share the same state model — the number/time-picker variant adds an error background. All elements below have <code>pointer-events: none</code> — they are static illustrations.</p>
 
     <div class="gap-callout">
       <span class="gap-callout-icon">⚠️</span>
@@ -626,6 +793,75 @@
         </div>
       </div>
     </div>
+
+    <h3 class="text-l4" style="margin-top:28px;">Number / time picker</h3>
+    <div class="preview">
+      <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
+      <div class="preview-body center" style="gap:0; padding:20px 0 0; flex-direction:column; align-items:stretch;">
+        <div style="display:grid; grid-template-columns:110px repeat(7,1fr); padding:0 20px 12px; border-bottom:1px solid var(--border-base);">
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);"></span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">DEFAULT</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">HOVER</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">FOCUS</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">ERROR</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">ERROR HOVER</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">ERROR FOCUS</span>
+          <span style="font-size:11px;font-weight:600;color:var(--content-subtle);text-align:center;">DISABLED</span>
+        </div>
+        <div style="display:grid; grid-template-columns:110px repeat(7,1fr); padding:16px 20px; align-items:center; gap:8px 4px;">
+          <span style="font-size:12px;color:var(--content-subtle);">Number</span>
+          <!-- Default -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Hover -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-hover" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Focus -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-focus" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Error -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-error" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Error Hover -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-error is-hover" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Error Focus -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-error is-focus" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+          <!-- Disabled -->
+          <div style="display:flex;justify-content:center;padding:0 4px;">
+            <div class="tf-num-wrap is-disabled" style="pointer-events:none;width:100%;min-width:0;">
+              <input class="tf-num" type="text" value="08:00" tabindex="-1" />
+              <div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- DESIGN TOKENS -->
@@ -651,6 +887,7 @@
           <tr><td><code>--content-subtle</code></td><td>Helper text</td><td>rgba(25,39,67, 0.50)</td></tr>
           <tr><td><code>--content-negative-secondary</code></td><td>Error message text</td><td>#d3353b</td></tr>
           <tr><td><code>--content-disabled</code></td><td>Disabled text and icon</td><td>rgba(25,39,67, 0.30)</td></tr>
+          <tr><td><code>--bg-negative-subtle</code></td><td>Number / time-picker error background</td><td>#ffebeb</td></tr>
           <tr><td><code>--sh-action</code></td><td>Container shadow</td><td>0 1px 2px rgba(25,39,67,.04)</td></tr>
           <tr><td><code>--radius-base</code></td><td>Container corner radius</td><td>6px</td></tr>
         </tbody>
@@ -910,13 +1147,58 @@
 <span class="ct">&lt;/div&gt;</span></code></pre>
     </div>
 
-    <h3 class="text-l4">Number input</h3>
-    <div class="dev-gap">
-      <span class="dev-gap-icon">⚠️</span>
-      <div class="dev-gap-body">
-        <span class="dev-gap-label">Figma gap</span>
-        <span class="dev-gap-text"><code>&lt;input type="number"&gt;</code> is used in production (with disabled and error states) but has no corresponding Figma component or documentation here yet. It shares the same CSS classes as the text variant. Add a dedicated number input frame to the Figma file and a usage example here in a future iteration.</span>
+    <h3 class="text-l4">Number / time picker</h3>
+    <div class="dev-preview" style="padding:24px 28px; gap:16px; align-items:center; flex-wrap:wrap;">
+      <div class="tf-num-wrap">
+        <input class="tf-num" type="number" min="0" max="23" placeholder="08" />
+        <div class="tf-num-stepper">
+          <button class="tf-num-btn" aria-label="Increment"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="tf-num-btn" aria-label="Decrement"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
       </div>
+      <!-- Time picker: H + M pair -->
+      <div style="display:flex; align-items:center; gap:4px;">
+        <div class="tf-num-wrap">
+          <span class="tf-num-lbl">H:</span>
+          <input class="tf-num" type="number" min="0" max="23" value="08" style="width:2ch;" />
+          <div class="tf-num-stepper">
+            <button class="tf-num-btn" aria-label="Increment hours"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Decrement hours"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:600;color:var(--content-secondary);">:</span>
+        <div class="tf-num-wrap">
+          <span class="tf-num-lbl">M:</span>
+          <input class="tf-num" type="number" min="0" max="59" value="30" style="width:2ch;" />
+          <div class="tf-num-stepper">
+            <button class="tf-num-btn" aria-label="Increment minutes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" aria-label="Decrement minutes"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dev-code-wrap">
+      <button class="dev-copy-btn">Copy</button>
+      <pre><code><span class="cc">&lt;!-- Standalone number field --&gt;</span>
+<span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"tf-num-wrap"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">class</span>=<span class="cv">"tf-num"</span> <span class="ca">type</span>=<span class="cv">"number"</span> <span class="ca">min</span>=<span class="cv">"0"</span> <span class="ca">max</span>=<span class="cv">"23"</span> <span class="ca">placeholder</span>=<span class="cv">"08"</span>
+         <span class="ca">aria-label</span>=<span class="cv">"Hours"</span> <span class="ct">/&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"tf-num-stepper"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tf-num-btn"</span> <span class="ca">aria-label</span>=<span class="cv">"Increment"</span><span class="ct">&gt;</span><span class="cc">&lt;!-- chevron-up --&gt;</span><span class="ct">&lt;/button&gt;</span>
+    <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tf-num-btn"</span> <span class="ca">aria-label</span>=<span class="cv">"Decrement"</span><span class="ct">&gt;</span><span class="cc">&lt;!-- chevron-down --&gt;</span><span class="ct">&lt;/button&gt;</span>
+  <span class="ct">&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span>
+
+<span class="cc">&lt;!-- Time picker: two fields with label prefix --&gt;</span>
+<span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"tf-num-wrap"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"tf-num-lbl"</span> <span class="ca">aria-hidden</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>H:<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">class</span>=<span class="cv">"tf-num"</span> <span class="ca">type</span>=<span class="cv">"number"</span> <span class="ca">min</span>=<span class="cv">"0"</span> <span class="ca">max</span>=<span class="cv">"23"</span> <span class="ca">value</span>=<span class="cv">"08"</span>
+         <span class="ca">aria-label</span>=<span class="cv">"Hours"</span> <span class="ct">/&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"tf-num-stepper"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tf-num-btn"</span> <span class="ca">aria-label</span>=<span class="cv">"Increment hours"</span><span class="ct">&gt;</span><span class="cc">&lt;!-- chevron-up --&gt;</span><span class="ct">&lt;/button&gt;</span>
+    <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"tf-num-btn"</span> <span class="ca">aria-label</span>=<span class="cv">"Decrement hours"</span><span class="ct">&gt;</span><span class="cc">&lt;!-- chevron-down --&gt;</span><span class="ct">&lt;/button&gt;</span>
+  <span class="ct">&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
     </div>
 
     <h3 class="text-l4">Inline variant</h3>
@@ -960,6 +1242,15 @@
           <tr><td><code>.tf-inline.is-hover</code></td><td><code>input</code></td><td>Static hover for inline</td></tr>
           <tr><td><code>.tf-inline.is-focus</code></td><td><code>input</code></td><td>Static focus for inline</td></tr>
           <tr><td><code>.tf-inline.is-disabled</code></td><td><code>input</code></td><td>Static disabled for inline</td></tr>
+          <tr><td><code>.tf-num-wrap</code></td><td><code>div</code></td><td>Number / time-picker outer container — transparent border until interaction, 36px height, 104px default width</td></tr>
+          <tr><td><code>.tf-num-wrap.is-hover</code></td><td><code>div</code></td><td>Static hover — shows border</td></tr>
+          <tr><td><code>.tf-num-wrap.is-focus</code></td><td><code>div</code></td><td>Static focus — brand border</td></tr>
+          <tr><td><code>.tf-num-wrap.is-error</code></td><td><code>div</code></td><td>Error state — pink background (<code>--bg-negative-subtle</code>); combine with <code>is-hover</code> / <code>is-focus</code> for border</td></tr>
+          <tr><td><code>.tf-num-wrap.is-disabled</code></td><td><code>div</code></td><td>Disabled — 40% opacity, pointer-events none</td></tr>
+          <tr><td><code>.tf-num</code></td><td><code>input</code></td><td>Number input inside <code>.tf-num-wrap</code> — native spinners suppressed, inherits container styles</td></tr>
+          <tr><td><code>.tf-num-lbl</code></td><td><code>span</code></td><td>Optional inline label prefix (e.g. <code>H:</code>, <code>M:</code>) — add <code>aria-hidden="true"</code> and provide <code>aria-label</code> on the input instead</td></tr>
+          <tr><td><code>.tf-num-stepper</code></td><td><code>div</code></td><td>Absolutely positioned stepper column on the right — contains up and down buttons</td></tr>
+          <tr><td><code>.tf-num-btn</code></td><td><code>button</code></td><td>Individual up or down stepper button — provide <code>aria-label="Increment"</code> / <code>aria-label="Decrement"</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -988,6 +1279,9 @@
 <span class="ca">--content-subtle</span>:            <span class="cv">rgba(25, 39, 67, 0.50)</span>;   <span class="cc">/* Helper text                       */</span>
 <span class="ca">--content-negative-secondary</span>: <span class="cv">#d3353b</span>;                 <span class="cc">/* Error message text                */</span>
 <span class="ca">--content-disabled</span>:          <span class="cv">rgba(25, 39, 67, 0.30)</span>;   <span class="cc">/* Disabled text &amp; icon              */</span>
+
+<span class="cc">/* Number / time-picker */</span>
+<span class="ca">--bg-negative-subtle</span>:        <span class="cv">#ffebeb</span>;                  <span class="cc">/* Error background                  */</span>
 
 <span class="cc">/* Shadow &amp; radius */</span>
 <span class="ca">--sh-action</span>:                 <span class="cv">0 1px 2px rgba(25,39,67,.04)</span>; <span class="cc">/* Container shadow              */</span>
