@@ -245,6 +245,17 @@
     .tf-num-wrap.is-disabled,
     .tf-num-wrap:has(input:disabled) { opacity: 0.4; pointer-events: none; }
 
+    /* ── Variant sub-section label ── */
+    .variant-sub { margin-top: 20px; }
+    .variant-sub-hd {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--content-subtle);
+      margin-bottom: 10px;
+    }
+
     /* ── Doc helpers ── */
     .state-label { font-size: 11px; color: var(--content-subtle); }
     .tf-demo-row { display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
@@ -598,8 +609,12 @@
       </div>
     </div>
 
-    <h3 class="text-l4" style="margin-top:28px;">Inline</h3>
-    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">Used for editing values in-place — inside table rows, settings lists, or any dense layout where a full bordered field would feel visually heavy. Has no label; context is provided by the surrounding UI.</p>
+    <h3 class="text-l4" style="margin-top:28px;">Inline variants</h3>
+    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:4px; line-height:1.6;">Both inline variants use a transparent border at rest that becomes visible on hover and focus. They differ in content type: the text variant is for free-form values; the number / time picker adds a custom stepper for numeric input.</p>
+
+    <div class="variant-sub">
+    <div class="variant-sub-hd">Text</div>
+    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">Used for editing text values in-place — inside table rows, settings lists, or any dense layout where a full bordered field would feel visually heavy. Context is provided by the surrounding UI instead of a label.</p>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body" style="gap:16px; padding:24px 28px; flex-wrap:wrap; align-items:center; justify-content:flex-start;">
@@ -625,9 +640,11 @@
         </div>
       </div>
     </div>
+    </div><!-- /variant-sub text -->
 
-    <h3 class="text-l4" style="margin-top:28px;">Number / time picker</h3>
-    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">A compact inline number field with custom up/down stepper controls. Used for numeric entry and time pickers (HH:MM). Follows the same transparent-border-until-interaction model as the inline variant. An optional label prefix (e.g. <code>H:</code> or <code>M:</code>) can be placed inside the field for context.</p>
+    <div class="variant-sub">
+    <div class="variant-sub-hd">Number / time picker</div>
+    <p style="font-size:14px; color:var(--content-secondary); margin-bottom:12px; line-height:1.6;">A compact inline number field with custom up/down stepper controls. Used for numeric entry and time pickers (HH:MM). An optional label prefix (e.g. <code>H:</code> or <code>M:</code>) can be placed inside the field for context. Unlike the text variant, the error state adds a pink background instead of just a red border.</p>
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body" style="gap:16px; padding:24px 28px; flex-wrap:wrap; align-items:center; justify-content:flex-start;">
@@ -711,6 +728,7 @@
         </div>
       </div>
     </div>
+    </div><!-- /variant-sub number -->
   </section>
 
   <!-- STATES -->
