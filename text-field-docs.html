@@ -139,7 +139,7 @@
       height: 36px;
       padding: 0 8px;
       border: 1px solid transparent;
-      border-radius: 4px;
+      border-radius: 6px;
       background: transparent;
       box-shadow: none;
       font-family: inherit;
@@ -247,7 +247,7 @@
     .tf-num-wrap.is-error:hover,
     .tf-num-wrap.is-error.is-hover { border-color: var(--border-negative-base); }
     .tf-num-wrap.is-error:focus-within,
-    .tf-num-wrap.is-error.is-focus { border-color: var(--border-negative-base); }
+    .tf-num-wrap.is-error.is-focus { border-color: var(--border-negative-base); background: var(--bg-input); }
     .tf-num-wrap.is-error input.tf-num { color: var(--content-negative-secondary); }
     /* Disabled */
     .tf-num-wrap.is-disabled,
@@ -615,23 +615,11 @@
       <div class="preview-body" style="gap:16px; padding:24px 28px; flex-wrap:wrap; align-items:center; justify-content:flex-start;">
         <div class="tf-demo-col">
           <input class="tf-inline" type="text" value="Q3 Employee Pulse" style="pointer-events:none;width:180px;" tabindex="-1" />
-          <span class="state-label">Default (filled)</span>
-        </div>
-        <div class="tf-demo-col">
-          <input class="tf-inline is-hover" type="text" value="Annual Engagement" style="pointer-events:none;width:180px;" tabindex="-1" />
-          <span class="state-label">Hover</span>
-        </div>
-        <div class="tf-demo-col">
-          <input class="tf-inline is-focus" type="text" value="Manager Feedback" style="pointer-events:none;width:180px;" tabindex="-1" />
-          <span class="state-label">Focus</span>
+          <span class="state-label">With value</span>
         </div>
         <div class="tf-demo-col">
           <input class="tf-inline" type="text" placeholder="Add a title…" style="pointer-events:none;width:180px;" tabindex="-1" />
           <span class="state-label">Empty</span>
-        </div>
-        <div class="tf-demo-col">
-          <input class="tf-inline is-disabled" type="text" value="Onboarding Survey" style="pointer-events:none;width:180px;" tabindex="-1" />
-          <span class="state-label">Disabled</span>
         </div>
       </div>
     </div>
@@ -643,60 +631,28 @@
     <div class="preview">
       <div class="preview-bar"><div class="preview-dots"><div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div></div></div>
       <div class="preview-body" style="gap:16px; padding:24px 28px; flex-wrap:wrap; align-items:center; justify-content:flex-start;">
-        <!-- Default -->
         <div class="tf-demo-col">
           <div class="tf-num-wrap" style="pointer-events:none;">
-            <input class="tf-num" type="text" placeholder="08:00" tabindex="-1" />
-            <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-          <span class="state-label">Default</span>
-        </div>
-        <!-- Hover -->
-        <div class="tf-demo-col">
-          <div class="tf-num-wrap is-hover" style="pointer-events:none;">
             <input class="tf-num" type="text" value="08" tabindex="-1" />
             <div class="tf-num-stepper">
               <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
           </div>
-          <span class="state-label">Hover</span>
+          <span class="state-label">Inline number</span>
         </div>
-        <!-- Focus -->
         <div class="tf-demo-col">
-          <div class="tf-num-wrap is-focus" style="pointer-events:none;">
-            <input class="tf-num" type="text" value="08" tabindex="-1" />
-            <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div style="display:flex;align-items:center;gap:4px;pointer-events:none;">
+            <span style="font-size:13px;color:var(--content-secondary);">H:</span>
+            <div class="tf-num-wrap">
+              <input class="tf-num" type="text" value="08" tabindex="-1" />
+              <div class="tf-num-stepper">
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
             </div>
           </div>
-          <span class="state-label">Focus</span>
-        </div>
-        <!-- Error -->
-        <div class="tf-demo-col">
-          <div class="tf-num-wrap is-error" style="pointer-events:none;">
-            <input class="tf-num" type="text" value="08" tabindex="-1" />
-            <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-          <span class="state-label">Error</span>
-        </div>
-        <!-- Disabled -->
-        <div class="tf-demo-col">
-          <div class="tf-num-wrap is-disabled" style="pointer-events:none;">
-            <input class="tf-num" type="text" value="08" tabindex="-1" />
-            <div class="tf-num-stepper">
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-              <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            </div>
-          </div>
-          <span class="state-label">Disabled</span>
+          <span class="state-label">With label prefix</span>
         </div>
       </div>
     </div>
@@ -708,22 +664,25 @@
     <h2 class="text-l3">States</h2>
     <p class="section-lead">All variants share the same state model — the inline number variant adds a pink error background instead of just a red border. All elements below have <code>pointer-events: none</code> — they are static illustrations.</p>
 
-    <div class="gap-callout">
-      <span class="gap-callout-icon">⚠️</span>
-      <div class="gap-callout-body">
-        <span class="gap-callout-label">Design gap</span>
-        <span class="gap-callout-text">The Figma component does not yet have a distinct Error frame for the standard text field. The code uses <code>class="error"</code> to trigger the red border — add a corresponding Error variant to the Figma component set so designers can spec it explicitly.</span>
-      </div>
-    </div>
-
     <h3 class="text-l4">Standard</h3>
     <div class="states-row">
       <div class="state-col"><span class="state-lbl">Default</span><input class="tf" type="text" placeholder="Placeholder" style="pointer-events:none;" tabindex="-1" /></div>
       <div class="state-col"><span class="state-lbl">Hover</span><input class="tf is-hover" type="text" placeholder="Placeholder" style="pointer-events:none;" tabindex="-1" /></div>
       <div class="state-col"><span class="state-lbl">Focus</span><input class="tf is-focus" type="text" placeholder="Placeholder" style="pointer-events:none;" tabindex="-1" /></div>
       <div class="state-col"><span class="state-lbl">Filled</span><input class="tf" type="text" value="Survey name" style="pointer-events:none;" tabindex="-1" /></div>
-      <div class="state-col"><span class="state-lbl">Error</span><input class="tf is-error" type="text" value="bad@" style="pointer-events:none;" tabindex="-1" /></div>
+      <div class="state-col">
+        <span class="state-lbl">Error</span>
+        <input class="tf is-error" type="text" value="bad@" style="pointer-events:none;" tabindex="-1" />
+        <span class="tf-err" style="pointer-events:none;">Enter a valid email address</span>
+      </div>
       <div class="state-col"><span class="state-lbl">Disabled</span><input class="tf is-disabled" type="text" value="Disabled" style="pointer-events:none;" tabindex="-1" /></div>
+    </div>
+    <div class="gap-callout">
+      <span class="gap-callout-icon">⚠️</span>
+      <div class="gap-callout-body">
+        <span class="gap-callout-label">Design gap</span>
+        <span class="gap-callout-text">In Figma the error message is part of the text field component. In Angular it is not — the error text must be added as a separate element in the consuming template.</span>
+      </div>
     </div>
 
     <h3 class="text-l4" style="margin-top:28px;">Inline text</h3>
@@ -742,7 +701,7 @@
       <div class="state-col"><span class="state-lbl">Focus</span><div class="tf-num-wrap is-focus" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
       <div class="state-col"><span class="state-lbl">Filled</span><div class="tf-num-wrap" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
       <div class="state-col"><span class="state-lbl">Error</span><div class="tf-num-wrap is-error" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
-      <div class="state-col"><span class="state-lbl">Error hover</span><div class="tf-num-wrap is-error is-hover" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
+
       <div class="state-col"><span class="state-lbl">Error focus</span><div class="tf-num-wrap is-error is-focus" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
       <div class="state-col"><span class="state-lbl">Disabled</span><div class="tf-num-wrap is-disabled" style="pointer-events:none;"><input class="tf-num" type="text" value="08" tabindex="-1" /><div class="tf-num-stepper"><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
     </div>
