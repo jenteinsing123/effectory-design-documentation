@@ -537,10 +537,16 @@
         <div class="variant-row-btn">
           <div class="tf-wrap" style="width:160px; pointer-events:none;">
             <label class="tf-lbl">Quantity</label>
-            <input class="tf" type="number" placeholder="0" tabindex="-1" />
+            <div class="tf-field">
+              <input class="tf" type="number" placeholder="0" style="padding-right:32px;" tabindex="-1" />
+              <div class="tf-num-stepper" style="position:absolute; right:0; top:0; bottom:0;">
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="variant-row-desc"><strong>Number</strong> — the same bordered Standard field but with <code>type="number"</code>, which enables browser spin controls, numeric keyboard on mobile, and autofill hints. Use when the value is strictly numeric and browser-native behaviour is acceptable.</div>
+        <div class="variant-row-desc"><strong>Number</strong> — the same bordered Standard field with custom stepper controls and <code>type="number"</code>, which enables numeric keyboard on mobile and autofill hints. Use when the value is strictly numeric.</div>
       </div>
       <div class="variant-row">
         <div class="variant-row-btn">
@@ -914,15 +920,33 @@
     <div class="dev-preview" style="padding:24px 28px; gap:16px; align-items:flex-start; flex-wrap:wrap;">
       <div class="tf-wrap" style="width:160px;">
         <label class="tf-lbl" for="tf-num-1">Quantity</label>
-        <input class="tf" type="number" id="tf-num-1" placeholder="123456" />
+        <div class="tf-field">
+          <input class="tf" type="number" id="tf-num-1" placeholder="0" style="padding-right:32px;" />
+          <div class="tf-num-stepper" style="position:absolute; right:0; top:0; bottom:0;">
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
       </div>
       <div class="tf-wrap" style="width:160px;">
         <label class="tf-lbl" for="tf-num-2">Quantity</label>
-        <input class="tf" type="number" id="tf-num-2" disabled placeholder="123456" />
+        <div class="tf-field">
+          <input class="tf" type="number" id="tf-num-2" disabled placeholder="0" style="padding-right:32px;" />
+          <div class="tf-num-stepper" style="position:absolute; right:0; top:0; bottom:0;">
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
       </div>
       <div class="tf-wrap" style="width:160px;">
         <label class="tf-lbl" for="tf-num-3">Quantity</label>
-        <input class="tf error" type="number" id="tf-num-3" placeholder="1a2345" aria-invalid="true" />
+        <div class="tf-field">
+          <input class="tf error" type="number" id="tf-num-3" placeholder="0" aria-invalid="true" style="padding-right:32px;" />
+          <div class="tf-num-stepper" style="position:absolute; right:0; top:0; bottom:0;">
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 9L7 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="tf-num-btn" tabindex="-1"><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="dev-code-wrap">
