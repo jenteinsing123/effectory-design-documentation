@@ -161,6 +161,20 @@
     .dp-time-value { flex: 1; font-size: 14px; color: var(--content-base); font-family: 'Poppins', inherit; }
     .dp-time-chevron { width: 16px; height: 16px; flex-shrink: 0; color: var(--content-secondary); display: flex; }
     .dp-time-field:hover { border-color: var(--border-action-hover); }
+    /* HH:MM number inputs */
+    .dp-time-hm { flex: 1; display: flex; align-items: center; gap: 1px; }
+    .dp-time-num {
+      width: 26px; text-align: center;
+      border: none; background: none; outline: none;
+      font-size: 14px; color: var(--content-base);
+      font-family: 'Poppins', inherit;
+      -moz-appearance: textfield; appearance: textfield;
+      padding: 0;
+    }
+    .dp-time-num::-webkit-inner-spin-button,
+    .dp-time-num::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .dp-time-num:focus { color: var(--content-brand-base); }
+    .dp-time-colon { font-size: 14px; color: var(--content-base); font-family: 'Poppins', inherit; }
 
     /* Up/down steppers for the time field */
     .dp-steppers {
@@ -548,7 +562,7 @@
           <!-- Inline -->
           <div class="variant-row vr-wide">
             <div class="variant-row-btn">
-              <div class="dp dp-inline" style="pointer-events:none;">
+              <div class="dp dp-inline" id="vr-cal-inline">
                 <div class="dp-body">
                   <div class="dp-header">
                     <div class="dp-month-group"><span class="dp-month-label">May 2026</span><i data-icon="chevron-down-small" style="display:flex;width:16px;height:16px;color:var(--content-secondary);"></i></div>
@@ -572,7 +586,7 @@
           <!-- With time selector -->
           <div class="variant-row vr-wide">
             <div class="variant-row-btn">
-              <div class="dp" style="pointer-events:none;">
+              <div class="dp" id="vr-cal-time">
                 <div class="dp-body">
                   <div class="dp-header">
                     <div class="dp-month-group"><span class="dp-month-label">May 2026</span><i data-icon="chevron-down-small" style="display:flex;width:16px;height:16px;color:var(--content-secondary);"></i></div>
@@ -596,16 +610,20 @@
                   </div>
                   <div class="dp-time-field">
                     <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
-                    <span class="dp-time-value">09:00</span>
+                    <div class="dp-time-hm">
+                      <input type="number" class="dp-time-num" value="9" min="0" max="23">
+                      <span class="dp-time-colon">:</span>
+                      <input type="number" class="dp-time-num" value="0" min="0" max="59">
+                    </div>
                     <div class="dp-steppers">
-                      <button class="dp-stepper-btn" tabindex="-1"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
-                      <button class="dp-stepper-btn" tabindex="-1"><i data-icon="chevron-down" style="display:flex;width:10px;height:10px;"></i></button>
+                      <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
+                      <button class="dp-stepper-btn"><i data-icon="chevron-down" style="display:flex;width:10px;height:10px;"></i></button>
                     </div>
                   </div>
                 </div>
                 <div class="dp-footer">
-                  <button class="btn-dp-cancel" tabindex="-1" style="pointer-events:none;">Cancel</button>
-                  <button class="btn-dp-apply" tabindex="-1" style="pointer-events:none;">Apply</button>
+                  <button class="btn-dp-cancel">Cancel</button>
+                  <button class="btn-dp-apply">Apply</button>
                 </div>
               </div>
             </div>
@@ -615,7 +633,7 @@
           <!-- Date range -->
           <div class="variant-row vr-wide">
             <div class="variant-row-btn">
-              <div class="dp" style="pointer-events:none;">
+              <div class="dp" id="vr-cal-range">
                 <div class="dp-body">
                   <div class="dp-header">
                     <div class="dp-month-group"><span class="dp-month-label">May 2026</span><i data-icon="chevron-down-small" style="display:flex;width:16px;height:16px;color:var(--content-secondary);"></i></div>
@@ -630,10 +648,6 @@
                     <div class="dp-day is-in-range">18</div><div class="dp-day is-in-range">19</div><div class="dp-day is-in-range">20</div><div class="dp-day is-in-range">21</div><div class="dp-day is-range-end">22</div><div class="dp-day">23</div><div class="dp-day">24</div>
                     <div class="dp-day">25</div><div class="dp-day">26</div><div class="dp-day">27</div><div class="dp-day">28</div><div class="dp-day">29</div><div class="dp-day">30</div><div class="dp-day">31</div>
                   </div>
-                </div>
-                <div class="dp-footer">
-                  <button class="btn-dp-cancel" tabindex="-1" style="pointer-events:none;">Cancel</button>
-                  <button class="btn-dp-apply" tabindex="-1" style="pointer-events:none;">Apply</button>
                 </div>
               </div>
             </div>
@@ -859,7 +873,7 @@
                   </select>
                 </div>
               </div>
-              <div class="pg-row" id="pg-row-footer">
+              <div class="pg-row" id="pg-row-footer" hidden>
                 <div class="pg-row-name">footerButtons</div>
                 <div class="pg-row-ctrl">
                   <label class="pg-toggle"><input type="checkbox" id="pg-footer" checked><span class="pg-toggle-track"></span></label>
@@ -917,7 +931,6 @@
           <button class="dev-copy-btn">Copy</button>
           <pre><code><span class="ct">&lt;eng-date-picker</span>
   <span class="ca">[(ngModel)]</span>=<span class="cv">"selectedDate"</span>
-  <span class="ca">[footerButtons]</span>=<span class="cv">"true"</span>
 <span class="ct">&gt;&lt;/eng-date-picker&gt;</span></code></pre>
         </div>
 
@@ -950,7 +963,7 @@
         </div>
 
         <h3 class="text-l4">With time selector</h3>
-        <div class="dev-preview" style="padding:24px 28px; justify-content:flex-start;">
+        <div class="dev-preview" id="dev-preview-time" style="padding:24px 28px; justify-content:flex-start;">
           <div class="dp">
             <div class="dp-body">
               <div class="dp-header">
@@ -975,7 +988,11 @@
               </div>
               <div class="dp-time-field">
                 <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
-                <span class="dp-time-value">09:00</span>
+                <div class="dp-time-hm">
+                  <input type="number" class="dp-time-num" value="9" min="0" max="23">
+                  <span class="dp-time-colon">:</span>
+                  <input type="number" class="dp-time-num" value="0" min="0" max="59">
+                </div>
                 <div class="dp-steppers">
                   <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
                   <button class="dp-stepper-btn"><i data-icon="chevron-down" style="display:flex;width:10px;height:10px;"></i></button>
@@ -1275,13 +1292,11 @@
   }
 
   function updatePreview() {
-    /* Inline mode: no footer row in playground */
-    rowFooter.style.display = state.mode === 'inline' ? 'none' : '';
     rowTimezone.style.display = state.timeselector ? '' : 'none';
 
     const isInline  = state.mode === 'inline';
-    const showFoot  = !isInline && state.footer;
     const showTime  = state.timeselector && !isInline;
+    const showFoot  = showTime;
     const showTz    = showTime && state.timezone;
 
     if (state.range) {
@@ -1297,7 +1312,11 @@
           ${showTz ? `<div class="dp-time-field"><i data-icon="globe" style="display:flex;width:16px;height:16px;"></i><span class="dp-time-value">Europe/Amsterdam</span><i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron"></i></div>` : ''}
           <div class="dp-time-field">
             <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
-            <span class="dp-time-value">09:00</span>
+            <div class="dp-time-hm">
+              <input type="number" class="dp-time-num" value="9" min="0" max="23">
+              <span class="dp-time-colon">:</span>
+              <input type="number" class="dp-time-num" value="0" min="0" max="59">
+            </div>
             <div class="dp-steppers">
               <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
               <button class="dp-stepper-btn"><i data-icon="chevron-down" style="display:flex;width:10px;height:10px;"></i></button>
@@ -1333,6 +1352,10 @@
         </div>
       </div>`;
     if (typeof injectIcons === 'function') injectIcons(preview);
+    // Wire up steppers for playground-generated time inputs
+    wireSteppers(preview);
+    // Wire up day selection for playground calendar
+    wireDaySelect(preview.querySelector('.dp:not(.dp-inline)') || preview.querySelector('.dp'), false);
   }
 
   function escHtml(s) {
@@ -1348,11 +1371,11 @@
 
   function buildCode() {
     const isInline  = state.mode === 'inline';
-    const showFoot  = !isInline && state.footer;
+    const showTime  = state.timeselector && !isInline;
     const lines = ['<eng-date-picker'];
     lines.push('  [(ngModel)]="' + (state.range ? 'dateRange' : 'selectedDate') + '"');
     if (state.range)        lines.push('  [dateRange]="true"');
-    if (!showFoot)          lines.push('  [footerButtons]="false"');
+    if (isInline)           lines.push('  [footerButtons]="false"');
     if (state.timeselector && !isInline) {
       lines.push('  [showTimeSelector]="true"');
       if (!state.timezone)  lines.push('  [showTimezone]="false"');
@@ -1405,6 +1428,79 @@
   });
 
   refresh();
+})();
+
+/* ── Shared helpers ── */
+function wireSteppers(root) {
+  (root || document).querySelectorAll('.dp-time-field .dp-steppers').forEach(steppers => {
+    const field = steppers.closest('.dp-time-field');
+    const inputs = field.querySelectorAll('.dp-time-num');
+    if (!inputs.length) return;
+    function nudge(delta) {
+      const active = [...inputs].find(i => i === document.activeElement) || inputs[0];
+      let v = parseInt(active.value, 10) + delta;
+      const max = parseInt(active.max, 10);
+      const min = parseInt(active.min, 10);
+      if (v > max) v = min;
+      if (v < min) v = max;
+      active.value = String(v).padStart(active === inputs[0] ? 2 : 2, '0');
+    }
+    const [up, down] = steppers.querySelectorAll('.dp-stepper-btn');
+    up   && up.addEventListener('click',   e => { e.preventDefault(); nudge( 1); });
+    down && down.addEventListener('click', e => { e.preventDefault(); nudge(-1); });
+  });
+}
+
+function wireDaySelect(cal, isRange) {
+  if (!cal) return;
+  if (isRange) {
+    let rangeStart = null;
+    cal.addEventListener('click', function(e) {
+      const day = e.target.closest('.dp-day');
+      if (!day || day.classList.contains('is-empty') || day.classList.contains('is-disabled')) return;
+      const allDays = [...cal.querySelectorAll('.dp-day')].filter(d => !d.classList.contains('is-empty'));
+      const idx = allDays.indexOf(day);
+      const hasEnd = cal.querySelector('.dp-day.is-range-end');
+      if (rangeStart === null || hasEnd) {
+        allDays.forEach(d => d.classList.remove('is-range-start','is-range-end','is-in-range'));
+        day.classList.add('is-range-start');
+        rangeStart = idx;
+      } else {
+        if (idx < rangeStart) {
+          allDays.forEach(d => d.classList.remove('is-range-start','is-range-end','is-in-range'));
+          day.classList.add('is-range-start');
+          rangeStart = idx;
+          return;
+        }
+        allDays.forEach((d, i) => {
+          d.classList.remove('is-range-start','is-range-end','is-in-range');
+          if (i === rangeStart) d.classList.add('is-range-start');
+          else if (i === idx)   d.classList.add('is-range-end');
+          else if (i > rangeStart && i < idx) d.classList.add('is-in-range');
+        });
+        rangeStart = null;
+      }
+    });
+  } else {
+    cal.addEventListener('click', function(e) {
+      const day = e.target.closest('.dp-day');
+      if (!day || day.classList.contains('is-empty') || day.classList.contains('is-disabled')) return;
+      cal.querySelectorAll('.dp-day').forEach(d => d.classList.remove('is-selected'));
+      day.classList.add('is-selected');
+    });
+  }
+}
+
+/* ── Wire variant row calendars ── */
+(function() {
+  const inline = document.getElementById('vr-cal-inline');
+  const time   = document.getElementById('vr-cal-time');
+  const range  = document.getElementById('vr-cal-range');
+  wireDaySelect(inline, false);
+  wireDaySelect(time,   false);
+  wireDaySelect(range,  true);
+  wireSteppers(document.getElementById('vr-cal-time'));
+  wireSteppers(document.getElementById('dev-preview-time'));
 })();
 </script>
 </body>
