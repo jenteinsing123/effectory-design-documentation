@@ -659,24 +659,22 @@
   <section class="section" id="tokens">
     <h2 class="text-l3">Design Tokens</h2>
     <p class="section-lead">All visual properties are driven by tokens. No raw colour or spacing values are used in the component.</p>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>TOKEN</th><th>PROPERTY</th><th>STATE</th></tr></thead>
-        <tbody>
-          <tr><td><code>border/action</code></td><td>Circle border</td><td>Unselected default</td></tr>
-          <tr><td><code>border/action-hover</code></td><td>Circle border</td><td>Unselected hover</td></tr>
-          <tr><td><code>bg/brand/base</code></td><td>Circle fill + border</td><td>Selected</td></tr>
-          <tr><td><code>bg/brand/hover</code></td><td>Circle fill + border</td><td>Selected hover</td></tr>
-          <tr><td><code>content/on-brand/base</code></td><td>Inner dot</td><td>Selected</td></tr>
-          <tr><td><code>bg/disabled</code></td><td>Circle fill</td><td>Disabled</td></tr>
-          <tr><td><code>content/base</code></td><td>Label text</td><td>Default</td></tr>
-          <tr><td><code>content/disabled</code></td><td>Label text</td><td>Disabled</td></tr>
-          <tr><td><code>bg/brand/subtle</code></td><td>Tile background</td><td>Tile selected</td></tr>
-          <tr><td><code>border/brand/base</code></td><td>Tile border</td><td>Tile selected</td></tr>
-          <tr><td><code>bg/base/hover</code></td><td>Tile background</td><td>Tile hover</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>--border-action</code></td><td>Circle border — unselected default</td><td>#bcc1cd</td></tr>
+        <tr><td><code>--border-action-hover</code></td><td>Circle border — unselected hover</td><td>#a5adbc</td></tr>
+        <tr><td><code>--bg-brand-base</code></td><td>Circle fill — selected</td><td>#0a9d99</td></tr>
+        <tr><td><code>--bg-brand-base-hover</code></td><td>Circle fill — selected hover</td><td>#0c827f</td></tr>
+        <tr><td><code>--content-on-brand-base</code></td><td>Inner dot colour</td><td>#ffffff</td></tr>
+        <tr><td><code>--bg-disabled</code></td><td>Circle fill — disabled</td><td>#192743 · 10%</td></tr>
+        <tr><td><code>--content-base</code></td><td>Label text</td><td>#192743</td></tr>
+        <tr><td><code>--content-disabled</code></td><td>Label text — disabled</td><td>#192743 · 30%</td></tr>
+        <tr><td><code>--bg-brand-subtle</code></td><td>Tile background — selected</td><td>#f0fafa</td></tr>
+        <tr><td><code>--border-brand-base</code></td><td>Tile border — selected</td><td>#0c827f</td></tr>
+        <tr><td><code>--bg-base-hover</code></td><td>Tile background — hover</td><td>#f8f8f9</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- ACCESSIBILITY -->

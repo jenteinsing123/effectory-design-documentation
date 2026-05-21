@@ -376,6 +376,8 @@ Token naming conventions:
 
 > ⚠️ `--bg-brand-base` ≠ `--border-brand-base` — they resolve to different hex values. Never use a `bg-` token as a border color or vice versa.
 
+> ⚠️ **Deprecated format** — some older pages use `<div class="tbl-wrap"><table>` with `<span class="token"><span class="swatch">` swatches and Figma-path token names like `bg/brand/base`. This format is deprecated. Always use `<table class="token-table">` with `<code>--css-var-name</code>` as shown above.
+
 ---
 
 ## 11. Developer Tab — Section Order

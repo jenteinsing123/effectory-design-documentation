@@ -383,24 +383,22 @@
     <h2 class="text-l3">Design Tokens</h2>
     <p class="section-lead">The badge uses the highlight ramp; the container colour and label fall back to neutral tokens so the button still reads correctly in both light and dark themes.</p>
 
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
-        <tbody>
-          <tr><td><span class="token">bg/highlight/base</span></td><td>#fdbd12</td><td>Yellow circle behind the arrow icon</td></tr>
-          <tr><td><span class="token">bg/highlight/subtle</span></td><td>#ffefc2</td><td>Pressed-state container background</td></tr>
-          <tr><td><span class="token">bg/interface/body</span></td><td>#ffffff</td><td>Default and hover container background</td></tr>
-          <tr><td><span class="token">border/highlight/base</span></td><td>#d68100</td><td>Default container border</td></tr>
-          <tr><td><span class="token">border/highlight/base-hover</span></td><td>#b16107</td><td>Hover and pressed container border</td></tr>
-          <tr><td><span class="token">content/secondary</span></td><td>#192743 · 80%</td><td>Default label colour</td></tr>
-          <tr><td><span class="token">content/secondary-hover</span></td><td>#192743</td><td>Hover and pressed label colour</td></tr>
-          <tr><td><span class="token">shadow/action</span></td><td>0 1 2 #1927430A</td><td>Default container shadow</td></tr>
-          <tr><td><span class="token">shadow/action-hover</span></td><td>0 2 2 #1927430F</td><td>Hover and pressed container shadow</td></tr>
-          <tr><td><span class="token">bg/disabled</span></td><td>#192743 · 10%</td><td>Disabled container and badge background</td></tr>
-          <tr><td><span class="token">content/disabled</span></td><td>#192743 · 30%</td><td>Disabled label and arrow icon colour</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>--bg-highlight-base</code></td><td>Yellow badge behind the arrow icon</td><td>#fdbd12</td></tr>
+        <tr><td><code>--bg-highlight-subtle</code></td><td>Pressed container background</td><td>#ffefc2</td></tr>
+        <tr><td><code>--bg-base</code></td><td>Default and hover container background</td><td>#ffffff</td></tr>
+        <tr><td><code>--border-highlight-base</code></td><td>Default container border</td><td>#d68100</td></tr>
+        <tr><td><code>--border-highlight-base-hover</code></td><td>Hover and pressed container border</td><td>#b16107</td></tr>
+        <tr><td><code>--content-secondary</code></td><td>Default label colour</td><td>#192743 · 80%</td></tr>
+        <tr><td><code>--content-secondary-hover</code></td><td>Hover and pressed label colour</td><td>#192743</td></tr>
+        <tr><td><code>--sh-action</code></td><td>Default container shadow</td><td>0 1px 2px #192743 · 4%</td></tr>
+        <tr><td><code>--sh-action-hover</code></td><td>Hover and pressed container shadow</td><td>0 2px 4px #192743 · 6%</td></tr>
+        <tr><td><code>--bg-disabled</code></td><td>Disabled container and badge background</td><td>#192743 · 10%</td></tr>
+        <tr><td><code>--content-disabled</code></td><td>Disabled label and arrow icon colour</td><td>#192743 · 30%</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- ACCESSIBILITY -->

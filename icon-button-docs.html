@@ -552,40 +552,28 @@
     <h2 class="text-l3">Design Tokens</h2>
     <p class="section-lead">Token names and resolved values. Use the token name in design and code — never hardcode the hex value.</p>
 
-    <div class="tbl-wrap" style="margin-bottom:16px;">
-      <table>
-        <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED FOR</th></tr></thead>
-        <tbody>
-          <tr><td><span class="token"><span class="swatch" style="background:#0a9d99;"></span>bg/brand/base</span></td><td><code>#0a9d99</code></td><td>Primary fill — Default</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>bg/brand/base-hover</span></td><td><code>#0c827f</code></td><td>Primary fill — Hover</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>bg/brand/base-pressed</span></td><td><code>#166764</code></td><td>Primary fill — Pressed</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#0c827f;"></span>border/brand/base</span></td><td><code>#0c827f</code></td><td>Primary stroke — Default</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#166764;"></span>border/brand/base-hover</span></td><td><code>#166764</code></td><td>Primary stroke — Hover</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#0e4846;"></span>border/brand/base-pressed</span></td><td><code>#0e4846</code></td><td>Primary stroke — Pressed</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #e4e4e7;"></span>all/fixed-white</span></td><td><code>#ffffff</code></td><td>Icon — Primary all active states</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#fff; border:1px solid #e4e4e7;"></span>bg/base</span></td><td><code>#ffffff</code></td><td>Secondary fill — Default &amp; Disabled</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#f8f8f9;"></span>bg/input-hover</span></td><td><code>#f8f8f9</code></td><td>Secondary/Tertiary fill — Hover</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/input-pressed</span></td><td><code>#f1f2f4</code></td><td>Secondary/Tertiary fill — Pressed</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td><code>#bcc1cd</code></td><td>Secondary stroke — Default</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#a5adbc;"></span>border/action-hover</span></td><td><code>#a5adbc</code></td><td>Secondary stroke — Hover</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#7b869e;"></span>border/action-pressed</span></td><td><code>#7b869e</code></td><td>Secondary stroke — Pressed</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:#e1e4e8;"></span>border/base</span></td><td><code>#e1e4e8</code></td><td>Secondary stroke — Disabled</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.80);"></span>content/action</span></td><td><code>#192743</code> 80%</td><td>Icon — Secondary/Tertiary Default</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.95);"></span>content/action-hover</span></td><td><code>#192743</code> 95%</td><td>Icon — Secondary/Tertiary Hover &amp; Pressed</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.10);"></span>bg/disabled</span></td><td><code>#192743</code> 10%</td><td>Primary fill — Disabled</td></tr>
-          <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.30);"></span>content/disabled</span></td><td><code>#192743</code> 30%</td><td>Icon — Disabled (all variants)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>EFFECT TOKEN</th><th>VALUES</th><th>APPLIED TO</th></tr></thead>
-        <tbody>
-          <tr><td><code>shadow/action</code></td><td>Drop shadow · <code>#192743</code> 4% · offset <code>0, 1px</code> · radius <code>2px</code></td><td>Primary and Secondary — Default state only</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>--bg-brand-base</code></td><td>Primary fill — default</td><td>#0a9d99</td></tr>
+        <tr><td><code>--bg-brand-base-hover</code></td><td>Primary fill — hover</td><td>#0c827f</td></tr>
+        <tr><td><code>--bg-brand-base-pressed</code></td><td>Primary fill — pressed</td><td>#166764</td></tr>
+        <tr><td><code>--border-brand-base</code></td><td>Primary border — default</td><td>#0c827f</td></tr>
+        <tr><td><code>--border-brand-base-hover</code></td><td>Primary border — hover</td><td>#166764</td></tr>
+        <tr><td><code>--content-on-brand-base</code></td><td>Icon on Primary — all active states</td><td>#ffffff</td></tr>
+        <tr><td><code>--bg-base</code></td><td>Secondary fill — default &amp; disabled</td><td>#ffffff</td></tr>
+        <tr><td><code>--bg-base-hover</code></td><td>Secondary/Tertiary fill — hover</td><td>#f8f8f9</td></tr>
+        <tr><td><code>--bg-base-pressed</code></td><td>Secondary/Tertiary fill — pressed</td><td>#f1f2f4</td></tr>
+        <tr><td><code>--border-action</code></td><td>Secondary border — default</td><td>#bcc1cd</td></tr>
+        <tr><td><code>--border-action-hover</code></td><td>Secondary border — hover</td><td>#a5adbc</td></tr>
+        <tr><td><code>--border-action-pressed</code></td><td>Secondary border — pressed</td><td>#7b869e</td></tr>
+        <tr><td><code>--content-secondary</code></td><td>Icon on Secondary/Tertiary — default</td><td>#192743 · 80%</td></tr>
+        <tr><td><code>--content-base</code></td><td>Icon on Secondary/Tertiary — hover/pressed</td><td>#192743</td></tr>
+        <tr><td><code>--bg-disabled</code></td><td>Primary fill — disabled</td><td>#192743 · 10%</td></tr>
+        <tr><td><code>--content-disabled</code></td><td>Icon — disabled (all variants)</td><td>#192743 · 30%</td></tr>
+        <tr><td><code>--sh-action</code></td><td>Container shadow — default state</td><td>0 1px 2px #192743 · 4%</td></tr>
+      </tbody>
+    </table>
   </section>
 
   

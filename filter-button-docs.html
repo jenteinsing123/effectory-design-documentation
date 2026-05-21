@@ -387,21 +387,19 @@
 <!-- TOKENS -->
 <section class="section" id="tokens">
   <h2 class="text-l3">Design Tokens</h2>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>TOKEN</th><th>VALUE</th><th>USED ON</th></tr></thead>
-      <tbody>
-        <tr><td><span class="token"><span class="swatch" style="background:#fff;border:1px solid #ddd;"></span>bg/base</span></td><td>#ffffff</td><td>Bordered default background</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#f8f8f9;"></span>bg/base-hover</span></td><td>#f8f8f9</td><td>Both variants hover background</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#f1f2f4;"></span>bg/base-pressed</span></td><td>#f1f2f4</td><td>Both variants pressed background</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#bcc1cd;"></span>border/action</span></td><td>#bcc1cd</td><td>Bordered default border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#a5adbc;"></span>border/action-hover</span></td><td>#a5adbc</td><td>Bordered hover border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:#7b869e;"></span>border/action-pressed</span></td><td>#7b869e</td><td>Bordered pressed border</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.6);"></span>content/action</span></td><td>rgba(25,39,67,.8)</td><td>Name + value + icon default</td></tr>
-        <tr><td><span class="token"><span class="swatch" style="background:rgba(25,39,67,.9);"></span>content/action-hover</span></td><td>rgba(25,39,67,.95)</td><td>Name + value + icon on hover/pressed</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="token-table">
+    <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td><code>--bg-base</code></td><td>Default background</td><td>#ffffff</td></tr>
+      <tr><td><code>--bg-base-hover</code></td><td>Hover background — both variants</td><td>#f8f8f9</td></tr>
+      <tr><td><code>--bg-base-pressed</code></td><td>Pressed background — both variants</td><td>#f1f2f4</td></tr>
+      <tr><td><code>--border-action</code></td><td>Default border</td><td>#bcc1cd</td></tr>
+      <tr><td><code>--border-action-hover</code></td><td>Hover border</td><td>#a5adbc</td></tr>
+      <tr><td><code>--border-action-pressed</code></td><td>Pressed border</td><td>#7b869e</td></tr>
+      <tr><td><code>--content-secondary</code></td><td>Name + value + icon — default</td><td>#192743 · 80%</td></tr>
+      <tr><td><code>--content-base</code></td><td>Name + value + icon — hover/pressed</td><td>#192743</td></tr>
+    </tbody>
+  </table>
 </section>
 
 <!-- ACCESSIBILITY -->
