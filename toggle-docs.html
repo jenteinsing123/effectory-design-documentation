@@ -12,7 +12,7 @@
        TOGGLE COMPONENT
        Track: 36×22px, border-radius:16px, 3px padding, 1px border
        Thumb: 16×16px circle, check icon when on
-       Travel: 36 − 3×2 − 16 = 14px
+       Travel: 36 − 2(border) − 6(padding) − 16(thumb) = 12px
     ═══════════════════════════════════════════════ */
 
     /* ── Hidden native input (keyboard + screen-reader accessible) ── */
@@ -67,7 +67,7 @@
       content: '';
       position: absolute;
       inset: 2px;
-      background-color: var(--bg-brand-base);
+      background-color: var(--content-base);
       -webkit-mask-image: url('assets/icons/check.svg');
       mask-image: url('assets/icons/check.svg');
       -webkit-mask-size: contain; mask-size: contain;
@@ -85,7 +85,7 @@
     }
     input[type="checkbox"].tgl:checked + .tgl-track .tgl-thumb,
     input[type="checkbox"].tgl.is-checked + .tgl-track .tgl-thumb {
-      transform: translateX(14px);
+      transform: translateX(12px);
       box-shadow: 0 1px 1px rgba(25,39,67,.04);
     }
     input[type="checkbox"].tgl:checked + .tgl-track .tgl-thumb::before,
@@ -133,7 +133,7 @@
       border-color: var(--border-brand-base);
     }
     .tgl-track.is-on .tgl-thumb {
-      transform: translateX(14px);
+      transform: translateX(12px);
       box-shadow: 0 1px 1px rgba(25,39,67,.04);
     }
     .tgl-track.is-on .tgl-thumb::before { opacity: 1; }
