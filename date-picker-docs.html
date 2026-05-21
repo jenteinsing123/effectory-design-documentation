@@ -89,13 +89,13 @@
 
     /* ── Day grid ── */
     .dp-grid {
-      display: grid; grid-template-columns: repeat(7, 28px);
+      display: grid; grid-template-columns: repeat(7, 32px);
       gap: 4px; justify-content: center;
       overflow: hidden; /* clips range-band bleeds at grid edges */
       isolation: isolate; /* stacking context so ::before z-index:-1 is below .dp-day, not the whole page */
     }
     .dp-day {
-      width: 28px; height: 28px;
+      width: 32px; height: 32px;
       display: flex; align-items: center; justify-content: center;
       font-size: 14px; font-weight: 400;
       color: var(--content-base);
