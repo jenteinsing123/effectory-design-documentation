@@ -164,6 +164,29 @@
     /* Single-day range: no strip */
     .dp-day.is-range-start.is-range-end::before { display: none; }
 
+    /* ── Year view ── */
+    .dp-year-panel { padding: 0 8px 8px; }
+    .dp-year-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .dp-year-cell {
+      height: 36px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--content-base); border-radius: 6px;
+      cursor: pointer; transition: background .1s, color .1s;
+    }
+    .dp-year-cell:hover { background: var(--bg-base-hover); }
+    .dp-year-cell.is-selected {
+      background: var(--bg-brand-base); color: #fff; border-radius: 80px;
+    }
+    .dp-year-cell.is-selected:hover { background: var(--bg-brand-base); }
+    /* Rotate chevron when year view is open */
+    .dp-month-group i[data-icon] { transition: transform .15s; }
+    .dp-body.dp-year-open .dp-month-group i[data-icon] { transform: rotate(180deg); }
+    /* Make month-group look clickable */
+    .dp-month-group { cursor: pointer; }
+    .dp-month-group:hover .dp-month-label { color: var(--content-brand-base); }
+
     /* ── Time selector — no divider, just top spacing ── */
     .dp-time-section {
       padding: 8px 16px 0;
@@ -1424,7 +1447,9 @@
     if (typeof injectIcons === 'function') injectIcons(preview);
     wireSteppers(preview);
     wireTimezone(preview);
-    wireDaySelect(preview.querySelector('.dp:not(.dp-inline)') || preview.querySelector('.dp'), false);
+    const pgCal = preview.querySelector('.dp:not(.dp-inline)') || preview.querySelector('.dp');
+    wireDaySelect(pgCal, false);
+    wireYearView(pgCal);
   }
 
   function escHtml(s) {
@@ -1566,6 +1591,83 @@ function wireTimezone(root) {
   });
 }
 
+function wireYearView(cal) {
+  if (!cal) return;
+  const body       = cal.querySelector('.dp-body');
+  const monthGroup = cal.querySelector('.dp-month-group');
+  const monthLabel = cal.querySelector('.dp-month-label');
+  const navBtns    = [...cal.querySelectorAll('.dp-nav-btn')];
+  const weekdays   = cal.querySelector('.dp-weekdays');
+  const grid       = cal.querySelector('.dp-grid');
+  if (!body || !monthGroup || !monthLabel || !weekdays || !grid) return;
+
+  const parts0 = monthLabel.textContent.split(' ');
+  let curMonth = parts0[0] || 'May';
+  let curYear  = parseInt(parts0[parts0.length - 1]) || 2026;
+  let decade   = Math.floor(curYear / 24) * 24;
+  let open     = false;
+
+  // Inject the year grid panel once, before weekdays
+  const panel = document.createElement('div');
+  panel.className = 'dp-year-panel';
+  panel.hidden = true;
+  weekdays.before(panel);
+
+  function render() {
+    const s = decade, e = s + 23;
+    monthLabel.textContent = s + ' – ' + e;
+    panel.innerHTML = '';
+    const g = document.createElement('div');
+    g.className = 'dp-year-grid';
+    for (let y = s; y <= e; y++) {
+      const c = document.createElement('div');
+      c.className = 'dp-year-cell' + (y === curYear ? ' is-selected' : '');
+      c.textContent = y;
+      c.addEventListener('click', ev => { ev.stopPropagation(); curYear = y; close(); });
+      g.appendChild(c);
+    }
+    panel.appendChild(g);
+  }
+
+  function prevDecade(e) { e.stopPropagation(); if (open) { decade -= 24; render(); } }
+  function nextDecade(e) { e.stopPropagation(); if (open) { decade += 24; render(); } }
+
+  function openView() {
+    open = true;
+    decade = Math.floor(curYear / 24) * 24;
+    render();
+    panel.hidden = false;
+    weekdays.hidden = true;
+    grid.hidden = true;
+    body.classList.add('dp-year-open');
+    if (navBtns[0]) navBtns[0].addEventListener('click', prevDecade);
+    if (navBtns[1]) navBtns[1].addEventListener('click', nextDecade);
+  }
+
+  function close() {
+    open = false;
+    panel.hidden = true;
+    weekdays.hidden = false;
+    grid.hidden = false;
+    body.classList.remove('dp-year-open');
+    monthLabel.textContent = curMonth + ' ' + curYear;
+    if (navBtns[0]) navBtns[0].removeEventListener('click', prevDecade);
+    if (navBtns[1]) navBtns[1].removeEventListener('click', nextDecade);
+  }
+
+  monthGroup.addEventListener('click', e => {
+    e.stopPropagation();
+    if (open) {
+      close();
+    } else {
+      const p = monthLabel.textContent.split(' ');
+      curMonth = p[0] || curMonth;
+      curYear  = parseInt(p[p.length - 1]) || curYear;
+      openView();
+    }
+  });
+}
+
 function wireDaySelect(cal, isRange) {
   if (!cal) return;
   if (isRange) {
@@ -1615,10 +1717,16 @@ function wireDaySelect(cal, isRange) {
   wireDaySelect(inline, false);
   wireDaySelect(time,   false);
   wireDaySelect(range,  true);
+  wireYearView(inline);
+  wireYearView(time);
+  wireYearView(range);
   wireSteppers(document.getElementById('vr-cal-time'));
   wireTimezone(document.getElementById('vr-cal-time'));
   wireSteppers(document.getElementById('dev-preview-time'));
   wireTimezone(document.getElementById('dev-preview-time'));
+  // Wire year view on standard dropdown cal and dev-usage previews
+  wireYearView(document.getElementById('vr-cal-std'));
+  document.querySelectorAll('.dev-preview .dp').forEach(dp => wireYearView(dp));
 
   // Standard dropdown variant
   const stdTrigger = document.getElementById('vr-trigger-std');
