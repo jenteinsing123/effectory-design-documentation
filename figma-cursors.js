@@ -1,9 +1,11 @@
 /**
  * figma-cursors.js
  * Simulates Figma-style multiplayer cursors roaming the page.
+ * Cursors are in document (page) coordinates so they behave like
+ * real users exploring the content, not UI overlays.
  */
 (function () {
-  if (window.innerWidth < 768) return; // skip on mobile
+  if (window.innerWidth < 768) return;
 
   var USERS = [
     { name: 'Alex M.',   color: '#7B61FF' },
@@ -12,16 +14,16 @@
     { name: 'Priya S.',  color: '#0D99FF' },
   ];
 
-  // ── Styles ──────────────────────────────────────────────────────────────
+  // ── Styles ───────────────────────────────────────────────────────────────
   var style = document.createElement('style');
   style.textContent =
-    '.fc{position:fixed;top:0;left:0;pointer-events:none;z-index:99999;will-change:transform;}' +
+    '.fc{position:absolute;top:0;left:0;pointer-events:none;z-index:99999;}' +
     '.fc-label{position:absolute;top:20px;left:6px;padding:2px 8px;border-radius:4px;' +
     'font-family:"Inter",system-ui,sans-serif;font-size:11px;font-weight:600;' +
     'color:#fff;white-space:nowrap;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,.2);}';
   document.head.appendChild(style);
 
-  // ── Cursor SVG ───────────────────────────────────────────────────────────
+  // ── Cursor SVG ────────────────────────────────────────────────────────────
   function makeCursorEl(user) {
     var el = document.createElement('div');
     el.className = 'fc';
@@ -38,24 +40,14 @@
     return el;
   }
 
-  // ── Instances ────────────────────────────────────────────────────────────
-  var instances = USERS.map(function (user, i) {
-    return {
-      el:        makeCursorEl(user),
-      x: 0, y: 0,
-      tx: 0, ty: 0,
-      pausing:   false,
-      pauseEnd:  0,
-      visible:   false,
-      showAfter: performance.now() + 800 + i * 1400 + Math.random() * 1200,
-    };
-  });
-
-  // ── Helpers ──────────────────────────────────────────────────────────────
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  // Pick a target within the currently visible viewport (in document coords)
   function randomTarget() {
+    var scrollY = window.scrollY || window.pageYOffset;
+    var scrollX = window.scrollX || window.pageXOffset;
     return {
-      x: 60 + Math.random() * (window.innerWidth  - 120),
-      y: 60 + Math.random() * (window.innerHeight - 120),
+      x: scrollX + 60 + Math.random() * (window.innerWidth  - 120),
+      y: scrollY + 80 + Math.random() * (window.innerHeight - 160),
     };
   }
 
@@ -70,7 +62,20 @@
     inst.tx = t.x; inst.ty = t.y;
   }
 
-  // ── Main loop (single rAF — never call it more than once per frame) ──────
+  // ── Instances ─────────────────────────────────────────────────────────────
+  var instances = USERS.map(function (user, i) {
+    return {
+      el:        makeCursorEl(user),
+      x: 0, y: 0,
+      tx: 0, ty: 0,
+      pausing:   false,
+      pauseEnd:  0,
+      visible:   false,
+      showAfter: performance.now() + 800 + i * 1400 + Math.random() * 1200,
+    };
+  });
+
+  // ── Main loop ─────────────────────────────────────────────────────────────
   var lastTime = 0;
 
   function frame(now) {
@@ -86,7 +91,7 @@
           pickTarget(inst);
           inst.el.style.opacity = '1';
         }
-        return; // just skip this cursor this frame — no rAF here
+        return;
       }
 
       // Pausing
@@ -94,7 +99,7 @@
         if (now < inst.pauseEnd) return;
         inst.pausing = false;
 
-        // Occasionally vanish and reappear elsewhere
+        // Occasionally vanish and reappear
         if (Math.random() < 0.18) {
           inst.visible = false;
           inst.el.style.opacity = '0';
@@ -118,7 +123,7 @@
       }
     });
 
-    requestAnimationFrame(frame); // called exactly once, at the end
+    requestAnimationFrame(frame);
   }
 
   requestAnimationFrame(function (t) {
