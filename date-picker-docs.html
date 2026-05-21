@@ -164,17 +164,35 @@
     /* HH:MM number inputs */
     .dp-time-hm { flex: 1; display: flex; align-items: center; gap: 1px; }
     .dp-time-num {
-      width: 26px; text-align: center;
+      width: 24px; text-align: center;
       border: none; background: none; outline: none;
       font-size: 14px; color: var(--content-base);
       font-family: 'Poppins', inherit;
       -moz-appearance: textfield; appearance: textfield;
-      padding: 0;
+      padding: 0; border-radius: 3px;
     }
     .dp-time-num::-webkit-inner-spin-button,
     .dp-time-num::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-    .dp-time-num:focus { color: var(--content-brand-base); }
-    .dp-time-colon { font-size: 14px; color: var(--content-base); font-family: 'Poppins', inherit; }
+    .dp-time-num:focus { background: var(--bg-brand-subtle); color: var(--content-base); outline: none; }
+    .dp-time-colon { font-size: 14px; color: var(--content-base); font-family: 'Poppins', inherit; user-select: none; }
+    /* Timezone dropdown */
+    .dp-tz-wrap { position: relative; }
+    .dp-tz-field { cursor: pointer; }
+    .dp-tz-field.is-open { border-color: var(--border-brand-base); box-shadow: 0 0 0 3px rgba(10,157,153,.15); }
+    .dp-tz-chevron { transition: transform .15s; }
+    .dp-tz-field.is-open .dp-tz-chevron { transform: rotate(180deg); }
+    .dp-tz-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 300;
+      background: var(--bg-base); border: 1px solid var(--border-base);
+      border-radius: 6px; box-shadow: 0 4px 16px rgba(25,39,67,.12);
+      overflow: hidden;
+    }
+    .dp-tz-option {
+      padding: 8px 12px; font-size: 13px; cursor: pointer;
+      color: var(--content-base); font-family: 'Poppins', inherit;
+    }
+    .dp-tz-option:hover { background: var(--bg-base-hover); }
+    .dp-tz-option.is-active { color: var(--content-brand-base); font-weight: 500; }
 
     /* Up/down steppers for the time field */
     .dp-steppers {
@@ -620,17 +638,27 @@
                   </div>
                 </div>
                 <div class="dp-time-section">
-                  <div class="dp-time-field">
-                    <i data-icon="globe" style="display:flex;width:16px;height:16px;"></i>
-                    <span class="dp-time-value">Europe/Amsterdam</span>
-                    <i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron"></i>
+                  <div class="dp-tz-wrap">
+                    <div class="dp-time-field dp-tz-field">
+                      <i data-icon="globe" style="display:flex;width:16px;height:16px;"></i>
+                      <span class="dp-time-value">Europe/Amsterdam</span>
+                      <i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron dp-tz-chevron"></i>
+                    </div>
+                    <div class="dp-tz-dropdown" hidden>
+                      <div class="dp-tz-option is-active">Europe/Amsterdam</div>
+                      <div class="dp-tz-option">Europe/London</div>
+                      <div class="dp-tz-option">America/New_York</div>
+                      <div class="dp-tz-option">America/Chicago</div>
+                      <div class="dp-tz-option">America/Los_Angeles</div>
+                      <div class="dp-tz-option">UTC</div>
+                    </div>
                   </div>
                   <div class="dp-time-field">
                     <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
                     <div class="dp-time-hm">
-                      <input type="number" class="dp-time-num" value="9" min="0" max="23">
+                      <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="09" data-min="0" data-max="23">
                       <span class="dp-time-colon">:</span>
-                      <input type="number" class="dp-time-num" value="0" min="0" max="59">
+                      <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="00" data-min="0" data-max="59">
                     </div>
                     <div class="dp-steppers">
                       <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
@@ -998,17 +1026,27 @@
               </div>
             </div>
             <div class="dp-time-section">
-              <div class="dp-time-field">
-                <i data-icon="globe" style="display:flex;width:16px;height:16px;"></i>
-                <span class="dp-time-value">Europe/Amsterdam</span>
-                <i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron"></i>
+              <div class="dp-tz-wrap">
+                <div class="dp-time-field dp-tz-field">
+                  <i data-icon="globe" style="display:flex;width:16px;height:16px;"></i>
+                  <span class="dp-time-value">Europe/Amsterdam</span>
+                  <i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron dp-tz-chevron"></i>
+                </div>
+                <div class="dp-tz-dropdown" hidden>
+                  <div class="dp-tz-option is-active">Europe/Amsterdam</div>
+                  <div class="dp-tz-option">Europe/London</div>
+                  <div class="dp-tz-option">America/New_York</div>
+                  <div class="dp-tz-option">America/Chicago</div>
+                  <div class="dp-tz-option">America/Los_Angeles</div>
+                  <div class="dp-tz-option">UTC</div>
+                </div>
               </div>
               <div class="dp-time-field">
                 <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
                 <div class="dp-time-hm">
-                  <input type="number" class="dp-time-num" value="9" min="0" max="23">
+                  <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="09" data-min="0" data-max="23">
                   <span class="dp-time-colon">:</span>
-                  <input type="number" class="dp-time-num" value="0" min="0" max="59">
+                  <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="00" data-min="0" data-max="59">
                 </div>
                 <div class="dp-steppers">
                   <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
@@ -1324,15 +1362,31 @@
 
     let timeSectionHtml = '';
     if (showTime) {
+      const tzHtml = showTz ? `
+          <div class="dp-tz-wrap">
+            <div class="dp-time-field dp-tz-field">
+              <i data-icon="globe" style="display:flex;width:16px;height:16px;"></i>
+              <span class="dp-time-value">Europe/Amsterdam</span>
+              <i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron dp-tz-chevron"></i>
+            </div>
+            <div class="dp-tz-dropdown" hidden>
+              <div class="dp-tz-option is-active">Europe/Amsterdam</div>
+              <div class="dp-tz-option">Europe/London</div>
+              <div class="dp-tz-option">America/New_York</div>
+              <div class="dp-tz-option">America/Chicago</div>
+              <div class="dp-tz-option">America/Los_Angeles</div>
+              <div class="dp-tz-option">UTC</div>
+            </div>
+          </div>` : '';
       timeSectionHtml = `
         <div class="dp-time-section">
-          ${showTz ? `<div class="dp-time-field"><i data-icon="globe" style="display:flex;width:16px;height:16px;"></i><span class="dp-time-value">Europe/Amsterdam</span><i data-icon="chevron-down" style="display:flex;width:16px;height:16px;" class="dp-time-chevron"></i></div>` : ''}
+          ${tzHtml}
           <div class="dp-time-field">
             <i data-icon="Clock" style="display:flex;width:16px;height:16px;"></i>
             <div class="dp-time-hm">
-              <input type="number" class="dp-time-num" value="9" min="0" max="23">
+              <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="09" data-min="0" data-max="23">
               <span class="dp-time-colon">:</span>
-              <input type="number" class="dp-time-num" value="0" min="0" max="59">
+              <input type="text" inputmode="numeric" maxlength="2" class="dp-time-num" value="00" data-min="0" data-max="59">
             </div>
             <div class="dp-steppers">
               <button class="dp-stepper-btn"><i data-icon="chevron-up" style="display:flex;width:10px;height:10px;"></i></button>
@@ -1369,9 +1423,8 @@
         </div>
       </div>`;
     if (typeof injectIcons === 'function') injectIcons(preview);
-    // Wire up steppers for playground-generated time inputs
     wireSteppers(preview);
-    // Wire up day selection for playground calendar
+    wireTimezone(preview);
     wireDaySelect(preview.querySelector('.dp:not(.dp-inline)') || preview.querySelector('.dp'), false);
   }
 
@@ -1450,21 +1503,83 @@
 /* ── Shared helpers ── */
 function wireSteppers(root) {
   (root || document).querySelectorAll('.dp-time-field .dp-steppers').forEach(steppers => {
-    const field = steppers.closest('.dp-time-field');
-    const inputs = field.querySelectorAll('.dp-time-num');
+    const field   = steppers.closest('.dp-time-field');
+    const inputs  = [...field.querySelectorAll('.dp-time-num')];
     if (!inputs.length) return;
-    function nudge(delta) {
-      const active = [...inputs].find(i => i === document.activeElement) || inputs[0];
-      let v = parseInt(active.value, 10) + delta;
-      const max = parseInt(active.max, 10);
-      const min = parseInt(active.min, 10);
+
+    let lastFocused = inputs[0]; // default: hours
+
+    // Track which input was last focused
+    inputs.forEach(inp => {
+      inp.addEventListener('focus', () => { lastFocused = inp; });
+      // Clamp + zero-pad on blur
+      inp.addEventListener('blur', () => {
+        const max = parseInt(inp.dataset.max, 10);
+        const min = parseInt(inp.dataset.min, 10);
+        let v = parseInt(inp.value, 10);
+        if (isNaN(v)) v = min;
+        v = Math.max(min, Math.min(max, v));
+        inp.value = String(v).padStart(2, '0');
+      });
+      // Keyboard arrows step the focused input
+      inp.addEventListener('keydown', e => {
+        if (e.key === 'ArrowUp')   { e.preventDefault(); nudge(inp,  1); }
+        if (e.key === 'ArrowDown') { e.preventDefault(); nudge(inp, -1); }
+      });
+      // Select all on focus for easy overwrite
+      inp.addEventListener('focus', () => inp.select());
+    });
+
+    function nudge(inp, delta) {
+      const max = parseInt(inp.dataset.max, 10);
+      const min = parseInt(inp.dataset.min, 10);
+      let v = parseInt(inp.value, 10);
+      if (isNaN(v)) v = min;
+      v = v + delta;
       if (v > max) v = min;
       if (v < min) v = max;
-      active.value = String(v).padStart(active === inputs[0] ? 2 : 2, '0');
+      inp.value = String(v).padStart(2, '0');
     }
-    const [up, down] = steppers.querySelectorAll('.dp-stepper-btn');
-    up   && up.addEventListener('click',   e => { e.preventDefault(); nudge( 1); });
-    down && down.addEventListener('click', e => { e.preventDefault(); nudge(-1); });
+
+    const [up, dn] = steppers.querySelectorAll('.dp-stepper-btn');
+    // mousedown + preventDefault keeps focus on the input (no blur before nudge)
+    up && up.addEventListener('mousedown', e => { e.preventDefault(); nudge(lastFocused,  1); lastFocused.focus(); });
+    dn && dn.addEventListener('mousedown', e => { e.preventDefault(); nudge(lastFocused, -1); lastFocused.focus(); });
+  });
+}
+
+function wireTimezone(root) {
+  (root || document).querySelectorAll('.dp-tz-wrap').forEach(wrap => {
+    const field    = wrap.querySelector('.dp-tz-field');
+    const dropdown = wrap.querySelector('.dp-tz-dropdown');
+    const label    = field && field.querySelector('.dp-time-value');
+    if (!field || !dropdown) return;
+
+    function openTz() {
+      dropdown.hidden = false;
+      field.classList.add('is-open');
+    }
+    function closeTz() {
+      dropdown.hidden = true;
+      field.classList.remove('is-open');
+    }
+
+    field.addEventListener('click', e => {
+      e.stopPropagation();
+      dropdown.hidden ? openTz() : closeTz();
+    });
+
+    dropdown.querySelectorAll('.dp-tz-option').forEach(opt => {
+      opt.addEventListener('click', e => {
+        e.stopPropagation();
+        dropdown.querySelectorAll('.dp-tz-option').forEach(o => o.classList.remove('is-active'));
+        opt.classList.add('is-active');
+        if (label) label.textContent = opt.textContent;
+        closeTz();
+      });
+    });
+
+    document.addEventListener('click', closeTz);
   });
 }
 
@@ -1517,7 +1632,9 @@ function wireDaySelect(cal, isRange) {
   wireDaySelect(time,   false);
   wireDaySelect(range,  true);
   wireSteppers(document.getElementById('vr-cal-time'));
+  wireTimezone(document.getElementById('vr-cal-time'));
   wireSteppers(document.getElementById('dev-preview-time'));
+  wireTimezone(document.getElementById('dev-preview-time'));
 
   // Standard dropdown variant
   const stdTrigger = document.getElementById('vr-trigger-std');
