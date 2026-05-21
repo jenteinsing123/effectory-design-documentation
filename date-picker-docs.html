@@ -165,7 +165,7 @@
     .dp-day.is-range-start.is-range-end::before { display: none; }
 
     /* ── Year view ── */
-    .dp-year-panel { padding: 0 8px 8px; display: flex; flex-direction: column; }
+    .dp-year-panel { padding: 0 8px 8px; display: flex; flex-direction: column; flex: 1; }
     .dp-year-grid {
       flex: 1;
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -183,7 +183,7 @@
     .dp-year-cell.is-selected:hover { background: var(--bg-brand-base); }
 
     /* ── Month picker ── */
-    .dp-month-panel { padding: 0 8px 8px; display: flex; flex-direction: column; }
+    .dp-month-panel { padding: 0 8px 8px; display: flex; flex-direction: column; flex: 1; }
     .dp-month-grid {
       flex: 1;
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -1627,8 +1627,8 @@ function wireYearView(cal) {
   let curMonthIdx = Math.max(0, MNAMES.findIndex(m => m.startsWith(p0[0])));
   let curYear = parseInt(p0[p0.length - 1]) || 2026;
   let decade  = Math.floor(curYear / 16) * 16;
-  let view       = 'day'; // 'day' | 'year' | 'month'
-  let cachedHeight = 0;  // measured once while days are still visible
+  let view           = 'day'; // 'day' | 'year' | 'month'
+  let cachedBodyH    = 0;    // locked body height, measured while day view is visible
 
   // Create panels
   const yearPanel  = document.createElement('div');
@@ -1639,8 +1639,6 @@ function wireYearView(cal) {
   monthPanel.style.display = 'none';
   weekdays.before(yearPanel);
   weekdays.before(monthPanel);
-
-  function calHeight() { return weekdays.offsetHeight + grid.offsetHeight; }
 
   function hideDays()  { weekdays.style.display = 'none'; grid.style.display = 'none'; }
   function showDays()  { weekdays.style.display = ''; grid.style.display = ''; }
@@ -1666,8 +1664,8 @@ function wireYearView(cal) {
     view = 'year';
     decade = Math.floor(curYear / 16) * 16;
     renderYear();
-    cachedHeight = calHeight(); // measure while days are still visible
-    yearPanel.style.height = cachedHeight + 'px';
+    if (!cachedBodyH) cachedBodyH = body.offsetHeight; // lock once while day view is visible
+    body.style.height = cachedBodyH + 'px';
     yearPanel.style.display = '';
     monthPanel.style.display = 'none';
     hideDays();
@@ -1693,7 +1691,6 @@ function wireYearView(cal) {
   function openMonth() {
     view = 'month';
     renderMonth();
-    monthPanel.style.height = cachedHeight + 'px';
     monthPanel.style.display = '';
     yearPanel.style.display = 'none';
     hideDays();
@@ -1706,6 +1703,7 @@ function wireYearView(cal) {
     yearPanel.style.display = 'none';
     monthPanel.style.display = 'none';
     showDays();
+    body.style.height = ''; // unlock — returns to natural day-view height
     body.classList.remove('dp-year-open');
     monthLabel.textContent = MNAMES[curMonthIdx] + ' ' + curYear;
   }
