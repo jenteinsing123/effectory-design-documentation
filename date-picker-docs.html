@@ -181,6 +181,24 @@
       background: var(--bg-brand-base); color: #fff; border-radius: 80px;
     }
     .dp-year-cell.is-selected:hover { background: var(--bg-brand-base); }
+
+    /* ── Month picker ── */
+    .dp-month-panel { padding: 0 8px 8px; display: flex; flex-direction: column; }
+    .dp-month-grid {
+      flex: 1;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 4px; align-content: space-evenly;
+    }
+    .dp-month-cell {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--content-base); border-radius: 6px;
+      cursor: pointer; transition: background .1s, color .1s;
+      border: 1.5px solid transparent;
+    }
+    .dp-month-cell:hover { background: var(--bg-base-hover); }
+    .dp-month-cell.is-selected { border-color: var(--content-base); }
+
     /* Rotate chevron when year view is open */
     .dp-month-group i[data-icon] { transition: transform .15s; }
     .dp-body.dp-year-open .dp-month-group i[data-icon] { transform: rotate(180deg); }
@@ -1602,71 +1620,121 @@ function wireYearView(cal) {
   const grid       = cal.querySelector('.dp-grid');
   if (!body || !monthGroup || !monthLabel || !weekdays || !grid) return;
 
-  const parts0 = monthLabel.textContent.split(' ');
-  let curMonth = parts0[0] || 'May';
-  let curYear  = parseInt(parts0[parts0.length - 1]) || 2026;
-  let decade   = Math.floor(curYear / 24) * 24;
-  let open     = false;
+  const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const MNAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-  // Inject the year grid panel once, before weekdays
-  const panel = document.createElement('div');
-  panel.className = 'dp-year-panel';
-  panel.style.display = 'none';
-  weekdays.before(panel);
+  const p0 = monthLabel.textContent.split(' ');
+  let curMonthIdx = Math.max(0, MNAMES.findIndex(m => m.startsWith(p0[0])));
+  let curYear = parseInt(p0[p0.length - 1]) || 2026;
+  let decade  = Math.floor(curYear / 16) * 16;
+  let view    = 'day'; // 'day' | 'year' | 'month'
 
-  function render() {
+  // Create panels
+  const yearPanel  = document.createElement('div');
+  yearPanel.className = 'dp-year-panel';
+  yearPanel.style.display = 'none';
+  const monthPanel = document.createElement('div');
+  monthPanel.className = 'dp-month-panel';
+  monthPanel.style.display = 'none';
+  weekdays.before(yearPanel);
+  weekdays.before(monthPanel);
+
+  function calHeight() { return weekdays.offsetHeight + grid.offsetHeight; }
+
+  function hideDays()  { weekdays.style.display = 'none'; grid.style.display = 'none'; }
+  function showDays()  { weekdays.style.display = ''; grid.style.display = ''; }
+
+  // ── Year view ──────────────────────────────────────────────
+  function renderYear() {
     const s = decade, e = s + 15;
     monthLabel.textContent = s + ' – ' + e;
-    panel.innerHTML = '';
+    yearPanel.innerHTML = '';
     const g = document.createElement('div');
     g.className = 'dp-year-grid';
     for (let y = s; y <= e; y++) {
       const c = document.createElement('div');
       c.className = 'dp-year-cell' + (y === curYear ? ' is-selected' : '');
       c.textContent = y;
-      c.addEventListener('click', ev => { ev.stopPropagation(); curYear = y; close(); });
+      c.addEventListener('click', ev => { ev.stopPropagation(); curYear = y; openMonth(); });
       g.appendChild(c);
     }
-    panel.appendChild(g);
+    yearPanel.appendChild(g);
   }
 
-  function prevDecade(e) { e.stopPropagation(); if (open) { decade -= 16; render(); } }
-  function nextDecade(e) { e.stopPropagation(); if (open) { decade += 16; render(); } }
-
-  function openView() {
-    open = true;
+  function openYear() {
+    view = 'year';
     decade = Math.floor(curYear / 16) * 16;
-    render();
-    // Match height of the weekdays + grid before hiding them
-    panel.style.height = (weekdays.offsetHeight + grid.offsetHeight) + 'px';
-    panel.style.display = '';
-    weekdays.style.display = 'none';
-    grid.style.display = 'none';
+    renderYear();
+    yearPanel.style.height = calHeight() + 'px';
+    yearPanel.style.display = '';
+    monthPanel.style.display = 'none';
+    hideDays();
     body.classList.add('dp-year-open');
-    if (navBtns[0]) navBtns[0].addEventListener('click', prevDecade);
-    if (navBtns[1]) navBtns[1].addEventListener('click', nextDecade);
   }
 
-  function close() {
-    open = false;
-    panel.style.display = 'none';
-    weekdays.style.display = '';
-    grid.style.display = '';
+  // ── Month view ─────────────────────────────────────────────
+  function renderMonth() {
+    monthLabel.textContent = curYear + '';
+    monthPanel.innerHTML = '';
+    const g = document.createElement('div');
+    g.className = 'dp-month-grid';
+    MONTHS.forEach((m, i) => {
+      const c = document.createElement('div');
+      c.className = 'dp-month-cell' + (i === curMonthIdx ? ' is-selected' : '');
+      c.textContent = m;
+      c.addEventListener('click', ev => { ev.stopPropagation(); curMonthIdx = i; closeToDay(); });
+      g.appendChild(c);
+    });
+    monthPanel.appendChild(g);
+  }
+
+  function openMonth() {
+    view = 'month';
+    renderMonth();
+    monthPanel.style.height = calHeight() + 'px';
+    monthPanel.style.display = '';
+    yearPanel.style.display = 'none';
+    hideDays();
+    body.classList.add('dp-year-open');
+  }
+
+  // ── Close to day view ──────────────────────────────────────
+  function closeToDay() {
+    view = 'day';
+    yearPanel.style.display = 'none';
+    monthPanel.style.display = 'none';
+    showDays();
     body.classList.remove('dp-year-open');
-    monthLabel.textContent = curMonth + ' ' + curYear;
-    if (navBtns[0]) navBtns[0].removeEventListener('click', prevDecade);
-    if (navBtns[1]) navBtns[1].removeEventListener('click', nextDecade);
+    monthLabel.textContent = MNAMES[curMonthIdx] + ' ' + curYear;
   }
 
+  // ── Nav buttons (shared; behaviour depends on view) ────────
+  function onPrev(e) {
+    e.stopPropagation();
+    if (view === 'year')  { decade -= 16; renderYear(); }
+    if (view === 'month') { curYear--;    renderMonth(); }
+  }
+  function onNext(e) {
+    e.stopPropagation();
+    if (view === 'year')  { decade += 16; renderYear(); }
+    if (view === 'month') { curYear++;    renderMonth(); }
+  }
+  if (navBtns[0]) navBtns[0].addEventListener('click', onPrev);
+  if (navBtns[1]) navBtns[1].addEventListener('click', onNext);
+
+  // ── Month-group click ──────────────────────────────────────
   monthGroup.addEventListener('click', e => {
     e.stopPropagation();
-    if (open) {
-      close();
-    } else {
+    if (view === 'day') {
       const p = monthLabel.textContent.split(' ');
-      curMonth = p[0] || curMonth;
-      curYear  = parseInt(p[p.length - 1]) || curYear;
-      openView();
+      const mi = MNAMES.findIndex(m => m.startsWith(p[0]));
+      if (mi >= 0) curMonthIdx = mi;
+      curYear = parseInt(p[p.length - 1]) || curYear;
+      openYear();
+    } else if (view === 'year') {
+      closeToDay();
+    } else if (view === 'month') {
+      openYear(); // go back up one level
     }
   });
 }
