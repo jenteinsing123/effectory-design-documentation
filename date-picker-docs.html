@@ -1575,7 +1575,7 @@ function wireDaySelect(cal, isRange) {
       if (!day || day.classList.contains('is-empty') || day.classList.contains('is-disabled')) return;
       const allDays = [...cal.querySelectorAll('.dp-day')].filter(d => !d.classList.contains('is-empty'));
       const idx = allDays.indexOf(day);
-      const hasEnd = cal.querySelector('.dp-day.is-range-end');
+      const hasEnd = cal.querySelector('.dp-day.is-range-end:not(.is-range-start)');
       if (rangeStart === null || hasEnd) {
         allDays.forEach(d => d.classList.remove('is-range-start','is-range-end','is-in-range'));
         // Add both start+end so the ::before band is hidden (single selection, no strip)
