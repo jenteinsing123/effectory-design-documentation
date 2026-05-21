@@ -165,13 +165,14 @@
     .dp-day.is-range-start.is-range-end::before { display: none; }
 
     /* ── Year view ── */
-    .dp-year-panel { padding: 0 8px 8px; }
+    .dp-year-panel { padding: 0 8px 8px; display: flex; flex-direction: column; }
     .dp-year-grid {
+      flex: 1;
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
+      gap: 4px; align-content: space-evenly;
     }
     .dp-year-cell {
-      height: 36px; display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 14px; color: var(--content-base); border-radius: 6px;
       cursor: pointer; transition: background .1s, color .1s;
     }
@@ -1637,7 +1638,7 @@ function wireYearView(cal) {
     decade = Math.floor(curYear / 24) * 24;
     render();
     // Match height of the weekdays + grid before hiding them
-    panel.style.minHeight = (weekdays.offsetHeight + grid.offsetHeight) + 'px';
+    panel.style.height = (weekdays.offsetHeight + grid.offsetHeight) + 'px';
     panel.style.display = '';
     weekdays.style.display = 'none';
     grid.style.display = 'none';
