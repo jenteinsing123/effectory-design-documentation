@@ -15,6 +15,15 @@
     document.head.appendChild(s);
   })();
 
+  // Load figma-cursors.js for the multiplayer cursor easter egg
+  (function loadCursors() {
+    if (document.querySelector('script[src$="figma-cursors.js"]')) return;
+    var s = document.createElement('script');
+    s.src = 'figma-cursors.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  })();
+
   // Resolve nav.html relative to this script's location
   var scriptSrc = document.querySelector('script[src$="nav.js"]');
   var base = scriptSrc
