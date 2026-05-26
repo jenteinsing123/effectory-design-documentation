@@ -1,0 +1,576 @@
+# Engage Design System — Reference
+
+Auto-generated source: `tokens.css`, `foundation.css`, `components.css`, `assets/icons/`
+Do NOT invent names. If something isn't listed here, it does not exist.
+
+---
+
+## 1. HTML boilerplate voor een prototype
+
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="../foundation.css" />
+  <link rel="stylesheet" href="../components.css" />
+  <style>
+    body { background: var(--bg-interface-body); color: var(--content-base); font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body>
+  <!-- prototype content here -->
+  <script src="../icons.js"></script>
+</body>
+</html>
+```
+
+**Nooit meenemen:** `nav.html`, `nav.js`, `.shell`, `.topnav`, `.sidebar`, `.content-wrap`, `.page-header`, `.page-tabs`, `.tab-panel`, `.states-row`, `.state-col`, `.dd-grid`, `.token-table`, `.pg-card`, `.dev-preview`, `.dev-code-wrap`, `.toc-col`, `.section`, `.pagination`
+
+---
+
+## 2. Foundation-variabelen (`foundation.css`)
+
+### Spacing
+| Token | Waarde |
+|---|---|
+| `--spacing-extra-tight` | `4px` |
+| `--spacing-tight` | `8px` |
+| `--spacing-base-tight` | `12px` |
+| `--spacing-base` | `16px` |
+| `--spacing-loose` | `24px` |
+| `--spacing-extra-loose` | `32px` |
+| `--spacing-super-loose` | `40px` |
+| `--spacing-super-extra-loose` | `56px` |
+
+### Border radius
+| Token | Waarde |
+|---|---|
+| `--radius-none` | `0` |
+| `--radius-sm` | `4px` |
+| `--radius-base` | `6px` |
+| `--radius-md` | `8px` |
+| `--radius-lg` | `12px` |
+| `--radius-xl` | `16px` |
+| `--radius-full` | `999px` |
+| `--radius` | alias → `--radius-md` |
+
+### Shadows
+| Token | Gebruik |
+|---|---|
+| `--sh-action` | Buttons, inputs (rest) |
+| `--sh-action-hover` | Buttons, inputs (hover) |
+| `--sh-card` | Cards (rest) |
+| `--sh-card-hover` | Cards (hover) |
+| `--sh-popovers` | Dropdowns, menus |
+| `--sh-dialogs` | Dialogs |
+| `--sh-footer` | Footer bars |
+| `--sh-slide-panel` | Slide-in panels |
+
+### Typografie-utility-classes
+```
+.text-l1   42px / 600 / -.03em    heading niveau 1
+.text-l2   32px / 600 / -.02em    heading niveau 2
+.text-l3   26px / 600 / -.02em    heading niveau 3
+.text-l4   20px / 600 / -.01em    heading niveau 4
+.text-l5   16px / 600 / 0         heading niveau 5
+.text-l6   12px / 600 / .08em     label uppercase (content-subtle)
+.text-small   12px / lh 1.5
+.text-medium  14px / lh 1.6
+.text-large   16px / lh 1.6
+.text-w600 / .text-w500 / .text-w400   font-weight helpers
+.text-subdued  color: var(--content-subtle)
+```
+
+---
+
+## 3. Design tokens (`tokens.css`)
+
+Tokens zijn auto-generated vanuit Figma via `build-tokens.py`. Nooit handmatig bewerken.
+
+### Dark mode
+`tokens.css` bevat drie dark-mode lagen:
+1. `@media (prefers-color-scheme: dark)` — automatisch op systeemvoorkeur
+2. `html[data-theme="dark"]` — expliciet dark
+3. `html[data-theme="light"]` — expliciet light (forceert light ook in dark-OS)
+
+### Portals
+- Default (Coordinator): teal brand (`--bg-brand-base: #0a9d99`)
+- Personal portal: `html[data-portal="personal"]` → geel brand (`--bg-brand-base: #fecd29`)
+
+### Semantische tokens — selectie voor prototype-gebruik
+
+**Achtergronden**
+| Token | Light waarde |
+|---|---|
+| `--bg-base` | `#ffffff` |
+| `--bg-base-hover` | `#f8f8f9` |
+| `--bg-base-pressed` | `#f1f2f4` |
+| `--bg-secondary` | `#f8f8f9` |
+| `--bg-tertiary` | `#e1e4e8` |
+| `--bg-brand-base` | `#0a9d99` |
+| `--bg-brand-subtle` | `#d2f8f6` |
+| `--bg-input` | `#ffffff` |
+| `--bg-disabled` | `rgba(25,39,67,.10)` |
+| `--bg-negative-base` | `#d3353b` |
+| `--bg-negative-subtle` | `#ffebeb` |
+| `--bg-positive-base` | `#278747` |
+| `--bg-positive-subtle` | `#d7f9e0` |
+| `--bg-info-base` | `#3174db` |
+| `--bg-info-subtle` | `#e6f0fe` |
+| `--bg-warning-bold` | `#fa8324` |
+| `--bg-warning-subtle` | `#feede1` |
+| `--bg-highlight-base` | `#fdbd12` |
+| `--bg-highlight-subtle` | `#ffefc2` |
+| `--bg-inverse-base` | `#192743` |
+| `--bg-interface-body` | `#ffffff` |
+
+**Borders**
+| Token | Light waarde |
+|---|---|
+| `--border-base` | `#e1e4e8` |
+| `--border-action` | `#bcc1cd` |
+| `--border-action-hover` | `#a5adbc` |
+| `--border-brand-base` | `#0c827f` |
+| `--border-brand-subtle` | `#7adddb` |
+| `--border-negative-base` | `#b9252a` |
+| `--border-positive-base` | `#39a35c` |
+| `--border-info-base` | `#3174db` |
+| `--border-warning-base` | `#ec6e0a` |
+| `--border-highlight-base` | `#d68100` |
+| `--border-disabled` | `rgba(25,39,67,.30)` |
+
+**Tekst / iconen**
+| Token | Light waarde |
+|---|---|
+| `--content-base` | `#192743` |
+| `--content-secondary` | `rgba(25,39,67,.80)` |
+| `--content-subtle` | `rgba(25,39,67,.50)` |
+| `--content-placeholder` | `rgba(25,39,67,.67)` |
+| `--content-disabled` | `rgba(25,39,67,.30)` |
+| `--content-brand-base` | `#166764` |
+| `--content-on-brand-base` | `#ffffff` |
+| `--content-negative-base` | `#b9252a` |
+| `--content-negative-secondary` | `#d3353b` |
+| `--content-positive-base` | `#236e41` |
+| `--content-info-base` | `#205bb9` |
+| `--content-warning-base` | `#a83e00` |
+| `--content-highlight-base` | `#8a4b15` |
+| `--content-inverse-base` | `#ffffff` |
+
+**Accent-kleuren** (voor badges, tags, highlights)
+Patroon: `--bg-accent-{kleur}-base` / `--bg-accent-{kleur}-subtle`
+Kleuren: `blue`, `green`, `orange`, `purple`, `red`, `turquoise`, `yellow`
+Overeenkomstige border: `--border-accent-{kleur}-base`
+Overeenkomstige tekst: `--content-accent-{kleur}-base`
+
+---
+
+## 4. Componenten (`components.css`)
+
+### Button
+```html
+<!-- Primary -->
+<button class="btn btn-primary">Label</button>
+<button class="btn btn-primary"><i data-icon="plus"></i> Label</button>
+
+<!-- Secondary -->
+<button class="btn btn-secondary">Label</button>
+
+<!-- Tertiary -->
+<button class="btn btn-tertiary">Label</button>
+
+<!-- Danger (filled) -->
+<button class="btn btn-danger">Verwijderen</button>
+
+<!-- Danger secondary -->
+<button class="btn btn-danger-secondary">Verwijderen</button>
+
+<!-- Danger tertiary -->
+<button class="btn btn-danger-tertiary">Verwijderen</button>
+
+<!-- Link -->
+<button class="btn btn-link">Meer info</button>
+
+<!-- Link delete -->
+<button class="btn btn-link-delete">Verwijderen</button>
+
+<!-- Disabled (elke variant) -->
+<button class="btn btn-primary is-disabled" disabled>Label</button>
+```
+States: `.is-hover` `.is-pressed` `.is-disabled`
+
+### Button Big
+```html
+<button class="btn-big btn-big-primary">Aan de slag</button>
+<button class="btn-big btn-big-secondary">Meer weten</button>
+<button class="btn-big btn-big-primary is-disabled" disabled>Disabled</button>
+```
+States: `.is-hover` `.is-pressed` `.is-disabled`
+
+### Upgrade Button
+```html
+<button class="btn-upgrade">
+  <span class="btn-upgrade-badge"><i data-icon="arrow-up"></i></span>
+  Upgrade
+</button>
+```
+States: `.is-hover` `.is-pressed` `.is-disabled`
+
+### Text Field
+```html
+<!-- Standaard -->
+<div class="tf-wrap">
+  <label class="tf-lbl">Label <span class="tf-required">*</span></label>
+  <div class="tf-field">
+    <input class="tf" type="text" placeholder="Placeholder" />
+  </div>
+  <span class="tf-help">Helper tekst</span>
+</div>
+
+<!-- Met leading icon -->
+<div class="tf-wrap">
+  <label class="tf-lbl">Zoeken</label>
+  <div class="tf-field">
+    <span class="tf-field-icon tf-icon-left"><i data-icon="search"></i></span>
+    <input class="tf" type="text" placeholder="Zoek..." />
+  </div>
+</div>
+
+<!-- Error state -->
+<div class="tf-wrap">
+  <label class="tf-lbl">E-mail</label>
+  <div class="tf-field">
+    <input class="tf is-error" type="email" value="fout@" />
+  </div>
+  <span class="tf-err"><i data-icon="alert-circle"></i> Ongeldig e-mailadres</span>
+</div>
+
+<!-- Inline variant -->
+<input class="tf-inline" type="text" value="Inline tekst" />
+
+<!-- Inline number variant -->
+<div class="tf-num-wrap">
+  <input class="tf-num" type="number" value="42" />
+  <span class="tf-num-lbl">%</span>
+  <div class="tf-num-stepper">
+    <button class="tf-num-btn"><i data-icon="chevron-up"></i></button>
+    <button class="tf-num-btn"><i data-icon="chevron-down"></i></button>
+  </div>
+</div>
+```
+States op `input.tf`: `.is-hover` `.is-focus` `.is-error` `.is-disabled` `.is-readonly`
+States op `.tf-num-wrap`: `.is-hover` `.is-focus` `.is-error` `.is-disabled`
+
+### Search
+```html
+<div class="search-wrap">
+  <span class="search-icon"><i data-icon="search"></i></span>
+  <input type="search" class="srch" placeholder="Zoeken..." />
+</div>
+```
+States op `input.srch`: `.is-hover` `.is-focus` `.is-disabled`
+
+### Textarea
+```html
+<div class="ta-wrap">
+  <label class="ta-lbl">Omschrijving <span class="ta-required">*</span></label>
+  <textarea class="ta" rows="4" placeholder="Typ hier..."></textarea>
+  <span class="ta-help">Max. 500 tekens</span>
+</div>
+
+<!-- Error state -->
+<div class="ta-wrap">
+  <label class="ta-lbl">Omschrijving</label>
+  <textarea class="ta is-error"></textarea>
+  <span class="ta-err"><i data-icon="alert-circle"></i> Verplicht veld</span>
+</div>
+```
+States op `textarea.ta`: `.is-hover` `.is-focus` `.is-error` `.is-disabled`
+
+### Select (Single)
+```html
+<div class="slt-wrap">
+  <label class="slt-lbl">Keuze</label>
+  <div class="slt" tabindex="0">
+    <span class="slt-left">
+      <span class="slt-ph">Selecteer...</span>
+    </span>
+    <i data-icon="chevron-down"></i>
+  </div>
+</div>
+
+<!-- Met geselecteerde waarde -->
+<div class="slt" tabindex="0">
+  <span class="slt-left"><span class="slt-val">Optie A</span></span>
+  <i data-icon="chevron-down"></i>
+</div>
+```
+States: `.is-hover` `.is-focus` `.is-typing` `.is-error` `.is-warning` `.is-disabled`
+
+### Select (Multi)
+```html
+<div class="ms" tabindex="0">
+  <span class="ms-ph">Selecteer opties...</span>
+  <span class="ms-ch"><i data-icon="chevron-down"></i></span>
+</div>
+
+<!-- Met chips -->
+<div class="ms">
+  <span class="chip">Optie A <i data-icon="cross"></i></span>
+  <span class="chip">Optie B <i data-icon="cross"></i></span>
+  <span class="ms-ch"><i data-icon="chevron-down"></i></span>
+</div>
+```
+Chip-varianten: `.chip` `.chip-info` `.chip-error` `.chip-warning`
+
+### Selection Button
+```html
+<button class="sel-btn">
+  <span class="sel-btn-name">Filter</span>
+  <span class="sel-btn-value">Actief</span>
+  <i data-icon="chevron-down"></i>
+</button>
+
+<!-- Inline variant -->
+<button class="sel-btn sel-btn-inline">
+  <span class="sel-btn-name">Sorteren</span>
+  <i data-icon="chevron-down"></i>
+</button>
+```
+States: `.is-hover` `.is-pressed` `.is-focus`
+
+### Dropdown menu
+```html
+<div class="menu">
+  <div class="menu-item">Optie 1</div>
+  <div class="menu-item is-selected">Optie 2</div>
+  <div class="menu-divider"></div>
+  <div class="menu-item">Optie 3</div>
+</div>
+
+<!-- Met zoekbalk -->
+<div class="menu">
+  <div class="menu-search">
+    <i data-icon="search"></i>
+    <input placeholder="Zoeken..." />
+  </div>
+  <div class="menu-item">Resultaat</div>
+  <div class="menu-empty">Geen resultaten</div>
+</div>
+
+<!-- Met groepslabel -->
+<div class="menu">
+  <div class="menu-group-lbl">Groep A</div>
+  <div class="menu-item">
+    <span class="menu-item-body">
+      <span class="menu-item-title">Titel</span>
+      <span class="menu-item-sub">Subtitel</span>
+    </span>
+  </div>
+</div>
+```
+States op `.menu-item`: `.is-selected` `.is-focus`
+
+### Checkbox
+```html
+<!-- Bare -->
+<span class="cb-wrap">
+  <input type="checkbox" class="cb" />
+</span>
+
+<!-- Labeled -->
+<label class="cb-label-wrap">
+  <span class="cb-wrap"><input type="checkbox" class="cb" /></span>
+  Optie label
+</label>
+
+<!-- Met beschrijving -->
+<div class="cb-info-wrap">
+  <span class="cb-wrap"><input type="checkbox" class="cb" /></span>
+  <div class="cb-info-body">
+    <span class="cb-info-label">Titel</span>
+    <span class="cb-info-desc">Korte beschrijving</span>
+  </div>
+</div>
+
+<!-- Checkbox button (ghost) -->
+<button class="cb-btn">
+  <span class="cb-wrap"><input type="checkbox" class="cb" /></span>
+  Label
+</button>
+
+<!-- Checkbox button (bordered) -->
+<button class="cb-btn-bordered">
+  <span class="cb-wrap"><input type="checkbox" class="cb" /></span>
+  Label
+</button>
+
+<!-- Tile -->
+<div class="cb-tile">
+  <div class="cb-tile-cb"><span class="cb-wrap"><input type="checkbox" class="cb" /></span></div>
+  <div class="cb-tile-body">
+    <div class="cb-tile-title">Titel</div>
+    <div class="cb-tile-desc">Beschrijving</div>
+  </div>
+</div>
+```
+Groottes: `.cb-large` / `.cb-lg` op de `input` (20×20 px)
+States op `input.cb`: `.is-hover` `.is-checked` `.is-indeterminate` `.is-disabled`
+State op `.cb-label-wrap` / `.cb-info-wrap` / `.cb-btn` / `.cb-btn-bordered`: `.is-disabled`
+
+### Radio Group
+```html
+<!-- Bare -->
+<span class="rb-wrap">
+  <input type="radio" class="rb" name="g1" />
+</span>
+
+<!-- Labeled -->
+<label class="rb-label-wrap">
+  <span class="rb-wrap"><input type="radio" class="rb" name="g1" /></span>
+  Optie A
+</label>
+
+<!-- Met beschrijving -->
+<div class="rb-info-wrap">
+  <span class="rb-wrap"><input type="radio" class="rb" name="g1" /></span>
+  <div class="rb-info-body">
+    <span class="rb-info-label">Titel</span>
+    <span class="rb-info-desc">Beschrijving</span>
+  </div>
+</div>
+
+<!-- Groep -->
+<div class="rb-group">
+  <label class="rb-label-wrap">
+    <span class="rb-wrap"><input type="radio" class="rb" name="g1" /></span>Optie A
+  </label>
+  <label class="rb-label-wrap">
+    <span class="rb-wrap"><input type="radio" class="rb" name="g1" /></span>Optie B
+  </label>
+</div>
+
+<!-- Tile -->
+<div class="rb-tile">
+  <div class="rb-tile-radio"><span class="rb-wrap"><input type="radio" class="rb" name="g1" /></span></div>
+  <div class="rb-tile-body">
+    <div class="rb-tile-title">Titel</div>
+    <div class="rb-tile-desc">Beschrijving</div>
+  </div>
+</div>
+
+<!-- Button ghost -->
+<button class="rb-btn-ghost">
+  <span class="rb-wrap"><input type="radio" class="rb" /></span>
+  Label
+</button>
+
+<!-- Button bordered -->
+<button class="rb-btn-bordered">
+  <span class="rb-wrap"><input type="radio" class="rb" /></span>
+  Label
+</button>
+```
+Grootte: `.rb-lg` op `input` (20×20 px)
+States op `input.rb`: `.is-hover` `.is-checked` `.is-disabled`
+State op wrappers: `.is-disabled`
+
+### Toggle
+```html
+<!-- Bare -->
+<label class="tgl-wrap">
+  <input type="checkbox" class="tgl" />
+  <span class="tgl-track"><span class="tgl-thumb"></span></span>
+</label>
+
+<!-- Labeled -->
+<label class="tgl-label-wrap">
+  <span class="tgl-wrap">
+    <input type="checkbox" class="tgl" />
+    <span class="tgl-track"><span class="tgl-thumb"></span></span>
+  </span>
+  Meldingen aan
+</label>
+
+<!-- Met beschrijving -->
+<div class="tgl-info-wrap">
+  <span class="tgl-wrap">
+    <input type="checkbox" class="tgl" />
+    <span class="tgl-track"><span class="tgl-thumb"></span></span>
+  </span>
+  <div class="tgl-info-body">
+    <span class="tgl-info-label">Titel</span>
+    <span class="tgl-info-desc">Beschrijving van de instelling</span>
+  </div>
+</div>
+```
+On-state: `input.tgl:checked` (native) of `.tgl-track.is-on` (statisch)
+States op `.tgl-track`: `.is-on` `.is-hover` `.is-disabled`
+States op wrappers: `.is-disabled`
+
+### Date Picker
+```html
+<!-- Trigger knop -->
+<button class="dp-trigger">
+  <i data-icon="calendar"></i>
+  12 jan 2025
+  <i data-icon="chevron-down"></i>
+</button>
+
+<!-- Kalender popup -->
+<div class="dp">
+  <div class="dp-body">
+    <div class="dp-header">
+      <div class="dp-month-group">
+        <span class="dp-month-label">Januari 2025</span>
+        <i data-icon="chevron-down"></i>
+      </div>
+      <div class="dp-nav">
+        <button class="dp-nav-btn"><i data-icon="chevron-left"></i></button>
+        <button class="dp-nav-btn"><i data-icon="chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="dp-weekdays">
+      <div class="dp-wday">Ma</div><!-- ... -->
+    </div>
+    <div class="dp-grid">
+      <div class="dp-day">1</div>
+      <div class="dp-day is-today">2</div>
+      <div class="dp-day is-selected">3</div>
+      <div class="dp-day is-disabled">4</div>
+      <div class="dp-day is-other-month">31</div>
+    </div>
+  </div>
+  <div class="dp-footer">
+    <button class="btn-dp-cancel">Annuleren</button>
+    <button class="btn-dp-apply">Toepassen</button>
+  </div>
+</div>
+
+<!-- Inline kalender (geen border/shadow) -->
+<div class="dp dp-inline">...</div>
+```
+States op `.dp-day`: `.is-today` `.is-selected` `.is-hover` `.is-disabled` `.is-other-month` `.is-empty`
+Range states: `.is-range-start` `.is-range-end` `.is-in-range`
+Trigger states: `.is-hover` `.is-focus` `.is-open`
+
+---
+
+## 5. Iconen
+
+Patroon: `<i data-icon="naam" style="display:flex;width:16px;height:16px;"></i>`
+Kleur via `color: currentColor` op de `<i>` of een ancestor.
+Iconen worden geïnjecteerd door `icons.js` (moet onderaan `<body>` staan).
+
+**Beschikbare iconen** (uit `assets/icons/`):
+
+`accessibility` `activity` `add-on` `aggregations` `alert-circle` `alert-triangle` `alert-triangle-1` `all changes` `approximately` `archive` `archive-1` `arrow-down` `arrow-left` `arrow-right` `arrow-sub` `arrow-up` `asterisk` `at-mail` `barchart-2` `bell` `benchmark-down` `benchmark-up` `bold` `book-open` `bookmark` `bookmark-filled` `box` `briefcase` `building` `bullet-point` `calendar` `calendar-add` `calendar-recurring` `calendar-remove` `category` `check` `check-square` `chevron-down` `chevron-down-small` `chevron-end` `chevron-left` `chevron-right` `chevron-start` `chevron-up` `clipboard` `clipboard-a` `clipboard-note` `clipboard-settings` `code` `collapse-left` `collapse-right` `compass` `cookie` `copy` `correlation-positive` `cpu` `cross` `desktop` `double-chevron-down` `double-chevron-up` `down-vote` `download` `download-2` `drag-drop` `edit` `edit-inline` `equal` `excel` `expand-left` `expand-right` `export` `external-link` `eye` `eye-off` `featured` `file` `file-error` `file-plus` `filter` `find-replace` `flag` `folder` `gear` `gender-male` `gender-male-1` `gender-non-binary` `gift` `globe` `goals` `group` `help` `hierarchy` `home` `import-export` `info` `italic` `key` `language` `layer-up-alt` `layout` `lightbulb` `link` `list-unordered` `lock` `log-out` `love` `mail` `maximize` `menu` `message` `message-filled` `minimize` `minus` `mobile` `moon` `more-horizontal` `more-vertical` `net-promoter-score` `net-promoter-score-detractor` `net-promoter-score-passive` `palette` `passkey` `pause` `pen-tool` `percent` `pie-chart` `pin` `pin-filled` `pipet` `play` `plus` `plus-minus` `point-scale` `privacy` `randomize` `refresh` `response` `rotate-backward` `rotate-forward` `search` `segments` `select` `selected` `send` `shapes` `share` `share-1` `shield` `single-answer` `single-answer-1` `sliders` `sort-ascending` `sort-descending` `star` `star-filled` `stop` `structure` `sun` `table` `tag` `target` `text-entry` `themes` `toggle-left` `toggle-right` `tool` `top-3-filled` `trash` `trend-stable` `underline` `undo` `unlock` `up-vote` `upload` `upload-file` `user` `user-badge` `user-check` `user-min` `user-plus` `users` `version-history` `waypoint` `win` `words` `youtube` `zap` `zap-filled`
+
+**Niet als `data-icon` te gebruiken** (bestandsnamen met spaties of hoofdletters zijn illustraties, geen UI-iconen):
+`Barchart-1` `Clock` `ESG scan` `ESG scan-1` `ESG scan-2` `Strategic fitness scan` `Tree` `Trend-down` `Trend-up` `Type` `magic wand`
