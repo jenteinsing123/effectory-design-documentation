@@ -608,3 +608,15 @@ TOC `href`s must exactly match the section `id`. Standard IDs:
 | Missing `is-` prefix on state classes | All state classes are `is-hover`, `is-pressed`, `is-checked`, `is-disabled`, etc. Never `hover`, `active`, `checked`. |
 | Inventing class names in `dev-code-wrap` snippets | Only use class names / selectors confirmed in the live Angular styleguide (`styleguide.effectory.com`). If the API is unknown, add a `dev-gap` callout instead of guessing. |
 | Using internal demo CSS classes in code snippets | Classes written in the page `<style>` block for visual demos (e.g. `.tf-inline`, `.tf-num-wrap`) must never appear in copyable code snippets — they are documentation scaffolding, not production code. |
+
+---
+
+## 19. Synchronisatie met het prototype-systeem
+
+Het prototype-systeem (`.claude/skills/build-prototype/`) leunt op drie herbruikbare lagen: `tokens.css`, `foundation.css` en `components.css`. Houd deze in sync met de documentatie:
+
+- **Nieuwe component gedocumenteerd of component-CSS gewijzigd?** Werk `components.css` bij zodat de gebundelde CSS klopt met de `<style>`-blokken in de doc-pagina's.
+- **Fundament gewijzigd** (spacing, radius of shadows in `:root` van `styles.css`)? Werk `foundation.css` overeenkomstig bij.
+- **Nieuwe of gewijzigde componenten, varianten, tokens of iconen?** Werk `.claude/skills/build-prototype/design-system-reference.md` bij.
+- **`tokens.css` is auto-gegenereerd** via `build-tokens.py` vanuit Figma — bewerk het **nooit** met de hand. Wijzig tokens in Figma en draai daarna `python3 build-tokens.py`.
+- Raken deze bestanden uit sync met de docs, dan bouwt het team prototypes met verouderde of ontbrekende componenten.
