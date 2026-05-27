@@ -1,10 +1,10 @@
-# Skill: build-prototype
+# Skill: Effectory Design System
 
-Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **scherm** of **losse component-demo** te bouwen.
+Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **design**, **scherm**, **pagina** of **losse component-demo** te bouwen met onze design-system-componenten.
 
 Laad voor elke bouwsessie eerst:
 ```
-Read(".claude/skills/build-prototype/design-system-reference.md")
+Read(".claude/skills/effectory-design-system/design-system-reference.md")
 ```
 
 ---

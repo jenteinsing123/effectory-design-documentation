@@ -613,10 +613,10 @@ TOC `href`s must exactly match the section `id`. Standard IDs:
 
 ## 19. Synchronisatie met het prototype-systeem
 
-Het prototype-systeem (`.claude/skills/build-prototype/`) leunt op drie herbruikbare lagen: `tokens.css`, `foundation.css` en `components.css`. Houd deze in sync met de documentatie:
+Het prototype-systeem (`.claude/skills/effectory-design-system/`) leunt op drie herbruikbare lagen: `tokens.css`, `foundation.css` en `components.css`. Houd deze in sync met de documentatie:
 
 - **Nieuwe component gedocumenteerd of component-CSS gewijzigd?** Werk `components.css` bij zodat de gebundelde CSS klopt met de `<style>`-blokken in de doc-pagina's.
 - **Fundament gewijzigd** (spacing, radius of shadows in `:root` van `styles.css`)? Werk `foundation.css` overeenkomstig bij.
-- **Nieuwe of gewijzigde componenten, varianten, tokens of iconen?** Werk `.claude/skills/build-prototype/design-system-reference.md` bij.
+- **Nieuwe of gewijzigde componenten, varianten, tokens of iconen?** Werk `.claude/skills/effectory-design-system/design-system-reference.md` bij.
 - **`tokens.css` is auto-gegenereerd** via `build-tokens.py` vanuit Figma — bewerk het **nooit** met de hand. Wijzig tokens in Figma en draai daarna `python3 build-tokens.py`.
 - Raken deze bestanden uit sync met de docs, dan bouwt het team prototypes met verouderde of ontbrekende componenten.
