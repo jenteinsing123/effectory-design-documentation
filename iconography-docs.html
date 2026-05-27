@@ -282,6 +282,17 @@
   <section class="section" id="guidance">
     <h2 class="text-l3">Guidance</h2>
 
+    <h3 class="text-l4">Always use the icon library</h3>
+    <p style="font-size:14px; color:var(--content-secondary); line-height:1.6; margin-bottom:12px;">Every icon in the product must come from this library, loaded via <span class="g-code">&lt;i data-icon="name"&gt;</span>. Never paste an inline <span class="g-code">&lt;svg&gt;</span> — sizes drift, colours can't pick up <span class="g-code">currentColor</span>, and the icon won't update when the library changes.</p>
+    <div class="dev-code-wrap" style="margin-bottom:24px;">
+      <pre><code><span class="cc">&lt;!-- ✅ Correct --&gt;</span>
+<span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"download"</span> <span class="ca">style</span>=<span class="cv">"display:flex;width:16px;height:16px;"</span><span class="ct">&gt;&lt;/i&gt;</span>
+
+<span class="cc">&lt;!-- ❌ Wrong --&gt;</span>
+<span class="ct">&lt;svg</span> <span class="ca">width</span>=<span class="cv">"16"</span> <span class="ca">height</span>=<span class="cv">"16"</span> <span class="ca">viewBox</span>=<span class="cv">"0 0 16 16"</span><span class="ct">&gt;</span>...<span class="ct">&lt;/svg&gt;</span></code></pre>
+    </div>
+    <p style="font-size:14px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Set width, height, and colour on the host <span class="g-code">&lt;i&gt;</span> element — the SVG inside fills it automatically and inherits <span class="g-code">currentColor</span>. The only exceptions are decorative shapes (e.g. callout lines, do/don't ticks) where no semantic icon exists.</p>
+
     <h3 class="text-l4">Meaning first, decoration never</h3>
     <p style="font-size:13.5px; color:var(--content-secondary); line-height:1.6; margin-bottom:24px;">Every icon should clarify something the label alone can't. If you added it for visual flavour, remove it — decorative icons add noise to the scan.</p>
 
