@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prototype System — Engage Design System</title>
+  <title>Get started — Engage Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
@@ -31,12 +31,22 @@
     .gs-step-title { font-weight: 600; font-size: 14px; color: var(--content-base); margin-bottom: 4px; }
     .gs-step-desc  { font-size: 13px; color: var(--content-secondary); line-height: 1.6; }
 
-    /* ── Warning callout ── */
+    /* ── Info / warning callouts ── */
     .gs-callout {
       display: flex; gap: 12px; align-items: flex-start;
       background: var(--bg-warning-subtle);
       border: 1px solid var(--border-warning-base);
       border-left: 4px solid var(--bg-warning-bold);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      margin: var(--spacing-base) 0 var(--spacing-loose);
+      font-size: 13.5px; color: var(--content-base); line-height: 1.55;
+    }
+    .gs-callout-info {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--bg-brand-subtle);
+      border: 1px solid var(--border-brand-base);
+      border-left: 4px solid var(--bg-brand-base);
       border-radius: var(--radius-lg);
       padding: 14px 16px;
       margin: var(--spacing-base) 0 var(--spacing-loose);
@@ -65,6 +75,23 @@
     .gs-rule:last-child { border-bottom: none; }
     .gs-rule-icon { color: var(--content-brand-base); flex-shrink: 0; margin-top: 2px; }
     .gs-rule strong { color: var(--content-base); font-weight: 600; }
+
+    /* ── Who-is-this pills ── */
+    .gs-audience {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: var(--spacing-loose);
+    }
+    .gs-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      background: var(--bg-secondary); border: 1px solid var(--border-base);
+      color: var(--content-secondary);
+    }
+    .gs-pill-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--bg-brand-base); flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -78,8 +105,8 @@
     <div class="page-badges">
       <span class="page-updated">Updated May 2026</span>
     </div>
-    <h1 class="text-l1">Prototype System</h1>
-    <p class="page-desc">Build realistic product screens using the real components and design tokens of this system — directly from Claude Code.</p>
+    <h1 class="text-l1">Get started</h1>
+    <p class="page-desc">Build realistic product screens that look exactly like the real app — by describing what you want in plain language, directly in Claude Code.</p>
   </div>
 </div>
 
@@ -89,22 +116,37 @@
   <!-- ── What is it ── -->
   <section class="section" id="what">
     <h2 class="text-l3">What is it</h2>
-    <p class="section-lead">A Claude Code skill that generates HTML prototypes using the exact same CSS, tokens, and icons as the real product.</p>
-    <p>The Effectory Design System skill knows every component, variant, token, and icon in this system. When you ask Claude to build a screen, it reads from a reference that is kept in sync with this documentation. Prototypes look like the real product because they <em>are</em> the real product's styles — not an approximation built from scratch.</p>
-    <p style="margin-top:var(--spacing-base);">Generated prototypes are saved in the <code>prototypes/</code> folder and can be opened in a browser immediately via a local server.</p>
+    <p class="section-lead">A way to build product screens with the real components and styles of this design system — no Figma, no coding required.</p>
+
+    <p>The Engage Design System comes with a built-in skill for Claude Code. When you describe a screen — in plain Dutch or English — Claude builds a working HTML prototype using the exact same components, colours, and spacing as the real product. The result looks like the real app because it <em>uses</em> the real app's styles.</p>
+
+    <p style="margin-top:var(--spacing-base);">You don't need to know how to code. You just need Claude Code open and a rough idea of what you want to build.</p>
+
+    <div class="gs-callout-info" style="margin-top:var(--spacing-loose);">
+      <span class="gs-callout-icon">💡</span>
+      <div>
+        <strong>New to this?</strong> Start with the one-time setup below. It takes about 5 minutes and you only do it once. After that, building a prototype takes less than a minute.
+      </div>
+    </div>
   </section>
 
   <!-- ── One-time setup ── -->
   <section class="section" id="setup">
     <h2 class="text-l3">One-time setup</h2>
-    <p class="section-lead">Three steps — only needed once per machine.</p>
+    <p class="section-lead">Do this once on your computer. After that you're ready to build.</p>
+
     <div class="gs-steps">
 
       <div class="gs-step">
         <div class="gs-step-num">1</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Clone (or pull) the repo</div>
-          <div class="gs-step-desc">The skill lives inside the repo at <code>.claude/skills/effectory-design-system/</code>. Clone it once, then stay up to date with <code>git pull</code> before each session.</div>
+          <div class="gs-step-title">Get the project folder</div>
+          <div class="gs-step-desc">
+            All the design system files live in a shared folder on your computer. If you don't have it yet, ask a developer on your team to set it up for you — they'll know what to do.<br><br>
+            If you already have the folder, make sure you have the latest version by opening a Terminal window inside it and running:
+            <br><code style="display:inline-block;margin-top:6px;">git pull</code><br><br>
+            Not sure how to do that? Ask a developer. It takes 30 seconds.
+          </div>
         </div>
       </div>
 
@@ -112,15 +154,23 @@
         <div class="gs-step-num">2</div>
         <div class="gs-step-body">
           <div class="gs-step-title">Install Claude Code</div>
-          <div class="gs-step-desc">Install via npm: <code>npm install -g @anthropic-ai/claude-code</code>. Requires Node 18 or higher.</div>
+          <div class="gs-step-desc">
+            Claude Code is a free tool made by Anthropic that runs in your Terminal. Install it by opening Terminal and running:<br>
+            <code style="display:inline-block;margin-top:6px;">npm install -g @anthropic-ai/claude-code</code><br><br>
+            If you see an error about <strong>npm not found</strong>, ask a developer to install Node.js for you first — it's a one-time step.
+          </div>
         </div>
       </div>
 
       <div class="gs-step">
         <div class="gs-step-num">3</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Start Claude Code from the repo root</div>
-          <div class="gs-step-desc">Navigate to the repo root in your terminal and run <code>claude</code>. Claude Code automatically picks up the skill from <code>.claude/skills/</code>.</div>
+          <div class="gs-step-title">Start Claude Code in the project folder</div>
+          <div class="gs-step-desc">
+            Open a Terminal window, navigate to the project folder, and run:
+            <br><code style="display:inline-block;margin-top:6px;">claude</code><br><br>
+            Claude Code starts up and automatically finds the design system. You're ready.
+          </div>
         </div>
       </div>
 
@@ -130,23 +180,27 @@
   <!-- ── Building a prototype ── -->
   <section class="section" id="make">
     <h2 class="text-l3">Building a prototype</h2>
-    <p class="section-lead">Start each session with a pull so you always have the latest components and skill.</p>
+    <p class="section-lead">Once setup is done, this is all you do every time.</p>
     <div class="gs-steps">
 
       <div class="gs-step">
         <div class="gs-step-num">1</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Pull before you start</div>
-          <div class="gs-step-desc">Components, tokens, and the skill reference are all in this repo. A <code>git pull</code> keeps everything in sync before you build.</div>
+          <div class="gs-step-title">Update your files before you start</div>
+          <div class="gs-step-desc">
+            The design system gets new components and improvements regularly. Before each session, run a quick update so you always have the latest version:<br>
+            <code style="display:inline-block;margin-top:6px;">git pull</code><br><br>
+            Skip this and you might build a prototype with outdated components.
+          </div>
         </div>
       </div>
 
       <div class="gs-step">
         <div class="gs-step-num">2</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Ask Claude to build the screen</div>
+          <div class="gs-step-title">Describe the screen you want</div>
           <div class="gs-step-desc">
-            Describe the screen naturally. The skill triggers on words like <em>prototype</em>, <em>design</em>, <em>scherm</em>, and <em>pagina</em>. Examples:
+            Just type what you want to build — in Dutch or English, as detailed or as rough as you like. Use words like <em>prototype</em>, <em>design</em>, <em>scherm</em>, or <em>pagina</em> and Claude will know what to do. Examples:
             <div class="gs-prompts">
               <span class="gs-prompt">"bouw een prototype van het instellingenscherm"</span>
               <span class="gs-prompt">"maak een design voor een onboarding-flow met drie stappen"</span>
@@ -159,8 +213,8 @@
       <div class="gs-step">
         <div class="gs-step-num">3</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Claude saves the file and tells you the URL</div>
-          <div class="gs-step-desc">The skill generates an HTML file in <code>prototypes/</code>, only using components and tokens that exist in this system. If something is missing, it stops and reports it rather than inventing a workaround.</div>
+          <div class="gs-step-title">Claude builds the file and gives you the link</div>
+          <div class="gs-step-desc">Claude saves the prototype as an HTML file and tells you exactly where to find it and how to open it. You don't need to do anything else.</div>
         </div>
       </div>
 
@@ -169,13 +223,13 @@
 
   <!-- ── Viewing ── -->
   <section class="section" id="open">
-    <h2 class="text-l3">Viewing the prototype</h2>
-    <p class="section-lead">Always open prototypes via the local server — never by double-clicking the file.</p>
+    <h2 class="text-l3">Viewing your prototype</h2>
+    <p class="section-lead">Open it through the local server — not by double-clicking the file.</p>
 
     <div class="gs-callout">
       <span class="gs-callout-icon">⚠️</span>
       <div>
-        <strong>Do not open via double-click (<code>file://</code>).</strong> SVG masks (e.g. the toggle checkmark) and icon loading rely on HTTP. Opening via <code>file://</code> silently breaks icons and some visual component details — the prototype looks incomplete, but the skill is fine.
+        <strong>Don't open the file by double-clicking it.</strong> This breaks icons and some visual details — the prototype will look incomplete even though nothing is wrong. Always use the local server instead (see below).
       </div>
     </div>
 
@@ -185,15 +239,15 @@
         <div class="gs-step-num">1</div>
         <div class="gs-step-body">
           <div class="gs-step-title">Start the local server</div>
-          <div class="gs-step-desc">In the repo root: <code>python3 serve.py</code>. The server prints the port it's running on.</div>
+          <div class="gs-step-desc">In a Terminal window inside the project folder, run:<br><code style="display:inline-block;margin-top:6px;">python3 serve.py</code><br><br>This starts a small local web server on your computer. Leave this Terminal window open while you're working.</div>
         </div>
       </div>
 
       <div class="gs-step">
         <div class="gs-step-num">2</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Open the URL Claude provides</div>
-          <div class="gs-step-desc">After building, Claude always prints the exact URL: <code>http://localhost:&lt;port&gt;/prototypes/&lt;filename&gt;.html</code>. Paste that into your browser.</div>
+          <div class="gs-step-title">Open the link Claude gives you</div>
+          <div class="gs-step-desc">After building, Claude always prints a URL like <code>http://localhost:8000/prototypes/my-screen.html</code>. Copy that link and paste it into your browser.</div>
         </div>
       </div>
 
@@ -202,36 +256,36 @@
 
   <!-- ── Ground rules ── -->
   <section class="section" id="rules">
-    <h2 class="text-l3">Ground rules</h2>
-    <p class="section-lead">The skill enforces the design system rather than working around it.</p>
+    <h2 class="text-l3">How it works</h2>
+    <p class="section-lead">Claude follows a few strict rules that keep prototypes consistent with the real product.</p>
     <div class="gs-rules">
 
       <div class="gs-rule">
         <span class="gs-rule-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <div><strong>Only existing components, tokens and icons.</strong> The skill reads directly from this documentation's CSS and token files. It never invents class names, color values, or variants.</div>
+        <div><strong>Only real components.</strong> Claude only uses components, colours, and icons that actually exist in the design system. It never invents something new or uses a rough approximation.</div>
       </div>
 
       <div class="gs-rule">
         <span class="gs-rule-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <div><strong>Missing component? Claude will tell you.</strong> If a requested component doesn't exist in the system, the skill stops and reports it explicitly — it never silently builds a substitute.</div>
+        <div><strong>If something doesn't exist, Claude tells you.</strong> If you ask for a component that isn't in the system yet, Claude stops and tells you clearly — it won't silently build a substitute that looks different from the real product.</div>
       </div>
 
       <div class="gs-rule">
         <span class="gs-rule-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <div><strong>No doc-site chrome.</strong> Prototypes are product screens, not documentation pages. The skill never adds the sidebar, page tabs, or TOC from this site to a prototype output.</div>
+        <div><strong>Prototypes look like the real product.</strong> Not a documentation page, not a wireframe — a realistic product screen. Dark mode and portal theming (Coordinator / Personal) work out of the box.</div>
       </div>
 
       <div class="gs-rule">
         <span class="gs-rule-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        <div><strong>Tokens, not hardcoded values.</strong> All spacing, color, and shadow values come from design tokens. Prototypes automatically inherit dark mode and portal theming (Coordinator / Personal).</div>
+        <div><strong>Files are saved automatically.</strong> Every prototype is saved in the <code>prototypes/</code> folder inside the project. You can share the URL with teammates — as long as they're also running the local server.</div>
       </div>
 
     </div>
@@ -239,8 +293,8 @@
 
   <!-- ── Maintenance ── -->
   <section class="section" id="maintenance">
-    <h2 class="text-l3">Keeping the skill up to date</h2>
-    <p class="section-lead">For those who maintain the design system — three files need to stay in sync with the documentation.</p>
+    <h2 class="text-l3">For design system maintainers</h2>
+    <p class="section-lead">Three files need to stay in sync with the documentation whenever components or tokens change.</p>
 
     <div class="tbl-wrap">
       <table>
@@ -271,7 +325,7 @@
       </table>
     </div>
 
-    <p style="margin-top:var(--spacing-base);">If these files drift out of sync with the documentation, the skill will build prototypes with outdated or missing components without any warning. A <code>git pull</code> before each session is the simplest safeguard.</p>
+    <p style="margin-top:var(--spacing-base);">If these files drift out of sync with the documentation, Claude will build prototypes with outdated or missing components without any warning. Running <code>git pull</code> before each session is the simplest safeguard.</p>
   </section>
 
   <div class="pagination">
@@ -293,9 +347,9 @@
     <a class="toc-link" href="#what">What is it</a>
     <a class="toc-link" href="#setup">One-time setup</a>
     <a class="toc-link" href="#make">Building a prototype</a>
-    <a class="toc-link" href="#open">Viewing the prototype</a>
-    <a class="toc-link" href="#rules">Ground rules</a>
-    <a class="toc-link" href="#maintenance">Keeping it up to date</a>
+    <a class="toc-link" href="#open">Viewing your prototype</a>
+    <a class="toc-link" href="#rules">How it works</a>
+    <a class="toc-link" href="#maintenance">For maintainers</a>
   </nav>
 </div>
 
