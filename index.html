@@ -164,18 +164,27 @@
 
     .home-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
-      column-gap: 64px; row-gap: 40px;
+      gap: 16px;
       margin-bottom: 64px;
     }
     .home-card {
       display: block;
+      padding: 24px 26px;
+      border-radius: 14px;
+      background: rgba(253, 253, 252, 0.7);
+      border: 1px solid rgba(44, 57, 83, 0.08);
       text-decoration: none; color: inherit;
-      transition: opacity .15s;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .home-card:hover {
+      background: rgba(253, 253, 252, 0.95);
+      border-color: rgba(44, 57, 83, 0.16);
+      transform: translateY(-1px);
     }
     .home-card h3 {
       font-family: 'Poppins', 'Inter', sans-serif;
       font-size: 17px; font-weight: 700; color: #2C3953;
-      margin: 0 0 10px; text-transform: none; letter-spacing: 0;
+      margin: 0 0 8px; text-transform: none; letter-spacing: 0;
       line-height: 1.3;
       text-decoration: underline;
       text-decoration-color: transparent;
@@ -186,7 +195,7 @@
     .home-card:hover h3 { text-decoration-color: #FF984A; }
     .home-card p {
       font-size: 14px; color: #2C3953; line-height: 1.5;
-      margin: 0; opacity: .8;
+      margin: 0; opacity: .75;
     }
 
     .home-section-title {
