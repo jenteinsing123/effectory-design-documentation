@@ -25,10 +25,14 @@
       grid-template-columns: minmax(0, 1fr) 460px;
       gap: 56px;
       align-items: center;
-      max-width: 1080px;
+      max-width: 960px;
       margin: 0 auto;
     }
-    .home-hero + .content-cols .content { padding-top: 48px; }
+    /* Match content width to hero on the homepage */
+    .home-hero + .content-cols .content {
+      padding-top: 48px;
+      max-width: 960px;
+    }
     .home-hero-copy { position: relative; max-width: 540px; }
     .home-hero-title {
       font-family: 'Poppins', 'Inter', sans-serif;
