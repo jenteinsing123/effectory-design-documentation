@@ -8,14 +8,9 @@
   if (window.innerWidth < 768) return;
 
   var USERS = [
-    { name: 'Jente',   color: '#7B61FF' },
-    { name: 'Jamal',   color: '#F24E1E' },
-    { name: 'Eray',    color: '#1BC47D' },
-    { name: 'Jesse',   color: '#0D99FF' },
-    { name: 'Maria',   color: '#FF6B6B' },
-    { name: 'Khaled',  color: '#F4A200' },
-    { name: 'Minh',    color: '#00C2A8' },
-    { name: 'Thimo',   color: '#E040FB' },
+    { name: 'Jente',  color: '#7B61FF' },
+    { name: 'Eray',   color: '#1BC47D' },
+    { name: 'Jesse',  color: '#0D99FF' },
   ];
 
   // ── Styles ───────────────────────────────────────────────────────────────
@@ -32,7 +27,7 @@
     var el = document.createElement('div');
     el.className = 'fc';
     el.style.opacity = '0';
-    el.style.transition = 'opacity .35s ease';
+    el.style.transition = 'opacity .8s ease';
     el.innerHTML =
       '<svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">' +
         '<path d="M2 2L2 16L5.5 12.5L11 12.5L2 2Z"' +
@@ -75,7 +70,7 @@
       pausing:   false,
       pauseEnd:  0,
       visible:   false,
-      showAfter: performance.now() + 800 + i * 1400 + Math.random() * 1200,
+      showAfter: performance.now() + 4000 + i * 5000 + Math.random() * 4000,
     };
   });
 
@@ -103,27 +98,27 @@
         if (now < inst.pauseEnd) return;
         inst.pausing = false;
 
-        // Occasionally vanish and reappear
-        if (Math.random() < 0.18) {
+        // Frequently vanish and reappear — keeps the page calm
+        if (Math.random() < 0.5) {
           inst.visible = false;
           inst.el.style.opacity = '0';
-          inst.showAfter = performance.now() + 2500 + Math.random() * 5000;
+          inst.showAfter = performance.now() + 8000 + Math.random() * 14000;
           return;
         }
 
         pickTarget(inst);
       }
 
-      // Lerp towards target
-      var speed = (0.028 + Math.random() * 0.004) * (dt / 16);
+      // Lerp towards target — slower drift
+      var speed = (0.014 + Math.random() * 0.003) * (dt / 16);
       inst.x += (inst.tx - inst.x) * speed;
       inst.y += (inst.ty - inst.y) * speed;
       inst.el.style.transform = 'translate(' + (inst.x | 0) + 'px,' + (inst.y | 0) + 'px)';
 
-      // Reached target → pause
+      // Reached target → pause longer
       if (Math.hypot(inst.tx - inst.x, inst.ty - inst.y) < 6) {
         inst.pausing  = true;
-        inst.pauseEnd = now + 500 + Math.random() * 2500;
+        inst.pauseEnd = now + 2000 + Math.random() * 4000;
       }
     });
 
