@@ -397,13 +397,24 @@
   <!-- ─── ACCESSIBILITY ─── -->
   <section class="section" id="accessibility">
     <h2 class="text-l3">Accessibility</h2>
-    <p class="section-lead">An avatar is decorative when the person's name appears next to it; it carries meaning on its own only in dense rosters.</p>
-    <ul class="section-list">
-      <li><strong>Decorative by default.</strong> When the avatar sits next to a visible name label, mark it <code>aria-hidden="true"</code>. The name carries the meaning.</li>
-      <li><strong>Standalone needs a label.</strong> If the avatar appears without a visible name (e.g. compact tables), add <code>aria-label="Jamie Tan"</code> with the full name.</li>
-      <li><strong>Colour is not the identity.</strong> Screen readers don't announce avatar colour, and 8% of users can't distinguish all six tints reliably. Never rely on colour alone to convey who someone is.</li>
-      <li><strong>Contrast.</strong> Each subtle background pairs with its matching base content colour — all combinations meet WCAG AA for text at 14&nbsp;px and up.</li>
-    </ul>
+    <div class="a11y-list">
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Always pass the full name as <code>tooltip</code>.</strong> The component exposes it as the accessible name, so screen readers announce who the avatar represents.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Anonymous keeps <code>tooltip</code> empty.</strong> When <code>text</code> is empty the icon variant renders; an empty tooltip is correct — there's no name to announce.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Colour is not the identity.</strong> Screen readers don't announce avatar colour, and 8% of users can't distinguish all six tints reliably. Never rely on colour alone to convey who someone is.</div>
+      </div>
+      <div class="a11y-item">
+        <span class="a11y-arrow">→</span>
+        <div><strong>Contrast.</strong> Each subtle background pairs with its matching base content colour — all combinations meet WCAG AA for text at 14&nbsp;px and up.</div>
+      </div>
+    </div>
   </section>
 
   <div class="pagination">
