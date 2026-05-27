@@ -13,27 +13,31 @@
        ============================================================ */
     .home-hero {
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr 460px;
-      gap: 48px;
-      align-items: center;
-      padding: 80px 96px 96px;
+      padding: 80px 64px 96px;
       border-radius: 0 0 80px 0;
       background:
         radial-gradient(120% 90% at 95% 35%, rgba(255,216,87,0.55) 0%, rgba(255,224,120,0.35) 20%, rgba(254,231,153,0.18) 38%, rgba(254,242,203,0.08) 60%, rgba(253,253,252,0) 80%),
         #fdfdfc;
       overflow: hidden;
     }
+    .home-hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 460px;
+      gap: 56px;
+      align-items: center;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
     .home-hero + .content-cols .content { padding-top: 48px; }
-    .home-hero-copy { position: relative; max-width: 720px; }
+    .home-hero-copy { position: relative; max-width: 540px; }
     .home-hero-title {
       font-family: 'Poppins', 'Inter', sans-serif;
       font-weight: 700;
-      font-size: 60px;
-      line-height: 1.2;
+      font-size: 48px;
+      line-height: 1.15;
       letter-spacing: 0;
       color: #2C3953;
-      margin: 0 0 28px;
+      margin: 0 0 24px;
       display: inline-block;
       position: relative;
     }
@@ -41,18 +45,18 @@
       content: "";
       position: absolute;
       left: 0;
-      bottom: -10px;
-      width: 236px;
+      bottom: -8px;
+      width: 188px;
       height: 4px;
       background: #FF984A;
       border-radius: 2px;
     }
     .home-hero-desc {
       font-family: 'Poppins', 'Inter', sans-serif;
-      font-size: 22px;
-      line-height: 1.4;
+      font-size: 18px;
+      line-height: 1.5;
       color: #2C3953;
-      margin: 32px 0 0;
+      margin: 28px 0 0;
       max-width: 460px;
     }
 
@@ -136,16 +140,17 @@
     }
 
     @media (max-width: 1100px) {
-      .home-hero { padding: 64px 48px 80px; gap: 32px; }
+      .home-hero { padding: 64px 48px 80px; }
+      .home-hero-inner { gap: 32px; }
     }
     @media (max-width: 900px) {
       .home-hero {
-        grid-template-columns: 1fr;
         padding: 56px 32px 64px;
         border-radius: 0 0 48px 0;
       }
-      .home-hero-title { font-size: 44px; }
-      .home-hero-desc { font-size: 18px; }
+      .home-hero-inner { grid-template-columns: 1fr; }
+      .home-hero-title { font-size: 36px; }
+      .home-hero-desc { font-size: 16px; }
       .home-hero-visual { display: none; }
     }
 
@@ -199,6 +204,7 @@
 <div class="content-wrap">
 
   <section class="home-hero">
+    <div class="home-hero-inner">
     <div class="home-hero-copy">
       <h1 class="home-hero-title">Engage Design</h1>
       <p class="home-hero-desc">A shared foundation for designers and developers at Effectory — consistent components, tokens, and guidelines that help us build better products faster.</p>
@@ -228,6 +234,7 @@
         <img src="assets/hero/portrait-cyan.png" alt="" />
         <img class="scribble" src="assets/hero/scribble-cyan.svg" alt="" />
       </div>
+    </div>
     </div>
   </section>
 
