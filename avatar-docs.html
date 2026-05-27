@@ -398,13 +398,12 @@
   <section class="section" id="accessibility">
     <h2 class="text-l3">Accessibility</h2>
     <p class="section-lead">An avatar is decorative when the person's name appears next to it; it carries meaning on its own only in dense rosters.</p>
-
-    <div class="gs-rules">
-      <div class="gs-rule"><span class="gs-rule-icon"></span><div><strong>Decorative by default.</strong> When the avatar sits next to a visible name label, mark it <code>aria-hidden="true"</code>. The name carries the meaning.</div></div>
-      <div class="gs-rule"><span class="gs-rule-icon"></span><div><strong>Standalone needs a label.</strong> If the avatar appears without a visible name (e.g. compact tables), add <code>aria-label="Jamie Tan"</code> with the full name.</div></div>
-      <div class="gs-rule"><span class="gs-rule-icon"></span><div><strong>Colour is not the identity.</strong> Screen readers don't announce avatar colour, and 8% of users can't distinguish all six tints reliably. Never rely on colour alone to convey who someone is.</div></div>
-      <div class="gs-rule"><span class="gs-rule-icon"></span><div><strong>Contrast.</strong> Each subtle background pairs with its matching base content colour — all combinations meet WCAG AA for text at 14&nbsp;px and up.</div></div>
-    </div>
+    <ul class="section-list">
+      <li><strong>Decorative by default.</strong> When the avatar sits next to a visible name label, mark it <code>aria-hidden="true"</code>. The name carries the meaning.</li>
+      <li><strong>Standalone needs a label.</strong> If the avatar appears without a visible name (e.g. compact tables), add <code>aria-label="Jamie Tan"</code> with the full name.</li>
+      <li><strong>Colour is not the identity.</strong> Screen readers don't announce avatar colour, and 8% of users can't distinguish all six tints reliably. Never rely on colour alone to convey who someone is.</li>
+      <li><strong>Contrast.</strong> Each subtle background pairs with its matching base content colour — all combinations meet WCAG AA for text at 14&nbsp;px and up.</li>
+    </ul>
   </section>
 
   <div class="pagination">
