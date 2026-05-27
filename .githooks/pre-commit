@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+# Pre-commit guard against inline <svg> icons in documentation HTML.
+#
+# Why: CLAUDE.md §14 requires icons to come from the library via
+# <i data-icon="name">. Inline SVGs drift in size and don't follow
+# the theme. This hook blocks new inline SVGs in *-docs.html files
+# unless they match an allowed exception or carry an opt-out marker.
+#
+# Allowed (silently):
+#   - Do/Don't tick SVGs (fill="#16a34a" green check, fill="#dc2626" red X)
+#   - SVGs inside <button class="page-tab"> blocks (tab icons in docs header)
+#   - Lines preceded or annotated with <!-- icon-exempt: reason -->
+#
+# To bypass for a legit decorative case: add a comment above the SVG:
+#   <!-- icon-exempt: callout line in anatomy figure -->
+#   <svg ...>...</svg>
+
+set -euo pipefail
+
+# Only check staged additions in *-docs.html and index.html
+FILES=$(git diff --cached --name-only --diff-filter=AM | grep -E '^([a-z0-9-]+-docs\.html|index\.html)$' || true)
+
+if [ -z "$FILES" ]; then
+  exit 0
+fi
+
+VIOLATIONS=0
+REPORT=""
+
+for f in $FILES; do
+  # Get the unified diff for this file, only added lines, with surrounding context
+  diff_output=$(git diff --cached --unified=2 -- "$f")
+
+  # Walk through diff lines tracking the previous line (for icon-exempt comments)
+  prev_line=""
+  in_page_tab=0
+  line_in_file=0
+  echo "$diff_output" | while IFS= read -r line; do
+    # Track if we're inside a page-tab button block (tab icons are allowed)
+    case "$line" in
+      *'class="page-tab"'*) in_page_tab=1 ;;
+      *'</button>'*) in_page_tab=0 ;;
+    esac
+
+    # Only inspect added lines (+ prefix, not +++ header)
+    case "$line" in
+      "+++"*) continue ;;
+      "+"*)
+        content="${line#+}"
+        if echo "$content" | grep -qE '<svg[[:space:]>]'; then
+          # Check exemptions
+          if echo "$content$prev_line" | grep -qE 'icon-exempt'; then
+            : # Allowed via marker
+          elif echo "$content" | grep -qE 'fill="#16a34a"|fill="#dc2626"'; then
+            : # Allowed: Do/Don't tick
+          elif [ $in_page_tab -eq 1 ]; then
+            : # Allowed: tab bar icon
+          else
+            echo "  $f: $content" >&2
+            VIOLATIONS=$((VIOLATIONS + 1))
+          fi
+        fi
+        ;;
+    esac
+    prev_line="$line"
+  done
+done
+
+# Re-check by re-running the inspection in a way that aggregates count outside the subshell
+# (the pipe above runs the while-loop in a subshell so VIOLATIONS doesn't propagate).
+# Use a tempfile to count violations reliably.
+TMP=$(mktemp)
+trap 'rm -f "$TMP"' EXIT
+
+for f in $FILES; do
+  diff_output=$(git diff --cached --unified=2 -- "$f")
+  in_page_tab=0
+  prev_line=""
+  while IFS= read -r line; do
+    case "$line" in
+      *'class="page-tab"'*) in_page_tab=1 ;;
+      *'</button>'*) in_page_tab=0 ;;
+    esac
+    case "$line" in
+      "+++"*) prev_line="$line"; continue ;;
+      "+"*)
+        content="${line#+}"
+        if echo "$content" | grep -qE '<svg[[:space:]>]'; then
+          if echo "$content$prev_line" | grep -qE 'icon-exempt'; then
+            :
+          elif echo "$content" | grep -qE 'fill="#16a34a"|fill="#dc2626"'; then
+            :
+          elif [ $in_page_tab -eq 1 ]; then
+            :
+          else
+            printf '  %s\n    %s\n' "$f" "$content" >> "$TMP"
+          fi
+        fi
+        ;;
+    esac
+    prev_line="$line"
+  done <<< "$diff_output"
+done
+
+if [ -s "$TMP" ]; then
+  echo ""
+  echo "❌ pre-commit: inline <svg> detected in documentation HTML"
+  echo ""
+  echo "Per CLAUDE.md §14, icons must use <i data-icon=\"name\"> from the library."
+  echo "The following new inline SVGs were found in this commit:"
+  echo ""
+  cat "$TMP"
+  echo ""
+  echo "Fix: replace each inline SVG with <i data-icon=\"name\"> (see iconography-docs.html)."
+  echo ""
+  echo "If this SVG is genuinely decorative (callout line, anatomy figure, hero illustration),"
+  echo "add an opt-out comment on the line above:"
+  echo ""
+  echo "  <!-- icon-exempt: brief reason -->"
+  echo "  <svg ...>...</svg>"
+  echo ""
+  exit 1
+fi
+
+exit 0
