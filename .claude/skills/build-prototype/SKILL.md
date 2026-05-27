@@ -65,6 +65,13 @@ Een prototype ziet eruit als een echte pagina in de app — niet als een docs-pa
 - Gebruik `--content-base` als standaard tekstkleur
 - Geen docs-chrome (sidebar, tabs, TOC, etc.)
 
+### 7. Altijd via lokale server openen
+Prototypes gebruiken `url('assets/icons/...')` CSS-masks (o.a. het Toggle-vinkje) en `icons.js` icoonfetches.
+Beide werken **niet** via `file://` (CORS-beperking van de browser).
+- Open prototypes altijd via `python3 serve.py` → `http://localhost:<poort>/...`
+- Zeg nooit dat dubbelklik ook werkt — het werkt niet.
+- Meld dit altijd aan de gebruiker na het bouwen (zie Workflow stap 7).
+
 ---
 
 ## Workflow
@@ -76,6 +83,11 @@ Een prototype ziet eruit als een echte pagina in de app — niet als een docs-pa
 4. **Bouw incrementeel** — begin met de HTML-structuur, voeg components toe, stel layout in met tokens
 5. **Geen eigen stijlen** — custom CSS alleen voor layout-specifieke zaken (positionering, grid, flex), altijd met tokens voor waarden
 6. **Review** — check de output op doc-classes en hardcoded waarden vóór oplevering
+7. **Lokale server vereist** — meld na het bouwen altijd:
+   > ⚠️ Open dit prototype via de lokale server, **niet** via dubbelklik (file://).
+   > SVG-maskers (o.a. Toggle-vinkje) en icoonfuncties werken niet zonder HTTP.
+   > Start de server met `python3 serve.py` en open daarna:
+   > `http://localhost:<poort>/prototypes/<bestandsnaam>.html`
 
 ---
 

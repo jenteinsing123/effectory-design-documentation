@@ -47,3 +47,9 @@
 .text-w500 { font-weight: 500; }
 .text-w400 { font-weight: 400; }
 .text-subdued { color: var(--content-subtle); }
+
+/* ── Icons — global behaviour ── */
+/* Without this rule <i data-icon> has display:inline, which adds unwanted     */
+/* spacing inside buttons and absolutely-positioned icon containers.           */
+/* Mirrors styles.css rule 253; omitted during initial extraction.             */
+[data-icon] { display: contents; }
