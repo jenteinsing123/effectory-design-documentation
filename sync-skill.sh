@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Sync repo files → skill-source/ bundle
+# Run this after updating the design system, before building the .zip.
+#
+# What it syncs:
+#   - design-system-reference.md  (from .claude/skills/...)
+#   - tokens.css, foundation.css, components.css, icons.js, serve.py
+#   - assets/icons/ (all SVGs)
+#
+# What it does NOT sync:
+#   - SKILL.md — has different paths from the project skill. Edit
+#     skill-source/SKILL.md directly if you need to change the rules.
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_SKILL="$ROOT/.claude/skills/effectory-design-system"
+SKILL_SRC="$ROOT/skill-source"
+BUNDLE="$SKILL_SRC/design-system-files"
+
+echo "→ Syncing reference doc"
+cp "$PROJECT_SKILL/design-system-reference.md" "$SKILL_SRC/design-system-reference.md"
+
+echo "→ Syncing CSS / JS / serve.py"
+for f in tokens.css foundation.css components.css icons.js serve.py; do
+  cp "$ROOT/$f" "$BUNDLE/$f"
+done
+
+echo "→ Syncing icons"
+rm -rf "$BUNDLE/assets/icons"
+mkdir -p "$BUNDLE/assets"
+cp -R "$ROOT/assets/icons" "$BUNDLE/assets/icons"
+
+echo ""
+echo "✓ skill-source/ in sync."
+echo ""
+echo "Reminder: if you edited the rules in SKILL.md, update them in BOTH places:"
+echo "  - $PROJECT_SKILL/SKILL.md (project skill, used in Claude Code locally)"
+echo "  - $SKILL_SRC/SKILL.md (org skill, distributed to the team)"
+echo ""
+echo "Next: ./build-skill.sh to produce dist/effectory-design-system.zip"

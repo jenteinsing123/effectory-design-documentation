@@ -7,29 +7,30 @@ description: Bouw prototypes, mockups, designs, schermen, pagina's of losse comp
 
 Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **design**, **scherm**, **pagina** of **losse component-demo** te bouwen met onze design-system-componenten.
 
-## Setup — eerste keer in een project
+## Setup — eerste keer in een sessie
 
-De plugin levert alle design-system bestanden mee in `${CLAUDE_PLUGIN_ROOT}/design-system-files/`:
-- `tokens.css`, `foundation.css`, `components.css`
-- `icons.js`
-- `serve.py`
-- `assets/icons/` (alle iconen als SVG)
+De skill levert alle design-system bestanden mee:
+- `design-system-reference.md` — naast deze SKILL.md
+- `design-system-files/tokens.css`, `foundation.css`, `components.css`
+- `design-system-files/icons.js`
+- `design-system-files/serve.py`
+- `design-system-files/assets/icons/` (alle iconen als SVG)
 
 **Voor elke bouwsessie:**
 
 1. Laad de reference (zit naast deze SKILL.md):
    ```
-   Read("${CLAUDE_PLUGIN_ROOT}/skills/effectory-design-system/design-system-reference.md")
+   Read("design-system-reference.md")
    ```
 
-2. Controleer of de design-system bestanden in de werkdirectory staan. Zo niet, kopieer ze vanuit de plugin:
+2. Kopieer de design-system bestanden naar de werkdirectory zodat prototypes ernaar kunnen linken:
    ```bash
-   cp "${CLAUDE_PLUGIN_ROOT}/design-system-files/tokens.css" .
-   cp "${CLAUDE_PLUGIN_ROOT}/design-system-files/foundation.css" .
-   cp "${CLAUDE_PLUGIN_ROOT}/design-system-files/components.css" .
-   cp "${CLAUDE_PLUGIN_ROOT}/design-system-files/icons.js" .
-   cp "${CLAUDE_PLUGIN_ROOT}/design-system-files/serve.py" .
-   mkdir -p assets && cp -R "${CLAUDE_PLUGIN_ROOT}/design-system-files/assets/icons" assets/icons
+   cp design-system-files/tokens.css .
+   cp design-system-files/foundation.css .
+   cp design-system-files/components.css .
+   cp design-system-files/icons.js .
+   cp design-system-files/serve.py .
+   mkdir -p assets && cp -R design-system-files/assets/icons assets/icons
    ```
    Sla deze stap over als de bestanden al bestaan.
 
