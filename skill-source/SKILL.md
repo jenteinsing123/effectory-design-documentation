@@ -14,7 +14,7 @@ De skill levert alle design-system bestanden mee:
 - `design-system-files/tokens.css`, `foundation.css`, `components.css`
 - `design-system-files/icons.js`
 - `design-system-files/serve.py`
-- `design-system-files/assets/icons/` (alle iconen als SVG)
+- `design-system-files/icons.tar.gz` — alle iconen, ingepakt om bestandsaantal te beperken
 
 **Voor elke bouwsessie:**
 
@@ -23,16 +23,16 @@ De skill levert alle design-system bestanden mee:
    Read("design-system-reference.md")
    ```
 
-2. Kopieer de design-system bestanden naar de werkdirectory zodat prototypes ernaar kunnen linken:
+2. Kopieer de design-system bestanden naar de werkdirectory en pak de iconen uit:
    ```bash
    cp design-system-files/tokens.css .
    cp design-system-files/foundation.css .
    cp design-system-files/components.css .
    cp design-system-files/icons.js .
    cp design-system-files/serve.py .
-   mkdir -p assets && cp -R design-system-files/assets/icons assets/icons
+   mkdir -p assets && tar -xzf design-system-files/icons.tar.gz -C assets/
    ```
-   Sla deze stap over als de bestanden al bestaan.
+   Sla deze stap over als de bestanden al bestaan (check of `tokens.css` en `assets/icons/` al aanwezig zijn).
 
 ---
 

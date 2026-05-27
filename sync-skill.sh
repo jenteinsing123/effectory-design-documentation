@@ -26,10 +26,10 @@ for f in tokens.css foundation.css components.css icons.js serve.py; do
   cp "$ROOT/$f" "$BUNDLE/$f"
 done
 
-echo "→ Syncing icons"
-rm -rf "$BUNDLE/assets/icons"
-mkdir -p "$BUNDLE/assets"
-cp -R "$ROOT/assets/icons" "$BUNDLE/assets/icons"
+echo "→ Bundling icons into icons.tar.gz (org-skills have a file-count limit)"
+rm -f "$BUNDLE/icons.tar.gz"
+rm -rf "$BUNDLE/assets"
+( cd "$ROOT/assets" && tar -czf "$BUNDLE/icons.tar.gz" icons )
 
 echo ""
 echo "✓ skill-source/ in sync."
