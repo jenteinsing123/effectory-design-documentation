@@ -567,6 +567,48 @@ States op `.dp-day`: `.is-today` `.is-selected` `.is-hover` `.is-disabled` `.is-
 Range states: `.is-range-start` `.is-range-end` `.is-in-range`
 Trigger states: `.is-hover` `.is-focus` `.is-open`
 
+### Inline notification
+```html
+<!-- Compact (single line) -->
+<div class="inline-notif is-info">
+  <span class="inline-notif-icon is-info"><i data-icon="info"></i></span>
+  <div class="inline-notif-content">
+    <span class="inline-notif-title">Heads up!</span>
+    <span class="inline-notif-msg">This alert needs your attention</span>
+  </div>
+  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+</div>
+
+<!-- Stacked (title above message) -->
+<div class="inline-notif is-warning is-stacked">
+  <span class="inline-notif-icon is-warning"><i data-icon="alert-circle"></i></span>
+  <div class="inline-notif-content">
+    <span class="inline-notif-title">Warning!</span>
+    <span class="inline-notif-msg">Better check yourself, you're not looking too good</span>
+  </div>
+  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+</div>
+
+<!-- With actions (link + button) -->
+<div class="inline-notif is-feature">
+  <span class="inline-notif-icon is-feature"><i data-icon="featured"></i></span>
+  <div class="inline-notif-content">
+    <span class="inline-notif-title">New feature!</span>
+    <span class="inline-notif-msg">We released a new feature you might want to use</span>
+  </div>
+  <div class="inline-notif-actions">
+    <button class="inline-notif-link">Link label</button>
+    <button class="btn btn-secondary">Try it</button>
+  </div>
+  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+</div>
+```
+
+Type modifiers (op root **én** `.inline-notif-icon`): `.is-feature` (witte card, sparkle), `.is-info` (blauw, `info` icoon), `.is-warning` (oranje, `alert-circle`), `.is-positive` (groen, `check`), `.is-negative` (rood, `alert-circle`).
+Layout: voeg `.is-stacked` toe op de root voor een gestapelde titel + boodschap.
+Sluitknop-states: `.is-hover` `.is-focus`.
+Toegankelijkheid: `role="alert"` voor Warning/Negative; `role="status"` voor de rest. Close-button altijd met `aria-label`.
+
 ---
 
 ## 5. Iconen
