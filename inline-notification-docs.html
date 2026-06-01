@@ -534,7 +534,7 @@
                 <div class="pg-row"><div class="pg-row-name">messageTitle</div><div class="pg-row-ctrl"><input class="pg-select" type="text" id="pg-title" value="Heads up!" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">message</div><div class="pg-row-ctrl"><input class="pg-select" type="text" id="pg-message" value="This alert needs your attention" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">showCloseButton</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-close" checked><span class="pg-toggle-track"></span></label></div></div>
-                <div class="pg-row"><div class="pg-row-name">inlineButtonText</div><div class="pg-row-ctrl"><input class="pg-select" type="text" id="pg-btn" value="" placeholder="(none)" /></div></div>
+                <div class="pg-row"><div class="pg-row-name">buttonMessages</div><div class="pg-row-ctrl"><input class="pg-select" type="text" id="pg-btn" value="" placeholder="action label, e.g. Renew now" /></div></div>
               </div>
               <div class="pg-panel pg-code-wrap" id="pg-panel-code" hidden>
                 <button class="dev-copy-btn" id="pg-copy">Copy</button>
@@ -567,16 +567,12 @@
 <span class="ct">&lt;/eff-inline-notification&gt;</span></code></pre>
           </div>
 
-          <h3 class="text-l4">Subtle — with inline button</h3>
-          <p>The <code>inlineButtonText</code> input renders a text-link style button; <code>inlineButtonCallback</code> fires on click. Project a sparkle icon for the subtle mood.</p>
+          <h3 class="text-l4">Subtle — with inline text button</h3>
+          <p>The <code>inlineButtonText</code> input renders a text-link style button <em>inline within the message copy</em> (not a separate action button); <code>inlineButtonCallback</code> fires on click. Project a sparkle icon for the subtle mood.</p>
           <div class="dev-preview">
             <div class="inline-notif is-subtle" style="width:100%;">
               <span class="inline-notif-icon is-subtle"><i data-icon="featured"></i></span>
-              <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use</span>
-                <div class="inline-notif-actions">
-                  <button class="btn btn-secondary">Learn more</button>
-                </div>
-              </div>
+              <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use. <button class="link-inline" style="font:inherit;">Learn more</button></span></div>
               <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
             </div>
           </div>
@@ -597,11 +593,7 @@
           <div class="dev-preview">
             <div class="inline-notif is-info" style="width:100%;">
               <img class="inline-notif-icon" src="assets/icons/notification-information.svg" alt="" />
-              <div class="inline-notif-content"><span class="inline-notif-title">Need a hand?</span><span class="inline-notif-msg">Read the docs for a full walkthrough</span>
-                <div class="inline-notif-actions">
-                  <a href="#" onclick="return false;" class="link-inline">Support Page</a>
-                </div>
-              </div>
+              <div class="inline-notif-content"><span class="inline-notif-title">Need a hand?</span><span class="inline-notif-msg">Read the full walkthrough on our <a href="#" onclick="return false;" class="link-inline">Support Page</a></span></div>
               <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
             </div>
           </div>
@@ -783,8 +775,8 @@
       if (s.message) L.push(`  [message]="'${ngEsc(s.message)}'"`);
       L.push(`  [messageType]="'${s.type}'"`);
       if (s.btn) {
-        L.push(`  [inlineButtonText]="'${ngEsc(s.btn)}'"`);
-        L.push(`  (inlineButtonCallback)="onAction()"`);
+        L.push(`  [buttonMessages]="['${ngEsc(s.btn)}']"`);
+        L.push(`  (buttonCallback0)="onAction()"`);
       }
       if (s.close) L.push(`  [showCloseButton]="true"`);
       // close the opening tag on the last attribute line
