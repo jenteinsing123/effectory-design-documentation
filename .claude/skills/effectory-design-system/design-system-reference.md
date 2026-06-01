@@ -591,20 +591,21 @@ Moods heten in code (Angular `messageType`): **`subtle` · `info` · `warn` · `
   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
 </div>
 
-<!-- Subtle met actie (link + button) -->
+<!-- Subtle met actieknop — let op: .inline-notif-actions staat BINNEN .inline-notif-content -->
 <div class="inline-notif is-subtle">
   <span class="inline-notif-icon is-subtle"><i data-icon="featured"></i></span>
   <div class="inline-notif-content">
     <span class="inline-notif-title">New feature!</span>
     <span class="inline-notif-msg">We released a new feature you might want to use</span>
-  </div>
-  <div class="inline-notif-actions">
-    <a href="#" class="link-inline">Link label</a>
-    <button class="btn btn-secondary">Try it</button>
+    <div class="inline-notif-actions">
+      <button class="btn btn-secondary">Try it</button>
+    </div>
   </div>
   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
 </div>
 ```
+
+**Knoppositie:** `.inline-notif-actions` staat **binnen** `.inline-notif-content`. Daardoor volgt de knop automatisch de layout — **stacked (default): knop ónder de tekst**; **one-liner (`.is-one-liner`): knop **rechts** op dezelfde regel. Geen aparte input/class nodig; het volgt `isOneLiner`.
 
 **Icoon-keuze per mood:**
 - `.is-info` → `<img src="/assets/icons/notification-information.svg">` (blauwe cirkel met "i")
