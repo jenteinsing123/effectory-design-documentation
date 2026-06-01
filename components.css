@@ -1821,17 +1821,8 @@ span.inline-notif-icon.is-feature i[data-icon] { width: 20px; height: 20px; disp
   flex-shrink: 0;
 }
 .inline-notif-actions .btn { padding: 4px 12px; font-size: 13px; }
-
-.inline-notif-link {
-  font-size: 14px;
-  color: var(--content-base);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  background: none; border: 0; padding: 0;
-  font-family: inherit;
-}
-.inline-notif-link:hover { color: var(--content-action); }
+/* The link inside .inline-notif-actions uses the shared .link-inline class
+   (defined below) — there is no bespoke notification-link class. */
 
 .inline-notif-close {
   flex-shrink: 0;
@@ -1849,3 +1840,50 @@ span.inline-notif-icon.is-feature i[data-icon] { width: 20px; height: 20px; disp
 .inline-notif-close.is-hover { background: rgba(25, 39, 67, 0.06); color: var(--content-base); }
 .inline-notif-close:focus-visible,
 .inline-notif-close.is-focus { outline: 2px solid var(--border-brand-base); outline-offset: 1px; }
+
+/* ─────────────────────────────────────────────
+   Link Inline
+   Underlined text link for use inside a sentence or inline notification.
+   Mirrors the .link-inline definition documented on link-inline-docs.html.
+   ───────────────────────────────────────────── */
+.link-inline {
+  color: var(--content-action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  transition: color .1s ease;
+}
+.link-inline:hover,
+.link-inline.is-hover {
+  color: var(--content-action-hover);
+  text-decoration: underline;
+}
+.link-inline:active,
+.link-inline.is-pressed {
+  color: var(--content-action-pressed);
+  text-decoration: underline;
+}
+.link-inline:focus-visible {
+  outline: 2px solid var(--border-brand-base);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.link-inline.is-disabled,
+.link-inline[disabled],
+.link-inline[aria-disabled="true"] {
+  color: var(--content-disabled) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: underline;
+}

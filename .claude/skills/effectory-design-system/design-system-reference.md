@@ -597,7 +597,7 @@ Trigger states: `.is-hover` `.is-focus` `.is-open`
     <span class="inline-notif-msg">We released a new feature you might want to use</span>
   </div>
   <div class="inline-notif-actions">
-    <button class="inline-notif-link">Link label</button>
+    <a href="#" class="link-inline">Link label</a>
     <button class="btn btn-secondary">Try it</button>
   </div>
   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
@@ -613,6 +613,7 @@ Trigger states: `.is-hover` `.is-focus` `.is-open`
 
 Belangrijk: voor de vier gekleurde varianten **altijd `<img>` gebruiken** — niet `<i data-icon="…">`. De cirkel zit in de SVG zelf en `icons.js` zou de kleuren wegnormaliseren tot één `currentColor`.
 
+Acties: gebruik in de `.inline-notif-actions`-rij de gedeelde `link-inline`-class voor de link (geen eigen class) en `btn btn-secondary` voor een knop. Sentiment-gekleurde actieknoppen (oranje/groen/rood per type) bestaan nog niet in code — val terug op `btn-secondary`, of `btn-danger` voor een destructieve actie in een Negative-notificatie.
 Layout: voeg `.is-stacked` toe op de root voor een gestapelde titel + boodschap.
 Sluitknop-states: `.is-hover` `.is-focus`.
 Toegankelijkheid: `role="alert"` voor Warning/Negative; `role="status"` voor de rest. Close-button altijd met `aria-label`.

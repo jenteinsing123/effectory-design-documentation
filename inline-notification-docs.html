@@ -72,17 +72,6 @@
     }
     .inline-notif-actions .btn { padding: 4px 12px; font-size: 13px; }
 
-    .inline-notif-link {
-      font-size: 14px;
-      color: var(--content-base);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-      background: none; border: 0; padding: 0;
-      font-family: inherit;
-    }
-    .inline-notif-link:hover { color: var(--content-action); }
-
     .inline-notif-close {
       flex-shrink: 0;
       width: 24px; height: 24px;
@@ -265,13 +254,13 @@
                   <span class="inline-notif-icon is-feature"><i data-icon="featured"></i></span>
                   <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use</span></div>
                   <div class="inline-notif-actions">
-                    <button class="inline-notif-link">Link label</button>
+                    <a href="#" onclick="return false;" class="link-inline">Link label</a>
                     <button class="btn btn-secondary">Action</button>
                   </div>
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Feature</strong> — Announce a new feature, capability, or product update. Pair with a link or button that lets the user explore the feature directly. Use sparingly; reserve for genuinely new things.</div>
+              <div class="variant-row-desc"><strong>Feature</strong> — Announce a new feature, capability, or product update. Pair with a <a class="link-inline" href="link-inline-docs.html">Link Inline</a> or button that lets the user explore the feature directly. Use sparingly; reserve for genuinely new things.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -548,12 +537,13 @@
           </div>
 
           <h3 class="text-l4">Feature — with action</h3>
+          <p>Actions sit in a trailing <code>.inline-notif-actions</code> row before the close button. The link uses the <a class="link-inline" href="link-inline-docs.html">Link Inline</a> component (<code>link-inline</code>); pair it with a button when you need a stronger call-to-action.</p>
           <div class="dev-preview">
             <div class="inline-notif is-feature" style="width:100%;">
               <span class="inline-notif-icon is-feature"><i data-icon="featured"></i></span>
               <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use</span></div>
               <div class="inline-notif-actions">
-                <button class="inline-notif-link">Link label</button>
+                <a href="#" onclick="return false;" class="link-inline">Link label</a>
                 <button class="btn btn-secondary">Try it</button>
               </div>
               <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
@@ -568,11 +558,19 @@
     <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"inline-notif-msg"</span><span class="ct">&gt;</span>We released a new feature you might want to use<span class="ct">&lt;/span&gt;</span>
   <span class="ct">&lt;/div&gt;</span>
   <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"inline-notif-actions"</span><span class="ct">&gt;</span>
-    <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"inline-notif-link"</span><span class="ct">&gt;</span>Link label<span class="ct">&lt;/button&gt;</span>
+    <span class="ct">&lt;a</span> <span class="ca">href</span>=<span class="cv">"/whats-new"</span> <span class="ca">class</span>=<span class="cv">"link-inline"</span><span class="ct">&gt;</span>Link label<span class="ct">&lt;/a&gt;</span>
     <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"btn btn-secondary"</span><span class="ct">&gt;</span>Try it<span class="ct">&lt;/button&gt;</span>
   <span class="ct">&lt;/div&gt;</span>
   <span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"inline-notif-close"</span> <span class="ca">aria-label</span>=<span class="cv">"Dismiss"</span><span class="ct">&gt;&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"cross"</span><span class="ct">&gt;&lt;/i&gt;&lt;/button&gt;</span>
 <span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap</span>
+              <span class="dev-gap-text">In Figma use the Warning, Positive, and Negative notifications <strong>sentiment buttons</strong> — action buttons coloured to match the notification's sentiment (orange in a Warning, green in a Positive, red in a Negative). The Angular styleguide does not expose these sentiment button variants yet: only the standard <code>btn-secondary</code> and, for negative actions, <code>btn-danger</code> exist. The brand <code>btn-primary</code> is also not yet wired up inside notifications. Until the sentiment button variants ship, fall back to <code>btn-secondary</code> (or <code>btn-danger</code> for a destructive action in a Negative notification) and do not hand-roll sentiment colours.</span>
+            </div>
           </div>
         </section>
 
@@ -590,7 +588,8 @@
               <tr><td><code>.inline-notif-title</code></td><td>Title text</td><td>Bold (weight 600), <code>--content-base</code>.</td></tr>
               <tr><td><code>.inline-notif-msg</code></td><td>Message text</td><td>Regular, <code>--content-secondary</code>.</td></tr>
               <tr><td><code>.inline-notif-actions</code></td><td>Optional actions wrapper</td><td>Right-aligned flex row for links and buttons that sit before the close.</td></tr>
-              <tr><td><code>.inline-notif-link</code></td><td>Inline text link</td><td>Underlined link styled to match a Link Inline.</td></tr>
+              <tr><td><code>.link-inline</code></td><td>Inline text link inside actions</td><td>The shared <a class="link-inline" href="link-inline-docs.html">Link Inline</a> component — use it for the link action, not a bespoke class.</td></tr>
+              <tr><td><code>.btn</code> + variant</td><td>Action button</td><td>Use <code>btn-secondary</code> today (or <code>btn-danger</code> for a destructive Negative action). Sentiment-coloured variants are a known gap — see the callout above.</td></tr>
               <tr><td><code>.inline-notif-close</code></td><td>Dismiss button</td><td>Bare X button with hover/focus state.</td></tr>
             </tbody>
           </table>
