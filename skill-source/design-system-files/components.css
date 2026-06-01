@@ -1775,7 +1775,7 @@ input[type="checkbox"].tgl.is-disabled + .tgl-track {
 }
 /* Each mood sets its accent vars (used by the action buttons) plus the
    notification's own subtle background. */
-.inline-notif.is-info    { background: var(--bg-info-subtle);     border-color: var(--border-info-subtle);     box-shadow: none; --notif-accent: var(--bg-info-base, #3174db);     --notif-accent-border: var(--border-info-base, #3174db);     --notif-accent-on: #fff; }
+.inline-notif.is-info    { background: var(--bg-info-subtle);     border-color: var(--border-info-subtle);     box-shadow: none; --notif-accent: var(--bg-info-base, #3174db);     --notif-accent-border: var(--border-info-base, #3174db);     --notif-accent-fill-border: var(--border-info-base-hover, #205bb9); --notif-accent-on: #fff; }
 .inline-notif.is-warn    { background: var(--bg-warning-subtle);  border-color: var(--border-warning-subtle);  box-shadow: none; --notif-accent: var(--bg-warning-bold, #fa8324);  --notif-accent-border: var(--border-warning-base, #ec6e0a);  --notif-accent-on: var(--content-base, #192743); }
 .inline-notif.is-success { background: var(--bg-positive-subtle); border-color: var(--border-positive-subtle); box-shadow: none; --notif-accent: var(--bg-positive-base, #278747); --notif-accent-border: var(--border-positive-base, #39a35c); --notif-accent-on: #fff; }
 .inline-notif.is-error   { background: var(--bg-negative-subtle); border-color: var(--border-negative-subtle); box-shadow: none; --notif-accent: var(--bg-negative-base, #d3353b); --notif-accent-border: var(--border-negative-base, #b9252a); --notif-accent-on: #fff; }
@@ -1849,7 +1849,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 /* Primary sentiment button — filled in the mood accent WITH a darker mood
    border and the mood's on-accent text colour. One rule, every mood.
    Figma intent; the Angular styleguide doesn't expose it yet. */
-.inline-notif-actions .btn-primary { background: var(--notif-accent); border-color: var(--notif-accent-border); color: var(--notif-accent-on); }
+.inline-notif-actions .btn-primary { background: var(--notif-accent); border-color: var(--notif-accent-fill-border, var(--notif-accent-border)); color: var(--notif-accent-on); }
 
 .inline-notif-close {
   flex-shrink: 0;
