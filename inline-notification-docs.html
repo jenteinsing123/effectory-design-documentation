@@ -339,6 +339,56 @@
               <div class="variant-row-desc"><strong>One-liner</strong> (<code>isOneLiner: true</code>) — Title and message flow on a single line. Use for short messages that fit without wrapping.</div>
             </div>
           </div>
+
+          <h3 class="text-l4">By action</h3>
+          <div class="variant-rows">
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-info" style="width:100%;">
+                  <img class="inline-notif-icon" src="assets/icons/notification-information.svg" alt="" />
+                  <div class="inline-notif-content"><span class="inline-notif-title">Heads up!</span><span class="inline-notif-msg">This alert needs your attention</span></div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Close only</strong> (<code>showCloseButton: true</code>) — No action, just a dismiss X. The default for informational messages.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-info" style="width:100%;">
+                  <img class="inline-notif-icon" src="assets/icons/notification-information.svg" alt="" />
+                  <div class="inline-notif-content"><span class="inline-notif-title">Read-only mode</span><span class="inline-notif-msg">Switch to edit mode to make changes</span></div>
+                  <div class="inline-notif-actions"><a href="#" onclick="return false;" class="link-inline">Learn more</a></div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Inline text button / link</strong> (<code>inlineButtonText</code> or <code>linkText</code>) — A low-emphasis text action. Use for "Learn more", "View details", or a link to docs. Renders as the <a class="link-inline" href="link-inline-docs.html">Link Inline</a> style.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-warn" style="width:100%;">
+                  <img class="inline-notif-icon" src="assets/icons/notification-warning.svg" alt="" />
+                  <div class="inline-notif-content"><span class="inline-notif-title">Action required</span><span class="inline-notif-msg">Your subscription expires in 3 days</span></div>
+                  <div class="inline-notif-actions"><button class="btn btn-secondary">Renew now</button></div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Sentiment button</strong> (<code>buttonMessages</code>) — A <code>secondary</code> button whose border is coloured to match the mood (orange here for <code>warn</code>). Use when the notification needs a clear, mid-emphasis call-to-action. The filled brand primary button is never used inside a notification.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-subtle" style="width:100%;">
+                  <span class="inline-notif-icon is-subtle"><i data-icon="featured"></i></span>
+                  <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use</span></div>
+                  <div class="inline-notif-actions">
+                    <a href="#" onclick="return false;" class="link-inline">Link label</a>
+                    <button class="btn btn-secondary">Try it</button>
+                  </div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Link + button</strong> — Combine a low-emphasis link with a sentiment button when you offer both a secondary and a primary path. Keep it to one of each.</div>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="content-guidelines">
