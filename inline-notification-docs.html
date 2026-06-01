@@ -94,7 +94,9 @@
     }
     .btn-secondary { background: var(--bg-base); border-color: var(--border-action); color: var(--content-secondary); box-shadow: var(--sh-action); }
     .btn-secondary:hover { background: var(--bg-base-hover); border-color: var(--border-action-hover); }
-    .inline-notif-actions .btn { height: auto; padding: 4px 12px; font-size: 13px; }
+    /* Action buttons use the full .btn size (36px tall, 14px) to match the
+       styleguide — no shrinking override. */
+    .inline-notif-actions .btn { padding: 9px 12px; }
     /* The link inside actions uses the shared .link-inline class. */
 
     /* Secondary sentiment button — white fill, mood-coloured border.
@@ -381,7 +383,19 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Action button</strong> (<code>buttonMessages</code>) — A <code>secondary</code> button whose border is coloured to match the mood (orange here for <code>warn</code>) — the "sentiment button". Use when the notification needs a clear call-to-action. The filled brand primary button is never used inside a notification.</div>
+              <div class="variant-row-desc"><strong>Secondary action button</strong> (<code>buttonMessages</code>) — A <code>secondary</code> button with a mood-coloured border (orange here for <code>warn</code>) — the "sentiment button". This is what the Angular styleguide renders today.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-warn" style="width:100%;">
+                  <img class="inline-notif-icon" src="assets/icons/notification-warning.svg" alt="" />
+                  <div class="inline-notif-content"><span class="inline-notif-title">Action required</span><span class="inline-notif-msg">Your subscription expires in 3 days</span>
+                    <div class="inline-notif-actions"><button class="btn btn-primary">Renew now</button></div>
+                  </div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Primary action button</strong> — A button <em>filled</em> in the mood colour. This is the Figma intent for a high-emphasis action; the Angular styleguide does not expose it yet (see the Developer tab gap). Up to 3 action buttons can sit below the text (or right in a one-liner).</div>
             </div>
           </div>
         </section>

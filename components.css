@@ -1832,7 +1832,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 20px; height: 20px; displ
   margin-left: auto;
   padding-left: 12px;
 }
-.inline-notif-actions .btn { padding: 4px 12px; font-size: 13px; }
+.inline-notif-actions .btn { padding: 9px 12px; }
 /* The link inside .inline-notif-actions uses the shared .link-inline class
    (defined below) — there is no bespoke notification-link class. */
 
