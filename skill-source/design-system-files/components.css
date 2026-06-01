@@ -1778,22 +1778,22 @@ input[type="checkbox"].tgl.is-disabled + .tgl-track {
 .inline-notif.is-positive { background: var(--bg-positive-subtle); border-color: var(--border-positive-subtle); box-shadow: none; }
 .inline-notif.is-negative { background: var(--bg-negative-subtle); border-color: var(--border-negative-subtle); box-shadow: none; }
 
+/* Icon — Info/Warning/Positive/Negative ship as <img> tags pointing to
+   assets/icons/notification-{information,warning,positive,negative}.svg.
+   Those SVGs have the coloured circle baked in. Feature uses a sparkle via
+   data-icon inside a <span class="inline-notif-icon is-feature">. */
 .inline-notif-icon {
-  flex: 0 0 24px;
-  width: 24px; height: 24px;
-  border-radius: 50%;
+  flex: 0 0 20px;
+  width: 20px; height: 20px;
+  display: block;
+  margin-top: 2px;
+}
+span.inline-notif-icon.is-feature {
   display: inline-flex;
   align-items: center; justify-content: center;
-  color: var(--content-inverse-base);
-  margin-top: 1px;
+  color: var(--content-highlight-secondary);
 }
-.inline-notif-icon i[data-icon] { width: 14px; height: 14px; display: flex; }
-.inline-notif-icon.is-info     { background: var(--bg-info-base); }
-.inline-notif-icon.is-warning  { background: var(--bg-warning-bold); }
-.inline-notif-icon.is-positive { background: var(--bg-positive-base); }
-.inline-notif-icon.is-negative { background: var(--bg-negative-base); }
-.inline-notif-icon.is-feature  { background: transparent; color: var(--content-highlight-secondary); }
-.inline-notif-icon.is-feature i[data-icon] { width: 18px; height: 18px; }
+span.inline-notif-icon.is-feature i[data-icon] { width: 20px; height: 20px; display: flex; }
 
 .inline-notif-content {
   flex: 1;

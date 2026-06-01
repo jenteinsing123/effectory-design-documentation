@@ -571,7 +571,7 @@ Trigger states: `.is-hover` `.is-focus` `.is-open`
 ```html
 <!-- Compact (single line) -->
 <div class="inline-notif is-info">
-  <span class="inline-notif-icon is-info"><i data-icon="info"></i></span>
+  <img class="inline-notif-icon" src="/assets/icons/notification-information.svg" alt="" />
   <div class="inline-notif-content">
     <span class="inline-notif-title">Heads up!</span>
     <span class="inline-notif-msg">This alert needs your attention</span>
@@ -581,7 +581,7 @@ Trigger states: `.is-hover` `.is-focus` `.is-open`
 
 <!-- Stacked (title above message) -->
 <div class="inline-notif is-warning is-stacked">
-  <span class="inline-notif-icon is-warning"><i data-icon="alert-circle"></i></span>
+  <img class="inline-notif-icon" src="/assets/icons/notification-warning.svg" alt="" />
   <div class="inline-notif-content">
     <span class="inline-notif-title">Warning!</span>
     <span class="inline-notif-msg">Better check yourself, you're not looking too good</span>
@@ -604,7 +604,15 @@ Trigger states: `.is-hover` `.is-focus` `.is-open`
 </div>
 ```
 
-Type modifiers (op root **én** `.inline-notif-icon`): `.is-feature` (witte card, sparkle), `.is-info` (blauw, `info` icoon), `.is-warning` (oranje, `alert-circle`), `.is-positive` (groen, `check`), `.is-negative` (rood, `alert-circle`).
+**Icoon-keuze per type:**
+- `.is-info` → `<img src="/assets/icons/notification-information.svg">` (blauwe cirkel met "i")
+- `.is-warning` → `<img src="/assets/icons/notification-warning.svg">` (oranje cirkel met "!")
+- `.is-positive` → `<img src="/assets/icons/notification-positive.svg">` (groene cirkel met "✓")
+- `.is-negative` → `<img src="/assets/icons/notification-negative.svg">` (rode cirkel met "!")
+- `.is-feature` → `<span class="inline-notif-icon is-feature"><i data-icon="featured"></i></span>` (oranje sparkle op witte card)
+
+Belangrijk: voor de vier gekleurde varianten **altijd `<img>` gebruiken** — niet `<i data-icon="…">`. De cirkel zit in de SVG zelf en `icons.js` zou de kleuren wegnormaliseren tot één `currentColor`.
+
 Layout: voeg `.is-stacked` toe op de root voor een gestapelde titel + boodschap.
 Sluitknop-states: `.is-hover` `.is-focus`.
 Toegankelijkheid: `role="alert"` voor Warning/Negative; `role="status"` voor de rest. Close-button altijd met `aria-label`.
