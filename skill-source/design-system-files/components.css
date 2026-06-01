@@ -1784,7 +1784,7 @@ input[type="checkbox"].tgl.is-disabled + .tgl-track {
   border-radius: 50%;
   display: inline-flex;
   align-items: center; justify-content: center;
-  color: var(--all-fixed-white);
+  color: var(--content-inverse-base);
   margin-top: 1px;
 }
 .inline-notif-icon i[data-icon] { width: 14px; height: 14px; display: flex; }

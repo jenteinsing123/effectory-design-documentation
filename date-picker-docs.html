@@ -899,14 +899,14 @@
         </table>
 
         <h3 class="text-l4">ARIA requirements</h3>
-        <ul>
-          <li>The calendar grid uses <code>role="grid"</code> with an <code>aria-label</code> identifying the current month and year.</li>
-          <li>Each day cell uses <code>role="gridcell"</code>. Selected cells carry <code>aria-selected="true"</code>. Disabled cells use <code>aria-disabled="true"</code>.</li>
-          <li>The trigger button announces the currently selected date; if empty, it uses a descriptive placeholder such as "Select a date".</li>
-          <li>Month navigation buttons have explicit <code>aria-label</code> values ("Go to previous month", "Go to next month").</li>
-          <li>For date range pickers, the start and end day cells carry <code>aria-label</code> values that describe their role (e.g., "14 May 2026, range start").</li>
-          <li>When the month changes via keyboard, the new month and year are announced live via an <code>aria-live</code> region.</li>
-        </ul>
+        <div class="a11y-list">
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Grid role.</strong> The calendar grid uses <code>role="grid"</code> with an <code>aria-label</code> identifying the current month and year.</div></div>
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Cells announce state.</strong> Each day cell uses <code>role="gridcell"</code>. Selected cells carry <code>aria-selected="true"</code>. Disabled cells use <code>aria-disabled="true"</code>.</div></div>
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Trigger announces the value.</strong> The trigger button announces the currently selected date; if empty, it uses a descriptive placeholder such as "Select a date".</div></div>
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Label navigation buttons.</strong> Month navigation buttons have explicit <code>aria-label</code> values ("Go to previous month", "Go to next month").</div></div>
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Label range ends.</strong> For date range pickers, the start and end day cells carry <code>aria-label</code> values that describe their role (e.g., "14 May 2026, range start").</div></div>
+          <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Announce month changes.</strong> When the month changes via keyboard, the new month and year are announced live via an <code>aria-live</code> region.</div></div>
+        </div>
       </section>
 
       <!-- PAGINATION -->

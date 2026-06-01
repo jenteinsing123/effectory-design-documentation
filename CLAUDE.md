@@ -345,6 +345,32 @@ Rules:
 
 ---
 
+## 9b. Accessibility Section — Always use `.a11y-list`
+
+Every Accessibility section — both in the Design tab (`#accessibility`) and the Developer tab (`#dev-a11y`) — uses the styled `.a11y-list` pattern. Never use a plain `<ul>` / `<li>` list. The arrow + bold lead-in is part of the page identity.
+
+```html
+<section class="section" id="accessibility">
+  <h2 class="text-l3">Accessibility</h2>
+  <p class="section-lead">[One-line intro about the component's a11y requirements.]</p>
+  <div class="a11y-list">
+    <div class="a11y-item">
+      <span class="a11y-arrow">→</span>
+      <div><strong>[Short rule title.]</strong> [Explanation of what to do and why.]</div>
+    </div>
+    <!-- one a11y-item per rule -->
+  </div>
+</section>
+```
+
+Rules:
+- Each item starts with a short **bold lead** ending in a period — the "rule name" — followed by the explanation.
+- Don't use `<ul class="section-list">` or a bare `<ul>` — those don't get the arrow + divider styling defined in `styles.css`.
+- The arrow span (`<span class="a11y-arrow">→</span>`) is required; the CSS expects it for layout.
+- If a section needs a sub-grouping (e.g. "Keyboard interaction" + "ARIA requirements"), use an `<h3 class="text-l4">` heading before each `.a11y-list` block. Don't nest `.a11y-list` inside another container.
+
+---
+
 ## 10. Design Tokens Section
 
 ```html

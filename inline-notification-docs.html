@@ -34,7 +34,7 @@
       border-radius: 50%;
       display: inline-flex;
       align-items: center; justify-content: center;
-      color: var(--all-fixed-white);
+      color: var(--content-inverse-base);
       margin-top: 1px;
     }
     .inline-notif-icon i[data-icon] { width: 14px; height: 14px; display: flex; }
@@ -99,6 +99,12 @@
     .inline-notif-close.is-hover { background: rgba(25, 39, 67, 0.06); color: var(--content-base); }
     .inline-notif-close:focus-visible,
     .inline-notif-close.is-focus { outline: 2px solid var(--border-brand-base); outline-offset: 1px; }
+
+    /* Page-specific override: give the variants column more room so the
+       inline notifications don't render cramped. Inline notifications are
+       wider than most components, so the default 300px preview column is
+       too tight here. */
+    .variant-row { grid-template-columns: minmax(420px, 1.4fr) 1fr; }
 
     /* Anatomy figure */
     .anatomy-fig {
@@ -416,7 +422,7 @@
               <tr><td><code>--border-base</code></td><td>Feature border</td><td>#e1e4e8</td></tr>
               <tr><td><code>--content-base</code></td><td>Title colour</td><td>#192743</td></tr>
               <tr><td><code>--content-secondary</code></td><td>Message + close icon</td><td>rgba(25,39,67,.8)</td></tr>
-              <tr><td><code>--all-fixed-white</code></td><td>Icon colour in coloured badge</td><td>#ffffff</td></tr>
+              <tr><td><code>--content-inverse-base</code></td><td>Icon colour in coloured badge</td><td>#ffffff</td></tr>
               <tr><td><code>--radius-base</code></td><td>Border radius</td><td>8px</td></tr>
             </tbody>
           </table>
@@ -425,14 +431,14 @@
         <section class="section" id="accessibility">
           <h2 class="text-l3">Accessibility</h2>
           <p class="section-lead">Inline notifications must be perceivable, operable, and announce themselves to assistive tech.</p>
-          <ul style="padding-left:18px; line-height:1.8;">
-            <li><strong>Role</strong> — Use <code>role="status"</code> for Info, Positive, Feature notifications and <code>role="alert"</code> for Warning and Negative. The role determines how screen readers announce it.</li>
-            <li><strong>Icon meaning</strong> — Colour is paired with an icon and a textual title; never rely on colour alone.</li>
-            <li><strong>Close button</strong> — Always include an <code>aria-label</code> like <code>Dismiss notification</code>. Focus must be visible (the <code>:focus-visible</code> ring is built in).</li>
-            <li><strong>Keyboard</strong> — The close button is reachable via Tab and activated with Enter or Space.</li>
-            <li><strong>Contrast</strong> — All title / message text meets WCAG 2.2 AA (≥4.5:1) on the variant background.</li>
-            <li><strong>Don't trap focus</strong> — Inline notifications are non-modal. Never move focus to them on mount unless the user just triggered an error they need to fix.</li>
-          </ul>
+          <div class="a11y-list">
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Pick the right role.</strong> Use <code>role="status"</code> for Info, Positive, and Feature notifications and <code>role="alert"</code> for Warning and Negative. The role determines how screen readers announce it.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Never colour alone.</strong> The variant colour is paired with an icon and a textual title; never rely on colour alone to communicate the message type.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Label the close.</strong> Always include an <code>aria-label</code> like <code>Dismiss notification</code>. Focus must be visible — the <code>:focus-visible</code> ring is built in.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Keyboard reachable.</strong> The close button is reachable via Tab and activated with Enter or Space.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Contrast.</strong> All title and message text meets WCAG 2.2 AA (≥4.5:1) on the variant background.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't trap focus.</strong> Inline notifications are non-modal. Never move focus to them on mount unless the user just triggered an error they need to fix.</div></div>
+          </div>
         </section>
 
         <div class="pagination">
@@ -609,12 +615,12 @@
         <section class="section" id="dev-a11y">
           <h2 class="text-l3">Accessibility</h2>
           <p class="section-lead">Pick the right role, label the close, and let users dismiss via keyboard.</p>
-          <ul style="padding-left:18px; line-height:1.8;">
-            <li>Wrap Warning and Negative variants in <code>role="alert"</code>; wrap Info, Positive and Feature in <code>role="status"</code>.</li>
-            <li>The close button must have a descriptive <code>aria-label</code> (e.g. <code>aria-label="Dismiss notification"</code>).</li>
-            <li>Keep focus order natural — don't move focus to the notification on mount unless it's a blocking error.</li>
-            <li>If the message changes dynamically, place the live region <em>outside</em> the close button so screen readers don't re-announce on dismiss.</li>
-          </ul>
+          <div class="a11y-list">
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Match the role to the type.</strong> Wrap Warning and Negative variants in <code>role="alert"</code>; wrap Info, Positive, and Feature in <code>role="status"</code>.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Label the close.</strong> The close button must have a descriptive <code>aria-label</code> (e.g. <code>aria-label="Dismiss notification"</code>).</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't steal focus.</strong> Keep focus order natural — don't move focus to the notification on mount unless it's a blocking error.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Live regions outside the dismiss button.</strong> If the message changes dynamically, place the live region <em>outside</em> the close button so screen readers don't re-announce on dismiss.</div></div>
+          </div>
         </section>
 
       </article>

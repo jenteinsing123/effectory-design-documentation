@@ -938,14 +938,14 @@
   <section class="section" id="dev-a11y">
     <h2 class="text-l3">Accessibility</h2>
     <p class="section-lead">Requirements for building an accessible toggle.</p>
-    <ul class="section-list">
-      <li>Use <code>&lt;input type="checkbox"&gt;</code> paired with a <code>&lt;label&gt;</code>, or a custom element with <code>role="switch"</code> and <code>aria-checked</code>.</li>
-      <li>The <strong>space bar</strong> must toggle the switch. Native checkboxes handle this automatically.</li>
-      <li>The check icon and thumb position communicate state independently of colour — satisfying WCAG 1.4.1.</li>
-      <li>Provide an accessible name via a visible label, <code>aria-label</code>, or <code>aria-labelledby</code>.</li>
-      <li>When using the with-description variant, connect the description with <code>aria-describedby</code>.</li>
-      <li>Use <code>aria-disabled="true"</code> instead of <code>disabled</code> if the control needs to remain focusable.</li>
-    </ul>
+    <div class="a11y-list">
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Use a real input or <code>role="switch"</code>.</strong> Either <code>&lt;input type="checkbox"&gt;</code> paired with a <code>&lt;label&gt;</code>, or a custom element with <code>role="switch"</code> and <code>aria-checked</code>.</div></div>
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Space bar must toggle.</strong> Native checkboxes handle this automatically.</div></div>
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>State without colour.</strong> The check icon and thumb position communicate state independently of colour — satisfying WCAG 1.4.1.</div></div>
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Provide an accessible name.</strong> Use a visible label, <code>aria-label</code>, or <code>aria-labelledby</code>.</div></div>
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Connect descriptions.</strong> When using the with-description variant, connect the description with <code>aria-describedby</code>.</div></div>
+      <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Keep disabled controls focusable.</strong> Use <code>aria-disabled="true"</code> instead of <code>disabled</code> if the control needs to remain focusable.</div></div>
+    </div>
   </section>
 
   <!-- PAGINATION -->
