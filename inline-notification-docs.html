@@ -89,6 +89,14 @@
     .inline-notif-actions .btn { height: auto; padding: 4px 12px; font-size: 13px; }
     /* The link inside actions uses the shared .link-inline class. */
 
+    /* Sentiment button — a secondary button whose border is coloured to match
+       the mood. The styleguide renders [buttonMessages] as these. Subtle keeps
+       the neutral border. */
+    .inline-notif.is-info    .inline-notif-actions .btn-secondary { border-color: var(--border-info-base); }
+    .inline-notif.is-warn    .inline-notif-actions .btn-secondary { border-color: var(--border-warning-base); }
+    .inline-notif.is-success .inline-notif-actions .btn-secondary { border-color: var(--border-positive-base); }
+    .inline-notif.is-error   .inline-notif-actions .btn-secondary { border-color: var(--border-negative-base); }
+
     .inline-notif-close {
       flex-shrink: 0;
       width: 24px; height: 24px;
@@ -590,11 +598,35 @@
 <span class="ct">&lt;/eff-inline-notification&gt;</span></code></pre>
           </div>
 
+          <h3 class="text-l4">With sentiment buttons</h3>
+          <p>Pass <code>buttonMessages</code> to render action buttons. Inside a notification these are <code>secondary</code> buttons whose border is automatically coloured to match the mood — the "sentiment button". Each entry gets its own <code>(buttonCallback0)</code>, <code>(buttonCallback1)</code>, … output.</p>
+          <div class="dev-preview">
+            <div class="inline-notif is-warn" style="width:100%;">
+              <img class="inline-notif-icon" src="assets/icons/notification-warning.svg" alt="" />
+              <div class="inline-notif-content"><span class="inline-notif-title">Action required</span><span class="inline-notif-msg">Your subscription expires in 3 days</span></div>
+              <div class="inline-notif-actions">
+                <button class="btn btn-secondary">Renew now</button>
+              </div>
+              <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;eff-inline-notification</span>
+  <span class="ca">[messageTitle]</span>=<span class="cv">"'Action required'"</span>
+  <span class="ca">[message]</span>=<span class="cv">"'Your subscription expires in 3 days'"</span>
+  <span class="ca">[messageType]</span>=<span class="cv">"'warn'"</span>
+  <span class="ca">[buttonMessages]</span>=<span class="cv">"['Renew now']"</span>
+  <span class="ca">(buttonCallback0)</span>=<span class="cv">"onRenew()"</span>
+  <span class="ca">[showCloseButton]</span>=<span class="cv">"true"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;/eff-inline-notification&gt;</span></code></pre>
+          </div>
+
           <div class="dev-gap">
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
               <span class="dev-gap-label">Figma gap</span>
-              <span class="dev-gap-text">In Figma the Warning, Success, and Error notifications use <strong>sentiment buttons</strong> — action buttons coloured to match the mood. The Angular styleguide does not expose sentiment-coloured action buttons: the only options inside a notification are the text-link style <code>inline-button link</code> (via <code>inlineButtonText</code>), a <code>secondary</code> button, and the dismiss buttons (via <code>buttonMessages</code>). The brand <strong>primary</strong> button is also not wired up inside notifications. Until sentiment button variants ship, use the inline button or a secondary button — don't hand-roll sentiment colours.</span>
+              <span class="dev-gap-text">Two things to keep an eye on. <strong>(1) Mood names</strong> differ between Figma (Feature / Warning / Positive / Negative) and code (subtle / warn / success / error) — to be reconciled (see the callout at the top). <strong>(2) The brand primary (filled teal) button is never used inside a notification</strong> — actions are limited to the inline text button (<code>inlineButtonText</code>), the sentiment-bordered <code>secondary</code> button (<code>buttonMessages</code>), and a link (<code>linkText</code>). If a design shows a filled primary button in a notification, flag it.</span>
             </div>
           </div>
         </section>

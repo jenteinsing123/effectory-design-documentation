@@ -615,12 +615,17 @@ Moods heten in code (Angular `messageType`): **`subtle` · `info` · `warn` · `
 
 Belangrijk: voor de vier gekleurde moods **altijd `<img>` gebruiken** — niet `<i data-icon="…">`. De cirkel zit in de SVG zelf en `icons.js` zou de kleuren wegnormaliseren tot één `currentColor`.
 
-Acties: gebruik de gedeelde `link-inline`-class voor de link (geen eigen class) en `btn btn-secondary` voor een knop. Sentiment-gekleurde actieknoppen (oranje/groen/rood per mood) bestaan nog niet in de Angular styleguide — val terug op `btn-secondary`.
+**Acties (3 soorten, geen filled primary):**
+- **Sentiment button** — een `btn btn-secondary` met een mood-gekleurde rand. In prototypes geeft de scoped CSS dit automatisch: `.inline-notif.is-warn .btn-secondary` → oranje rand, `is-success` → groen, `is-error` → rood, `is-info` → blauw, `is-subtle` → neutraal. In Angular via `[buttonMessages]`.
+- **Inline tekst-knop** — link-stijl knop via `[inlineButtonText]`. In prototypes: `<a class="link-inline">` of een tekst-knop.
+- **Link** — `<a class="link-inline">` (Angular `[linkText]` + `[linkHref]`).
+
+De brand **primary** (gevulde teal) knop wordt **nooit** in een notificatie gebruikt.
 Sluitknop-states: `.is-hover` `.is-focus`.
 Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. Close-button altijd met `aria-label`.
 
 > ⚠️ **Dev/Figma gap:** Figma gebruikt mood-namen `Feature / Info / Warning / Positive / Negative`; de code gebruikt `subtle / info / warn / success / error`. Nog te harmoniseren.
-> **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
+> **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [buttonMessages] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
 
 ---
 

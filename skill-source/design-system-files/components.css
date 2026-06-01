@@ -1828,6 +1828,14 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 20px; height: 20px; displ
 /* The link inside .inline-notif-actions uses the shared .link-inline class
    (defined below) — there is no bespoke notification-link class. */
 
+/* Sentiment button — a secondary button whose border is coloured to match the
+   mood. The Angular styleguide renders [buttonMessages] as these. Subtle keeps
+   the neutral --border-action. */
+.inline-notif.is-info    .inline-notif-actions .btn-secondary { border-color: var(--border-info-base); }
+.inline-notif.is-warn    .inline-notif-actions .btn-secondary { border-color: var(--border-warning-base); }
+.inline-notif.is-success .inline-notif-actions .btn-secondary { border-color: var(--border-positive-base); }
+.inline-notif.is-error   .inline-notif-actions .btn-secondary { border-color: var(--border-negative-base); }
+
 .inline-notif-close {
   flex-shrink: 0;
   width: 24px; height: 24px;
