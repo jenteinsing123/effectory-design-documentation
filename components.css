@@ -1930,7 +1930,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .tooltip.is-right::after { right: 100%;  top: 50%;  transform: translateY(-50%); border-right-color: var(--bg-inverse-base); }
 /* Helper: position a tooltip around a trigger */
 .tt-demo { position: relative; display: inline-flex; }
-.tt-demo .tooltip { position: absolute; white-space: nowrap; z-index: 2; }
+.tt-demo .tooltip { position: absolute; z-index: 2; width: max-content; max-width: 240px; }
 .tt-demo .tooltip.is-above { bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
 .tt-demo .tooltip.is-below { top: calc(100% + 10px);    left: 50%; transform: translateX(-50%); }
 .tt-demo .tooltip.is-left  { right: calc(100% + 10px);  top: 50%;  transform: translateY(-50%); }
