@@ -27,8 +27,8 @@
 
     .gt-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
     .gt-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
-    .gt-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 6px; }
-    .gt-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; }
+    .gt-title { font-size: 16px; font-weight: 600; line-height: 1.3; margin: 0 0 6px; } /* text-l5 */
+    .gt-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-inverse-secondary); }
     .gt-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
     .gt-footer.is-single .btn { width: 100%; }
     .gt-dots { display: flex; align-items: center; gap: 6px; }
@@ -225,7 +225,8 @@
             <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>--bg-inverse-base</code></td><td>Card + arrow fill</td><td>#192743</td></tr>
-              <tr><td><code>--content-inverse-base</code></td><td>Title + body text</td><td>#ffffff</td></tr>
+              <tr><td><code>--content-inverse-base</code></td><td>Title text</td><td>#ffffff</td></tr>
+              <tr><td><code>--content-inverse-secondary</code></td><td>Body text</td><td>rgba(255,255,255,.8)</td></tr>
               <tr><td><code>--content-highlight-secondary</code></td><td>Badge (sparkle + label)</td><td>#ec9f06</td></tr>
               <tr><td><code>--bg-brand-base</code></td><td>Action button + active step dot</td><td>#0a9d99</td></tr>
               <tr><td><code>--content-on-brand-base</code></td><td>Action button text</td><td>#ffffff</td></tr>
@@ -375,6 +376,7 @@
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
     const defaults = { flow:'single', badge:true, title:'Choose your settings later', body:'Confirm your project settings before you create a survey.', btn:'Got it!', pos:'above' };
+    let step = 0; const TOTAL = 3; // multi-step walkthrough state
     function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function state(){return{
       flow:document.getElementById('pg-flow').value,
@@ -384,8 +386,13 @@
       btn:document.getElementById('pg-btn').value,
       pos:document.getElementById('pg-pos').value,
     };}
+    function dots(active){ let h=''; for (let i=0;i<TOTAL;i++) h += `<span class="gt-dot${i<=active?' is-active':''}"></span>`; return h; }
     function footer(s){
-      if (s.flow === 'multi') return `<div class="gt-footer is-multi"><div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div><button class="btn btn-primary">Next</button></div>`;
+      if (s.flow === 'multi') {
+        const last = step >= TOTAL - 1;
+        const label = last ? (esc(s.btn) || 'Got it!') : 'Next';
+        return `<div class="gt-footer is-multi"><div class="gt-dots">${dots(step)}</div><button class="btn btn-primary" data-gt-next>${label}</button></div>`;
+      }
       return `<div class="gt-footer is-single"><button class="btn btn-primary">${esc(s.btn)||'Got it!'}</button></div>`;
     }
     function buildHtml(s){
@@ -416,8 +423,10 @@
       return L.join('\n');
     }
     function render(){const s=state();$preview.innerHTML=buildHtml(s);document.getElementById('pg-code').textContent=buildCode(s);if(window.Icons&&window.Icons.render)window.Icons.render($preview);}
-    ['pg-flow','pg-badge','pg-title','pg-body','pg-btn','pg-pos'].forEach(id=>{const el=document.getElementById(id);el&&el.addEventListener('input',render);el&&el.addEventListener('change',render);});
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-flow').value=defaults.flow;document.getElementById('pg-badge').checked=defaults.badge;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-btn').value=defaults.btn;document.getElementById('pg-pos').value=defaults.pos;render();});
+    ['pg-flow','pg-badge','pg-title','pg-body','pg-btn','pg-pos'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const fn=()=>{ if(id==='pg-flow') step=0; render(); };el.addEventListener('input',fn);el.addEventListener('change',fn);});
+    // Multi-step: click "Next" to walk through; wraps back to the start at the end
+    $preview.addEventListener('click',(e)=>{ if(!e.target.closest('[data-gt-next]'))return; step = step < TOTAL-1 ? step+1 : 0; render(); });
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{step=0;document.getElementById('pg-flow').value=defaults.flow;document.getElementById('pg-badge').checked=defaults.badge;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-btn').value=defaults.btn;document.getElementById('pg-pos').value=defaults.pos;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
     render();
