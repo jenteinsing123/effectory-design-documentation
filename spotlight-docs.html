@@ -27,8 +27,9 @@
 
     .sl-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
     .sl-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
-    .sl-title { font-size: 16px; font-weight: 600; line-height: 1.2; margin: 0; } /* text-l5 */
-    .sl-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-inverse-secondary); }
+    /* scoped to beat the global `.content p` rule (specificity) */
+    .spotlight .sl-title { font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0 0 6px; } /* text-l5 */
+    .spotlight .sl-body  { font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--content-inverse-secondary); }
     .sl-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
     .sl-footer.is-single .btn { width: 100%; }
     .sl-dots { display: flex; align-items: center; gap: 6px; }
@@ -67,16 +68,6 @@
     </div>
   </div><!-- /page-header-row -->
 
-  <div style="display:flex; justify-content:center; padding:28px 48px 0;">
-    <div class="dev-gap" style="width:100%; max-width:880px; margin:0;">
-      <span class="dev-gap-icon">⚠️</span>
-      <div class="dev-gap-body">
-        <span class="dev-gap-label">Naming in transition</span>
-        <span class="dev-gap-text">In the code and styleguide this is still a <strong>tooltip</strong> (the Angular selector is <code>eff-tooltip-dialog</code>, documented under "Tooltips"). In the design system we're renaming it to <strong>Spotlight</strong>. To be reconciled so design and code share one name.</span>
-      </div>
-    </div>
-  </div>
-
   <div class="page-tabs">
     <div class="page-tabs-inner">
       <button class="page-tab" data-tab="design">
@@ -87,6 +78,16 @@
         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4L1 8l4 4M11 4l4 4-4 4M9 2l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Developer
       </button>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:center; padding:32px 48px 0;">
+    <div class="dev-gap" style="width:100%; max-width:880px; margin:0;">
+      <span class="dev-gap-icon">⚠️</span>
+      <div class="dev-gap-body">
+        <span class="dev-gap-label">Naming in transition</span>
+        <span class="dev-gap-text">In the code and styleguide this is still a <strong>tooltip</strong> (the Angular selector is <code>eff-tooltip-dialog</code>, documented under "Tooltips"). In the design system we're renaming it to <strong>Spotlight</strong>. To be reconciled so design and code share one name.</span>
+      </div>
     </div>
   </div>
 

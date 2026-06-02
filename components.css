@@ -1953,8 +1953,8 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .spotlight.is-right::after { right: 100%;  top: 28px;  border-right-color: var(--bg-inverse-base); }
 .sl-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
 .sl-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
-.sl-title { font-size: 16px; font-weight: 600; line-height: 1.2; margin: 0; } /* text-l5 */
-.sl-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-inverse-secondary); }
+.spotlight .sl-title { font-size: 16px; font-weight: 600; line-height: 1.25; margin: 0 0 6px; } /* text-l5 */
+.spotlight .sl-body  { font-size: 14px; font-weight: 400; line-height: 1.5; margin: 0; color: var(--content-inverse-secondary); }
 .sl-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
 .sl-footer.is-single .btn { width: 100%; }
 .sl-footer.is-multi .btn { margin-left: auto; }
