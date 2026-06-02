@@ -58,6 +58,8 @@
 .btn-secondary.is-disabled { background: var(--bg-base) !important; border-color: var(--border-base) !important; }
 .btn-tertiary.is-disabled  { background: var(--bg-disabled) !important; border-color: transparent !important; }
 .btn-link.is-disabled      { background: transparent !important; border-color: transparent !important; }
+.btn-primary:disabled, .btn-primary.is-disabled,
+.btn-danger:disabled, .btn-danger.is-disabled { border-color: transparent !important; }
 
 
 /* === Button Big === */
