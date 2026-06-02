@@ -1767,7 +1767,7 @@ input[type="checkbox"].tgl.is-disabled + .tgl-track {
   gap: 12px;
   padding: 16px;
   border: 1px solid var(--border-base);
-  border-radius: var(--radius-base);
+  border-radius: var(--radius-md);
   background: var(--bg-base);
   box-shadow: var(--sh-card);
   font-family: 'Poppins', sans-serif;
