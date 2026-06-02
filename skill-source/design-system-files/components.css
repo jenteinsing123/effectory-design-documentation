@@ -1961,3 +1961,26 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .sl-dots { display: flex; align-items: center; gap: 6px; }
 .sl-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
 .sl-dot.is-active { background: var(--bg-brand-base); }
+
+/* ── Announcement — floating, non-blocking feature card ── */
+.announcement {
+  position: relative;
+  width: 336px; max-width: 336px;
+  background: var(--bg-base);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sh-dialogs);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+.ann-media {
+  height: 149px;
+  background: var(--bg-highlight-base);
+  display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+  gap: 14px; padding: 0 20px; overflow: hidden;
+}
+.ann-logo { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 3px rgba(25,39,67,.12); }
+.ann-body { padding: 16px 24px 24px; }
+.announcement .ann-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 8px; color: var(--content-base); } /* text-l5 */
+.announcement .ann-text  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); }
+.ann-actions { margin-top: 20px; display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
