@@ -1815,12 +1815,12 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   min-width: 0;
   padding-top: 1px;
 }
-.inline-notif.is-one-liner .inline-notif-content {
-  flex-direction: row;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 4px 6px;
-}
+/* One-liner: title + message flow as continuous inline text, wrapping together
+   onto the next line instead of stacking as separate blocks. */
+.inline-notif.is-one-liner .inline-notif-content { display: block; }
+.inline-notif.is-one-liner .inline-notif-title { display: inline; }
+.inline-notif.is-one-liner .inline-notif-title::after { content: " "; }
+.inline-notif.is-one-liner .inline-notif-msg { display: inline; }
 .inline-notif-title { font-weight: 600; }
 .inline-notif-msg   { color: var(--content-secondary); }
 
@@ -1836,9 +1836,10 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   margin-top: 8px;
 }
 .inline-notif.is-one-liner .inline-notif-actions {
+  display: inline-flex;
+  vertical-align: middle;
   margin-top: 0;
-  margin-left: auto;
-  padding-left: 12px;
+  margin-left: 8px;
 }
 .inline-notif-actions .btn { padding: 9px 12px; }
 /* The link inside .inline-notif-actions uses the shared .link-inline class
