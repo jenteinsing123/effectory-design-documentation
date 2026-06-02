@@ -19,14 +19,15 @@
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
     }
-    /* Media header — illustrative banner (clipped to the rounded top) */
+    /* Media header — the illustration (eff-tooltip-dialog [svgUrl]). Shown here as a placeholder. */
     .ann-media {
-      height: 149px;
-      background: var(--bg-highlight-base);
-      display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
-      gap: 14px; padding: 0 20px; overflow: hidden;
+      height: 140px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-base);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--content-subtle);
     }
-    .ann-logo { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 3px rgba(25,39,67,.12); }
+    .ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .55; }
     .ann-body { padding: 16px 24px 24px; }
     /* scoped to beat the global `.content p` rule (specificity) */
     .announcement .ann-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 8px; color: var(--content-base); } /* text-l5 */
@@ -38,9 +39,9 @@
     .btn-primary { background: var(--bg-brand-base); border-color: var(--border-brand-base); color: var(--content-on-brand-base); box-shadow: var(--sh-action); }
     .btn-primary:hover, .btn-primary.is-hover { background: var(--bg-brand-base-hover); border-color: var(--bg-brand-base-pressed); }
     .btn-primary:active, .btn-primary.is-pressed { background: var(--bg-brand-base-pressed); border-color: var(--border-brand-base-pressed); }
-    .btn-tertiary { background: transparent; border-color: transparent; color: var(--content-secondary); }
-    .btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-base-hover); }
-    .btn-tertiary:active, .btn-tertiary.is-pressed { background: var(--bg-base-pressed); }
+    /* link-style button (low-emphasis action — no underline, matches eff button.link) */
+    .btn-link { background: transparent; border-color: transparent; color: var(--content-secondary); padding: 0 8px; }
+    .btn-link:hover, .btn-link.is-hover { color: var(--content-base); }
 
     .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: 12px; padding: 48px 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .announcement { pointer-events: none; }
@@ -66,7 +67,7 @@
         <span class="page-updated">Updated June 2026</span>
       </div>
       <h1 class="text-l1">Announcement</h1>
-      <p class="page-desc">A floating card that announces a new feature or update. It sits in the bottom-right corner, stays out of the way (the page underneath remains usable), and the user dismisses it when they're done.</p>
+      <p class="page-desc">A floating card that announces a new feature or update. It stays out of the way — the page underneath remains usable — and the user dismisses it when they're done.</p>
     </div>
   </div><!-- /page-header-row -->
 
@@ -90,56 +91,45 @@
 
         <section class="section" id="anatomy">
           <h2 class="text-l3">Anatomy</h2>
-          <p class="section-lead">A light card with an optional media header, a title, a body, and a footer holding a dismiss action and a primary call-to-action.</p>
+          <p class="section-lead">A light card with an illustration, a title, a body, and a footer holding a low-emphasis dismiss action and a primary call-to-action.</p>
           <div class="anatomy-fig">
             <div class="announcement" style="pointer-events:none;">
               <div class="ann-media">
-                <span class="ann-logo" style="background:#1769ff;"></span>
-                <span class="ann-logo" style="background:#e8543f;"></span>
-                <span class="ann-logo" style="background:#0a9d99;"></span>
-                <span class="ann-logo" style="background:#192743;"></span>
-                <span class="ann-logo" style="background:#7b61ff;"></span>
-                <span class="ann-logo" style="background:#ff5d8f;"></span>
-                <span class="ann-logo" style="background:#fff;"></span>
-                <span class="ann-logo" style="background:#16a34a;"></span>
-                <span class="ann-logo" style="background:#fdbd12; box-shadow:0 0 0 1px rgba(25,39,67,.12);"></span>
-                <span class="ann-logo" style="background:#192743;"></span>
+                <i data-icon="image" class="ann-media-ph"></i>
               </div>
               <div class="ann-body">
                 <p class="ann-title">We just launched 20+ additional integrations!</p>
                 <p class="ann-text">Managing employee data has never been easier. Discover how to connect your tools.</p>
                 <div class="ann-actions">
-                  <button class="btn btn-tertiary">Close</button>
+                  <button class="btn btn-link">Close</button>
                   <button class="btn btn-primary">View integrations</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="anatomy-items">
-            <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Media (optional)</span> — An illustrative banner that gives the announcement a visual hook.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Illustration</span> — A visual hook at the top of the card. Optional, but it's what sets this apart from a plain notification.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Title</span> — A short, bold headline that names the new thing.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Body</span> — One or two sentences explaining the value and what to do next.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Dismiss</span> — A low-emphasis "Close" action so the user can put it away.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Dismiss</span> — A low-emphasis link action so the user can put it away.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Call-to-action</span> — A primary button that takes the user to the feature.</div></div>
           </div>
         </section>
 
         <section class="section" id="usage">
           <h2 class="text-l3">Usage</h2>
-          <p class="section-lead">Use an announcement to surface something new without interrupting. It floats in the corner, the page stays usable, and it waits until the user is ready.</p>
+          <p class="section-lead">Use an announcement to surface something new without interrupting. The page stays usable and it waits until the user is ready.</p>
 
           <h3 class="text-l4">Announce, don't alert</h3>
           <div class="dd-grid">
             <div class="dd-card">
               <div class="ann-prev">
                 <div class="announcement" style="pointer-events:none; width:300px;">
-                  <div class="ann-media" style="height:110px;">
-                    <span class="ann-logo" style="background:#1769ff;"></span><span class="ann-logo" style="background:#0a9d99;"></span><span class="ann-logo" style="background:#7b61ff;"></span><span class="ann-logo" style="background:#ff5d8f;"></span><span class="ann-logo" style="background:#16a34a;"></span><span class="ann-logo" style="background:#192743;"></span>
-                  </div>
+                  <div class="ann-media" style="height:104px;"><i data-icon="image" class="ann-media-ph"></i></div>
                   <div class="ann-body">
                     <p class="ann-title">Meet the new dashboard</p>
                     <p class="ann-text">See all your surveys in one place. Take a quick look.</p>
-                    <div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Explore</button></div>
+                    <div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Explore</button></div>
                   </div>
                 </div>
               </div>
@@ -154,7 +144,7 @@
                   <div class="ann-body">
                     <p class="ann-title">Your session will expire in 60s</p>
                     <p class="ann-text">Save your work now to avoid losing changes.</p>
-                    <div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Stay signed in</button></div>
+                    <div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Stay signed in</button></div>
                   </div>
                 </div>
               </div>
@@ -173,7 +163,7 @@
                   <div class="ann-body">
                     <p class="ann-title">Templates are here</p>
                     <p class="ann-text">Start from a ready-made survey and tweak the questions.</p>
-                    <div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Browse templates</button></div>
+                    <div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Browse templates</button></div>
                   </div>
                 </div>
               </div>
@@ -197,23 +187,21 @@
 
         <section class="section" id="variants">
           <h2 class="text-l3">Variants</h2>
-          <p class="section-lead">The media header is optional; the rest of the card stays the same.</p>
+          <p class="section-lead">The illustration is optional; the rest of the card stays the same.</p>
 
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
                 <div class="announcement" style="width:300px;">
-                  <div class="ann-media" style="height:120px;">
-                    <span class="ann-logo" style="background:#1769ff;"></span><span class="ann-logo" style="background:#e8543f;"></span><span class="ann-logo" style="background:#0a9d99;"></span><span class="ann-logo" style="background:#7b61ff;"></span><span class="ann-logo" style="background:#ff5d8f;"></span><span class="ann-logo" style="background:#16a34a;"></span>
-                  </div>
+                  <div class="ann-media" style="height:120px;"><i data-icon="image" class="ann-media-ph"></i></div>
                   <div class="ann-body">
                     <p class="ann-title">20+ new integrations</p>
                     <p class="ann-text">Connect the tools your team already uses.</p>
-                    <div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">View integrations</button></div>
+                    <div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">View integrations</button></div>
                   </div>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>With media</strong> — A banner illustration sits at the top. Use it for big, visual launches where the imagery sells the feature (new integrations, a redesigned area).</div>
+              <div class="variant-row-desc"><strong>With illustration</strong> — A banner image sits at the top. Use it for big, visual launches where the imagery sells the feature (new integrations, a redesigned area).</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
@@ -221,11 +209,11 @@
                   <div class="ann-body">
                     <p class="ann-title">Filters moved to the toolbar</p>
                     <p class="ann-text">Your filters now live in the toolbar so they're easier to reach.</p>
-                    <div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Show me</button></div>
+                    <div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Show me</button></div>
                   </div>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Text only</strong> — No media header. Use it for smaller updates and changes where an illustration would add noise rather than value.</div>
+              <div class="variant-row-desc"><strong>Text only</strong> — No illustration. Use it for smaller updates and changes where an image would add noise rather than value.</div>
             </div>
           </div>
         </section>
@@ -239,11 +227,11 @@
             <p>The title names the feature; the body gives the reason to care in one short sentence.</p>
             <div class="dd-grid">
               <div class="dd-card">
-                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Export your results</p><p class="ann-text">Download every response as a spreadsheet in one click.</p><div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Try it</button></div></div></div></div>
+                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Export your results</p><p class="ann-text">Download every response as a spreadsheet in one click.</p><div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Try it</button></div></div></div></div>
                 <div class="dd-cap do"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Do</div>Clear headline, one benefit-led sentence.</div>
               </div>
               <div class="dd-card">
-                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Update</p><p class="ann-text">We've shipped a number of changes across the product that we think you're going to love, so go ahead and take a look around whenever you get the chance.</p><div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">Okay</button></div></div></div></div>
+                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Update</p><p class="ann-text">We've shipped a number of changes across the product that we think you're going to love, so go ahead and take a look around whenever you get the chance.</p><div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">Okay</button></div></div></div></div>
                 <div class="dd-cap dont"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Don't</div>Vague title and a long, unfocused body.</div>
               </div>
             </div>
@@ -254,11 +242,11 @@
             <p>The primary action should describe where it leads, not just say "OK".</p>
             <div class="dd-grid">
               <div class="dd-card">
-                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Meet the new dashboard</p><p class="ann-text">See all your surveys in one place.</p><div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">View dashboard</button></div></div></div></div>
+                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Meet the new dashboard</p><p class="ann-text">See all your surveys in one place.</p><div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">View dashboard</button></div></div></div></div>
                 <div class="dd-cap do"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Do</div>An action verb + the destination.</div>
               </div>
               <div class="dd-card">
-                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Meet the new dashboard</p><p class="ann-text">See all your surveys in one place.</p><div class="ann-actions"><button class="btn btn-tertiary">Close</button><button class="btn btn-primary">OK</button></div></div></div></div>
+                <div class="ann-prev"><div class="announcement" style="pointer-events:none; width:280px;"><div class="ann-body"><p class="ann-title">Meet the new dashboard</p><p class="ann-text">See all your surveys in one place.</p><div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">OK</button></div></div></div></div>
                 <div class="dd-cap dont"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Don't</div>A generic label that says nothing about what happens.</div>
               </div>
             </div>
@@ -267,16 +255,15 @@
 
         <section class="section" id="tokens">
           <h2 class="text-l3">Design Tokens</h2>
-          <p class="section-lead">A light surface with a brand-coloured call-to-action; the media header uses the highlight colour.</p>
+          <p class="section-lead">A light surface with a brand-coloured call-to-action.</p>
           <table class="token-table">
             <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>--bg-base</code></td><td>Card surface</td><td>#ffffff</td></tr>
-              <tr><td><code>--border-base</code></td><td>Card border</td><td>#e1e4e8</td></tr>
+              <tr><td><code>--border-base</code></td><td>Card + media border</td><td>#e1e4e8</td></tr>
               <tr><td><code>--sh-dialogs</code></td><td>Card shadow (floating elevation)</td><td>0 4px 12px rgba(25,39,67,.08)</td></tr>
-              <tr><td><code>--bg-highlight-base</code></td><td>Media header background</td><td>#fdbd12</td></tr>
               <tr><td><code>--content-base</code></td><td>Title text</td><td>#192743</td></tr>
-              <tr><td><code>--content-secondary</code></td><td>Body text + Close action</td><td>rgba(25,39,67,.8)</td></tr>
+              <tr><td><code>--content-secondary</code></td><td>Body text + dismiss action</td><td>rgba(25,39,67,.8)</td></tr>
               <tr><td><code>--bg-brand-base</code></td><td>Call-to-action fill</td><td>#0a9d99</td></tr>
               <tr><td><code>--border-brand-base</code></td><td>Call-to-action border</td><td>#0c827f</td></tr>
               <tr><td><code>--content-on-brand-base</code></td><td>Call-to-action text</td><td>#ffffff</td></tr>
@@ -292,9 +279,9 @@
           <div class="a11y-list">
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Don't steal focus.</strong> Unlike a dialog or spotlight, it appears without moving focus, so the user can keep working uninterrupted.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Announce politely.</strong> Place it in a live region with <code>aria-live="polite"</code> (or a labelled <code>role="region"</code>) so screen-reader users hear it without being interrupted.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Always dismissible.</strong> Provide a clearly labelled "Close" control; both actions are reachable by keyboard in a logical tab order.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Always dismissible.</strong> Provide a clearly labelled dismiss action; both buttons are reachable by keyboard in a logical tab order.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>No auto-dismiss.</strong> It stays until the user acts, so nobody misses it or has to read against a timer.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Media is decorative.</strong> The header illustration carries no information, so hide it from assistive tech (empty <code>alt</code> / <code>aria-hidden</code>).</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>The illustration is decorative.</strong> It carries no information, so hide it from assistive tech (empty <code>alt</code> / <code>aria-hidden</code>).</div></div>
           </div>
         </section>
 
@@ -326,14 +313,14 @@
         <div class="dev-gap">
           <span class="dev-gap-icon">⚠️</span>
           <div class="dev-gap-body">
-            <span class="dev-gap-label">Dev gap</span>
-            <span class="dev-gap-text">This component isn't in the Angular styleguide yet — there's no confirmed <code>eff-*</code> selector or input API. The markup below is the <strong>design-system prototype structure</strong> (the classes shipped in <code>components.css</code> for building prototypes), not a production Angular API. Confirm the real component and inputs with engineering before using this in the app.</span>
+            <span class="dev-gap-label">Same component as Spotlight</span>
+            <span class="dev-gap-text">In code, an announcement is the same Angular component as the <a class="link-inline" href="spotlight-docs.html">Spotlight</a> — <code>&lt;eff-tooltip-dialog&gt;</code> — in its <code>with-svg</code> configuration: an illustration (<code>[svgUrl]</code>) plus an optional "New" badge (<code>[isNewFeature]</code>). Documented in the styleguide under <strong>Tooltips → "display tooltip with-svg"</strong>.</span>
           </div>
         </div>
 
         <section class="section" id="dev-playground">
           <h2 class="text-l3">Playground</h2>
-          <p class="section-lead">Configure the announcement and preview it. The code reflects the prototype structure.</p>
+          <p class="section-lead">Configure the announcement and preview it. The code shows the matching <code>&lt;eff-tooltip-dialog&gt;</code> markup.</p>
           <div class="pg-card">
             <div class="pg-preview" id="pg-preview" style="padding:40px 24px;"></div>
             <div class="pg-bottom">
@@ -343,11 +330,12 @@
                 <button class="pg-reset" id="pg-reset">Reset</button>
               </div>
               <div class="pg-panel pg-props-wrap" id="pg-panel-props">
-                <div class="pg-row"><div class="pg-row-name">media <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">header image</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-media" checked><span class="pg-toggle-track"></span></label></div></div>
-                <div class="pg-row"><div class="pg-row-name">title</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-title" value="We just launched 20+ additional integrations!" /></div></div>
-                <div class="pg-row"><div class="pg-row-name">body</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-body" value="Managing employee data has never been easier. Discover how to connect your tools." /></div></div>
-                <div class="pg-row"><div class="pg-row-name">action label</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-cta" value="View integrations" /></div></div>
-                <div class="pg-row"><div class="pg-row-name">close button</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-close" checked><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">svgUrl <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">show illustration</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-media" checked><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">dialogTitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-title" value="We just launched 20+ additional integrations!" /></div></div>
+                <div class="pg-row"><div class="pg-row-name">dialogSubtitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-body" value="Managing employee data has never been easier. Discover how to connect your tools." /></div></div>
+                <div class="pg-row"><div class="pg-row-name">dialogButtonText <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">primary CTA</span></div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-cta" value="View integrations" /></div></div>
+                <div class="pg-row"><div class="pg-row-name">dialogLinkButtonText <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">link / dismiss</span></div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-link" value="Close" /></div></div>
+                <div class="pg-row"><div class="pg-row-name">isNewFeature</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-new"><span class="pg-toggle-track"></span></label></div></div>
               </div>
               <div class="pg-panel pg-code-wrap" id="pg-panel-code" hidden>
                 <button class="dev-copy-btn" id="pg-copy">Copy</button>
@@ -357,18 +345,68 @@
           </div>
         </section>
 
+        <section class="section" id="dev-usage">
+          <h2 class="text-l3">Usage</h2>
+          <p class="section-lead">Toggle the dialog from a signal and anchor it to a target element. The <code>with-svg</code> class plus <code>[svgUrl]</code> gives it the illustration.</p>
+          <div class="dev-preview" style="padding:40px 24px;">
+            <div class="announcement" style="width:300px;">
+              <div class="ann-media" style="height:120px;"><i data-icon="image" class="ann-media-ph"></i></div>
+              <div class="ann-body"><p class="ann-title">We just launched 20+ integrations!</p><p class="ann-text">Managing employee data has never been easier.</p><div class="ann-actions"><button class="btn btn-link">Close</button><button class="btn btn-primary">View integrations</button></div></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+<pre><code><span class="cc">&lt;!-- trigger --&gt;</span>
+<span class="ct">&lt;button</span> <span class="ca">#svgTarget</span> <span class="ca">class</span>=<span class="cv">"secondary"</span> <span class="ca">(click)</span>=<span class="cv">"showAnnouncement.set(true)"</span><span class="ct">&gt;</span>
+  Show announcement
+<span class="ct">&lt;/button&gt;</span>
+
+<span class="cc">&lt;!-- announcement (with illustration) --&gt;</span>
+<span class="ct">&lt;eff-tooltip-dialog</span>
+  <span class="ca">*ngIf</span>=<span class="cv">"showAnnouncement()"</span>
+  <span class="ca">class</span>=<span class="cv">"with-svg"</span>
+  <span class="ca">[targetElement]</span>=<span class="cv">"svgTarget"</span>
+  <span class="ca">[svgUrl]</span>=<span class="cv">"'assets/img/home-illustration.svg'"</span>
+  <span class="ca">[isNewFeature]</span>=<span class="cv">"true"</span>
+  <span class="ca">[dialogTitle]</span>=<span class="cv">"'We just launched 20+ integrations!'"</span>
+  <span class="ca">[dialogSubtitle]</span>=<span class="cv">"'Managing employee data has never been easier.'"</span>
+  <span class="ca">[dialogButtonText]</span>=<span class="cv">"'View integrations'"</span>
+  <span class="ca">[dialogLinkButtonText]</span>=<span class="cv">"'Close'"</span>
+  <span class="ca">[dialogPositionToTarget]</span>=<span class="cv">"'after'"</span>
+  <span class="ca">(dialogClosedOutput)</span>=<span class="cv">"showAnnouncement.set(false)"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;/eff-tooltip-dialog&gt;</span></code></pre>
+          </div>
+        </section>
+
         <section class="section" id="dev-props">
-          <h2 class="text-l3">Prototype structure</h2>
-          <p class="section-lead">The classes shipped in <code>components.css</code> for building prototypes with the design-system skill.</p>
+          <h2 class="text-l3">Inputs</h2>
+          <p class="section-lead">Key inputs on <code>eff-tooltip-dialog</code> for the announcement (<code>with-svg</code>) configuration.</p>
+          <table class="token-table">
+            <thead><tr><th>Input</th><th>Type</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td><code>[svgUrl]</code></td><td>string</td><td>URL of the illustration shown at the top. Pair with <code>class="with-svg"</code>.</td></tr>
+              <tr><td><code>[isNewFeature]</code></td><td>boolean</td><td>Shows the "New" feature badge.</td></tr>
+              <tr><td><code>[dialogTitle]</code></td><td>string</td><td>Headline.</td></tr>
+              <tr><td><code>[dialogSubtitle]</code></td><td>string</td><td>Body copy.</td></tr>
+              <tr><td><code>[dialogButtonText]</code></td><td>string</td><td>Primary button label (the call-to-action).</td></tr>
+              <tr><td><code>[dialogLinkButtonText]</code></td><td>string</td><td>Link-style button label (the low-emphasis / dismiss action).</td></tr>
+              <tr><td><code>[targetElement]</code></td><td>ElementRef</td><td>The element the dialog anchors to.</td></tr>
+              <tr><td><code>[dialogPositionToTarget]</code></td><td>'after' · 'before' · 'above' · 'below'</td><td>Placement relative to the target.</td></tr>
+              <tr><td><code>[dialogWidth]</code></td><td>number</td><td>Card width.</td></tr>
+              <tr><td><code>[addOutlineToTargetElement]</code> · <code>[addHighlightToTargetElement]</code></td><td>boolean</td><td>Optionally outline / highlight the target element.</td></tr>
+              <tr><td><code>(dialogClosedOutput)</code></td><td>EventEmitter</td><td>Fires when the dialog is closed — flip your signal back to <code>false</code>.</td></tr>
+            </tbody>
+          </table>
+          <h3 class="text-l4" style="margin-top:24px;">Rendered structure</h3>
           <table class="token-table">
             <thead><tr><th>Class</th><th>Role</th></tr></thead>
             <tbody>
-              <tr><td><code>.announcement</code></td><td>The floating card. 336px wide, light surface, rounded, dialog shadow.</td></tr>
-              <tr><td><code>.ann-media</code></td><td>Optional media header (illustration banner), clipped to the rounded top.</td></tr>
-              <tr><td><code>.ann-body</code></td><td>Padding wrapper for the text and actions.</td></tr>
-              <tr><td><code>.ann-title</code> (<code>text-l5</code>)</td><td>Headline.</td></tr>
-              <tr><td><code>.ann-text</code> (<code>body-14</code>)</td><td>Body copy.</td></tr>
-              <tr><td><code>.ann-actions</code></td><td>Right-aligned footer. Holds <code>.btn-tertiary</code> ("Close") + <code>.btn-primary</code> (CTA).</td></tr>
+              <tr><td><code>.tour-container</code></td><td>The card. Carries the position (<code>after</code>/<code>before</code>/<code>above</code>/<code>below</code>) + alignment (<code>start</code>/<code>end</code>) + <code>card</code> classes.</td></tr>
+              <tr><td><code>img.illustration</code></td><td>The <code>[svgUrl]</code> image.</td></tr>
+              <tr><td><code>p.text-l5.text-w600</code></td><td>Title.</td></tr>
+              <tr><td><code>p.text-w400.text-subdued</code></td><td>Subtitle / body.</td></tr>
+              <tr><td><code>.new-feature-container</code></td><td>The "New" badge (when <code>isNewFeature</code> is set).</td></tr>
+              <tr><td><code>.tour-footer</code></td><td>Footer: <code>button.link</code> (link text) + <code>button.primary</code> (CTA).</td></tr>
             </tbody>
           </table>
         </section>
@@ -380,7 +418,6 @@
             <thead><tr><th>Token</th><th>Used for</th></tr></thead>
             <tbody>
               <tr><td><code>--bg-base</code> · <code>--border-base</code> · <code>--sh-dialogs</code></td><td>Card surface, border, floating shadow</td></tr>
-              <tr><td><code>--bg-highlight-base</code></td><td>Media header background</td></tr>
               <tr><td><code>--bg-brand-base</code> · <code>--border-brand-base</code> · <code>--content-on-brand-base</code></td><td>Call-to-action button</td></tr>
               <tr><td><code>--radius-lg</code></td><td>Card radius</td></tr>
             </tbody>
@@ -392,8 +429,8 @@
           <p class="section-lead">Treat it as a non-modal, polite live region.</p>
           <div class="a11y-list">
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>aria-live="polite"</strong> (or a labelled <code>role="region"</code>) so it's announced without interrupting; never move focus to it on open.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Both actions are keyboard-reachable</strong> in a logical tab order; "Close" always dismisses.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Decorative media</strong> is hidden from assistive tech (<code>aria-hidden</code> / empty <code>alt</code>).</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Both actions are keyboard-reachable</strong> in a logical tab order; the link/dismiss action always closes it.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Decorative illustration</strong> is hidden from assistive tech (<code>aria-hidden</code> / empty <code>alt</code>).</div></div>
           </div>
         </section>
 
@@ -403,7 +440,8 @@
         <nav class="toc">
           <div class="toc-title">ON THIS PAGE</div>
           <a class="toc-link" href="#dev-playground">Playground</a>
-          <a class="toc-link" href="#dev-props">Prototype structure</a>
+          <a class="toc-link" href="#dev-usage">Usage</a>
+          <a class="toc-link" href="#dev-props">Inputs</a>
           <a class="toc-link" href="#dev-tokens">CSS tokens</a>
           <a class="toc-link" href="#dev-a11y">Accessibility</a>
         </nav>
@@ -419,44 +457,47 @@
   (function () {
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
-    const defaults = { media:true, title:'We just launched 20+ additional integrations!', body:'Managing employee data has never been easier. Discover how to connect your tools.', cta:'View integrations', close:true };
-    const LOGOS = ['#1769ff','#e8543f','#0a9d99','#192743','#7b61ff','#ff5d8f','#16a34a','#fdbd12'];
+    const defaults = { media:true, title:'We just launched 20+ additional integrations!', body:'Managing employee data has never been easier. Discover how to connect your tools.', cta:'View integrations', link:'Close', isNew:false };
     function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function aq(s){return String(s).replace(/'/g,"\\'");}
     function state(){return{
       media:document.getElementById('pg-media').checked,
       title:document.getElementById('pg-title').value,
       body:document.getElementById('pg-body').value,
       cta:document.getElementById('pg-cta').value,
-      close:document.getElementById('pg-close').checked,
+      link:document.getElementById('pg-link').value,
+      isNew:document.getElementById('pg-new').checked,
     };}
-    function mediaHtml(){ return '<div class="ann-media">' + LOGOS.map(c=>`<span class="ann-logo" style="background:${c};${c==='#fff'||c==='#fdbd12'?'box-shadow:0 0 0 1px rgba(25,39,67,.12);':''}"></span>`).join('') + '</div>'; }
+    const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     function buildHtml(s){
-      const media = s.media ? mediaHtml() : '';
-      const close = s.close ? '<button class="btn btn-tertiary">Close</button>' : '';
-      return `<div class="announcement" style="width:300px;">${media}<div class="ann-body"><p class="ann-title">${esc(s.title)}</p><p class="ann-text">${esc(s.body)}</p><div class="ann-actions">${close}<button class="btn btn-primary">${esc(s.cta)||'View'}</button></div></div></div>`;
+      const media = s.media ? `<div class="ann-media">${PH}</div>` : '';
+      const badge = s.isNew ? '<div class="sl-badge" style="margin:0 0 8px; color:var(--content-highlight-secondary); font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; display:flex; align-items:center; gap:6px;"><i data-icon="featured" style="width:16px;height:16px;display:flex;"></i> New</div>' : '';
+      const link = s.link ? `<button class="btn btn-link">${esc(s.link)}</button>` : '';
+      return `<div class="announcement" style="width:300px;">${media}<div class="ann-body">${badge}<p class="ann-title">${esc(s.title)}</p><p class="ann-text">${esc(s.body)}</p><div class="ann-actions">${link}<button class="btn btn-primary">${esc(s.cta)||'View'}</button></div></div></div>`;
     }
     function buildCode(s){
       const L=[];
-      L.push('<div class="announcement">');
-      if (s.media) {
-        L.push('  <div class="ann-media"><!-- media / illustration --></div>');
-      }
-      L.push('  <div class="ann-body">');
-      L.push(`    <p class="ann-title">${esc(s.title)}</p>`);
-      L.push(`    <p class="ann-text">${esc(s.body)}</p>`);
-      L.push('    <div class="ann-actions">');
-      if (s.close) L.push('      <button class="btn btn-tertiary">Close</button>');
-      L.push(`      <button class="btn btn-primary">${esc(s.cta)}</button>`);
-      L.push('    </div>');
-      L.push('  </div>');
-      L.push('</div>');
+      L.push('<eff-tooltip-dialog');
+      L.push('  *ngIf="showAnnouncement()"');
+      if (s.media) L.push('  class="with-svg"');
+      L.push('  [targetElement]="svgTarget"');
+      if (s.media) L.push("  [svgUrl]=\"'assets/img/home-illustration.svg'\"");
+      if (s.isNew) L.push('  [isNewFeature]="true"');
+      L.push(`  [dialogTitle]="'${aq(s.title)}'"`);
+      L.push(`  [dialogSubtitle]="'${aq(s.body)}'"`);
+      L.push(`  [dialogButtonText]="'${aq(s.cta)}'"`);
+      if (s.link) L.push(`  [dialogLinkButtonText]="'${aq(s.link)}'"`);
+      L.push('  [dialogPositionToTarget]="\'after\'"');
+      L.push('  (dialogClosedOutput)="showAnnouncement.set(false)">');
+      L.push('</eff-tooltip-dialog>');
       return L.join('\n');
     }
     function render(){const s=state();$preview.innerHTML=buildHtml(s);document.getElementById('pg-code').textContent=buildCode(s);if(window.Icons&&window.Icons.render)window.Icons.render($preview);}
-    ['pg-media','pg-title','pg-body','pg-cta','pg-close'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',render);el.addEventListener('change',render);});
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-media').checked=defaults.media;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-cta').value=defaults.cta;document.getElementById('pg-close').checked=defaults.close;render();});
+    ['pg-media','pg-title','pg-body','pg-cta','pg-link','pg-new'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',render);el.addEventListener('change',render);});
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-media').checked=defaults.media;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-cta').value=defaults.cta;document.getElementById('pg-link').value=defaults.link;document.getElementById('pg-new').checked=defaults.isNew;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
+    document.querySelectorAll('.dev-copy-btn').forEach(b=>{ if(b.id==='pg-copy')return; b.addEventListener('click',()=>{const c=b.parentElement.querySelector('code');if(c)navigator.clipboard.writeText(c.textContent);}); });
     render();
   })();
 </script>

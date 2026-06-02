@@ -686,24 +686,27 @@ Classes: `.spotlight` (+ `.is-above/.is-below/.is-left/.is-right`), `.sl-badge` 
 > ⚠️ **Dev gap:** de exacte Angular input/service-API van `eff-tooltip-dialog` is nog niet bevestigd (de styleguide-code was niet leesbaar). De class-structuur klopt; de inputs nog verifiëren.
 
 ### Announcement
-Zwevende, non-blocking feature-aankondiging die rechtsonder verschijnt. De pagina eronder blijft bruikbaar; de gebruiker dismisst hem zelf (geen auto-dismiss). Lichte card met optionele media-header, titel, body, en footer met een "Close" (tertiary) + primary call-to-action. Onderscheid: Toast = vluchtig/statusfeedback, Spotlight = verankerde coach-mark, Announcement = blijvende aankondiging in de hoek.
+Zwevende, non-blocking feature-aankondiging. De pagina eronder blijft bruikbaar; de gebruiker dismisst hem zelf (geen auto-dismiss). Lichte card met optionele illustratie, titel, body, en footer met een link-actie (dismiss) + primary call-to-action. Onderscheid: Toast = vluchtig/statusfeedback, Spotlight = verankerde coach-mark/tour, Announcement = aankondiging met illustratie.
 
+**In code is dit dezelfde Angular-component als Spotlight:** `<eff-tooltip-dialog>` in de `with-svg`-configuratie (styleguide → Tooltips → "display tooltip with-svg").
+
+Prototype-markup (`components.css`):
 ```html
 <div class="announcement">
-  <div class="ann-media"><!-- optionele media / illustratie --></div>
+  <div class="ann-media"><!-- illustratie ([svgUrl]); placeholder als leeg --></div>
   <div class="ann-body">
     <p class="ann-title">We just launched 20+ additional integrations!</p>
-    <p class="ann-text">Managing employee data has never been easier. Discover how to connect your tools.</p>
+    <p class="ann-text">Managing employee data has never been easier.</p>
     <div class="ann-actions">
-      <button class="btn btn-tertiary">Close</button>
+      <button class="btn btn-link">Close</button>
       <button class="btn btn-primary">View integrations</button>
     </div>
   </div>
 </div>
 ```
-Classes: `.announcement` (336px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`), `.ann-media` (optioneel, `--bg-highlight-base`, geclipt aan de ronde top), `.ann-body` (padding), `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (rechts uitgelijnd: `.btn-tertiary` "Close" + `.btn-primary` CTA). A11y: non-modal — geen focus stelen, `aria-live="polite"`, altijd dismissible.
+Classes: `.announcement` (336px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`), `.ann-media` (optioneel; `<img>` vult 'm, anders placeholder op `--bg-secondary`), `.ann-body`, `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (rechts uitgelijnd: `.btn-link` dismiss + `.btn-primary` CTA).
 
-> ⚠️ **Dev gap:** dit component staat nog niet in de Angular-styleguide — er is nog geen bevestigde `eff-*`-selector of input-API. De `.announcement`-classes zijn de prototype-structuur; verifieer de productie-API met engineering.
+Echte Angular-API (`eff-tooltip-dialog`, `class="with-svg"`): `[svgUrl]` (illustratie), `[isNewFeature]` (badge), `[dialogTitle]`, `[dialogSubtitle]`, `[dialogButtonText]` (primary), `[dialogLinkButtonText]` (link/dismiss), `[targetElement]`, `[dialogPositionToTarget]` ('after'/'before'/'above'/'below'), `[dialogWidth]`, `[addOutlineToTargetElement]`, `[addHighlightToTargetElement]`, `(dialogClosedOutput)`. Gerenderd: `.tour-container` > `img.illustration` + `p.text-l5.text-w600` + `p.text-w400.text-subdued` + `.tour-footer` (`button.link` + `button.primary`). A11y: non-modal — geen focus stelen, `aria-live="polite"`, altijd dismissible.
 
 ---
 

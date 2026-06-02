@@ -1973,14 +1973,20 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
+/* Media header — the illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
 .ann-media {
-  height: 149px;
-  background: var(--bg-highlight-base);
-  display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
-  gap: 14px; padding: 0 20px; overflow: hidden;
+  height: 140px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-base);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--content-subtle); overflow: hidden;
 }
-.ann-logo { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 3px rgba(25,39,67,.12); }
+.ann-media img { width: 100%; height: 100%; object-fit: cover; }
+.ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .55; }
 .ann-body { padding: 16px 24px 24px; }
 .announcement .ann-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 8px; color: var(--content-base); } /* text-l5 */
 .announcement .ann-text  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); }
 .ann-actions { margin-top: 20px; display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
+/* link-style low-emphasis action (no underline, matches eff button.link) */
+.btn-link { background: transparent; border-color: transparent; color: var(--content-secondary); padding: 0 8px; }
+.btn-link:hover, .btn-link.is-hover { color: var(--content-base); }
