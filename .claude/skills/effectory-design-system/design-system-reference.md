@@ -704,7 +704,7 @@ Prototype-markup (`components.css`):
   </div>
 </div>
 ```
-Classes: `.announcement` (336px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`), `.ann-media` (optioneel; `<img>` vult 'm, anders placeholder op `--bg-secondary`), `.ann-body`, `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (rechts uitgelijnd: `.btn-link` dismiss + `.btn-primary` CTA).
+Classes: `.announcement` (320px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`), `.ann-media` (optioneel; `<img>` vult 'm, anders placeholder op `--bg-secondary`), `.ann-body`, `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (rechts uitgelijnd: `.btn-link` dismiss + `.btn-primary` CTA).
 
 Echte Angular-API (`eff-tooltip-dialog`, `class="with-svg"`): `[svgUrl]` (illustratie), `[isNewFeature]` (badge), `[dialogTitle]`, `[dialogSubtitle]`, `[dialogButtonText]` (primary), `[dialogLinkButtonText]` (link/dismiss), `[targetElement]`, `[dialogPositionToTarget]` ('after'/'before'/'above'/'below'), `[dialogWidth]`, `[addOutlineToTargetElement]`, `[addHighlightToTargetElement]`, `(dialogClosedOutput)`. Gerenderd: `.tour-container` > `img.illustration` + `p.text-l5.text-w600` + `p.text-w400.text-subdued` + `.tour-footer` (`button.link` + `button.primary`). A11y: non-modal — geen focus stelen, `aria-live="polite"`, altijd dismissible.
 

@@ -1965,7 +1965,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 /* ── Announcement — floating, non-blocking feature card ── */
 .announcement {
   position: relative;
-  width: 336px; max-width: 336px;
+  width: 320px; max-width: 320px;
   background: var(--bg-base);
   border: 1px solid var(--border-base);
   border-radius: var(--radius-lg);
