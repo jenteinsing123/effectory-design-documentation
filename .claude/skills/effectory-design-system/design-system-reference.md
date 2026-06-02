@@ -641,6 +641,7 @@ Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. 
 > 1. **Mood-namen:** Figma `Feature / Warning / Positive / Negative` vs code `subtle / warn / success / error`.
 > 2. **Primary sentiment button:** Figma heeft een gevulde, mood-gekleurde primary actieknop; de Angular styleguide heeft die nog niet (alleen de `secondary` sentiment-knop via `buttonMessages`).
 > 3. **Inline-button plaatsing:** Figma groepeert de inline button bij de andere actieknoppen; de styleguide rendert `inlineButtonText` inline in de boodschap-tekst.
+> 4. **One-liner tekst-flow:** in dit design lopen titel en message als één doorlopende regel tekst (wrappen samen); de Angular styleguide doet dit nog niet. Nog gelijk te trekken.
 >
 > **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [buttonMessages] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
 
