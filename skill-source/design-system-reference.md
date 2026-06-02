@@ -616,11 +616,12 @@ Moods heten in code (Angular `messageType`): **`subtle` · `info` · `warn` · `
 
 Belangrijk: voor de vier gekleurde moods **altijd `<img>` gebruiken** — niet `<i data-icon="…">`. De cirkel zit in de SVG zelf en `icons.js` zou de kleuren wegnormaliseren tot één `currentColor`.
 
-**Acties — volg de live styleguide:**
-- **Sentiment button (action button)** — een `btn btn-secondary` met een mood-gekleurde rand, max 3. Scoped CSS regelt dit: `.inline-notif.is-warn .btn-secondary` → oranje rand, `is-success` → groen, `is-error` → rood, `is-info` → blauw, `is-subtle` → neutraal. In Angular via `[buttonMessages]` (array, max 3). Staat **onder** de tekst (stacked) of **rechts** (one-liner).
-- **Inline tekst-knop** — `[inlineButtonText]`; render in prototypes als `<a class="link-inline">` (zelfde stijl als de inline link).
-- **Link** — `<a class="link-inline">` (Angular `[linkText]` + `[linkHref]`).
+**Acties — volg de live styleguide. Per mood zetten we accent-variabelen op `.inline-notif` (`--notif-accent`, `--notif-accent-border`, `--notif-accent-on`); de knoppen lezen die.**
+- **Sentiment action button** — `btn btn-secondary` (wit + mood-rand) of `btn btn-primary` (gevuld in mood-kleur), max 3, via Angular `[buttonMessages]`. Staat **onder** de tekst (stacked) of **rechts** (one-liner). Voor `is-subtle` is de secondary-rand neutraal grijs (`--border-action`), de primary blijft brand-teal.
+- **Link button** — `[inlineButtonText]` + `(inlineButtonCallback)`. Een knop die een **actie** uitvoert (navigeert niet), gestyled als link maar **zónder underline**. In prototypes: `<button class="link-inline" style="text-decoration:none;">`.
+- **Inline link** — `[linkText]` + `[linkHref]`. Een echte `<a>` die **navigeert**, **mét underline**. In prototypes: `<a class="link-inline">`.
 
+Regel: navigeert + in een zin → inline link (underline); voert een actie uit → link button (geen underline); navigeert maar losstaand → Button met `link`-variant.
 Sluitknop-states: `.is-hover` `.is-focus`.
 Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. Close-button altijd met `aria-label`.
 
@@ -628,7 +629,6 @@ Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. 
 > 1. **Mood-namen:** Figma `Feature / Warning / Positive / Negative` vs code `subtle / warn / success / error`.
 > 2. **Primary sentiment button:** Figma heeft een gevulde, mood-gekleurde primary actieknop; de Angular styleguide heeft die nog niet (alleen de `secondary` sentiment-knop via `buttonMessages`).
 > 3. **Inline-button plaatsing:** Figma groepeert de inline button bij de andere actieknoppen; de styleguide rendert `inlineButtonText` inline in de boodschap-tekst.
-> 4. **Inline-button stijl:** wij stylen 'm als een underlined Link Inline; de huidige styleguide rendert 'm zonder underline.
 >
 > **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [buttonMessages] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
 

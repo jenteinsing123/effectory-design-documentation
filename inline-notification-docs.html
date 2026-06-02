@@ -564,8 +564,8 @@
                 <div class="pg-row"><div class="pg-row-name">messageTitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-title" value="Heads up!" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">message</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-message" value="This alert needs your attention" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">showCloseButton</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-close" checked><span class="pg-toggle-track"></span></label></div></div>
-                <div class="pg-row"><div class="pg-row-name">inlineButton<span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">in message</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-inlinebtn"><span class="pg-toggle-track"></span></label></div></div>
-                <div class="pg-row"><div class="pg-row-name">link<span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">in message</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-link"><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">inlineButton<span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">in message · action, no underline</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-inlinebtn"><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">link<span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">in message · navigates, underlined</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-link"><span class="pg-toggle-track"></span></label></div></div>
                 <div class="pg-row" style="align-items:flex-start;"><div class="pg-row-name">action buttons<span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">buttonMessages, max 3</span></div>
                   <div class="pg-row-ctrl" style="flex-direction:column; align-items:stretch; gap:8px;">
                     <div id="pg-btn-list" style="display:flex; flex-direction:column; gap:8px;"></div>
@@ -605,11 +605,11 @@
           </div>
 
           <h3 class="text-l4">Subtle — with inline text button</h3>
-          <p>The <code>inlineButtonText</code> input renders a link-styled button <em>inline within the message copy</em>; <code>inlineButtonCallback</code> fires on click. We style it the same as an inline <a class="link-inline" href="link-inline-docs.html">Link Inline</a>. Project a sparkle icon for the subtle mood.</p>
+          <p>The <code>inlineButtonText</code> input renders a <strong>link button</strong> <em>inline within the message copy</em> — it performs an action (<code>inlineButtonCallback</code> fires on click) and is <strong>not underlined</strong>, distinguishing it from a navigating <a class="link-inline" href="link-inline-docs.html">Link Inline</a> (which is underlined). Project a sparkle icon for the subtle mood.</p>
           <div class="dev-preview">
             <div class="inline-notif is-subtle" style="width:100%;">
               <span class="inline-notif-icon is-subtle"><i data-icon="featured"></i></span>
-              <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use. <button class="link-inline" style="font:inherit;">Learn more</button></span></div>
+              <div class="inline-notif-content"><span class="inline-notif-title">New feature!</span><span class="inline-notif-msg">We released a new feature you might want to use. <button class="link-inline" style="font:inherit; text-decoration:none;">Learn more</button></span></div>
               <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
             </div>
           </div>
@@ -835,7 +835,7 @@
       const ol = s.oneliner ? ' is-one-liner' : '';
       // inline text button + link both styled as an inline Link Inline
       let inlineExtras = '';
-      if (s.inlineBtn) inlineExtras += ` <button class="link-inline" style="font:inherit;">Learn more</button>`;
+      if (s.inlineBtn) inlineExtras += ` <button class="link-inline" style="font:inherit; text-decoration:none;">Learn more</button>`;
       if (s.link) inlineExtras += ` <a href="#" onclick="return false;" class="link-inline">Support Page</a>`;
       const msgSpan = (s.message || inlineExtras) ? `<span class="inline-notif-msg">${esc(s.message)}${inlineExtras}</span>` : '';
       const action = buttons.length ? `<div class="inline-notif-actions">${buttons.map(buttonHtml).join('')}</div>` : '';
