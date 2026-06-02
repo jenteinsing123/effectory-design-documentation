@@ -1965,35 +1965,37 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 /* ── Announcement — floating, non-blocking feature card ── */
 .announcement {
   position: relative;
-  width: 320px; max-width: 320px;
+  width: 300px; max-width: 300px;
   background: var(--bg-base);
   border: 1px solid var(--border-base);
   border-radius: var(--radius-lg);
   box-shadow: var(--sh-dialogs);
-  overflow: hidden;
+  padding: 16px;
   font-family: 'Poppins', sans-serif;
 }
-/* Media header — the illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
+/* Inset illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
 .ann-media {
-  height: 140px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-base);
+  height: 136px;
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
   display: flex; align-items: center; justify-content: center;
   color: var(--content-subtle); overflow: hidden;
+  margin-bottom: 16px;
 }
 .ann-media img { width: 100%; height: 100%; object-fit: cover; }
-.ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .55; }
-.ann-body { padding: 16px 24px 24px; }
+.ann-media-ph { display: flex; width: 36px; height: 36px; opacity: .5; }
 .announcement .ann-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 8px; color: var(--content-base); } /* text-l5 */
 .announcement .ann-text  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); }
-.ann-actions { margin-top: 20px; display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
-/* link-style low-emphasis action (no underline, matches eff button.link) */
-.btn-link { background: transparent; border-color: transparent; color: var(--content-secondary); padding: 0 8px; }
+/* Actions stack full-width: primary on top, dismiss below */
+.ann-actions { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.ann-actions .btn { width: 100%; }
+/* link-style dismiss (low-emphasis, no underline, matches eff button.link) */
+.btn-link { background: transparent; border-color: transparent; color: var(--content-secondary); }
 .btn-link:hover, .btn-link.is-hover { color: var(--content-base); }
-/* Stacked: progress (dots + prev/next) left, actions right */
-.ann-footer { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+/* Stacked: progress (dots + prev/next), centred under the actions */
+.ann-footer { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
 .ann-footer .ann-actions { margin-top: 0; }
-.ann-progress { display: flex; align-items: center; gap: 4px; }
+.ann-progress { display: flex; align-items: center; justify-content: center; gap: 4px; }
 .ann-dots { display: flex; align-items: center; gap: 6px; margin: 0 4px; }
 .ann-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border-action); }
 .ann-dot.is-active { background: var(--bg-brand-base); }
