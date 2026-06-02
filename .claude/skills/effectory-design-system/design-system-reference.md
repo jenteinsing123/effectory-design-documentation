@@ -618,10 +618,11 @@ Belangrijk: voor de vier gekleurde moods **altijd `<img>` gebruiken** — niet `
 
 **Acties — volg de live styleguide. Per mood zetten we accent-variabelen op `.inline-notif` (`--notif-accent`, `--notif-accent-border`, `--notif-accent-on`); de knoppen lezen die.**
 - **Sentiment action button** — `btn btn-secondary` (wit + mood-rand) of `btn btn-primary` (gevuld in mood-kleur), max 3, via Angular `[buttonMessages]`. Staat **onder** de tekst (stacked) of **rechts** (one-liner). Voor `is-subtle` is de secondary-rand neutraal grijs (`--border-action`), de primary blijft brand-teal.
-- **Link button** — `[inlineButtonText]` + `(inlineButtonCallback)`. Een knop die een **actie** uitvoert (navigeert niet), gestyled als link maar **zónder underline**. In prototypes: `<button class="link-inline" style="text-decoration:none;">`.
-- **Inline link** — `[linkText]` + `[linkHref]`. Een echte `<a>` die **navigeert**, **mét underline**. In prototypes: `<a class="link-inline">`.
+- **Link button** — `[inlineButtonText]` + `(inlineButtonCallback)`. Staat in de **actie-rij** naast de knoppen. Voert een **actie** uit (navigeert niet), gestyled als link maar **zónder underline**. In prototypes: `<button class="link-inline" style="text-decoration:none;">` binnen `.inline-notif-actions`.
+- **Link** — `[linkText]` + `[linkHref]`. Staat ook in de **actie-rij**. Een echte `<a>` die **navigeert**, **mét underline**. In prototypes: `<a class="link-inline">` binnen `.inline-notif-actions`.
 
-Regel: navigeert + in een zin → inline link (underline); voert een actie uit → link button (geen underline); navigeert maar losstaand → Button met `link`-variant.
+In de actie-rij mag dus een link óf een link button naast de actieknoppen komen.
+Regel (algemeen): inline links en links zien er hetzelfde uit (underline); een link button heeft géén underline omdat het een actie is.
 Sluitknop-states: `.is-hover` `.is-focus`.
 Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. Close-button altijd met `aria-label`.
 
