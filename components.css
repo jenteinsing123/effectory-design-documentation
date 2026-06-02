@@ -1940,7 +1940,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
    Guided tooltip — onboarding / coach-mark overlay (eff-tooltip-dialog)
    ───────────────────────────────────────────── */
 .guided-tooltip {
-  position: relative; width: 300px; max-width: 100%;
+  position: relative; width: 280px; max-width: 280px;
   background: var(--bg-inverse-base); color: var(--content-inverse-base);
   border-radius: var(--radius-lg); padding: 20px;
   font-family: 'Poppins', sans-serif;

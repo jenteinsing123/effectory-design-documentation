@@ -11,7 +11,7 @@
     /* ── Guided tooltip — onboarding/coach-mark overlay (eff-tooltip-dialog) ── */
     .guided-tooltip {
       position: relative;
-      width: 300px; max-width: 100%;
+      width: 280px; max-width: 280px;
       background: var(--bg-inverse-base);
       color: var(--content-inverse-base);
       border-radius: var(--radius-lg);
@@ -43,6 +43,9 @@
     .anatomy-fig .guided-tooltip { pointer-events: none; }
     /* roomy preview cells for the bigger card */
     .gt-prev { display: flex; justify-content: center; align-items: center; padding: 32px 24px; flex: 1; }
+    /* Variants: give the (wide) guided-tooltip card room to breathe */
+    .variant-row { grid-template-columns: minmax(360px, 1.3fr) 1fr; }
+    .variant-row-btn { padding: 36px 32px; }
   </style>
 </head>
 <body>
@@ -176,7 +179,7 @@
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
-                <div class="guided-tooltip is-above" style="width:260px;">
+                <div class="guided-tooltip is-above" style="width:280px;">
                   <div class="gt-badge"><i data-icon="featured"></i> New</div>
                   <p class="gt-title">Choose your settings later</p>
                   <p class="gt-body">Confirm your project settings before you create a survey.</p>
@@ -187,7 +190,7 @@
             </div>
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
-                <div class="guided-tooltip is-above" style="width:260px;">
+                <div class="guided-tooltip is-above" style="width:280px;">
                   <p class="gt-title">Choose your settings later</p>
                   <p class="gt-body">Confirm your project settings before you create a survey.</p>
                   <div class="gt-footer is-multi"><div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div><button class="btn btn-primary">Next</button></div>
