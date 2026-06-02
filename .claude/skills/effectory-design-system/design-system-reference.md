@@ -645,6 +645,44 @@ Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. 
 >
 > **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [buttonMessages] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
 
+### Tooltip
+Kleine, niet-interactieve donkere bubble die op hover/focus verschijnt. Alleen korte tekst. In Angular: de Material `matTooltip` directive + `matTooltipPosition`.
+
+```html
+<!-- Prototype-weergave: bubble + pijl, positie boven/onder/links/rechts -->
+<div class="tt-demo">
+  <span class="ib"><i data-icon="trash"></i></span>
+  <div class="tooltip is-above">Delete survey</div>
+</div>
+```
+Positie-classes: `.is-above` `.is-below` `.is-left` `.is-right`. Bubble = `--bg-inverse-base` (#192743), witte tekst, Poppins Medium 14, `--radius-md`. Gebruik nooit voor essentiële info of interactieve content → dan een Guided tooltip of dialog.
+
+### Guided tooltip
+Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Donkere card met optionele NEW-badge, titel, body, en footer met óf één primary knop (single-step) óf paginatie-dots + "Next" (multi-step).
+
+```html
+<!-- Single-step -->
+<div class="guided-tooltip is-above">
+  <div class="gt-badge"><i data-icon="featured"></i> New</div>
+  <p class="gt-title">Choose your settings later</p>
+  <p class="gt-body">Confirm your project settings before you create a survey.</p>
+  <div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div>
+</div>
+
+<!-- Multi-step -->
+<div class="guided-tooltip is-above">
+  <p class="gt-title">Pick a template</p>
+  <p class="gt-body">Start from a ready-made survey, then tweak the questions.</p>
+  <div class="gt-footer is-multi">
+    <div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div>
+    <button class="btn btn-primary">Next</button>
+  </div>
+</div>
+```
+Classes: `.guided-tooltip` (+ `.is-above/.is-below/.is-left/.is-right`), `.gt-badge` (optioneel, oranje), `.gt-title` (16/SemiBold), `.gt-body` (14), `.gt-footer` (`.is-single` = volle-breedte knop · `.is-multi` = dots links + knop rechts), `.gt-dot.is-active`. Card = `--bg-inverse-base`, knop = `--bg-brand-base` (teal). Behandel als een dialog: focus erin, Escape sluit, focus terug.
+
+> ⚠️ **Dev gap:** de exacte Angular input/service-API van `eff-tooltip-dialog` is nog niet bevestigd (de styleguide-code was niet leesbaar). De class-structuur klopt; de inputs nog verifiëren.
+
 ---
 
 ## 5. Iconen

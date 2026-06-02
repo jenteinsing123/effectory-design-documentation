@@ -1913,3 +1913,51 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   pointer-events: none;
   text-decoration: underline;
 }
+
+/* ─────────────────────────────────────────────
+   Tooltip — small dark label shown on hover/focus (Angular Material matTooltip)
+   ───────────────────────────────────────────── */
+.tooltip {
+  position: relative; display: inline-block; max-width: 240px;
+  background: var(--bg-inverse-base); color: var(--content-inverse-base);
+  font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; line-height: 1.4;
+  padding: 8px 12px; border-radius: var(--radius-md);
+}
+.tooltip::after { content: ''; position: absolute; border: 6px solid transparent; }
+.tooltip.is-above::after { top: 100%;    left: 50%; transform: translateX(-50%); border-top-color: var(--bg-inverse-base); }
+.tooltip.is-below::after { bottom: 100%; left: 50%; transform: translateX(-50%); border-bottom-color: var(--bg-inverse-base); }
+.tooltip.is-left::after  { left: 100%;   top: 50%;  transform: translateY(-50%); border-left-color: var(--bg-inverse-base); }
+.tooltip.is-right::after { right: 100%;  top: 50%;  transform: translateY(-50%); border-right-color: var(--bg-inverse-base); }
+/* Helper: position a tooltip around a trigger */
+.tt-demo { position: relative; display: inline-flex; }
+.tt-demo .tooltip { position: absolute; white-space: nowrap; z-index: 2; }
+.tt-demo .tooltip.is-above { bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
+.tt-demo .tooltip.is-below { top: calc(100% + 10px);    left: 50%; transform: translateX(-50%); }
+.tt-demo .tooltip.is-left  { right: calc(100% + 10px);  top: 50%;  transform: translateY(-50%); }
+.tt-demo .tooltip.is-right { left: calc(100% + 10px);   top: 50%;  transform: translateY(-50%); }
+
+/* ─────────────────────────────────────────────
+   Guided tooltip — onboarding / coach-mark overlay (eff-tooltip-dialog)
+   ───────────────────────────────────────────── */
+.guided-tooltip {
+  position: relative; width: 300px; max-width: 100%;
+  background: var(--bg-inverse-base); color: var(--content-inverse-base);
+  border-radius: var(--radius-md); padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 8px 24px rgba(25,39,67,.24);
+}
+.guided-tooltip::after { content: ''; position: absolute; border: 8px solid transparent; }
+.guided-tooltip.is-above::after { top: 100%;    left: 28px; border-top-color: var(--bg-inverse-base); }
+.guided-tooltip.is-below::after { bottom: 100%; left: 28px; border-bottom-color: var(--bg-inverse-base); }
+.guided-tooltip.is-left::after  { left: 100%;   top: 28px;  border-left-color: var(--bg-inverse-base); }
+.guided-tooltip.is-right::after { right: 100%;  top: 28px;  border-right-color: var(--bg-inverse-base); }
+.gt-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
+.gt-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
+.gt-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 6px; }
+.gt-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; }
+.gt-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+.gt-footer.is-single .btn { width: 100%; }
+.gt-footer.is-multi .btn { margin-left: auto; }
+.gt-dots { display: flex; align-items: center; gap: 6px; }
+.gt-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
+.gt-dot.is-active { background: var(--bg-brand-base); }
