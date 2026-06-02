@@ -655,33 +655,33 @@ Kleine, niet-interactieve donkere bubble die op hover/focus verschijnt. Alleen k
   <div class="tooltip is-above">Delete survey</div>
 </div>
 ```
-Positie-classes: `.is-above` `.is-below` `.is-left` `.is-right`. Bubble = `--bg-inverse-base` (#192743), witte tekst, Poppins Medium 14, `--radius-md`. Tekst wrapt op max-width ~240px. Gebruik nooit voor essentiële info of interactieve content → dan een Guided tooltip of dialog.
+Positie-classes: `.is-above` `.is-below` `.is-left` `.is-right`. Bubble = `--bg-inverse-base` (#192743), witte tekst, Poppins Medium 14, `--radius-md`. Tekst wrapt op max-width ~240px. Gebruik nooit voor essentiële info of interactieve content → dan een Spotlight of dialog.
 
 > ⚠️ **Dev/Figma gap:** Figma gebruikt **Medium (500)** voor de tooltip-tekst; de Material `matTooltip` rendert **Normal (400)**. Nog gelijk te trekken.
 
-### Guided tooltip
+### Spotlight
 Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Donkere card met optionele NEW-badge, titel, body, en footer met óf één primary knop (single-step) óf paginatie-dots + "Next" (multi-step).
 
 ```html
 <!-- Single-step -->
-<div class="guided-tooltip is-above">
-  <div class="gt-badge"><i data-icon="featured"></i> New</div>
-  <p class="gt-title">Choose your settings later</p>
-  <p class="gt-body">Confirm your project settings before you create a survey.</p>
-  <div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div>
+<div class="spotlight is-above">
+  <div class="sl-badge"><i data-icon="featured"></i> New</div>
+  <p class="sl-title">Choose your settings later</p>
+  <p class="sl-body">Confirm your project settings before you create a survey.</p>
+  <div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div>
 </div>
 
 <!-- Multi-step -->
-<div class="guided-tooltip is-above">
-  <p class="gt-title">Pick a template</p>
-  <p class="gt-body">Start from a ready-made survey, then tweak the questions.</p>
-  <div class="gt-footer is-multi">
-    <div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div>
+<div class="spotlight is-above">
+  <p class="sl-title">Pick a template</p>
+  <p class="sl-body">Start from a ready-made survey, then tweak the questions.</p>
+  <div class="sl-footer is-multi">
+    <div class="sl-dots"><span class="sl-dot is-active"></span><span class="sl-dot"></span><span class="sl-dot"></span></div>
     <button class="btn btn-primary">Next</button>
   </div>
 </div>
 ```
-Classes: `.guided-tooltip` (+ `.is-above/.is-below/.is-left/.is-right`), `.gt-badge` (optioneel, oranje), `.gt-title` (16/SemiBold), `.gt-body` (14), `.gt-footer` (`.is-single` = volle-breedte knop · `.is-multi` = dots links + knop rechts), `.gt-dot.is-active`. Card = `--bg-inverse-base`, knop = `--bg-brand-base` (teal). Behandel als een dialog: focus erin, Escape sluit, focus terug.
+Classes: `.spotlight` (+ `.is-above/.is-below/.is-left/.is-right`), `.sl-badge` (optioneel, oranje), `.sl-title` (16/SemiBold), `.sl-body` (14), `.sl-footer` (`.is-single` = volle-breedte knop · `.is-multi` = dots links + knop rechts), `.sl-dot.is-active`. Card = `--bg-inverse-base`, knop = `--bg-brand-base` (teal). Behandel als een dialog: focus erin, Escape sluit, focus terug.
 
 > ⚠️ **Dev gap:** de exacte Angular input/service-API van `eff-tooltip-dialog` is nog niet bevestigd (de styleguide-code was niet leesbaar). De class-structuur klopt; de inputs nog verifiëren.
 

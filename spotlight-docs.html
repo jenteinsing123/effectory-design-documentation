@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guided tooltip — Engage Design System</title>
+  <title>Spotlight — Engage Design System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Poppins:wght@300..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* ── Guided tooltip — onboarding/coach-mark overlay (eff-tooltip-dialog) ── */
-    .guided-tooltip {
+    /* ── Spotlight — onboarding/coach-mark overlay (eff-tooltip-dialog) ── */
+    .spotlight {
       position: relative;
       width: 280px; max-width: 280px;
       background: var(--bg-inverse-base);
@@ -19,31 +19,31 @@
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 8px 24px rgba(25,39,67,.24);
     }
-    .guided-tooltip::after { content: ''; position: absolute; border: 8px solid transparent; }
-    .guided-tooltip.is-above::after  { top: 100%;    left: 28px; border-top-color: var(--bg-inverse-base); }
-    .guided-tooltip.is-below::after  { bottom: 100%; left: 28px; border-bottom-color: var(--bg-inverse-base); }
-    .guided-tooltip.is-left::after   { left: 100%;   top: 28px;  border-left-color: var(--bg-inverse-base); }
-    .guided-tooltip.is-right::after  { right: 100%;  top: 28px;  border-right-color: var(--bg-inverse-base); }
+    .spotlight::after { content: ''; position: absolute; border: 8px solid transparent; }
+    .spotlight.is-above::after  { top: 100%;    left: 28px; border-top-color: var(--bg-inverse-base); }
+    .spotlight.is-below::after  { bottom: 100%; left: 28px; border-bottom-color: var(--bg-inverse-base); }
+    .spotlight.is-left::after   { left: 100%;   top: 28px;  border-left-color: var(--bg-inverse-base); }
+    .spotlight.is-right::after  { right: 100%;  top: 28px;  border-right-color: var(--bg-inverse-base); }
 
-    .gt-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
-    .gt-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
-    .gt-title { font-size: 16px; font-weight: 600; line-height: 1.3; margin: 0 0 6px; } /* text-l5 */
-    .gt-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-inverse-secondary); }
-    .gt-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
-    .gt-footer.is-single .btn { width: 100%; }
-    .gt-dots { display: flex; align-items: center; gap: 6px; }
-    .gt-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
-    .gt-dot.is-active { background: var(--bg-brand-base); }
-    .gt-footer.is-multi .btn { margin-left: auto; }
+    .sl-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--content-highlight-secondary); font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
+    .sl-badge i[data-icon] { width: 16px; height: 16px; display: flex; }
+    .sl-title { font-size: 16px; font-weight: 600; line-height: 1.3; margin: 0 0 6px; } /* text-l5 */
+    .sl-body  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-inverse-secondary); }
+    .sl-footer { margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+    .sl-footer.is-single .btn { width: 100%; }
+    .sl-dots { display: flex; align-items: center; gap: 6px; }
+    .sl-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
+    .sl-dot.is-active { background: var(--bg-brand-base); }
+    .sl-footer.is-multi .btn { margin-left: auto; }
 
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 16px; border-radius: var(--radius-base); border: 1px solid transparent; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; }
     .btn-primary { background: var(--bg-brand-base); border-color: var(--border-brand-base); color: var(--content-on-brand-base); box-shadow: var(--sh-action); }
 
     .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: 12px; padding: 48px 40px; margin-bottom: 24px; display: flex; justify-content: center; }
-    .anatomy-fig .guided-tooltip { pointer-events: none; }
+    .anatomy-fig .spotlight { pointer-events: none; }
     /* roomy preview cells for the bigger card */
-    .gt-prev { display: flex; justify-content: center; align-items: center; padding: 32px 24px; flex: 1; }
-    /* Variants: give the (wide) guided-tooltip card room to breathe */
+    .sl-prev { display: flex; justify-content: center; align-items: center; padding: 32px 24px; flex: 1; }
+    /* Variants: give the (wide) spotlight card room to breathe */
     .variant-row { grid-template-columns: minmax(360px, 1.3fr) 1fr; }
     .variant-row-btn { padding: 36px 32px; }
   </style>
@@ -62,8 +62,8 @@
       <div class="page-badges">
         <span class="page-updated">Updated May 2026</span>
       </div>
-      <h1 class="text-l1">Guided tooltip</h1>
-      <p class="page-desc">An interactive coach-mark overlay that introduces a feature or walks the user through a short, multi-step flow.</p>
+      <h1 class="text-l1">Spotlight</h1>
+      <p class="page-desc">Draws attention to a new or changed part of the UI and explains it — for feature discovery and onboarding, as a single highlight or a short multi-step tour.</p>
     </div>
   </div><!-- /page-header-row -->
 
@@ -89,11 +89,11 @@
           <h2 class="text-l3">Anatomy</h2>
           <p class="section-lead">A dark card with an optional badge, a title, a body, and a footer that holds the action.</p>
           <div class="anatomy-fig">
-            <div class="guided-tooltip is-above" style="pointer-events:none;">
-              <div class="gt-badge"><i data-icon="featured"></i> New</div>
-              <p class="gt-title">Choose your settings later</p>
-              <p class="gt-body">Click on this icon to go to your project settings and confirm them before you create a survey.</p>
-              <div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div>
+            <div class="spotlight is-above" style="pointer-events:none;">
+              <div class="sl-badge"><i data-icon="featured"></i> New</div>
+              <p class="sl-title">Choose your settings later</p>
+              <p class="sl-body">Click on this icon to go to your project settings and confirm them before you create a survey.</p>
+              <div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div>
             </div>
           </div>
           <div class="anatomy-items">
@@ -107,17 +107,17 @@
 
         <section class="section" id="usage">
           <h2 class="text-l3">Usage</h2>
-          <p class="section-lead">Use a guided tooltip to teach — to point at something new and explain it. It interrupts, so use it sparingly.</p>
+          <p class="section-lead">Use a spotlight to teach — to point at something new and explain it. It interrupts, so use it sparingly.</p>
 
           <h3 class="text-l4">Use it to introduce, not to alert</h3>
           <div class="dd-grid">
             <div class="dd-card">
-              <div class="gt-prev">
-                <div class="guided-tooltip is-above" style="pointer-events:none; width:280px;">
-                  <div class="gt-badge"><i data-icon="featured"></i> New</div>
-                  <p class="gt-title">Filters moved here</p>
-                  <p class="gt-body">Your filters now live in the toolbar so they're easier to reach.</p>
-                  <div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div>
+              <div class="sl-prev">
+                <div class="spotlight is-above" style="pointer-events:none; width:280px;">
+                  <div class="sl-badge"><i data-icon="featured"></i> New</div>
+                  <p class="sl-title">Filters moved here</p>
+                  <p class="sl-body">Your filters now live in the toolbar so they're easier to reach.</p>
+                  <div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div>
                 </div>
               </div>
               <div class="dd-cap do">
@@ -126,11 +126,11 @@
               </div>
             </div>
             <div class="dd-card">
-              <div class="gt-prev">
-                <div class="guided-tooltip is-above" style="pointer-events:none; width:280px;">
-                  <p class="gt-title">Couldn't save your changes</p>
-                  <p class="gt-body">The connection dropped. Try again.</p>
-                  <div class="gt-footer is-single"><button class="btn btn-primary">Retry</button></div>
+              <div class="sl-prev">
+                <div class="spotlight is-above" style="pointer-events:none; width:280px;">
+                  <p class="sl-title">Couldn't save your changes</p>
+                  <p class="sl-body">The connection dropped. Try again.</p>
+                  <div class="sl-footer is-single"><button class="btn btn-primary">Retry</button></div>
                 </div>
               </div>
               <div class="dd-cap dont">
@@ -143,11 +143,11 @@
           <h3 class="text-l4">Keep tours short</h3>
           <div class="dd-grid">
             <div class="dd-card">
-              <div class="gt-prev">
-                <div class="guided-tooltip is-above" style="pointer-events:none; width:280px;">
-                  <p class="gt-title">Pick a template</p>
-                  <p class="gt-body">Start from a ready-made survey, then tweak the questions.</p>
-                  <div class="gt-footer is-multi"><div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div><button class="btn btn-primary">Next</button></div>
+              <div class="sl-prev">
+                <div class="spotlight is-above" style="pointer-events:none; width:280px;">
+                  <p class="sl-title">Pick a template</p>
+                  <p class="sl-body">Start from a ready-made survey, then tweak the questions.</p>
+                  <div class="sl-footer is-multi"><div class="sl-dots"><span class="sl-dot is-active"></span><span class="sl-dot"></span><span class="sl-dot"></span></div><button class="btn btn-primary">Next</button></div>
                 </div>
               </div>
               <div class="dd-cap do">
@@ -156,11 +156,11 @@
               </div>
             </div>
             <div class="dd-card">
-              <div class="gt-prev">
-                <div class="guided-tooltip is-above" style="pointer-events:none; width:280px;">
-                  <p class="gt-title">Step 9 of 12</p>
-                  <p class="gt-body">…and this menu does yet another thing you'll figure out anyway.</p>
-                  <div class="gt-footer is-multi"><div class="gt-dots"><span class="gt-dot"></span><span class="gt-dot"></span><span class="gt-dot is-active"></span></div><button class="btn btn-primary">Next</button></div>
+              <div class="sl-prev">
+                <div class="spotlight is-above" style="pointer-events:none; width:280px;">
+                  <p class="sl-title">Step 9 of 12</p>
+                  <p class="sl-body">…and this menu does yet another thing you'll figure out anyway.</p>
+                  <div class="sl-footer is-multi"><div class="sl-dots"><span class="sl-dot"></span><span class="sl-dot"></span><span class="sl-dot is-active"></span></div><button class="btn btn-primary">Next</button></div>
                 </div>
               </div>
               <div class="dd-cap dont">
@@ -179,24 +179,24 @@
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
-                <div class="guided-tooltip is-above" style="width:280px;">
-                  <div class="gt-badge"><i data-icon="featured"></i> New</div>
-                  <p class="gt-title">Choose your settings later</p>
-                  <p class="gt-body">Confirm your project settings before you create a survey.</p>
-                  <div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div>
+                <div class="spotlight is-above" style="width:280px;">
+                  <div class="sl-badge"><i data-icon="featured"></i> New</div>
+                  <p class="sl-title">Choose your settings later</p>
+                  <p class="sl-body">Confirm your project settings before you create a survey.</p>
+                  <div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div>
                 </div>
               </div>
               <div class="variant-row-desc"><strong>Single-step</strong> — One tip with a full-width confirm button ("Got it!"). Use to announce a single feature. The badge is optional.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px;">
-                <div class="guided-tooltip is-above" style="width:280px;">
-                  <p class="gt-title">Choose your settings later</p>
-                  <p class="gt-body">Confirm your project settings before you create a survey.</p>
-                  <div class="gt-footer is-multi"><div class="gt-dots"><span class="gt-dot is-active"></span><span class="gt-dot"></span><span class="gt-dot"></span></div><button class="btn btn-primary">Next</button></div>
+                <div class="spotlight is-above" style="width:280px;">
+                  <p class="sl-title">Choose your settings later</p>
+                  <p class="sl-body">Confirm your project settings before you create a survey.</p>
+                  <div class="sl-footer is-multi"><div class="sl-dots"><span class="sl-dot is-active"></span><span class="sl-dot"></span><span class="sl-dot"></span></div><button class="btn btn-primary">Next</button></div>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Multi-step</strong> — A short walkthrough: step dots on the left show progress, "Next" advances. Use for a guided tour of 2–4 related spots.</div>
+              <div class="variant-row-desc"><strong>Multi-step</strong> — A short walkthrough: step dots on the left show progress, "Next" advances. Use for a step-by-step tour of 2–4 related spots.</div>
             </div>
           </div>
         </section>
@@ -210,11 +210,11 @@
             <p>The title is a short noun phrase; the body is a single, action-oriented sentence.</p>
             <div class="dd-grid">
               <div class="dd-card">
-                <div class="gt-prev"><div class="guided-tooltip is-above" style="pointer-events:none; width:260px;"><p class="gt-title">Export your results</p><p class="gt-body">Download a spreadsheet of every response from here.</p><div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div></div></div>
+                <div class="sl-prev"><div class="spotlight is-above" style="pointer-events:none; width:260px;"><p class="sl-title">Export your results</p><p class="sl-body">Download a spreadsheet of every response from here.</p><div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div></div></div>
                 <div class="dd-cap do"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Do</div>Clear title, one actionable sentence.</div>
               </div>
               <div class="dd-card">
-                <div class="gt-prev"><div class="guided-tooltip is-above" style="pointer-events:none; width:260px;"><p class="gt-title">Welcome!</p><p class="gt-body">There's a lot you can do here and we're excited to show you around so let's get started on this journey together.</p><div class="gt-footer is-single"><button class="btn btn-primary">Got it!</button></div></div></div>
+                <div class="sl-prev"><div class="spotlight is-above" style="pointer-events:none; width:260px;"><p class="sl-title">Welcome!</p><p class="sl-body">There's a lot you can do here and we're excited to show you around so let's get started on this journey together.</p><div class="sl-footer is-single"><button class="btn btn-primary">Got it!</button></div></div></div>
                 <div class="dd-cap dont"><div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Don't</div>Vague title and a rambling, non-specific body.</div>
               </div>
             </div>
@@ -241,7 +241,7 @@
 
         <section class="section" id="accessibility">
           <h2 class="text-l3">Accessibility</h2>
-          <p class="section-lead">A guided tooltip is an interactive overlay, so it needs proper focus handling — unlike a plain tooltip.</p>
+          <p class="section-lead">A spotlight is an interactive overlay, so it needs proper focus handling — unlike a plain tooltip.</p>
           <div class="a11y-list">
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Move focus into it.</strong> When it opens, move focus to the card (or its action) so keyboard and screen-reader users land on it.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Dismissable.</strong> <code>Escape</code> closes it; "Got it!" / completing the tour closes it. Always offer a way out.</div></div>
@@ -281,13 +281,13 @@
           <span class="dev-gap-icon">⚠️</span>
           <div class="dev-gap-body">
             <span class="dev-gap-label">Dev gap</span>
-            <span class="dev-gap-text">The guided tooltip renders as <code>&lt;eff-tooltip-dialog&gt;</code> in an overlay. Its visual structure is documented below, but the exact Angular <strong>inputs / service API</strong> (how you set the title, body, steps, and trigger it) still need to be confirmed from the styleguide source — the code examples weren't readable when this page was written. Treat the snippets here as structural reference, not copy-paste-ready.</span>
+            <span class="dev-gap-text">The spotlight renders as <code>&lt;eff-tooltip-dialog&gt;</code> in an overlay. Its visual structure is documented below, but the exact Angular <strong>inputs / service API</strong> (how you set the title, body, steps, and trigger it) still need to be confirmed from the styleguide source — the code examples weren't readable when this page was written. Treat the snippets here as structural reference, not copy-paste-ready.</span>
           </div>
         </div>
 
         <section class="section" id="dev-playground">
           <h2 class="text-l3">Playground</h2>
-          <p class="section-lead">Configure the guided tooltip and preview it. The code shows the rendered structure of <code>&lt;eff-tooltip-dialog&gt;</code>.</p>
+          <p class="section-lead">Configure the spotlight and preview it. The code shows the rendered structure of <code>&lt;eff-tooltip-dialog&gt;</code>.</p>
           <div class="pg-card">
             <div class="pg-preview" id="pg-preview" style="padding:40px 24px;"></div>
             <div class="pg-bottom">
@@ -389,18 +389,18 @@
       btn:document.getElementById('pg-btn').value,
       pos:document.getElementById('pg-pos').value,
     };}
-    function dots(active){ let h=''; for (let i=0;i<TOTAL;i++) h += `<span class="gt-dot${i<=active?' is-active':''}"></span>`; return h; }
+    function dots(active){ let h=''; for (let i=0;i<TOTAL;i++) h += `<span class="sl-dot${i<=active?' is-active':''}"></span>`; return h; }
     function footer(s){
       if (s.flow === 'multi') {
         const last = step >= TOTAL - 1;
         const label = last ? (esc(s.btn) || 'Got it!') : 'Next';
-        return `<div class="gt-footer is-multi"><div class="gt-dots">${dots(step)}</div><button class="btn btn-primary" data-gt-next>${label}</button></div>`;
+        return `<div class="sl-footer is-multi"><div class="sl-dots">${dots(step)}</div><button class="btn btn-primary" data-sl-next>${label}</button></div>`;
       }
-      return `<div class="gt-footer is-single"><button class="btn btn-primary">${esc(s.btn)||'Got it!'}</button></div>`;
+      return `<div class="sl-footer is-single"><button class="btn btn-primary">${esc(s.btn)||'Got it!'}</button></div>`;
     }
     function buildHtml(s){
-      const badge = s.badge ? `<div class="gt-badge"><i data-icon="featured"></i> New</div>` : '';
-      return `<div class="guided-tooltip is-${s.pos}" style="width:280px;">${badge}<p class="gt-title">${esc(s.title)}</p><p class="gt-body">${esc(s.body)}</p>${footer(s)}</div>`;
+      const badge = s.badge ? `<div class="sl-badge"><i data-icon="featured"></i> New</div>` : '';
+      return `<div class="spotlight is-${s.pos}" style="width:280px;">${badge}<p class="sl-title">${esc(s.title)}</p><p class="sl-body">${esc(s.body)}</p>${footer(s)}</div>`;
     }
     function buildCode(s){
       const L=[];
@@ -428,7 +428,7 @@
     function render(){const s=state();$preview.innerHTML=buildHtml(s);document.getElementById('pg-code').textContent=buildCode(s);if(window.Icons&&window.Icons.render)window.Icons.render($preview);}
     ['pg-flow','pg-badge','pg-title','pg-body','pg-btn','pg-pos'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const fn=()=>{ if(id==='pg-flow') step=0; render(); };el.addEventListener('input',fn);el.addEventListener('change',fn);});
     // Multi-step: click "Next" to walk through; wraps back to the start at the end
-    $preview.addEventListener('click',(e)=>{ if(!e.target.closest('[data-gt-next]'))return; step = step < TOTAL-1 ? step+1 : 0; render(); });
+    $preview.addEventListener('click',(e)=>{ if(!e.target.closest('[data-sl-next]'))return; step = step < TOTAL-1 ? step+1 : 0; render(); });
     document.getElementById('pg-reset')?.addEventListener('click',()=>{step=0;document.getElementById('pg-flow').value=defaults.flow;document.getElementById('pg-badge').checked=defaults.badge;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-btn').value=defaults.btn;document.getElementById('pg-pos').value=defaults.pos;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));

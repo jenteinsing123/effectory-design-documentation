@@ -142,7 +142,7 @@
               </div>
               <div class="dd-cap dont">
                 <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Don't</div>
-                Cram a paragraph in — long or essential content belongs in a Guided tooltip, dialog, or helper text.
+                Cram a paragraph in — long or essential content belongs in a Spotlight, dialog, or helper text.
               </div>
             </div>
           </div>
@@ -205,14 +205,14 @@
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Link it to its trigger.</strong> Associate the tooltip with the control via <code>aria-describedby</code> so screen readers announce it.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Dismissable.</strong> Pressing <code>Escape</code> hides the tooltip without moving focus (WCAG 1.4.13).</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Never essential-only.</strong> Don't put information the user needs to proceed only in a tooltip — it's invisible on touch and to many AT users. Use visible helper text instead.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>No interactive content.</strong> Tooltips can't contain links or buttons. If you need actions, use a Guided tooltip or a dialog.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>No interactive content.</strong> Tooltips can't contain links or buttons. If you need actions, use a Spotlight or a dialog.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Contrast.</strong> White text on the inverse surface meets WCAG 2.2 AA.</div></div>
           </div>
         </section>
 
         <div class="pagination">
           <a class="pag-card left" href="dialog-docs.html"><span class="pag-dir">← Previous</span><span class="pag-name">Dialog</span></a>
-          <a class="pag-card right" href="guided-tooltip-docs.html"><span class="pag-dir">Next →</span><span class="pag-name">Guided tooltip</span></a>
+          <a class="pag-card right" href="spotlight-docs.html"><span class="pag-dir">Next →</span><span class="pag-name">Spotlight</span></a>
         </div>
       </article>
 
@@ -302,7 +302,7 @@
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
               <span class="dev-gap-label">Figma gap</span>
-              <span class="dev-gap-text">Two things to reconcile. <strong>(1) Font weight</strong> — Figma uses <strong>Medium (500)</strong> for the tooltip text, but the Angular <code>matTooltip</code> renders it at <strong>Normal (400)</strong>. <strong>(2) Rich tooltips</strong> — for a tooltip with a title, body, and actions (the "Got it" / multi-step walkthrough), use the <a class="link-inline" href="guided-tooltip-docs.html">Guided tooltip</a> (<code>eff-tooltip-dialog</code>), not <code>matTooltip</code> (text-only).</span>
+              <span class="dev-gap-text">Two things to reconcile. <strong>(1) Font weight</strong> — Figma uses <strong>Medium (500)</strong> for the tooltip text, but the Angular <code>matTooltip</code> renders it at <strong>Normal (400)</strong>. <strong>(2) Rich tooltips</strong> — for a tooltip with a title, body, and actions (the "Got it" / multi-step walkthrough), use the <a class="link-inline" href="spotlight-docs.html">Spotlight</a> (<code>eff-tooltip-dialog</code>), not <code>matTooltip</code> (text-only).</span>
             </div>
           </div>
         </section>
@@ -326,7 +326,7 @@
           <div class="a11y-list">
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Focus + hover.</strong> matTooltip shows on both by default and wires up <code>aria-describedby</code> — don't disable focus display.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Escape dismisses.</strong> Built in. Don't trap it.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Text only.</strong> Never put essential info or interactive content in a tooltip — use a Guided tooltip or visible helper text.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Text only.</strong> Never put essential info or interactive content in a tooltip — use a Spotlight or visible helper text.</div></div>
           </div>
         </section>
 
