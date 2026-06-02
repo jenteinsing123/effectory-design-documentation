@@ -210,7 +210,7 @@
             <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Icon</span> — A coloured icon that signals the message type (info, warn, success, error) at a glance. The subtle mood uses a sparkle.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Title</span> — A short, scannable label that summarises the message in one or two words.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Message</span> — The body text explaining what happened or what the user should do.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Close button</span> — Lets the user dismiss the notification. Optional, controlled by <code>showCloseButton</code>.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Close button</span> — Lets the user dismiss the notification. Optional — include it unless the message is critical.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">+</div><div><span class="anatomy-term">Actions (optional)</span> — An inline link/button or a dismiss button, placed before the close.</div></div>
           </div>
         </section>
@@ -282,7 +282,7 @@
 
         <section class="section" id="variants">
           <h2 class="text-l3">Variants</h2>
-          <p class="section-lead">Five moods cover the most common signals; the one-liner layout handles short copy. Mood names match the Angular <code>messageType</code> input.</p>
+          <p class="section-lead">Five moods cover the most common signals; the one-liner layout handles short copy.</p>
 
           <h3 class="text-l4">By mood</h3>
           <div class="variant-rows">
@@ -299,7 +299,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Subtle</strong> (<code>messageType: 'subtle'</code>) — Neutral white card with a sparkle icon. Announce a new feature, capability, or product update. Pair with a <a class="link-inline" href="link-inline-docs.html">Link Inline</a> or button. Use sparingly.</div>
+              <div class="variant-row-desc"><strong>Subtle</strong> — Neutral white card with a sparkle icon. Announce a new feature, capability, or product update. Pair with a link or button. Use sparingly.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -309,7 +309,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Info</strong> (<code>messageType: 'info'</code>) — Neutral, contextual information the user should know but doesn't need to act on immediately.</div>
+              <div class="variant-row-desc"><strong>Info</strong> — Neutral, contextual information the user should know but doesn't need to act on immediately.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -319,7 +319,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Warning</strong> (<code>messageType: 'warn'</code>) — Something needs the user's attention soon to avoid a problem. Expiring trials, deprecations, near-quota limits.</div>
+              <div class="variant-row-desc"><strong>Warning</strong> — Something needs the user's attention soon to avoid a problem. Expiring trials, deprecations, near-quota limits.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -329,7 +329,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Success</strong> (<code>messageType: 'success'</code>) — Confirms a successful outcome that persists on the page. For transient success, prefer a Toast.</div>
+              <div class="variant-row-desc"><strong>Success</strong> — Confirms a successful outcome that persists on the page. For transient success, prefer a Toast.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -339,7 +339,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Error</strong> (<code>messageType: 'error'</code>) — Errors or failures the user must address before they can continue. Failed import, permission denied, API error.</div>
+              <div class="variant-row-desc"><strong>Error</strong> — Errors or failures the user must address before they can continue. Failed import, permission denied, API error.</div>
             </div>
           </div>
 
@@ -353,7 +353,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Stacked</strong> (default, <code>isOneLiner: false</code>) — Title sits above the message. Use for longer messages or when actions are present.</div>
+              <div class="variant-row-desc"><strong>Stacked</strong> (default) — Title sits above the message. Use for longer messages or when actions are present.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -363,12 +363,12 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>One-liner</strong> (<code>isOneLiner: true</code>) — Title and message flow on a single line. Use for short messages that fit without wrapping.</div>
+              <div class="variant-row-desc"><strong>One-liner</strong> — Title and message flow on a single line, with any actions on the right. Use for short messages that fit without wrapping.</div>
             </div>
           </div>
 
           <h3 class="text-l4">By action</h3>
-          <p style="font-size:13.5px; color:var(--content-secondary); margin:-4px 0 14px; line-height:1.55;">A notification can stand on its own (close only) or carry actions in the actions row: up to 3 action buttons, plus optionally a <strong>link</strong> (<code>linkText</code>, underlined, navigates) or a <strong>link button</strong> (<code>inlineButtonText</code>, no underline, fires an action).</p>
+          <p style="font-size:13.5px; color:var(--content-secondary); margin:-4px 0 14px; line-height:1.55;">A notification can stand on its own (close only) or carry actions in the actions row: up to 3 action buttons, plus optionally a <strong>link</strong> (underlined, navigates) or a <strong>link button</strong> (no underline, fires an action).</p>
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -378,7 +378,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Close only</strong> (<code>showCloseButton: true</code>) — No action, just a dismiss X. The default for informational messages.</div>
+              <div class="variant-row-desc"><strong>Close only</strong> — No action, just a dismiss X. The default for informational messages.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -390,7 +390,7 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Secondary action button</strong> (<code>buttonMessages</code>) — A <code>secondary</code> button with a mood-coloured border (orange here for <code>warn</code>) — the "sentiment button". This is what the Angular styleguide renders today.</div>
+              <div class="variant-row-desc"><strong>Secondary action button</strong> — A button with a mood-coloured border (orange for a warning) — the "sentiment button". A clear, mid-emphasis call-to-action.</div>
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -402,7 +402,19 @@
                   <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Primary action button</strong> — A button <em>filled</em> in the mood colour. This is the Figma intent for a high-emphasis action; the Angular styleguide does not expose it yet (see the Developer tab gap). Up to 3 action buttons can sit below the text (or right in a one-liner).</div>
+              <div class="variant-row-desc"><strong>Primary action button</strong> — A button <em>filled</em> in the mood colour, for a high-emphasis action. Up to 3 action buttons can sit below the text, or on the right in a one-liner.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="inline-notif is-info is-one-liner" style="width:100%;">
+                  <img class="inline-notif-icon" src="assets/icons/notification-information.svg" alt="" />
+                  <div class="inline-notif-content"><span class="inline-notif-title">Your export is ready</span>
+                    <div class="inline-notif-actions"><a href="#" onclick="return false;" class="link-inline">Dismiss</a><button class="btn btn-secondary">Download</button></div>
+                  </div>
+                  <button class="inline-notif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Buttons on the right (one-liner)</strong> — In a one-liner with just a title, the actions sit on the right, aligned with the text. Use for a short, action-oriented message that doesn't need a separate body line.</div>
             </div>
           </div>
         </section>
@@ -698,7 +710,7 @@
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
               <span class="dev-gap-label">Figma gap</span>
-              <span class="dev-gap-text">This page follows the live Angular styleguide. Known Figma ↔ code differences to reconcile: <strong>(1) Mood names</strong> — Figma (Feature / Warning / Positive / Negative) vs code (subtle / warn / success / error). <strong>(2) Primary sentiment button</strong> — Figma includes a filled, mood-coloured primary action button; the Angular styleguide does not expose it yet (only the <code>secondary</code> sentiment button via <code>buttonMessages</code> exists). <strong>(3) Inline button placement</strong> — Figma groups the inline button with the other action buttons, while the styleguide renders <code>inlineButtonText</code> inline within the message copy. <strong>(4) Inline button style</strong> — we render it like an underlined Link Inline; the current styleguide renders it without an underline.</span>
+              <span class="dev-gap-text">This page follows the live Angular styleguide. Known Figma ↔ code differences to reconcile: <strong>(1) Mood names</strong> — Figma (Feature / Warning / Positive / Negative) vs code (subtle / warn / success / error). <strong>(2) Primary sentiment button</strong> — Figma includes a filled, mood-coloured primary action button; the Angular styleguide does not expose it yet (only the <code>secondary</code> sentiment button via <code>buttonMessages</code> exists). <strong>(3) Action placement</strong> — design puts the link / link button next to the action buttons in the actions row, while the styleguide renders <code>inlineButtonText</code> / <code>linkText</code> inline within the message copy.</span>
             </div>
           </div>
         </section>

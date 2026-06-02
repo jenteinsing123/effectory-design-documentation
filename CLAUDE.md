@@ -142,6 +142,10 @@ Sections appear in this order inside `<article class="content">`:
 
 Not all sections are required for every component — skip ones that don't apply. Keep the order when sections are present.
 
+### Design tab is code-free
+
+The **Design tab never references code** — no prop names, input names, CSS class names, enum values, or framework details (e.g. don't write `isOneLiner: true`, `messageType: 'warn'`, `buttonMessages`, `showCloseButton`, or "the Angular styleguide…"). Describe everything in plain design language: use the human-friendly variant name ("One-liner", "Warning", "Close only") and explain *when* and *why* to use it. All code, prop/input names, API tables, and Figma-vs-code gap callouts belong in the **Developer tab**. The two audiences are separate: designers read the Design tab, developers read the Developer tab.
+
 ### Section boilerplate
 
 ```html
