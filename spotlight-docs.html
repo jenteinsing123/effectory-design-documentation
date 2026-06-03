@@ -289,10 +289,10 @@
       <article class="content">
 
         <div class="dev-gap">
-          <span class="dev-gap-icon">⚠️</span>
+          <span class="dev-gap-icon">🧩</span>
           <div class="dev-gap-body">
-            <span class="dev-gap-label">Dev gap</span>
-            <span class="dev-gap-text">The spotlight renders as <code>&lt;eff-tooltip-dialog&gt;</code> in an overlay. Its visual structure is documented below, but the exact Angular <strong>inputs / service API</strong> (how you set the title, body, steps, and trigger it) still need to be confirmed from the styleguide source — the code examples weren't readable when this page was written. Treat the snippets here as structural reference, not copy-paste-ready.</span>
+            <span class="dev-gap-label">One component, two patterns</span>
+            <span class="dev-gap-text">In code, <code>&lt;eff-tooltip-dialog&gt;</code> backs two design-system components. <strong>Spotlight</strong> (this page) is the anchored coach-mark / <em>tour</em> mode — it points at a target and shows one or more steps (<code>.tour-progression</code>). The <a class="link-inline" href="announcement-docs.html">Announcement</a> is the same component in its <code>with-svg</code> mode — a floating feature card with an illustration. Same inputs, different configuration.</span>
           </div>
         </div>
 
@@ -328,8 +328,24 @@
         </section>
 
         <section class="section" id="dev-props">
-          <h2 class="text-l3">Rendered structure</h2>
-          <p class="section-lead">The component (<code>eff-tooltip-dialog</code>) renders this class structure. Use it as a reference until the input API is confirmed.</p>
+          <h2 class="text-l3">Inputs</h2>
+          <p class="section-lead">Key inputs on <code>eff-tooltip-dialog</code> for the spotlight (tour) configuration.</p>
+          <table class="token-table">
+            <thead><tr><th>Input</th><th>Type</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td><code>[targetElement]</code></td><td>ElementRef</td><td>The element the spotlight points at.</td></tr>
+              <tr><td><code>[dialogTitle]</code></td><td>string</td><td>Title.</td></tr>
+              <tr><td><code>[dialogSubtitle]</code></td><td>string</td><td>Body copy.</td></tr>
+              <tr><td><code>[dialogButtonText]</code></td><td>string</td><td>Primary button label ("Got it!" / "Next").</td></tr>
+              <tr><td><code>[dialogLinkButtonText]</code></td><td>string</td><td>Optional low-emphasis link button.</td></tr>
+              <tr><td><code>[dialogPositionToTarget]</code></td><td>'after' · 'before' · 'above' · 'below'</td><td>Placement relative to the target.</td></tr>
+              <tr><td><code>[addHighlightToTargetElement]</code> · <code>[addOutlineToTargetElement]</code></td><td>boolean</td><td>Highlight / outline the target while open.</td></tr>
+              <tr><td><code>[isNewFeature]</code></td><td>boolean</td><td>Shows the "New" badge.</td></tr>
+              <tr><td><code>[svgUrl]</code></td><td>string</td><td>Illustration — used by the <a class="link-inline" href="announcement-docs.html">Announcement</a> (<code>with-svg</code>) mode.</td></tr>
+              <tr><td><code>(dialogClosedOutput)</code></td><td>EventEmitter</td><td>Fires when the dialog is closed.</td></tr>
+            </tbody>
+          </table>
+          <h3 class="text-l4" style="margin-top:24px;">Rendered structure</h3>
           <table class="token-table">
             <thead><tr><th>Class</th><th>Role</th></tr></thead>
             <tbody>

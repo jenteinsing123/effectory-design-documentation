@@ -683,7 +683,7 @@ Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Do
 ```
 Classes: `.spotlight` (+ `.is-above/.is-below/.is-left/.is-right`), `.sl-badge` (optioneel, oranje), `.sl-title` (16/SemiBold), `.sl-body` (14), `.sl-footer` (`.is-single` = volle-breedte knop · `.is-multi` = dots links + knop rechts), `.sl-dot.is-active`. Card = `--bg-inverse-base`, knop = `--bg-brand-base` (teal). Behandel als een dialog: focus erin, Escape sluit, focus terug.
 
-> ⚠️ **Dev gap:** de exacte Angular input/service-API van `eff-tooltip-dialog` is nog niet bevestigd (de styleguide-code was niet leesbaar). De class-structuur klopt; de inputs nog verifiëren.
+> 🧩 **Eén component, twee patronen:** `eff-tooltip-dialog` dekt twee design-system-componenten af. **Spotlight** = de verankerde coach-mark/**tour**-modus (target + 1-of-meer stappen, `.tour-progression`). **Announcement** = dezelfde component in `with-svg`-modus (zwevende feature-card met illustratie). Zelfde inputs (`[targetElement]`, `[dialogTitle]`, `[dialogSubtitle]`, `[dialogButtonText]`, `[dialogLinkButtonText]`, `[dialogPositionToTarget]`, `[addHighlightToTargetElement]`, `[isNewFeature]`, `[svgUrl]`, `(dialogClosedOutput)`), andere configuratie.
 
 ### Announcement
 Compacte, zwevende, non-blocking feature-aankondiging. De pagina eronder blijft bruikbaar; de gebruiker dismisst hem zelf (geen auto-dismiss). Lichte 300px-card met een **full-bleed** illustratie bovenaan (raakt boven + zijkanten, geclipt op de ronde hoeken), titel, body, en twee **verticaal gestapelde full-width acties**: primary CTA "Learn more" boven, "Close" (tertiary/ghost) eronder. Onderscheid: Toast = vluchtig/statusfeedback, Spotlight = verankerde coach-mark/tour, Announcement = aankondiging met illustratie.
