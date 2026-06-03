@@ -334,7 +334,7 @@
           <span class="dev-gap-icon">🧩</span>
           <div class="dev-gap-body">
             <span class="dev-gap-label">One component, two patterns</span>
-            <span class="dev-gap-text">In code, <code>&lt;eff-tooltip-dialog&gt;</code> backs two design-system components. <strong>Announcement</strong> (this page) is the <code>with-svg</code> mode — a floating feature card with an illustration (<code>[svgUrl]</code>) + optional "New" badge (<code>[isNewFeature]</code>); in the styleguide it's <strong>Tooltips → "display tooltip with-svg"</strong>. The <a class="link-inline" href="spotlight-docs.html">Spotlight</a> is the same component in its anchored coach-mark / <em>tour</em> mode. Same inputs, different configuration.</span>
+            <span class="dev-gap-text">In code, <code>&lt;eff-tooltip-dialog&gt;</code> backs two design-system components. <strong>Announcement</strong> (this page) is the <code>with-svg</code> mode — a floating feature card with an illustration (<code>[svgUrl]</code>); in the styleguide it's <strong>Tooltips → "display tooltip with-svg"</strong>. The <a class="link-inline" href="spotlight-docs.html">Spotlight</a> is the same component in its anchored coach-mark / <em>tour</em> mode. Same inputs, different configuration.</span>
           </div>
         </div>
 
@@ -353,8 +353,8 @@
                 <div class="pg-row"><div class="pg-row-name">svgUrl <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">show illustration</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-media" checked><span class="pg-toggle-track"></span></label></div></div>
                 <div class="pg-row"><div class="pg-row-name">dialogTitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-title" value="Dynamic reporting is here!" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">dialogSubtitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-body" value="A new look, new features, and even more to explore." /></div></div>
-                <div class="pg-row"><div class="pg-row-name">dialogButtonText <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">primary CTA</span></div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-cta" value="Learn more" /></div></div>
-                <div class="pg-row"><div class="pg-row-name">isNewFeature</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-new"><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">dialogButtonText <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;">primary CTA — on/off</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-cta-on" checked><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row" id="pg-cta-label-row"><div class="pg-row-name">button label</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-cta" value="Learn more" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">stacked <span style="display:block;font-size:11px;color:var(--content-secondary);font-weight:400;"># queued in the deck</span></div><div class="pg-row-ctrl">
                   <select class="pg-select" id="pg-stack"><option value="1" selected>off (single)</option><option value="2">2 announcements</option><option value="3">3 announcements</option></select>
                 </div></div>
@@ -389,7 +389,6 @@
   <span class="ca">class</span>=<span class="cv">"with-svg"</span>
   <span class="ca">[targetElement]</span>=<span class="cv">"svgTarget"</span>
   <span class="ca">[svgUrl]</span>=<span class="cv">"'assets/img/home-illustration.svg'"</span>
-  <span class="ca">[isNewFeature]</span>=<span class="cv">"true"</span>
   <span class="ca">[dialogTitle]</span>=<span class="cv">"'Dynamic reporting is here!'"</span>
   <span class="ca">[dialogSubtitle]</span>=<span class="cv">"'A new look, new features, and more to explore.'"</span>
   <span class="ca">[dialogButtonText]</span>=<span class="cv">"'Learn more'"</span>
@@ -407,7 +406,6 @@
             <thead><tr><th>Input</th><th>Type</th><th>Role</th></tr></thead>
             <tbody>
               <tr><td><code>[svgUrl]</code></td><td>string</td><td>URL of the illustration shown at the top. Pair with <code>class="with-svg"</code>.</td></tr>
-              <tr><td><code>[isNewFeature]</code></td><td>boolean</td><td>Shows the "New" feature badge.</td></tr>
               <tr><td><code>[dialogTitle]</code></td><td>string</td><td>Headline.</td></tr>
               <tr><td><code>[dialogSubtitle]</code></td><td>string</td><td>Body copy.</td></tr>
               <tr><td><code>[dialogButtonText]</code></td><td>string</td><td>Primary button label (the call-to-action).</td></tr>
@@ -476,7 +474,7 @@
   (function () {
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
-    const defaults = { media:true, title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', cta:'Learn more', isNew:false, stack:'1' };
+    const defaults = { media:true, title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', ctaOn:true, cta:'Learn more', stack:'1' };
     const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const BG = ['#6c5ce7', '#0a9d99', '#ec9f06'];
     // sample queue used when stacked; index 0 is the editable card
@@ -491,8 +489,8 @@
       media:document.getElementById('pg-media').checked,
       title:document.getElementById('pg-title').value,
       body:document.getElementById('pg-body').value,
+      ctaOn:document.getElementById('pg-cta-on').checked,
       cta:document.getElementById('pg-cta').value,
-      isNew:document.getElementById('pg-new').checked,
       stack:parseInt(document.getElementById('pg-stack').value,10)||1,
     };}
     function content(s, p){ // content for absolute queue position p (0 = editable card)
@@ -507,12 +505,13 @@
     }
     function inner(s, p){
       const d = content(s, p);
-      const badge = (p===0 && s.isNew) ? '<div class="sl-badge" style="margin:0 0 8px; color:var(--content-highlight-secondary); font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; display:flex; align-items:center; gap:6px;"><i data-icon="featured" style="width:16px;height:16px;display:flex;"></i> New</div>' : '';
-      return `${media(s,p)}<div class="ann-body">${badge}<p class="ann-title">${esc(d.title)}</p><p class="ann-text">${esc(d.body)}</p>`+
-        `<div class="ann-actions"><button class="btn btn-primary" data-next>${esc(d.cta)}</button><button class="btn btn-tertiary" data-next>Close</button></div></div>`;
+      const cta = s.ctaOn ? `<button class="btn btn-primary" data-next>${esc(d.cta)}</button>` : '';
+      return `${media(s,p)}<div class="ann-body"><p class="ann-title">${esc(d.title)}</p><p class="ann-text">${esc(d.body)}</p>`+
+        `<div class="ann-actions">${cta}<button class="btn btn-tertiary" data-next>Close</button></div></div>`;
     }
     function render(){
       const s = st();
+      document.getElementById('pg-cta-label-row').style.display = s.ctaOn ? '' : 'none';
       const total = s.stack;
       if (total <= 1) {
         $preview.innerHTML = `<div class="announcement" style="width:280px;">${inner(s, 0)}</div>`;
@@ -536,10 +535,9 @@
       if (s.media) L.push('  class="with-svg"');
       L.push('  [targetElement]="svgTarget"');
       if (s.media) L.push("  [svgUrl]=\"'assets/img/home-illustration.svg'\"");
-      if (s.isNew) L.push('  [isNewFeature]="true"');
       L.push(`  [dialogTitle]="'${aq(s.title)}'"`);
       L.push(`  [dialogSubtitle]="'${aq(s.body)}'"`);
-      L.push(`  [dialogButtonText]="'${aq(s.cta)}'"`);
+      if (s.ctaOn) L.push(`  [dialogButtonText]="'${aq(s.cta)}'"`);
       L.push("  [dialogLinkButtonText]=\"'Close'\"");
       L.push("  [dialogPositionToTarget]=\"'after'\"");
       L.push('  (dialogClosedOutput)="showAnnouncement.set(false)">');
@@ -559,8 +557,8 @@
       const b = e.target.closest('[data-next]'); if (!b) return;
       if (st().stack > 1) advance(); // page through the deck
     });
-    ['pg-media','pg-title','pg-body','pg-cta','pg-new','pg-stack'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const fn=()=>{ if(id==='pg-stack') idx=0; render(); };el.addEventListener('input',fn);el.addEventListener('change',fn);});
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{idx=0;document.getElementById('pg-media').checked=defaults.media;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-cta').value=defaults.cta;document.getElementById('pg-new').checked=defaults.isNew;document.getElementById('pg-stack').value=defaults.stack;render();});
+    ['pg-media','pg-title','pg-body','pg-cta-on','pg-cta','pg-stack'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const fn=()=>{ if(id==='pg-stack') idx=0; render(); };el.addEventListener('input',fn);el.addEventListener('change',fn);});
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{idx=0;document.getElementById('pg-media').checked=defaults.media;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-cta-on').checked=defaults.ctaOn;document.getElementById('pg-cta').value=defaults.cta;document.getElementById('pg-stack').value=defaults.stack;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
     document.querySelectorAll('.dev-copy-btn').forEach(b=>{ if(b.id==='pg-copy')return; b.addEventListener('click',()=>{const c=b.parentElement.querySelector('code');if(c)navigator.clipboard.writeText(c.textContent);}); });
