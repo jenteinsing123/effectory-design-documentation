@@ -686,25 +686,27 @@ Classes: `.spotlight` (+ `.is-above/.is-below/.is-left/.is-right`), `.sl-badge` 
 > ⚠️ **Dev gap:** de exacte Angular input/service-API van `eff-tooltip-dialog` is nog niet bevestigd (de styleguide-code was niet leesbaar). De class-structuur klopt; de inputs nog verifiëren.
 
 ### Announcement
-Compacte, zwevende, non-blocking feature-aankondiging. De pagina eronder blijft bruikbaar; de gebruiker dismisst hem zelf (geen auto-dismiss). Lichte 300px-card met 16px padding, optionele **ingesloten** illustratie (eigen ronde hoeken op `--bg-tertiary`), titel, body, en twee **verticaal gestapelde full-width acties**: primary CTA boven, "Close"-link eronder. Onderscheid: Toast = vluchtig/statusfeedback, Spotlight = verankerde coach-mark/tour, Announcement = aankondiging met illustratie.
+Compacte, zwevende, non-blocking feature-aankondiging. De pagina eronder blijft bruikbaar; de gebruiker dismisst hem zelf (geen auto-dismiss). Lichte 300px-card met een **full-bleed** illustratie bovenaan (raakt boven + zijkanten, geclipt op de ronde hoeken), titel, body, en twee **verticaal gestapelde full-width acties**: primary CTA "Learn more" boven, "Close" (tertiary/ghost) eronder. Onderscheid: Toast = vluchtig/statusfeedback, Spotlight = verankerde coach-mark/tour, Announcement = aankondiging met illustratie.
 
 **In code is dit dezelfde Angular-component als Spotlight:** `<eff-tooltip-dialog>` in de `with-svg`-configuratie (styleguide → Tooltips → "display tooltip with-svg").
 
 Prototype-markup (`components.css`):
 ```html
 <div class="announcement">
-  <div class="ann-media"><!-- illustratie ([svgUrl]); placeholder als leeg --></div>
-  <p class="ann-title">Dynamic reporting is here!</p>
-  <p class="ann-text">Managing employee data has never been easier!</p>
-  <div class="ann-actions">
-    <button class="btn btn-primary">See for yourself</button>
-    <button class="btn btn-link">Close</button>
+  <div class="ann-media"><!-- full-bleed illustratie ([svgUrl]); placeholder als leeg --></div>
+  <div class="ann-body">
+    <p class="ann-title">Dynamic reporting is here!</p>
+    <p class="ann-text">A new look, new features, and even more to explore.</p>
+    <div class="ann-actions">
+      <button class="btn btn-primary">Learn more</button>
+      <button class="btn btn-tertiary">Close</button>
+    </div>
   </div>
 </div>
 ```
-Classes: `.announcement` (300px, 16px padding, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`), `.ann-media` (optioneel, ingesloten, `--radius-md`, `<img>` vult 'm anders placeholder op `--bg-tertiary`), `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (verticale stack, full-width: `.btn-primary` CTA bovenaan + `.btn-link` dismiss eronder — primary eerst in DOM).
+Classes: `.announcement` (300px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`, `overflow:hidden`), `.ann-media` (optioneel, **full-bleed** 168px; `<img>` vult 'm anders placeholder op `--bg-tertiary`), `.ann-body` (20px padding), `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (verticale stack full-width: `.btn-primary` CTA bovenaan + `.btn-tertiary` "Close" eronder — primary eerst in DOM).
 
-**Gestapeld (meerdere announcements):** als meerdere teams iets willen promoten op dezelfde pagina, queue je ze en toon je er één tegelijk met een progress-indicator. Footer wordt dan `.ann-footer` (kolom): de `.ann-actions` met daaronder een gecentreerde `.ann-progress` (`.ann-nav` prev/next chevrons + `.ann-dots`/`.ann-dot.is-active`). "Close" ruimt de hele stapel op. Het queuen/volgorde-bepalen is app-orkestratie (render één `<eff-tooltip-dialog>` tegelijk, index ophogen); de dots hergebruiken de Spotlight-`.tour-progression`-structuur.
+**Gestapeld = card deck:** meerdere teams kunnen op dezelfde pagina iets promoten; je queuet ze als een **stapel** met echte kaarten erachter die net uitsteken. Markup: `.ann-deck` met de achterste kaarten (`.ann-b2`, `.ann-b1`) en de voorste (`.ann-front`). "Close" onthult de volgende: de voorste valt naar beneden (`.ann-front.is-leaving`) en de kaarten erachter promoten één stap (`.ann-b1.is-promoting`, `.ann-b2.is-promoting`). Het queuen/volgorde-bepalen is app-orkestratie (render één kaart tegelijk, index ophogen). De deck-visual + animatie zit niet in het styleguide-voorbeeld — met engineering te bevestigen.
 
 Echte Angular-API (`eff-tooltip-dialog`, `class="with-svg"`): `[svgUrl]` (illustratie), `[isNewFeature]` (badge), `[dialogTitle]`, `[dialogSubtitle]`, `[dialogButtonText]` (primary), `[dialogLinkButtonText]` (link/dismiss), `[targetElement]`, `[dialogPositionToTarget]` ('after'/'before'/'above'/'below'), `[dialogWidth]`, `[addOutlineToTargetElement]`, `[addHighlightToTargetElement]`, `(dialogClosedOutput)`. Gerenderd: `.tour-container` > `img.illustration` + `p.text-l5.text-w600` + `p.text-w400.text-subdued` + `.tour-footer` (`button.link` + `button.primary`). A11y: non-modal — geen focus stelen, `aria-live="polite"`, altijd dismissible.
 

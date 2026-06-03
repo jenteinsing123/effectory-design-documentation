@@ -1970,36 +1970,35 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   border: 1px solid var(--border-base);
   border-radius: var(--radius-lg);
   box-shadow: var(--sh-dialogs);
-  padding: 16px;
+  overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
-/* Inset illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
+/* full-bleed illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
 .ann-media {
-  height: 136px;
-  border-radius: var(--radius-md);
+  height: 168px;
   background: var(--bg-tertiary);
   display: flex; align-items: center; justify-content: center;
-  color: var(--content-subtle); overflow: hidden;
-  margin-bottom: 16px;
+  color: var(--content-subtle);
 }
-.ann-media img { width: 100%; height: 100%; object-fit: cover; }
-.ann-media-ph { display: flex; width: 36px; height: 36px; opacity: .5; }
+.ann-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .5; }
+.ann-body { padding: 20px; }
 .announcement .ann-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 8px; color: var(--content-base); } /* text-l5 */
 .announcement .ann-text  { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); }
-/* Actions stack full-width: primary on top, dismiss below */
-.ann-actions { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+/* actions stack full-width: primary on top, dismiss below */
+.ann-actions { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
 .ann-actions .btn { width: 100%; }
-/* link-style dismiss (low-emphasis, no underline, matches eff button.link) */
-.btn-link { background: transparent; border-color: transparent; color: var(--content-secondary); }
-.btn-link:hover, .btn-link.is-hover { color: var(--content-base); }
-/* Stacked: progress (dots + prev/next), centred under the actions */
-.ann-footer { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
-.ann-footer .ann-actions { margin-top: 0; }
-.ann-progress { display: flex; align-items: center; justify-content: center; gap: 4px; }
-.ann-dots { display: flex; align-items: center; gap: 6px; margin: 0 4px; }
-.ann-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border-action); }
-.ann-dot.is-active { background: var(--bg-brand-base); }
-.ann-nav { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 0; border: none; background: transparent; border-radius: var(--radius-base); color: var(--content-secondary); cursor: pointer; }
-.ann-nav:hover:not(:disabled) { background: var(--bg-base-hover); color: var(--content-base); }
-.ann-nav:disabled { opacity: .35; cursor: default; }
-.ann-nav i[data-icon] { width: 16px; height: 16px; display: flex; }
+/* tertiary (ghost) dismiss */
+.btn-tertiary { background: transparent; border-color: transparent; color: var(--content-secondary); }
+.btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-base-hover); color: var(--content-base); }
+
+/* Stacked = card deck: real cards behind the front one, promoting one step on advance */
+.ann-deck { position: relative; width: 300px; }
+.ann-deck .announcement { transition: transform .42s cubic-bezier(.3,.1,.3,1), opacity .42s ease; }
+.ann-front { position: relative; z-index: 3; }
+.ann-b1 { position: absolute; inset: 0; z-index: 2; transform: translateY(-12px) scale(.95); transform-origin: top center; pointer-events: none; }
+.ann-b2 { position: absolute; inset: 0; z-index: 1; transform: translateY(-22px) scale(.90); transform-origin: top center; pointer-events: none; }
+.ann-front.is-leaving { transform: translateY(150px); opacity: 0; pointer-events: none; }
+.ann-b1.is-promoting  { transform: translateY(0) scale(1); }
+.ann-b2.is-promoting  { transform: translateY(-12px) scale(.95); }
+@media (prefers-reduced-motion: reduce) { .ann-deck .announcement { transition: none; } }
