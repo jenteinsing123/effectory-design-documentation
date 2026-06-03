@@ -495,30 +495,35 @@
       isNew:document.getElementById('pg-new').checked,
       stack:parseInt(document.getElementById('pg-stack').value,10)||1,
     };}
-    function data(s, i){ // content for stack position i (0 = editable card)
-      if (i === 0) return { title:s.title, body:s.body };
-      return SAMPLES[i] || SAMPLES[1];
+    function content(s, p){ // content for absolute queue position p (0 = editable card)
+      if (p === 0) return { title:s.title, body:s.body, cta:s.cta || 'Learn more' };
+      const x = SAMPLES[p] || SAMPLES[1];
+      return { title:x.title, body:x.body, cta:'Learn more' };
     }
-    function media(s, i){
+    function media(s, p){
       if (!s.media) return '';
-      const bg = i > 0 ? `background:${BG[i % BG.length]};` : '';
-      return `<div class="ann-media" style="${bg}">${i>0?'':PH}</div>`;
+      if (s.stack <= 1) return `<div class="ann-media">${PH}</div>`; // single: grey placeholder
+      return `<div class="ann-media" style="background:${BG[p % BG.length]}; color:rgba(255,255,255,.85);">${PH}</div>`; // deck: coloured per card
     }
-    function inner(s, i){
-      const d = data(s, i);
-      const badge = (i===0 && s.isNew) ? '<div class="sl-badge" style="margin:0 0 8px; color:var(--content-highlight-secondary); font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; display:flex; align-items:center; gap:6px;"><i data-icon="featured" style="width:16px;height:16px;display:flex;"></i> New</div>' : '';
-      return `${media(s,i)}<div class="ann-body">${badge}<p class="ann-title">${esc(d.title)}</p><p class="ann-text">${esc(d.body)}</p>`+
-        `<div class="ann-actions"><button class="btn btn-primary" data-next>${esc(s.cta)||'Learn more'}</button><button class="btn btn-tertiary" data-next>Close</button></div></div>`;
+    function inner(s, p){
+      const d = content(s, p);
+      const badge = (p===0 && s.isNew) ? '<div class="sl-badge" style="margin:0 0 8px; color:var(--content-highlight-secondary); font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; display:flex; align-items:center; gap:6px;"><i data-icon="featured" style="width:16px;height:16px;display:flex;"></i> New</div>' : '';
+      return `${media(s,p)}<div class="ann-body">${badge}<p class="ann-title">${esc(d.title)}</p><p class="ann-text">${esc(d.body)}</p>`+
+        `<div class="ann-actions"><button class="btn btn-primary" data-next>${esc(d.cta)}</button><button class="btn btn-tertiary" data-next>Close</button></div></div>`;
     }
     function render(){
       const s = st();
-      if (s.stack <= 1) {
+      const total = s.stack;
+      if (total <= 1) {
         $preview.innerHTML = `<div class="announcement" style="width:280px;">${inner(s, 0)}</div>`;
+      } else if (idx >= total) {
+        $preview.innerHTML = `<div style="width:280px; text-align:center; font-family:'Poppins',sans-serif; font-size:14px; color:var(--content-secondary); padding:32px 0;">You're all caught up ✓<button id="pg-replay" style="display:block; margin:10px auto 0; background:none; border:none; color:var(--content-brand-base); font:inherit; cursor:pointer; text-decoration:underline;">Replay</button></div>`;
+        document.getElementById('pg-replay').onclick = () => { idx = 0; render(); };
       } else {
         const layers = [];
-        if (s.stack >= 3 && SAMPLES[2]) layers.push(`<div class="announcement ann-b2" style="width:280px;">${inner(s,2)}</div>`);
-        if (s.stack >= 2) layers.push(`<div class="announcement ann-b1" style="width:280px;">${inner(s,1)}</div>`);
-        layers.push(`<div class="announcement ann-front" style="width:280px;">${inner(s,0)}</div>`);
+        if (idx + 2 < total) layers.push(`<div class="announcement ann-b2" style="width:280px;">${inner(s, idx+2)}</div>`);
+        if (idx + 1 < total) layers.push(`<div class="announcement ann-b1" style="width:280px;">${inner(s, idx+1)}</div>`);
+        layers.push(`<div class="announcement ann-front" style="width:280px;">${inner(s, idx)}</div>`);
         $preview.innerHTML = `<div class="ann-deck" style="width:280px;">${layers.join('')}</div>`;
       }
       document.getElementById('pg-code').textContent = code(s);
@@ -541,26 +546,20 @@
       L.push('</eff-tooltip-dialog>');
       return (s.stack > 1 ? `<!-- ${s.stack} queued; your app shows one at a time and advances on close -->\n` : '') + L.join('\n');
     }
-    // advance the deck with the promote animation
+    // advance the deck with the promote animation: front falls, the cards behind move up one step
     function advance(){
       const front = $preview.querySelector('.ann-front');
       if (!front || front.classList.contains('is-leaving')) return;
       front.classList.add('is-leaving');
       const b1 = $preview.querySelector('.ann-b1'); if (b1) b1.classList.add('is-promoting');
       const b2 = $preview.querySelector('.ann-b2'); if (b2) b2.classList.add('is-promoting');
-      setTimeout(() => {
-        const sel = document.getElementById('pg-stack');
-        const n = Math.max(1, (parseInt(sel.value,10)||1) - 1);
-        sel.value = String(n);
-        render();
-      }, FALL_MS);
+      setTimeout(() => { idx += 1; render(); }, FALL_MS);
     }
     $preview.addEventListener('click', (e) => {
       const b = e.target.closest('[data-next]'); if (!b) return;
-      const s = st();
-      if (s.stack > 1) advance(); // page through the deck
+      if (st().stack > 1) advance(); // page through the deck
     });
-    ['pg-media','pg-title','pg-body','pg-cta','pg-new','pg-stack'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',render);el.addEventListener('change',render);});
+    ['pg-media','pg-title','pg-body','pg-cta','pg-new','pg-stack'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const fn=()=>{ if(id==='pg-stack') idx=0; render(); };el.addEventListener('input',fn);el.addEventListener('change',fn);});
     document.getElementById('pg-reset')?.addEventListener('click',()=>{idx=0;document.getElementById('pg-media').checked=defaults.media;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-body').value=defaults.body;document.getElementById('pg-cta').value=defaults.cta;document.getElementById('pg-new').checked=defaults.isNew;document.getElementById('pg-stack').value=defaults.stack;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
