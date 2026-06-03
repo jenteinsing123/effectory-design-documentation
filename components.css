@@ -1973,12 +1973,12 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
-/* full-bleed illustration (eff-tooltip-dialog [svgUrl]); placeholder shown when no image */
+/* full-bleed illustration (eff-tooltip-dialog [svgUrl]); coloured placeholder shown when no image */
 .ann-media {
   height: 168px;
-  background: var(--bg-tertiary);
+  background: #6c5ce7;
   display: flex; align-items: center; justify-content: center;
-  color: var(--content-subtle);
+  color: rgba(255,255,255,.85);
 }
 .ann-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .5; }

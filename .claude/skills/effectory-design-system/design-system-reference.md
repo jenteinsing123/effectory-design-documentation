@@ -704,7 +704,7 @@ Prototype-markup (`components.css`):
   </div>
 </div>
 ```
-Classes: `.announcement` (300px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`, `overflow:hidden`), `.ann-media` (optioneel, **full-bleed** 168px; `<img>` vult 'm anders placeholder op `--bg-tertiary`), `.ann-body` (20px padding), `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (verticale stack full-width: `.btn-primary` CTA bovenaan + `.btn-tertiary` "Close" eronder — primary eerst in DOM).
+Classes: `.announcement` (300px, `--bg-base`, `--border-base`, `--sh-dialogs`, `--radius-lg`, `overflow:hidden`), `.ann-media` (optioneel, **full-bleed** 168px; `<img>` vult 'm anders een gekleurde placeholder (#6c5ce7, wit icoon)), `.ann-body` (20px padding), `.ann-title` (16/SemiBold), `.ann-text` (14), `.ann-actions` (verticale stack full-width: `.btn-primary` CTA bovenaan + `.btn-tertiary` "Close" eronder — primary eerst in DOM).
 
 **Gestapeld = card deck:** meerdere teams kunnen op dezelfde pagina iets promoten; je queuet ze als een **stapel** met echte kaarten erachter die net uitsteken. Markup: `.ann-deck` met de achterste kaarten (`.ann-b2`, `.ann-b1`) en de voorste (`.ann-front`). "Close" onthult de volgende: de voorste valt naar beneden (`.ann-front.is-leaving`) en de kaarten erachter promoten één stap (`.ann-b1.is-promoting`, `.ann-b2.is-promoting`). Het queuen/volgorde-bepalen is app-orkestratie (render één kaart tegelijk, index ophogen). De deck-visual + animatie zit niet in het styleguide-voorbeeld — met engineering te bevestigen.
 
