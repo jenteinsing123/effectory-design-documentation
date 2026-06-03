@@ -15,9 +15,16 @@
     body { margin: 0; font-family: 'Poppins', sans-serif; color: var(--content-base); background: var(--bg-secondary); -webkit-font-smoothing: antialiased; }
 
     .page { max-width: 620px; margin: 0 auto; padding: 56px 24px 180px; }
-    .page-hd { margin-bottom: 26px; }
+    .page-hd { margin-bottom: 22px; }
     .page-hd h1 { font-size: 26px; font-weight: 600; margin: 0 0 6px; letter-spacing: -.3px; }
     .page-hd p { font-size: 14px; color: var(--content-secondary); margin: 0; line-height: 1.5; }
+
+    /* top tabs */
+    .tabs-top { display: inline-flex; gap: 4px; background: var(--bg-base); border: 1px solid var(--border-base); border-radius: 12px; padding: 4px; margin-bottom: 26px; }
+    .tabs-top button { border: none; background: transparent; font: inherit; font-size: 14px; font-weight: 500; color: var(--content-secondary); padding: 8px 20px; border-radius: 9px; cursor: pointer; transition: background .12s, color .12s; }
+    .tabs-top button.active { background: var(--bg-brand-base); color: var(--content-on-brand-base); }
+    .tabpanel { display: none; }
+    .tabpanel.active { display: block; }
 
     .panel { background: var(--bg-base); border: 1px solid var(--border-base); border-radius: 16px; box-shadow: 0 1px 2px rgba(25,39,67,.04), 0 12px 28px -16px rgba(25,39,67,.2); overflow: hidden; margin-bottom: 18px; }
     .panel-hd { padding: 16px 22px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--content-subtle); border-bottom: 1px solid var(--border-base); display: flex; align-items: center; }
@@ -29,197 +36,302 @@
     .set-row .lbl .d { font-size: 12.5px; color: var(--content-secondary); margin-top: 3px; line-height: 1.45; }
     .set-row .ctrl { flex-shrink: 0; display: flex; align-items: center; }
     .set-row .ctrl .tf { width: 270px; }
+    .set-row .ctrl textarea.tf { resize: vertical; min-height: 60px; font-family: inherit; }
 
     .tf-num-wrap.count { width: 96px; }
     .tf-num-wrap.count .tf-num { text-align: center; }
 
-    /* per-card config block */
     .card-cfg .panel-hd { justify-content: space-between; }
     .card-cfg .swatch { width: 14px; height: 14px; border-radius: 4px; }
     .card-cfg .tag { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); }
     .card-cfg-hd-left { display: flex; align-items: center; gap: 9px; }
 
-    .foot { display: flex; gap: 10px; align-items: center; }
+    .foot { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
     .foot .hint { font-size: 12.5px; color: var(--content-subtle); margin-left: auto; }
 
-    /* ── Announcement, floating bottom-right ── */
+    /* ── Card: floating bottom-right deck ── */
     #announcement { position: fixed; right: 30px; bottom: 30px; z-index: 1000;
       --ann-dur: 560ms; --ann-ease: cubic-bezier(.4,0,.2,1); --ann-drop: 280px; }
     #announcement .ann-deck { width: 300px; }
-    #announcement .ann-deck .announcement {
-      /* travels for most of the duration, then fades only at the end → the drop is visible */
-      transition: transform var(--ann-dur) var(--ann-ease), opacity calc(var(--ann-dur) * .4) ease calc(var(--ann-dur) * .55);
-    }
-    /* slide (drop): front falls, behind cards promote up — and the deck height eases simultaneously (JS) */
+    #announcement .ann-deck .announcement { transition: transform var(--ann-dur) var(--ann-ease), opacity calc(var(--ann-dur) * .4) ease calc(var(--ann-dur) * .55); }
     #announcement .ann-front.is-leaving { transform: translateY(var(--ann-drop)); opacity: 0; }
-    /* smooth illustration reveal/collapse */
     #announcement .ann-media { overflow: hidden; transition: height var(--ann-dur) var(--ann-ease), opacity calc(var(--ann-dur) * .8) ease; }
     #announcement .ann-media.is-collapsed { height: 0; opacity: 0; }
-    /* entry */
     .ann-enter { animation: annIn var(--ann-dur) var(--ann-ease) both; }
     @keyframes annIn { from { opacity: 0; transform: translateY(20px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    /* ── Dialog: centred modal ── */
+    #dialog-host { position: fixed; inset: 0; z-index: 1100; display: none; align-items: center; justify-content: center; background: rgba(25,39,67,.4); padding: 24px; }
+    #dialog-host.open { display: flex; }
+    .dlg { position: relative; width: 600px; max-width: 100%; background: var(--bg-base); border-radius: 16px; box-shadow: 0 4px 12px rgba(25,39,67,.08), 0 24px 60px -20px rgba(25,39,67,.45); overflow: hidden; font-family: 'Poppins', sans-serif; }
+    .dlg-media { height: 300px; display: flex; align-items: center; justify-content: center; color: rgba(25,39,67,.32); overflow: hidden; transition: height .3s cubic-bezier(.4,0,.2,1); }
+    .dlg-media.is-collapsed { height: 0; }
+    .dlg-media-ph { display: flex; width: 48px; height: 48px; }
+    /* close uses the real design-system Icon Button (.ib .ib-secondary); this only positions it */
+    .dlg-close { position: absolute; top: 16px; right: 16px; z-index: 2; }
+    .dlg-body { padding: 32px; }
+    .dlg-title { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
+    .dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); }
+    .dlg-dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
+    .dlg-dot { width: 8px; height: 8px; border-radius: 50%; background: #c1eeed; cursor: pointer; transition: background .15s; }
+    .dlg-dot.is-active { background: #30b3af; }
+    .dlg-footer { display: flex; justify-content: space-between; align-items: center; }
+    .dlg-footer .btn i[data-icon] { width: 15px; height: 15px; display: flex; }
+    @keyframes dlgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* floating sticky triggers */
+    .fab { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); z-index: 1050; display: none; height: 44px; padding: 0 22px; box-shadow: 0 10px 28px -8px rgba(10,157,153,.6); }
+    .fab.show { display: inline-flex; }
+    .fab i[data-icon] { width: 16px; height: 16px; display: flex; }
   </style>
 </head>
 <body>
   <div class="page">
     <div class="page-hd">
       <h1>Announcement playground</h1>
-      <p>Configure each card below — the announcement updates live in the bottom-right corner. Click <strong>Learn more</strong> or <strong>Close</strong> to page through the stack.</p>
+      <p>Configure the announcement and see it live. Switch between the corner <strong>Card</strong> and the centred <strong>Dialog</strong>.</p>
     </div>
 
-    <!-- count -->
-    <div class="panel">
-      <div class="set-row">
-        <div class="lbl"><div class="t">Number of announcements</div><div class="d">How many cards are queued in the deck.</div></div>
-        <div class="ctrl">
-          <div class="tf-num-wrap count">
-            <input class="tf-num" id="s-count" type="number" value="3" min="1" max="4" />
-            <div class="tf-num-stepper">
-              <button class="tf-num-btn" data-step="1" aria-label="More"><i data-icon="chevron-up"></i></button>
-              <button class="tf-num-btn" data-step="-1" aria-label="Fewer"><i data-icon="chevron-down"></i></button>
+    <div class="tabs-top">
+      <button class="active" data-tab="card">Card</button>
+      <button data-tab="dialog">Dialog</button>
+    </div>
+
+    <!-- ════════ CARD TAB ════════ -->
+    <div class="tabpanel active" data-panel="card">
+      <div class="panel">
+        <div class="set-row">
+          <div class="lbl"><div class="t">Number of announcements</div><div class="d">How many cards are queued in the deck.</div></div>
+          <div class="ctrl">
+            <div class="tf-num-wrap count">
+              <input class="tf-num" id="c-count" type="number" value="3" min="1" max="4" />
+              <div class="tf-num-stepper">
+                <button class="tf-num-btn" data-cstep="1" aria-label="More"><i data-icon="chevron-up"></i></button>
+                <button class="tf-num-btn" data-cstep="-1" aria-label="Fewer"><i data-icon="chevron-down"></i></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div id="card-cfgs"></div>
     </div>
 
-    <!-- per-card config blocks -->
-    <div id="cards"></div>
-
-    <div class="foot">
-      <button class="btn btn-primary" id="s-show">Show announcement</button>
-      <span class="hint">Closed all of them? Hit "Show announcement".</span>
+    <!-- ════════ DIALOG TAB ════════ -->
+    <div class="tabpanel" data-panel="dialog">
+      <div class="panel">
+        <div class="set-row">
+          <div class="lbl"><div class="t">Number of steps</div><div class="d">Each step is one screen in the carousel.</div></div>
+          <div class="ctrl">
+            <div class="tf-num-wrap count">
+              <input class="tf-num" id="d-count" type="number" value="4" min="1" max="6" />
+              <div class="tf-num-stepper">
+                <button class="tf-num-btn" data-dstep="1" aria-label="More"><i data-icon="chevron-up"></i></button>
+                <button class="tf-num-btn" data-dstep="-1" aria-label="Fewer"><i data-icon="chevron-down"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="set-row">
+          <div class="lbl"><div class="t">"Previous" label</div></div>
+          <div class="ctrl"><input class="tf" id="d-prev" type="text" value="Previous"></div>
+        </div>
+        <div class="set-row">
+          <div class="lbl"><div class="t">"Next" label</div><div class="d">Shown on every step except the last.</div></div>
+          <div class="ctrl"><input class="tf" id="d-next" type="text" value="Next feature"></div>
+        </div>
+      </div>
+      <div id="step-cfgs"></div>
     </div>
   </div>
 
-  <!-- Floating announcement (card deck) -->
+  <!-- floating sticky triggers -->
+  <button class="btn btn-primary fab" id="c-fab">Show announcement</button>
+  <button class="btn btn-primary fab" id="d-fab"><i data-icon="maximize"></i> Show dialog</button>
+
+  <!-- live previews -->
   <div id="announcement"></div>
+  <div id="dialog-host"></div>
 
   <script src="/icons.js"></script>
   <script>
-    const BG = ['#6c5ce7', '#0a9d99', '#ec9f06', '#3174db'];
-    const DUR = 560, EASE = 'cubic-bezier(.4,0,.2,1)';   // baked-in slide animation
-    const $host = document.getElementById('announcement');
-    const $cards = document.getElementById('cards');
-    const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const el = (id) => document.getElementById(id);
     function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+    function paint(node){ if (window.Icons && window.Icons.render) window.Icons.render(node || document.body); }
+    function tgl(scope, i, field, on){
+      return `<label class="tgl-wrap"><input type="checkbox" class="tgl" data-${scope}="${i}" data-field="${field}" ${on?'checked':''}><span class="tgl-track"><span class="tgl-thumb"></span></span></label>`;
+    }
 
-    // master config — up to 4 cards; `count` decides how many are shown
+    /* ══════════════ CARD ══════════════ */
+    const C_BG = ['#6c5ce7', '#0a9d99', '#ec9f06', '#3174db'];
+    const DUR = 560, EASE = 'cubic-bezier(.4,0,.2,1)';
+    const $ann = document.getElementById('announcement');
+    const $cardCfgs = document.getElementById('card-cfgs');
+    const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const CARDS = [
       { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more' },
       { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups' },
       { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export' },
       { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more' },
     ];
-    let count = 3, idx = 0, first = true;
+    let cCount = 3, cIdx = 0, cFirst = true;
 
-    /* ── settings form (rebuilt only when count changes) ── */
-    function tgl(i, field, on){
-      return `<label class="tgl-wrap"><input type="checkbox" class="tgl" data-card="${i}" data-field="${field}" ${on?'checked':''}><span class="tgl-track"><span class="tgl-thumb"></span></span></label>`;
-    }
-    function blockHtml(i){
+    function cBlock(i){
       const c = CARDS[i];
-      return `<div class="panel card-cfg" data-block="${i}">
-        <div class="panel-hd">
-          <span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?BG[i]:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>
-          ${i===0?'<span class="tag">featured</span>':''}
-        </div>
-        <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl(i,'media',c.media)}</div></div>
+      return `<div class="panel card-cfg" data-cblock="${i}">
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?C_BG[i]:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
+        <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('card',i,'media',c.media)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="title" value="${esc(c.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="body" value="${esc(c.body)}"></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">Call-to-action button</div></div><div class="ctrl">${tgl(i,'cta',c.cta)}</div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Call-to-action button</div></div><div class="ctrl">${tgl('card',i,'cta',c.cta)}</div></div>
         <div class="set-row cta-label-row ${c.cta?'':'hidden'}"><div class="lbl"><div class="t">Button label</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="ctaLabel" value="${esc(c.ctaLabel)}"></div></div>
       </div>`;
     }
-    function renderForm(){
-      let h = '';
-      for (let i = 0; i < count; i++) h += blockHtml(i);
-      $cards.innerHTML = h;
-      if (window.Icons && window.Icons.render) window.Icons.render($cards);
-    }
-
-    /* ── live announcement deck ── */
-    function card(i, cls){
+    function cRenderForm(){ let h=''; for(let i=0;i<cCount;i++) h+=cBlock(i); $cardCfgs.innerHTML=h; paint($cardCfgs); }
+    function cCard(i, cls){
       const c = CARDS[i];
-      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${BG[i]}; color:rgba(255,255,255,.85);">${PH}</div>`;
-      const cta = c.cta ? `<button class="btn btn-primary" data-next>${esc(c.ctaLabel)||'Learn more'}</button>` : '';
-      return `<div class="announcement ${cls}">${media}<div class="ann-body">`+
-        `<p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p>`+
-        `<div class="ann-actions">${cta}<button class="btn btn-tertiary" data-next>Close</button></div></div></div>`;
+      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${C_BG[i]}; color:rgba(255,255,255,.85);">${PH}</div>`;
+      const cta = c.cta ? `<button class="btn btn-primary" data-cnext>${esc(c.ctaLabel)||'Learn more'}</button>` : '';
+      return `<div class="announcement ${cls}">${media}<div class="ann-body"><p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p><div class="ann-actions">${cta}<button class="btn btn-tertiary" data-cnext>Close</button></div></div></div>`;
     }
-    // measure a card's natural height off-screen (inside #announcement so the collapsed-media rule applies)
-    function measureFront(i){
-      const probe = document.createElement('div');
-      probe.style.cssText = 'position:absolute; left:-9999px; top:0; visibility:hidden;';
-      probe.innerHTML = `<div class="ann-deck" style="width:300px;">${card(i,'ann-front')}</div>`;
-      $host.appendChild(probe);
-      const h = probe.querySelector('.ann-front').offsetHeight;
-      probe.remove();
-      return h;
+    function cMeasure(i){
+      const probe = document.createElement('div'); probe.style.cssText='position:absolute;left:-9999px;top:0;visibility:hidden;';
+      probe.innerHTML = `<div class="ann-deck" style="width:300px;">${cCard(i,'ann-front')}</div>`;
+      $ann.appendChild(probe); const h = probe.querySelector('.ann-front').offsetHeight; probe.remove(); return h;
     }
-    function renderDeck(){
-      if (count <= 0 || idx >= count) { $host.innerHTML = ''; return; }
-      const layers = [];
-      if (idx + 2 < count) layers.push(card(idx + 2, 'ann-b2'));
-      if (idx + 1 < count) layers.push(card(idx + 1, 'ann-b1'));
-      layers.push(card(idx, 'ann-front'));
-      $host.innerHTML = `<div class="ann-deck${first ? ' ann-enter' : ''}">${layers.join('')}</div>`;
-      first = false;
-      if (window.Icons && window.Icons.render) window.Icons.render($host);
+    function cRenderDeck(){
+      if (tab !== 'card' || cCount <= 0 || cIdx >= cCount) { $ann.innerHTML=''; updateFab(); return; }
+      const layers=[];
+      if (cIdx+2 < cCount) layers.push(cCard(cIdx+2,'ann-b2'));
+      if (cIdx+1 < cCount) layers.push(cCard(cIdx+1,'ann-b1'));
+      layers.push(cCard(cIdx,'ann-front'));
+      $ann.innerHTML = `<div class="ann-deck${cFirst?' ann-enter':''}">${layers.join('')}</div>`;
+      cFirst=false; paint($ann); updateFab();
     }
-    function advance(){
-      const deck = $host.querySelector('.ann-deck');
-      const front = $host.querySelector('.ann-front');
+    function cAdvance(){
+      const deck=$ann.querySelector('.ann-deck'), front=$ann.querySelector('.ann-front');
       if (!front || !deck || front.classList.contains('is-leaving')) return;
-      // front drops AND the card behind resizes into place at the same time
-      const next = idx + 1;
-      if (next < count) {
-        const h0 = deck.offsetHeight, h1 = measureFront(next);
-        if (h1 && h1 !== h0) {
-          deck.style.height = h0 + 'px';
-          deck.getBoundingClientRect();
-          deck.style.transition = 'height ' + DUR + 'ms ' + EASE;
-          deck.style.height = h1 + 'px';
-        }
-      }
+      const next=cIdx+1;
+      if (next<cCount){ const h0=deck.offsetHeight, h1=cMeasure(next); if(h1&&h1!==h0){ deck.style.height=h0+'px'; deck.getBoundingClientRect(); deck.style.transition='height '+DUR+'ms '+EASE; deck.style.height=h1+'px'; } }
       front.classList.add('is-leaving');
-      const b1 = $host.querySelector('.ann-b1'); if (b1) b1.classList.add('is-promoting');
-      const b2 = $host.querySelector('.ann-b2'); if (b2) b2.classList.add('is-promoting');
-      setTimeout(() => { idx += 1; renderDeck(); }, DUR);
+      const b1=$ann.querySelector('.ann-b1'); if(b1)b1.classList.add('is-promoting');
+      const b2=$ann.querySelector('.ann-b2'); if(b2)b2.classList.add('is-promoting');
+      setTimeout(()=>{ cIdx+=1; cRenderDeck(); }, DUR);
     }
-    function reshow(){ idx = 0; first = true; renderDeck(); }
-    function setCount(n){ count = Math.max(1, Math.min(4, n)); el('s-count').value = count; renderForm(); reshow(); }
+    function cReshow(){ cIdx=0; cFirst=true; cRenderDeck(); }
+    function cSetCount(n){ cCount=Math.max(1,Math.min(4,n)); el('c-count').value=cCount; cRenderForm(); cReshow(); }
 
-    /* ── wiring ── */
-    $host.addEventListener('click', (e) => { if (e.target.closest('[data-next]')) advance(); });
-    el('s-count').addEventListener('input', () => setCount(parseInt(el('s-count').value,10)||1));
-    document.querySelectorAll('.tf-num-btn[data-step]').forEach(b => b.addEventListener('click', () =>
-      setCount((parseInt(el('s-count').value,10)||0) + parseInt(b.dataset.step,10))
-    ));
-    function onEdit(e){
-      const t = e.target;
-      if (t.dataset.card === undefined) return;
-      const i = +t.dataset.card, f = t.dataset.field;
-      if (f === 'media' || f === 'cta') {
-        CARDS[i][f] = t.checked;
-        if (f === 'cta') t.closest('.card-cfg').querySelector('.cta-label-row').classList.toggle('hidden', !t.checked);
-        if (f === 'media') {
-          t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked ? BG[i] : 'var(--bg-tertiary)';
-          const m = (i === idx) ? $host.querySelector('.ann-front .ann-media') : null;
-          if (m) { m.classList.toggle('is-collapsed', !t.checked); return; }
-        }
-      } else {
-        CARDS[i][f] = t.value;
-      }
-      renderDeck();
+    $ann.addEventListener('click', e => { if (e.target.closest('[data-cnext]')) cAdvance(); });
+    el('c-count').addEventListener('input', () => cSetCount(parseInt(el('c-count').value,10)||1));
+    document.querySelectorAll('.tf-num-btn[data-cstep]').forEach(b => b.addEventListener('click', () => cSetCount((parseInt(el('c-count').value,10)||0)+parseInt(b.dataset.cstep,10))));
+    function cEdit(e){
+      const t=e.target; if (t.dataset.card===undefined) return;
+      const i=+t.dataset.card, f=t.dataset.field;
+      if (f==='media'||f==='cta'){
+        CARDS[i][f]=t.checked;
+        if (f==='cta') t.closest('.card-cfg').querySelector('.cta-label-row').classList.toggle('hidden', !t.checked);
+        if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?C_BG[i]:'var(--bg-tertiary)';
+          const m=(i===cIdx)?$ann.querySelector('.ann-front .ann-media'):null; if(m){ m.classList.toggle('is-collapsed', !t.checked); return; } }
+      } else CARDS[i][f]=t.value;
+      cRenderDeck();
     }
-    $cards.addEventListener('input', onEdit);
-    $cards.addEventListener('change', onEdit);
-    el('s-show').addEventListener('click', reshow);
+    $cardCfgs.addEventListener('input', cEdit); $cardCfgs.addEventListener('change', cEdit);
+    el('c-fab').addEventListener('click', cReshow);
 
-    renderForm();
-    renderDeck();
+    /* ══════════════ DIALOG ══════════════ */
+    const D_BG = ['#acceff', '#c1eeed', '#ffe9a6', '#e6dbff', '#ffd9e2', '#d7f9e0'];
+    const $dlg = document.getElementById('dialog-host');
+    const DPH = '<i data-icon="image" class="dlg-media-ph"></i>';
+    const STEPS = [
+      { title:'Select a random sample of participants!', body:'When creating a new survey, you can now automatically sample your participant pool — pick just a few people from every team to gather balanced insights without overwhelming your whole organization.', media:true },
+      { title:'Compare across groups', body:'Benchmark any team against the company in a single click, and instantly spot where to focus.', media:true },
+      { title:'Export to PowerPoint', body:'Download a ready-made results deck for your next meeting — no more copy-pasting charts.', media:true },
+      { title:'Topics & Ideas', body:'See the themes your employees suggest most often, ranked automatically so the signal stands out.', media:true },
+      { title:'Schedule recurring pulses', body:'Set a cadence once and let surveys go out on autopilot.', media:true },
+      { title:'Share results securely', body:'Give managers their own view without exposing the whole organization.', media:true },
+    ];
+    let dCount = 4, dStep = 0, dOpen = false;
+
+    function dBlock(i){
+      const s = STEPS[i];
+      return `<div class="panel card-cfg" data-dblock="${i}">
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${s.media?D_BG[i]:'var(--bg-tertiary)'}"></span> Step ${i+1}</span></div>
+        <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('step',i,'media',s.media)}</div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="title" value="${esc(s.title)}"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" rows="3" data-step="${i}" data-field="body">${esc(s.body)}</textarea></div></div>
+      </div>`;
+    }
+    const $stepCfgs = document.getElementById('step-cfgs');
+    function dRenderForm(){ let h=''; for(let i=0;i<dCount;i++) h+=dBlock(i); $stepCfgs.innerHTML=h; paint($stepCfgs); }
+    function dRender(){
+      if (!dOpen) { $dlg.classList.remove('open'); $dlg.innerHTML=''; return; }
+      const s = STEPS[dStep];
+      const last = dStep >= dCount - 1;
+      const media = `<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${D_BG[dStep]};">${DPH}</div>`;
+      let dots = '';
+      for (let i=0;i<dCount;i++) dots += `<span class="dlg-dot${i===dStep?' is-active':''}" data-ddot="${i}"></span>`;
+      const prevLabel = el('d-prev').value || 'Previous';
+      const nextLabel = last ? 'Got it' : (el('d-next').value || 'Next');
+      $dlg.innerHTML = `<div class="dlg">
+        <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
+        ${media}
+        <div class="dlg-body">
+          <p class="dlg-title">${esc(s.title)}</p>
+          <p class="dlg-text">${esc(s.body)}</p>
+          <div class="dlg-dots">${dots}</div>
+          <div class="dlg-footer">
+            <button class="btn btn-secondary" data-dprev ${dStep===0?'disabled':''}><i data-icon="arrow-left"></i> ${esc(prevLabel)}</button>
+            <button class="btn btn-primary" data-dnext>${esc(nextLabel)} ${last?'':'<i data-icon="arrow-right"></i>'}</button>
+          </div>
+        </div>
+      </div>`;
+      $dlg.classList.add('open');
+      paint($dlg);
+    }
+    function updateFab(){
+      el('c-fab').classList.toggle('show', tab === 'card' && (cCount <= 0 || cIdx >= cCount));
+      el('d-fab').classList.toggle('show', tab === 'dialog' && !dOpen);
+    }
+    function dOpenDlg(){ dStep=0; dOpen=true; dRender(); updateFab(); }
+    function dClose(){ dOpen=false; dRender(); updateFab(); }
+    function dNext(){ if (dStep < dCount-1){ dStep++; dRender(); } else dClose(); }
+    function dPrev(){ if (dStep > 0){ dStep--; dRender(); } }
+    function dSetCount(n){ dCount=Math.max(1,Math.min(6,n)); el('d-count').value=dCount; if(dStep>=dCount) dStep=dCount-1; dRenderForm(); dRender(); }
+
+    $dlg.addEventListener('click', e => {
+      if (e.target.closest('[data-dclose]')) return dClose();
+      if (e.target.closest('[data-dnext]')) return dNext();
+      if (e.target.closest('[data-dprev]')) return dPrev();
+      const dot = e.target.closest('[data-ddot]'); if (dot){ dStep = +dot.dataset.ddot; dRender(); return; }
+      if (e.target === $dlg) dClose(); // click backdrop
+    });
+    el('d-count').addEventListener('input', () => dSetCount(parseInt(el('d-count').value,10)||1));
+    document.querySelectorAll('.tf-num-btn[data-dstep]').forEach(b => b.addEventListener('click', () => dSetCount((parseInt(el('d-count').value,10)||0)+parseInt(b.dataset.dstep,10))));
+    function dEdit(e){
+      const t=e.target;
+      if (t.id==='d-prev' || t.id==='d-next'){ dRender(); return; }
+      if (t.dataset.step===undefined) return;
+      const i=+t.dataset.step, f=t.dataset.field;
+      if (f==='media'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?D_BG[i]:'var(--bg-tertiary)'; }
+      else STEPS[i][f]=t.value;
+      if (i===dStep) dRender();
+    }
+    $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
+    el('d-prev').addEventListener('input', dRender); el('d-next').addEventListener('input', dRender);
+    el('d-fab').addEventListener('click', dOpenDlg);
+
+    /* ══════════════ TABS ══════════════ */
+    let tab = 'card';
+    document.querySelectorAll('.tabs-top button').forEach(b => b.addEventListener('click', () => {
+      tab = b.dataset.tab;
+      document.querySelectorAll('.tabs-top button').forEach(x => x.classList.toggle('active', x===b));
+      document.querySelectorAll('.tabpanel').forEach(p => p.classList.toggle('active', p.dataset.panel===tab));
+      if (tab === 'card') { dClose(); cReshow(); }
+      else { $ann.innerHTML=''; dClose(); }   // dialog stays closed until "Show dialog"
+    }));
+
+    // init
+    cRenderForm(); cRenderDeck();
+    dRenderForm(); updateFab();
   </script>
 </body>
 </html>

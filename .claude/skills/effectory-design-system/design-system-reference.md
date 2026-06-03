@@ -229,6 +229,15 @@ States: `.is-hover` `.is-pressed` `.is-disabled`
 ```
 States: `.is-hover` `.is-pressed` `.is-disabled`
 
+### Icon Button
+Vierkante knop met alleen een icoon. Maat via `.ib-36` (16px icoon) of `.ib-24` (12px icoon); variant via `.ib-primary` / `.ib-secondary` / `.ib-tertiary`. Altijd een `aria-label` meegeven.
+```html
+<button class="ib ib-36 ib-secondary" aria-label="Sluiten"><i data-icon="cross"></i></button>
+<button class="ib ib-36 ib-primary" aria-label="Toevoegen"><i data-icon="plus"></i></button>
+<button class="ib ib-24 ib-tertiary" aria-label="Meer"><i data-icon="more-horizontal"></i></button>
+```
+Secondary = witte vulling + 1px `--border-action` + subtiele `--sh-action` (bijv. de close-knop op een dialog). States: `.is-hover` `.is-pressed` `.is-disabled`.
+
 ### Text Field
 ```html
 <!-- Standaard -->
