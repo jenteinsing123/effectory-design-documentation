@@ -75,6 +75,8 @@
     /* close uses the real design-system Icon Button (.ib .ib-secondary); this only positions it */
     .dlg-close { position: absolute; top: 16px; right: 16px; z-index: 2; }
     .dlg-body { padding: 32px; }
+    .dlg-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); margin-bottom: 12px; }
+    .dlg-tag i[data-icon] { width: 13px; height: 13px; display: flex; }
     .dlg-title { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
     .dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); min-height: 90px; } /* ~4 lines, keeps step heights consistent */
     .dlg-dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
@@ -152,6 +154,10 @@
         <div class="set-row">
           <div class="lbl"><div class="t">"Next" label</div><div class="d">Shown on every step except the last.</div></div>
           <div class="ctrl"><input class="tf" id="d-next" type="text" value="Next feature"></div>
+        </div>
+        <div class="set-row">
+          <div class="lbl"><div class="t">Locked-feature tag</div><div class="d">Shown on steps marked "Premium".</div></div>
+          <div class="ctrl"><input class="tf" id="d-plantag" type="text" value="Available on Plan 2 and higher"></div>
         </div>
       </div>
       <div id="step-cfgs"></div>
@@ -258,7 +264,7 @@
     const STEPS = [
       { title:'Select a random sample of participants!', body:'When creating a new survey, you can now automatically sample your participant pool — pick just a few people from every team to gather balanced insights without overwhelming your whole organization.', media:true },
       { title:'Compare across groups', body:'Benchmark any team against the company in a single click, and instantly spot where to focus.', media:true },
-      { title:'Export to PowerPoint', body:'Download a ready-made results deck for your next meeting — no more copy-pasting charts.', media:true },
+      { title:'Export to PowerPoint', body:'Download a ready-made results deck for your next meeting — no more copy-pasting charts. Brand it, tweak it, and present in minutes.', media:true, locked:true },
       { title:'Topics & Ideas', body:'See the themes your employees suggest most often, ranked automatically so the signal stands out.', media:true },
       { title:'Schedule recurring pulses', body:'Set a cadence once and let surveys go out on autopilot.', media:true },
       { title:'Share results securely', body:'Give managers their own view without exposing the whole organization.', media:true },
@@ -272,6 +278,7 @@
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('step',i,'media',s.media)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="title" value="${esc(s.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" rows="3" data-step="${i}" data-field="body">${esc(s.body)}</textarea></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Premium (locked)</div><div class="d">Not in the current plan — shows the upgrade tag.</div></div><div class="ctrl">${tgl('step',i,'locked',s.locked)}</div></div>
       </div>`;
     }
     const $stepCfgs = document.getElementById('step-cfgs');
@@ -311,10 +318,12 @@
       for (let i=0;i<dCount;i++) dots += `<span class="dlg-dot${i===dStep?' is-active':''}" data-ddot="${i}"></span>`;
       const prevLabel = el('d-prev').value || 'Previous';
       const nextLabel = last ? 'Got it' : (el('d-next').value || 'Next');
+      const tag = s.locked ? `<div class="dlg-tag"><i data-icon="lock"></i> ${esc(el('d-plantag').value) || 'Premium'}</div>` : '';
       $dlg.innerHTML = `<div class="dlg">
         <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
         ${media}
         <div class="dlg-body">
+          ${tag}
           <p class="dlg-title">${esc(s.title)}</p>
           <p class="dlg-text">${esc(s.body)}</p>
           <div class="dlg-dots">${dots}</div>
@@ -355,11 +364,13 @@
       if (t.dataset.step===undefined) return;
       const i=+t.dataset.step, f=t.dataset.field;
       if (f==='media'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?D_BG[i]:'var(--bg-tertiary)'; }
+      else if (f==='locked'){ STEPS[i][f]=t.checked; }
       else STEPS[i][f]=t.value;
-      if (i===dStep) dRender();
+      if (i===dStep && dPhase==='tour') dRender();
     }
     $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
     el('d-prev').addEventListener('input', dRender); el('d-next').addEventListener('input', dRender);
+    el('d-plantag').addEventListener('input', () => { if (dPhase==='tour') dRender(); });
     ['d-intro-title','d-intro-body','d-start','d-skip','d-intro-media'].forEach(id => {
       el(id).addEventListener('input', () => { if (dPhase==='intro') dRender(); });
       el(id).addEventListener('change', () => { if (dPhase==='intro') dRender(); });
