@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App shell — Prototype</title>
+  <!-- resolve assets from the repo root — works locally (/) and on GitHub Pages (/repo-name/) -->
+  <script>document.write('<base href="' + location.pathname.replace(/prototypes\/.*$/, '') + '">');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="foundation.css" />
+  <link rel="stylesheet" href="components.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: 'Poppins', sans-serif; color: var(--content-base); background: var(--bg-secondary); -webkit-font-smoothing: antialiased; }
+
+    /* App layout: nav left (full height), content right */
+    .app { display: flex; height: 100vh; overflow: hidden; }
+    /* Override the docs "card" framing — in a real app the sidebar is full-height with a right border. */
+    .app .mainnav { height: 100%; border: 0; border-right: 1px solid var(--border-base); border-radius: 0; overflow-y: auto; }
+
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+    .topbar { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 28px; border-bottom: 1px solid var(--border-base); background: var(--bg-base); flex-shrink: 0; }
+    .topbar .crumb { font-size: 12px; color: var(--content-subtle); }
+    .topbar .crumb b { color: var(--content-secondary); font-weight: 500; }
+    .topbar .spacer { flex: 1; }
+    .topbar .tb-btn { width: 36px; height: 36px; border-radius: var(--radius-full); border: 1px solid var(--border-base); background: var(--bg-base); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--content-action); }
+    .topbar .tb-btn i[data-icon] { width: 16px; height: 16px; display: flex; }
+
+    .content { flex: 1; overflow-y: auto; padding: 32px 28px 64px; }
+    .content-inner { max-width: 880px; margin: 0 auto; }
+    .pg-title { font-size: 26px; font-weight: 600; letter-spacing: -.3px; margin: 0 0 4px; }
+    .pg-sub { font-size: 14px; color: var(--content-secondary); margin: 0 0 28px; line-height: 1.5; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .ph-card { background: var(--bg-base); border: 1px solid var(--border-base); border-radius: var(--radius-lg); padding: 20px; box-shadow: 0 1px 2px rgba(25,39,67,.04); }
+    .ph-card .ph-ico { width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--bg-brand-subtle-selected); color: var(--content-brand-base); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .ph-card .ph-ico i[data-icon] { width: 18px; height: 18px; display: flex; }
+    .ph-card h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+    .ph-line { height: 9px; border-radius: var(--radius-full); background: var(--bg-secondary); margin-top: 8px; }
+    .ph-line.w-90 { width: 90%; } .ph-line.w-70 { width: 70%; } .ph-line.w-50 { width: 50%; }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <div class="mainnav" id="nav">
+    <button class="mn-portal" id="portalBtn">
+      <span class="mn-logo"></span>
+      <b id="portalName">Coordinator</b>
+      <i data-icon="chevron-down" class="mn-chev"></i>
+    </button>
+    <nav class="mn-nav" id="navItems" aria-label="Main"></nav>
+    <div class="mn-foot">
+      <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
+      <div class="mn-foot-divider"></div>
+      <div class="mn-user">
+        <div class="av av-32 av-blue">JR</div>
+        <div class="mn-meta">
+          <div class="mn-name">Jamal van Rooi…</div>
+          <div class="mn-org">Effectory B.V.</div>
+        </div>
+        <i data-icon="chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb"><span id="crumbPortal">Coordinator</span> / <b id="crumbPage">Home</b></div>
+      <div class="spacer"></div>
+      <button class="tb-btn" title="Search"><i data-icon="search"></i></button>
+      <button class="tb-btn" title="Notifications"><i data-icon="bell"></i></button>
+    </header>
+    <div class="content">
+      <div class="content-inner">
+        <h1 class="pg-title" id="pgTitle">Home</h1>
+        <p class="pg-sub" id="pgSub">This is a prototype shell — click around the navigation on the left.</p>
+        <div class="cards" id="cards"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="icons.js"></script>
+<script>
+(function(){
+  // Navigation model per portal. `key` is the active id; `group` items expand to `sub` leaves.
+  const NAV = {
+    coordinator: [
+      { key:'home', icon:'home', label:'Home' },
+      { key:'surveys', icon:'clipboard', label:'Surveys', group:true, sub:['All surveys','Projects'] },
+      { key:'feedback', icon:'refresh', label:'360° Feedback' },
+      { key:'org', icon:'globe', label:'Organization', group:true, sub:['Employees','Reporting structures','Segments','Integrations','Admins','Security'] },
+    ],
+    personal: [
+      { key:'home', icon:'home', label:'Home' },
+      { key:'feedback', icon:'clipboard', label:'Your feedback' },
+      { key:'reviews', icon:'refresh', label:'360° Feedback' },
+    ],
+  };
+  const SUB_DIVIDER_AFTER = { 'Integrations': true }; // a divider line after this sub-item
+
+  const $nav = document.getElementById('navItems');
+  const $items = NAV;
+  let portal = 'coordinator';
+  let active = 'home';                 // active leaf: a top key, or 'group/Sub label'
+  const expanded = { surveys:false, org:false };
+
+  function pageTitle(){
+    if (active.includes('/')) return active.split('/')[1];
+    const it = NAV[portal].find(i=>i.key===active);
+    return it ? it.label : 'Home';
+  }
+
+  function render(){
+    // sidebar
+    let html = '';
+    NAV[portal].forEach(it=>{
+      if (it.group){
+        const open = expanded[it.key];
+        const isActiveGroup = active.startsWith(it.key+'/');
+        html += `<a class="mn-item" data-key="${it.key}" data-group="1" aria-expanded="${open}"><i data-icon="${it.icon}"></i> ${it.label} <i data-icon="${open?'chevron-up':'chevron-down'}" class="mn-chev"></i></a>`;
+        if (open){
+          html += '<div class="mn-sub">';
+          it.sub.forEach(s=>{
+            const id = it.key+'/'+s;
+            html += `<a class="mn-subitem${active===id?' is-active':''}" data-sub="${id}">${s}</a>`;
+            if (SUB_DIVIDER_AFTER[s]) html += '<div class="mn-sub-divider"></div>';
+          });
+          html += '</div>';
+        }
+      } else {
+        html += `<a class="mn-item${active===it.key?' is-active':''}" data-key="${it.key}"${active===it.key?' aria-current="page"':''}><i data-icon="${it.icon}"></i> ${it.label}</a>`;
+      }
+    });
+    $nav.innerHTML = html;
+
+    // chrome
+    document.getElementById('nav').classList.toggle('is-personal', portal==='personal');
+    document.getElementById('portalName').textContent = portal==='personal' ? 'Personal' : 'Coordinator';
+    document.getElementById('crumbPortal').textContent = portal==='personal' ? 'Personal' : 'Coordinator';
+    const title = pageTitle();
+    document.getElementById('crumbPage').textContent = title;
+    document.getElementById('pgTitle').textContent = title;
+
+    // content placeholders
+    const cards = document.getElementById('cards');
+    cards.innerHTML = Array.from({length:6}).map((_,i)=>`
+      <div class="ph-card">
+        <div class="ph-ico"><i data-icon="${['home','clipboard','refresh','globe','users','pie-chart'][i%6]}"></i></div>
+        <h3>${title} · item ${i+1}</h3>
+        <div class="ph-line w-90"></div>
+        <div class="ph-line w-70"></div>
+        <div class="ph-line w-50"></div>
+      </div>`).join('');
+
+    if (window.Icons && window.Icons.render) window.Icons.render(document);
+  }
+
+  // Sidebar interactions
+  $nav.addEventListener('click', e=>{
+    const subEl = e.target.closest('.mn-subitem');
+    if (subEl){ active = subEl.dataset.sub; render(); return; }
+    const it = e.target.closest('.mn-item');
+    if (!it) return;
+    if (it.dataset.group){
+      const key = it.dataset.key;
+      const willOpen = !expanded[key];
+      expanded[key] = willOpen;
+      if (willOpen){ active = key+'/'+NAV[portal].find(i=>i.key===key).sub[0]; } // first sub active by default
+      render(); return;
+    }
+    active = it.dataset.key; render();
+  });
+
+  // Portal switch
+  document.getElementById('portalBtn').addEventListener('click', ()=>{
+    portal = portal==='personal' ? 'coordinator' : 'personal';
+    active = 'home';
+    expanded.surveys = false; expanded.org = false;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
