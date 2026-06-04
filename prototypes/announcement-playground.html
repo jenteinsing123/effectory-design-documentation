@@ -65,7 +65,7 @@
     #dialog-host { position: fixed; inset: 0; z-index: 1100; display: none; align-items: center; justify-content: center; background: rgba(25,39,67,.4); padding: 24px; }
     #dialog-host.open { display: flex; }
     .dlg { position: relative; width: 600px; max-width: 100%; background: var(--bg-base); border-radius: 16px; box-shadow: 0 4px 12px rgba(25,39,67,.08), 0 24px 60px -20px rgba(25,39,67,.45); overflow: hidden; font-family: 'Poppins', sans-serif; }
-    .dlg-media { height: 300px; display: flex; align-items: center; justify-content: center; color: rgba(25,39,67,.32); overflow: hidden; transition: height .3s cubic-bezier(.4,0,.2,1); }
+    .dlg-media { position: relative; height: 300px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.8); overflow: hidden; transition: height .3s cubic-bezier(.4,0,.2,1); }
     .dlg-media.is-collapsed { height: 0; }
     .dlg-media-ph { display: flex; width: 48px; height: 48px; }
     /* festive intro header */
@@ -77,6 +77,8 @@
     .dlg-body { padding: 32px; }
     .dlg-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); margin-bottom: 12px; }
     .dlg-tag i[data-icon] { width: 13px; height: 13px; display: flex; }
+    /* same tag, but pinned in the bottom-left of the illustration */
+    .dlg-tag-media { position: absolute; left: 16px; bottom: 16px; margin: 0; background: rgba(255,255,255,.96); color: var(--content-base); border-color: rgba(255,255,255,.7); box-shadow: 0 1px 3px rgba(25,39,67,.15); }
     .dlg-title { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
     .dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); min-height: 90px; } /* ~4 lines, keeps step heights consistent */
     .dlg-dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
@@ -161,6 +163,14 @@
         </div>
       </div>
       <div id="step-cfgs"></div>
+      <div class="panel">
+        <div class="panel-hd">Outro screen</div>
+        <div class="set-row"><div class="lbl"><div class="t">Show outro</div><div class="d">A reusable closing screen linking to all release notes.</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-outro-on" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-outro-title" type="text" value="And lots of small improvements"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-outro-body" rows="3">We've also shipped plenty of smaller tweaks and fixes across the product. Have a look at everything that's new.</textarea></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Button label</div></div><div class="ctrl"><input class="tf" id="d-outro-cta" type="text" value="Check out all the newly released features"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Support URL</div></div><div class="ctrl"><input class="tf" id="d-outro-url" type="text" value="https://support.effectory.com"></div></div>
+      </div>
     </div>
   </div>
 
@@ -258,7 +268,14 @@
     el('c-fab').addEventListener('click', cReshow);
 
     /* ══════════════ DIALOG ══════════════ */
-    const D_BG = ['#acceff', '#c1eeed', '#ffe9a6', '#e6dbff', '#ffd9e2', '#d7f9e0'];
+    const D_BG = [
+      'linear-gradient(135deg,#acceff,#6c9bf5)',
+      'linear-gradient(135deg,#c1eeed,#54c9c4)',
+      'linear-gradient(135deg,#ffe9a6,#f5c042)',
+      'linear-gradient(135deg,#e6dbff,#a98bf5)',
+      'linear-gradient(135deg,#ffd9e2,#f58aa6)',
+      'linear-gradient(135deg,#d7f9e0,#62cd86)'
+    ];
     const $dlg = document.getElementById('dialog-host');
     const DPH = '<i data-icon="image" class="dlg-media-ph"></i>';
     const STEPS = [
@@ -311,25 +328,45 @@
         </div>`;
         $dlg.classList.add('open'); paint($dlg); return;
       }
+      if (dPhase === 'outro') {
+        const media = `<div class="dlg-media" style="background:linear-gradient(135deg,#7b6cf0,#30b3af); color:#fff;"><i data-icon="zap-filled" class="dlg-intro-spark"></i></div>`;
+        $dlg.innerHTML = `<div class="dlg">
+          <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
+          ${media}
+          <div class="dlg-body">
+            <p class="dlg-title">${esc(el('d-outro-title').value)}</p>
+            <p class="dlg-text">${esc(el('d-outro-body').value)}</p>
+            <div class="dlg-footer" style="margin-top:24px;">
+              <button class="btn btn-secondary" data-dprev><i data-icon="arrow-left"></i> ${esc(el('d-prev').value)||'Previous'}</button>
+              <a class="btn btn-primary" href="${esc(el('d-outro-url').value)||'#'}" target="_blank" rel="noopener">${esc(el('d-outro-cta').value)||'Learn more'} <i data-icon="arrow-right"></i></a>
+            </div>
+          </div>
+        </div>`;
+        $dlg.classList.add('open'); paint($dlg); return;
+      }
       const s = STEPS[dStep];
       const last = dStep >= dCount - 1;
       const media = `<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${D_BG[dStep]};">${DPH}</div>`;
       let dots = '';
       for (let i=0;i<dCount;i++) dots += `<span class="dlg-dot${i===dStep?' is-active':''}" data-ddot="${i}"></span>`;
       const prevLabel = el('d-prev').value || 'Previous';
-      const nextLabel = last ? 'Got it' : (el('d-next').value || 'Next');
-      const tag = s.locked ? `<div class="dlg-tag"><i data-icon="lock"></i> ${esc(el('d-plantag').value) || 'Premium'}</div>` : '';
+      const lastFinal = last && !el('d-outro-on').checked;   // truly the last slide (no outro after)
+      const nextLabel = lastFinal ? 'Got it' : (el('d-next').value || 'Next');
+      const tagText = esc(el('d-plantag').value) || 'Premium';
+      const tagMedia = s.locked && s.media ? `<div class="dlg-tag dlg-tag-media"><i data-icon="lock"></i> ${tagText}</div>` : '';
+      const tagBody  = s.locked && !s.media ? `<div class="dlg-tag"><i data-icon="lock"></i> ${tagText}</div>` : '';
+      const mediaWithTag = media.replace('</div>', `${tagMedia}</div>`);
       $dlg.innerHTML = `<div class="dlg">
         <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
-        ${media}
+        ${mediaWithTag}
         <div class="dlg-body">
-          ${tag}
+          ${tagBody}
           <p class="dlg-title">${esc(s.title)}</p>
           <p class="dlg-text">${esc(s.body)}</p>
           <div class="dlg-dots">${dots}</div>
           <div class="dlg-footer">
             <button class="btn btn-secondary" data-dprev><i data-icon="arrow-left"></i> ${esc(prevLabel)}</button>
-            <button class="btn btn-primary" data-dnext>${esc(nextLabel)} ${last?'':'<i data-icon="arrow-right"></i>'}</button>
+            <button class="btn btn-primary" data-dnext>${esc(nextLabel)} ${lastFinal?'':'<i data-icon="arrow-right"></i>'}</button>
           </div>
         </div>
       </div>`;
@@ -343,8 +380,15 @@
     function dOpenDlg(){ dPhase='intro'; dStep=0; dOpen=true; dRender(); updateFab(); }
     function dStartTour(){ dPhase='tour'; dStep=0; dRender(); }
     function dClose(){ dOpen=false; dRender(); updateFab(); }
-    function dNext(){ if (dStep < dCount-1){ dStep++; dRender(); } else dClose(); }
-    function dPrev(){ if (dStep > 0){ dStep--; dRender(); } else { dPhase='intro'; dRender(); } }
+    function dNext(){
+      if (dStep < dCount-1){ dStep++; dRender(); }
+      else if (el('d-outro-on').checked){ dPhase='outro'; dRender(); }
+      else dClose();
+    }
+    function dPrev(){
+      if (dPhase==='outro'){ dPhase='tour'; dRender(); return; }
+      if (dStep > 0){ dStep--; dRender(); } else { dPhase='intro'; dRender(); }
+    }
     function dSetCount(n){ dCount=Math.max(1,Math.min(6,n)); el('d-count').value=dCount; if(dStep>=dCount) dStep=dCount-1; dRenderForm(); dRender(); }
 
     $dlg.addEventListener('click', e => {
@@ -371,6 +415,10 @@
     $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
     el('d-prev').addEventListener('input', dRender); el('d-next').addEventListener('input', dRender);
     el('d-plantag').addEventListener('input', () => { if (dPhase==='tour') dRender(); });
+    ['d-outro-on','d-outro-title','d-outro-body','d-outro-cta','d-outro-url'].forEach(id => {
+      el(id).addEventListener('input', () => { if (dOpen) dRender(); });
+      el(id).addEventListener('change', () => { if (dOpen) dRender(); });
+    });
     ['d-intro-title','d-intro-body','d-start','d-skip','d-intro-media'].forEach(id => {
       el(id).addEventListener('input', () => { if (dPhase==='intro') dRender(); });
       el(id).addEventListener('change', () => { if (dPhase==='intro') dRender(); });
