@@ -719,6 +719,28 @@ Classes: `.announcement` (300px, `--bg-base`, `--border-base`, `--sh-dialogs`, `
 
 Echte Angular-API (`eff-tooltip-dialog`, `class="with-svg"`): `[svgUrl]` (illustratie), `[dialogTitle]`, `[dialogSubtitle]`, `[dialogButtonText]` (primary CTA, optioneel), `[dialogLinkButtonText]` (link/dismiss), `[targetElement]`, `[dialogPositionToTarget]` ('after'/'before'/'above'/'below'), `[dialogWidth]`, `[addOutlineToTargetElement]`, `[addHighlightToTargetElement]`, `(dialogClosedOutput)`. Gerenderd: `.tour-container` > `img.illustration` + `p.text-l5.text-w600` + `p.text-w400.text-subdued` + `.tour-footer` (`button.link` + `button.primary`). A11y: non-modal — geen focus stelen, `aria-live="polite"`, altijd dismissible.
 
+### Main Navigation
+De primaire app-sidebar (240px, links). Bevat een portal-switcher bovenaan, navigatie-items in het midden, en het account-menu onderaan. Eén per scherm.
+
+```html
+<div class="mainnav">                          <!-- + .is-personal voor het Personal-portal (geel accent) -->
+  <button class="mn-portal"><span class="mn-logo"><span></span></span> <b>Coordinator</b> <i data-icon="chevron-down" class="mn-chev"></i></button>
+  <nav class="mn-nav" aria-label="Main">
+    <a class="mn-item is-active"><i data-icon="home"></i> Home</a>
+    <a class="mn-item"><i data-icon="clipboard"></i> Surveys <i data-icon="chevron-down" class="mn-chev"></i></a>
+    <div class="mn-sub"><a class="mn-subitem is-active">All surveys</a><a class="mn-subitem">Projects</a></div>
+    <a class="mn-item"><i data-icon="globe"></i> Organization <i data-icon="chevron-down" class="mn-chev"></i></a>
+  </nav>
+  <div class="mn-foot">
+    <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
+    <div class="mn-user"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
+  </div>
+</div>
+```
+Classes: `.mainnav` (+ `.is-personal`), `.mn-portal`/`.mn-logo`, `.mn-nav`/`.mn-item` (states `.is-hover`/`.is-active`, optionele `.mn-chev`), uitklapbare groep `.mn-sub`/`.mn-subitem` (+ `.mn-sub-divider`), footer `.mn-foot`/`.mn-user` (states `.is-hover`/`.is-pressed`), account-dropdown `.mn-menu`/`.mn-menu-item` (`.mn-menu-divider`, `.mn-beta`). Het portal-accent loopt via `--mn-accent`, `--mn-accent-soft` en `--mn-logo` op `.mainnav` (Coordinator = teal, Personal = geel). A11y: `<nav aria-label="Main">`, `aria-current="page"` op de actieve item, `aria-expanded` op groep-headers.
+
+> ⚠️ **Dev gap:** de Angular-selector/inputs van de app-sidebar zijn nog niet bevestigd in de styleguide. Deze `.mainnav`-classes zijn de prototype-structuur; verifieer de productie-API met engineering.
+
 ---
 
 ## 5. Iconen
