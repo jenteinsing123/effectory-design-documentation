@@ -167,4 +167,49 @@ if [ -s "$FTMP" ]; then
   exit 1
 fi
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Guard 3: border-radius must use a --radius-* token via var(), never a raw px.
+# Scans staged additions in *-docs.html, index.html and components.css.
+# Allowed: var(...), 0, percentage values (e.g. 50%). Raw px values are blocked.
+# Opt-out for a genuine exception: add /* radius-exempt: reason */ on the line.
+# ─────────────────────────────────────────────────────────────────────────────
+RTMP=$(mktemp)
+trap 'rm -f "$TMP" "$FTMP" "$RTMP"' EXIT
+
+for f in $FS_FILES; do
+  while IFS= read -r line; do
+    case "$line" in
+      "+++"*) continue ;;
+      "+"*)
+        content="${line#+}"
+        # Look for a border-radius declaration whose value contains a px number.
+        if echo "$content" | grep -qE 'border-radius:[^;]*[0-9]+(\.[0-9]+)?px'; then
+          # Allowed if the value is sourced from a var() token or carries an opt-out marker.
+          if echo "$content" | grep -qE 'var\(--radius'; then :;
+          elif echo "$content" | grep -qE 'radius-exempt'; then :;
+          else
+            printf '  %s\n    %s\n' "$f" "$content" >> "$RTMP"
+          fi
+        fi
+        ;;
+    esac
+  done <<< "$(git diff --cached --unified=0 -- "$f")"
+done
+
+if [ -s "$RTMP" ]; then
+  echo ""
+  echo "❌ pre-commit: raw px border-radius detected"
+  echo ""
+  echo "Border radius must use a --radius-* token via var():"
+  echo "  --radius-sm 4 · --radius-base 6 · --radius-md 8 · --radius-lg 12 · --radius-xl 16 · --radius-full 999"
+  echo "These added lines use a raw px value instead of a token:"
+  echo ""
+  cat "$RTMP"
+  echo ""
+  echo "Fix: replace the px value with the nearest token, e.g. border-radius: var(--radius-md);"
+  echo "Genuine exception? add a marker on the line: /* radius-exempt: reason */"
+  echo ""
+  exit 1
+fi
+
 exit 0

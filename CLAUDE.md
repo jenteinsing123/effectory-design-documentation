@@ -542,6 +542,18 @@ A pre-commit hook (`.githooks/pre-commit`, Guard 2) blocks off-scale `font-size`
 
 ---
 
+## 14c. Border radius — Always Use a Radius Token
+
+**Border radius must come from a `--radius-*` token via `var()`. Never write a raw `px` radius.**
+
+The scale (px): `--radius-sm` 4 · `--radius-base` 6 · `--radius-md` 8 · `--radius-lg` 12 · `--radius-xl` 16 · `--radius-full` 999. Pick the nearest token — a design that looks like `9px` is `var(--radius-md)`, `10px`/`11px` is `var(--radius-lg)`, a pill/circle is `var(--radius-full)`.
+
+**Never** hardcode a px value like `border-radius: 9px` or `border-radius: 10px`. Percentages for true circles (`50%`) and `0` are allowed, but prefer `var(--radius-full)` for pills and circular avatars/badges so the system stays consistent. This applies to every component (in `components.css`) and every component demo in a `*-docs.html` `<style>` block.
+
+A pre-commit hook (`.githooks/pre-commit`, Guard 3) blocks raw-px `border-radius` additions in `*-docs.html`, `index.html` and `components.css`. For a genuine exception, add `/* radius-exempt: reason */` on the line.
+
+---
+
 ## 15. Playground Section (Developer Tab — Required)
 
 Every component page must include a Playground as the first section in the Developer tab.

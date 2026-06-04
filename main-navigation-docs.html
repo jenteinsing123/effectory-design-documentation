@@ -18,51 +18,55 @@
     .mainnav.is-personal { --bg-brand-subtle-selected: #ffefc2; --content-brand-base: #8a4b15; --logo-bg: #fdbd12; }
 
     /* portal switcher */
-    .mn-portal { display: flex; align-items: center; gap: 10px; margin: 0 12px 16px; padding: 8px 10px; border: none; background: transparent; border-radius: 10px; cursor: pointer; font-family: inherit; }
+    .mn-portal { display: flex; align-items: center; gap: 10px; margin: 0 12px 16px; padding: 8px 10px; border: none; background: transparent; border-radius: var(--radius-md); cursor: pointer; font-family: inherit; }
     .mn-portal:hover { background: var(--bg-base-hover); }
-    .mn-logo { width: 30px; height: 30px; border-radius: 8px; background: var(--logo-bg, #30b3af); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .mn-logo span { width: 12px; height: 12px; border-radius: 50%; border: 2.5px solid #fff; }
+    .mn-logo { width: 30px; height: 30px; border-radius: var(--radius-md); background: var(--logo-bg, #30b3af); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .mn-logo span { width: 12px; height: 12px; border-radius: var(--radius-full); border: 2.5px solid #fff; }
     .mn-portal b { font-size: 14px; font-weight: 600; color: var(--content-base); }
-    .mn-portal .mn-chev { margin-left: auto; width: 15px; height: 15px; color: var(--content-subtle); display: flex; }
+    .mn-portal .mn-chev { margin-left: auto; width: 16px; height: 16px; color: var(--content-subtle); display: flex; }
 
     /* nav items */
     .mn-nav { display: flex; flex-direction: column; gap: 3px; padding: 0 12px; }
-    .mn-item { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 14px; border-radius: 9px; font-size: 14px; font-weight: 500; color: var(--content-secondary); text-decoration: none; cursor: pointer; border: none; background: transparent; font-family: inherit; width: 100%; text-align: left; transition: background .1s, color .1s; }
-    .mn-item > i[data-icon] { width: 20px; height: 20px; display: flex; flex-shrink: 0; color: var(--content-subtle); }
-    .mn-item .mn-chev { margin-left: auto; width: 15px; height: 15px; color: var(--content-subtle); display: flex; }
+    .mn-item { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 14px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--content-action); text-decoration: none; cursor: pointer; border: none; background: transparent; font-family: inherit; width: 100%; text-align: left; transition: background .1s, color .1s; }
+    .mn-item > i[data-icon] { width: 16px; height: 16px; display: flex; flex-shrink: 0; color: var(--content-action); }
+    .mn-item .mn-chev { margin-left: auto; width: 16px; height: 16px; color: var(--content-subtle); display: flex; }
     .mn-item:hover, .mn-item.is-hover { background: var(--bg-base-hover); color: var(--content-base); }
     .mn-item.is-active { background: var(--bg-brand-subtle-selected); color: var(--content-base); font-weight: 600; }
     .mn-item.is-active > i[data-icon] { color: var(--content-brand-base); }
 
     /* expandable group */
     .mn-sub { display: flex; flex-direction: column; gap: 2px; padding: 2px 0 6px; }
-    .mn-subitem { display: flex; align-items: center; height: 44px; padding: 0 14px 0 46px; border-radius: 9px; font-size: 14px; color: var(--content-secondary); text-decoration: none; cursor: pointer; }
+    .mn-subitem { display: flex; align-items: center; height: 44px; padding: 0 14px 0 42px; border-radius: var(--radius-md); font-size: 14px; color: var(--content-action); text-decoration: none; cursor: pointer; }
     .mn-subitem:hover { background: var(--bg-base-hover); color: var(--content-base); }
     .mn-subitem.is-active { background: var(--bg-brand-subtle-selected); color: var(--content-base); font-weight: 600; }
     .mn-sub-divider { height: 1px; background: var(--border-base); margin: 6px 12px; }
 
     /* footer: help + account */
     .mn-foot { margin-top: auto; padding: 0 12px; display: flex; flex-direction: column; gap: 4px; }
-    .mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; border-top: 1px solid var(--border-base); margin-top: 6px; cursor: pointer; }
+    .mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-md); border-top: 1px solid var(--border-base); margin-top: 6px; cursor: pointer; }
     .mn-user:hover, .mn-user.is-hover { background: var(--bg-base-hover); }
     .mn-user.is-pressed { background: var(--bg-base-pressed); }
-    .mn-ava { width: 32px; height: 32px; border-radius: 50%; background: #6c5ce7; color: #fff; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .mn-user .mn-meta { line-height: 1.3; min-width: 0; }
     .mn-user .mn-name { font-size: 14px; font-weight: 500; color: var(--content-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .mn-user .mn-org { font-size: 12px; color: var(--content-subtle); }
-    .mn-user > i[data-icon] { width: 15px; height: 15px; margin-left: auto; color: var(--content-subtle); display: flex; }
+    .mn-user > i[data-icon] { width: 16px; height: 16px; margin-left: auto; color: var(--content-subtle); display: flex; }
+
+    /* Avatar component (from the design system) — used in the account button */
+    .av { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-full); font-family: 'Poppins', sans-serif; font-weight: 600; flex-shrink: 0; user-select: none; box-sizing: border-box; }
+    .av-32 { width: 32px; height: 32px; font-size: 12px; }
+    .av-blue { background: var(--bg-accent-blue-subtle); color: var(--content-accent-blue-base); }
 
     /* account dropdown */
-    .mn-menu { width: 264px; background: var(--bg-base); border: 1px solid var(--border-base); border-radius: 12px; box-shadow: var(--sh-dialogs); padding: 8px; font-family: 'Poppins', sans-serif; }
-    .mn-menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 9px; font-size: 14px; color: var(--content-base); cursor: pointer; }
+    .mn-menu { width: 264px; background: var(--bg-base); border: 1px solid var(--border-base); border-radius: var(--radius-lg); box-shadow: var(--sh-dialogs); padding: 8px; font-family: 'Poppins', sans-serif; }
+    .mn-menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius-md); font-size: 14px; color: var(--content-base); cursor: pointer; }
     .mn-menu-item:hover { background: var(--bg-base-hover); }
-    .mn-menu-item > i[data-icon] { width: 17px; height: 17px; display: flex; color: var(--content-subtle); flex-shrink: 0; }
+    .mn-menu-item > i[data-icon] { width: 16px; height: 16px; display: flex; color: var(--content-subtle); flex-shrink: 0; }
     .mn-menu-item .mn-menu-sub { font-size: 12px; color: var(--content-subtle); }
-    .mn-menu-item .mn-beta { margin-left: auto; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: var(--bg-info-subtle, #d6e6ff); color: var(--content-info-base, #205bb9); }
+    .mn-menu-item .mn-beta { margin-left: auto; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: var(--radius-full); background: var(--bg-info-subtle, #d6e6ff); color: var(--content-info-base, #205bb9); }
     .mn-menu-divider { height: 1px; background: var(--border-base); margin: 6px 4px; }
 
     /* doc layout helpers */
-    .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: 12px; padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
+    .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .mainnav { pointer-events: none; }
     .mn-prev { display: flex; justify-content: center; align-items: flex-start; padding: 28px 20px; flex: 1; }
     .variant-row { grid-template-columns: minmax(300px, 1fr) 1fr; }
@@ -122,7 +126,7 @@
               </nav>
               <div class="mn-foot">
                 <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
-                <div class="mn-user"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
+                <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
               </div>
             </div>
           </div>
@@ -274,9 +278,9 @@
 
           <h3 class="text-l4">Account menu button</h3>
           <div class="states-row">
-            <div class="state-col"><span class="state-lbl">Default</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user" style="border-top:0;margin:0;"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
-            <div class="state-col"><span class="state-lbl">Hover</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user is-hover" style="border-top:0;margin:0;"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
-            <div class="state-col"><span class="state-lbl">Pressed</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user is-pressed" style="border-top:0;margin:0;"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
+            <div class="state-col"><span class="state-lbl">Default</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user" style="border-top:0;margin:0;"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
+            <div class="state-col"><span class="state-lbl">Hover</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user is-hover" style="border-top:0;margin:0;"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
+            <div class="state-col"><span class="state-lbl">Pressed</span><div class="mainnav" style="height:auto;width:216px;padding:0;border:0;background:transparent;pointer-events:none;"><div class="mn-user is-pressed" style="border-top:0;margin:0;"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div></div></div>
           </div>
         </section>
 
@@ -395,7 +399,7 @@
               <tr><td><code>.mn-portal</code> · <code>.mn-logo</code></td><td>Portal switcher button + logo square.</td></tr>
               <tr><td><code>.mn-nav</code> · <code>.mn-item</code></td><td>Item list + a single item (icon + label + optional <code>.mn-chev</code>). States: <code>.is-hover</code>, <code>.is-active</code>.</td></tr>
               <tr><td><code>.mn-sub</code> · <code>.mn-subitem</code></td><td>Expanded group's sub-items (indented). <code>.mn-sub-divider</code> separates setting-level items.</td></tr>
-              <tr><td><code>.mn-foot</code> · <code>.mn-user</code></td><td>Bottom region: Help &amp; learn + account button (<code>.mn-ava</code>, <code>.mn-name</code>, <code>.mn-org</code>). States: <code>.is-hover</code>, <code>.is-pressed</code>.</td></tr>
+              <tr><td><code>.mn-foot</code> · <code>.mn-user</code></td><td>Bottom region: Help &amp; learn + account button (<code>.av</code>, <code>.mn-name</code>, <code>.mn-org</code>). States: <code>.is-hover</code>, <code>.is-pressed</code>.</td></tr>
               <tr><td><code>.mn-menu</code> · <code>.mn-menu-item</code></td><td>The account dropdown + its rows (<code>.mn-menu-divider</code>, <code>.mn-beta</code> tag).</td></tr>
             </tbody>
           </table>
@@ -478,7 +482,7 @@
         <nav class="mn-nav" aria-label="Main">${items}</nav>
         <div class="mn-foot">
           <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
-          <div class="mn-user"><div class="mn-ava">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
+          <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
         </div>
       </div>`;
     }
