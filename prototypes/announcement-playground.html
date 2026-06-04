@@ -120,6 +120,15 @@
     <!-- ════════ DIALOG TAB ════════ -->
     <div class="tabpanel" data-panel="dialog">
       <div class="panel">
+        <div class="panel-hd">Intro screen</div>
+        <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-intro-media" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-intro-title" type="text" value="🎉 New release"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-intro-body" rows="3">We've built some awesome new things to make your surveys even better. Want a quick look?</textarea></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">"Show me" label</div></div><div class="ctrl"><input class="tf" id="d-start" type="text" value="Show me what's new"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">"Skip" label</div><div class="d">Closes the dialog; it returns via the floating button.</div></div><div class="ctrl"><input class="tf" id="d-skip" type="text" value="Skip for now"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hd">Feature tour</div>
         <div class="set-row">
           <div class="lbl"><div class="t">Number of steps</div><div class="d">Each step is one screen in the carousel.</div></div>
           <div class="ctrl">
@@ -250,7 +259,7 @@
       { title:'Schedule recurring pulses', body:'Set a cadence once and let surveys go out on autopilot.', media:true },
       { title:'Share results securely', body:'Give managers their own view without exposing the whole organization.', media:true },
     ];
-    let dCount = 4, dStep = 0, dOpen = false;
+    let dCount = 4, dStep = 0, dOpen = false, dPhase = 'intro'; // 'intro' | 'tour'
 
     function dBlock(i){
       const s = STEPS[i];
@@ -265,6 +274,23 @@
     function dRenderForm(){ let h=''; for(let i=0;i<dCount;i++) h+=dBlock(i); $stepCfgs.innerHTML=h; paint($stepCfgs); }
     function dRender(){
       if (!dOpen) { $dlg.classList.remove('open'); $dlg.innerHTML=''; return; }
+      if (dPhase === 'intro') {
+        const im = el('d-intro-media').checked;
+        const media = `<div class="dlg-media ${im?'':'is-collapsed'}" style="background:#6c5ce7; color:rgba(255,255,255,.85);">${DPH}</div>`;
+        $dlg.innerHTML = `<div class="dlg">
+          <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
+          ${media}
+          <div class="dlg-body">
+            <p class="dlg-title">${esc(el('d-intro-title').value)}</p>
+            <p class="dlg-text">${esc(el('d-intro-body').value)}</p>
+            <div class="dlg-footer" style="margin-top:24px;">
+              <button class="btn btn-tertiary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>
+              <button class="btn btn-primary" data-dstart>${esc(el('d-start').value)||'Show me'} <i data-icon="arrow-right"></i></button>
+            </div>
+          </div>
+        </div>`;
+        $dlg.classList.add('open'); paint($dlg); return;
+      }
       const s = STEPS[dStep];
       const last = dStep >= dCount - 1;
       const media = `<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${D_BG[dStep]};">${DPH}</div>`;
@@ -292,7 +318,8 @@
       el('c-fab').classList.toggle('show', tab === 'card' && (cCount <= 0 || cIdx >= cCount));
       el('d-fab').classList.toggle('show', tab === 'dialog' && !dOpen);
     }
-    function dOpenDlg(){ dStep=0; dOpen=true; dRender(); updateFab(); }
+    function dOpenDlg(){ dPhase='intro'; dStep=0; dOpen=true; dRender(); updateFab(); }
+    function dStartTour(){ dPhase='tour'; dStep=0; dRender(); }
     function dClose(){ dOpen=false; dRender(); updateFab(); }
     function dNext(){ if (dStep < dCount-1){ dStep++; dRender(); } else dClose(); }
     function dPrev(){ if (dStep > 0){ dStep--; dRender(); } }
@@ -300,6 +327,8 @@
 
     $dlg.addEventListener('click', e => {
       if (e.target.closest('[data-dclose]')) return dClose();
+      if (e.target.closest('[data-dskip]')) return dClose();
+      if (e.target.closest('[data-dstart]')) return dStartTour();
       if (e.target.closest('[data-dnext]')) return dNext();
       if (e.target.closest('[data-dprev]')) return dPrev();
       const dot = e.target.closest('[data-ddot]'); if (dot){ dStep = +dot.dataset.ddot; dRender(); return; }
@@ -318,6 +347,10 @@
     }
     $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
     el('d-prev').addEventListener('input', dRender); el('d-next').addEventListener('input', dRender);
+    ['d-intro-title','d-intro-body','d-start','d-skip','d-intro-media'].forEach(id => {
+      el(id).addEventListener('input', () => { if (dPhase==='intro') dRender(); });
+      el(id).addEventListener('change', () => { if (dPhase==='intro') dRender(); });
+    });
     el('d-fab').addEventListener('click', dOpenDlg);
 
     /* ══════════════ TABS ══════════════ */
