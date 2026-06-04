@@ -199,7 +199,7 @@
     const r = userBtn.getBoundingClientRect();
     userMenu.hidden = false;
     userMenu.style.left = r.left + 'px';
-    userMenu.style.width = r.width + 'px';
+    userMenu.style.width = '240px';
     userMenu.style.bottom = (window.innerHeight - r.top + 8) + 'px';
     userBtn.setAttribute('aria-expanded','true');
     if (window.Icons && window.Icons.render) window.Icons.render(userMenu);
