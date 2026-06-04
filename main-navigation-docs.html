@@ -43,12 +43,13 @@
 
     /* footer: help + account */
     .mn-foot { margin-top: auto; padding: 0 12px; display: flex; flex-direction: column; gap: 4px; }
-    .mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-md); border-top: 1px solid var(--border-base); margin-top: 6px; cursor: pointer; }
+    .mn-foot-divider { height: 1px; background: var(--border-base); margin: 6px 0; }
+    .mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-md); cursor: pointer; }
     .mn-user:hover, .mn-user.is-hover { background: var(--bg-base-hover); }
     .mn-user.is-pressed { background: var(--bg-base-pressed); }
     .mn-user .mn-meta { line-height: 1.3; min-width: 0; }
     .mn-user .mn-name { font-size: 14px; font-weight: 500; color: var(--content-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mn-user .mn-org { font-size: 12px; color: var(--content-subtle); }
+    .mn-user .mn-org { font-size: 12px; color: var(--content-secondary); }
     .mn-user > i[data-icon] { width: 16px; height: 16px; margin-left: auto; color: var(--content-subtle); display: flex; }
 
     /* Avatar component (from the design system) — used in the account button */
@@ -126,6 +127,7 @@
               </nav>
               <div class="mn-foot">
                 <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
+                <div class="mn-foot-divider"></div>
                 <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
               </div>
             </div>
@@ -364,6 +366,14 @@
           </div>
         </div>
 
+        <div class="dev-gap">
+          <span class="dev-gap-icon">⚠️</span>
+          <div class="dev-gap-body">
+            <span class="dev-gap-label">Figma gap</span>
+            <span class="dev-gap-text">In Figma the <strong>active</strong> navigation item's label is <strong>Semi&nbsp;Bold (600)</strong>, but the current implementation in dev renders it at the regular Medium (500) weight — it does not bump to semi-bold. Align the active-item label to <code>font-weight: 600</code> in the production component to match the design.</span>
+          </div>
+        </div>
+
         <section class="section" id="dev-playground">
           <h2 class="text-l3">Playground</h2>
           <p class="section-lead">Switch portal, pick the active item, and expand groups. The code reflects the prototype structure.</p>
@@ -493,6 +503,7 @@
         <nav class="mn-nav" aria-label="Main">${items}</nav>
         <div class="mn-foot">
           <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
+          <div class="mn-foot-divider"></div>
           <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal van Rooi…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
         </div>
       </div>`;

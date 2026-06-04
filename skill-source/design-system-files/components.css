@@ -2046,12 +2046,13 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .mn-subitem.is-active { background: var(--bg-brand-subtle-selected); color: var(--content-base); font-weight: 600; }
 .mn-sub-divider { height: 1px; background: var(--border-base); margin: 6px 12px; }
 .mn-foot { margin-top: auto; padding: 0 12px; display: flex; flex-direction: column; gap: 4px; }
-.mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-md); border-top: 1px solid var(--border-base); margin-top: 6px; cursor: pointer; }
+.mn-foot-divider { height: 1px; background: var(--border-base); margin: 6px 0; }
+.mn-user { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--radius-md); cursor: pointer; }
 .mn-user:hover, .mn-user.is-hover { background: var(--bg-base-hover); }
 .mn-user.is-pressed { background: var(--bg-base-pressed); }
 .mn-user .mn-meta { line-height: 1.3; min-width: 0; }
 .mn-user .mn-name { font-size: 14px; font-weight: 500; color: var(--content-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.mn-user .mn-org { font-size: 12px; color: var(--content-subtle); }
+.mn-user .mn-org { font-size: 12px; color: var(--content-secondary); }
 .mn-user > i[data-icon] { width: 16px; height: 16px; margin-left: auto; color: var(--content-subtle); display: flex; }
 .mn-menu { width: 264px; background: var(--bg-base); border: 1px solid var(--border-base); border-radius: var(--radius-lg); box-shadow: var(--sh-dialogs); padding: 8px; font-family: 'Poppins', sans-serif; }
 .mn-menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius-md); font-size: 14px; color: var(--content-base); cursor: pointer; }

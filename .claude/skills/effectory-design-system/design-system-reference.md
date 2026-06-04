@@ -733,6 +733,7 @@ De primaire app-sidebar (240px, links). Bevat een portal-switcher bovenaan, navi
   </nav>
   <div class="mn-foot">
     <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
+    <div class="mn-foot-divider"></div>
     <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
   </div>
 </div>
