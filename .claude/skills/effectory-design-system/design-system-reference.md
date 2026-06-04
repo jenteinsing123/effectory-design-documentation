@@ -734,11 +734,11 @@ De primaire app-sidebar (240px, links). Bevat een portal-switcher bovenaan, navi
   <div class="mn-foot">
     <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
     <div class="mn-foot-divider"></div>
-    <div class="mn-user"><div class="av av-32 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
+    <div class="mn-user"><div class="av av-36 av-blue">JR</div><div class="mn-meta"><div class="mn-name">Jamal…</div><div class="mn-org">Effectory B.V.</div></div><i data-icon="chevron-down"></i></div>
   </div>
 </div>
 ```
-Classes: `.mainnav` (+ `.is-personal`), `.mn-portal` (container) met statisch `.mn-logo` + klikbare `.mn-portal-btn` (alleen het label/chevron heeft een hover-achtergrond, het logo niet), `.mn-nav`/`.mn-item` (states `.is-hover`/`.is-active`, optionele `.mn-chev`), uitklapbare groep `.mn-sub`/`.mn-subitem` (+ `.mn-sub-divider`), footer `.mn-foot`/`.mn-user` (states `.is-hover`/`.is-pressed`), account-dropdown `.mn-menu`/`.mn-menu-item` (`.mn-menu-divider`, `.mn-beta`). De actieve item gebruikt `--bg-brand-subtle-selected` (highlight) + `--content-brand-base` (icoon). Het portal-logo (`.mn-logo`) is het Effectory-merklogo als `background-image` (teal voor Coordinator), dat naar het gele logo wisselt bij `.mainnav.is-personal`. Het Personal-portal (`html[data-portal="personal"]`, of `.mainnav.is-personal` in een prototype) remapt die brand-tokens naar geel. Het account-menu gebruikt de gedocumenteerde **Avatar** (`.av av-32`), niet een eigen avatar-class. Menu-item-iconen zijn 16px met `--content-action`; alle radii komen uit `--radius-*` tokens. A11y: `<nav aria-label="Main">`, `aria-current="page"` op de actieve item, `aria-expanded` op groep-headers.
+Classes: `.mainnav` (+ `.is-personal`), `.mn-portal` (container) met statisch `.mn-logo` + klikbare `.mn-portal-btn` (alleen het label/chevron heeft een hover-achtergrond, het logo niet), `.mn-nav`/`.mn-item` (states `.is-hover`/`.is-active`, optionele `.mn-chev`), uitklapbare groep `.mn-sub`/`.mn-subitem` (+ `.mn-sub-divider`), footer `.mn-foot`/`.mn-user` (states `.is-hover`/`.is-pressed`), account-dropdown `.mn-menu`/`.mn-menu-item` (`.mn-menu-divider`, `.mn-beta`). De actieve item gebruikt `--bg-brand-subtle-selected` (highlight) + `--content-brand-base` (icoon). Het portal-logo (`.mn-logo`) is het Effectory-merklogo als `background-image` (teal voor Coordinator), dat naar het gele logo wisselt bij `.mainnav.is-personal`. Het Personal-portal (`html[data-portal="personal"]`, of `.mainnav.is-personal` in een prototype) remapt die brand-tokens naar geel. Het account-menu gebruikt de gedocumenteerde **Avatar** (`.av av-36`), niet een eigen avatar-class. Menu-item-iconen zijn 16px met `--content-action`; alle radii komen uit `--radius-*` tokens. A11y: `<nav aria-label="Main">`, `aria-current="page"` op de actieve item, `aria-expanded` op groep-headers.
 
 > ⚠️ **Dev gap:** de Angular-selector/inputs van de app-sidebar zijn nog niet bevestigd in de styleguide. Deze `.mainnav`-classes zijn de prototype-structuur; verifieer de productie-API met engineering.
 
@@ -749,7 +749,7 @@ Ronde avatar met initialen of een icoon. Gebruik altijd deze gedocumenteerde com
 <div class="av av-32 av-blue">JR</div>                 <!-- initialen -->
 <div class="av av-40 av-turquoise"><i data-icon="user"></i></div>  <!-- icoon -->
 ```
-Maten: `.av-40` / `.av-36` / `.av-32` / `.av-24` / `.av-20` (font schaalt mee; av-24=11px, av-20=10px zijn bewust off-scale voor initialen). Kleuren: `.av-blue`, `.av-turquoise`, `.av-green`, `.av-orange`, `.av-red`, `.av-yellow`, `.av-grey` — elk een `--bg-accent-*-subtle` vlak met `--content-accent-*-base` tekst. Radius is altijd `--radius-full`. Gebruikt o.a. in de Main Navigation (`.av av-32` in `.mn-user`).
+Maten: `.av-40` / `.av-36` / `.av-32` / `.av-24` / `.av-20` (font schaalt mee; av-24=11px, av-20=10px zijn bewust off-scale voor initialen). Kleuren: `.av-blue`, `.av-turquoise`, `.av-green`, `.av-orange`, `.av-red`, `.av-yellow`, `.av-grey` — elk een `--bg-accent-*-subtle` vlak met `--content-accent-*-base` tekst. Radius is altijd `--radius-full`. Gebruikt o.a. in de Main Navigation (`.av av-36` in `.mn-user`).
 
 ---
 
