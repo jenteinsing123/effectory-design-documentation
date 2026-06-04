@@ -41,6 +41,9 @@
     .ph-card h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
     .ph-line { height: 9px; border-radius: var(--radius-full); background: var(--bg-secondary); margin-top: 8px; }
     .ph-line.w-90 { width: 90%; } .ph-line.w-70 { width: 70%; } .ph-line.w-50 { width: 50%; }
+
+    /* Account dropdown floats above the account button (fixed → never clipped by the sidebar) */
+    #userMenu { position: fixed; z-index: 50; }
   </style>
 </head>
 <body>
@@ -58,7 +61,7 @@
     <div class="mn-foot">
       <a class="mn-item"><i data-icon="help"></i> Help &amp; learn</a>
       <div class="mn-foot-divider"></div>
-      <div class="mn-user" id="userBtn" title="Open account designs in Figma">
+      <div class="mn-user" id="userBtn" aria-haspopup="true" aria-expanded="false">
         <div class="av av-36 av-blue">JR</div>
         <div class="mn-meta">
           <div class="mn-name">Jamal van Rooi…</div>
@@ -67,6 +70,17 @@
         <i data-icon="chevron-down"></i>
       </div>
     </div>
+  </div>
+
+  <!-- Account dropdown (Main Nav / User Settings / Dropdown) — positioned over the account button on click -->
+  <div class="mn-menu" id="userMenu" role="menu" hidden>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="building"></i> Switch organization</div>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="gift"></i> Preview features</div>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="sun"></i> <span>Appearance<span class="mn-menu-sub">Light</span></span> <span class="mn-beta">beta</span></div>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="globe"></i> Change language</div>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="cookie"></i> Cookie settings</div>
+    <div class="mn-menu-divider"></div>
+    <div class="mn-menu-item" role="menuitem"><i data-icon="log-out"></i> Log out</div>
   </div>
 
   <div class="main">
@@ -178,10 +192,22 @@
     active = it.dataset.key; render();
   });
 
-  // Account / name menu item → open the Figma designs in a new tab
-  document.getElementById('userBtn').addEventListener('click', ()=>{
-    window.open('https://www.figma.com/design/W5JIbsiwG0mczYajMuEwSOmy/%F0%9F%A4%96-Components?node-id=19464-14816&t=mEZM561fyBEC8Cuh-4', '_blank', 'noopener');
-  });
+  // Account / name menu item → open the account dropdown above the button
+  const userBtn = document.getElementById('userBtn');
+  const userMenu = document.getElementById('userMenu');
+  function openMenu(){
+    const r = userBtn.getBoundingClientRect();
+    userMenu.hidden = false;
+    userMenu.style.left = r.left + 'px';
+    userMenu.style.width = r.width + 'px';
+    userMenu.style.bottom = (window.innerHeight - r.top + 8) + 'px';
+    userBtn.setAttribute('aria-expanded','true');
+    if (window.Icons && window.Icons.render) window.Icons.render(userMenu);
+  }
+  function closeMenu(){ userMenu.hidden = true; userBtn.setAttribute('aria-expanded','false'); }
+  userBtn.addEventListener('click', e=>{ e.stopPropagation(); userMenu.hidden ? openMenu() : closeMenu(); });
+  document.addEventListener('click', e=>{ if (!userMenu.hidden && !userMenu.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e=>{ if (e.key==='Escape') closeMenu(); });
 
   // Portal switch
   document.getElementById('portalBtn').addEventListener('click', ()=>{
