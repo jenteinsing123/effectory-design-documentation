@@ -25,11 +25,17 @@
     .sp-heading.is-sm .sp-title { font-size: 18px; line-height: 1.5; }
     .sp-heading .sp-subtitle { margin: 8px 0 0; font-size: 14px; color: var(--content-secondary); }
     .sp-heading.is-sm .sp-subtitle { margin: 4px 0 0; }
-    /* Small (compact) header — title shares its row with the actions */
-    .sp-header.is-compact { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 12px 8px; }
-    .sp-header.is-compact .sp-heading { grid-column: 1; grid-row: 1; padding: 16px 0 0 40px; }
-    .sp-header.is-compact .sp-toolbar { grid-column: 2; grid-row: 1; }
-    .sp-header.is-compact .sp-tabs { grid-column: 1 / -1; grid-row: 2; margin: 0; }
+    /* Small header → tighter 24px padding everywhere (incl. above the title) */
+    .sidepanel.is-sm-header .sp-toolbar { padding: 24px 24px 0; }
+    .sidepanel.is-sm-header .sp-heading { padding: 0 24px; }
+    .sidepanel.is-sm-header .sp-tabs   { padding: 0 24px; }
+    .sidepanel.is-sm-header .sp-body   { padding: 16px 24px; }
+    .sidepanel.is-sm-header .sp-footer { padding: 16px 24px 24px; }
+    /* Compact small header (no advanced menu) — title shares its row with the actions */
+    .sp-header.is-compact { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 8px; padding: 24px 24px 0; }
+    .sp-header.is-compact .sp-toolbar { grid-column: 2; grid-row: 1; padding: 0; }
+    .sp-header.is-compact .sp-heading { grid-column: 1; grid-row: 1; padding: 0; }
+    .sp-header.is-compact .sp-tabs { grid-column: 1 / -1; grid-row: 2; margin: 8px -24px 0; padding: 0 24px; }
 
     .sp-tabs { display: flex; gap: 28px; margin: 4px 0 0; padding: 0 40px; border-bottom: 1px solid var(--border-base); overflow-x: auto; }
     .sp-tab { display: inline-flex; align-items: center; gap: 6px; padding: 10px 0; font-size: 14px; font-weight: 500; color: var(--content-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; cursor: pointer; }
@@ -223,7 +229,7 @@
           </div>
 
           <h3 class="text-l4">Header size</h3>
-          <p>A <strong>Large</strong> header (26px title) puts the toolbar on its own row above the title; a <strong>Small</strong> header (18px title) is more compact and places the close/actions on the title row. Try both in the playground.</p>
+          <p>A <strong>Large</strong> header (26px title) puts the toolbar on its own row above the title; a <strong>Small</strong> header (18px title) is more compact: it tightens the panel padding to 24px (including above the title) and places the close/actions on the title row. Try both in the playground.</p>
 
           <h3 class="text-l4">Footer</h3>
           <p>A footer is optional. Add one when the panel edits data and needs explicit Save/Cancel actions; omit it for read-only detail panels (use the close button).</p>
@@ -486,7 +492,7 @@ open() {
       const foot = s.foot ? '<div class="sp-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Confirm</button></div>' : '';
       const headerSm = s.header==='small';
       const compact = headerSm && !s.adv; // small header puts the actions on the title row
-      return `<div class="sidepanel${s.size==='small'?' sidepanel-sm':''}" role="dialog" aria-modal="true">
+      return `<div class="sidepanel${s.size==='small'?' sidepanel-sm':''}${headerSm?' is-sm-header':''}" role="dialog" aria-modal="true">
         <div class="sp-header${compact?' is-compact':''}">
           <div class="sp-toolbar">${nav}<div class="sp-actions">${extra}<i data-icon="cross" data-close="1"></i></div></div>
           <div class="sp-heading${headerSm?' is-sm':''}"><h3 class="sp-title">${esc(s.title)||'Title'}</h3>${(s.subon && s.subtitle)?`<p class="sp-subtitle">${esc(s.subtitle)}</p>`:''}</div>
