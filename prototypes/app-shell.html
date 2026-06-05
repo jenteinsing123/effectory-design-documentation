@@ -44,6 +44,9 @@
 
     /* Dropdowns float (fixed → never clipped by the sidebar) */
     #userMenu, #portalMenu { position: fixed; z-index: 50; max-height: none; overflow: visible; }
+    /* Account menu: titles are regular weight, beta tag is a 12px semibold pill */
+    #userMenu .menu-item-title { font-weight: 400; }
+    #userMenu .chip { font-size: 12px; font-weight: 600; border-radius: var(--radius-full); }
     /* Dropdown header (e.g. "Switch my role") */
     .menu-header { padding: 6px 8px 10px; font-size: 14px; font-weight: 600; color: var(--content-base); }
     /* Mini portal logos inside the portal dropdown */
