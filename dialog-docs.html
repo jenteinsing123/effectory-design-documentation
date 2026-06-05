@@ -39,7 +39,7 @@
     .dialog-header { display: flex; flex-direction: column; gap: 4px; }
     .dialog-title { margin: 0; font-size: 26px; font-weight: 600; line-height: 1.3; color: var(--content-base); }
     .dialog-subtitle { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--content-secondary); }
-    .dialog-xs .dialog-title, .dialog-header.is-sm .dialog-title { font-size: 18px; line-height: 1.5; }
+    .dialog-header.is-sm .dialog-title { font-size: 18px; line-height: 1.5; }
 
     .dialog-body { font-size: 16px; line-height: 1.5; color: var(--content-secondary); }
 
@@ -66,6 +66,8 @@
     .ana-slot { border: 1.5px dashed var(--border-action); border-radius: var(--radius-md); padding: 20px 16px; text-align: center; font-size: 14px; color: var(--content-subtle); }
 
     .dd-card .dd-prev { flex: 1; }
+    /* Do/Don't demos are compact confirmation dialogs → use the small header */
+    .dd-prev .dialog-title { font-size: 18px; line-height: 1.5; }
     .pg-preview .dialog { max-width: 100%; }
     /* Give the variant previews more room for the dialogs */
     .variant-row { grid-template-columns: minmax(440px, 1fr) 1fr; }
@@ -232,7 +234,7 @@
                   <div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Small</strong> — An 18px title (<code>.dialog-header.is-sm</code>). For tight or secondary dialogs where a full-size heading would feel heavy — and the default for the XS size.</div>
+              <div class="variant-row-desc"><strong>Small</strong> — An 18px title (<code>.dialog-header.is-sm</code>). For tight or secondary dialogs where a full-size heading would feel heavy. Independent of the dialog's width — pair it with any size.</div>
             </div>
           </div>
 
@@ -263,21 +265,15 @@
 
           <h3 class="text-l4">Size</h3>
           <p>Width scales with how much the content needs; height always fits the content. Pick the smallest that comfortably holds your content.</p>
-          <div class="variant-rows">
-            <div class="variant-row">
-              <div class="variant-row-btn"><div class="dialog dialog-xs" style="gap:16px; padding:20px;"><div class="dialog-header"><h3 class="dialog-title" style="font-size:18px; line-height:1.4;">Header</h3><p class="dialog-subtitle">Subtitle</p></div><div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div></div></div>
-              <div class="variant-row-desc"><strong>XS · 440px</strong> — Tight confirmations and yes/no decisions. Uses a smaller (18px) title.</div>
-            </div>
-            <div class="variant-row">
-              <div class="variant-row-desc" style="flex:none; width:100%;"><strong>S · 600px</strong> — The default. Most confirmations, short forms and messages.</div>
-            </div>
-            <div class="variant-row">
-              <div class="variant-row-desc" style="flex:none; width:100%;"><strong>M · 800px</strong> — Denser content: longer forms, side-by-side fields, a small table.</div>
-            </div>
-            <div class="variant-row">
-              <div class="variant-row-desc" style="flex:none; width:100%;"><strong>L · 1080px</strong> — The largest. Complex, content-rich tasks that still warrant a modal. Consider a full page instead when it grows beyond this.</div>
-            </div>
-          </div>
+          <table class="token-table">
+            <thead><tr><th>Size</th><th>Width</th><th>When to use</th></tr></thead>
+            <tbody>
+              <tr><td><strong>XS</strong></td><td>440px</td><td>Tight confirmations and yes/no decisions.</td></tr>
+              <tr><td><strong>S</strong></td><td>600px</td><td>The default — most confirmations, short forms and messages.</td></tr>
+              <tr><td><strong>M</strong></td><td>800px</td><td>Denser content: longer forms, side-by-side fields, a small table.</td></tr>
+              <tr><td><strong>L</strong></td><td>1080px</td><td>The largest. Complex, content-rich tasks that still warrant a modal — consider a full page beyond this.</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section class="section" id="content-guidelines">
