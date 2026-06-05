@@ -62,6 +62,8 @@
     .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .dialog { pointer-events: none; }
     .ana-num { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--content-base); color: var(--bg-base); font-size: 9px; /* font-scale-exempt: anatomy number badge */ font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 3; }
+    /* Anatomy content slot — dashed to signal "insert your content here" */
+    .ana-slot { border: 1.5px dashed var(--border-action); border-radius: var(--radius-md); padding: 20px 16px; text-align: center; font-size: 14px; color: var(--content-subtle); }
 
     .dd-card .dd-prev { flex: 1; }
     .pg-preview .dialog { max-width: 100%; }
@@ -121,7 +123,7 @@
                 <h3 class="dialog-title">Header</h3>
                 <p class="dialog-subtitle">An explanation of some sorts — what this dialog is for and what happens next.</p>
               </div>
-              <div class="dialog-body">Dialog content goes here — a message, a form, or any custom UI.</div>
+              <div class="dialog-body"><div class="ana-slot">Your content goes here — a message, a form, or any custom UI</div></div>
               <div class="dialog-footer">
                 <button class="btn btn-secondary" tabindex="-1">Cancel</button>
                 <button class="btn btn-primary" tabindex="-1">Got it</button>
