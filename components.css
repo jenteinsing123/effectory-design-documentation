@@ -2140,7 +2140,5 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .tab { display: inline-flex; align-items: center; gap: 8px; padding: 10px 0; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-secondary); background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; font-family: inherit; white-space: nowrap; }
 .tab:hover, .tab.is-hover { color: var(--content-base); }
 .tab.is-active { color: var(--content-base); border-bottom-color: var(--content-brand-secondary); }
-.tab.is-disabled { color: var(--content-subtle); cursor: not-allowed; }
+.tab.is-disabled { color: var(--content-disabled); cursor: not-allowed; }
 .tab i[data-icon] { width: 16px; height: 16px; display: flex; }
-.tabs.is-vertical { flex-direction: column; gap: 6px; align-items: flex-start; border-bottom: none; }
-.tabs.is-vertical .tab { margin-bottom: 0; }
