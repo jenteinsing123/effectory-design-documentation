@@ -20,6 +20,11 @@ ZIP="$ROOT/dist/$ASSET"
 "$ROOT/sync-skill.sh"
 "$ROOT/build-skill.sh"
 
+VER=$(tr -d '[:space:]' < "$ROOT/VERSION")
+BUILT=$(date +"%Y-%m-%d %H:%M")
+TITLE="Effectory Design System — skill v$VER"
+BODY="Version **$VER** · built $BUILT\n\nAlways the latest build. Download $ASSET and upload it in Claude.ai → Organization settings → Skills → + Add. (Requires 'Code execution and file creation' enabled.)\n\nThe version number is also inside the bundle (VERSION file + SKILL.md)."
+
 # 2. Resolve a token
 TOKEN="${GITHUB_TOKEN:-$(printf 'protocol=https\nhost=github.com\n\n' | git credential fill 2>/dev/null | sed -n 's/^username=//p')}"
 if [ -z "$TOKEN" ]; then
@@ -32,12 +37,15 @@ hdr=(-H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json")
 
 echo "→ Publishing to release '$TAG'"
 
+META=$(printf '{"tag_name":"%s","target_commitish":"main","name":"%s","body":"%s"}' "$TAG" "$TITLE" "$BODY")
+
 # 3. Get the release id, creating the rolling release if it doesn't exist yet
 ID=$(curl -s "${hdr[@]}" "$API/releases/tags/$TAG" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("id",""))')
 if [ -z "$ID" ]; then
-  ID=$(curl -s -X POST "${hdr[@]}" "$API/releases" \
-        -d "{\"tag_name\":\"$TAG\",\"target_commitish\":\"main\",\"name\":\"Effectory Design System — skill (latest)\",\"body\":\"Always the latest build. Download $ASSET and upload it in Claude.ai → Organization settings → Skills.\"}" \
-        | python3 -c 'import sys,json;print(json.load(sys.stdin).get("id",""))')
+  ID=$(curl -s -X POST "${hdr[@]}" "$API/releases" -d "$META" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("id",""))')
+else
+  # refresh title/body to the current version
+  curl -s -X PATCH "${hdr[@]}" "$API/releases/$ID" -d "$META" >/dev/null
 fi
 if [ -z "$ID" ]; then echo "✗ Could not find or create the release."; exit 1; fi
 
@@ -53,5 +61,5 @@ URL=$(curl -s -X POST "${hdr[@]}" -H "Content-Type: application/zip" \
         | python3 -c 'import sys,json;print(json.load(sys.stdin).get("browser_download_url",""))')
 
 echo ""
-echo "✓ Published. Shareable download URL:"
+echo "✓ Published v$VER. Shareable download URL (stable, always newest):"
 echo "  $URL"

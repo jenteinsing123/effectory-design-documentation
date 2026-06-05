@@ -24,8 +24,9 @@ cp "$TMP_FILE" "$OUT_FILE"
 rm "$TMP_FILE"
 
 SIZE=$(du -h "$OUT_FILE" | awk '{print $1}')
+VER=$(tr -d '[:space:]' < "$ROOT/VERSION" 2>/dev/null || echo "?")
 echo ""
-echo "✓ Built: dist/effectory-design-system.zip ($SIZE)"
+echo "✓ Built: dist/effectory-design-system.zip (v$VER, $SIZE)"
 echo ""
 echo "Upload to:"
 echo "  Claude.ai → Organization settings → Skills → + Add → select this .zip"

@@ -18,6 +18,12 @@ PROJECT_SKILL="$ROOT/.claude/skills/effectory-design-system"
 SKILL_SRC="$ROOT/skill-source"
 BUNDLE="$SKILL_SRC/design-system-files"
 
+VER=$(tr -d '[:space:]' < "$ROOT/VERSION")
+echo "→ Stamping version $VER"
+cp "$ROOT/VERSION" "$SKILL_SRC/VERSION"
+# Keep the **Version:** line in SKILL.md in sync with the VERSION file
+sed -i.bak "s/^\*\*Version:\*\*.*/**Version:** $VER/" "$SKILL_SRC/SKILL.md" && rm -f "$SKILL_SRC/SKILL.md.bak"
+
 echo "→ Syncing reference doc"
 cp "$PROJECT_SKILL/design-system-reference.md" "$SKILL_SRC/design-system-reference.md"
 
