@@ -579,7 +579,9 @@
     // Make the rendered nav directly clickable; the props controls stay in sync.
     $preview.addEventListener('click', e=>{
       const portal = e.target.closest('[data-action="portal"]');
-      if (portal){ const sel=document.getElementById('pg-portal'); sel.value = sel.value==='personal'?'coordinator':'personal'; render(); return; }
+      if (portal){ e.stopPropagation(); pgPortalMenu.hidden ? pgOpenPortal(portal) : pgCloseMenus(); return; }
+      const user = e.target.closest('.mn-user');
+      if (user){ e.stopPropagation(); pgUserMenu.hidden ? pgOpenUser(user) : pgCloseMenus(); return; }
       const subEl = e.target.closest('.mn-subitem');
       if (subEl){ const g=subEl.dataset.subgroup; activeSub[g]=subEl.dataset.sub; document.getElementById('pg-active').value=g; render(); return; }
       const it = e.target.closest('.mn-item');
@@ -596,7 +598,60 @@
         render();
       }
     });
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-portal').value=defaults.portal;document.getElementById('pg-active').value=defaults.active;document.getElementById('pg-exp-surveys').checked=defaults.surveys;document.getElementById('pg-exp-org').checked=defaults.org;activeSub.surveys='All surveys';activeSub.org='Employees';render();});
+    // ── Portal & account dropdowns (the documented Dropdown Menu component) ──
+    document.body.insertAdjacentHTML('beforeend',
+      '<div class="menu" id="pgPortalMenu" role="menu" hidden style="position:fixed;z-index:1000;max-height:none;overflow:visible;">'
+      + '<div class="menu-header">Switch my role</div>'
+      + '<div class="menu-item" data-portal="coordinator"><span class="pi-logo pi-logo-coordinator"></span><div class="menu-item-body"><span class="menu-item-title">Coordinator</span></div><i data-icon="check" class="menu-item-check"></i></div>'
+      + '<div class="menu-item" data-portal="personal"><span class="pi-logo pi-logo-personal"></span><div class="menu-item-body"><span class="menu-item-title">Personal</span></div><i data-icon="check" class="menu-item-check"></i></div>'
+      + '</div>'
+      + '<div class="menu" id="pgUserMenu" role="menu" hidden style="position:fixed;z-index:1000;max-height:none;overflow:visible;">'
+      + '<div class="menu-item"><i data-icon="building" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Switch organization</span></div></div>'
+      + '<div class="menu-item"><i data-icon="gift" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Preview features</span></div></div>'
+      + '<div class="menu-item"><i data-icon="sun" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Appearance</span><span class="menu-item-sub">Light</span></div></div>'
+      + '<div class="menu-item"><i data-icon="globe" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Change language</span></div></div>'
+      + '<div class="menu-item"><i data-icon="cookie" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Cookie settings</span></div></div>'
+      + '<div class="menu-divider"></div>'
+      + '<div class="menu-item"><i data-icon="log-out" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Log out</span></div></div>'
+      + '</div>');
+    const pgPortalMenu = document.getElementById('pgPortalMenu');
+    const pgUserMenu = document.getElementById('pgUserMenu');
+    function pgCloseMenus(){ pgPortalMenu.hidden = true; pgUserMenu.hidden = true; }
+    function pgOpenPortal(btn){
+      pgCloseMenus();
+      const cur = state().portal;
+      pgPortalMenu.querySelectorAll('.menu-item').forEach(mi=>{
+        const seld = mi.dataset.portal===cur;
+        mi.classList.toggle('is-selected', seld);
+        mi.querySelector('.menu-item-check').style.visibility = seld ? 'visible' : 'hidden';
+      });
+      const r = btn.getBoundingClientRect();
+      pgPortalMenu.style.left = r.left+'px'; pgPortalMenu.style.top = (r.bottom+8)+'px'; pgPortalMenu.style.width = '240px';
+      pgPortalMenu.hidden = false;
+      if (window.Icons && window.Icons.render) window.Icons.render(pgPortalMenu);
+    }
+    function pgOpenUser(btn){
+      pgCloseMenus();
+      const r = btn.getBoundingClientRect();
+      pgUserMenu.style.left = r.left+'px'; pgUserMenu.style.bottom = (window.innerHeight-r.top+8)+'px'; pgUserMenu.style.width = '240px';
+      pgUserMenu.hidden = false;
+      if (window.Icons && window.Icons.render) window.Icons.render(pgUserMenu);
+    }
+    pgPortalMenu.addEventListener('click', e=>{
+      const mi = e.target.closest('.menu-item'); if (!mi) return;
+      document.getElementById('pg-portal').value = mi.dataset.portal;
+      document.getElementById('pg-active').value = 'home';
+      document.getElementById('pg-exp-surveys').checked = false;
+      document.getElementById('pg-exp-org').checked = false;
+      pgCloseMenus(); render();
+    });
+    document.addEventListener('click', e=>{
+      if (!pgPortalMenu.hidden && !pgPortalMenu.contains(e.target) && !e.target.closest('[data-action="portal"]')) pgCloseMenus();
+      if (!pgUserMenu.hidden && !pgUserMenu.contains(e.target) && !e.target.closest('.mn-user')) pgCloseMenus();
+    });
+    document.addEventListener('keydown', e=>{ if (e.key==='Escape') pgCloseMenus(); });
+
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-portal').value=defaults.portal;document.getElementById('pg-active').value=defaults.active;document.getElementById('pg-exp-surveys').checked=defaults.surveys;document.getElementById('pg-exp-org').checked=defaults.org;activeSub.surveys='All surveys';activeSub.org='Employees';pgCloseMenus();render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
     render();
