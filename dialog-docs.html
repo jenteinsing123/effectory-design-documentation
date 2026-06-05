@@ -36,7 +36,8 @@
     }
     .dialog-media i[data-icon] { width: 40px; height: 40px; display: flex; opacity: .6; }
 
-    .dialog-header { display: flex; flex-direction: column; gap: 4px; }
+    .dialog-header { display: flex; flex-direction: column; gap: 8px; }
+    .dialog-header.is-sm { gap: 4px; }
     .dialog-header-top { display: flex; align-items: center; gap: 8px; }
     .dialog-header-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; color: var(--content-info-secondary); }
     .dialog-header.is-sm .dialog-header-icon { width: 20px; height: 20px; }
@@ -389,6 +390,14 @@
   <div class="tab-panel" data-panel="developer">
     <div class="content-cols">
       <article class="content">
+
+        <div class="dev-gap">
+          <span class="dev-gap-icon">⚠️</span>
+          <div class="dev-gap-body">
+            <span class="dev-gap-label">Figma gap</span>
+            <span class="dev-gap-text">In Figma the Dialog and Side Panel headers use inconsistent title↔subtitle spacing. The design system standardizes both: a <strong>small</strong> header is an 18px title with a <strong>4px</strong> gap to the 14px subtitle; a <strong>large</strong> header is a 26px title (<code>text-l3</code>) with an <strong>8px</strong> gap to the 14px subtitle.</span>
+          </div>
+        </div>
 
         <section class="section" id="dev-playground">
           <h2 class="text-l3">Playground</h2>
