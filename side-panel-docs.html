@@ -47,7 +47,8 @@
     .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .sidepanel { pointer-events: none; height: 460px; border: 1px solid var(--border-base); }
     .ana-num { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--content-base); color: var(--bg-base); font-size: 9px; /* font-scale-exempt: anatomy number badge */ font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 3; }
-    .sp-slot { border: 1.5px dashed var(--border-action); border-radius: var(--radius-md); padding: 24px 16px; text-align: center; font-size: 14px; color: var(--content-subtle); }
+    .sp-slot { flex: 1; display: flex; align-items: center; justify-content: center; border: 1.5px dashed var(--border-action); border-radius: var(--radius-md); padding: 24px 16px; text-align: center; font-size: 14px; color: var(--content-subtle); }
+    .sp-body:has(.sp-slot) { display: flex; }
 
     .dd-card .dd-prev { flex: 1; }
     .variant-row { grid-template-columns: minmax(420px, 1fr) 1fr; }
@@ -448,7 +449,7 @@ open() {
           <div class="sp-heading${s.size==='small'?' is-sm':''}"><h3 class="sp-title">${esc(s.title)||'Title'}</h3>${s.subtitle?`<p class="sp-subtitle">${esc(s.subtitle)}</p>`:''}</div>
           ${tabs}
         </div>
-        <div class="sp-body">The content goes here.</div>
+        <div class="sp-body"><div class="sp-slot">Your content goes here — details, a form, or any custom UI</div></div>
         ${foot}
       </div>`;
     }
