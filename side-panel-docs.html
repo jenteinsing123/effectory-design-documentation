@@ -56,6 +56,18 @@
     .sp-stage { display: flex; justify-content: flex-end; height: 480px; background: rgba(25,39,67,.18); border-radius: var(--radius-lg); overflow: hidden; }
     .sp-stage .sidepanel { box-shadow: -8px 0 24px -12px rgba(25,39,67,.25); }
 
+    /* Zoomed-out "page with a side panel" scene (a real page mock, scaled down) */
+    .sp-scene { position: relative; width: 300px; height: 188px; margin: 0 auto; overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-base); background: var(--bg-base); }
+    .sp-scene-inner { position: absolute; top: 0; left: 0; width: 960px; height: 600px; transform: scale(.3125); transform-origin: top left; }
+    .spm-page { position: absolute; inset: 0; padding: 40px; }
+    .spm-title { font-size: 32px; font-weight: 600; color: var(--content-base); }
+    .spm-tabs { display: flex; gap: 28px; margin-top: 22px; border-bottom: 1px solid var(--border-base); font-size: 16px; color: var(--content-secondary); }
+    .spm-tabs span { padding-bottom: 12px; }
+    .spm-tabs .is-active { color: var(--content-base); border-bottom: 2px solid var(--content-brand-base); }
+    .spm-row { height: 60px; border: 1px solid var(--border-base); border-radius: var(--radius-md); margin-top: 16px; }
+    .spm-scrim { position: absolute; inset: 0; background: rgba(25,39,67,.45); }
+    .sp-scene .sidepanel { position: absolute; top: 0; right: 0; height: 100%; box-shadow: -8px 0 24px -12px rgba(25,39,67,.3); }
+
     /* Anatomy */
     .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .sidepanel { pointer-events: none; height: 460px; border: 1px solid var(--border-base); }
@@ -159,11 +171,19 @@
           <h3 class="text-l4">Keep the context visible</h3>
           <div class="dd-grid">
             <div class="dd-card">
-              <div class="dd-prev" style="padding:0; overflow:hidden;">
-                <div class="sp-stage" style="height:230px; width:100%; border-radius:0;">
-                  <div class="sidepanel" style="width:62%; pointer-events:none;">
-                    <div class="sp-header"><div class="sp-toolbar"><div class="sp-actions"><i data-icon="cross"></i></div></div><div class="sp-heading is-sm"><h3 class="sp-title">Jamal van Rooi</h3><p class="sp-subtitle">Response details</p></div></div>
-                    <div class="sp-body" style="font-size:14px;">Open a respondent beside the list — the table stays in view.</div>
+              <div class="dd-prev" style="padding:24px;">
+                <div class="sp-scene">
+                  <div class="sp-scene-inner">
+                    <div class="spm-page">
+                      <div class="spm-title">Deepdive about Appreciation</div>
+                      <div class="spm-tabs"><span class="is-active">Open Answers</span><span>Scores</span><span>Reports</span></div>
+                      <div class="spm-row"></div><div class="spm-row"></div><div class="spm-row"></div>
+                    </div>
+                    <div class="spm-scrim"></div>
+                    <div class="sidepanel sidepanel-sm is-sm-header" style="width:380px;">
+                      <div class="sp-header is-compact"><div class="sp-toolbar"><div class="sp-actions"><i data-icon="cross"></i></div></div><div class="sp-heading is-sm"><h3 class="sp-title">Jamal van Rooi</h3><p class="sp-subtitle">Response details</p></div></div>
+                      <div class="sp-body"><div class="sp-slot">Respondent details</div></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,11 +193,19 @@
               </div>
             </div>
             <div class="dd-card">
-              <div class="dd-prev" style="padding:0; overflow:hidden;">
-                <div class="sp-stage" style="height:230px; width:100%; border-radius:0;">
-                  <div class="sidepanel" style="width:100%; pointer-events:none;">
-                    <div class="sp-header"><div class="sp-toolbar"><div class="sp-actions"><i data-icon="cross"></i></div></div><div class="sp-heading"><h3 class="sp-title">Full report</h3></div></div>
-                    <div class="sp-body" style="font-size:14px;">A whole multi-step flow crammed into a panel that covers the page.</div>
+              <div class="dd-prev" style="padding:24px;">
+                <div class="sp-scene">
+                  <div class="sp-scene-inner">
+                    <div class="spm-page">
+                      <div class="spm-title">Deepdive about Appreciation</div>
+                      <div class="spm-tabs"><span class="is-active">Open Answers</span><span>Scores</span><span>Reports</span></div>
+                      <div class="spm-row"></div><div class="spm-row"></div><div class="spm-row"></div>
+                    </div>
+                    <div class="spm-scrim"></div>
+                    <div class="sidepanel" style="width:880px;">
+                      <div class="sp-header"><div class="sp-toolbar"><div class="sp-actions"><i data-icon="cross"></i></div></div><div class="sp-heading"><h3 class="sp-title">Full report</h3><p class="sp-subtitle">A whole multi-step flow crammed into a panel that covers the page.</p></div></div>
+                      <div class="sp-body"><div class="sp-slot">Step 1 of 6</div></div>
+                    </div>
                   </div>
                 </div>
               </div>
