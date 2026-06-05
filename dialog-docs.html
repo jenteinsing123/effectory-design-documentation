@@ -67,6 +67,9 @@
 
     .dd-card .dd-prev { flex: 1; }
     .pg-preview .dialog { max-width: 100%; }
+    /* Give the variant previews more room for the dialogs */
+    .variant-row { grid-template-columns: minmax(440px, 1fr) 1fr; }
+    .variant-row-btn .dialog { width: 100%; max-width: 440px; }
 
     /* Real modal overlay opened from the playground */
     .dlg-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(25,39,67,.45); animation: dlg-fade .12s ease-out; }
@@ -215,7 +218,7 @@
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="dialog" style="width:360px;">
+                <div class="dialog">
                   <div class="dialog-header"><h3 class="dialog-title">Header</h3><p class="dialog-subtitle">An explanation of some sorts.</p></div>
                   <div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div>
                 </div>
@@ -224,7 +227,7 @@
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="dialog" style="width:360px;">
+                <div class="dialog">
                   <div class="dialog-header is-sm"><h3 class="dialog-title">Header</h3><p class="dialog-subtitle">An explanation of some sorts.</p></div>
                   <div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div>
                 </div>
@@ -237,7 +240,7 @@
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="dialog dialog-xs" style="width:360px;">
+                <div class="dialog dialog-xs">
                   <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="dialog-header"><h3 class="dialog-title">Header</h3><p class="dialog-subtitle">Subtitle</p></div>
                   <div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div>
@@ -247,7 +250,7 @@
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="dialog dialog-xs" style="width:360px;">
+                <div class="dialog dialog-xs">
                   <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="dialog-media"><i data-icon="image"></i></div>
                   <div class="dialog-header"><h3 class="dialog-title">Header</h3><p class="dialog-subtitle">Subtitle</p></div>
@@ -262,7 +265,7 @@
           <p>Width scales with how much the content needs; height always fits the content. Pick the smallest that comfortably holds your content.</p>
           <div class="variant-rows">
             <div class="variant-row">
-              <div class="variant-row-btn"><div class="dialog dialog-xs" style="width:300px; gap:16px; padding:20px;"><div class="dialog-header"><h3 class="dialog-title" style="font-size:18px; line-height:1.4;">Header</h3><p class="dialog-subtitle">Subtitle</p></div><div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div></div></div>
+              <div class="variant-row-btn"><div class="dialog dialog-xs" style="gap:16px; padding:20px;"><div class="dialog-header"><h3 class="dialog-title" style="font-size:18px; line-height:1.4;">Header</h3><p class="dialog-subtitle">Subtitle</p></div><div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div></div></div>
               <div class="variant-row-desc"><strong>XS · 440px</strong> — Tight confirmations and yes/no decisions. Uses a smaller (18px) title.</div>
             </div>
             <div class="variant-row">
