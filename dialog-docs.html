@@ -37,6 +37,8 @@
     .dialog-media i[data-icon] { width: 40px; height: 40px; display: flex; opacity: .6; }
 
     .dialog-header { display: flex; flex-direction: column; gap: 4px; }
+    .dialog-header-top { display: flex; align-items: center; gap: 8px; }
+    .dialog-header-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; color: var(--content-info-secondary); }
     .dialog-title { margin: 0; font-size: 26px; font-weight: 600; line-height: 1.3; color: var(--content-base); }
     .dialog-subtitle { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--content-secondary); }
     .dialog-header.is-sm .dialog-title { font-size: 18px; line-height: 1.5; }
@@ -238,6 +240,23 @@
             </div>
           </div>
 
+          <h3 class="text-l4">Header icon</h3>
+          <div class="variant-rows">
+            <div class="variant-row">
+              <div class="variant-row-btn">
+                <div class="dialog">
+                  <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
+                  <div class="dialog-header is-sm">
+                    <div class="dialog-header-top"><i class="dialog-header-icon" data-icon="info"></i><h3 class="dialog-title">Header</h3></div>
+                    <p class="dialog-subtitle">Subtitle</p>
+                  </div>
+                  <div class="dialog-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Got it</button></div>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>With icon</strong> — An optional 24px icon sits left of the title (<code>.dialog-header-top</code> + <code>.dialog-header-icon</code>, coloured with <code>--content-info-secondary</code>). Use it to signal the dialog's nature — e.g. info or a warning.</div>
+            </div>
+          </div>
+
           <h3 class="text-l4">Visual header</h3>
           <div class="variant-rows">
             <div class="variant-row">
@@ -390,6 +409,7 @@
               <div class="pg-panel pg-props-wrap" id="pg-panel-props">
                 <div class="pg-row"><div class="pg-row-name">size</div><div class="pg-row-ctrl"><select class="pg-select" id="pg-size"><option value="xs">XS — 440</option><option value="s" selected>S — 600</option><option value="m">M — 800</option><option value="l">L — 1080</option></select></div></div>
                 <div class="pg-row"><div class="pg-row-name">header size</div><div class="pg-row-ctrl"><select class="pg-select" id="pg-header"><option value="large" selected>Large</option><option value="small">Small</option></select></div></div>
+                <div class="pg-row"><div class="pg-row-name">header icon</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-hicon"><span class="pg-toggle-track"></span></label></div></div>
                 <div class="pg-row"><div class="pg-row-name">visual header</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-visual"><span class="pg-toggle-track"></span></label></div></div>
                 <div class="pg-row"><div class="pg-row-name">title</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-title" value="Discard changes?" /></div></div>
                 <div class="pg-row"><div class="pg-row-name">subtitle</div><div class="pg-row-ctrl"><input class="pg-input" type="text" id="pg-subtitle" value="You have unsaved edits to this report." /></div></div>
@@ -462,7 +482,7 @@
               <tr><td><code>.dialog</code></td><td>The surface. Defaults to 440px; add <code>.dialog-s</code> (600) · <code>.dialog-m</code> (800) · <code>.dialog-l</code> (1080) to widen.</td></tr>
               <tr><td><code>.dialog-close</code></td><td>Top-right icon button (a <code>cross</code> icon) that dismisses the dialog.</td></tr>
               <tr><td><code>.dialog-media</code></td><td>Optional full-bleed visual-header band above the title.</td></tr>
-              <tr><td><code>.dialog-header</code> · <code>.dialog-title</code> · <code>.dialog-subtitle</code></td><td>Heading block: required title + optional supporting line.</td></tr>
+              <tr><td><code>.dialog-header</code> · <code>.dialog-title</code> · <code>.dialog-subtitle</code></td><td>Heading block: required title + optional supporting line. Add <code>.is-sm</code> for the small (18px) title. For an icon, wrap the title in <code>.dialog-header-top</code> with a <code>.dialog-header-icon</code> before it.</td></tr>
               <tr><td><code>.dialog-body</code></td><td>The content slot — put a message, form or custom UI here.</td></tr>
               <tr><td><code>.dialog-footer</code></td><td>Right-aligned actions (<code>.btn</code> from the Button component). Add <code>.dialog-footer-link</code> for an optional left-aligned outgoing link.</td></tr>
             </tbody>
@@ -519,11 +539,12 @@
   (function () {
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
-    const defaults = { size:'s', header:'large', visual:false, title:'Discard changes?', subtitle:'You have unsaved edits to this report.', primary:'Discard', secondary:'Keep editing', close:true, link:false };
+    const defaults = { size:'s', header:'large', icon:false, visual:false, title:'Discard changes?', subtitle:'You have unsaved edits to this report.', primary:'Discard', secondary:'Keep editing', close:true, link:false };
     function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
     function state(){return{
       size:document.getElementById('pg-size').value,
       header:document.getElementById('pg-header').value,
+      icon:document.getElementById('pg-hicon').checked,
       visual:document.getElementById('pg-visual').checked,
       title:document.getElementById('pg-title').value,
       subtitle:document.getElementById('pg-subtitle').value,
@@ -536,7 +557,9 @@
       let h = `<div class="dialog dialog-${s.size}" role="dialog" aria-modal="true">`;
       if (s.close) h += `<button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>`;
       if (s.visual) h += `<div class="dialog-media"><i data-icon="image"></i></div>`;
-      h += `<div class="dialog-header${s.header==='small'?' is-sm':''}"><h3 class="dialog-title">${esc(s.title)||'Header'}</h3>`;
+      h += `<div class="dialog-header${s.header==='small'?' is-sm':''}">`;
+      const title = `<h3 class="dialog-title">${esc(s.title)||'Header'}</h3>`;
+      h += s.icon ? `<div class="dialog-header-top"><i class="dialog-header-icon" data-icon="info"></i>${title}</div>` : title;
       if (s.subtitle) h += `<p class="dialog-subtitle">${esc(s.subtitle)}</p>`;
       h += `</div>`;
       h += `<div class="dialog-footer">`;
@@ -552,7 +575,14 @@
       if (s.close) L.push('  <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>');
       if (s.visual) L.push('  <div class="dialog-media"><!-- illustration / image --></div>');
       L.push(`  <div class="dialog-header${s.header==='small'?' is-sm':''}">`);
-      L.push(`    <h3 class="dialog-title">${esc(s.title)||'Header'}</h3>`);
+      if (s.icon){
+        L.push('    <div class="dialog-header-top">');
+        L.push('      <i class="dialog-header-icon" data-icon="info"></i>');
+        L.push(`      <h3 class="dialog-title">${esc(s.title)||'Header'}</h3>`);
+        L.push('    </div>');
+      } else {
+        L.push(`    <h3 class="dialog-title">${esc(s.title)||'Header'}</h3>`);
+      }
       if (s.subtitle) L.push(`    <p class="dialog-subtitle">${esc(s.subtitle)}</p>`);
       L.push('  </div>');
       L.push('  <div class="dialog-footer">');
@@ -564,7 +594,7 @@
       return L.join('\n');
     }
     function render(){const s=state();$preview.innerHTML='<button class="btn btn-primary" id="pg-open">Open dialog</button>';document.getElementById('pg-code').textContent=buildCode(s);}
-    ['pg-size','pg-header','pg-visual','pg-title','pg-subtitle','pg-primary','pg-secondary','pg-close','pg-link'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',render);el.addEventListener('change',render);});
+    ['pg-size','pg-header','pg-hicon','pg-visual','pg-title','pg-subtitle','pg-primary','pg-secondary','pg-close','pg-link'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.addEventListener('input',render);el.addEventListener('change',render);});
 
     // Open the configured dialog as a real modal over the page (scrim overlay)
     const overlay = document.createElement('div');
@@ -584,7 +614,7 @@
       if (e.target === overlay || e.target.closest('.dialog-close') || e.target.closest('.dialog-footer .btn')) closeOverlay();
     });
     $preview.addEventListener('click', e=>{ if (e.target.closest('#pg-open')) openOverlay(); });
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-size').value=defaults.size;document.getElementById('pg-header').value=defaults.header;document.getElementById('pg-visual').checked=defaults.visual;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-subtitle').value=defaults.subtitle;document.getElementById('pg-primary').value=defaults.primary;document.getElementById('pg-secondary').value=defaults.secondary;document.getElementById('pg-close').checked=defaults.close;document.getElementById('pg-link').checked=defaults.link;render();});
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{document.getElementById('pg-size').value=defaults.size;document.getElementById('pg-header').value=defaults.header;document.getElementById('pg-hicon').checked=defaults.icon;document.getElementById('pg-visual').checked=defaults.visual;document.getElementById('pg-title').value=defaults.title;document.getElementById('pg-subtitle').value=defaults.subtitle;document.getElementById('pg-primary').value=defaults.primary;document.getElementById('pg-secondary').value=defaults.secondary;document.getElementById('pg-close').checked=defaults.close;document.getElementById('pg-link').checked=defaults.link;render();});
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
     render();

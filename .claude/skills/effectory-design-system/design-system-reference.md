@@ -759,7 +759,7 @@ Een modale kaart die over een scrim verschijnt: titel, optionele subtitle, conte
   <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
   <div class="dialog-media"><i data-icon="image"></i></div>   <!-- optioneel: visual header -->
   <div class="dialog-header">
-    <h3 class="dialog-title" id="dlg-title">Discard changes?</h3>
+    <div class="dialog-header-top"><i class="dialog-header-icon" data-icon="info"></i><h3 class="dialog-title" id="dlg-title">Discard changes?</h3></div> <!-- optioneel icoon; anders alleen de <h3> -->
     <p class="dialog-subtitle">You have unsaved edits to this report.</p>
   </div>
   <div class="dialog-body">…custom content…</div>             <!-- optioneel content-slot -->
@@ -770,7 +770,7 @@ Een modale kaart die over een scrim verschijnt: titel, optionele subtitle, conte
   </div>
 </div>
 ```
-Maten (breedte): default `.dialog` = 440 (XS), `.dialog-s` = 600, `.dialog-m` = 800, `.dialog-l` = 1080. **Header-formaat:** twee maten — Large (titel 26px, `text-l3`, default) en Small (titel 18px, `body-18-SB`) via `.dialog-header.is-sm`. Onafhankelijk van de breedte; combineer met elke maat. `.dialog-media` is een full-bleed band bovenaan (illustratie/afbeelding) voor de *visual header*-variant. Footer-knoppen zijn de Button-component (`.btn` + `.btn-primary`/`.btn-secondary`); de optionele `.dialog-footer-link` staat links. Tokens: `--bg-base`/`--border-base`, `--sh-dialogs`, `--radius-xl` (16), `--content-base`/`--content-secondary`, `--content-action` (close), `--bg-brand-subtle` (media). A11y: `role="dialog"` + `aria-modal="true"`, `aria-labelledby` naar de titel, focus-trap + focus terug op de trigger bij sluiten, Escape sluit.
+Maten (breedte): default `.dialog` = 440 (XS), `.dialog-s` = 600, `.dialog-m` = 800, `.dialog-l` = 1080. **Header-formaat:** twee maten — Large (titel 26px, `text-l3`, default) en Small (titel 18px, `body-18-SB`) via `.dialog-header.is-sm`. Onafhankelijk van de breedte; combineer met elke maat. **Optioneel icoon:** wikkel de titel in `.dialog-header-top` met een `.dialog-header-icon` (24px, kleur `--content-info-secondary`) ervoor. `.dialog-media` is een full-bleed band bovenaan (illustratie/afbeelding) voor de *visual header*-variant. Footer-knoppen zijn de Button-component (`.btn` + `.btn-primary`/`.btn-secondary`); de optionele `.dialog-footer-link` staat links. Tokens: `--bg-base`/`--border-base`, `--sh-dialogs`, `--radius-xl` (16), `--content-base`/`--content-secondary`, `--content-action` (close), `--bg-brand-subtle` (media). A11y: `role="dialog"` + `aria-modal="true"`, `aria-labelledby` naar de titel, focus-trap + focus terug op de trigger bij sluiten, Escape sluit.
 
 > ⚠️ **Dev gap:** de Angular-selector/inputs van de dialog (en de overlay/scrim-wiring) zijn nog niet bevestigd in de styleguide. Deze `.dialog`-classes zijn de prototype-structuur; verifieer de productie-API met engineering.
 
