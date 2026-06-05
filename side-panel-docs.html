@@ -67,9 +67,10 @@
     .spm-scrim { position: absolute; inset: 0; background: rgba(25,39,67,.45); }
     .sp-scene .sidepanel { position: absolute; top: 0; right: 0; height: 100%; box-shadow: -8px 0 24px -12px rgba(25,39,67,.3); }
 
-    /* Anatomy */
-    .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); margin-bottom: 24px; height: 460px; overflow: hidden; }
-    .anatomy-fig .sidepanel { position: absolute; top: 0; right: 0; height: 100%; width: 340px; pointer-events: none; z-index: 2; box-shadow: -8px 0 24px -12px rgba(25,39,67,.3); }
+    /* Anatomy — a whole page+panel scene, scaled down a bit (zoomed out) */
+    .anatomy-fig { position: relative; background: var(--bg-secondary); border-radius: var(--radius-lg); margin-bottom: 24px; height: 440px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .ana-scene-inner { position: relative; flex-shrink: 0; width: 860px; height: 480px; transform: scale(.82); transform-origin: center; }
+    .anatomy-fig .sidepanel { position: absolute; top: 0; right: 0; height: 100%; width: 380px; pointer-events: none; z-index: 2; box-shadow: -8px 0 24px -12px rgba(25,39,67,.3); }
     .ana-num { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--content-base); color: var(--bg-base); font-size: 9px; /* font-scale-exempt: anatomy number badge */ font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 4; }
     .sp-slot { flex: 1; display: flex; align-items: center; justify-content: center; border: 1.5px dashed var(--border-action); border-radius: var(--radius-md); padding: 24px 16px; text-align: center; font-size: 14px; color: var(--content-subtle); }
     .sp-body:has(.sp-slot) { display: flex; }
@@ -130,6 +131,7 @@
           <h2 class="text-l3">Anatomy</h2>
           <p class="section-lead">A side panel docks against the right edge at full height, over a scrim. A header holds the title and actions; the body scrolls; an optional footer pins the actions.</p>
           <div class="anatomy-fig">
+            <div class="ana-scene-inner">
             <div class="spm-page">
               <div class="spm-title"></div>
               <div class="spm-tabs"><span></span><span></span><span></span></div>
@@ -149,14 +151,15 @@
               <div class="sp-footer"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Confirm</button></div>
             </div>
             <!-- callouts anchored to the right edge (panel is flush right) -->
-            <div class="ana-num" style="right:161px; top:8px;">1</div>
-            <div class="ana-num" style="right:10px; top:14px;">2</div>
-            <div class="ana-num" style="right:352px; top:18px;">3</div>
-            <div class="ana-num" style="right:352px; top:58px;">4</div>
-            <div class="ana-num" style="right:352px; top:98px;">5</div>
-            <div class="ana-num" style="right:352px; top:132px;">6</div>
-            <div class="ana-num" style="right:352px; top:236px;">7</div>
-            <div class="ana-num" style="right:352px; top:398px;">8</div>
+            <div class="ana-num" style="right:190px; top:8px;">1</div>
+            <div class="ana-num" style="right:16px; top:14px;">2</div>
+            <div class="ana-num" style="right:392px; top:18px;">3</div>
+            <div class="ana-num" style="right:392px; top:58px;">4</div>
+            <div class="ana-num" style="right:392px; top:98px;">5</div>
+            <div class="ana-num" style="right:392px; top:132px;">6</div>
+            <div class="ana-num" style="right:392px; top:248px;">7</div>
+            <div class="ana-num" style="right:392px; top:430px;">8</div>
+            </div>
           </div>
           <div class="anatomy-items">
             <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Surface</span> — A full-height panel docked to the right edge, raised over a scrim that dims the page behind it.</div></div>
