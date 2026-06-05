@@ -58,8 +58,12 @@
     .sp-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; justify-content: flex-end; background: rgba(25,39,67,.45); animation: sp-fade .15s ease-out; }
     .sp-overlay[hidden] { display: none; }
     .sp-overlay .sidepanel { height: 100%; animation: sp-slide .26s cubic-bezier(.22,.61,.36,1); }
+    .sp-overlay.is-closing { animation: sp-fade-out .22s ease-in forwards; }
+    .sp-overlay.is-closing .sidepanel { animation: sp-slide-out .24s cubic-bezier(.55,.06,.68,.19) forwards; }
     @keyframes sp-fade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes sp-slide { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    @keyframes sp-fade-out { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes sp-slide-out { from { transform: translateX(0); } to { transform: translateX(100%); } }
   </style>
 </head>
 <body>
@@ -498,12 +502,23 @@ open() {
     document.body.appendChild(overlay);
     function escClose(e){ if (e.key==='Escape') closeOverlay(); }
     function openOverlay(){
+      overlay.classList.remove('is-closing');
       overlay.innerHTML = buildPanel(state());
       overlay.hidden = false;
       if (window.Icons && window.Icons.render) window.Icons.render(overlay);
       document.addEventListener('keydown', escClose);
     }
-    function closeOverlay(){ overlay.hidden = true; overlay.innerHTML = ''; document.removeEventListener('keydown', escClose); }
+    function closeOverlay(){
+      if (overlay.hidden || overlay.classList.contains('is-closing')) return;
+      document.removeEventListener('keydown', escClose);
+      overlay.classList.add('is-closing');
+      const done = ()=>{ overlay.hidden = true; overlay.innerHTML = ''; overlay.classList.remove('is-closing'); };
+      const panel = overlay.querySelector('.sidepanel');
+      let finished = false;
+      const finish = ()=>{ if (finished) return; finished = true; done(); };
+      if (panel) panel.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 300);
+    }
     overlay.addEventListener('click', e=>{
       if (e.target === overlay || e.target.closest('[data-close]') || e.target.closest('.sp-footer .btn')) closeOverlay();
     });
