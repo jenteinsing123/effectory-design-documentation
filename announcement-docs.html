@@ -11,7 +11,7 @@
     /* ── Announcement — floating, non-blocking feature card ── */
     .announcement {
       position: relative;
-      width: 300px; max-width: 300px;
+      width: 260px; max-width: 260px;
       background: var(--bg-base);
       border: 1px solid var(--border-base);
       border-radius: var(--radius-lg);
@@ -47,7 +47,7 @@
     .btn-tertiary:hover, .btn-tertiary.is-hover { background: var(--bg-base-hover); color: var(--content-base); }
 
     /* ── stacked: real cards behind the front one (card deck) ── */
-    .ann-deck { position: relative; width: 300px; }
+    .ann-deck { position: relative; width: 260px; }
     .ann-deck .announcement { transition: transform .42s cubic-bezier(.3,.1,.3,1), opacity .42s ease; }
     .ann-front { position: relative; z-index: 5; }
     /* cards behind sit progressively higher (gaps 12 → 10 → 8 → 6px) — same opacity, depth comes from the offset + scale */
@@ -143,7 +143,7 @@
           <div class="dd-grid">
             <div class="dd-card">
               <div class="ann-prev">
-                <div class="announcement" style="pointer-events:none; width:280px;">
+                <div class="announcement" style="pointer-events:none; width:260px;">
                   <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="ann-media" style="height:120px;"><i data-icon="image" class="ann-media-ph"></i></div>
                   <div class="ann-body">
@@ -160,7 +160,7 @@
             </div>
             <div class="dd-card">
               <div class="ann-prev">
-                <div class="announcement" style="pointer-events:none; width:280px;">
+                <div class="announcement" style="pointer-events:none; width:260px;">
                   <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="ann-body">
                     <p class="ann-title">Your session will expire in 60s</p>
@@ -181,8 +181,8 @@
             <div class="dd-card">
               <div class="ann-prev">
                 <div class="ann-deck" style="pointer-events:none;">
-                  <div class="announcement ann-b1" style="width:264px;"><div class="ann-media" style="height:90px; background:var(--bg-info-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Bulk export</p></div></div>
-                  <div class="announcement ann-front" style="width:264px;"><button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button><div class="ann-media" style="height:90px; background:var(--bg-brand-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Comments are live</p><p class="ann-text" style="font-size:12px;">Leave feedback on any question.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
+                  <div class="announcement ann-b1" style="width:260px;"><div class="ann-media" style="height:90px; background:var(--bg-info-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Bulk export</p></div></div>
+                  <div class="announcement ann-front" style="width:260px;"><button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button><div class="ann-media" style="height:90px; background:var(--bg-brand-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Comments are live</p><p class="ann-text" style="font-size:12px;">Leave feedback on any question.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
                 </div>
               </div>
               <div class="dd-cap do">
@@ -221,7 +221,7 @@
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="announcement" style="width:280px;">
+                <div class="announcement" style="width:260px;">
                   <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="ann-media" style="height:130px;"><i data-icon="image" class="ann-media-ph"></i></div>
                   <div class="ann-body">
@@ -235,7 +235,7 @@
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="announcement" style="width:280px;">
+                <div class="announcement" style="width:260px;">
                   <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                   <div class="ann-body">
                     <p class="ann-title">Filters moved to the toolbar</p>
@@ -248,12 +248,12 @@
             </div>
             <div class="variant-row">
               <div class="variant-row-btn">
-                <div class="ann-deck" style="width:280px; pointer-events:none;">
-                  <div class="announcement ann-b4" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-negative-base);"></div></div>
-                  <div class="announcement ann-b3" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-info-base);"></div></div>
-                  <div class="announcement ann-b2" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-warning-bold);"></div></div>
-                  <div class="announcement ann-b1" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-positive-base);"></div></div>
-                  <div class="announcement ann-front" style="width:280px;">
+                <div class="ann-deck" style="width:260px; pointer-events:none;">
+                  <div class="announcement ann-b4" style="width:260px;"><div class="ann-media" style="height:130px; background:var(--bg-negative-base);"></div></div>
+                  <div class="announcement ann-b3" style="width:260px;"><div class="ann-media" style="height:130px; background:var(--bg-info-base);"></div></div>
+                  <div class="announcement ann-b2" style="width:260px;"><div class="ann-media" style="height:130px; background:var(--bg-warning-bold);"></div></div>
+                  <div class="announcement ann-b1" style="width:260px;"><div class="ann-media" style="height:130px; background:var(--bg-positive-base);"></div></div>
+                  <div class="announcement ann-front" style="width:260px;">
                     <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                     <div class="ann-media" style="height:130px; background:var(--bg-brand-base);"></div>
                     <div class="ann-body">
@@ -410,7 +410,7 @@
             </div>
           </div>
           <div class="dev-preview" style="padding:40px 24px;">
-            <div class="announcement" style="width:280px;">
+            <div class="announcement" style="width:260px;">
               <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
               <div class="ann-media" style="height:130px;"><i data-icon="image" class="ann-media-ph"></i></div>
               <div class="ann-body"><p class="ann-title">Dynamic reporting is here!</p><p class="ann-text">A new look, new features, and more to explore.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div>
@@ -556,18 +556,18 @@
       document.getElementById('pg-cta-label-row').style.display = s.ctaOn ? '' : 'none';
       const total = s.stack;
       if (total <= 1) {
-        $preview.innerHTML = `<div class="announcement" style="width:280px;">${inner(s, 0)}</div>`;
+        $preview.innerHTML = `<div class="announcement" style="width:260px;">${inner(s, 0)}</div>`;
       } else if (idx >= total) {
-        $preview.innerHTML = `<div style="width:280px; text-align:center; font-family:'Poppins',sans-serif; font-size:14px; color:var(--content-secondary); padding:32px 0;">You're all caught up ✓<button id="pg-replay" style="display:block; margin:10px auto 0; background:none; border:none; color:var(--content-brand-base); font:inherit; cursor:pointer; text-decoration:underline;">Replay</button></div>`;
+        $preview.innerHTML = `<div style="width:260px; text-align:center; font-family:'Poppins',sans-serif; font-size:14px; color:var(--content-secondary); padding:32px 0;">You're all caught up ✓<button id="pg-replay" style="display:block; margin:10px auto 0; background:none; border:none; color:var(--content-brand-base); font:inherit; cursor:pointer; text-decoration:underline;">Replay</button></div>`;
         document.getElementById('pg-replay').onclick = () => { idx = 0; render(); };
       } else {
         const layers = [];
-        if (idx + 4 < total) layers.push(`<div class="announcement ann-b4" style="width:280px;">${inner(s, idx+4)}</div>`);
-        if (idx + 3 < total) layers.push(`<div class="announcement ann-b3" style="width:280px;">${inner(s, idx+3)}</div>`);
-        if (idx + 2 < total) layers.push(`<div class="announcement ann-b2" style="width:280px;">${inner(s, idx+2)}</div>`);
-        if (idx + 1 < total) layers.push(`<div class="announcement ann-b1" style="width:280px;">${inner(s, idx+1)}</div>`);
-        layers.push(`<div class="announcement ann-front" style="width:280px;">${inner(s, idx)}</div>`);
-        $preview.innerHTML = `<div class="ann-deck" style="width:280px;">${layers.join('')}</div>`;
+        if (idx + 4 < total) layers.push(`<div class="announcement ann-b4" style="width:260px;">${inner(s, idx+4)}</div>`);
+        if (idx + 3 < total) layers.push(`<div class="announcement ann-b3" style="width:260px;">${inner(s, idx+3)}</div>`);
+        if (idx + 2 < total) layers.push(`<div class="announcement ann-b2" style="width:260px;">${inner(s, idx+2)}</div>`);
+        if (idx + 1 < total) layers.push(`<div class="announcement ann-b1" style="width:260px;">${inner(s, idx+1)}</div>`);
+        layers.push(`<div class="announcement ann-front" style="width:260px;">${inner(s, idx)}</div>`);
+        $preview.innerHTML = `<div class="ann-deck" style="width:260px;">${layers.join('')}</div>`;
       }
       document.getElementById('pg-code').textContent = code(s);
       if (window.Icons && window.Icons.render) window.Icons.render($preview);
