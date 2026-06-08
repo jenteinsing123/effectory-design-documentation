@@ -20,7 +20,7 @@
       font-family: 'Poppins', sans-serif;
     }
     /* full-bleed illustration (eff-tooltip-dialog [svgUrl]); coloured placeholder shown when no image */
-    .ann-media { height: 168px; background: #6c5ce7; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); }
+    .ann-media { height: 168px; background: var(--bg-brand-base); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); }
     .ann-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .ann-media-ph { display: flex; width: 40px; height: 40px; opacity: .5; }
     .ann-body { padding: 20px; }
@@ -179,8 +179,8 @@
             <div class="dd-card">
               <div class="ann-prev">
                 <div class="ann-deck" style="pointer-events:none;">
-                  <div class="announcement ann-b1" style="width:264px;"><div class="ann-media" style="height:90px; background:#0a9d99;"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Bulk export</p></div></div>
-                  <div class="announcement ann-front" style="width:264px;"><button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button><div class="ann-media" style="height:90px; background:#6c5ce7;"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Comments are live</p><p class="ann-text" style="font-size:12px;">Leave feedback on any question.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
+                  <div class="announcement ann-b1" style="width:264px;"><div class="ann-media" style="height:90px; background:var(--bg-info-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Bulk export</p></div></div>
+                  <div class="announcement ann-front" style="width:264px;"><button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button><div class="ann-media" style="height:90px; background:var(--bg-brand-base);"></div><div class="ann-body" style="padding:14px 16px 16px;"><p class="ann-title" style="font-size:14px;">Comments are live</p><p class="ann-text" style="font-size:12px;">Leave feedback on any question.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
                 </div>
               </div>
               <div class="dd-cap do">
@@ -203,8 +203,19 @@
 
         <section class="section" id="variants">
           <h2 class="text-l3">Variants</h2>
-          <p class="section-lead">The illustration is optional, and several announcements can be queued as a deck.</p>
+          <p class="section-lead">Pick a colour to match the message, choose whether to show an illustration, and queue several as a deck.</p>
 
+          <h3 class="text-l4">Colour</h3>
+          <p>Colours reuse the design-system <strong>sentiment</strong> palette — the same tokens as <a class="link-inline" href="inline-notification-docs.html">Inline notification</a>. <strong>Default</strong> is a white card with the brand (teal) button; the sentiments tint the card background (<code>--bg-*-subtle</code>), the illustration (<code>--bg-*-base</code>) and the call-to-action. Match the colour to the message — Default for neutral announcements, and Info / Success / Warning / Error to signal meaning.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; margin:18px 0 28px;">
+            <div class="announcement" style="width:210px; pointer-events:none;"><div class="ann-body"><p class="ann-title">Default</p><p class="ann-text">Neutral, everyday announcement.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-info-subtle);"><div class="ann-body"><p class="ann-title">Info</p><p class="ann-text">Neutral context or a heads-up.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-info-base);--border-brand-base:var(--border-info-base-hover);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-positive-subtle);"><div class="ann-body"><p class="ann-title">Success</p><p class="ann-text">Something completed well.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-positive-base);--border-brand-base:var(--border-positive-base-hover);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-warning-subtle);"><div class="ann-body"><p class="ann-title">Warning</p><p class="ann-text">Something needs attention.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-warning-bold);--border-brand-base:var(--border-warning-base);--content-on-brand-base:var(--content-base);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-negative-subtle);"><div class="ann-body"><p class="ann-title">Error</p><p class="ann-text">Something went wrong.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-negative-base);--border-brand-base:var(--border-negative-base-hover);">Learn more</button></div></div></div>
+          </div>
+
+          <h3 class="text-l4">Layout</h3>
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn">
@@ -236,13 +247,13 @@
             <div class="variant-row">
               <div class="variant-row-btn">
                 <div class="ann-deck" style="width:280px; pointer-events:none;">
-                  <div class="announcement ann-b4" style="width:280px;"><div class="ann-media" style="height:130px; background:#e0518a;"></div></div>
-                  <div class="announcement ann-b3" style="width:280px;"><div class="ann-media" style="height:130px; background:#3174db;"></div></div>
-                  <div class="announcement ann-b2" style="width:280px;"><div class="ann-media" style="height:130px; background:#ec9f06;"></div></div>
-                  <div class="announcement ann-b1" style="width:280px;"><div class="ann-media" style="height:130px; background:#0a9d99;"></div></div>
+                  <div class="announcement ann-b4" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-negative-base);"></div></div>
+                  <div class="announcement ann-b3" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-info-base);"></div></div>
+                  <div class="announcement ann-b2" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-warning-bold);"></div></div>
+                  <div class="announcement ann-b1" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-positive-base);"></div></div>
                   <div class="announcement ann-front" style="width:280px;">
                     <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
-                    <div class="ann-media" style="height:130px; background:#6c5ce7;"></div>
+                    <div class="ann-media" style="height:130px; background:var(--bg-brand-base);"></div>
                     <div class="ann-body">
                       <p class="ann-title">Dynamic reporting is here!</p>
                       <p class="ann-text">A new look, new features, and more to explore.</p>
@@ -503,7 +514,7 @@
     if (!$preview) return;
     const defaults = { media:true, title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', ctaOn:true, cta:'Learn more', stack:'1' };
     const PH = '<i data-icon="image" class="ann-media-ph"></i>';
-    const BG = ['#6c5ce7', '#0a9d99', '#ec9f06', '#3174db', '#e0518a'];
+    const BG = ['var(--bg-brand-base)', 'var(--bg-info-base)', 'var(--bg-positive-base)', 'var(--bg-warning-bold)', 'var(--bg-negative-base)'];
     // sample queue used when stacked; index 0 is the editable card
     const SAMPLES = [null,
       { title:'Comments are now live', body:'Leave feedback right on any question, in real time.' },
