@@ -221,7 +221,9 @@
     function cRenderForm(){ let h=''; for(let i=0;i<cCount;i++) h+=cBlock(i); $cardCfgs.innerHTML=h; paint($cardCfgs); }
     function cCard(i, cls){
       const c = CARDS[i];
-      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${C_BG[i]}; color:rgba(255,255,255,.85);">${PH}</div>`;
+      // only the front card shows its colour; queued cards behind get a calm neutral tint
+      const mediaBg = (cls === 'ann-front') ? C_BG[i] : 'var(--bg-tertiary)';
+      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${mediaBg}; color:rgba(255,255,255,.85);">${PH}</div>`;
       const close = `<button class="ann-close ib ib-24 ib-secondary" data-cnext aria-label="Close"><i data-icon="cross"></i></button>`;
       const cta = c.cta ? `<button class="btn btn-primary" data-cnext>${esc(c.ctaLabel)||'Learn more'}</button>` : '';
       const actions = cta ? `<div class="ann-actions">${cta}</div>` : '';

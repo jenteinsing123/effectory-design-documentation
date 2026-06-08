@@ -234,10 +234,10 @@
             <div class="variant-row">
               <div class="variant-row-btn">
                 <div class="ann-deck" style="width:280px; pointer-events:none;">
-                  <div class="announcement ann-b4" style="width:280px;"><div class="ann-media" style="height:130px; background:#e0518a;"></div></div>
-                  <div class="announcement ann-b3" style="width:280px;"><div class="ann-media" style="height:130px; background:#3174db;"></div></div>
-                  <div class="announcement ann-b2" style="width:280px;"><div class="ann-media" style="height:130px; background:#ec9f06;"></div></div>
-                  <div class="announcement ann-b1" style="width:280px;"><div class="ann-media" style="height:130px; background:#0a9d99;"></div></div>
+                  <div class="announcement ann-b4" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-tertiary);"></div></div>
+                  <div class="announcement ann-b3" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-tertiary);"></div></div>
+                  <div class="announcement ann-b2" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-tertiary);"></div></div>
+                  <div class="announcement ann-b1" style="width:280px;"><div class="ann-media" style="height:130px; background:var(--bg-tertiary);"></div></div>
                   <div class="announcement ann-front" style="width:280px;">
                     <button class="ann-close ib ib-24 ib-secondary" aria-label="Close"><i data-icon="cross"></i></button>
                     <div class="ann-media" style="height:130px; background:#6c5ce7;"></div>
@@ -526,7 +526,9 @@
     function media(s, p){
       if (!s.media) return '';
       if (s.stack <= 1) return `<div class="ann-media">${PH}</div>`; // single: grey placeholder
-      return `<div class="ann-media" style="background:${BG[p % BG.length]}; color:rgba(255,255,255,.85);">${PH}</div>`; // deck: coloured per card
+      // only the front card shows its colour; queued cards behind get a calm neutral tint
+      const bg = (p === idx) ? BG[p % BG.length] : 'var(--bg-tertiary)';
+      return `<div class="ann-media" style="background:${bg}; color:rgba(255,255,255,.85);">${PH}</div>`;
     }
     function inner(s, p){
       const d = content(s, p);
