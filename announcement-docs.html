@@ -68,6 +68,8 @@
     .ann-prev { display: flex; justify-content: center; align-items: center; padding: 28px 24px; flex: 1; }
     .variant-row { grid-template-columns: minmax(340px, 1.2fr) 1fr; }
     .variant-row-btn { padding: 36px 32px 44px; }
+    /* framed preview for the colour swatches */
+    .colour-frame { display: flex; flex-wrap: wrap; gap: 16px; background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 32px; margin: 18px 0 28px; }
   </style>
 </head>
 <body>
@@ -206,13 +208,13 @@
           <p class="section-lead">Pick a colour to match the message, choose whether to show an illustration, and queue several as a deck.</p>
 
           <h3 class="text-l4">Colour</h3>
-          <p>Colours reuse the design-system <strong>sentiment</strong> palette — the same tokens as <a class="link-inline" href="inline-notification-docs.html">Inline notification</a>. <strong>Default</strong> is a white card with the brand (teal) button; the sentiments tint the card background (<code>--bg-*-subtle</code>), the illustration (<code>--bg-*-base</code>) and the call-to-action. Match the colour to the message — Default for neutral announcements, and Info / Success / Warning / Error to signal meaning.</p>
-          <div style="display:flex; flex-wrap:wrap; gap:16px; margin:18px 0 28px;">
-            <div class="announcement" style="width:210px; pointer-events:none;"><div class="ann-body"><p class="ann-title">Default</p><p class="ann-text">Neutral, everyday announcement.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
-            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-info-subtle);"><div class="ann-body"><p class="ann-title">Info</p><p class="ann-text">Neutral context or a heads-up.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-info-base);--border-brand-base:var(--border-info-base-hover);">Learn more</button></div></div></div>
-            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-positive-subtle);"><div class="ann-body"><p class="ann-title">Success</p><p class="ann-text">Something completed well.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-positive-base);--border-brand-base:var(--border-positive-base-hover);">Learn more</button></div></div></div>
-            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-warning-subtle);"><div class="ann-body"><p class="ann-title">Warning</p><p class="ann-text">Something needs attention.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-warning-bold);--border-brand-base:var(--border-warning-base);--content-on-brand-base:var(--content-base);">Learn more</button></div></div></div>
-            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-negative-subtle);"><div class="ann-body"><p class="ann-title">Error</p><p class="ann-text">Something went wrong.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-negative-base);--border-brand-base:var(--border-negative-base-hover);">Learn more</button></div></div></div>
+          <p>The card comes in a small set of colours drawn from the design-system palette tokens. <strong>Default</strong> is a white card with the brand (teal) button; the others tint the card background (<code>--bg-*-subtle</code>), the illustration (<code>--bg-*-base</code>) and the call-to-action. They're purely decorative colour choices — an announcement carries no error or status meaning, so pick whichever fits the moment.</p>
+          <div class="colour-frame">
+            <div class="announcement" style="width:210px; pointer-events:none;"><div class="ann-body"><p class="ann-title">Default</p><p class="ann-text">A fresh update worth a look.</p><div class="ann-actions"><button class="btn btn-primary">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-info-subtle);"><div class="ann-body"><p class="ann-title">Blue</p><p class="ann-text">A fresh update worth a look.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-info-base);--border-brand-base:var(--border-info-base-hover);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-positive-subtle);"><div class="ann-body"><p class="ann-title">Green</p><p class="ann-text">A fresh update worth a look.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-positive-base);--border-brand-base:var(--border-positive-base-hover);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-warning-subtle);"><div class="ann-body"><p class="ann-title">Orange</p><p class="ann-text">A fresh update worth a look.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-warning-bold);--border-brand-base:var(--border-warning-base);--content-on-brand-base:var(--content-base);">Learn more</button></div></div></div>
+            <div class="announcement" style="width:210px; pointer-events:none; background:var(--bg-negative-subtle);"><div class="ann-body"><p class="ann-title">Red</p><p class="ann-text">A fresh update worth a look.</p><div class="ann-actions"><button class="btn btn-primary" style="--bg-brand-base:var(--bg-negative-base);--border-brand-base:var(--border-negative-base-hover);">Learn more</button></div></div></div>
           </div>
 
           <h3 class="text-l4">Layout</h3>

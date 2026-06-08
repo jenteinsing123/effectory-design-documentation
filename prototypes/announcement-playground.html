@@ -152,7 +152,7 @@
       <div class="panel">
         <div class="panel-hd">Feature tour</div>
         <div class="set-row">
-          <div class="lbl"><div class="t">Color</div><div class="d">Matches the design-system sentiment colours.</div></div>
+          <div class="lbl"><div class="t">Color</div><div class="d">Card, illustration and button colour.</div></div>
           <div class="ctrl"><div class="slt-wrap" id="d-color-wrap"></div></div>
         </div>
         <div class="set-row">
@@ -206,17 +206,18 @@
     }
 
     /* ══════════════ CARD ══════════════ */
-    // Card colours map 1:1 to the design-system sentiment tokens (same as Inline notification):
-    //   surface = subtle background tint · illu = sentiment accent fill · btn* = CTA button.
+    // Card colour options. Values come from the design-system palette tokens (same hues as the
+    // sentiment colours) but they're plain colour choices — no error/status meaning.
+    //   surface = subtle background tint · illu = accent fill · btn* = CTA button.
     // Default keeps a white card with the brand (teal) primary button.
     const THEMES = {
-      default: { label:'Default',  surface:'var(--bg-base)',           illu:'var(--bg-brand-base)' },
-      info:    { label:'Info',     surface:'var(--bg-info-subtle)',     illu:'var(--bg-info-base)',     btnBg:'var(--bg-info-base)',     btnBorder:'var(--border-info-base-hover)',     btnOn:'#fff' },
-      success: { label:'Success',  surface:'var(--bg-positive-subtle)', illu:'var(--bg-positive-base)', btnBg:'var(--bg-positive-base)', btnBorder:'var(--border-positive-base-hover)', btnOn:'#fff' },
-      warning: { label:'Warning',  surface:'var(--bg-warning-subtle)',  illu:'var(--bg-warning-bold)',  btnBg:'var(--bg-warning-bold)',  btnBorder:'var(--border-warning-base)',        btnOn:'var(--content-base)' },
-      error:   { label:'Error',    surface:'var(--bg-negative-subtle)', illu:'var(--bg-negative-base)', btnBg:'var(--bg-negative-base)', btnBorder:'var(--border-negative-base-hover)', btnOn:'#fff' },
+      default: { label:'Default', surface:'var(--bg-base)',           illu:'var(--bg-brand-base)' },
+      blue:    { label:'Blue',    surface:'var(--bg-info-subtle)',     illu:'var(--bg-info-base)',     btnBg:'var(--bg-info-base)',     btnBorder:'var(--border-info-base-hover)',     btnOn:'#fff' },
+      green:   { label:'Green',   surface:'var(--bg-positive-subtle)', illu:'var(--bg-positive-base)', btnBg:'var(--bg-positive-base)', btnBorder:'var(--border-positive-base-hover)', btnOn:'#fff' },
+      orange:  { label:'Orange',  surface:'var(--bg-warning-subtle)',  illu:'var(--bg-warning-bold)',  btnBg:'var(--bg-warning-bold)',  btnBorder:'var(--border-warning-base)',        btnOn:'var(--content-base)' },
+      red:     { label:'Red',     surface:'var(--bg-negative-subtle)', illu:'var(--bg-negative-base)', btnBg:'var(--bg-negative-base)', btnBorder:'var(--border-negative-base-hover)', btnOn:'#fff' },
     };
-    const THEME_ORDER = ['default','info','success','warning','error'];
+    const THEME_ORDER = ['default','blue','green','orange','red'];
     const themeOf = c => THEMES[c.color] || THEMES.default;
     const DUR = 560, EASE = 'cubic-bezier(.4,0,.2,1)';
     const $ann = document.getElementById('announcement');
@@ -224,10 +225,10 @@
     const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const CARDS = [
       { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more', color:'default' },
-      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups', color:'info' },
-      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export', color:'success' },
-      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more', color:'warning' },
-      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up', color:'error' },
+      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups', color:'blue' },
+      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export', color:'green' },
+      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more', color:'orange' },
+      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up', color:'red' },
     ];
     let cCount = 3, cIdx = 0, cFirst = true;
 
@@ -235,7 +236,7 @@
       const c = CARDS[i];
       return `<div class="panel card-cfg" data-cblock="${i}">
         <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?themeOf(c).illu:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
-        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Matches the design-system sentiment colours.</div></div><div class="ctrl">
+        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Card, illustration and button colour.</div></div><div class="ctrl">
           <div class="slt-wrap" data-card="${i}">
             <div class="slt" data-slt tabindex="0" role="button" aria-haspopup="listbox">
               <div class="slt-left"><span class="color-dot" style="background:${themeOf(c).illu}"></span><span class="slt-val">${THEMES[c.color].label}</span></div>
