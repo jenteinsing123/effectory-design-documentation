@@ -160,10 +160,6 @@
           <div class="lbl"><div class="t">"Next" label</div><div class="d">Shown on every step except the last.</div></div>
           <div class="ctrl"><input class="tf" id="d-next" type="text" value="Next feature"></div>
         </div>
-        <div class="set-row">
-          <div class="lbl"><div class="t">Locked-feature tag</div><div class="d">Shown on steps marked "Premium".</div></div>
-          <div class="ctrl"><input class="tf" id="d-plantag" type="text" value="Available on Plan 2 and higher"></div>
-        </div>
       </div>
       <div id="step-cfgs"></div>
       <div class="panel">
@@ -301,6 +297,7 @@
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="title" value="${esc(s.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" rows="3" data-step="${i}" data-field="body">${esc(s.body)}</textarea></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Premium (locked)</div><div class="d">Not in the current plan — shows the upgrade tag.</div></div><div class="ctrl">${tgl('step',i,'locked',s.locked)}</div></div>
+        <div class="set-row plantag-row ${s.locked?'':'hidden'}"><div class="lbl"><div class="t">Upgrade label</div><div class="d">Tag shown on this locked step.</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="planTag" value="${esc(s.planTag ?? 'Available on Plan 2 and higher')}"></div></div>
       </div>`;
     }
     const $stepCfgs = document.getElementById('step-cfgs');
@@ -318,7 +315,7 @@
       arr.push({ kind:'intro', title:el('d-intro-title').value, body:el('d-intro-body').value,
         media:`<div class="dlg-media dlg-intro-media ${im?'':'is-collapsed'}">${INTRO_CONFETTI}<i data-icon="featured" class="dlg-intro-spark"></i></div>` });
       for (let i=0;i<dCount;i++){ const s=STEPS[i];
-        arr.push({ kind:'feature', title:s.title, body:s.body, locked:s.locked, mediaOn:s.media,
+        arr.push({ kind:'feature', title:s.title, body:s.body, locked:s.locked, mediaOn:s.media, planTag:s.planTag ?? 'Available on Plan 2 and higher',
           media:`<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${D_BG[i]};">${DPH}</div>` }); }
       if (el('d-outro-on').checked) arr.push({ kind:'outro', title:el('d-outro-title').value, body:el('d-outro-body').value, url:el('d-outro-url').value,
         media:`<div class="dlg-media" style="background:linear-gradient(135deg,#7b6cf0,#30b3af); color:#fff;"><i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` });
@@ -330,7 +327,7 @@
       dIdx = Math.max(0, Math.min(S.length-1, dIdx));
       const sl = S[dIdx], isFirst = dIdx===0, isLast = dIdx===S.length-1;
       let dots=''; for (let i=0;i<S.length;i++) dots += `<span class="dlg-dot${i===dIdx?' is-active':''}" data-ddot="${i}"></span>`;
-      const tagText = esc(el('d-plantag').value) || 'Premium';
+      const tagText = esc(sl.planTag) || 'Premium';
       const tagMedia = (sl.kind==='feature' && sl.locked && sl.mediaOn) ? `<div class="dlg-tag dlg-tag-media"><i data-icon="lock"></i> ${tagText}</div>` : '';
       const tagBody  = (sl.kind==='feature' && sl.locked && !sl.mediaOn) ? `<div class="dlg-tag"><i data-icon="lock"></i> ${tagText}</div>` : '';
       const media = sl.media.replace('</div>', `${tagMedia}</div>`);
@@ -381,13 +378,13 @@
       if (t.dataset.step===undefined) return;
       const i=+t.dataset.step, f=t.dataset.field;
       if (f==='media'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?D_BG[i]:'var(--bg-tertiary)'; }
-      else if (f==='locked'){ STEPS[i][f]=t.checked; }
+      else if (f==='locked'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.plantag-row').classList.toggle('hidden', !t.checked); }
       else STEPS[i][f]=t.value;
       if (dOpen) dRender();
     }
     $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
     // any dialog setting re-renders the open dialog (one slide list reads them all)
-    ['d-prev','d-next','d-plantag','d-intro-title','d-intro-body','d-start','d-skip','d-intro-media',
+    ['d-prev','d-next','d-intro-title','d-intro-body','d-start','d-skip','d-intro-media',
      'd-outro-on','d-outro-title','d-outro-body','d-outro-cta','d-outro-url'].forEach(id => {
       el(id).addEventListener('input', () => { if (dOpen) dRender(); });
       el(id).addEventListener('change', () => { if (dOpen) dRender(); });
