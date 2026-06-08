@@ -44,6 +44,13 @@
 
     .card-cfg .panel-hd { justify-content: space-between; }
     .card-cfg .swatch { width: 14px; height: 14px; border-radius: 4px; }
+    /* Color picker uses the design-system Select (.slt) + Dropdown menu (.menu) */
+    .card-cfg .slt-wrap { position: relative; width: 240px; }
+    .card-cfg .slt-wrap .menu { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 60; }
+    .card-cfg .slt-wrap .menu[hidden] { display: none; }
+    .color-dot { width: 14px; height: 14px; border-radius: var(--radius-full); flex-shrink: 0; display: inline-block; }
+    .card-cfg .menu-item-check { opacity: 0; }
+    .card-cfg .menu-item.is-selected .menu-item-check { opacity: 1; }
     .card-cfg .tag { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); }
     .card-cfg-hd-left { display: flex; align-items: center; gap: 9px; }
 
@@ -224,7 +231,15 @@
       const c = CARDS[i];
       return `<div class="panel card-cfg" data-cblock="${i}">
         <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?themeOf(c).bg:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
-        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Tints the illustration and the button.</div></div><div class="ctrl"><select class="tf" data-card="${i}" data-field="color">${THEME_ORDER.map(k=>`<option value="${k}" ${c.color===k?'selected':''}>${THEMES[k].label}</option>`).join('')}</select></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Tints the illustration and the button.</div></div><div class="ctrl">
+          <div class="slt-wrap" data-card="${i}">
+            <div class="slt" data-slt tabindex="0" role="button" aria-haspopup="listbox">
+              <div class="slt-left"><span class="color-dot" style="background:${themeOf(c).bg}"></span><span class="slt-val">${THEMES[c.color].label}</span></div>
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="menu" data-slt-menu role="listbox" hidden>${THEME_ORDER.map(k=>`<div class="menu-item ${c.color===k?'is-selected':''}" data-card="${i}" data-color="${k}" role="option" aria-selected="${c.color===k}"><span class="menu-item-icon"><span class="color-dot" style="background:${THEMES[k].bg}"></span></span><div class="menu-item-body"><span class="menu-item-title">${THEMES[k].label}</span></div><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`).join('')}</div>
+          </div>
+        </div></div>
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('card',i,'media',c.media)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="title" value="${esc(c.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="body" value="${esc(c.body)}"></div></div>
@@ -288,12 +303,45 @@
         if (f==='cta') t.closest('.card-cfg').querySelector('.cta-label-row').classList.toggle('hidden', !t.checked);
         if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?themeOf(CARDS[i]).bg:'var(--bg-tertiary)';
           const m=(i===cIdx)?$ann.querySelector('.ann-front .ann-media'):null; if(m){ m.classList.toggle('is-collapsed', !t.checked); return; } }
-      } else { CARDS[i][f]=t.value;
-        if (f==='color' && CARDS[i].media) t.closest('.card-cfg').querySelector('.swatch').style.background = themeOf(CARDS[i]).bg; }
+      } else CARDS[i][f]=t.value;
       cRenderDeck();
     }
     $cardCfgs.addEventListener('input', cEdit); $cardCfgs.addEventListener('change', cEdit);
     el('c-fab').addEventListener('click', cReshow);
+
+    /* Colour picker — design-system Select (.slt) opening a Dropdown menu (.menu) */
+    function cCloseMenus(except){
+      $cardCfgs.querySelectorAll('[data-slt-menu]').forEach(m => {
+        if (m !== except){ m.hidden = true; m.previousElementSibling.classList.remove('is-focus'); }
+      });
+    }
+    $cardCfgs.addEventListener('click', e => {
+      const trig = e.target.closest('[data-slt]');
+      if (trig){
+        const menu = trig.parentElement.querySelector('[data-slt-menu]');
+        const willOpen = menu.hidden;
+        cCloseMenus();
+        menu.hidden = !willOpen;
+        trig.classList.toggle('is-focus', willOpen);
+        return;
+      }
+      const item = e.target.closest('[data-color]');
+      if (item){
+        const i = +item.dataset.card, k = item.dataset.color, wrap = item.closest('.slt-wrap');
+        CARDS[i].color = k;
+        wrap.querySelector('.slt-val').textContent = THEMES[k].label;
+        wrap.querySelector('.slt .color-dot').style.background = themeOf(CARDS[i]).bg;
+        wrap.querySelectorAll('.menu-item').forEach(mi => {
+          const sel = mi.dataset.color === k;
+          mi.classList.toggle('is-selected', sel);
+          mi.setAttribute('aria-selected', sel);
+        });
+        cCloseMenus();
+        if (CARDS[i].media) item.closest('.card-cfg').querySelector('.swatch').style.background = themeOf(CARDS[i]).bg;
+        cRenderDeck();
+      }
+    });
+    document.addEventListener('click', e => { if (!e.target.closest('.slt-wrap')) cCloseMenus(); });
 
     /* ══════════════ DIALOG ══════════════ */
     const D_BG = [
