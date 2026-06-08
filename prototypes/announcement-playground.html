@@ -195,14 +195,15 @@
     }
 
     /* ══════════════ CARD ══════════════ */
-    // per-card colour themes: illustration fill + the matching CTA button fill/border (darker shade)
+    // per-card colour themes: illustration/button fill, the matching button border (darker shade),
+    // and a light card-background tint. Tints are ~10% so the dark title/body text keeps AA+ contrast.
     const THEMES = {
-      teal:   { label:'Teal (brand)', bg:'#0a9d99', border:'#0c827f' },
-      blue:   { label:'Blue',         bg:'#3174db', border:'#2861b5' },
-      purple: { label:'Purple',       bg:'#6c5ce7', border:'#5544c9' },
-      green:  { label:'Green',        bg:'#16a34a', border:'#11833c' },
-      orange: { label:'Orange',       bg:'#ec9f06', border:'#c08105' },
-      pink:   { label:'Pink',         bg:'#e0518a', border:'#c23d72' },
+      teal:   { label:'Teal (brand)', bg:'#0a9d99', border:'#0c827f', surface:'#e6f5f4' },
+      blue:   { label:'Blue',         bg:'#3174db', border:'#2861b5', surface:'#e9f1fc' },
+      purple: { label:'Purple',       bg:'#6c5ce7', border:'#5544c9', surface:'#efedfc' },
+      green:  { label:'Green',        bg:'#16a34a', border:'#11833c', surface:'#e7f6ed' },
+      orange: { label:'Orange',       bg:'#ec9f06', border:'#c08105', surface:'#fdf3df' },
+      pink:   { label:'Pink',         bg:'#e0518a', border:'#c23d72', surface:'#fce9f0' },
     };
     const THEME_ORDER = ['teal','blue','purple','green','orange','pink'];
     const themeOf = c => THEMES[c.color] || THEMES.teal;
@@ -243,7 +244,7 @@
       const btnStyle = `--bg-brand-base:${th.bg};--bg-brand-base-hover:${th.border};--bg-brand-base-pressed:${th.border};--border-brand-base:${th.border};--border-brand-base-pressed:${th.border};`;
       const cta = c.cta ? `<button class="btn btn-primary" data-cnext style="${btnStyle}">${esc(c.ctaLabel)||'Learn more'}</button>` : '';
       const actions = cta ? `<div class="ann-actions">${cta}</div>` : '';
-      return `<div class="announcement ${cls}">${close}${media}<div class="ann-body"><p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p>${actions}</div></div>`;
+      return `<div class="announcement ${cls}" style="background:${th.surface};">${close}${media}<div class="ann-body"><p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p>${actions}</div></div>`;
     }
     function cMeasure(i){
       const probe = document.createElement('div'); probe.style.cssText='position:absolute;left:-9999px;top:0;visibility:hidden;';
