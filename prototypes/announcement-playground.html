@@ -195,24 +195,35 @@
     }
 
     /* ══════════════ CARD ══════════════ */
-    const C_BG = ['#6c5ce7', '#0a9d99', '#ec9f06', '#3174db', '#e0518a'];
+    // per-card colour themes: illustration fill + the matching CTA button fill/border (darker shade)
+    const THEMES = {
+      teal:   { label:'Teal (brand)', bg:'#0a9d99', border:'#0c827f' },
+      blue:   { label:'Blue',         bg:'#3174db', border:'#2861b5' },
+      purple: { label:'Purple',       bg:'#6c5ce7', border:'#5544c9' },
+      green:  { label:'Green',        bg:'#16a34a', border:'#11833c' },
+      orange: { label:'Orange',       bg:'#ec9f06', border:'#c08105' },
+      pink:   { label:'Pink',         bg:'#e0518a', border:'#c23d72' },
+    };
+    const THEME_ORDER = ['teal','blue','purple','green','orange','pink'];
+    const themeOf = c => THEMES[c.color] || THEMES.teal;
     const DUR = 560, EASE = 'cubic-bezier(.4,0,.2,1)';
     const $ann = document.getElementById('announcement');
     const $cardCfgs = document.getElementById('card-cfgs');
     const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const CARDS = [
-      { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more' },
-      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups' },
-      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export' },
-      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more' },
-      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up' },
+      { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more', color:'purple' },
+      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups', color:'teal' },
+      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export', color:'orange' },
+      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more', color:'blue' },
+      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up', color:'pink' },
     ];
     let cCount = 3, cIdx = 0, cFirst = true;
 
     function cBlock(i){
       const c = CARDS[i];
       return `<div class="panel card-cfg" data-cblock="${i}">
-        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?C_BG[i]:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?themeOf(c).bg:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
+        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Tints the illustration and the button.</div></div><div class="ctrl"><select class="tf" data-card="${i}" data-field="color">${THEME_ORDER.map(k=>`<option value="${k}" ${c.color===k?'selected':''}>${THEMES[k].label}</option>`).join('')}</select></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('card',i,'media',c.media)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="title" value="${esc(c.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><input class="tf" type="text" data-card="${i}" data-field="body" value="${esc(c.body)}"></div></div>
@@ -223,11 +234,14 @@
     function cRenderForm(){ let h=''; for(let i=0;i<cCount;i++) h+=cBlock(i); $cardCfgs.innerHTML=h; paint($cardCfgs); }
     function cCard(i, cls){
       const c = CARDS[i];
+      const th = themeOf(c);
       // each card keeps its own illustration colour on every layer, so the colour is already
       // correct the moment a queued card promotes to the front (no late colour swap)
-      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${C_BG[i]}; color:rgba(255,255,255,.85);">${PH}</div>`;
+      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${th.bg}; color:rgba(255,255,255,.85);">${PH}</div>`;
       const close = `<button class="ann-close ib ib-24 ib-secondary" data-cnext aria-label="Close"><i data-icon="cross"></i></button>`;
-      const cta = c.cta ? `<button class="btn btn-primary" data-cnext>${esc(c.ctaLabel)||'Learn more'}</button>` : '';
+      // retint the design-system primary button via its own tokens so hover/pressed stay coherent
+      const btnStyle = `--bg-brand-base:${th.bg};--bg-brand-base-hover:${th.border};--bg-brand-base-pressed:${th.border};--border-brand-base:${th.border};--border-brand-base-pressed:${th.border};`;
+      const cta = c.cta ? `<button class="btn btn-primary" data-cnext style="${btnStyle}">${esc(c.ctaLabel)||'Learn more'}</button>` : '';
       const actions = cta ? `<div class="ann-actions">${cta}</div>` : '';
       return `<div class="announcement ${cls}">${close}${media}<div class="ann-body"><p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p>${actions}</div></div>`;
     }
@@ -271,9 +285,10 @@
       if (f==='media'||f==='cta'){
         CARDS[i][f]=t.checked;
         if (f==='cta') t.closest('.card-cfg').querySelector('.cta-label-row').classList.toggle('hidden', !t.checked);
-        if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?C_BG[i]:'var(--bg-tertiary)';
+        if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?themeOf(CARDS[i]).bg:'var(--bg-tertiary)';
           const m=(i===cIdx)?$ann.querySelector('.ann-front .ann-media'):null; if(m){ m.classList.toggle('is-collapsed', !t.checked); return; } }
-      } else CARDS[i][f]=t.value;
+      } else { CARDS[i][f]=t.value;
+        if (f==='color' && CARDS[i].media) t.closest('.card-cfg').querySelector('.swatch').style.background = themeOf(CARDS[i]).bg; }
       cRenderDeck();
     }
     $cardCfgs.addEventListener('input', cEdit); $cardCfgs.addEventListener('change', cEdit);
