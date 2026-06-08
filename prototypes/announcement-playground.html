@@ -45,12 +45,12 @@
     .card-cfg .panel-hd { justify-content: space-between; }
     .card-cfg .swatch { width: 14px; height: 14px; border-radius: 4px; }
     /* Color picker uses the design-system Select (.slt) + Dropdown menu (.menu) */
-    .card-cfg .slt-wrap { position: relative; width: 240px; }
-    .card-cfg .slt-wrap .menu { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 60; }
-    .card-cfg .slt-wrap .menu[hidden] { display: none; }
+    .slt-wrap { position: relative; width: 240px; }
+    .slt-wrap .menu { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 60; }
+    .slt-wrap .menu[hidden] { display: none; }
     .color-dot { width: 14px; height: 14px; border-radius: var(--radius-full); flex-shrink: 0; display: inline-block; }
-    .card-cfg .menu-item-check { opacity: 0; }
-    .card-cfg .menu-item.is-selected .menu-item-check { opacity: 1; }
+    .slt-wrap .menu-item-check { opacity: 0; }
+    .slt-wrap .menu-item.is-selected .menu-item-check { opacity: 1; }
     .card-cfg .tag { font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); }
     .card-cfg-hd-left { display: flex; align-items: center; gap: 9px; }
 
@@ -152,6 +152,10 @@
       <div class="panel">
         <div class="panel-hd">Feature tour</div>
         <div class="set-row">
+          <div class="lbl"><div class="t">Color</div><div class="d">Matches the design-system sentiment colours.</div></div>
+          <div class="ctrl"><div class="slt-wrap" id="d-color-wrap"></div></div>
+        </div>
+        <div class="set-row">
           <div class="lbl"><div class="t">Number of steps</div><div class="d">Each step is one screen in the carousel.</div></div>
           <div class="ctrl">
             <div class="tf-num-wrap count">
@@ -202,42 +206,42 @@
     }
 
     /* ══════════════ CARD ══════════════ */
-    // per-card colour themes: illustration/button fill, the matching button border (darker shade),
-    // and a light card-background tint. Tints are ~10% so the dark title/body text keeps AA+ contrast.
+    // Card colours map 1:1 to the design-system sentiment tokens (same as Inline notification):
+    //   surface = subtle background tint · illu = sentiment accent fill · btn* = CTA button.
+    // Default keeps a white card with the brand (teal) primary button.
     const THEMES = {
-      teal:   { label:'Teal (brand)', bg:'#0a9d99', border:'#0c827f', surface:'#e6f5f4' },
-      blue:   { label:'Blue',         bg:'#3174db', border:'#2861b5', surface:'#e9f1fc' },
-      purple: { label:'Purple',       bg:'#6c5ce7', border:'#5544c9', surface:'#efedfc' },
-      green:  { label:'Green',        bg:'#16a34a', border:'#11833c', surface:'#e7f6ed' },
-      orange: { label:'Orange',       bg:'#ec9f06', border:'#c08105', surface:'#fdf3df' },
-      pink:   { label:'Pink',         bg:'#e0518a', border:'#c23d72', surface:'#fce9f0' },
+      default: { label:'Default',  surface:'var(--bg-base)',           illu:'var(--bg-brand-base)' },
+      info:    { label:'Info',     surface:'var(--bg-info-subtle)',     illu:'var(--bg-info-base)',     btnBg:'var(--bg-info-base)',     btnBorder:'var(--border-info-base-hover)',     btnOn:'#fff' },
+      success: { label:'Success',  surface:'var(--bg-positive-subtle)', illu:'var(--bg-positive-base)', btnBg:'var(--bg-positive-base)', btnBorder:'var(--border-positive-base-hover)', btnOn:'#fff' },
+      warning: { label:'Warning',  surface:'var(--bg-warning-subtle)',  illu:'var(--bg-warning-bold)',  btnBg:'var(--bg-warning-bold)',  btnBorder:'var(--border-warning-base)',        btnOn:'var(--content-base)' },
+      error:   { label:'Error',    surface:'var(--bg-negative-subtle)', illu:'var(--bg-negative-base)', btnBg:'var(--bg-negative-base)', btnBorder:'var(--border-negative-base-hover)', btnOn:'#fff' },
     };
-    const THEME_ORDER = ['teal','blue','purple','green','orange','pink'];
-    const themeOf = c => THEMES[c.color] || THEMES.teal;
+    const THEME_ORDER = ['default','info','success','warning','error'];
+    const themeOf = c => THEMES[c.color] || THEMES.default;
     const DUR = 560, EASE = 'cubic-bezier(.4,0,.2,1)';
     const $ann = document.getElementById('announcement');
     const $cardCfgs = document.getElementById('card-cfgs');
     const PH = '<i data-icon="image" class="ann-media-ph"></i>';
     const CARDS = [
-      { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more', color:'purple' },
-      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups', color:'teal' },
-      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export', color:'orange' },
-      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more', color:'blue' },
-      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up', color:'pink' },
+      { title:'Dynamic reporting is here!', body:'A new look, new features, and even more to explore.', media:true,  cta:true,  ctaLabel:'Learn more', color:'default' },
+      { title:'Compare across groups',      body:'Benchmark any team against the company in one click.', media:false, cta:true,  ctaLabel:'View groups', color:'info' },
+      { title:'Export to PowerPoint',       body:'Download a ready-made results deck for your meeting.',  media:false, cta:true,  ctaLabel:'Try export', color:'success' },
+      { title:'New: Topics & Ideas',        body:'See the themes employees suggest most often.',          media:true,  cta:false, ctaLabel:'Learn more', color:'warning' },
+      { title:'Schedule recurring pulses',   body:'Set a cadence once and let surveys go out on autopilot.', media:false, cta:true,  ctaLabel:'Set up', color:'error' },
     ];
     let cCount = 3, cIdx = 0, cFirst = true;
 
     function cBlock(i){
       const c = CARDS[i];
       return `<div class="panel card-cfg" data-cblock="${i}">
-        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?themeOf(c).bg:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
-        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Tints the illustration and the button.</div></div><div class="ctrl">
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${c.media?themeOf(c).illu:'var(--bg-tertiary)'}"></span> Card ${i+1}</span>${i===0?'<span class="tag">featured</span>':''}</div>
+        <div class="set-row"><div class="lbl"><div class="t">Color</div><div class="d">Matches the design-system sentiment colours.</div></div><div class="ctrl">
           <div class="slt-wrap" data-card="${i}">
             <div class="slt" data-slt tabindex="0" role="button" aria-haspopup="listbox">
-              <div class="slt-left"><span class="color-dot" style="background:${themeOf(c).bg}"></span><span class="slt-val">${THEMES[c.color].label}</span></div>
+              <div class="slt-left"><span class="color-dot" style="background:${themeOf(c).illu}"></span><span class="slt-val">${THEMES[c.color].label}</span></div>
               <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="menu" data-slt-menu role="listbox" hidden>${THEME_ORDER.map(k=>`<div class="menu-item ${c.color===k?'is-selected':''}" data-card="${i}" data-color="${k}" role="option" aria-selected="${c.color===k}"><span class="menu-item-icon"><span class="color-dot" style="background:${THEMES[k].bg}"></span></span><div class="menu-item-body"><span class="menu-item-title">${THEMES[k].label}</span></div><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`).join('')}</div>
+            <div class="menu" data-slt-menu role="listbox" hidden>${THEME_ORDER.map(k=>`<div class="menu-item ${c.color===k?'is-selected':''}" data-card="${i}" data-color="${k}" role="option" aria-selected="${c.color===k}"><span class="menu-item-icon"><span class="color-dot" style="background:${THEMES[k].illu}"></span></span><div class="menu-item-body"><span class="menu-item-title">${THEMES[k].label}</span></div><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`).join('')}</div>
           </div>
         </div></div>
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('card',i,'media',c.media)}</div></div>
@@ -253,10 +257,10 @@
       const th = themeOf(c);
       // each card keeps its own illustration colour on every layer, so the colour is already
       // correct the moment a queued card promotes to the front (no late colour swap)
-      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${th.bg}; color:rgba(255,255,255,.85);">${PH}</div>`;
+      const media = `<div class="ann-media ${c.media?'':'is-collapsed'}" style="background:${th.illu}; color:rgba(255,255,255,.92);">${PH}</div>`;
       const close = `<button class="ann-close ib ib-24 ib-secondary" data-cnext aria-label="Close"><i data-icon="cross"></i></button>`;
-      // retint the design-system primary button via its own tokens so hover/pressed stay coherent
-      const btnStyle = `--bg-brand-base:${th.bg};--bg-brand-base-hover:${th.border};--bg-brand-base-pressed:${th.border};--border-brand-base:${th.border};--border-brand-base-pressed:${th.border};`;
+      // Default uses the plain brand (teal) primary button; sentiments retint it via the button's own tokens
+      const btnStyle = th.btnBg ? `--bg-brand-base:${th.btnBg};--bg-brand-base-hover:${th.btnBorder};--bg-brand-base-pressed:${th.btnBorder};--border-brand-base:${th.btnBorder};--border-brand-base-pressed:${th.btnBorder};--content-on-brand-base:${th.btnOn};` : '';
       const cta = c.cta ? `<button class="btn btn-primary" data-cnext style="${btnStyle}">${esc(c.ctaLabel)||'Learn more'}</button>` : '';
       const actions = cta ? `<div class="ann-actions">${cta}</div>` : '';
       return `<div class="announcement ${cls}" style="background:${th.surface};">${close}${media}<div class="ann-body"><p class="ann-title">${esc(c.title)}</p><p class="ann-text">${esc(c.body)}</p>${actions}</div></div>`;
@@ -301,7 +305,7 @@
       if (f==='media'||f==='cta'){
         CARDS[i][f]=t.checked;
         if (f==='cta') t.closest('.card-cfg').querySelector('.cta-label-row').classList.toggle('hidden', !t.checked);
-        if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?themeOf(CARDS[i]).bg:'var(--bg-tertiary)';
+        if (f==='media'){ t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?themeOf(CARDS[i]).illu:'var(--bg-tertiary)';
           const m=(i===cIdx)?$ann.querySelector('.ann-front .ann-media'):null; if(m){ m.classList.toggle('is-collapsed', !t.checked); return; } }
       } else CARDS[i][f]=t.value;
       cRenderDeck();
@@ -330,28 +334,21 @@
         const i = +item.dataset.card, k = item.dataset.color, wrap = item.closest('.slt-wrap');
         CARDS[i].color = k;
         wrap.querySelector('.slt-val').textContent = THEMES[k].label;
-        wrap.querySelector('.slt .color-dot').style.background = themeOf(CARDS[i]).bg;
+        wrap.querySelector('.slt .color-dot').style.background = themeOf(CARDS[i]).illu;
         wrap.querySelectorAll('.menu-item').forEach(mi => {
           const sel = mi.dataset.color === k;
           mi.classList.toggle('is-selected', sel);
           mi.setAttribute('aria-selected', sel);
         });
         cCloseMenus();
-        if (CARDS[i].media) item.closest('.card-cfg').querySelector('.swatch').style.background = themeOf(CARDS[i]).bg;
+        if (CARDS[i].media) item.closest('.card-cfg').querySelector('.swatch').style.background = themeOf(CARDS[i]).illu;
         cRenderDeck();
       }
     });
     document.addEventListener('click', e => { if (!e.target.closest('.slt-wrap')) cCloseMenus(); });
 
     /* ══════════════ DIALOG ══════════════ */
-    const D_BG = [
-      'linear-gradient(135deg,#acceff,#6c9bf5)',
-      'linear-gradient(135deg,#c1eeed,#54c9c4)',
-      'linear-gradient(135deg,#ffe9a6,#f5c042)',
-      'linear-gradient(135deg,#e6dbff,#a98bf5)',
-      'linear-gradient(135deg,#ffd9e2,#f58aa6)',
-      'linear-gradient(135deg,#d7f9e0,#62cd86)'
-    ];
+    let dColor = 'default';   // dialog-level sentiment colour (shared THEMES with the cards)
     const $dlg = document.getElementById('dialog-host');
     const DPH = '<i data-icon="image" class="dlg-media-ph"></i>';
     const STEPS = [
@@ -367,7 +364,7 @@
     function dBlock(i){
       const s = STEPS[i];
       return `<div class="panel card-cfg" data-dblock="${i}">
-        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${s.media?D_BG[i]:'var(--bg-tertiary)'}"></span> Step ${i+1}</span></div>
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${s.media?THEMES[dColor].illu:'var(--bg-tertiary)'}"></span> Step ${i+1}</span></div>
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('step',i,'media',s.media)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="title" value="${esc(s.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" rows="3" data-step="${i}" data-field="body">${esc(s.body)}</textarea></div></div>
@@ -377,6 +374,21 @@
     }
     const $stepCfgs = document.getElementById('step-cfgs');
     function dRenderForm(){ let h=''; for(let i=0;i<dCount;i++) h+=dBlock(i); $stepCfgs.innerHTML=h; paint($stepCfgs); }
+    // dialog Color picker — same design-system Select (.slt) + sentiment THEMES as the cards
+    function dColorRender(){
+      const wrap = el('d-color-wrap'); const th = THEMES[dColor];
+      wrap.innerHTML = `<div class="slt" data-dslt tabindex="0" role="button" aria-haspopup="listbox"><div class="slt-left"><span class="color-dot" style="background:${th.illu}"></span><span class="slt-val">${th.label}</span></div><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="menu" data-dslt-menu role="listbox" hidden>${THEME_ORDER.map(k=>`<div class="menu-item ${dColor===k?'is-selected':''}" data-dcolor="${k}" role="option" aria-selected="${dColor===k}"><span class="menu-item-icon"><span class="color-dot" style="background:${THEMES[k].illu}"></span></span><div class="menu-item-body"><span class="menu-item-title">${THEMES[k].label}</span></div><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`).join('')}</div>`;
+      paint(wrap);
+    }
+    el('d-color-wrap').addEventListener('click', e => {
+      const trig = e.target.closest('[data-dslt]');
+      if (trig){ const menu = el('d-color-wrap').querySelector('[data-dslt-menu]'); menu.hidden = !menu.hidden; trig.classList.toggle('is-focus', !menu.hidden); return; }
+      const item = e.target.closest('[data-dcolor]');
+      if (item){ dColor = item.dataset.dcolor; dColorRender(); dRenderForm(); if (dOpen) dRender(); }
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#d-color-wrap')){ const m = el('d-color-wrap')?.querySelector('[data-dslt-menu]'); if (m){ m.hidden = true; m.previousElementSibling.classList.remove('is-focus'); } }
+    });
     const INTRO_CONFETTI = [
       'top:34px;left:64px;background:#ffd857;transform:rotate(22deg)','top:58px;right:96px;background:#ff5d8f;border-radius:50%',
       'bottom:48px;left:104px;background:#c1eeed;border-radius:50%','top:96px;left:168px;background:#fff;transform:rotate(-16deg)',
@@ -386,14 +398,15 @@
     // one ordered list of slides: intro + features + (optional) outro — all in the same carousel
     function slides(){
       const arr = [];
+      const th = THEMES[dColor];           // dialog-level sentiment colour
       const im = el('d-intro-media').checked;
       arr.push({ kind:'intro', title:el('d-intro-title').value, body:el('d-intro-body').value,
-        media:`<div class="dlg-media dlg-intro-media ${im?'':'is-collapsed'}">${INTRO_CONFETTI}<i data-icon="featured" class="dlg-intro-spark"></i></div>` });
+        media:`<div class="dlg-media dlg-intro-media ${im?'':'is-collapsed'}" style="background:${th.illu};">${INTRO_CONFETTI}<i data-icon="featured" class="dlg-intro-spark"></i></div>` });
       for (let i=0;i<dCount;i++){ const s=STEPS[i];
         arr.push({ kind:'feature', title:s.title, body:s.body, locked:s.locked, mediaOn:s.media, planTag:s.planTag ?? 'Available on Plan 2 and higher',
-          media:`<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${D_BG[i]};">${DPH}</div>` }); }
+          media:`<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${th.illu};">${DPH}</div>` }); }
       if (el('d-outro-on').checked) arr.push({ kind:'outro', title:el('d-outro-title').value, body:el('d-outro-body').value, url:el('d-outro-url').value,
-        media:`<div class="dlg-media" style="background:linear-gradient(135deg,#7b6cf0,#30b3af); color:#fff;"><i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` });
+        media:`<div class="dlg-media" style="background:${th.illu}; color:#fff;"><i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` });
       return arr;
     }
     function dRender(){
@@ -406,6 +419,9 @@
       const tagMedia = (sl.kind==='feature' && sl.locked && sl.mediaOn) ? `<div class="dlg-tag dlg-tag-media"><i data-icon="lock"></i> ${tagText}</div>` : '';
       const tagBody  = (sl.kind==='feature' && sl.locked && !sl.mediaOn) ? `<div class="dlg-tag"><i data-icon="lock"></i> ${tagText}</div>` : '';
       const media = sl.media.replace('</div>', `${tagMedia}</div>`);
+      // retint the dialog's primary buttons to the chosen sentiment (Default → plain brand teal)
+      const dth = THEMES[dColor];
+      const dBtnStyle = dth.btnBg ? `--bg-brand-base:${dth.btnBg};--bg-brand-base-hover:${dth.btnBorder};--bg-brand-base-pressed:${dth.btnBorder};--border-brand-base:${dth.btnBorder};--border-brand-base-pressed:${dth.btnBorder};--content-on-brand-base:${dth.btnOn};` : '';
       // footer
       const left = isFirst
         ? `<button class="btn btn-tertiary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>`
@@ -415,7 +431,7 @@
       else if (sl.kind==='intro') right = `<button class="btn btn-primary" data-dnext>${esc(el('d-start').value)||'Show me'} <i data-icon="arrow-right"></i></button>`;
       else if (isLast) right = `<button class="btn btn-primary" data-dnext>Got it</button>`;
       else right = `<button class="btn btn-primary" data-dnext>${esc(el('d-next').value)||'Next'} <i data-icon="arrow-right"></i></button>`;
-      $dlg.innerHTML = `<div class="dlg">
+      $dlg.innerHTML = `<div class="dlg" style="${dBtnStyle}">
         <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
         ${media}
         <div class="dlg-body">
@@ -481,7 +497,7 @@
     window.addEventListener('hashchange', () => activate(location.hash.slice(1)));
 
     // init
-    cRenderForm(); dRenderForm();
+    cRenderForm(); dRenderForm(); dColorRender();
     activate(location.hash.slice(1) || 'card');
   </script>
 </body>
