@@ -41,7 +41,7 @@
   --sh-slide-panel:   -4px 4px 4px rgba(25,39,67,.04);
 }
 
-html { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; line-height: 1.6; color: var(--content-base); background: var(--bg-base); }
+html { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; line-height: 1.6; color: var(--content-base); background: var(--bg-base); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
 
 ::-webkit-scrollbar { width: 4px; }
