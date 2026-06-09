@@ -9,7 +9,12 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ── System Notification — dark, system-level message card ── */
-    .sysnotif { position: relative; display: flex; flex-direction: column; gap: 8px; width: 326px; max-width: 100%; padding: 16px 36px 16px 24px; background: var(--bg-inverse-base); border-left: 8px solid var(--border-positive-base); border-radius: var(--radius-md); box-shadow: var(--sh-popovers); font-family: 'Poppins', sans-serif; }
+    .sysnotif { position: relative; display: flex; flex-direction: column; gap: 8px; width: 326px; max-width: 100%; padding: 16px 36px 16px 24px; background: var(--bg-inverse-base); border-left: 8px solid var(--border-positive-base); border-radius: var(--radius-md); box-shadow: var(--sh-popovers); font-family: 'Poppins', sans-serif; animation: sysnotif-in 0.2s ease-in-out; }
+    @keyframes sysnotif-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .sysnotif { animation: none; } }
+    /* placement demo */
+    .sysnotif-stagedemo { position: relative; height: 220px; background: var(--bg-secondary); border: 1px solid var(--border-base); border-radius: var(--radius-lg); overflow: hidden; }
+    .sysnotif-stagedemo .sysnotif { position: absolute; top: 8px; right: 8px; animation: none; pointer-events: none; }
     .sysnotif.is-error   { border-left-color: var(--border-negative-base); }
     .sysnotif.is-warning { border-left-color: var(--border-warning-base); }
     .sysnotif-title { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-inverse-base); }
@@ -40,7 +45,7 @@
         <span class="page-updated">Updated June 2026</span>
       </div>
       <h1 class="text-l1">System Notifications</h1>
-      <p class="page-desc">A dark, system-level message that reports the outcome of a background process or a system event — separate from the page content, with an optional action and dismiss.</p>
+      <p class="page-desc">A dark, system-level message that reports the outcome of a background process or a system event. It appears top-right of the screen with an optional action and dismiss.</p>
     </div>
   </div><!-- /page-header-row -->
 
@@ -128,6 +133,15 @@
           </div>
         </section>
 
+        <section class="section" id="placement">
+          <h2 class="text-l3">Placement &amp; motion</h2>
+          <p class="section-lead">System notifications always appear in the <strong>top-right</strong> of the screen, 8px from the edges, and stack downwards when there are several. New ones slide up into place while fading in.</p>
+          <div class="sysnotif-stagedemo">
+            <div class="sysnotif"><div class="sysnotif-title">Export ready</div><div class="sysnotif-desc">Your report finished exporting.</div><button class="sysnotif-action">Download</button><button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button></div>
+          </div>
+          <p style="font-size:14px; color:var(--content-secondary); margin-top:10px;">Fixed top-right placement. The enter animation is a short slide-up + fade (≈200ms).</p>
+        </section>
+
         <section class="section" id="content-guidelines">
           <h2 class="text-l3">Content guidelines</h2>
           <p class="section-lead">Notifications are read in a glance — lead with the outcome.</p>
@@ -189,6 +203,7 @@
           <a class="toc-link" href="#anatomy">Anatomy</a>
           <a class="toc-link" href="#usage">Usage</a>
           <a class="toc-link" href="#variants">Variants</a>
+          <a class="toc-link" href="#placement">Placement &amp; motion</a>
           <a class="toc-link" href="#content-guidelines">Content guidelines</a>
           <a class="toc-link" href="#tokens">Design Tokens</a>
           <a class="toc-link" href="#accessibility">Accessibility</a>
@@ -256,6 +271,16 @@
 <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"sysnotif is-warning"</span> <span class="ca">role</span>=<span class="cv">"alert"</span><span class="ct">&gt;</span> … <span class="ct">&lt;/div&gt;</span></code></pre>
           </div>
 
+          <h3 class="text-l4">Placement</h3>
+          <p>Mount notifications inside a <code>.sysnotif-stack</code> — a fixed, top-right container that stacks them and lets clicks pass through the empty area. Each notification slides up and fades in (≈200ms).</p>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"sysnotif-stack"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"sysnotif"</span> <span class="ca">role</span>=<span class="cv">"status"</span><span class="ct">&gt;</span> … <span class="ct">&lt;/div&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"sysnotif is-error"</span> <span class="ca">role</span>=<span class="cv">"alert"</span><span class="ct">&gt;</span> … <span class="ct">&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
           <div class="dev-gap">
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
@@ -271,7 +296,8 @@
           <table class="token-table">
             <thead><tr><th>Class</th><th>Role</th></tr></thead>
             <tbody>
-              <tr><td><code>.sysnotif</code></td><td>The dark card. Sentiment: <code>.is-error</code>, <code>.is-warning</code> (default is Success).</td></tr>
+              <tr><td><code>.sysnotif-stack</code></td><td>Fixed top-right container that stacks notifications (pointer-events pass through empty space).</td></tr>
+              <tr><td><code>.sysnotif</code></td><td>The dark card; slides up + fades in on enter. Sentiment: <code>.is-error</code>, <code>.is-warning</code> (default is Success).</td></tr>
               <tr><td><code>.sysnotif-title</code></td><td>Title line (always present).</td></tr>
               <tr><td><code>.sysnotif-desc</code></td><td>Optional description line.</td></tr>
               <tr><td><code>.sysnotif-action</code></td><td>Optional single follow-up link (white underline).</td></tr>

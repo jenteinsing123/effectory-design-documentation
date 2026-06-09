@@ -2202,7 +2202,12 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 }
 
 /* ── System Notification — dark, system-level message card ── */
-.sysnotif { position: relative; display: flex; flex-direction: column; gap: 8px; width: 326px; max-width: 100%; padding: 16px 36px 16px 24px; background: var(--bg-inverse-base); border-left: 8px solid var(--border-positive-base); border-radius: var(--radius-md); box-shadow: var(--sh-popovers); font-family: 'Poppins', sans-serif; }
+.sysnotif { position: relative; display: flex; flex-direction: column; gap: 8px; width: 326px; max-width: 100%; padding: 16px 36px 16px 24px; background: var(--bg-inverse-base); border-left: 8px solid var(--border-positive-base); border-radius: var(--radius-md); box-shadow: var(--sh-popovers); font-family: 'Poppins', sans-serif; animation: sysnotif-in 0.2s ease-in-out; }
+/* Always top-right of the screen, stacked. Mount notifications inside .sysnotif-stack. */
+.sysnotif-stack { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding: 8px; pointer-events: none; }
+.sysnotif-stack > .sysnotif { pointer-events: auto; }
+@keyframes sysnotif-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .sysnotif { animation: none; } }
 .sysnotif.is-error   { border-left-color: var(--border-negative-base); }
 .sysnotif.is-warning { border-left-color: var(--border-warning-base); }
 .sysnotif-title { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-inverse-base); }

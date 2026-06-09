@@ -723,6 +723,13 @@ Donkere, systeem-brede melding (uitkomst van een achtergrond-proces of systeem-e
 - Donkere surface `--bg-inverse-base`; titel `--content-inverse-base`; desc + action `--content-inverse-secondary`; action-underline `--border-white`; shadow `--sh-popovers`; radius `--radius-md`; 8px accent-balk links.
 - a11y: `role="status"` (Success) / `role="alert"` (Error/Warning); `aria-label` op de close-knop.
 - Onderdelen: `.sysnotif-title`, `.sysnotif-desc`, `.sysnotif-action`, `.sysnotif-close`.
+- **Plaatsing:** altijd rechtsboven in het scherm, gestapeld. Mount ze in `.sysnotif-stack` (fixed, `inset:0`, `align-items:flex-end`, 8px padding, `pointer-events:none`; de notificaties zelf weer `pointer-events:auto`).
+- **Animatie:** enter = slide-up + fade-in (`translateY(16px)→0`, opacity 0→1) in ~200ms `ease-in-out`. `prefers-reduced-motion` zet 'm uit (ingebouwd).
+```html
+<div class="sysnotif-stack">
+  <div class="sysnotif" role="status"> … </div>
+</div>
+```
 > **Figma/dev gap:** de echte Angular-component/service is nog te bevestigen op `styleguide.effectory.com`. De HTML hierboven is de visuele design-system-weergave.
 
 ### Tooltip
