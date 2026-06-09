@@ -426,6 +426,7 @@ States op `.menu-item`: `.is-hover` `.is-selected` `.is-focus` `.is-disabled`.
 Echte Angular-API: Material `mat-menu` met `[matMenuTriggerFor]`; items `<button mat-menu-item disableRipple>` (icoon + `<span>`) of `<a mat-menu-item class="icon-before">` voor links.
 Onderdelen: `.menu-header` (titel), `.menu-group-lbl`, `.menu-divider`, `.menu-item` (+ `.menu-item-icon` / `.av` avatar, `.menu-item-body` → `.menu-item-title` + `.menu-item-sub`), trailing `.menu-item-check` / `.menu-chevron` / `.menu-label`.
 Icoongrootte: `.menu-item-icon` is 16px (default); voeg `size-24` of `size-32` toe voor een groter icoon (16/24/32). Hou één maat aan binnen één menu.
+Breedte: een dropdown groeit mee met de inhoud tot een max-breedte (~320px) en kapt daarna title/subtitle af met ellipsis (`width: max-content; min-width; max-width` + `text-overflow: ellipsis` op `.menu-item-title`/`.menu-item-sub`). Geen vaste breedte.
 
 ### Checkbox
 ```html
