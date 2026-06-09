@@ -709,6 +709,22 @@ Toegankelijkheid: `role="alert"` voor Warn/Error; `role="status"` voor de rest. 
 >
 > **Echte Angular component:** `<eff-inline-notification [messageTitle] [message] [messageType] [isOneLiner] [showCloseButton] [inlineButtonText] [buttonMessages] [linkText] [linkHref] …>`. De prototype-HTML hierboven is de visuele weergave; in productie-Angular gebruik je de component met inputs.
 
+### System Notification
+Donkere, systeem-brede melding (uitkomst van een achtergrond-proces of systeem-event). Niet voor element-specifieke feedback — gebruik daarvoor de Inline notification.
+```html
+<div class="sysnotif" role="status">
+  <div class="sysnotif-title">Export ready</div>
+  <div class="sysnotif-desc">Your report finished exporting.</div>   <!-- optioneel -->
+  <button class="sysnotif-action">Download</button>                   <!-- optioneel -->
+  <button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+</div>
+```
+- Sentiment via modifier op `.sysnotif`: default = Success (accent `--border-positive-base`), `is-error` (`--border-negative-base`), `is-warning` (`--border-warning-base`).
+- Donkere surface `--bg-inverse-base`; titel `--content-inverse-base`; desc + action `--content-inverse-secondary`; action-underline `--border-white`; shadow `--sh-popovers`; radius `--radius-md`; 8px accent-balk links.
+- a11y: `role="status"` (Success) / `role="alert"` (Error/Warning); `aria-label` op de close-knop.
+- Onderdelen: `.sysnotif-title`, `.sysnotif-desc`, `.sysnotif-action`, `.sysnotif-close`.
+> **Figma/dev gap:** de echte Angular-component/service is nog te bevestigen op `styleguide.effectory.com`. De HTML hierboven is de visuele design-system-weergave.
+
 ### Tooltip
 Kleine, niet-interactieve donkere bubble die op hover/focus verschijnt. Alleen korte tekst. In Angular: de Material `matTooltip` directive + `matTooltipPosition`.
 
