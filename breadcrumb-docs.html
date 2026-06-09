@@ -10,15 +10,15 @@
   <style>
     /* ── Breadcrumb — location trail with a Back action ── */
     .breadcrumb {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 6px;
       min-height: 64px; padding: 0 24px;
       background: var(--bg-base);
       border-bottom: 1px solid var(--border-base);
       font-family: 'Poppins', sans-serif;
     }
     /* the page trail */
-    .bc-trail { display: flex; align-items: center; gap: 12px; margin: 0; padding: 0; list-style: none; min-width: 0; }
-    .bc-trail li { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .bc-trail { display: flex; align-items: center; gap: 6px; margin: 0; padding: 0; list-style: none; min-width: 0; }
+    .bc-trail li { display: flex; align-items: center; gap: 6px; min-width: 0; }
     .bc-trail li:not(:first-child)::before { content: '/'; color: var(--content-secondary); font-size: 14px; font-weight: 500; }
     .bc-link {
       display: inline-flex; align-items: center; gap: 6px;
@@ -32,8 +32,6 @@
     .bc-link:focus-visible, .bc-link.is-focus { outline: 2px solid var(--border-brand-base); outline-offset: 1px; }
     /* current page — darker, not a link */
     .bc-current { padding: 2px 6px; font-size: 14px; font-weight: 500; line-height: 22px; color: var(--content-base); white-space: nowrap; }
-    /* trailing action pushes to the far end */
-    .bc-spacer { margin-left: auto; }
 
     /* canonical button set (matches the Button page) */
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: var(--radius-base); border: 1px solid transparent; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; line-height: 22px; cursor: pointer; white-space: nowrap; transition: all .1s; text-decoration: none; flex-shrink: 0; }
@@ -43,17 +41,6 @@
     .btn-secondary:active, .btn-secondary.is-pressed { background: var(--bg-secondary); border-color: var(--border-action-pressed); }
     .btn-secondary:focus-visible, .btn-secondary.is-focus { outline: 2px solid var(--border-brand-base); outline-offset: 1px; }
     .btn-secondary.is-disabled { background: var(--bg-base) !important; border-color: var(--border-base) !important; color: var(--content-disabled) !important; box-shadow: none !important; cursor: not-allowed; }
-
-    /* collapsed (mobile) pattern */
-    .bc-collapsed { gap: 6px; padding: 8px 12px; min-height: 52px; }
-    .bc-collapsed .ib i[data-icon] { display: flex; }
-    .bc-more { font-weight: 500; }
-    /* "Navigate to" ancestor menu */
-    .bc-menu { width: 320px; background: var(--bg-base); border: 1px solid var(--border-base); border-radius: var(--radius-md); box-shadow: var(--sh-dialogs); padding: 12px; font-family: 'Poppins', sans-serif; }
-    .bc-menu-hd { font-size: 14px; font-weight: 600; color: var(--content-base); padding: 4px 8px 8px; }
-    .bc-menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-radius: var(--radius-base); font-size: 14px; color: var(--content-secondary); text-decoration: none; cursor: pointer; }
-    .bc-menu-item i[data-icon] { display: flex; width: 16px; height: 16px; flex-shrink: 0; }
-    .bc-menu-item:hover { background: var(--bg-base-hover); color: var(--content-base); }
 
     /* doc preview frame */
     .bc-prev { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 0; overflow-x: auto; border: 1px solid var(--border-base); }
@@ -121,7 +108,6 @@
                 <li><a class="bc-link" href="#" onclick="return false">Company pulse</a></li>
                 <li><span class="bc-current" aria-current="page">Reporting structures</span></li>
               </ol>
-              <button class="btn btn-secondary bc-spacer">Export</button>
             </div>
           </div>
           <div class="anatomy-items">
@@ -129,7 +115,6 @@
             <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Crumb</span> — A link to an ancestor page. Selecting it jumps straight to that level.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Separator</span> — A slash between crumbs, purely decorative.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Current page</span> — The last crumb, marked as the current location and not clickable.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Action</span> — An optional button on the far end for a page-level action (e.g. Export). Leave it out when the page has no such action.</div></div>
           </div>
         </section>
 
@@ -163,40 +148,11 @@
               </div>
             </div>
           </div>
-
-          <h3 class="text-l4">Keep it on one line</h3>
-          <div class="dd-grid">
-            <div class="dd-card">
-              <div class="dd-prev" style="flex-direction:column; flex-wrap:nowrap; flex:1; height:auto; justify-content:center; gap:0; align-items:stretch; padding:0;">
-                <div class="breadcrumb bc-collapsed" style="pointer-events:none;">
-                  <button class="ib ib-36 ib-secondary" aria-label="Back"><i data-icon="arrow-left"></i></button>
-                  <button class="ib ib-36 ib-secondary bc-more" aria-label="Show full path"><i data-icon="more-horizontal"></i></button>
-                  <span class="bc-sep" aria-hidden="true" style="color:var(--content-secondary);">/</span>
-                  <span class="bc-current" aria-current="page">Reporting structures</span>
-                </div>
-              </div>
-              <div class="dd-cap do">
-                <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#16a34a"/><path d="M5 9l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Do</div>
-                When space is tight, collapse the middle of the trail into a “…” that opens the full path.
-              </div>
-            </div>
-            <div class="dd-card">
-              <div class="dd-prev" style="flex-direction:column; flex-wrap:nowrap; flex:1; height:auto; justify-content:center; gap:0; align-items:stretch; padding:0;">
-                <div class="breadcrumb" style="pointer-events:none; flex-wrap:wrap;">
-                  <ol class="bc-trail" style="flex-wrap:wrap;"><li><a class="bc-link">Organisation</a></li><li><a class="bc-link">People analytics</a></li><li><a class="bc-link">Reporting structures</a></li><li><span class="bc-current">Coordinator view</span></li></ol>
-                </div>
-              </div>
-              <div class="dd-cap dont">
-                <div class="dd-cap-hd"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#dc2626"/><path d="M6 6l6 6M12 6l-6 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>Don't</div>
-                Let the trail wrap onto a second line. Collapse it instead.
-              </div>
-            </div>
-          </div>
         </section>
 
         <section class="section" id="variants">
           <h2 class="text-l3">Variants</h2>
-          <p class="section-lead">The trail grows with depth, can carry a trailing action, and collapses on small screens.</p>
+          <p class="section-lead">The trail grows with depth — from a single level to the full path.</p>
 
           <div class="bc-variant">
             <div class="bc-prev"><div class="breadcrumb">
@@ -211,34 +167,6 @@
               <ol class="bc-trail"><li><a class="bc-link" href="#" onclick="return false">Projects</a></li><li><a class="bc-link" href="#" onclick="return false">Company pulse</a></li><li><span class="bc-current" aria-current="page">Reporting structures</span></li></ol>
             </div></div>
             <p class="bc-variant-desc"><strong>Multi-level</strong> — Deeper pages show the full trail of ancestors so any level is one click away.</p>
-          </div>
-          <div class="bc-variant">
-            <div class="bc-prev"><div class="breadcrumb" style="width:100%;">
-              <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
-              <ol class="bc-trail"><li><a class="bc-link" href="#" onclick="return false">Projects</a></li><li><span class="bc-current" aria-current="page">Reporting structures</span></li></ol>
-              <button class="btn btn-secondary bc-spacer">Export</button>
-            </div></div>
-            <p class="bc-variant-desc"><strong>With trailing action</strong> — A page-level action sits on the far end, balanced against the trail. Use it only for an action that belongs to the whole page.</p>
-          </div>
-          <div class="bc-variant">
-            <div class="bc-prev"><div class="breadcrumb bc-collapsed" style="max-width:360px;">
-              <button class="ib ib-36 ib-secondary" aria-label="Back"><i data-icon="arrow-left"></i></button>
-              <button class="ib ib-36 ib-secondary bc-more" aria-label="Show full path"><i data-icon="more-horizontal"></i></button>
-              <span class="bc-sep" aria-hidden="true" style="color:var(--content-secondary);">/</span>
-              <span class="bc-current" aria-current="page">Reporting structures</span>
-            </div></div>
-            <p class="bc-variant-desc"><strong>Collapsed (mobile)</strong> — On narrow screens the Back button becomes an icon and the middle of the trail folds into a “…”. Selecting it reveals the full path in a “Navigate&nbsp;to” menu (below).</p>
-          </div>
-
-          <h3 class="text-l4">Collapsed menu</h3>
-          <p class="section-lead">Tapping “…” opens the ancestors as a short list, each jumping straight to that level.</p>
-          <div class="bc-prev" style="padding:24px; display:flex; justify-content:center;">
-            <nav class="bc-menu" aria-label="Breadcrumb" style="pointer-events:none;">
-              <div class="bc-menu-hd">Navigate to:</div>
-              <a class="bc-menu-item"><i data-icon="arrow-left"></i> Projects</a>
-              <a class="bc-menu-item"><i data-icon="arrow-left"></i> Company wide pulse</a>
-              <a class="bc-menu-item"><i data-icon="arrow-left"></i> Reporting structures</a>
-            </nav>
           </div>
         </section>
 
@@ -335,8 +263,7 @@
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Use an ordered list.</strong> The trail is an <code>&lt;ol&gt;</code> — the order carries meaning (top level → current page).</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Mark the current page.</strong> Give the last crumb <code>aria-current="page"</code> and render it as text, not a link.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Hide the separators.</strong> Slashes are decorative — draw them with CSS or mark them <code>aria-hidden</code> so they aren't read out.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Label icon-only controls.</strong> The collapsed Back and “…” buttons need an <code>aria-label</code> (“Back”, “Show full path”), and the “…” opens a menu with the full, reachable trail.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Keyboard reachable.</strong> Back, every crumb and the “…” menu are tab-stops with a visible focus ring.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Keyboard reachable.</strong> Back and every crumb are tab-stops with a visible focus ring.</div></div>
           </div>
         </section>
 
@@ -379,8 +306,6 @@
               </div>
               <div class="pg-panel pg-props-wrap" id="pg-panel-props">
                 <div class="pg-row"><div class="pg-row-name">levels <span style="display:block;font-size:12px;color:var(--content-secondary);font-weight:400;">crumbs in the trail</span></div><div class="pg-row-ctrl"><select class="pg-select" id="pg-levels"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></div></div>
-                <div class="pg-row"><div class="pg-row-name">trailing button</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-action"><span class="pg-toggle-track"></span></label></div></div>
-                <div class="pg-row"><div class="pg-row-name">collapsed <span style="display:block;font-size:12px;color:var(--content-secondary);font-weight:400;">mobile pattern</span></div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-collapsed"><span class="pg-toggle-track"></span></label></div></div>
               </div>
               <div class="pg-panel pg-code-wrap" id="pg-panel-code" hidden>
                 <button class="dev-copy-btn" id="pg-copy">Copy</button>
@@ -431,19 +356,6 @@
 <span class="ct">&lt;/nav&gt;</span></code></pre>
           </div>
 
-          <h3 class="text-l4">With a trailing action</h3>
-          <div class="dev-preview" style="padding:0; overflow:hidden;">
-            <div class="breadcrumb" style="width:100%;">
-              <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
-              <ol class="bc-trail"><li><a class="bc-link" href="#" onclick="return false">Projects</a></li><li><span class="bc-current" aria-current="page">Reporting structures</span></li></ol>
-              <button class="btn btn-secondary bc-spacer">Export</button>
-            </div>
-          </div>
-          <div class="dev-code-wrap">
-            <button class="dev-copy-btn">Copy</button>
-<pre><code><span class="cc">&lt;!-- the trailing action uses margin-left:auto via .bc-spacer --&gt;</span>
-<span class="ct">&lt;button</span> <span class="ca">class</span>=<span class="cv">"btn btn-secondary bc-spacer"</span><span class="ct">&gt;</span>Export<span class="ct">&lt;/button&gt;</span></code></pre>
-          </div>
         </section>
 
         <section class="section" id="dev-props">
@@ -456,9 +368,7 @@
               <tr><td><code>.bc-trail</code></td><td><code>ol</code></td><td>The crumb list. Separators are drawn with CSS on each <code>li</code>.</td></tr>
               <tr><td><code>.bc-link</code></td><td><code>a</code></td><td>A crumb that links to an ancestor page.</td></tr>
               <tr><td><code>.bc-current</code></td><td><code>span</code></td><td>The current page — pair with <code>aria-current="page"</code>.</td></tr>
-              <tr><td><code>.btn.btn-secondary</code></td><td><code>button</code></td><td>The Back button (with <code>data-icon="arrow-left"</code>) and any trailing action.</td></tr>
-              <tr><td><code>.bc-spacer</code></td><td>—</td><td>Pushes a trailing action to the far end (<code>margin-left:auto</code>).</td></tr>
-              <tr><td><code>.bc-collapsed</code></td><td><code>nav</code></td><td>Mobile modifier — tighter bar with icon buttons (<code>.ib.ib-36.ib-secondary</code>) and a “…” that opens the path menu.</td></tr>
+              <tr><td><code>.btn.btn-secondary</code></td><td><code>button</code></td><td>The Back button (with <code>data-icon="arrow-left"</code>).</td></tr>
             </tbody>
           </table>
         </section>
@@ -484,7 +394,7 @@
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>nav + aria-label="Breadcrumb"</strong> wraps the whole component; the trail is an <code>&lt;ol&gt;</code>.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>aria-current="page"</strong> on the last crumb, rendered as text rather than a link.</div></div>
             <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Decorative separators</strong> are CSS-drawn (or <code>aria-hidden</code>) so they aren't announced.</div></div>
-            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Icon-only buttons</strong> (collapsed Back and “…”) carry an <code>aria-label</code>; everything is keyboard-reachable with a visible focus ring.</div></div>
+            <div class="a11y-item"><span class="a11y-arrow">→</span><div><strong>Keyboard reachable</strong> — Back and every crumb are tab-stops with a visible focus ring.</div></div>
           </div>
         </section>
 
@@ -512,51 +422,28 @@
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
     const CRUMBS = ['Projects', 'Company pulse', 'Reporting structures', 'Coordinator view'];
-    const defaults = { levels: 3, action: false, collapsed: false };
+    const defaults = { levels: 3 };
     function st(){ return {
       levels: parseInt(document.getElementById('pg-levels').value, 10) || 1,
-      action: document.getElementById('pg-action').checked,
-      collapsed: document.getElementById('pg-collapsed').checked,
     };}
     function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
     function render(){
       const s = st();
-      // collapsed disables the levels/action rows visually but we still build a sensible preview
-      let html;
-      if (s.collapsed){
-        html = `<nav class="breadcrumb bc-collapsed" aria-label="Breadcrumb" style="width:100%;">
-          <button class="ib ib-36 ib-secondary" aria-label="Back"><i data-icon="arrow-left"></i></button>
-          ${s.levels > 1 ? `<button class="ib ib-36 ib-secondary bc-more" aria-label="Show full path"><i data-icon="more-horizontal"></i></button><span style="color:var(--content-secondary);font-size:14px;">/</span>` : ''}
-          <span class="bc-current" aria-current="page">${esc(CRUMBS[s.levels-1])}</span>
-          ${s.action ? `<button class="btn btn-secondary bc-spacer">Export</button>` : ''}
-        </nav>`;
-      } else {
-        const items = [];
-        for (let i=0;i<s.levels;i++){
-          const last = i === s.levels-1;
-          items.push(last
-            ? `<li><span class="bc-current" aria-current="page">${esc(CRUMBS[i])}</span></li>`
-            : `<li><a class="bc-link" href="#" onclick="return false">${esc(CRUMBS[i])}</a></li>`);
-        }
-        html = `<nav class="breadcrumb" aria-label="Breadcrumb" style="width:100%;">
+      const items = [];
+      for (let i=0;i<s.levels;i++){
+        const last = i === s.levels-1;
+        items.push(last
+          ? `<li><span class="bc-current" aria-current="page">${esc(CRUMBS[i])}</span></li>`
+          : `<li><a class="bc-link" href="#" onclick="return false">${esc(CRUMBS[i])}</a></li>`);
+      }
+      $preview.innerHTML = `<nav class="breadcrumb" aria-label="Breadcrumb" style="width:100%;">
           <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
           <ol class="bc-trail">${items.join('')}</ol>
-          ${s.action ? `<button class="btn btn-secondary bc-spacer">Export</button>` : ''}
         </nav>`;
-      }
-      $preview.innerHTML = html;
       document.getElementById('pg-code').textContent = code(s);
       if (window.Icons && window.Icons.render) window.Icons.render($preview);
     }
     function code(s){
-      if (s.collapsed){
-        return `<nav class="breadcrumb bc-collapsed" aria-label="Breadcrumb">\n`
-          + `  <button class="ib ib-36 ib-secondary" aria-label="Back"><i data-icon="arrow-left"></i></button>\n`
-          + (s.levels > 1 ? `  <button class="ib ib-36 ib-secondary" aria-label="Show full path"><i data-icon="more-horizontal"></i></button>\n` : '')
-          + `  <span class="bc-current" aria-current="page">${esc(CRUMBS[s.levels-1])}</span>\n`
-          + (s.action ? `  <button class="btn btn-secondary bc-spacer">Export</button>\n` : '')
-          + `</nav>`;
-      }
       const lines = ['<nav class="breadcrumb" aria-label="Breadcrumb">',
         '  <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>',
         '  <ol class="bc-trail">'];
@@ -567,15 +454,12 @@
           : `    <li><a class="bc-link" href="#">${esc(CRUMBS[i])}</a></li>`);
       }
       lines.push('  </ol>');
-      if (s.action) lines.push('  <button class="btn btn-secondary bc-spacer">Export</button>');
       lines.push('</nav>');
       return lines.join('\n');
     }
-    ['pg-levels','pg-action','pg-collapsed'].forEach(id => { const el = document.getElementById(id); el.addEventListener('input', render); el.addEventListener('change', render); });
+    ['pg-levels'].forEach(id => { const el = document.getElementById(id); el.addEventListener('input', render); el.addEventListener('change', render); });
     document.getElementById('pg-reset')?.addEventListener('click', () => {
       document.getElementById('pg-levels').value = defaults.levels;
-      document.getElementById('pg-action').checked = defaults.action;
-      document.getElementById('pg-collapsed').checked = defaults.collapsed;
       render();
     });
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab => tab.addEventListener('click', () => {

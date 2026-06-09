@@ -812,7 +812,7 @@ Classes: `.tabs`, `.tab` (states `.is-hover`/`.is-active`/`.is-disabled`; option
 ---
 
 ### Breadcrumb
-Toont waar de gebruiker zit in de hiërarchie en laat hem omhoog stappen. Een **Back**-actie leidt de balk, gevolgd door het pad van pagina's; optioneel een actieknop op het uiterste eind.
+Toont waar de gebruiker zit in de hiërarchie en laat hem omhoog stappen. Een **Back**-actie leidt de balk, gevolgd door het pad van pagina's.
 
 ```html
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -822,12 +822,11 @@ Toont waar de gebruiker zit in de hiërarchie en laat hem omhoog stappen. Een **
     <li><a class="bc-link" href="/projects/pulse">Company pulse</a></li>
     <li><span class="bc-current" aria-current="page">Reporting structures</span></li>
   </ol>
-  <!-- optioneel: <button class="btn btn-secondary bc-spacer">Export</button> -->
 </nav>
 ```
-Classes: `.breadcrumb` (witte balk, `--bg-base` + onderrand `--border-base`, 64px hoog), `.bc-trail` (de `<ol>`; scheidingsteken `/` via `li:not(:first-child)::before`), `.bc-link` (crumb-link, `--content-secondary`, hover `--bg-base-hover`/`--content-base`, radius `--radius-sm`), `.bc-current` (huidige pagina, `--content-base`, géén link, met `aria-current="page"`), `.btn.btn-secondary` voor **Back** (met `<i data-icon="arrow-left">`) en een eventuele trailing-actie (`.bc-spacer` = `margin-left:auto`). **Collapsed (mobiel):** `.bc-collapsed` met icon-buttons (`.ib.ib-36.ib-secondary`) — back-pijl + een `<i data-icon="more-horizontal">` ("…") die het volledige pad opent in een **"Navigate to"**-menu (`.bc-menu` / `.bc-menu-item`). A11y: `nav[aria-label]`, geordende lijst, `aria-current` op de huidige pagina, scheidingstekens zijn decoratief, icon-only knoppen krijgen een `aria-label`.
+Classes: `.breadcrumb` (witte balk, `--bg-base` + onderrand `--border-base`, 64px hoog, **6px** gap tussen items), `.bc-trail` (de `<ol>`; scheidingsteken `/` via `li:not(:first-child)::before`), `.bc-link` (crumb-link, `--content-secondary`, hover `--bg-base-hover`/`--content-base`, radius `--radius-sm`), `.bc-current` (huidige pagina, `--content-base`, géén link, met `aria-current="page"`), `.btn.btn-secondary` voor **Back** (met `<i data-icon="arrow-left">`). A11y: `nav[aria-label]`, geordende lijst, `aria-current` op de huidige pagina, scheidingstekens zijn decoratief.
 
-> **Productie-API:** controleer in de Angular-styleguide of er een dedicated breadcrumb-component/selector bestaat (bijv. `eff-breadcrumb`) vóór je het met de hand bouwt; de classes hier zijn de prototype-structuur.
+> **Productie-API:** controleer in de Angular-styleguide of er een dedicated breadcrumb-component/selector bestaat (bijv. `eff-breadcrumb`) vóór je het met de hand bouwt; de classes hier zijn de prototype-structuur. **Figma-gap:** de crumb (Link Button) heeft in Figma meer horizontale side-padding dan in de styleguide/code — stem de `.bc-link`-padding af.
 
 ---
 
