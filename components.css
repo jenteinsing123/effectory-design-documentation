@@ -2188,7 +2188,8 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   position: fixed; inset: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: center;
   padding: 24px;
-  background: var(--bg-interface-overlay);
+  /* Figma token --bg-interface-overlay is .50, the styleguide renders .65 — using .60 until aligned. */
+  background: rgba(25, 39, 67, 0.6);
   animation: overlay-fade var(--motion-base) var(--ease-out);
 }
 .overlay.is-right { justify-content: flex-end; align-items: stretch; padding: 0; }

@@ -80,7 +80,7 @@
     .variant-row-btn .dialog { width: 100%; max-width: 440px; }
 
     /* Real modal overlay opened from the playground */
-    .dlg-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--bg-interface-overlay); animation: dlg-fade .12s ease-out; }
+    .dlg-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(25,39,67,.6); animation: dlg-fade .12s ease-out; }
     .dlg-overlay[hidden] { display: none; }
     .dlg-overlay .dialog { animation: dlg-pop .15s cubic-bezier(0, 0, 0.2, 1); transform-origin: center; }
     @keyframes dlg-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -358,6 +358,13 @@
             </tbody>
           </table>
           <p style="margin-top:10px; font-size:14px; color:var(--content-secondary);">Typography: title <code>text-l3</code> (26px SemiBold) — or <code>body-18-SB</code> (18px) at XS; supporting text <code>body-14</code>; body <code>body-16</code>.</p>
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap — backdrop opacity</span>
+              <span class="dev-gap-text">The Figma token <code>--bg-interface-overlay</code> is <code>rgba(25,39,67,.50)</code>, but the live styleguide renders the dialog backdrop at <code>rgba(25,39,67,.65)</code>. This documentation uses <code>.60</code> as a middle ground — align Figma ↔ code on the final value.</span>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="accessibility">

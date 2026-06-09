@@ -87,7 +87,7 @@
     .variant-row { grid-template-columns: minmax(420px, 1fr) 1fr; }
 
     /* Real modal overlay opened from the playground */
-    .sp-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; justify-content: flex-end; background: rgba(25,39,67,.45); animation: sp-fade .15s ease-out; }
+    .sp-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; justify-content: flex-end; background: rgba(25,39,67,.6); animation: sp-fade .15s ease-out; }
     .sp-overlay[hidden] { display: none; }
     .sp-overlay .sidepanel { height: 100%; animation: sp-slide .26s cubic-bezier(.22,.61,.36,1); }
     .sp-overlay.is-closing { animation: sp-fade-out .22s ease-in forwards; }
@@ -336,9 +336,17 @@
               <tr><td><code>--content-secondary</code></td><td>Subtitle + body + inactive tabs</td><td>rgba(25,39,67,.80)</td></tr>
               <tr><td><code>--content-action</code></td><td>Toolbar + nav icons</td><td>rgba(25,39,67,.80)</td></tr>
               <tr><td><code>--content-brand-secondary</code></td><td>Active tab indicator</td><td>#0c827f</td></tr>
+              <tr><td><code>--bg-interface-overlay</code></td><td>Backdrop / scrim</td><td>rgba(25,39,67,.50)</td></tr>
             </tbody>
           </table>
           <p style="margin-top:10px; font-size:14px; color:var(--content-secondary);">Typography: title <code>text-l3</code> (26px) — or 18px when small; subtitle &amp; tabs <code>body-14</code>; body <code>body-16</code>.</p>
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap — backdrop opacity</span>
+              <span class="dev-gap-text">The Figma token <code>--bg-interface-overlay</code> is <code>rgba(25,39,67,.50)</code>, but the live styleguide renders the overlay scrim at <code>rgba(25,39,67,.65)</code>. This documentation uses <code>.60</code> as a middle ground — align Figma ↔ code on the final value.</span>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="accessibility">
