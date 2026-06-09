@@ -230,7 +230,7 @@ States: `.is-hover` `.is-pressed` `.is-disabled`
 States: `.is-hover` `.is-pressed` `.is-disabled`
 
 ### Icon Button
-Vierkante knop met alleen een icoon. Maat via `.ib-36` (16px icoon) of `.ib-24` (12px icoon); variant via `.ib-primary` / `.ib-secondary` / `.ib-tertiary`. Altijd een `aria-label` meegeven.
+Vierkante knop met alleen een icoon. Maat via `.ib-36` (16px icoon, radius `--radius-md`) of `.ib-24` (12px icoon, radius `--radius-base`); variant via `.ib-primary` / `.ib-secondary` / `.ib-tertiary`. Altijd een `aria-label` meegeven.
 ```html
 <button class="ib ib-36 ib-secondary" aria-label="Sluiten"><i data-icon="cross"></i></button>
 <button class="ib ib-36 ib-primary" aria-label="Toevoegen"><i data-icon="plus"></i></button>
@@ -380,18 +380,37 @@ States: `.is-hover` `.is-pressed` `.is-focus`
   <div class="menu-empty">Geen resultaten</div>
 </div>
 
-<!-- Met groepslabel -->
+<!-- Header, groepslabel, subtitel, avatar, label, submenu, checkmark -->
 <div class="menu">
-  <div class="menu-group-lbl">Groep A</div>
+  <div class="menu-header">Choose option</div>
   <div class="menu-item">
+    <i data-icon="box" class="menu-item-icon"></i>
     <span class="menu-item-body">
       <span class="menu-item-title">Titel</span>
       <span class="menu-item-sub">Subtitel</span>
     </span>
   </div>
+  <div class="menu-group-lbl">Groep A</div>
+  <div class="menu-item">
+    <span class="av av-24 av-yellow">JT</span>
+    <span class="menu-item-body"><span class="menu-item-title">Met avatar</span></span>
+  </div>
+  <div class="menu-divider"></div>
+  <div class="menu-item">
+    <i data-icon="box" class="menu-item-icon"></i>
+    <span class="menu-item-body"><span class="menu-item-title">Met label</span></span>
+    <span class="menu-label">beta</span>
+  </div>
+  <div class="menu-item">
+    <i data-icon="box" class="menu-item-icon"></i>
+    <span class="menu-item-body"><span class="menu-item-title">Submenu</span></span>
+    <i data-icon="chevron-right" class="menu-chevron"></i>
+  </div>
 </div>
 ```
-States op `.menu-item`: `.is-selected` `.is-focus`
+States op `.menu-item`: `.is-hover` `.is-selected` `.is-focus` `.is-disabled`.
+Echte Angular-API: Material `mat-menu` met `[matMenuTriggerFor]`; items `<button mat-menu-item disableRipple>` (icoon + `<span>`) of `<a mat-menu-item class="icon-before">` voor links.
+Onderdelen: `.menu-header` (titel), `.menu-group-lbl`, `.menu-divider`, `.menu-item` (+ `.menu-item-icon` / `.av` avatar, `.menu-item-body` → `.menu-item-title` + `.menu-item-sub`), trailing `.menu-item-check` / `.menu-chevron` / `.menu-label`.
 
 ### Checkbox
 ```html
@@ -808,6 +827,25 @@ Wissel tussen secties van dezelfde view (altijd horizontaal); label optioneel me
 Classes: `.tabs`, `.tab` (states `.is-hover`/`.is-active`/`.is-disabled`; optioneel een leading `<i data-icon>` en/of een `.tab-count`-badge vóór of na het label — blauwe pill `--bg-info-base`, witte 12px-tekst). Actieve tab: `--content-base` tekst + een 4px afgeronde bar `--content-brand-secondary` (via `.tab::after`); inactief `--content-secondary`; disabled `--content-disabled`; track `--border-base`. Typografie `body-14-M`. A11y: `role="tablist"`/`tab`/`tabpanel`, `aria-selected`, pijltjestoetsen + roving `tabindex`.
 
 > **Productie-API:** in code is dit Angular Material `mat-tab-group` met `class="tabs"` (`mat-align-tabs="start"`, `disableRipple`) en `mat-tab`-children (`label`, of een `<ng-template mat-tab-label>` met `eff-mat-icon class="tab-icon"`). De `.tabs`/`.tab`-classes hier zijn de prototype-structuur.
+
+---
+
+### Breadcrumb
+Toont waar de gebruiker zit in de hiërarchie en laat hem omhoog stappen. Een **Back**-actie leidt de balk, gevolgd door het pad van pagina's.
+
+```html
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
+  <ol class="bc-trail">
+    <li><a class="bc-link" href="/projects">Projects</a></li>
+    <li><a class="bc-link" href="/projects/pulse">Company pulse</a></li>
+    <li><span class="bc-current" aria-current="page">Reporting structures</span></li>
+  </ol>
+</nav>
+```
+Classes: `.breadcrumb` (witte balk, `--bg-base` + onderrand `--border-base`, 64px hoog, **6px** gap tussen items), `.bc-trail` (de `<ol>`; scheidingsteken `/` via `li:not(:first-child)::before`), `.bc-link` (crumb-link, `--content-secondary`, hover `--bg-base-hover`/`--content-base`, radius `--radius-sm`), `.bc-current` (huidige pagina, `--content-base`, géén link, met `aria-current="page"`), `.btn.btn-secondary` voor **Back** (met `<i data-icon="arrow-left">`). A11y: `nav[aria-label]`, geordende lijst, `aria-current` op de huidige pagina, scheidingstekens zijn decoratief.
+
+> **Productie-API:** controleer in de Angular-styleguide of er een dedicated breadcrumb-component/selector bestaat (bijv. `eff-breadcrumb`) vóór je het met de hand bouwt; de classes hier zijn de prototype-structuur. **Figma-gap:** de crumb (Link Button) heeft in Figma meer horizontale side-padding dan in de styleguide/code — stem de `.bc-link`-padding af.
 
 ---
 
