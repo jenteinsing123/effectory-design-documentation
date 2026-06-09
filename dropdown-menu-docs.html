@@ -19,6 +19,8 @@
     .menu-item.is-disabled { color: var(--content-disabled); cursor: not-allowed; }
     .menu-item.is-disabled .menu-item-icon, .menu-item.is-disabled .menu-item-title { color: inherit; }
     .menu-item-icon { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; color: var(--content-subtle); flex-shrink: 0; }
+    .menu-item-icon.size-24 { width: 24px; height: 24px; }
+    .menu-item-icon.size-32 { width: 32px; height: 32px; }
     .menu-item-body { display: flex; flex-direction: column; min-width: 0; flex: 1; gap: 2px; }
     .menu-item-title { font-weight: 500; font-size: 14px; line-height: 1.6; color: var(--content-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .menu-item-title:only-child { font-weight: 400; }
@@ -173,6 +175,14 @@
             <div class="variant-row">
               <div class="variant-row-btn"><div class="menu" style="width:240px;"><div class="menu-item is-selected"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><i data-icon="check" class="menu-item-check"></i></div></div></div>
               <div class="variant-row-desc"><strong>Selected</strong> — In a choice menu, the chosen item is highlighted with a checkmark.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn"><div class="menu" style="width:240px;">
+                <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">16px</span></div></div>
+                <div class="menu-item"><i data-icon="box" class="menu-item-icon size-24"></i><div class="menu-item-body"><span class="menu-item-title">24px</span></div></div>
+                <div class="menu-item"><i data-icon="box" class="menu-item-icon size-32"></i><div class="menu-item-body"><span class="menu-item-title">32px</span></div></div>
+              </div></div>
+              <div class="variant-row-desc"><strong>Icon size</strong> — Items use a 16px icon by default. Step up to 24px or 32px when the icon carries more meaning — a brand mark, product logo, or a richer item with a subtitle. Keep one size consistent within a single menu.</div>
             </div>
           </div>
         </section>
@@ -350,6 +360,25 @@
   <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"av av-24 av-yellow"</span><span class="ct">&gt;</span>JT<span class="ct">&lt;/span&gt;</span>
   <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Jente Tjepkema<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
 <span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Icon size</h3>
+          <p>Icons are 16px by default. Add <code>size-24</code> or <code>size-32</code> on the icon for a larger glyph.</p>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">16px</span></div></div>
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon size-24"></i><div class="menu-item-body"><span class="menu-item-title">24px</span></div></div>
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon size-32"></i><div class="menu-item-body"><span class="menu-item-title">32px</span></div></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="cc">&lt;!-- 16px (default) --&gt;</span>
+<span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
+<span class="cc">&lt;!-- 24px --&gt;</span>
+<span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon size-24"</span><span class="ct">&gt;&lt;/i&gt;</span>
+<span class="cc">&lt;!-- 32px --&gt;</span>
+<span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon size-32"</span><span class="ct">&gt;&lt;/i&gt;</span></code></pre>
           </div>
 
           <h3 class="text-l4">Item with label</h3>
