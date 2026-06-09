@@ -253,6 +253,16 @@
       opacity: 1;
       transform: none;
     }
+    .gen-longer-note {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-base-tight);
+      padding: var(--spacing-base-tight) var(--spacing-base);
+      background: var(--bg-info-subtle);
+      border-radius: var(--radius-md);
+    }
+    .gen-longer-icon { flex: none; width: 20px; height: 20px; display: flex; margin-top: 1px; color: var(--content-info-base); }
+    .gen-longer-note p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--content-base); }
     .gen-longer-actions { display: flex; justify-content: flex-end; margin-top: var(--spacing-base); }
 
     /* Row generating state */
@@ -514,8 +524,7 @@
 <div class="toast-region" id="ready-toast" hidden>
   <div class="sysnotif" role="status">
     <button class="sysnotif-close" id="ready-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
-    <span class="sysnotif-title">Your report is ready</span>
-    <span class="sysnotif-desc"><span id="ready-name">Report</span> has finished generating and is ready to download.</span>
+    <span class="sysnotif-title" id="ready-title"></span>
     <button class="sysnotif-action" id="ready-download"><i data-icon="download"></i> Download</button>
   </div>
 </div>
@@ -554,8 +563,11 @@
         </div>
       </div>
       <div class="gen-longer" id="gen-longer">
-        <p class="dialog-subtitle">This is taking longer than expected. You can close this window and we’ll notify you when your file is ready to download.</p>
-        <div class="gen-longer-actions"><button class="btn btn-secondary" id="gen-close-btn">Close</button></div>
+        <div class="gen-longer-note">
+          <i data-icon="info" class="gen-longer-icon"></i>
+          <p>No need to wait around — you can keep doing other things in My Effectory and we’ll notify you as soon as your report is ready to download.</p>
+        </div>
+        <div class="gen-longer-actions"><button class="btn btn-secondary" id="gen-close-btn">Notify me</button></div>
       </div>
     </div>
   </div>
@@ -578,10 +590,10 @@
     var genSub = document.getElementById('gen-sub');
     var genPanel = document.getElementById('gen-panel');
     var genLonger = document.getElementById('gen-longer');
-    var LONGER_HINT_MS = 10000;   // after this, raw-data dialog offers to close & be notified
+    var LONGER_HINT_MS = 4000;    // after this, raw-data dialog offers to close & be notified
     var longerTimer = null;
     var toast = document.getElementById('ready-toast');
-    var toastName = document.getElementById('ready-name');
+    var readyTitle = document.getElementById('ready-title');
 
     // The report currently being acted on
     var current = null; // { row, name, isRaw }
@@ -676,9 +688,9 @@
       genLonger.classList.add('is-shown');
     }
 
-    function openGenDialog(ready) {
+    function openGenDialog(ready, lang) {
       genSubtitle.textContent = COPY.standard;
-      genSub.textContent = 'In your selected language';
+      genSub.textContent = lang || 'In your selected language';
       genLonger.classList.remove('is-shown');
       genPanel.classList.toggle('is-done', !!ready);
       genScrim.hidden = false;
@@ -707,7 +719,7 @@
 
       // Already generated in this language → no need to regenerate, download directly
       if (s.ready.indexOf(lang) !== -1) {
-        openGenDialog(true);
+        openGenDialog(true, lang);
         return;
       }
 
@@ -718,9 +730,9 @@
         updateRowLabel(row);
         scheduleGeneration(row, name, lang, isRaw);
       }
-      openGenDialog(false);
+      openGenDialog(false, lang);
 
-      // Raw data can take a while — after 10s, offer to close and be notified
+      // Raw data can take a while — after 5s, offer to close and be notified
       if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
       if (isRaw) longerTimer = setTimeout(showLonger, LONGER_HINT_MS);
     });
@@ -766,13 +778,13 @@
           if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
           genLonger.classList.remove('is-shown');
         } else {
-          showToast(name);
+          showToast(name, lang);
         }
       }, isRaw ? RAW_GEN_MS : QUICK_GEN_MS);
     }
 
-    function showToast(name) {
-      toastName.textContent = name;
+    function showToast(name, lang) {
+      readyTitle.textContent = name + ' is ready to download in ' + lang;
       toast.hidden = false;
     }
     document.getElementById('ready-close').addEventListener('click', function () { toast.hidden = true; });

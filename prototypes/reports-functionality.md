@@ -24,14 +24,19 @@ A survey results **Reports** page where a user downloads reports. Two groups:
 - **The list row reflects it right away** (not only after the dialog closes): the download button is replaced by a loader + label
   - one language → **"Generating in {language}"**
   - multiple at once → **"Generating in {n} languages"**
-- **Download dialog** opens the same way for **all** report types — same copy ("We are working hard to generate your file…") and the grey-file + spinner *Generating* state.
-  - *Generating* state: grey file icon + spinner.
+- **Download dialog is identical for all report types.** Same title ("Download reports"), same body copy ("We are working hard to generate your file…"), same grey-file + spinner *Generating* card. The card's sub-line shows the **actual selected language** (e.g. "German"), not a generic phrase.
+  - *Generating* state: grey file icon + spinner + selected language.
   - *Done* state: green file icon + **"Done! The report will download automatically"** with a **"Download does not start? Click here"** fallback link.
-  - **Longer-running hint (raw data):** if generation is still running after **10 seconds** (`LONGER_HINT_MS`), the dialog reveals an extra line — *"This is taking longer than expected. You can close this window and we'll notify you when your file is ready to download."* — plus a **Close** button. (Essential reports finish before 10s, so they never show it.)
-  - Otherwise the dialog has no footer buttons; it also closes via the **✕**, backdrop click, or `Esc`.
+  - **Longer-running hint (raw data):** if generation is still running after **4 seconds** (`LONGER_HINT_MS`), the dialog smoothly expands (animated, no layout jump) an **info callout** — info icon + *"No need to wait around — you can keep doing other things in My Effectory and we'll notify you as soon as your report is ready to download."* — plus a **"Notify me"** button. (Essential reports finish first, so they never show it.)
+  - The dialog has no footer otherwise; it closes via the **✕**, backdrop click, or `Esc`.
 - **Stay in the dialog until ready** → it switches to the *Done* state (file downloads automatically).
-- **Close the dialog before ready** (raw data) → generation continues **in the background**; when finished a **system notification** appears **top-right** with a **Download** action.
+- **Close / Notify me before ready** (raw data) → generation continues **in the background**; when finished a **system notification** appears **top-right**.
 - **No regeneration / caching** — once a (report, language) is generated it is remembered. Requesting that same language again → **downloads directly** (the dialog opens straight in the *Done* state, no generating step).
+
+### System notification (when generated in the background)
+
+- Uses the design-system **System Notification** (`.sysnotif`) — dark card, green left border, top-right.
+- **Everything sits in the title** — *"{report name} is ready to download in {language}"* (no separate description line), with a **Download** action and a dismiss ✕.
 
 ### Language picker reflects per-report state
 
@@ -44,9 +49,10 @@ A survey results **Reports** page where a user downloads reports. Two groups:
 
 | | Essential (PPT/PDF) | Raw Data (XLS) |
 |---|---|---|
-| Generation time | Quick (near-instant) | Long — "up to 10 minutes" |
-| Dialog copy | "We are working hard to generate your file…" | "…can take up to 10 minutes. You can close this window and keep working — we'll notify you." |
-| Typical pattern | Wait in dialog → Done → auto-download | Close → background → system notification |
+| Generation time | Quick (near-instant) | Long — up to ~10 minutes |
+| Dialog (start) | Identical for both — same copy + generating card showing the selected language | |
+| Longer-running hint | Never (finishes first) | Info callout + **Notify me** after 4s |
+| Typical pattern | Wait in dialog → Done → auto-download | Notify me / close → background → system notification |
 
 ---
 
@@ -58,7 +64,7 @@ Main navigation · Breadcrumb (with **Back**) · Tabs · Selection button (filte
 
 ## Prototype-only simulation notes (not production behaviour)
 
-- Timings are simulated: `RAW_GEN_MS = 30000` (real-world ~10 min), `QUICK_GEN_MS = 800`.
+- Timings are simulated: `RAW_GEN_MS = 30000` (real-world ~10 min), `QUICK_GEN_MS = 800`, `LONGER_HINT_MS = 4000` (when the raw-data "Notify me" callout appears).
 - Generation/ready state lives in-memory per row (`row._gen = { generating: [], ready: [] }`); nothing is persisted.
 - File-type icons are multi-colour, so they're loaded via `<img>`, **not** `data-icon` (which would normalise the colours).
 - The served `components.css` ships a stripped `.sysnotif-action`; the prototype restores the text-link styling inline. **Worth aligning the bundled `components.css`.**
