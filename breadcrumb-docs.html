@@ -11,7 +11,7 @@
     /* ── Breadcrumb — location trail with a Back action ── */
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      min-height: 64px; padding: 0 24px;
+      padding: 16px 24px;
       background: var(--bg-base);
       border-bottom: 1px solid var(--border-base);
       font-family: 'Poppins', sans-serif;
@@ -115,6 +115,13 @@
             <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Crumb</span> — A link to an ancestor page. Selecting it jumps straight to that level.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Separator</span> — A slash between crumbs, purely decorative.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Current page</span> — The last crumb, marked as the current location and not clickable.</div></div>
+          </div>
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap — vertical spacing</span>
+              <span class="dev-gap-text">The bar uses 16px top and bottom padding in design. The platform currently renders 24px above and below the breadcrumb. Align Figma ↔ code on the intended vertical spacing.</span>
+            </div>
           </div>
         </section>
 
