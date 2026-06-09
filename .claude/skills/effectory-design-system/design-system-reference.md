@@ -715,13 +715,13 @@ Donkere, systeem-brede melding (uitkomst van een achtergrond-proces of systeem-e
 <div class="sysnotif" role="status">
   <div class="sysnotif-title">Export ready</div>
   <div class="sysnotif-desc">Your report finished exporting.</div>   <!-- optioneel -->
-  <button class="sysnotif-action">Download</button>                   <!-- optioneel -->
+  <button class="link-inline sysnotif-action">Download</button>       <!-- optioneel -->
   <button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
 </div>
 ```
 - Sentiment via modifier op `.sysnotif`: default = Success (accent `--border-positive-base`), `is-error` (`--border-negative-base`), `is-warning` (`--border-warning-base`).
 - Donkere surface `--bg-inverse-base`; titel `--content-inverse-base`; desc `--content-inverse-secondary`; shadow `--sh-popovers`; radius `--radius-md`; 8px accent-balk links.
-- De action-link neemt de **sentiment-kleur** over (`--border-positive/negative/warning-base`). ⚠️ Figma/dev gap: Figma tekent de action wit/secondary — nog gelijk te trekken.
+- De action is een **Link Button** (`.link-inline`) met een kleur-override naar de sentiment (`--border-positive/negative/warning-base`): `<button class="link-inline sysnotif-action">…</button>`. ⚠️ Figma/dev gap: Figma tekent de action wit/secondary — nog gelijk te trekken.
 - a11y: `role="status"` (Success) / `role="alert"` (Error/Warning); `aria-label` op de close-knop.
 - Onderdelen: `.sysnotif-title`, `.sysnotif-desc`, `.sysnotif-action`, `.sysnotif-close`.
 - **Plaatsing:** altijd rechtsboven in het scherm, gestapeld. Mount ze in `.sysnotif-stack` (fixed, `inset:0`, `align-items:flex-end`, 8px padding, `pointer-events:none`; de notificaties zelf weer `pointer-events:auto`).
