@@ -411,9 +411,7 @@
     function render(){
       const s = state();
       $preview.innerHTML =
-        '<button class="sn-trigger" id="pg-trigger"><i data-icon="bell"></i> Show notification (top-right)</button>' +
-        '<div style="margin-top:20px;">' + buildMenu(s) + '</div>';
-      $preview.querySelector('.sysnotif').style.animation = 'none';   // inline preview shouldn't replay the enter anim
+        '<button class="sn-trigger" id="pg-trigger"><i data-icon="bell"></i> Show notification (top-right)</button>';
       document.getElementById('pg-code').textContent = buildCode(s);
       if (window.Icons && window.Icons.render) window.Icons.render($preview);
     }
