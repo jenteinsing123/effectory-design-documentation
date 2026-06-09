@@ -80,7 +80,7 @@
     .variant-row-btn .dialog { width: 100%; max-width: 440px; }
 
     /* Real modal overlay opened from the playground */
-    .dlg-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(25,39,67,.45); animation: dlg-fade .12s ease-out; }
+    .dlg-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--bg-interface-overlay); animation: dlg-fade .12s ease-out; }
     .dlg-overlay[hidden] { display: none; }
     .dlg-overlay .dialog { animation: dlg-pop .15s cubic-bezier(0, 0, 0.2, 1); transform-origin: center; }
     @keyframes dlg-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -349,6 +349,7 @@
               <tr><td><code>--bg-base</code></td><td>Dialog surface</td><td>#ffffff</td></tr>
               <tr><td><code>--border-base</code></td><td>Surface border</td><td>#e1e4e8</td></tr>
               <tr><td><code>--sh-dialogs</code></td><td>Surface shadow</td><td>0 4px 12px rgba(25,39,67,.08)</td></tr>
+              <tr><td><code>--bg-interface-overlay</code></td><td>Backdrop / scrim</td><td>rgba(25,39,67,.50)</td></tr>
               <tr><td><code>--radius-xl</code></td><td>Surface corner radius</td><td>16px</td></tr>
               <tr><td><code>--content-base</code></td><td>Title colour</td><td>#192743</td></tr>
               <tr><td><code>--content-secondary</code></td><td>Supporting text &amp; body</td><td>rgba(25,39,67,.80)</td></tr>
@@ -531,6 +532,7 @@ openDialog() {
             <tbody>
               <tr><td><code>--bg-base</code> · <code>--border-base</code></td><td>Surface fill + border</td></tr>
               <tr><td><code>--sh-dialogs</code></td><td>Surface shadow</td></tr>
+              <tr><td><code>--bg-interface-overlay</code></td><td>Backdrop / scrim</td></tr>
               <tr><td><code>--radius-xl</code></td><td>Corner radius (16px)</td></tr>
               <tr><td><code>--content-base</code> · <code>--content-secondary</code></td><td>Title / supporting text + body</td></tr>
               <tr><td><code>--content-action</code></td><td>Close icon</td></tr>
