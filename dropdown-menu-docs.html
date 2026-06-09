@@ -91,27 +91,21 @@
             <div class="menu">
               <div class="menu-header">Choose option</div>
               <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div>
-              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span><span class="menu-item-sub">Subtitle</span></div></div>
-              <div class="menu-group-lbl">Group</div>
-              <div class="menu-item"><div class="av av-24 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div>
               <div class="menu-divider"></div>
-              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><span class="menu-label">label</span></div>
               <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><i data-icon="chevron-right" class="menu-chevron"></i></div>
             </div>
             <div class="ana-num" style="left:24%; top:10%;">1</div>
-            <div class="ana-num" style="left:24%; top:17%;">2</div>
-            <div class="ana-num" style="left:24%; top:30%;">3</div>
-            <div class="ana-num" style="left:24%; top:45%;">4</div>
-            <div class="ana-num" style="left:24%; top:55%;">5</div>
-            <div class="ana-num" style="right:24%; top:74%;">6</div>
+            <div class="ana-num" style="left:24%; top:25%;">2</div>
+            <div class="ana-num" style="left:24%; top:45%;">3</div>
+            <div class="ana-num" style="left:24%; top:62%;">4</div>
+            <div class="ana-num" style="right:24%; top:80%;">5</div>
           </div>
           <div class="anatomy-items">
             <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Surface</span> — A floating panel raised with the popover shadow, anchored to its trigger.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Header</span> — Optional title introducing the menu (e.g. "Choose option").</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Item</span> — A row: label with an optional leading icon or avatar.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Subtitle</span> — Optional second line on an item for extra context.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Group label</span> — A small uppercase heading splitting items into sections; a divider can separate groups too.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">6</div><div><span class="anatomy-term">Trailing</span> — Optional end element: a label/tag, a checkmark (selected), or a chevron (opens a submenu).</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Header</span> — Optional title introducing the menu.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Item</span> — A row: a label with an optional leading icon or avatar.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Divider</span> — Separates groups of items; a group label can head each group.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">5</div><div><span class="anatomy-term">Trailing</span> — Optional end element: a label/tag, a checkmark (selected), or a chevron (submenu).</div></div>
           </div>
         </section>
 
@@ -323,8 +317,105 @@
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
               <span class="dev-gap-label">Figma gap</span>
-              <span class="dev-gap-text">Material's <code>mat-menu</code> covers the simple list (icon + label). The richer item layouts shown in Figma — <strong>subtitle</strong>, <strong>avatar</strong>, <strong>trailing label</strong>, <strong>group label/header</strong>, <strong>submenu</strong> — are the design-system <code>.menu</code> item classes (as used in the Select / app dropdowns). Confirm the production markup for those with engineering.</span>
+              <span class="dev-gap-text">Material's <code>mat-menu</code> covers the simple list (icon + label). The richer item layouts below — <strong>subtitle</strong>, <strong>avatar</strong>, <strong>trailing label</strong>, <strong>header / group label</strong>, <strong>submenu</strong>, <strong>selected</strong> — are the design-system <code>.menu</code> item classes (as used in the Select / app dropdowns). Confirm the production markup for those with engineering.</span>
             </div>
+          </div>
+
+          <h3 class="text-l4">Item with subtitle</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span><span class="menu-item-sub">Subtitle</span></div></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Title<span class="ct">&lt;/span&gt;</span>
+    <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-sub"</span><span class="ct">&gt;</span>Subtitle<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Item with avatar</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item"><div class="av av-24 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Jente Tjepkema</span></div></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"av av-24 av-yellow"</span><span class="ct">&gt;</span>JT<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Jente Tjepkema<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Item with label</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><span class="menu-label">beta</span></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Title<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
+  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-label"</span><span class="ct">&gt;</span>beta<span class="ct">&lt;/span&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Submenu</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">More options</span></div><i data-icon="chevron-right" class="menu-chevron"></i></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>More options<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"chevron-right"</span> <span class="ca">class</span>=<span class="cv">"menu-chevron"</span><span class="ct">&gt;&lt;/i&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Selected item</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-item is-selected"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><i data-icon="check" class="menu-item-check"></i></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item is-selected"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Title<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
+  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"check"</span> <span class="ca">class</span>=<span class="cv">"menu-item-check"</span><span class="ct">&gt;&lt;/i&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
+          </div>
+
+          <h3 class="text-l4">Header &amp; grouped items</h3>
+          <div class="dev-preview" style="padding:24px;">
+            <div class="menu" style="width:240px;">
+              <div class="menu-header">Choose option</div>
+              <div class="menu-group-lbl">Group</div>
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div>
+              <div class="menu-divider"></div>
+              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div>
+            </div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-header"</span><span class="ct">&gt;</span>Choose option<span class="ct">&lt;/div&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-group-lbl"</span><span class="ct">&gt;</span>Group<span class="ct">&lt;/div&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>…<span class="ct">&lt;/div&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-divider"</span><span class="ct">&gt;&lt;/div&gt;</span>
+  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>…<span class="ct">&lt;/div&gt;</span>
+<span class="ct">&lt;/div&gt;</span></code></pre>
           </div>
         </section>
 
