@@ -32,7 +32,7 @@
 
     /* avatar used inside menu items */
     .av { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-full); font-family: 'Poppins', sans-serif; font-weight: 600; flex-shrink: 0; }
-    .av-24 { width: 24px; height: 24px; font-size: 11px; /* font-scale-exempt: avatar initials */ }
+    .av-32 { width: 32px; height: 32px; font-size: 12px; }
     .av-yellow { background: var(--bg-accent-yellow-subtle); color: var(--content-accent-yellow-base); }
 
     /* trigger button (the Button component) */
@@ -161,7 +161,7 @@
               <div class="variant-row-desc"><strong>With subtitle</strong> — A second line for extra context under the label.</div>
             </div>
             <div class="variant-row">
-              <div class="variant-row-btn"><div class="menu" style="width:240px;"><div class="menu-item"><div class="av av-24 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
+              <div class="variant-row-btn"><div class="menu" style="width:240px;"><div class="menu-item"><div class="av av-32 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
               <div class="variant-row-desc"><strong>With avatar</strong> — A person or entity row uses an avatar instead of an icon.</div>
             </div>
             <div class="variant-row">
@@ -351,13 +351,13 @@
           <h3 class="text-l4">Item with avatar</h3>
           <div class="dev-preview" style="padding:24px;">
             <div class="menu" style="width:240px;">
-              <div class="menu-item"><div class="av av-24 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Jente Tjepkema</span></div></div>
+              <div class="menu-item"><div class="av av-32 av-yellow">JT</div><div class="menu-item-body"><span class="menu-item-title">Jente Tjepkema</span></div></div>
             </div>
           </div>
           <div class="dev-code-wrap">
             <button class="dev-copy-btn">Copy</button>
             <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"av av-24 av-yellow"</span><span class="ct">&gt;</span>JT<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;span</span> <span class="ca">class</span>=<span class="cv">"av av-32 av-yellow"</span><span class="ct">&gt;</span>JT<span class="ct">&lt;/span&gt;</span>
   <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Jente Tjepkema<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
 <span class="ct">&lt;/div&gt;</span></code></pre>
           </div>
