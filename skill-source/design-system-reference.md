@@ -40,6 +40,20 @@ Do NOT invent names. If something isn't listed here, it does not exist.
 
 ## 2. Foundation-variabelen (`foundation.css`)
 
+### Grid & layout
+Geen formeel kolomgrid. Layout = **page padding** (responsive margin rondom de content) + **container max-width** + een vaste **gutter**.
+| Property | Waarde |
+|---|---|
+| Page padding — mobile (`<576px`) | `16px` (alle zijden) |
+| Page padding — tablet (`576–1199px`) | `24px` (alle zijden) |
+| Page padding — desktop (`≥1200px`) | `64px` (alle zijden) |
+| Container — narrow | `max-width: 960px` (lezen, formulieren, focus-flows) |
+| Container — wide | `max-width: 1200px` (standaard app-pagina's, card-grids, dashboards) |
+| Container — full width | geen max-width (data-zware tabellen / complexe UI's) |
+| Default gutter | `24px` tussen elementen |
+| Sidebar (desktop) | `240px` breed |
+| Nav switch | op `1200px` wisselt sidebar ↔ hamburger-header |
+
 ### Spacing
 | Token | Waarde |
 |---|---|
@@ -75,6 +89,26 @@ Do NOT invent names. If something isn't listed here, it does not exist.
 | `--sh-dialogs` | Dialogs |
 | `--sh-footer` | Footer bars |
 | `--sh-slide-panel` | Slide-in panels |
+
+### Motion
+Gebruik altijd deze tokens voor animaties; verzin geen eigen duraties/easings.
+| Token | Waarde | Gebruik |
+|---|---|---|
+| `--motion-fast` | `75ms` | exits, snelle fades |
+| `--motion-base` | `150ms` | dialog open, standaard enters |
+| `--motion-slow` | `300ms` | grotere surfaces (side panel slide) |
+| `--ease-out` | `cubic-bezier(0,0,.2,1)` | enters (decelerate) |
+| `--ease-in` | `cubic-bezier(.4,0,1,1)` | exits (accelerate) |
+| `--ease-standard` | `cubic-bezier(.4,0,.2,1)` | bewegen op het scherm |
+
+**Overlays animeren automatisch.** Wikkel een `.dialog` of `.sidepanel` in `.overlay` (gebruik `.overlay.is-right` voor een side panel) en de juiste enter-animatie wordt toegepast:
+```html
+<div class="overlay"><div class="dialog dialog-s"> … </div></div>
+<div class="overlay is-right"><div class="sidepanel"> … </div></div>
+```
+- Dialog: surface scaleert `0.8 → 1` in `--motion-base` met `--ease-out`; backdrop (`--bg-interface-overlay`) fade't in.
+- Side panel: slidet van rechts in (`translateX(100%) → 0`) in `--motion-slow`.
+- `prefers-reduced-motion` zet de animaties uit (al ingebouwd).
 
 ### Typografie-utility-classes
 ```
@@ -411,6 +445,8 @@ States: `.is-hover` `.is-pressed` `.is-focus`
 States op `.menu-item`: `.is-hover` `.is-selected` `.is-focus` `.is-disabled`.
 Echte Angular-API: Material `mat-menu` met `[matMenuTriggerFor]`; items `<button mat-menu-item disableRipple>` (icoon + `<span>`) of `<a mat-menu-item class="icon-before">` voor links.
 Onderdelen: `.menu-header` (titel), `.menu-group-lbl`, `.menu-divider`, `.menu-item` (+ `.menu-item-icon` / `.av` avatar, `.menu-item-body` → `.menu-item-title` + `.menu-item-sub`), trailing `.menu-item-check` / `.menu-chevron` / `.menu-label`.
+Icoongrootte: `.menu-item-icon` is 16px (default); voeg `size-24` of `size-32` toe voor een groter icoon (16/24/32). Hou één maat aan binnen één menu.
+Breedte: een dropdown groeit mee met de inhoud tot een max-breedte (~320px) en kapt daarna title/subtitle af met ellipsis (`width: max-content; min-width; max-width` + `text-overflow: ellipsis` op `.menu-item-title`/`.menu-item-sub`). Geen vaste breedte.
 
 ### Checkbox
 ```html

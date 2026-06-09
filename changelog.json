@@ -1,6 +1,20 @@
 {
-  "count": 594,
+  "count": 596,
   "entries": [
+    {
+      "hash": "535cd92",
+      "author": "Jente Insing",
+      "date": "2026-06-09",
+      "subject": "Skill: standard motion layer for prototypes",
+      "pages": []
+    },
+    {
+      "hash": "45e8b5a",
+      "author": "Jente Insing",
+      "date": "2026-06-09",
+      "subject": "Regenerate changelog.json",
+      "pages": []
+    },
     {
       "hash": "13450c5",
       "author": "Jente Insing",
