@@ -15,7 +15,6 @@
     .menu-divider { height: 1px; background: var(--border-base); margin: 4px 0; }
     .menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 8px; border-radius: var(--radius-md); cursor: pointer; color: var(--content-base); line-height: 20px; }
     .menu-item:hover, .menu-item.is-hover { background: var(--bg-base-hover); }
-    .menu-item.is-selected, .menu-item.is-selected:hover { background: var(--bg-brand-subtle); }
     .menu-item.is-disabled { color: var(--content-disabled); cursor: not-allowed; }
     .menu-item.is-disabled .menu-item-icon, .menu-item.is-disabled .menu-item-title { color: inherit; }
     .menu-item-icon { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; color: var(--content-subtle); flex-shrink: 0; }
@@ -25,9 +24,7 @@
     .menu-item-title { font-weight: 500; font-size: 14px; line-height: 1.6; color: var(--content-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .menu-item-title:only-child { font-weight: 400; }
     .menu-item-sub { font-weight: 400; font-size: 12px; line-height: 1.6; color: var(--content-secondary); }
-    .menu-item-check, .menu-chevron { width: 16px; height: 16px; flex-shrink: 0; display: flex; }
-    .menu-item-check { color: var(--content-brand-base); }
-    .menu-chevron { color: var(--content-subtle); }
+    .menu-chevron { width: 16px; height: 16px; flex-shrink: 0; display: flex; color: var(--content-subtle); }
     .menu-label { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: var(--radius-full); background: var(--bg-info-base); color: #fff; font-size: 12px; font-weight: 600; }
 
     /* avatar used inside menu items */
@@ -44,9 +41,10 @@
     .anatomy-fig .menu { pointer-events: none; }
     .ana-num { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--content-base); color: var(--bg-base); font-size: 9px; /* font-scale-exempt: anatomy number badge */ font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 3; }
     .dd-card .dd-prev { flex: 1; }
-    /* playground popover */
-    #pg-menu { position: fixed; z-index: 1000; }
-    #pg-menu[hidden] { display: none; }
+    /* playground popover + per-item config */
+    #pg-menu, #pg-submenu { position: fixed; z-index: 1000; }
+    #pg-menu[hidden], #pg-submenu[hidden] { display: none; }
+    .pg-item-hd { font-size: 11px; /* font-scale-exempt: playground group label */ font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--content-subtle); padding: 16px 0 4px; border-top: 1px solid var(--border-base); margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -173,10 +171,6 @@
               <div class="variant-row-desc"><strong>Submenu</strong> — A trailing chevron opens a nested menu.</div>
             </div>
             <div class="variant-row">
-              <div class="variant-row-btn"><div class="menu" style="width:240px;"><div class="menu-item is-selected"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><i data-icon="check" class="menu-item-check"></i></div></div></div>
-              <div class="variant-row-desc"><strong>Selected</strong> — In a choice menu, the chosen item is highlighted with a checkmark.</div>
-            </div>
-            <div class="variant-row">
               <div class="variant-row-btn"><div class="menu" style="width:240px;">
                 <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">16px</span></div></div>
                 <div class="menu-item"><i data-icon="box" class="menu-item-icon size-24"></i><div class="menu-item-body"><span class="menu-item-title">24px</span></div></div>
@@ -189,11 +183,10 @@
 
         <section class="section" id="states">
           <h2 class="text-l3">States</h2>
-          <p class="section-lead">Items respond to interaction and selection.</p>
+          <p class="section-lead">Items respond to interaction. A dropdown never keeps a "selected" item — if a choice needs to persist, that's a <a class="link-inline" href="select-docs.html">Select</a>.</p>
           <div class="states-row">
             <div class="state-col"><span class="state-lbl">Default</span><div class="menu" style="width:200px; pointer-events:none;"><div class="menu-item" tabindex="-1"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
             <div class="state-col"><span class="state-lbl">Hover</span><div class="menu" style="width:200px; pointer-events:none;"><div class="menu-item is-hover" tabindex="-1"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
-            <div class="state-col"><span class="state-lbl">Selected</span><div class="menu" style="width:200px; pointer-events:none;"><div class="menu-item is-selected" tabindex="-1"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
             <div class="state-col"><span class="state-lbl">Disabled</span><div class="menu" style="width:200px; pointer-events:none;"><div class="menu-item is-disabled" tabindex="-1"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div></div></div></div>
           </div>
         </section>
@@ -227,7 +220,6 @@
               <tr><td><code>--sh-popovers</code></td><td>Surface shadow</td><td>0 2px 12px rgba(25,39,67,.08)</td></tr>
               <tr><td><code>--radius-md</code></td><td>Surface &amp; item radius</td><td>8px</td></tr>
               <tr><td><code>--bg-base-hover</code></td><td>Item hover</td><td>—</td></tr>
-              <tr><td><code>--bg-brand-subtle</code></td><td>Selected item</td><td>—</td></tr>
               <tr><td><code>--content-base</code> · <code>--content-secondary</code> · <code>--content-subtle</code></td><td>Title / subtitle / icon &amp; group label</td><td>—</td></tr>
             </tbody>
           </table>
@@ -272,7 +264,7 @@
 
         <section class="section" id="dev-playground">
           <h2 class="text-l3">Playground</h2>
-          <p class="section-lead">Open the menu from its trigger — it's the Angular Material <code>mat-menu</code>; the snippet below is the production markup.</p>
+          <p class="section-lead">Configure each item on its own — leading icon or avatar, subtitle, and trailing label or submenu — then open the menu from its trigger. A submenu item opens a nested menu on click. The code reflects your setup.</p>
           <div class="pg-card">
             <div class="pg-preview" id="pg-preview" style="padding:40px; justify-content:center;"></div>
             <div class="pg-bottom">
@@ -282,7 +274,9 @@
                 <button class="pg-reset" id="pg-reset">Reset</button>
               </div>
               <div class="pg-panel pg-props-wrap" id="pg-panel-props">
-                <div class="pg-row"><div class="pg-row-name">icons</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-icons" checked><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">header</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" id="pg-header"><span class="pg-toggle-track"></span></label></div></div>
+                <div class="pg-row"><div class="pg-row-name">icon size</div><div class="pg-row-ctrl"><select class="pg-select" id="pg-iconsize"><option value="16">16px</option><option value="24">24px</option><option value="32">32px</option></select></div></div>
+                <div id="pg-items"></div>
               </div>
               <div class="pg-panel pg-code-wrap" id="pg-panel-code" hidden>
                 <button class="dev-copy-btn" id="pg-copy">Copy</button>
@@ -397,33 +391,33 @@
           </div>
 
           <h3 class="text-l4">Submenu</h3>
-          <div class="dev-preview" style="padding:24px;">
-            <div class="menu" style="width:240px;">
-              <div class="menu-item"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">More options</span></div><i data-icon="chevron-right" class="menu-chevron"></i></div>
+          <p>A submenu item shows a trailing chevron; on hover it opens a nested menu beside the parent. In Angular Material, point the item's <code>matMenuTriggerFor</code> at a second <code>mat-menu</code>.</p>
+          <div class="dev-preview" style="padding:24px; align-items:flex-start; gap:4px;">
+            <div class="menu" style="width:220px;">
+              <div class="menu-item"><i data-icon="user" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Profile</span></div></div>
+              <div class="menu-item is-hover"><i data-icon="share" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Share</span></div><i data-icon="chevron-right" class="menu-chevron"></i></div>
+            </div>
+            <div class="menu" style="width:190px; margin-top:48px;">
+              <div class="menu-item"><i data-icon="link" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Copy link</span></div></div>
+              <div class="menu-item"><i data-icon="mail" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Email</span></div></div>
             </div>
           </div>
           <div class="dev-code-wrap">
             <button class="dev-copy-btn">Copy</button>
-            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
-  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>More options<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
-  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"chevron-right"</span> <span class="ca">class</span>=<span class="cv">"menu-chevron"</span><span class="ct">&gt;&lt;/i&gt;</span>
-<span class="ct">&lt;/div&gt;</span></code></pre>
-          </div>
+            <pre><code><span class="ct">&lt;mat-menu</span> <span class="ca">#menu</span>=<span class="cv">"matMenu"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;button</span> <span class="ca">mat-menu-item</span> <span class="ca">disableRipple</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;eff-mat-icon</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ca">[iconName]</span>=<span class="cv">"'user'"</span><span class="ct">/&gt;</span><span class="ct">&lt;span&gt;</span>Profile<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;/button&gt;</span>
+  <span class="cc">&lt;!-- opens the nested menu --&gt;</span>
+  <span class="ct">&lt;button</span> <span class="ca">mat-menu-item</span> <span class="ca">[matMenuTriggerFor]</span>=<span class="cv">"share"</span> <span class="ca">disableRipple</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;eff-mat-icon</span> <span class="ca">class</span>=<span class="cv">"icon"</span> <span class="ca">[iconName]</span>=<span class="cv">"'share'"</span><span class="ct">/&gt;</span><span class="ct">&lt;span&gt;</span>Share<span class="ct">&lt;/span&gt;</span>
+  <span class="ct">&lt;/button&gt;</span>
+<span class="ct">&lt;/mat-menu&gt;</span>
 
-          <h3 class="text-l4">Selected item</h3>
-          <div class="dev-preview" style="padding:24px;">
-            <div class="menu" style="width:240px;">
-              <div class="menu-item is-selected"><i data-icon="box" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">Title</span></div><i data-icon="check" class="menu-item-check"></i></div>
-            </div>
-          </div>
-          <div class="dev-code-wrap">
-            <button class="dev-copy-btn">Copy</button>
-            <pre><code><span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item is-selected"</span><span class="ct">&gt;</span>
-  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"box"</span> <span class="ca">class</span>=<span class="cv">"menu-item-icon"</span><span class="ct">&gt;&lt;/i&gt;</span>
-  <span class="ct">&lt;div</span> <span class="ca">class</span>=<span class="cv">"menu-item-body"</span><span class="ct">&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"menu-item-title"</span><span class="ct">&gt;</span>Title<span class="ct">&lt;/span&gt;&lt;/div&gt;</span>
-  <span class="ct">&lt;i</span> <span class="ca">data-icon</span>=<span class="cv">"check"</span> <span class="ca">class</span>=<span class="cv">"menu-item-check"</span><span class="ct">&gt;&lt;/i&gt;</span>
-<span class="ct">&lt;/div&gt;</span></code></pre>
+<span class="ct">&lt;mat-menu</span> <span class="ca">#share</span>=<span class="cv">"matMenu"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;button</span> <span class="ca">mat-menu-item</span> <span class="ca">disableRipple</span><span class="ct">&gt;&lt;span&gt;</span>Copy link<span class="ct">&lt;/span&gt;&lt;/button&gt;</span>
+  <span class="ct">&lt;button</span> <span class="ca">mat-menu-item</span> <span class="ca">disableRipple</span><span class="ct">&gt;&lt;span&gt;</span>Email<span class="ct">&lt;/span&gt;&lt;/button&gt;</span>
+<span class="ct">&lt;/mat-menu&gt;</span></code></pre>
           </div>
 
           <h3 class="text-l4">Header &amp; grouped items</h3>
@@ -458,10 +452,10 @@
               <tr><td><code>.menu-header</code></td><td>Optional title row at the top.</td></tr>
               <tr><td><code>.menu-group-lbl</code></td><td>Uppercase section heading splitting items into groups.</td></tr>
               <tr><td><code>.menu-divider</code></td><td>Hairline separator between groups.</td></tr>
-              <tr><td><code>.menu-item</code></td><td>A row. States: <code>.is-hover</code>, <code>.is-selected</code>, <code>.is-disabled</code>.</td></tr>
-              <tr><td><code>.menu-item-icon</code></td><td>Leading 16px icon (or use an <code>.av</code> avatar instead).</td></tr>
+              <tr><td><code>.menu-item</code></td><td>A row. States: <code>.is-hover</code>, <code>.is-disabled</code>.</td></tr>
+              <tr><td><code>.menu-item-icon</code></td><td>Leading 16px icon — add <code>size-24</code> / <code>size-32</code> for 24/32px (or use an <code>.av</code> avatar instead).</td></tr>
               <tr><td><code>.menu-item-body</code> → <code>.menu-item-title</code> / <code>.menu-item-sub</code></td><td>Label and optional subtitle.</td></tr>
-              <tr><td><code>.menu-item-check</code> · <code>.menu-chevron</code> · <code>.menu-label</code></td><td>Trailing checkmark (selected), submenu chevron, or a status label.</td></tr>
+              <tr><td><code>.menu-chevron</code> · <code>.menu-label</code></td><td>Trailing submenu chevron or a status label.</td></tr>
             </tbody>
           </table>
         </section>
@@ -513,54 +507,146 @@
   (function () {
     const $preview = document.getElementById('pg-preview');
     if (!$preview) return;
-    const defaults = { icons: true };
-    const ITEMS = [ { icon:'user', label:'Open profile' }, { icon:'users', label:'Switch organization' }, { icon:'globe', label:'Change language' }, { icon:'log-out', label:'Log out' } ];
-    function state(){ return { icons: document.getElementById('pg-icons').checked }; }
-    function buildMenu(s){
-      const rows = ITEMS.map(it=>`<div class="menu-item">${s.icons?`<i data-icon="${it.icon}" class="menu-item-icon"></i>`:''}<div class="menu-item-body"><span class="menu-item-title">${it.label}</span></div></div>`).join('');
-      return `<div class="menu" style="width:240px;">${rows}</div>`;
+
+    // Each item is independently configurable. icon + subtitle text are
+    // preset per item; you choose leading / subtitle / trailing per row.
+    const DEFAULTS = [
+      { label:'Profile',   icon:'user',   sub:'Personal account', leading:'icon',   subtitle:false, trailing:'none' },
+      { label:'Workspace', icon:'users',  sub:'Acme Inc',         leading:'avatar', subtitle:true,  trailing:'none' },
+      { label:'Share',     icon:'share',  sub:'',                 leading:'icon',   subtitle:false, trailing:'submenu' },
+      { label:'Settings',  icon:'gear',   sub:'',                 leading:'icon',   subtitle:false, trailing:'label' }
+    ];
+    const SUBMENU = [ { icon:'link', label:'Copy link' }, { icon:'mail', label:'Email' } ];
+    const cfg = { header:false, iconSize:'16', items: DEFAULTS.map(d=>({...d})) };
+
+    function initials(s){ return s.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join(''); }
+    function sizeCls(){ return cfg.iconSize==='16' ? '' : ' size'+'-'+cfg.iconSize; }
+
+    function leadingHtml(it){
+      if (it.leading==='icon')   return `<i data-icon="${it.icon}" class="menu-item-icon${sizeCls()}"></i>`;
+      if (it.leading==='avatar') return `<span class="av av-32 av-yellow">${initials(it.label)}</span>`;
+      return '';
     }
-    function buildCode(s){
-      const L = [];
-      L.push('<button mat-button [matMenuTriggerFor]="menu">Open dropdown</button>');
-      L.push('');
-      L.push('<mat-menu #menu="matMenu">');
-      ITEMS.forEach(it=>{
-        L.push('  <button mat-menu-item disableRipple>');
-        if (s.icons) L.push(`    <eff-mat-icon class="icon" [iconName]="'${it.icon}'"/>`);
-        L.push(`    <span>${it.label}</span>`);
-        L.push('  </button>');
-      });
-      L.push('</mat-menu>');
+    function bodyHtml(it){
+      const sub = (it.subtitle && it.sub) ? `<span class="menu-item-sub">${it.sub}</span>` : '';
+      return `<div class="menu-item-body"><span class="menu-item-title">${it.label}</span>${sub}</div>`;
+    }
+    function trailingHtml(it){
+      if (it.trailing==='label')   return `<span class="menu-label">new</span>`;
+      if (it.trailing==='submenu') return `<i data-icon="chevron-right" class="menu-chevron"></i>`;
+      return '';
+    }
+    function itemHtml(it, i){
+      return `<div class="menu-item" data-i="${i}"${it.trailing==='submenu'?' data-submenu="1"':''}>${leadingHtml(it)}${bodyHtml(it)}${trailingHtml(it)}</div>`;
+    }
+    function buildMenu(){
+      const head = cfg.header ? `<div class="menu-header">Choose option</div>` : '';
+      return `<div class="menu" style="width:248px;">${head}${cfg.items.map(itemHtml).join('')}</div>`;
+    }
+    function buildSubmenu(){
+      return `<div class="menu" style="width:190px;">${SUBMENU.map(s=>`<div class="menu-item"><i data-icon="${s.icon}" class="menu-item-icon"></i><div class="menu-item-body"><span class="menu-item-title">${s.label}</span></div></div>`).join('')}</div>`;
+    }
+
+    function ind(it){
+      const lines = [];
+      const lead = it.leading==='icon' ? `  <i data-icon="${it.icon}" class="menu-item-icon${sizeCls()}"></i>\n`
+                 : it.leading==='avatar' ? `  <span class="av av-32 av-yellow">${initials(it.label)}</span>\n` : '';
+      const sub = (it.subtitle && it.sub) ? `\n    <span class="menu-item-sub">${it.sub}</span>` : '';
+      const trail = it.trailing==='label' ? `\n  <span class="menu-label">new</span>`
+                  : it.trailing==='submenu' ? `\n  <i data-icon="chevron-right" class="menu-chevron"></i>` : '';
+      lines.push(`<div class="menu-item">`);
+      lines.push(`${lead}  <div class="menu-item-body"><span class="menu-item-title">${it.label}</span>${sub}</div>${trail}`);
+      lines.push(`</div>`);
+      return lines.join('\n');
+    }
+    function buildCode(){
+      const L = ['<div class="menu">'];
+      if (cfg.header) L.push('  <div class="menu-header">Choose option</div>');
+      cfg.items.forEach(it=>{ ind(it).split('\n').forEach(l=>L.push('  '+l)); });
+      L.push('</div>');
       return L.join('\n');
     }
-    const menu = document.createElement('div');
-    menu.id = 'pg-menu'; menu.hidden = true; document.body.appendChild(menu);
+
+    // ── floating popovers ──
+    const menu = document.createElement('div'); menu.id='pg-menu'; menu.hidden=true; document.body.appendChild(menu);
+    const sub  = document.createElement('div'); sub.id='pg-submenu'; sub.hidden=true; document.body.appendChild(sub);
     function escClose(e){ if (e.key==='Escape') closeMenu(); }
+    function closeSub(){ sub.hidden=true; sub.innerHTML=''; menu.querySelectorAll('.menu-item.is-hover').forEach(el=>el.classList.remove('is-hover')); }
     function openMenu(btn){
-      menu.innerHTML = buildMenu(state());
-      menu.hidden = false;
+      menu.innerHTML = buildMenu(); menu.hidden=false;
       if (window.Icons && window.Icons.render) window.Icons.render(menu);
       const r = btn.getBoundingClientRect();
-      menu.style.left = r.left + 'px';
-      menu.style.top = (r.bottom + 6) + 'px';
+      menu.style.left = r.left+'px'; menu.style.top = (r.bottom+6)+'px';
       btn.setAttribute('aria-expanded','true');
       document.addEventListener('keydown', escClose);
     }
-    function closeMenu(){ menu.hidden = true; menu.innerHTML = ''; document.removeEventListener('keydown', escClose); const b=document.getElementById('pg-trigger'); if(b) b.setAttribute('aria-expanded','false'); }
-    function render(){
+    function closeMenu(){ closeSub(); menu.hidden=true; menu.innerHTML=''; document.removeEventListener('keydown', escClose); const b=document.getElementById('pg-trigger'); if(b) b.setAttribute('aria-expanded','false'); }
+    function openSub(itemEl){
+      sub.innerHTML = buildSubmenu(); sub.hidden=false;
+      if (window.Icons && window.Icons.render) window.Icons.render(sub);
+      const r = itemEl.getBoundingClientRect();
+      sub.style.left = (r.right+2)+'px'; sub.style.top = r.top+'px';
+      itemEl.classList.add('is-hover');
+    }
+    menu.addEventListener('click', e=>{
+      const item = e.target.closest('.menu-item'); if(!item) return;
+      if (item.dataset.submenu){ sub.hidden ? openSub(item) : closeSub(); }
+      else closeMenu();
+    });
+    sub.addEventListener('click', ()=>closeMenu());
+
+    // ── build the per-item config controls ──
+    function controlsHtml(){
+      return cfg.items.map((it,i)=>`
+        <div class="pg-item-hd">Item ${i+1} — ${it.label}</div>
+        <div class="pg-row"><div class="pg-row-name">leading</div><div class="pg-row-ctrl"><select class="pg-select" data-i="${i}" data-k="leading">
+          <option value="icon">Icon</option><option value="avatar">Avatar</option><option value="none">None</option></select></div></div>
+        <div class="pg-row"><div class="pg-row-name">subtitle</div><div class="pg-row-ctrl"><label class="pg-toggle"><input type="checkbox" data-i="${i}" data-k="subtitle"><span class="pg-toggle-track"></span></label></div></div>
+        <div class="pg-row"><div class="pg-row-name">trailing</div><div class="pg-row-ctrl"><select class="pg-select" data-i="${i}" data-k="trailing">
+          <option value="none">None</option><option value="label">Label</option><option value="submenu">Submenu</option></select></div></div>`).join('');
+    }
+    function syncControls(){
+      const box = document.getElementById('pg-items');
+      box.querySelectorAll('select, input').forEach(el=>{
+        const it = cfg.items[+el.dataset.i], k = el.dataset.k;
+        if (el.type==='checkbox') el.checked = it[k]; else el.value = it[k];
+      });
+      document.getElementById('pg-header').checked = cfg.header;
+      document.getElementById('pg-iconsize').value = cfg.iconSize;
+    }
+
+    function paintPreviewCode(){
+      document.getElementById('pg-code').textContent = buildCode();
+    }
+    function renderTrigger(){
       $preview.innerHTML = '<button class="btn btn-secondary" id="pg-trigger" aria-haspopup="menu" aria-expanded="false">Open dropdown <i data-icon="chevron-down"></i></button>';
-      document.getElementById('pg-code').textContent = buildCode(state());
       if (window.Icons && window.Icons.render) window.Icons.render($preview);
     }
-    document.getElementById('pg-icons').addEventListener('change', ()=>{ render(); });
+
+    // events
+    document.getElementById('pg-items').innerHTML = controlsHtml();
+    document.getElementById('pg-items').addEventListener('change', e=>{
+      const el = e.target; if (el.dataset.i===undefined) return;
+      const it = cfg.items[+el.dataset.i], k = el.dataset.k;
+      it[k] = el.type==='checkbox' ? el.checked : el.value;
+      paintPreviewCode(); if(!menu.hidden){ closeMenu(); }
+    });
+    document.getElementById('pg-header').addEventListener('change', e=>{ cfg.header=e.target.checked; paintPreviewCode(); if(!menu.hidden) closeMenu(); });
+    document.getElementById('pg-iconsize').addEventListener('change', e=>{ cfg.iconSize=e.target.value; paintPreviewCode(); if(!menu.hidden) closeMenu(); });
+
     $preview.addEventListener('click', e=>{ if (e.target.closest('#pg-trigger')) { menu.hidden ? openMenu(document.getElementById('pg-trigger')) : closeMenu(); } });
-    menu.addEventListener('click', e=>{ if (e.target.closest('.menu-item')) closeMenu(); });
-    document.addEventListener('click', e=>{ if (!menu.hidden && !menu.contains(e.target) && !e.target.closest('#pg-trigger')) closeMenu(); });
-    document.getElementById('pg-reset')?.addEventListener('click',()=>{ document.getElementById('pg-icons').checked=defaults.icons; closeMenu(); render(); });
+    document.addEventListener('click', e=>{ if (!menu.hidden && !menu.contains(e.target) && !sub.contains(e.target) && !e.target.closest('#pg-trigger')) closeMenu(); });
+
+    document.getElementById('pg-reset')?.addEventListener('click',()=>{
+      cfg.header=false; cfg.iconSize='16'; cfg.items = DEFAULTS.map(d=>({...d}));
+      syncControls(); closeMenu(); paintPreviewCode();
+    });
     document.querySelectorAll('.pg-tab[data-pgtab]').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.pg-tab').forEach(t=>t.classList.remove('is-active'));tab.classList.add('is-active');const w=tab.dataset.pgtab;document.getElementById('pg-panel-props').hidden=w!=='props';document.getElementById('pg-panel-code').hidden=w!=='code';});});
     document.getElementById('pg-copy')?.addEventListener('click',()=>navigator.clipboard.writeText(document.getElementById('pg-code').textContent));
-    render();
+
+    syncControls();
+    renderTrigger();
+    paintPreviewCode();
   })();
 </script>
 </body>
