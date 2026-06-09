@@ -305,23 +305,65 @@
   <!-- ── External users path ── -->
   <section class="section" id="external">
     <h2 class="text-l3">For everyone else</h2>
-    <p class="section-lead">Prefer to work locally in Claude Code? Install the skill from the public GitHub repo.</p>
+    <p class="section-lead">No organization needed — you can add the skill to your own Claude in a minute. Or, if you'd rather work locally, use Claude Code.</p>
+
+    <h3 class="text-l4">Easiest: upload it as your own skill</h3>
+    <p style="font-size:14px; color:var(--content-secondary); margin:var(--spacing-tight) 0 var(--spacing-base-tight);">Works on any Claude plan that supports Skills — no GitHub account, no Terminal.</p>
+
+    <div style="margin-bottom:var(--spacing-base-tight);">
+      <a class="gs-download-btn" href="https://github.com/jenteinsing123/effectory-design-documentation/releases/download/skill-latest/effectory-design-system.zip">
+        <i data-icon="download"></i>
+        Download the skill (.zip)
+      </a>
+      <span style="display:block; font-size:14px; color:var(--content-secondary);">Always the latest build — same link every time.</span>
+    </div>
 
     <div class="gs-steps">
 
       <div class="gs-step">
         <div class="gs-step-num">1</div>
         <div class="gs-step-body">
-          <div class="gs-step-title">Download the skill from GitHub</div>
+          <div class="gs-step-title">Download the packaged skill</div>
+          <div class="gs-step-desc">Use the button above to grab the <code>.zip</code>.</div>
+        </div>
+      </div>
+
+      <div class="gs-step">
+        <div class="gs-step-num">2</div>
+        <div class="gs-step-body">
+          <div class="gs-step-title">Enable code execution</div>
+          <div class="gs-step-desc">In Claude, open <strong>Settings → Capabilities</strong> and turn on <em>Code execution and file creation</em>.</div>
+        </div>
+      </div>
+
+      <div class="gs-step">
+        <div class="gs-step-num">3</div>
+        <div class="gs-step-body">
+          <div class="gs-step-title">Upload it under Skills</div>
+          <div class="gs-step-desc">Go to <strong>Settings → Skills → + Add</strong> and select the <code>.zip</code>. Then describe a screen in a new chat — same flow as the Effectory team above.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="text-l4" style="margin-top:var(--spacing-extra-loose);">Alternative: work locally in Claude Code</h3>
+    <p style="font-size:14px; color:var(--content-secondary); margin:var(--spacing-tight) 0 var(--spacing-base-tight);">Prefer the CLI and a local preview server? Clone the open-source repo instead.</p>
+
+    <div class="gs-steps">
+
+      <div class="gs-step">
+        <div class="gs-step-num">1</div>
+        <div class="gs-step-body">
+          <div class="gs-step-title">Download the repo from GitHub</div>
           <div class="gs-step-desc">
-            The skill is open source. No GitHub account needed.
+            The whole design system is open source. No GitHub account needed.
             <div style="margin-top:var(--spacing-base-tight);">
               <a class="gs-download-btn" href="https://github.com/jenteinsing123/effectory-design-documentation/archive/refs/heads/main.zip">
                 <i data-icon="download"></i>
-                Download design system (.zip)
+                Download repo (.zip)
               </a>
             </div>
-            Unzip and save the folder somewhere easy to find. Or browse the source at <a class="link-inline" href="https://github.com/jenteinsing123/effectory-design-documentation" target="_blank">github.com/jenteinsing123/effectory-design-documentation</a>.
+            Unzip it somewhere easy to find. Or browse the source at <a class="link-inline" href="https://github.com/jenteinsing123/effectory-design-documentation" target="_blank">github.com/jenteinsing123/effectory-design-documentation</a>.
           </div>
         </div>
       </div>
@@ -350,7 +392,7 @@
 
     </div>
 
-    <p style="margin-top:var(--spacing-base); font-size:14px; color:var(--content-secondary);">Keep it fresh: re-download the ZIP before each session, or <code>git pull</code> if you cloned the repo.</p>
+    <p style="margin-top:var(--spacing-base); font-size:14px; color:var(--content-secondary);">Keep it fresh: re-download before each session, or <code>git pull</code> if you cloned the repo.</p>
   </section>
 
   <!-- ── Viewing ── -->
