@@ -123,12 +123,140 @@
         });
       }
 
-      // ── Page tabs (Design / Developer) ──
+      // ── Changelog: inject the tab shell (sync) so initPageTabs binds it ──
+      injectChangelogTab();
+
+      // ── Page tabs (Design / Developer / Changelog) ──
       initPageTabs();
+
+      // ── Changelog: fetch data and render (async) ──
+      renderChangelog();
     })
     .catch(function (err) {
       console.warn('[nav.js] Could not load nav.html:', err);
     });
+
+  // Map a *-docs.html filename to its sidebar label (falls back to a
+  // prettified filename when the page isn't in the nav).
+  function pageLabel(file) {
+    var link = document.querySelector('.nav-item[href$="' + file + '"]');
+    if (link) return link.textContent.replace(/\s+/g, ' ').trim();
+    return file
+      .replace(/-docs\.html$/, '')
+      .replace(/\.html$/, '')
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function currentPageFile() {
+    var f = location.pathname.split('/').pop() || 'index.html';
+    return f === '' ? 'index.html' : f;
+  }
+
+  function initials(name) {
+    var parts = (name || '').trim().split(/\s+/).slice(0, 2);
+    return parts.map(function (p) { return p.charAt(0).toUpperCase(); }).join('') || '?';
+  }
+
+  function avatarColor(name) {
+    var palette = ['cl-av-blue', 'cl-av-yellow', 'cl-av-green', 'cl-av-purple', 'cl-av-red'];
+    var sum = 0;
+    for (var i = 0; i < (name || '').length; i++) sum += name.charCodeAt(i);
+    return palette[sum % palette.length];
+  }
+
+  function entryHtml(e, withTags) {
+    var tags = '';
+    if (withTags && e.pages && e.pages.length) {
+      tags = '<div class="cl-tags">' + e.pages.map(function (p) {
+        return '<a class="cl-tag" href="' + p + '?tab=changelog">' + pageLabel(p) + '</a>';
+      }).join('') + '</div>';
+    }
+    return '' +
+      '<li class="cl-entry">' +
+        '<span class="cl-av ' + avatarColor(e.author) + '">' + initials(e.author) + '</span>' +
+        '<div class="cl-body">' +
+          '<div class="cl-subject">' + escapeHtml(e.subject) + '</div>' +
+          '<div class="cl-meta">' +
+            '<span class="cl-author">' + escapeHtml(e.author) + '</span>' +
+            '<span class="cl-dot">·</span>' +
+            '<span class="cl-date">' + e.date + '</span>' +
+            '<span class="cl-dot">·</span>' +
+            '<code class="cl-hash">' + e.hash + '</code>' +
+          '</div>' +
+          tags +
+        '</div>' +
+      '</li>';
+  }
+
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function injectChangelogTab() {
+    var tabsInner = document.querySelector('.page-tabs-inner');
+    var contentWrap = document.querySelector('.content-wrap');
+    if (!tabsInner || !contentWrap) return;            // not a tabbed page
+    if (tabsInner.querySelector('[data-tab="changelog"]')) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'page-tab';
+    btn.setAttribute('data-tab', 'changelog');
+    btn.innerHTML =
+      '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M8 4v4l2.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.5"/></svg> Changelog';
+    tabsInner.appendChild(btn);
+
+    var panel = document.createElement('div');
+    panel.className = 'tab-panel';
+    panel.setAttribute('data-panel', 'changelog');
+    panel.hidden = true;
+    panel.innerHTML =
+      '<div class="content-cols"><article class="content">' +
+      '<section class="section"><h2 class="text-l3">Changelog</h2>' +
+      '<p class="section-lead">Every change to this component, newest first — pulled straight from the git history.</p>' +
+      '<ul class="cl-list" id="cl-page"><li class="cl-empty">Loading…</li></ul>' +
+      '</section></article></div>';
+    contentWrap.appendChild(panel);
+  }
+
+  function renderChangelog() {
+    var pageList = document.getElementById('cl-page');
+    var allList = document.getElementById('changelog-all');
+    if (!pageList && !allList) return;
+
+    fetch(base + 'changelog.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var entries = (data && data.entries) || [];
+
+        if (pageList) {
+          var file = currentPageFile();
+          var mine = entries.filter(function (e) {
+            return e.pages && e.pages.indexOf(file) !== -1;
+          });
+          pageList.innerHTML = mine.length
+            ? mine.map(function (e) { return entryHtml(e, false); }).join('')
+            : '<li class="cl-empty">No tracked changes for this page yet.</li>';
+        }
+
+        if (allList) {
+          allList.innerHTML = entries.length
+            ? entries.map(function (e) { return entryHtml(e, true); }).join('')
+            : '<li class="cl-empty">No changes recorded.</li>';
+          var countEl = document.getElementById('changelog-count');
+          if (countEl) countEl.textContent = entries.length + ' changes';
+        }
+      })
+      .catch(function (err) {
+        console.warn('[nav.js] Could not load changelog.json:', err);
+        if (pageList) pageList.innerHTML = '<li class="cl-empty">Changelog unavailable.</li>';
+        if (allList) allList.innerHTML = '<li class="cl-empty">Changelog unavailable.</li>';
+      });
+  }
 
   function initPageTabs() {
     var tabs = document.querySelectorAll('.page-tab');

@@ -759,3 +759,24 @@ html[data-theme="dark"] {
 .tpop-thumb-hd { height: 9px; }
 .tpop-thumb-line { height: 3px; border-radius: 2px; margin: var(--spacing-extra-tight) 5px 0; }
 .tpop-divider { border: none; border-top: 1px solid var(--border-base-hover); margin: var(--spacing-tight) 0; }
+
+/* ── Changelog (tab on every page + the global changelog.html) ── */
+.cl-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.cl-entry { display: flex; gap: 14px; padding: 16px 4px; border-bottom: 1px solid var(--border-base); }
+.cl-entry:last-child { border-bottom: none; }
+.cl-av { flex-shrink: 0; width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; line-height: 1; user-select: none; }
+.cl-av-blue   { background: #dbeafe; color: #1d4ed8; }
+.cl-av-yellow { background: #fef3c7; color: #b45309; }
+.cl-av-green  { background: #dcfce7; color: #15803d; }
+.cl-av-purple { background: #ede9fe; color: #6d28d9; }
+.cl-av-red    { background: #fee2e2; color: #b91c1c; }
+.cl-body { min-width: 0; flex: 1; }
+.cl-subject { font-size: 14px; font-weight: 500; color: var(--content-base); line-height: 1.5; }
+.cl-meta { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; color: var(--content-secondary); flex-wrap: wrap; }
+.cl-author { font-weight: 500; }
+.cl-dot { color: var(--content-subtle); }
+.cl-hash { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--bg-secondary); color: var(--content-secondary); }
+.cl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.cl-tag { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--content-secondary); text-decoration: none; border: 1px solid var(--border-base); }
+.cl-tag:hover { background: var(--bg-base-hover); color: var(--content-base); }
+.cl-empty { padding: 24px 4px; color: var(--content-subtle); font-size: 14px; }
