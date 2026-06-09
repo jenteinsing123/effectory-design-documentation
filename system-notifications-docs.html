@@ -13,8 +13,9 @@
     @keyframes sysnotif-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @media (prefers-reduced-motion: reduce) { .sysnotif { animation: none; } }
     /* placement demo */
-    .sysnotif-stagedemo { position: relative; height: 220px; background: var(--bg-secondary); border: 1px solid var(--border-base); border-radius: var(--radius-lg); overflow: hidden; }
-    .sysnotif-stagedemo .sysnotif { position: absolute; top: 8px; right: 8px; animation: none; pointer-events: none; }
+    .sysnotif-stagedemo { position: relative; height: 300px; background: var(--bg-secondary); border: 1px solid var(--border-base); border-radius: var(--radius-lg); overflow: hidden; }
+    .sysnotif-stagedemo .sysnotif-stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding: 8px; }
+    .sysnotif-stagedemo .sysnotif { animation: none; pointer-events: none; }
     .sysnotif.is-error   { border-left-color: var(--border-negative-base); }
     .sysnotif.is-warning { border-left-color: var(--border-warning-base); }
     .sysnotif-title { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-inverse-base); }
@@ -137,7 +138,11 @@
           <h2 class="text-l3">Placement &amp; motion</h2>
           <p class="section-lead">System notifications always appear in the <strong>top-right</strong> of the screen, 8px from the edges, and stack downwards when there are several. New ones slide up into place while fading in.</p>
           <div class="sysnotif-stagedemo">
-            <div class="sysnotif"><div class="sysnotif-title">Export ready</div><div class="sysnotif-desc">Your report finished exporting.</div><button class="sysnotif-action">Download</button><button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button></div>
+            <div class="sysnotif-stack">
+              <div class="sysnotif"><div class="sysnotif-title">Export ready</div><div class="sysnotif-desc">Your report finished exporting.</div><button class="sysnotif-action">Download</button><button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button></div>
+              <div class="sysnotif is-warning"><div class="sysnotif-title">Session expiring soon</div><div class="sysnotif-desc">You'll be signed out in 5 minutes.</div><button class="sysnotif-action">Stay signed in</button><button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button></div>
+              <div class="sysnotif is-error"><div class="sysnotif-title">Sync failed</div><button class="sysnotif-action">Retry</button><button class="sysnotif-close" aria-label="Dismiss"><i data-icon="cross"></i></button></div>
+            </div>
           </div>
           <p style="font-size:14px; color:var(--content-secondary); margin-top:10px;">Fixed top-right placement. The enter animation is a short slide-up + fade (≈200ms).</p>
         </section>
