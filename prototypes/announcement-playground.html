@@ -78,28 +78,70 @@
     /* ── Dialog: centred modal ── */
     #dialog-host { position: fixed; inset: 0; z-index: 1100; display: none; align-items: center; justify-content: center; background: rgba(25,39,67,.4); padding: 24px; }
     #dialog-host.open { display: flex; }
-    .dlg { position: relative; width: 600px; max-width: 100%; background: var(--bg-base); border-radius: 16px; box-shadow: 0 4px 12px rgba(25,39,67,.08), 0 24px 60px -20px rgba(25,39,67,.45); overflow: hidden; font-family: 'Poppins', sans-serif; }
-    .dlg-media { position: relative; height: 300px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.8); overflow: hidden; transition: height .3s cubic-bezier(.4,0,.2,1); }
+    /* whole dialog carries the theme tint + a matching coloured border (see Figma 22772-1702) */
+    .dlg { position: relative; width: 600px; max-width: 100%; background: var(--dlg-tint, var(--bg-base)); border: 1px solid var(--dlg-border, var(--border-base)); border-radius: 16px; box-shadow: 0 4px 12px rgba(25,39,67,.08), 0 24px 60px -20px rgba(25,39,67,.45); overflow: hidden; font-family: 'Poppins', sans-serif; }
+    /* media blends into the tinted card; the colour comes from a soft accent blob behind the illustration */
+    .dlg-media { position: relative; height: 440px; display: flex; align-items: center; justify-content: center; color: var(--dlg-accent, var(--bg-brand-base)); overflow: hidden; transition: height .3s cubic-bezier(.4,0,.2,1); }
+    .dlg-media::before { content: ''; position: absolute; left: 50%; top: -28%; width: 132%; height: 150%; transform: translateX(-50%); pointer-events: none;
+      background: radial-gradient(58% 52% at 50% 44%, color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 42%, transparent) 0%, transparent 72%); }
     .dlg-media.is-collapsed { height: 0; }
-    .dlg-media-ph { display: flex; width: 48px; height: 48px; }
-    /* festive intro header */
-    .dlg-intro-media { background: linear-gradient(135deg, #7b6cf0 0%, #30b3af 100%); color: #fff; position: relative; }
-    .dlg-intro-spark { display: flex; width: 76px; height: 76px; filter: drop-shadow(0 4px 10px rgba(25,39,67,.25)); }
-    .confetti { position: absolute; width: 11px; height: 11px; border-radius: 2px; opacity: .92; }
+    /* real illustration fills the media; when present it covers the accent blob + fallback icon */
+    .dlg-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; animation: mediaIn .55s cubic-bezier(.34,1.56,.64,1) both; }
+    @keyframes mediaIn { from { opacity: 0; transform: scale(.93) translateY(10px); } to { opacity: 1; transform: none; } }
+    .dlg-media.has-img::before { display: none; }
+    .dlg-media-ph { display: flex; width: 72px; height: 72px; position: relative; z-index: 1; filter: drop-shadow(0 4px 10px rgba(25,39,67,.12)); }
+    /* optional decorative wavy two-tone background (Figma 22772-980): a deeper band up top, the body tint rising in a wave */
+    .dlg.has-bg .dlg-media::before { display: none; }
+    .dlg-wave { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+    .dlg-wave .band { fill: var(--dlg-band, var(--dlg-tint)); }
+    .dlg-wave .crest { fill: var(--dlg-tint, var(--bg-base)); }
+    /* wave off → band matches the body tint, so the media reads as one seamless colour */
+    .dlg-wave.flat .band { fill: var(--dlg-tint, var(--bg-base)); }
+    /* festive intro: glow burst behind a white gift-hero badge */
+    .dlg-burst { position: absolute; z-index: 0; left: 50%; top: 47%; width: 460px; height: 460px; transform: translate(-50%,-50%); pointer-events: none;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 36%, transparent), transparent 72%); }
+    .dlg-hero { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 112px; height: 112px; border-radius: var(--radius-xl);
+      background: #fff; box-shadow: 0 16px 36px -10px rgba(25,39,67,.32); animation: introPop .55s cubic-bezier(.34,1.56,.64,1) both; }
+    .dlg-hero::after { content: ''; position: absolute; inset: -9px; border-radius: var(--radius-xl); border: 2px dashed color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 50%, #fff); opacity: .65; }
+    .dlg-hero i[data-icon] { display: flex; width: 60px; height: 60px; color: var(--dlg-accent, var(--bg-brand-base)); }
+    @keyframes introPop { from { opacity: 0; transform: scale(.5) rotate(-10deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+    /* outro keeps the single spark icon */
+    .dlg-intro-spark { display: flex; width: 84px; height: 84px; position: relative; z-index: 2; color: var(--dlg-accent, var(--bg-brand-base)); filter: drop-shadow(0 6px 14px rgba(25,39,67,.2)); }
+    /* confetti sits ON TOP of the artwork, explodes in on open, then drifts gently */
+    .confetti { position: absolute; z-index: 3; width: 11px; height: 11px; border-radius: 2px; opacity: .96;
+      animation: confBurst .5s cubic-bezier(.2,.9,.3,1.5) var(--d,0s) both, confDrift 3.4s ease-in-out calc(var(--d,0s) + .5s) infinite; }
+    @keyframes confBurst { 0% { opacity: 0; transform: scale(0) rotate(var(--cr,0deg)); } 60% { opacity: 1; transform: scale(1.32) rotate(calc(var(--cr,0deg) + 14deg)); } 100% { opacity: 1; transform: scale(1) rotate(var(--cr,0deg)); } }
+    @keyframes confDrift { 0%,100% { transform: translateY(0) rotate(var(--cr,0deg)); } 50% { transform: translateY(-11px) rotate(calc(var(--cr,0deg) + 16deg)); } }
+    /* playful sparkle icons, also on top, with the same explode-then-float treatment */
+    .dlg-spark-deco { position: absolute; z-index: 3; display: flex; filter: drop-shadow(0 2px 6px rgba(25,39,67,.14));
+      animation: decoBurst .55s cubic-bezier(.2,.9,.3,1.6) var(--d,0s) both, introFloat 3s ease-in-out calc(var(--d,0s) + .55s) infinite; }
+    .dlg-spark-deco i[data-icon] { display: flex; width: 100%; height: 100%; }
+    .dlg-spark-deco.s1 { top: 56px;  left: 84px;   width: 46px; height: 46px; color: #ff5d8f; --d: .05s; }
+    .dlg-spark-deco.s2 { top: 150px; right: 84px;  width: 32px; height: 32px; color: #30b3af; --d: .15s; }
+    .dlg-spark-deco.s3 { bottom: 108px; left: 128px; width: 40px; height: 40px; color: #fecd29; --d: .25s; }
+    .dlg-spark-deco.s4 { top: 86px;  right: 162px; width: 26px; height: 26px; color: #7c5cff; --d: .1s; }
+    .dlg-spark-deco.s5 { bottom: 78px; right: 116px; width: 44px; height: 44px; color: #7c5cff; --d: .2s; }
+    .dlg-spark-deco.s6 { top: 210px; left: 108px; width: 24px; height: 24px; color: #30b3af; --d: .3s; }
+    @keyframes decoBurst { 0% { opacity: 0; transform: scale(0); } 65% { opacity: 1; transform: scale(1.38); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes introFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     /* close uses the real design-system Icon Button (.ib .ib-secondary); this only positions it */
-    .dlg-close { position: absolute; top: 16px; right: 16px; z-index: 2; }
-    .dlg-body { padding: 32px; }
+    .dlg-close { position: absolute; top: 16px; right: 16px; z-index: 4; }
+    .dlg-body { padding: 16px 32px 32px; }
     .dlg-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); margin-bottom: 12px; }
     .dlg-tag i[data-icon] { width: 13px; height: 13px; display: flex; }
     /* same tag, but pinned in the bottom-left of the illustration */
     .dlg-tag-media { position: absolute; left: 16px; bottom: 16px; margin: 0; background: rgba(255,255,255,.96); color: var(--content-base); border-color: rgba(255,255,255,.7); box-shadow: 0 1px 3px rgba(25,39,67,.15); }
-    .dlg-title { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
-    .dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-secondary); min-height: 90px; } /* ~4 lines, keeps step heights consistent */
-    .dlg-dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
-    .dlg-dot { width: 8px; height: 8px; border-radius: 50%; background: #c1eeed; cursor: pointer; transition: background .15s; }
-    .dlg-dot.is-active { background: #30b3af; }
-    .dlg-footer { display: flex; justify-content: space-between; align-items: center; }
+    .dlg-title { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
+    .dlg-title.is-l3 { font-size: 26px; line-height: 1.3; } /* text-l3 for the intro slide */
+    .dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-base); min-height: 112px; } /* room for 5 lines, keeps step heights consistent */
+    /* story-style segmented progress, vertically centred on the same line as the close button (top 16px, 36px tall) */
+    .dlg-progress { position: absolute; top: 31px; left: 22px; right: 62px; z-index: 3; display: flex; gap: 6px; }
+    .dlg-seg { flex: 1 0 0; min-width: 0; height: 7px; border-radius: var(--radius-full); background: rgba(25,39,67,.22); cursor: pointer; transition: background .25s ease; }
+    .dlg-seg.is-fill { background: var(--content-base); }
+    .dlg-footer { display: flex; align-items: center; gap: 10px; }
     .dlg-footer .btn i[data-icon] { width: 15px; height: 15px; display: flex; }
+    /* primary fills the row; the back/skip button stays at its natural width beside it */
+    .dlg-footer .btn-primary { flex: 1 0 0; }
     @keyframes dlgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     /* floating sticky triggers */
@@ -143,17 +185,23 @@
     <div class="tabpanel" data-panel="dialog">
       <div class="panel">
         <div class="panel-hd">Intro screen</div>
-        <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-intro-media" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-intro-title" type="text" value="🎉 New release"></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-intro-body" rows="3">We've built some awesome new things to make your surveys even better. Want a quick look?</textarea></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Illustration</div><div class="d">The festive "What's New" cover graphic, with confetti + sparkles.</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-intro-media" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Decorative background</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-intro-bg" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Wave divider</div><div class="d">Off = straight edge, band matches the body colour. Needs the background on.</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-intro-wave" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-intro-title" type="text" value="What we launched in June 2026"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-intro-body" rows="3">This month we shipped a batch of upgrades to help you work faster, smarter and with less hassle. Take 30 seconds — here are the highlights you'll actually want to use.</textarea></div></div>
         <div class="set-row"><div class="lbl"><div class="t">"Show me" label</div></div><div class="ctrl"><input class="tf" id="d-start" type="text" value="Show me what's new"></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">"Skip" label</div><div class="d">Closes the dialog; it returns via the floating button.</div></div><div class="ctrl"><input class="tf" id="d-skip" type="text" value="Skip for now"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">"Skip" label</div><div class="d">Closes the dialog; it returns via the floating button.</div></div><div class="ctrl"><input class="tf" id="d-skip" type="text" value="Maybe later"></div></div>
       </div>
       <div class="panel">
         <div class="panel-hd">Feature tour</div>
         <div class="set-row">
-          <div class="lbl"><div class="t">Color</div><div class="d">Card, illustration and button colour.</div></div>
-          <div class="ctrl"><div class="slt-wrap" id="d-color-wrap"></div></div>
+          <div class="lbl"><div class="t">Colour</div><div class="d">Each step automatically takes its own colour from the palette — the story moves through the colours.</div></div>
+          <div class="ctrl"><span class="hint" style="font-size:12.5px;color:var(--content-subtle);">Auto per step</span></div>
+        </div>
+        <div class="set-row">
+          <div class="lbl"><div class="t">Background &amp; wave</div><div class="d">Set the decorative background and wave divider per step, below.</div></div>
+          <div class="ctrl"><span class="hint" style="font-size:12.5px;color:var(--content-subtle);">Per step</span></div>
         </div>
         <div class="set-row">
           <div class="lbl"><div class="t">Number of steps</div><div class="d">Each step is one screen in the carousel.</div></div>
@@ -180,8 +228,10 @@
       <div class="panel">
         <div class="panel-hd">Outro screen</div>
         <div class="set-row"><div class="lbl"><div class="t">Show outro</div><div class="d">A reusable closing screen linking to all release notes.</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-outro-on" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-outro-title" type="text" value="And lots of small improvements"></div></div>
-        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-outro-body" rows="3">We've also shipped plenty of smaller tweaks and fixes across the product. Have a look at everything that's new.</textarea></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Decorative background</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-outro-bg" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Wave divider</div><div class="d">Off = straight edge, band matches the body colour. Needs the background on.</div></div><div class="ctrl"><label class="tgl-wrap"><input type="checkbox" class="tgl" id="d-outro-wave" checked><span class="tgl-track"><span class="tgl-thumb"></span></span></label></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" id="d-outro-title" type="text" value="And plenty more under the hood"></div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" id="d-outro-body" rows="3">We've shipped dozens of smaller refinements and fixes this month too. Dive into the full release notes to see everything that just got better.</textarea></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Button label</div></div><div class="ctrl"><input class="tf" id="d-outro-cta" type="text" value="See all updates"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Support URL</div></div><div class="ctrl"><input class="tf" id="d-outro-url" type="text" value="https://support.effectory.com/my-effectory-release-notes-21-04-2026"></div></div>
       </div>
@@ -210,12 +260,16 @@
     // sentiment colours) but they're plain colour choices — no error/status meaning.
     //   surface = subtle background tint · illu = accent fill · btn* = CTA button.
     // Default keeps a white card with the brand (teal) primary button.
+    //   tint/dlgBorder/accent = dialog-only treatment (tinted card, coloured border, accent blob); cards ignore them.
     const THEMES = {
-      default: { label:'Default', surface:'var(--bg-base)',           illu:'var(--bg-brand-base)' },
-      blue:    { label:'Blue',    surface:'var(--bg-info-subtle)',     illu:'var(--bg-info-base)',     btnBg:'var(--bg-info-base)',     btnBorder:'var(--border-info-base-hover)',     btnOn:'#fff' },
-      green:   { label:'Green',   surface:'var(--bg-positive-subtle)', illu:'var(--bg-positive-base)', btnBg:'var(--bg-positive-base)', btnBorder:'var(--border-positive-base-hover)', btnOn:'#fff' },
-      orange:  { label:'Orange',  surface:'var(--bg-warning-subtle)',  illu:'var(--bg-warning-bold)',  btnBg:'var(--bg-warning-bold)',  btnBorder:'var(--border-warning-base)',        btnOn:'var(--content-base)' },
-      red:     { label:'Red',     surface:'var(--bg-negative-subtle)', illu:'var(--bg-negative-base)', btnBg:'var(--bg-negative-base)', btnBorder:'var(--border-negative-base-hover)', btnOn:'#fff' },
+      default: { label:'Default', surface:'var(--bg-base)',           illu:'var(--bg-brand-base)',                                                                                                  tint:'var(--bg-brand-subtle)',    dlgBorder:'var(--border-brand-subtle)',    accent:'var(--bg-brand-base)' },
+      blue:    { label:'Blue',    surface:'var(--bg-info-subtle)',     illu:'var(--bg-info-base)',     btnBg:'var(--bg-info-base)',     btnBorder:'var(--border-info-base-hover)',     btnOn:'#fff',              tint:'var(--bg-info-subtle)',     dlgBorder:'var(--border-info-subtle)',     accent:'var(--bg-info-base)' },
+      green:   { label:'Green',   surface:'var(--bg-positive-subtle)', illu:'var(--bg-positive-base)', btnBg:'var(--bg-positive-base)', btnBorder:'var(--border-positive-base-hover)', btnOn:'#fff',              tint:'var(--bg-positive-subtle)', dlgBorder:'var(--border-positive-subtle)', accent:'var(--bg-positive-base)' },
+      orange:  { label:'Orange',  surface:'var(--bg-warning-subtle)',  illu:'var(--bg-warning-bold)',  btnBg:'var(--bg-warning-bold)',  btnBorder:'var(--border-warning-base)',        btnOn:'var(--content-base)', tint:'var(--bg-warning-subtle)',  dlgBorder:'var(--border-warning-subtle)',  accent:'var(--bg-warning-bold)' },
+      red:     { label:'Red',     surface:'var(--bg-negative-subtle)', illu:'var(--bg-negative-base)', btnBg:'var(--bg-negative-base)', btnBorder:'var(--border-negative-base-hover)', btnOn:'#fff',              tint:'var(--bg-negative-subtle)', dlgBorder:'var(--border-negative-subtle)', accent:'var(--bg-negative-base)' },
+      // prototype-only hues (no sentiment tokens) so the dialog colour can match the purple/yellow illustrations
+      purple:  { label:'Purple',  surface:'#efeaff',                   illu:'#7c5cff',                 btnBg:'#7c5cff',                 btnBorder:'#6a47f0',                           btnOn:'#fff',              tint:'#efeaff',                   dlgBorder:'#d9ccff',                       accent:'#7c5cff' },
+      yellow:  { label:'Yellow',  surface:'var(--bg-accent-yellow-subtle)', illu:'#f5b300',             btnBg:'#f5b300',                 btnBorder:'#e0a200',                           btnOn:'var(--content-base)', tint:'var(--bg-accent-yellow-subtle)', dlgBorder:'#ffe39c',                 accent:'#f5b300' },
     };
     const THEME_ORDER = ['default','blue','green','orange','red'];
     const themeOf = c => THEMES[c.color] || THEMES.default;
@@ -349,24 +403,44 @@
     document.addEventListener('click', e => { if (!e.target.closest('.slt-wrap')) cCloseMenus(); });
 
     /* ══════════════ DIALOG ══════════════ */
-    let dColor = 'default';   // dialog-level sentiment colour (shared THEMES with the cards)
+    // Colour + illustration are automatic per slide: the story walks through the palette, so every step
+    // (intro → features → outro) takes the next colour/image in these cycles. Order matches the illustrations.
+    const COLOR_CYCLE = ['yellow','purple','red','green','orange'];
+    const slideColor = i => COLOR_CYCLE[((i % COLOR_CYCLE.length) + COLOR_CYCLE.length) % COLOR_CYCLE.length];
+    // drop the matching files into assets/illustrations/ — missing files fall back to the placeholder icon
+    const WHATSNEW = 'assets/illustrations/whatsnew.png'; // festive cover graphic for the intro slide
+    const IMG_CYCLE = ['notifications','tasks','inbox','welcome'].map(n => `assets/illustrations/${n}.png`);
+    const slideImg = i => IMG_CYCLE[((i % IMG_CYCLE.length) + IMG_CYCLE.length) % IMG_CYCLE.length];
+    // <img> that swaps back to the blob + fallback icon if the file isn't there yet
+    const imgTag = src => src ? `<img src="${src}" alt="" onerror="var m=this.closest('.dlg-media'); if(m) m.classList.remove('has-img'); this.remove();">` : '';
+    // decorative background per slide: a deeper band fills the media; with the wave on, the body tint rises in a curve.
+    // wave off → the band matches the body tint (.flat), so the media reads as one seamless colour.
+    function bgSvg(bgOn, waveOn){
+      if (!bgOn) return '';
+      const crest = waveOn ? `<path class="crest" d="M0,348 C150,316 330,392 600,338 L600,440 L0,440 Z"/>` : '';
+      return `<svg class="dlg-wave${waveOn?'':' flat'}" viewBox="0 0 600 440" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect class="band" x="0" y="0" width="600" height="440"/>${crest}</svg>`;
+    }
     const $dlg = document.getElementById('dialog-host');
     const DPH = '<i data-icon="image" class="dlg-media-ph"></i>';
     const STEPS = [
-      { title:'Select a random sample of participants!', body:'When creating a new survey, you can now automatically sample your participant pool — pick just a few people from every team to gather balanced insights without overwhelming your whole organization.', media:true },
-      { title:'Compare across groups', body:'Benchmark any team against the company in a single click, and instantly spot where to focus.', media:true },
-      { title:'Export to PowerPoint', body:'Download a ready-made results deck for your next meeting — no more copy-pasting charts. Brand it, tweak it, and present in minutes.', media:true, locked:true },
-      { title:'Topics & Ideas', body:'See the themes your employees suggest most often, ranked automatically so the signal stands out.', media:true },
-      { title:'Schedule recurring pulses', body:'Set a cadence once and let surveys go out on autopilot.', media:true },
-      { title:'Share results securely', body:'Give managers their own view without exposing the whole organization.', media:true },
+      { title:'Smart participant sampling', body:'Stop surveying everyone. Auto-pick a balanced sample from every team in one click — richer insights, far less survey fatigue, and results you can still trust.', media:true, wave:false },
+      { title:'Compare across groups in one click', body:'Benchmark any team against the whole company instantly, and see exactly where to celebrate and where to focus next.', media:true },
+      { title:'Export to PowerPoint in seconds', body:'Turn your results into a polished, on-brand deck in seconds — no more copy-pasting charts the night before your meeting.', media:true, locked:true, wave:false },
+      { title:'Topics & Ideas, surfaced for you', body:'Discover what your people really care about. The themes they raise most are surfaced and ranked automatically, so the signal never gets lost.', media:true, wave:false },
+      { title:'Put pulses on autopilot', body:'Set your cadence once and let surveys go out on schedule. Stay on the pulse of your organization without lifting a finger.', media:true },
+      { title:'Share results, stay in control', body:'Give every manager their own tailored view — full transparency for them, full control over who sees what for you.', media:true },
     ];
     let dCount = 4, dOpen = false, dIdx = 0; // dIdx spans intro + features + outro
+    // background band + wave are set per feature step (STEPS[i].bg / .wave); intro & outro default to on
 
     function dBlock(i){
       const s = STEPS[i];
       return `<div class="panel card-cfg" data-dblock="${i}">
-        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${s.media?THEMES[dColor].illu:'var(--bg-tertiary)'}"></span> Step ${i+1}</span></div>
+        <div class="panel-hd"><span class="card-cfg-hd-left"><span class="swatch" style="background:${s.media?THEMES[slideColor(i+1)].accent:'var(--bg-tertiary)'}"></span> Step ${i+1}</span></div>
         <div class="set-row"><div class="lbl"><div class="t">Illustration</div></div><div class="ctrl">${tgl('step',i,'media',s.media)}</div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Decorative background</div></div><div class="ctrl">${tgl('step',i,'bg',s.bg ?? true)}</div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Wave divider</div><div class="d">Off = straight edge, band matches the body colour. Needs the background on.</div></div><div class="ctrl">${tgl('step',i,'wave',s.wave ?? true)}</div></div>
+        <div class="set-row"><div class="lbl"><div class="t">Sparkles &amp; confetti</div><div class="d">Festive stars + confetti floating over the illustration.</div></div><div class="ctrl">${tgl('step',i,'sparkles',s.sparkles ?? false)}</div></div>
         <div class="set-row"><div class="lbl"><div class="t">Title</div></div><div class="ctrl"><input class="tf" type="text" data-step="${i}" data-field="title" value="${esc(s.title)}"></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Message</div></div><div class="ctrl"><textarea class="tf" rows="3" data-step="${i}" data-field="body">${esc(s.body)}</textarea></div></div>
         <div class="set-row"><div class="lbl"><div class="t">Premium (locked)</div><div class="d">Not in the current plan — shows the upgrade tag.</div></div><div class="ctrl">${tgl('step',i,'locked',s.locked)}</div></div>
@@ -375,39 +449,50 @@
     }
     const $stepCfgs = document.getElementById('step-cfgs');
     function dRenderForm(){ let h=''; for(let i=0;i<dCount;i++) h+=dBlock(i); $stepCfgs.innerHTML=h; paint($stepCfgs); }
-    // dialog Color picker — same design-system Select (.slt) + sentiment THEMES as the cards
-    function dColorRender(){
-      const wrap = el('d-color-wrap'); const th = THEMES[dColor];
-      wrap.innerHTML = `<div class="slt" data-dslt tabindex="0" role="button" aria-haspopup="listbox"><div class="slt-left"><span class="color-dot" style="background:${th.illu}"></span><span class="slt-val">${th.label}</span></div><svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="menu" data-dslt-menu role="listbox" hidden>${THEME_ORDER.map(k=>`<div class="menu-item ${dColor===k?'is-selected':''}" data-dcolor="${k}" role="option" aria-selected="${dColor===k}"><span class="menu-item-icon"><span class="color-dot" style="background:${THEMES[k].illu}"></span></span><div class="menu-item-body"><span class="menu-item-title">${THEMES[k].label}</span></div><svg class="menu-item-check" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`).join('')}</div>`;
-      paint(wrap);
-    }
-    el('d-color-wrap').addEventListener('click', e => {
-      const trig = e.target.closest('[data-dslt]');
-      if (trig){ const menu = el('d-color-wrap').querySelector('[data-dslt-menu]'); menu.hidden = !menu.hidden; trig.classList.toggle('is-focus', !menu.hidden); return; }
-      const item = e.target.closest('[data-dcolor]');
-      if (item){ dColor = item.dataset.dcolor; dColorRender(); dRenderForm(); if (dOpen) dRender(); }
-    });
-    document.addEventListener('click', e => {
-      if (!e.target.closest('#d-color-wrap')){ const m = el('d-color-wrap')?.querySelector('[data-dslt-menu]'); if (m){ m.hidden = true; m.previousElementSibling.classList.remove('is-focus'); } }
-    });
     const INTRO_CONFETTI = [
-      'top:34px;left:64px;background:#ffd857;transform:rotate(22deg)','top:58px;right:96px;background:#ff5d8f;border-radius:50%',
-      'bottom:48px;left:104px;background:#c1eeed;border-radius:50%','top:96px;left:168px;background:#fff;transform:rotate(-16deg)',
-      'bottom:64px;right:130px;background:#ffd857;border-radius:50%','top:48px;right:180px;background:#fff;transform:rotate(38deg)',
-      'bottom:90px;left:60px;background:#ff5d8f;transform:rotate(10deg)'
-    ].map(s => `<span class="confetti" style="${s}"></span>`).join('');
+      'top:40px;left:70px;--cr:22deg;background:#ffd857;width:14px;height:14px',
+      'top:64px;right:88px;background:#ff5d8f;border-radius:50%;width:13px;height:13px',
+      'bottom:70px;left:118px;background:#30b3af;border-radius:50%;width:11px;height:11px',
+      'top:112px;left:208px;--cr:-16deg;background:#7c5cff;width:9px;height:18px',
+      'bottom:88px;right:138px;background:#ffd857;border-radius:50%;width:12px;height:12px',
+      'top:52px;right:206px;--cr:38deg;background:#192743;width:11px;height:11px',
+      'bottom:124px;left:66px;--cr:10deg;background:#ff5d8f;width:14px;height:9px',
+      'top:154px;right:66px;--cr:-24deg;background:#30b3af;width:9px;height:18px',
+      'top:30px;left:312px;background:#7c5cff;border-radius:50%;width:10px;height:10px',
+      'bottom:44px;right:248px;--cr:18deg;background:#ffd857;width:14px;height:9px',
+      'top:206px;left:104px;background:#ff5d8f;border-radius:50%;width:9px;height:9px',
+      'bottom:62px;left:268px;--cr:-12deg;background:#30b3af;width:11px;height:16px',
+      'top:88px;left:128px;background:#192743;border-radius:50%;width:8px;height:8px',
+      'top:176px;right:124px;--cr:30deg;background:#7c5cff;width:13px;height:9px',
+      'bottom:154px;right:208px;background:#ffd857;border-radius:50%;width:10px;height:10px',
+      'top:236px;right:176px;--cr:-20deg;background:#ff5d8f;width:10px;height:15px',
+      'top:46px;left:172px;--cr:14deg;background:#30b3af;width:11px;height:11px',
+      'top:130px;left:300px;background:#ff5d8f;border-radius:50%;width:9px;height:9px',
+      'bottom:96px;left:200px;--cr:-28deg;background:#7c5cff;width:9px;height:16px',
+      'top:74px;right:150px;background:#ffd857;border-radius:50%;width:10px;height:10px',
+      'bottom:40px;left:140px;--cr:24deg;background:#192743;width:10px;height:8px',
+      'top:198px;right:90px;background:#30b3af;border-radius:50%;width:9px;height:9px',
+      'bottom:130px;right:96px;--cr:-14deg;background:#ffd857;width:12px;height:9px',
+      'top:104px;left:84px;background:#7c5cff;border-radius:50%;width:8px;height:8px'
+    ].map((s,i) => `<span class="confetti" style="${s};--d:${(i*0.022).toFixed(3)}s"></span>`).join('');
+    // playful sparkle icons around the hero on the intro
+    const INTRO_DECO = `<span class="dlg-spark-deco s1"><i data-icon="star-filled"></i></span><span class="dlg-spark-deco s2"><i data-icon="zap-filled"></i></span><span class="dlg-spark-deco s3"><i data-icon="sun"></i></span><span class="dlg-spark-deco s4"><i data-icon="star-filled"></i></span><span class="dlg-spark-deco s5"><i data-icon="star-filled"></i></span><span class="dlg-spark-deco s6"><i data-icon="zap-filled"></i></span>`;
     // one ordered list of slides: intro + features + (optional) outro — all in the same carousel
     function slides(){
       const arr = [];
-      const th = THEMES[dColor];           // dialog-level sentiment colour
       const im = el('d-intro-media').checked;
-      arr.push({ kind:'intro', title:el('d-intro-title').value, body:el('d-intro-body').value,
-        media:`<div class="dlg-media dlg-intro-media ${im?'':'is-collapsed'}" style="background:${th.illu};">${INTRO_CONFETTI}<i data-icon="featured" class="dlg-intro-spark"></i></div>` });
-      for (let i=0;i<dCount;i++){ const s=STEPS[i];
-        arr.push({ kind:'feature', title:s.title, body:s.body, locked:s.locked, mediaOn:s.media, planTag:s.planTag ?? 'Available on Plan 2 and higher',
-          media:`<div class="dlg-media ${s.media?'':'is-collapsed'}" style="background:${th.illu};">${DPH}</div>` }); }
-      if (el('d-outro-on').checked) arr.push({ kind:'outro', title:el('d-outro-title').value, body:el('d-outro-body').value, url:el('d-outro-url').value,
-        media:`<div class="dlg-media" style="background:${th.illu}; color:#fff;"><i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` });
+      const introBg = el('d-intro-bg').checked, introWave = el('d-intro-wave').checked;
+      // intro = festive "What's New" cover: confetti + sparkles sit behind the (transparent) graphic, so they fill the empty space around it
+      arr.push({ kind:'intro', title:el('d-intro-title').value, body:el('d-intro-body').value, bgOn:introBg,
+        media:`<div class="dlg-media dlg-intro-media ${im?'':'is-collapsed'} ${WHATSNEW?'has-img':''}">${bgSvg(introBg,introWave)}${imgTag(WHATSNEW)}${INTRO_CONFETTI}${INTRO_DECO}</div>` });
+      for (let i=0;i<dCount;i++){ const s=STEPS[i]; const fImg=slideImg(i);
+        const bgOn = s.bg ?? true, waveOn = s.wave ?? true;
+        const deco = s.sparkles ? INTRO_CONFETTI + INTRO_DECO : '';
+        arr.push({ kind:'feature', title:s.title, body:s.body, locked:s.locked, mediaOn:s.media, planTag:s.planTag ?? 'Available on Plan 2 and higher', bgOn,
+          media:`<div class="dlg-media ${s.media?'':'is-collapsed'} ${fImg?'has-img':''}">${bgSvg(bgOn,waveOn)}${DPH}${imgTag(fImg)}${deco}</div>` }); }
+      if (el('d-outro-on').checked){ const outroBg = el('d-outro-bg').checked, outroWave = el('d-outro-wave').checked;
+        arr.push({ kind:'outro', title:el('d-outro-title').value, body:el('d-outro-body').value, url:el('d-outro-url').value, bgOn:outroBg,
+        media:`<div class="dlg-media">${bgSvg(outroBg,outroWave)}<i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` }); }
       return arr;
     }
     function dRender(){
@@ -415,31 +500,34 @@
       const S = slides();
       dIdx = Math.max(0, Math.min(S.length-1, dIdx));
       const sl = S[dIdx], isFirst = dIdx===0, isLast = dIdx===S.length-1;
-      let dots=''; for (let i=0;i<S.length;i++) dots += `<span class="dlg-dot${i===dIdx?' is-active':''}" data-ddot="${i}"></span>`;
+      // story-style segments: everything up to and including the current slide is filled (dark navy)
+      let segs=''; for (let i=0;i<S.length;i++) segs += `<span class="dlg-seg${i<=dIdx?' is-fill':''}" data-ddot="${i}"></span>`;
       const tagText = esc(sl.planTag) || 'Premium';
-      const tagMedia = (sl.kind==='feature' && sl.locked && sl.mediaOn) ? `<div class="dlg-tag dlg-tag-media"><i data-icon="lock"></i> ${tagText}</div>` : '';
-      const tagBody  = (sl.kind==='feature' && sl.locked && !sl.mediaOn) ? `<div class="dlg-tag"><i data-icon="lock"></i> ${tagText}</div>` : '';
-      const media = sl.media.replace('</div>', `${tagMedia}</div>`);
-      // retint the dialog's primary buttons to the chosen sentiment (Default → plain brand teal)
-      const dth = THEMES[dColor];
+      // premium tag always sits in the body, directly above the title — aligned with it and close
+      const tagBody = (sl.kind==='feature' && sl.locked) ? `<div class="dlg-tag"><i data-icon="lock"></i> ${tagText}</div>` : '';
+      const media = sl.media;
+      // this slide's colour drives the tint, border, accent blob and primary button (Default → plain brand teal)
+      const dth = THEMES[slideColor(dIdx)];
+      // tint the whole card + colour the border + drive the accent blob
+      const dlgVars = `--dlg-tint:${dth.tint};--dlg-border:${dth.dlgBorder};--dlg-accent:${dth.accent};--dlg-band:color-mix(in srgb, ${dth.accent} 38%, #fff);`;
       const dBtnStyle = dth.btnBg ? `--bg-brand-base:${dth.btnBg};--bg-brand-base-hover:${dth.btnBorder};--bg-brand-base-pressed:${dth.btnBorder};--border-brand-base:${dth.btnBorder};--border-brand-base-pressed:${dth.btnBorder};--content-on-brand-base:${dth.btnOn};` : '';
       // footer
       const left = isFirst
-        ? `<button class="btn btn-tertiary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>`
+        ? `<button class="btn btn-secondary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>`
         : `<button class="btn btn-secondary" data-dprev><i data-icon="arrow-left"></i> ${esc(el('d-prev').value)||'Previous'}</button>`;
       let right;
       if (sl.kind==='outro') right = `<a class="btn btn-primary" href="${esc(sl.url)||'#'}" target="_blank" rel="noopener">${esc(el('d-outro-cta').value)||'Learn more'} <i data-icon="arrow-right"></i></a>`;
       else if (sl.kind==='intro') right = `<button class="btn btn-primary" data-dnext>${esc(el('d-start').value)||'Show me'} <i data-icon="arrow-right"></i></button>`;
       else if (isLast) right = `<button class="btn btn-primary" data-dnext>Got it</button>`;
       else right = `<button class="btn btn-primary" data-dnext>${esc(el('d-next').value)||'Next'} <i data-icon="arrow-right"></i></button>`;
-      $dlg.innerHTML = `<div class="dlg" style="${dBtnStyle}">
+      $dlg.innerHTML = `<div class="dlg${sl.bgOn?' has-bg':''}" style="${dlgVars}${dBtnStyle}">
         <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
+        <div class="dlg-progress">${segs}</div>
         ${media}
         <div class="dlg-body">
           ${tagBody}
-          <p class="dlg-title">${esc(sl.title)}</p>
+          <p class="dlg-title${sl.kind==='intro'?' is-l3':''}">${esc(sl.title)}</p>
           <p class="dlg-text">${esc(sl.body)}</p>
-          <div class="dlg-dots">${dots}</div>
           <div class="dlg-footer">${left}${right}</div>
         </div>
       </div>`;
@@ -469,15 +557,16 @@
       const t=e.target;
       if (t.dataset.step===undefined) return;
       const i=+t.dataset.step, f=t.dataset.field;
-      if (f==='media'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?D_BG[i]:'var(--bg-tertiary)'; }
+      if (f==='media'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.swatch').style.background = t.checked?THEMES[slideColor(i+1)].accent:'var(--bg-tertiary)'; }
+      else if (f==='bg'||f==='wave'||f==='sparkles'){ STEPS[i][f]=t.checked; }
       else if (f==='locked'){ STEPS[i][f]=t.checked; t.closest('.card-cfg').querySelector('.plantag-row').classList.toggle('hidden', !t.checked); }
       else STEPS[i][f]=t.value;
       if (dOpen) dRender();
     }
     $stepCfgs.addEventListener('input', dEdit); $stepCfgs.addEventListener('change', dEdit);
     // any dialog setting re-renders the open dialog (one slide list reads them all)
-    ['d-prev','d-next','d-intro-title','d-intro-body','d-start','d-skip','d-intro-media',
-     'd-outro-on','d-outro-title','d-outro-body','d-outro-cta','d-outro-url'].forEach(id => {
+    ['d-prev','d-next','d-intro-title','d-intro-body','d-start','d-skip','d-intro-media','d-intro-bg','d-intro-wave',
+     'd-outro-on','d-outro-title','d-outro-body','d-outro-cta','d-outro-url','d-outro-bg','d-outro-wave'].forEach(id => {
       el(id).addEventListener('input', () => { if (dOpen) dRender(); });
       el(id).addEventListener('change', () => { if (dOpen) dRender(); });
     });
@@ -498,7 +587,7 @@
     window.addEventListener('hashchange', () => activate(location.hash.slice(1)));
 
     // init
-    cRenderForm(); dRenderForm(); dColorRender();
+    cRenderForm(); dRenderForm();
     activate(location.hash.slice(1) || 'card');
   </script>
 </body>
