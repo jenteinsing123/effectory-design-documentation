@@ -2232,7 +2232,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 
 /* ── Loading — spinner (block + inline) ── */
 @keyframes loadingspin { to { transform: rotate(360deg); } }
-.spinner { --thk: 4px; display: inline-block; box-sizing: border-box; width: 24px; height: 24px; border-radius: var(--radius-full); background: radial-gradient(farthest-side, var(--content-base) 98%, transparent) 50% 0 / var(--thk) var(--thk) no-repeat, conic-gradient(transparent 25%, var(--content-base) 0), var(--border-base); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thk)), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - var(--thk)), #000 0); animation: loadingspin .8s linear infinite; }
+.spinner { --thk: 4px; display: inline-block; box-sizing: border-box; width: 24px; height: 24px; border-radius: var(--radius-full); background: radial-gradient(farthest-side, var(--content-base) 98%, transparent) 50% 0 / var(--thk) var(--thk) no-repeat, radial-gradient(farthest-side, var(--content-base) 98%, transparent) 100% 50% / var(--thk) var(--thk) no-repeat, conic-gradient(transparent 25%, var(--content-base) 0), var(--border-base); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thk)), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - var(--thk)), #000 0); animation: loadingspin .8s linear infinite; }
 .spinner-sm { width: 16px; height: 16px; --thk: 3px; }
 .spinner-lg { width: 32px; height: 32px; --thk: 4px; }
 .block-loader { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--content-secondary); }
