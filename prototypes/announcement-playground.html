@@ -128,6 +128,8 @@
     .dlg-close { position: absolute; top: 16px; right: 16px; z-index: 4; }
     .dlg-body { padding: 16px 32px 32px; }
     .dlg-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); margin-bottom: 12px; }
+    /* when a step has no tag, reserve the same space lower down (before the footer) so locked steps aren't taller — keeps the title tight to the media */
+    .dlg-tag-spacer { height: 38px; }
     .dlg-tag i[data-icon] { width: 13px; height: 13px; display: flex; }
     /* same tag, but pinned in the bottom-left of the illustration */
     .dlg-tag-media { position: absolute; left: 16px; bottom: 16px; margin: 0; background: rgba(255,255,255,.96); color: var(--content-base); border-color: rgba(255,255,255,.7); box-shadow: 0 1px 3px rgba(25,39,67,.15); }
@@ -409,6 +411,7 @@
     const slideColor = i => COLOR_CYCLE[((i % COLOR_CYCLE.length) + COLOR_CYCLE.length) % COLOR_CYCLE.length];
     // drop the matching files into assets/illustrations/ — missing files fall back to the placeholder icon
     const WHATSNEW = 'assets/illustrations/whatsnew.png'; // festive cover graphic for the intro slide
+    const OUTRO_IMG = 'assets/illustrations/outro.png';   // "lots more" graphic for the outro slide
     const IMG_CYCLE = ['notifications','tasks','inbox','welcome'].map(n => `assets/illustrations/${n}.png`);
     const slideImg = i => IMG_CYCLE[((i % IMG_CYCLE.length) + IMG_CYCLE.length) % IMG_CYCLE.length];
     // <img> that swaps back to the blob + fallback icon if the file isn't there yet
@@ -492,7 +495,7 @@
           media:`<div class="dlg-media ${s.media?'':'is-collapsed'} ${fImg?'has-img':''}">${bgSvg(bgOn,waveOn)}${DPH}${imgTag(fImg)}${deco}</div>` }); }
       if (el('d-outro-on').checked){ const outroBg = el('d-outro-bg').checked, outroWave = el('d-outro-wave').checked;
         arr.push({ kind:'outro', title:el('d-outro-title').value, body:el('d-outro-body').value, url:el('d-outro-url').value, bgOn:outroBg,
-        media:`<div class="dlg-media">${bgSvg(outroBg,outroWave)}<i data-icon="zap-filled" class="dlg-intro-spark"></i></div>` }); }
+        media:`<div class="dlg-media ${OUTRO_IMG?'has-img':''}">${bgSvg(outroBg,outroWave)}${OUTRO_IMG?imgTag(OUTRO_IMG):'<i data-icon="zap-filled" class="dlg-intro-spark"></i>'}</div>` }); }
       return arr;
     }
     function dRender(){
@@ -512,14 +515,20 @@
       const dlgVars = `--dlg-tint:${dth.tint};--dlg-border:${dth.dlgBorder};--dlg-accent:${dth.accent};--dlg-band:color-mix(in srgb, ${dth.accent} 38%, #fff);`;
       const dBtnStyle = dth.btnBg ? `--bg-brand-base:${dth.btnBg};--bg-brand-base-hover:${dth.btnBorder};--bg-brand-base-pressed:${dth.btnBorder};--border-brand-base:${dth.btnBorder};--border-brand-base-pressed:${dth.btnBorder};--content-on-brand-base:${dth.btnOn};` : '';
       // footer
-      const left = isFirst
-        ? `<button class="btn btn-secondary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>`
-        : `<button class="btn btn-secondary" data-dprev><i data-icon="arrow-left"></i> ${esc(el('d-prev').value)||'Previous'}</button>`;
-      let right;
-      if (sl.kind==='outro') right = `<a class="btn btn-primary" href="${esc(sl.url)||'#'}" target="_blank" rel="noopener">${esc(el('d-outro-cta').value)||'Learn more'} <i data-icon="arrow-right"></i></a>`;
-      else if (sl.kind==='intro') right = `<button class="btn btn-primary" data-dnext>${esc(el('d-start').value)||'Show me'} <i data-icon="arrow-right"></i></button>`;
-      else if (isLast) right = `<button class="btn btn-primary" data-dnext>Got it</button>`;
-      else right = `<button class="btn btn-primary" data-dnext>${esc(el('d-next').value)||'Next'} <i data-icon="arrow-right"></i></button>`;
+      // Previous is a compact icon button, on every slide except the first (intro) — including the outro
+      const prevIcon = `<button class="ib ib-36 ib-secondary" data-dprev aria-label="${esc(el('d-prev').value)||'Previous'}"><i data-icon="arrow-left"></i></button>`;
+      let left, right;
+      if (isFirst){
+        left = `<button class="btn btn-secondary" data-dskip>${esc(el('d-skip').value)||'Skip for now'}</button>`;
+        right = `<button class="btn btn-primary" data-dnext>${esc(el('d-start').value)||'Show me'} <i data-icon="arrow-right"></i></button>`;
+      } else if (sl.kind==='outro'){
+        // primary just closes the tour — the external link is a secondary option, not the funnel
+        left = `${prevIcon}<a class="btn btn-secondary" href="${esc(sl.url)||'#'}" target="_blank" rel="noopener">${esc(el('d-outro-cta').value)||'See all updates'} <i data-icon="external-link"></i></a>`;
+        right = `<button class="btn btn-primary" data-dclose>Done</button>`;
+      } else {
+        left = prevIcon;
+        right = isLast ? `<button class="btn btn-primary" data-dnext>Got it</button>` : `<button class="btn btn-primary" data-dnext>${esc(el('d-next').value)||'Next'} <i data-icon="arrow-right"></i></button>`;
+      }
       $dlg.innerHTML = `<div class="dlg${sl.bgOn?' has-bg':''}" style="${dlgVars}${dBtnStyle}">
         <button class="dlg-close ib ib-36 ib-secondary" data-dclose aria-label="Close"><i data-icon="cross"></i></button>
         <div class="dlg-progress">${segs}</div>
@@ -528,6 +537,7 @@
           ${tagBody}
           <p class="dlg-title${sl.kind==='intro'?' is-l3':''}">${esc(sl.title)}</p>
           <p class="dlg-text">${esc(sl.body)}</p>
+          ${tagBody ? '' : '<div class="dlg-tag-spacer"></div>'}
           <div class="dlg-footer">${left}${right}</div>
         </div>
       </div>`;
