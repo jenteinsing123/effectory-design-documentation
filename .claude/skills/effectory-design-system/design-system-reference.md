@@ -776,6 +776,19 @@ Geanimeerde spinner voor een onbepaalde wachttijd. Voor content die in een beken
 - Echte Angular-API: block = `<eff-loader />`; inline = `<div class="loader-inline">`; (loading bar = `<eff-loading-bar>` → zie Progress Bar). Styleguide: Loaders.
 - a11y: `role="status"` + `aria-label="Loading"` als er geen zichtbaar label is; haal de loader uit de DOM zodra klaar.
 
+### Skeleton
+Placeholder-vormen die de content-layout nabootsen tijdens het laden (met shimmer). Gebruik bij een bekende layout (lijsten, cards, tabellen); korte/onbekende wachttijd → Loading spinner; meetbare voortgang → Progress Bar.
+```html
+<div aria-busy="true" aria-label="Loading">
+  <div class="skeleton skeleton-circle" style="width:40px;height:40px"></div>
+  <div class="skeleton skeleton-text" style="width:80%"></div>
+  <div class="skeleton skeleton-text" style="width:60%"></div>
+</div>
+```
+- Basis `.skeleton` (fill `--bg-secondary`, shimmer-highlight `--bg-base`, 1.4s sweep, respecteert `prefers-reduced-motion`) + shape: `.skeleton-text` (12px), `.skeleton-title` (20px), `.skeleton-circle` (`--radius-full`), `.skeleton-block` (`--radius-md`). Zet breedte/hoogte inline, passend bij de echte content.
+- a11y: shapes `aria-hidden="true"`; regio `aria-busy="true"` + zichtbaar/verborgen "Loading"-status; zelfde maat als de content (geen layout-shift).
+> ⚠️ Figma/dev gap: de styleguide heeft geen aparte skeleton-component (alleen spinners + loading bar). Bovenstaande classes zijn het design-system-pattern — bevestig of er een `eff-skeleton` in Angular bestaat.
+
 ### Spotlight
 Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Donkere card met optionele NEW-badge, titel, body, en footer met óf één primary knop (single-step) óf paginatie-dots + "Next" (multi-step).
 

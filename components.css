@@ -2237,3 +2237,12 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .spinner-lg { width: 32px; height: 32px; --thk: 4px; }
 .block-loader { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--content-secondary); }
 .loader-inline { display: inline-block; box-sizing: border-box; width: 16px; height: 16px; border: 2px solid var(--content-base); border-top-color: transparent; border-radius: var(--radius-full); animation: loadingspin .8s ease infinite; vertical-align: middle; }
+
+/* ── Skeleton — placeholder shapes that mimic content while it loads ── */
+@keyframes skeleton-shimmer { 0% { background-position: 150% 0; } 100% { background-position: -150% 0; } }
+.skeleton { background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-base) 50%, var(--bg-secondary) 75%); background-size: 200% 100%; border-radius: var(--radius-base); animation: skeleton-shimmer 1.4s ease infinite; }
+.skeleton-text   { height: 12px; border-radius: var(--radius-sm); }
+.skeleton-title  { height: 20px; border-radius: var(--radius-sm); }
+.skeleton-circle { border-radius: var(--radius-full); flex-shrink: 0; }
+.skeleton-block  { border-radius: var(--radius-md); }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
