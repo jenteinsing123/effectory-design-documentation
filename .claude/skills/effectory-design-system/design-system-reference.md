@@ -586,6 +586,20 @@ On-state: `input.tgl:checked` (native) of `.tgl-track.is-on` (statisch)
 States op `.tgl-track`: `.is-on` `.is-hover` `.is-disabled`
 States op wrappers: `.is-disabled`
 
+### Segmented Control
+Compacte groep van 2–3 opties waarvan er altijd precies één geselecteerd is — voor het wisselen van views/modes binnen dezelfde pagina (chart/table, week/maand). Méér dan 3 opties → Select; aan/uit → Toggle; navigatie → Tabs.
+```html
+<div class="segctl">
+  <button class="segctl-btn is-active"><i data-icon="box"></i> Chart</button>
+  <button class="segctl-btn"><i data-icon="box"></i> Table</button>
+</div>
+```
+- Track: `--bg-tertiary`, 4px padding, 4px gap, `--radius-base`.
+- Segment: 6px 16px padding, 8px icon-gap, `body-14` Medium; icoon 16px (optioneel — alle segmenten of geen).
+- Geselecteerd (`.is-active`): `--bg-base` + `--sh-card`, tekst `--content-action-pressed`. Niet-geselecteerd: transparant, `--content-secondary`. Hover: `.is-hover` → `--content-base`.
+- Echte Angular-API: Material `mat-button-toggle-group` + `mat-button-toggle [value] checked` (styleguide: Toggles → "Button toggles"); icoon via `eff-svg-* class="icon"` + `<span>`.
+> ⚠️ Figma/dev gap: de styleguide kent ook `multiple` (meerdere segmenten tegelijk aan); Figma dekt alleen single select met 2–3 buttons.
+
 ### Date Picker
 ```html
 <!-- Trigger knop -->
