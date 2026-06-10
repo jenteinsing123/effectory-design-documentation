@@ -2229,3 +2229,11 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .segctl-btn:hover, .segctl-btn.is-hover { background: var(--bg-secondary); color: var(--content-base); }
 .segctl-btn.is-active, .segctl-btn.is-active:hover { background: var(--bg-base); color: var(--content-action-pressed); box-shadow: var(--sh-card); cursor: default; }
 .segctl-btn i[data-icon] { width: 16px; height: 16px; display: flex; }
+
+/* ── Loading — spinner (block + inline) ── */
+@keyframes loadingspin { to { transform: rotate(360deg); } }
+.spinner { display: inline-block; box-sizing: border-box; width: 24px; height: 24px; border: 3px solid var(--border-base); border-top-color: var(--content-base); border-radius: var(--radius-full); animation: loadingspin .8s linear infinite; }
+.spinner-sm { width: 16px; height: 16px; border-width: 2px; }
+.spinner-lg { width: 32px; height: 32px; border-width: 3px; }
+.block-loader { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--content-secondary); }
+.loader-inline { display: inline-block; box-sizing: border-box; width: 16px; height: 16px; border: 2px solid var(--content-base); border-top-color: transparent; border-radius: var(--radius-full); animation: loadingspin .8s ease infinite; vertical-align: middle; }

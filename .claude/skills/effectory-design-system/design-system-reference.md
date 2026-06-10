@@ -762,6 +762,20 @@ Positie-classes: `.is-above` `.is-below` `.is-left` `.is-right`. Bubble = `--bg-
 
 > ⚠️ **Dev/Figma gap:** Figma gebruikt **Medium (500)** voor de tooltip-tekst; de Material `matTooltip` rendert **Normal (400)**. Nog gelijk te trekken.
 
+### Loading (spinner)
+Geanimeerde spinner voor een onbepaalde wachttijd. Voor content die in een bekende layout laadt → Skeleton; voor meetbare voortgang → Progress Bar.
+```html
+<!-- Block loader: spinner + optioneel label -->
+<div class="block-loader"><span class="spinner" role="status" aria-label="Loading"></span> Loading</div>
+
+<!-- Inline loader (in tekst/knop) -->
+<span class="loader-inline"></span>
+```
+- Block-spinner `.spinner` (24px) + sizes `.spinner-sm` (16px) / `.spinner-lg` (32px): track `--border-base`, arc `--content-base`, `border-radius: var(--radius-full)`, rotatie `.8s` linear.
+- `.loader-inline` (16px): border `--content-base` met `border-top-color: transparent` (geen track), `.8s` ease.
+- Echte Angular-API: block = `<eff-loader />`; inline = `<div class="loader-inline">`; (loading bar = `<eff-loading-bar>` → zie Progress Bar). Styleguide: Loaders.
+- a11y: `role="status"` + `aria-label="Loading"` als er geen zichtbaar label is; haal de loader uit de DOM zodra klaar.
+
 ### Spotlight
 Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Donkere card met optionele NEW-badge, titel, body, en footer met óf één primary knop (single-step) óf paginatie-dots + "Next" (multi-step).
 
