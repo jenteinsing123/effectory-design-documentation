@@ -785,9 +785,10 @@ Placeholder-vormen die de content-layout nabootsen tijdens het laden (met shimme
   <div class="skeleton skeleton-text" style="width:60%"></div>
 </div>
 ```
-- Basis `.skeleton` (fill `--bg-secondary`, shimmer-highlight `--bg-base`, 1.4s sweep, respecteert `prefers-reduced-motion`) + shape: `.skeleton-text` (12px), `.skeleton-title` (20px), `.skeleton-circle` (`--radius-full`), `.skeleton-block` (`--radius-md`). Zet breedte/hoogte inline, passend bij de echte content.
+- Basis `.skeleton` (pulse tussen `--border-base` en `--bg-base-pressed`, ~1s ease-in, respecteert `prefers-reduced-motion`) + shape: `.skeleton-text` (12px), `.skeleton-title` (20px), `.skeleton-circle` (`--radius-full`), `.skeleton-block` (`--radius-md`). Zet breedte/hoogte inline, passend bij de echte content.
+- In een `mat-table` vult de styleguide elke cel met een pulserende `.loading-bar` (zelfde pulse, ~12px hoog, 8px radius).
 - a11y: shapes `aria-hidden="true"`; regio `aria-busy="true"` + zichtbaar/verborgen "Loading"-status; zelfde maat als de content (geen layout-shift).
-> ⚠️ Figma/dev gap: de styleguide heeft geen aparte skeleton-component (alleen spinners + loading bar). Bovenstaande classes zijn het design-system-pattern — bevestig of er een `eff-skeleton` in Angular bestaat.
+> ⚠️ Figma/dev gap: de styleguide gebruikt een pulserende `.loading-bar` voor table-loading, maar heeft geen algemene skeleton-component voor willekeurige layouts. Bovenstaande `.skeleton`-classes zijn het design-system-pattern — stem een gedeelde `.loading-bar` / `eff-skeleton` af met engineering.
 
 ### Spotlight
 Interactieve coach-mark/onboarding-overlay (Angular: `<eff-tooltip-dialog>`). Donkere card met optionele NEW-badge, titel, body, en footer met óf één primary knop (single-step) óf paginatie-dots + "Next" (multi-step).

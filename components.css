@@ -2239,8 +2239,8 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .loader-inline { display: inline-block; box-sizing: border-box; width: 16px; height: 16px; border: 2px solid var(--content-base); border-top-color: transparent; border-radius: var(--radius-full); animation: loadingspin .8s ease infinite; vertical-align: middle; }
 
 /* ── Skeleton — placeholder shapes that mimic content while it loads ── */
-@keyframes skeleton-shimmer { 0% { background-position: 150% 0; } 100% { background-position: -150% 0; } }
-.skeleton { background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-base) 50%, var(--bg-secondary) 75%); background-size: 200% 100%; border-radius: var(--radius-base); animation: skeleton-shimmer 1.4s ease infinite; }
+@keyframes skeleton-pulse { 0%, 100% { background-color: var(--border-base); } 50% { background-color: var(--bg-base-pressed); } }
+.skeleton { background-color: var(--border-base); border-radius: var(--radius-base); animation: skeleton-pulse 1s ease-in infinite; }
 .skeleton-text   { height: 12px; border-radius: var(--radius-sm); }
 .skeleton-title  { height: 20px; border-radius: var(--radius-sm); }
 .skeleton-circle { border-radius: var(--radius-full); flex-shrink: 0; }

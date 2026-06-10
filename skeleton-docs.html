@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* ── Skeleton — placeholder shapes that mimic content while it loads ── */
-    @keyframes skeleton-shimmer { 0% { background-position: 150% 0; } 100% { background-position: -150% 0; } }
-    .skeleton { background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-base) 50%, var(--bg-secondary) 75%); background-size: 200% 100%; border-radius: var(--radius-base); animation: skeleton-shimmer 1.4s ease infinite; }
+    @keyframes skeleton-pulse { 0%, 100% { background-color: var(--border-base); } 50% { background-color: var(--bg-base-pressed); } }
+    .skeleton { background-color: var(--border-base); border-radius: var(--radius-base); animation: skeleton-pulse 1s ease-in infinite; }
     .skeleton-text   { height: 12px; border-radius: var(--radius-sm); }
     .skeleton-title  { height: 20px; border-radius: var(--radius-sm); }
     .skeleton-circle { border-radius: var(--radius-full); flex-shrink: 0; }
@@ -65,7 +65,7 @@
 
         <section class="section" id="anatomy">
           <h2 class="text-l3">Anatomy</h2>
-          <p class="section-lead">Simple shapes — lines, circles and blocks — arranged in the same layout as the content they stand in for, with a soft shimmer.</p>
+          <p class="section-lead">Simple shapes — lines, circles and blocks — arranged in the same layout as the content they stand in for, with a soft pulse.</p>
           <div class="anatomy-fig">
             <div class="sk-card" aria-hidden="true">
               <div class="sk-row">
@@ -84,7 +84,7 @@
             <div class="anatomy-item"><div class="anatomy-num">1</div><div><span class="anatomy-term">Line</span> — A placeholder for a line of text; the last line is usually shorter.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">2</div><div><span class="anatomy-term">Circle</span> — Stands in for an avatar or round icon.</div></div>
             <div class="anatomy-item"><div class="anatomy-num">3</div><div><span class="anatomy-term">Block</span> — A larger area for an image, thumbnail or chart.</div></div>
-            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Shimmer</span> — A subtle moving highlight that signals the screen is loading, not frozen.</div></div>
+            <div class="anatomy-item"><div class="anatomy-num">4</div><div><span class="anatomy-term">Pulse</span> — A soft pulse between two greys that signals the screen is loading, not frozen.</div></div>
           </div>
         </section>
 
@@ -158,14 +158,14 @@
           <table class="token-table">
             <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
             <tbody>
-              <tr><td><code>--bg-secondary</code></td><td>Placeholder fill</td><td>#f8f8f9</td></tr>
-              <tr><td><code>--bg-base</code></td><td>Shimmer highlight</td><td>#ffffff</td></tr>
+              <tr><td><code>--border-base</code></td><td>Placeholder fill (rest)</td><td>#e1e4e8</td></tr>
+              <tr><td><code>--bg-base-pressed</code></td><td>Pulse highlight</td><td>#f1f2f4</td></tr>
               <tr><td><code>--radius-sm</code></td><td>Text line radius</td><td>4px</td></tr>
               <tr><td><code>--radius-md</code></td><td>Block radius</td><td>8px</td></tr>
               <tr><td><code>--radius-full</code></td><td>Circle</td><td>999px</td></tr>
             </tbody>
           </table>
-          <p style="margin-top:10px; font-size:14px; color:var(--content-secondary);">Shimmer: a 90° highlight sweeping across every ~1.4s. Honours <code>prefers-reduced-motion</code> (static fill).</p>
+          <p style="margin-top:10px; font-size:14px; color:var(--content-secondary);">Pulse: the fill eases between <code>--border-base</code> and <code>--bg-base-pressed</code> every ~1s — matching the styleguide's table loader. Honours <code>prefers-reduced-motion</code> (static fill).</p>
         </section>
 
         <section class="section" id="accessibility">
@@ -257,11 +257,24 @@
 <span class="ct">&lt;/div&gt;</span></code></pre>
           </div>
 
+          <h3 class="text-l4">Table loading</h3>
+          <p>In a <code>mat-table</code>, the styleguide fills each cell with a pulsing <code>.loading-bar</code> (full-width, ~12px tall, 8px radius) — the same pulse as the skeleton above.</p>
+          <div class="dev-preview" style="padding:24px; flex-direction:column; gap:14px; align-items:stretch;">
+            <div class="skeleton skeleton-text" style="width:100%;height:12px;"></div>
+            <div class="skeleton skeleton-text" style="width:100%;height:12px;"></div>
+            <div class="skeleton skeleton-text" style="width:100%;height:12px;"></div>
+          </div>
+          <div class="dev-code-wrap">
+            <button class="dev-copy-btn">Copy</button>
+            <pre><code><span class="cc">&lt;!-- one per cell while the row loads --&gt;</span>
+<span class="ct">&lt;td&gt;&lt;span</span> <span class="ca">class</span>=<span class="cv">"loading-bar"</span><span class="ct">&gt;&lt;/span&gt;&lt;/td&gt;</span></code></pre>
+          </div>
+
           <div class="dev-gap">
             <span class="dev-gap-icon">⚠️</span>
             <div class="dev-gap-body">
               <span class="dev-gap-label">Confirm the Angular API</span>
-              <span class="dev-gap-text">The styleguide's Loaders page covers spinners and the loading bar, but has no dedicated skeleton component. The classes above are the design-system pattern — check whether engineering has an <code>eff-skeleton</code> directive/component before building, and use it if so.</span>
+              <span class="dev-gap-text">The styleguide uses a pulsing <code>.loading-bar</code> for table loading, but has no general skeleton component for arbitrary layouts (cards, headers, lists). The <code>.skeleton</code> classes here are the design-system pattern; align on a shared <code>.loading-bar</code> / <code>eff-skeleton</code> approach with engineering before building.</span>
             </div>
           </div>
         </section>
@@ -287,8 +300,8 @@
           <table class="token-table">
             <thead><tr><th>Token</th><th>Used for</th></tr></thead>
             <tbody>
-              <tr><td><code>--bg-secondary</code></td><td>Placeholder fill</td></tr>
-              <tr><td><code>--bg-base</code></td><td>Shimmer highlight</td></tr>
+              <tr><td><code>--border-base</code></td><td>Placeholder fill (rest)</td></tr>
+              <tr><td><code>--bg-base-pressed</code></td><td>Pulse highlight</td></tr>
               <tr><td><code>--radius-sm</code> · <code>--radius-md</code> · <code>--radius-full</code></td><td>Line / block / circle radius</td></tr>
             </tbody>
           </table>
