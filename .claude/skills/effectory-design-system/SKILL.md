@@ -19,6 +19,15 @@ Read(".claude/skills/effectory-design-system/design-system-reference.md")
 
 ---
 
+## Component-keuze (let op gelijkende namen)
+
+- **Page Header** (`.ph`) = titelblok bovenaan een hele view (de page-`h1`). **Section Header** (`.sh`) = kop van een blok *binnen* een pagina.
+- **Announcement** (`.announcement`) = compacte, non-blocking card. **Announcement Dialog** (`.dlg`) = modale, meerstaps release-tour. **Dialog** (`.dialog`) = generieke modale kaart.
+
+Kies bewust de juiste; verzin geen mengvorm. Markup staat in `design-system-reference.md` sectie 4.
+
+---
+
 ## Regels — altijd van toepassing
 
 ### 1. Alleen bestaande namen
