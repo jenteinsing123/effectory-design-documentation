@@ -287,8 +287,6 @@
       justify-content: center;
     }
     .report-row.is-generating .ib { display: none; }
-    .report-row.is-generating { cursor: default; }
-    .report-row.is-generating:hover { background: transparent; }
     .gen-spinner-sm { width: 14px; height: 14px; }
 
     /* Floating notification region */
@@ -650,7 +648,7 @@
         } else if (s.ready.indexOf(lang) !== -1) {
           var st2 = document.createElement('span');
           st2.className = 'lang-status is-ready';
-          st2.textContent = 'Ready';
+          st2.textContent = 'Generated';
           lr.appendChild(st2);
         }
       });

@@ -16,7 +16,7 @@ Report list with two groups: **Essential** (PPT/PDF, fast) and **Raw Data** (XLS
 8. **When a background generation finishes** → show a **system notification** (top-right) titled *"{report} is ready to download in {language}"* with a **Download** action.
 9. **In the language picker**, show per language for that report:
    - currently generating → **"Generating…"** badge, option disabled
-   - already done → green **"Ready"** badge, selectable (downloads directly)
+   - already done → green **"Generated"** badge, selectable (downloads directly)
 
 ## To confirm with engineering
 
