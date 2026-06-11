@@ -9,6 +9,21 @@ Read(".claude/skills/effectory-design-system/design-system-reference.md")
 
 ---
 
+## Referentie-prototypes (bekende schermen)
+
+In `reference-prototypes/` staan volledig uitgewerkte schermen die al een vaste, goedgekeurde vorm hebben. Vraagt iemand om zo'n scherm bij naam ("maak een prototype van de **reports pagina**"), dan is dat scherm **niet vrij in te vullen** — lees de referentie en neem die exact over:
+
+1. Lees `reference-prototypes/<naam>.md` (layout, states, gedrag, regels).
+2. Kopieer `reference-prototypes/<naam>.html` naar `prototypes/` en pas alleen aan wat de gebruiker vraagt. Verzin geen afwijkende layout of states.
+
+| Scherm | Trigger | Bestanden |
+|---|---|---|
+| Reports pagina | "reports pagina", "reports prototype", "download reports" | `reference-prototypes/reports.md` + `reports.html` |
+
+Staat het gevraagde scherm hier niet bij, bouw dan normaal volgens de reference.
+
+---
+
 ## Scope
 
 | Bouwen | Niet bouwen |
