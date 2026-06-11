@@ -2246,3 +2246,76 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .skeleton-circle { border-radius: var(--radius-full); flex-shrink: 0; }
 .skeleton-block  { border-radius: var(--radius-md); }
 @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+/* ── Page Header — the title block at the top of a view ── */
+.ph { width: 100%; background: var(--bg-base); }
+.ph-row { display: flex; align-items: center; gap: 24px; padding-bottom: 24px; }
+.ph-left { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+.ph-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--content-brand-base); padding: 4px 0; }
+.ph-title { font-size: 26px; line-height: 1.3; font-weight: 600; color: var(--content-base); margin: 0; }
+.ph-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 4px 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+.ph-meta strong { font-weight: 500; }
+.ph-link { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; color: var(--content-brand-secondary); text-decoration: none; cursor: pointer; }
+.ph-link i[data-icon] { width: 14px; height: 14px; display: flex; }
+.ph-sep { width: 1px; height: 16px; background: var(--border-base); }
+.ph-range { display: inline-flex; align-items: center; gap: 8px; }
+.ph-range i[data-icon] { width: 24px; height: 16px; display: flex; color: var(--content-subtle); }
+.ph-status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+.ph-status-dot { width: 12px; height: 12px; border-radius: var(--radius-full); background: var(--bg-positive-base); flex-shrink: 0; }
+.ph-status .muted { color: var(--content-subtle); }
+.ph-controls { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.ph-divider { height: 1px; background: var(--border-base); width: 100%; }
+.ph-tabs { display: flex; gap: 48px; padding-top: 24px; }
+.ph-tab { font-size: 14px; font-weight: 500; color: var(--content-secondary); padding-bottom: 9px; position: relative; white-space: nowrap; }
+.ph-tab.is-active { color: var(--content-base); }
+.ph-tab.is-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; border-radius: var(--radius-full); background: var(--content-brand-secondary); }
+
+/* ── Section Header — heading that introduces a block within a page ── */
+.sh { width: 100%; }
+.sh-row { display: flex; align-items: center; gap: 24px; }
+.sh-left { flex: 1 0 0; min-width: 0; }
+.sh-title { font-size: 18px; line-height: 1.4; font-weight: 600; color: var(--content-base); margin: 0; }
+.sh-desc { font-size: 14px; line-height: 1.6; color: var(--content-secondary); margin: 4px 0 0; }
+.sh-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.sh-divider { height: 1px; background: var(--border-base); width: 100%; margin-top: 16px; }
+
+/* ── Announcement Dialog — centred modal release tour. Per-step colour comes from inline --dlg-tint / --dlg-border / --dlg-accent / --dlg-band vars (app-orchestrated, like the Announcement deck). ── */
+.dlg { position: relative; width: 600px; max-width: 100%; background: var(--dlg-tint, var(--bg-base)); border: 1px solid var(--dlg-border, var(--border-base)); border-radius: var(--radius-xl); box-shadow: var(--sh-dialogs); overflow: hidden; }
+.dlg-media { position: relative; height: 440px; display: flex; align-items: center; justify-content: center; color: var(--dlg-accent, var(--bg-brand-base)); overflow: hidden; }
+.dlg-media::before { content: ''; position: absolute; left: 50%; top: -28%; width: 132%; height: 150%; transform: translateX(-50%); pointer-events: none; background: radial-gradient(58% 52% at 50% 44%, color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 42%, transparent) 0%, transparent 72%); }
+.dlg-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; animation: dlgMediaIn .55s cubic-bezier(.34,1.56,.64,1) both; }
+.dlg-media.has-img::before, .dlg.has-bg .dlg-media::before { display: none; }
+.dlg-media-ph { display: flex; width: 72px; height: 72px; position: relative; z-index: 1; }
+.dlg-fade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to bottom, transparent 40%, var(--dlg-tint, var(--bg-base)) 100%); }
+.dlg-wave { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+.dlg-wave .band { fill: var(--dlg-band, var(--dlg-tint)); }
+.dlg-wave .crest { fill: var(--dlg-tint, var(--bg-base)); }
+.dlg-wave.flat .band { fill: var(--dlg-tint, var(--bg-base)); }
+.dlg-burst { position: absolute; z-index: 0; left: 50%; top: 47%; width: 460px; height: 460px; transform: translate(-50%,-50%); pointer-events: none; background: radial-gradient(closest-side, color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 36%, transparent), transparent 72%); }
+.dlg-hero { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 112px; height: 112px; border-radius: var(--radius-xl); background: var(--bg-base); box-shadow: 0 16px 36px -10px rgba(25,39,67,.32); animation: dlgPop .55s cubic-bezier(.34,1.56,.64,1) both; }
+.dlg-hero::after { content: ''; position: absolute; inset: -9px; border-radius: var(--radius-xl); border: 2px dashed color-mix(in srgb, var(--dlg-accent, var(--bg-brand-base)) 50%, var(--bg-base)); opacity: .65; }
+.dlg-hero i[data-icon] { display: flex; width: 60px; height: 60px; color: var(--dlg-accent, var(--bg-brand-base)); }
+.dlg-intro-spark { display: flex; width: 84px; height: 84px; position: relative; z-index: 2; color: var(--dlg-accent, var(--bg-brand-base)); }
+@keyframes dlgPop { from { opacity: 0; transform: scale(.5) rotate(-10deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes dlgMediaIn { from { opacity: 0; transform: scale(.93) translateY(10px); } to { opacity: 1; transform: none; } }
+/* festive confetti colours are decorative party colours, not semantic tokens */
+.confetti { position: absolute; z-index: 3; width: 10px; height: 10px; border-radius: 2px; /* radius-exempt: tiny confetti corner */ opacity: .96; animation: dlgConfBurst .5s cubic-bezier(.2,.9,.3,1.5) var(--d,0s) both, dlgConfDrift 3.4s ease-in-out calc(var(--d,0s) + .5s) infinite; }
+@keyframes dlgConfBurst { 0% { opacity: 0; transform: scale(0) rotate(var(--cr,0deg)); } 60% { opacity: 1; transform: scale(1.3) rotate(calc(var(--cr,0deg) + 14deg)); } 100% { opacity: 1; transform: scale(1) rotate(var(--cr,0deg)); } }
+@keyframes dlgConfDrift { 0%,100% { transform: translateY(0) rotate(var(--cr,0deg)); } 50% { transform: translateY(-11px) rotate(calc(var(--cr,0deg) + 16deg)); } }
+.dlg-spark-deco { position: absolute; z-index: 3; display: flex; animation: dlgDecoBurst .55s cubic-bezier(.2,.9,.3,1.6) var(--d,0s) both, dlgFloat 3s ease-in-out calc(var(--d,0s) + .55s) infinite; }
+.dlg-spark-deco i[data-icon] { display: flex; width: 100%; height: 100%; }
+@keyframes dlgDecoBurst { 0% { opacity: 0; transform: scale(0); } 65% { opacity: 1; transform: scale(1.38); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes dlgFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.dlg-close { position: absolute; top: 16px; right: 16px; z-index: 4; }
+.dlg-progress { position: absolute; top: 31px; left: 22px; right: 62px; z-index: 3; display: flex; gap: 6px; }
+.dlg-seg { flex: 1 0 0; min-width: 0; height: 7px; border-radius: var(--radius-full); background: rgba(25,39,67,.22); }
+.dlg-seg.is-fill { background: var(--content-subtle); }
+.dlg-body { padding: 16px 32px 32px; }
+.dlg-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: var(--radius-full); background: var(--bg-highlight-subtle); color: var(--content-highlight-base); border: 1px solid var(--border-highlight-subtle); margin-bottom: 12px; }
+.dlg-tag i[data-icon] { width: 13px; height: 13px; display: flex; }
+.dlg-tag-spacer { height: 38px; }
+.dlg-title { font-size: 26px; line-height: 1.3; font-weight: 600; margin: 0 0 8px; color: var(--content-base); }
+.dlg-text { font-size: 14px; font-weight: 400; line-height: 1.6; margin: 0; color: var(--content-base); min-height: 112px; }
+.dlg-footer { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+.dlg-footer .btn-primary { flex: 1 0 0; }
+@media (prefers-reduced-motion: reduce) { .dlg-hero, .confetti, .dlg-spark-deco, .dlg-media img { animation: none; } }

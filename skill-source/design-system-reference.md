@@ -951,6 +951,77 @@ Classes: `.breadcrumb` (witte balk, `--bg-base` + onderrand `--border-base`, 64p
 
 > **Productie-API:** controleer in de Angular-styleguide of er een dedicated breadcrumb-component/selector bestaat (bijv. `eff-breadcrumb`) vóór je het met de hand bouwt; de classes hier zijn de prototype-structuur. **Figma-gap:** de crumb (Link Button) heeft in Figma meer horizontale side-padding dan in de styleguide/code — stem de `.bc-link`-padding af.
 
+### Page Header
+Het titelblok bovenaan een view: benoemt waar de gebruiker is, geeft context, en bevat de primaire acties van de pagina. Eén per view; de titel is de `h1`. Voor een kop *binnen* een pagina → Section Header.
+
+```html
+<div class="ph">
+  <div class="ph-eyebrow">Project name</div>            <!-- optioneel: parent-context, brand-kleur -->
+  <div class="ph-row">                                   <!-- centreert acties op titel+subtitle; eyebrow staat er bewust buiten -->
+    <div class="ph-left">
+      <h1 class="ph-title">Employees</h1>
+      <div class="ph-meta">                              <!-- optioneel, flexibel slot -->
+        <span class="ph-range">21 Feb 2019 <i data-icon="from-to"></i> 21 Feb 2019</span>
+      </div>
+    </div>
+    <div class="ph-controls"><button class="btn btn-primary"><i data-icon="plus"></i> New survey</button></div>  <!-- optioneel -->
+  </div>
+  <div class="ph-tabs"><a class="ph-tab is-active">Overview</a><a class="ph-tab">Reports</a></div>  <!-- optioneel; zet dan ph-row padding-bottom:0 -->
+  <div class="ph-divider"></div>
+</div>
+```
+Classes: `.ph`, `.ph-eyebrow` (optionele overline, 12px uppercase, `--content-brand-base`), `.ph-row` (`align-items:center` → acties centreren op **titel+subtitle**; daarom staat de eyebrow búiten de row), `.ph-title` (26px `text-l3`, de page-`h1`). Het flexibele **subtitle-slot** `.ph-meta` met o.a.: platte tekst, `.ph-range` (datumrange met het `from-to`-icoon ertussen), `.ph-status` (`.ph-status-dot` + label + `.muted`), `.ph-link` (inline link-button, `--content-brand-secondary`). Voor een group/filter-selector in het slot: de bestaande **Selection Button** (`.sel-btn`). `.ph-controls` (rechter-acties: Button / Icon Button / Search). Optionele `.ph-tabs`/`.ph-tab` (**Tabs**-component; actief = 4px underline). `.ph-divider` (1px `--border-base`) sluit de header; in de app loopt die **full-bleed** tot de schermranden terwijl de content de container-padding houdt. Typografie: titel `text-l3`, subtitle `body-14`.
+
+> ⚠️ **Dev gap:** Angular-API nog te bevestigen; `.ph-*` is de prototype-structuur (titel/eyebrow/subtitle/acties/tabs componeren).
+
+### Section Header
+Een kop die een blok content *binnen* een pagina introduceert: titel + optionele beschrijving + optionele sectie-acties + optionele divider. Kleiner dan de Page Header. In de praktijk meestal **alleen een titel**.
+
+```html
+<div class="sh">
+  <div class="sh-row">
+    <div class="sh-left">
+      <h2 class="sh-title">Team members</h2>
+      <p class="sh-desc">Manage your team members and their account permissions here.</p>  <!-- optioneel -->
+    </div>
+    <div class="sh-actions"><button class="btn btn-secondary">Secondary</button><button class="btn btn-primary">Button</button></div>  <!-- optioneel: button / kebab / search -->
+  </div>
+  <div class="sh-divider"></div>  <!-- optioneel -->
+</div>
+```
+Classes: `.sh`, `.sh-row` (titel-blok links + `.sh-actions` rechts), `.sh-title` (18px `text-l4`, een echte `h2`/`h3` onder de page-`h1`), `.sh-desc` (optioneel, `--content-secondary`), `.sh-actions` (sectie-scoped: Button, kebab-icon-knop, of Search — niet page-level), `.sh-divider` (optioneel; weglaten als een card of spacing het blok al groepeert). A11y: echt heading-element, geen bold `<div>`; icon-only acties krijgen `aria-label`.
+
+> ⚠️ **Dev gap:** Angular-API nog te bevestigen; `.sh-*` is de prototype-structuur.
+
+### Announcement Dialog
+Een gecentreerde, modale **release-tour**: loopt door meerdere features, één scherm tegelijk — een feestelijke intro, een gekleurde feature-stap per release, en een outro. Onderscheid t.o.v. de **Announcement** (card): de Dialog is blokkerend/modaal en meerstaps; de card is compact/non-blocking. 600px breed, 440px media.
+
+```html
+<div class="overlay">
+  <div class="dlg has-bg" role="dialog" aria-modal="true"
+       style="--dlg-tint:var(--bg-info-subtle); --dlg-accent:var(--bg-info-base); --dlg-band:color-mix(in srgb, var(--bg-info-base) 38%, #fff); --dlg-border:var(--border-info-subtle);">
+    <button class="ib ib-36 ib-secondary dlg-close" aria-label="Close"><i data-icon="cross"></i></button>
+    <div class="dlg-progress"><span class="dlg-seg is-fill"></span><span class="dlg-seg"></span><span class="dlg-seg"></span></div>
+    <div class="dlg-media has-img">
+      <svg class="dlg-wave" viewBox="0 0 600 440" preserveAspectRatio="none"><rect class="band" width="600" height="440"/><path class="crest" d="M0,348 C150,316 330,392 600,338 L600,440 L0,440 Z"/></svg>
+      <img src="/assets/illustrations/tasks.png" alt="">
+    </div>
+    <div class="dlg-body">
+      <span class="dlg-tag"><i data-icon="lock"></i> Available on Plan 2 and higher</span>   <!-- of <div class="dlg-tag-spacer"></div> als er geen tag is -->
+      <p class="dlg-title">Export to PowerPoint in seconds</p>
+      <p class="dlg-text">Turn your results into a polished, on-brand deck — no more copy-pasting charts.</p>
+      <div class="dlg-footer">
+        <button class="ib ib-36 ib-secondary" aria-label="Previous"><i data-icon="arrow-left"></i></button>
+        <button class="btn btn-primary">Next feature <i data-icon="arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+Classes: `.dlg` (tint/rand/accent uit inline `--dlg-tint`/`--dlg-border`/`--dlg-accent`/`--dlg-band`), `.dlg-media` (440px; `.has-img` = full-bleed illustratie + verbergt de accent-glow; `.dlg-media-ph` = placeholder-icoon). Achtergrond: `.dlg-wave` (SVG `.band` + `.crest`; `.flat` = rechte rand, band = body-tint) en `.dlg-fade` (illustratie vervaagt naar body-tint, voor de outro). Story-progress: `.dlg-progress` + `.dlg-seg` (gevuld = `.is-fill`, `--content-subtle`). Body: `.dlg-body`, `.dlg-tag` (premium-chip; `.dlg-tag-spacer` reserveert dezelfde ruimte zonder tag → slides even hoog), `.dlg-title` (26px), `.dlg-text` (14px, `min-height:112px`), `.dlg-footer` (Previous als **Icon Button** + full-width primary; outro: secundaire "See all updates"-link + primary "Done" die sluit). Feestelijke intro: `.dlg-burst` (glow) + `.dlg-hero` (witte badge met gift-icoon) + `.confetti` + `.dlg-spark-deco` (sparkle-iconen) — exploderen bij openen, zweven daarna. Toon in een `.overlay` (sectie *Animaties*).
+
+> ⚠️ **Dev gap / app-orkestratie:** de per-stap kleur (inline `--dlg-*` vars), de confetti-posities en de progress-vulling zijn **app-logica** (JS) — net als de Announcement-deck. Referentie-implementatie: `prototypes/announcement-playground.html`. Angular-API nog te bevestigen.
+
 ---
 
 ## 5. Iconen
@@ -961,7 +1032,7 @@ Iconen worden geïnjecteerd door `icons.js` (moet onderaan `<body>` staan).
 
 **Beschikbare iconen** (uit `assets/icons/`):
 
-`accessibility` `activity` `add-on` `aggregations` `alert-circle` `alert-triangle` `alert-triangle-1` `all changes` `approximately` `archive` `archive-1` `arrow-down` `arrow-left` `arrow-right` `arrow-sub` `arrow-up` `asterisk` `at-mail` `barchart-2` `bell` `benchmark-down` `benchmark-up` `bold` `book-open` `bookmark` `bookmark-filled` `box` `briefcase` `building` `bullet-point` `calendar` `calendar-add` `calendar-recurring` `calendar-remove` `category` `check` `check-square` `chevron-down` `chevron-down-small` `chevron-end` `chevron-left` `chevron-right` `chevron-start` `chevron-up` `clipboard` `clipboard-a` `clipboard-note` `clipboard-settings` `code` `collapse-left` `collapse-right` `compass` `cookie` `copy` `correlation-positive` `cpu` `cross` `desktop` `double-chevron-down` `double-chevron-up` `down-vote` `download` `download-2` `drag-drop` `edit` `edit-inline` `equal` `excel` `expand-left` `expand-right` `export` `external-link` `eye` `eye-off` `featured` `file` `file-error` `file-plus` `filter` `find-replace` `flag` `folder` `gear` `gender-male` `gender-male-1` `gender-non-binary` `gift` `globe` `goals` `group` `help` `hierarchy` `home` `import-export` `info` `italic` `key` `language` `layer-up-alt` `layout` `lightbulb` `link` `list-unordered` `lock` `log-out` `love` `mail` `maximize` `menu` `message` `message-filled` `minimize` `minus` `mobile` `moon` `more-horizontal` `more-vertical` `net-promoter-score` `net-promoter-score-detractor` `net-promoter-score-passive` `palette` `passkey` `pause` `pen-tool` `percent` `pie-chart` `pin` `pin-filled` `pipet` `play` `plus` `plus-minus` `point-scale` `privacy` `randomize` `refresh` `response` `rotate-backward` `rotate-forward` `search` `segments` `select` `selected` `send` `shapes` `share` `share-1` `shield` `single-answer` `single-answer-1` `sliders` `sort-ascending` `sort-descending` `star` `star-filled` `stop` `structure` `sun` `table` `tag` `target` `text-entry` `themes` `toggle-left` `toggle-right` `tool` `top-3-filled` `trash` `trend-stable` `underline` `undo` `unlock` `up-vote` `upload` `upload-file` `user` `user-badge` `user-check` `user-min` `user-plus` `users` `version-history` `waypoint` `win` `words` `youtube` `zap` `zap-filled`
+`accessibility` `activity` `add-on` `aggregations` `alert-circle` `alert-triangle` `alert-triangle-1` `all changes` `approximately` `archive` `archive-1` `arrow-down` `arrow-left` `arrow-right` `arrow-sub` `arrow-up` `asterisk` `at-mail` `barchart-2` `bell` `benchmark-down` `benchmark-up` `bold` `book-open` `bookmark` `bookmark-filled` `box` `briefcase` `building` `bullet-point` `calendar` `calendar-add` `calendar-recurring` `calendar-remove` `category` `check` `check-square` `chevron-down` `chevron-down-small` `chevron-end` `chevron-left` `chevron-right` `chevron-start` `chevron-up` `clipboard` `clipboard-a` `clipboard-note` `clipboard-settings` `code` `collapse-left` `collapse-right` `compass` `cookie` `copy` `correlation-positive` `cpu` `cross` `desktop` `double-chevron-down` `double-chevron-up` `down-vote` `download` `download-2` `drag-drop` `edit` `edit-inline` `equal` `excel` `expand-left` `expand-right` `export` `external-link` `eye` `eye-off` `featured` `file` `file-error` `file-plus` `filter` `find-replace` `flag` `folder` `from-to` `gear` `gender-male` `gender-male-1` `gender-non-binary` `gift` `globe` `goals` `group` `help` `hierarchy` `home` `import-export` `info` `italic` `key` `language` `layer-up-alt` `layout` `lightbulb` `link` `list-unordered` `lock` `log-out` `love` `mail` `maximize` `menu` `message` `message-filled` `minimize` `minus` `mobile` `moon` `more-horizontal` `more-vertical` `net-promoter-score` `net-promoter-score-detractor` `net-promoter-score-passive` `palette` `passkey` `pause` `pen-tool` `percent` `pie-chart` `pin` `pin-filled` `pipet` `play` `plus` `plus-minus` `point-scale` `privacy` `randomize` `refresh` `response` `rotate-backward` `rotate-forward` `search` `segments` `select` `selected` `send` `shapes` `share` `share-1` `shield` `single-answer` `single-answer-1` `sliders` `sort-ascending` `sort-descending` `star` `star-filled` `stop` `structure` `sun` `table` `tag` `target` `text-entry` `themes` `toggle-left` `toggle-right` `tool` `top-3-filled` `trash` `trend-stable` `underline` `undo` `unlock` `up-vote` `upload` `upload-file` `user` `user-badge` `user-check` `user-min` `user-plus` `users` `version-history` `waypoint` `win` `words` `youtube` `zap` `zap-filled`
 
 **Niet als `data-icon` te gebruiken** (bestandsnamen met spaties of hoofdletters zijn illustraties, geen UI-iconen):
 `Barchart-1` `Clock` `ESG scan` `ESG scan-1` `ESG scan-2` `Strategic fitness scan` `Tree` `Trend-down` `Trend-up` `Type` `magic wand`

@@ -1,6 +1,69 @@
 {
-  "count": 633,
+  "count": 641,
   "entries": [
+    {
+      "hash": "ec1f5d4",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Sync effectory-design-system skill with new components",
+      "pages": []
+    },
+    {
+      "hash": "296939d",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Flesh out the Section Header documentation page",
+      "pages": [
+        "section-header-docs.html"
+      ]
+    },
+    {
+      "hash": "8230608",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Add Page Header documentation page",
+      "pages": [
+        "page-header-docs.html"
+      ]
+    },
+    {
+      "hash": "30e020d",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Reports: dialog title \"Generating report\"; switch title + copy when ready",
+      "pages": []
+    },
+    {
+      "hash": "d99f387",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Reports: hover on generating rows + rename language badge to \"Generated\"",
+      "pages": []
+    },
+    {
+      "hash": "96aee0e",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Reports: Generate/Download label in the language dialog; copy & timing tweaks",
+      "pages": []
+    },
+    {
+      "hash": "24ab2dd",
+      "author": "Jente Insing",
+      "date": "2026-06-11",
+      "subject": "Add Announcement Dialog documentation page",
+      "pages": [
+        "announcement-dialog-docs.html",
+        "announcement-docs.html"
+      ]
+    },
+    {
+      "hash": "d866df0",
+      "author": "Jente Insing",
+      "date": "2026-06-10",
+      "subject": "Release skill v1.6.0",
+      "pages": []
+    },
     {
       "hash": "7f66f43",
       "author": "Jente Insing",
