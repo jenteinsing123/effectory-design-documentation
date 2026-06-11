@@ -565,9 +565,9 @@
       <div class="gen-longer" id="gen-longer">
         <div class="gen-longer-note">
           <i data-icon="info" class="gen-longer-icon"></i>
-          <p>No need to wait around — you can keep doing other things in My Effectory and we’ll notify you as soon as your report is ready to download.</p>
+          <p>This can take a while. Feel free to close this window and keep working in My Effectory — your report will be ready to download here when it’s done.</p>
         </div>
-        <div class="gen-longer-actions"><button class="btn btn-secondary" id="gen-close-btn">Notify me</button></div>
+        <div class="gen-longer-actions"><button class="btn btn-secondary" id="gen-close-btn">Got it</button></div>
       </div>
     </div>
   </div>
@@ -590,7 +590,7 @@
     var genSub = document.getElementById('gen-sub');
     var genPanel = document.getElementById('gen-panel');
     var genLonger = document.getElementById('gen-longer');
-    var LONGER_HINT_MS = 2000;    // after this, raw-data dialog offers to close & be notified
+    var LONGER_HINT_MS = 10000;   // after this, raw-data dialog suggests coming back later
     var longerTimer = null;
     var toast = document.getElementById('ready-toast');
     var readyTitle = document.getElementById('ready-title');
@@ -619,6 +619,13 @@
     function selectedLanguage() {
       var sel = langScrim.querySelector('.lang-row.is-selected');
       return (sel && sel.dataset.lang) || 'English (US)';
+    }
+
+    // Primary button reads "Download" if the selected language is already generated, else "Generate"
+    var langBtn = langScrim.querySelector('.btn-primary');
+    function updateLangButton() {
+      if (!current) return;
+      langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? 'Download' : 'Generate';
     }
 
     // Mark, in the language list, which languages are already generating / ready
@@ -661,6 +668,7 @@
           firstFree.querySelector('input').checked = true;
         }
       }
+      updateLangButton();
     }
 
     function openLang(row) {
@@ -758,6 +766,7 @@
       row.addEventListener('change', function () {
         langRows.forEach(function (r) { r.classList.remove('is-selected'); });
         row.classList.add('is-selected');
+        updateLangButton();
       });
     });
 
