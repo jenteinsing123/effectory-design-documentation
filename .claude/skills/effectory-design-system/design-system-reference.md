@@ -945,11 +945,11 @@ Stapel van inklapbare secties (header + content) voor progressive disclosure. **
       <span class="acc-meta">4 questions</span>          <!-- optioneel trailing meta (expansion-panel stijl) -->
       <i data-icon="chevron-down" class="acc-chevron"></i>
     </button>
-    <div class="acc-body">Content van het paneel.</div>
+    <div class="acc-body"><div class="acc-body-inner">Content van het paneel.</div></div>
   </div>
 </div>
 ```
-- Panel `.acc-item` (witte `--bg-base`, 1px `--border-base`, `--radius-md`), 16px tussen panels; header `.acc-header` (16px 24px, hover `--bg-base-hover`); titel `.acc-title` = `text-l5` (16px/600); body `.acc-body` (0 24px 16px, `--content-secondary`); chevron `.acc-chevron` roteert 180° bij `.is-open`. De border verandert niet bij open. Open/dicht animeert smooth (max-height + opacity, ~0.24s; respecteert `prefers-reduced-motion`).
+- Panel `.acc-item` (witte `--bg-base`, 1px `--border-base`, `--radius-md`), 16px tussen panels; header `.acc-header` (16px 24px, hover `--bg-base-hover`); titel `.acc-title` = `text-l5` (16px/600); body `.acc-body` (0 24px 16px, `--content-secondary`); chevron `.acc-chevron` roteert 180° bij `.is-open`. De border verandert niet bij open. Open/dicht animeert smooth via `grid-template-rows 0fr→1fr` op `.acc-body` (content in `.acc-body-inner`, ~0.26s; respecteert `prefers-reduced-motion`).
 - Open zetten: `.acc-item.is-open`. Single-open gedrag = groepslogica (in Angular: `mat-accordion`).
 - Varianten: leading icon (`.acc-icon`), **beschrijving** (titel + `.acc-desc` onder elkaar in `.acc-titles`), trailing meta (`.acc-meta`), **selectie** (checkbox `<span class="cb-wrap"><input class="cb">` in de header + `.acc-item.is-selected` → brand-border), en **borderless/hidden header** (`.acc-item.is-borderless` → geen border/zijpadding, alleen titel + chevron).
 - Echte Angular-API: `mat-expansion-panel` (+ `mat-expansion-panel-header`, `ng-template matExpansionPanelContent`), groepeer in `mat-accordion`. Styleguide: Accordions.
