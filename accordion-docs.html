@@ -41,6 +41,8 @@
 
     .anatomy-fig { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
     .anatomy-fig .acc { max-width: 460px; }
+    /* give the accordion the wide column in the Variants section */
+    .variant-row { grid-template-columns: minmax(0, 1fr) 260px; }
   </style>
 </head>
 <body>
@@ -435,7 +437,7 @@
       return `<span class="acc-title">${it.title}</span>`;
     }
     function build(s){
-      const rows = ITEMS.map((it,i)=>`<div class="acc-item${i===0?' is-open':''}"><button class="acc-header">${s.icon?'<i data-icon="box" class="acc-icon"></i>':''}${titleBlock(it,s)}${s.meta?`<span class="acc-meta">${it.meta}</span>`:''}<i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">${it.body}</div></div>`).join('');
+      const rows = ITEMS.map((it,i)=>`<div class="acc-item${i===0?' is-open':''}"><button class="acc-header">${s.icon?'<i data-icon="box" class="acc-icon"></i>':''}${titleBlock(it,s)}${s.meta?`<span class="acc-meta">${it.meta}</span>`:''}<i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body"><div class="acc-slot">Your content goes here</div></div></div>`).join('');
       return `<div class="acc" data-live="1" data-single="${s.single?'1':'0'}" style="width:100%;">${rows}</div>`;
     }
     function buildCode(s){
