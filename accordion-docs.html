@@ -20,6 +20,10 @@
     .acc-item.is-open .acc-chevron { transform: rotate(180deg); }
     .acc-body { padding: 0 24px 16px; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .acc-item:not(.is-open) .acc-body { display: none; }
+    .acc-item.is-selected { border-color: var(--border-brand-base); }
+    .acc-item.is-borderless { border: 0; border-radius: 0; }
+    .acc-item.is-borderless .acc-header { padding: 16px 0; }
+    .acc-item.is-borderless .acc-body { padding: 0 0 16px; }
     @media (prefers-reduced-motion: reduce) { .acc-chevron { transition: none; } }
 
     .anatomy-fig { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 24px; display: flex; justify-content: center; }
@@ -121,7 +125,7 @@
 
         <section class="section" id="variants">
           <h2 class="text-l3">Variants</h2>
-          <p class="section-lead">The same panel, with progressively richer headers. Click to expand.</p>
+          <p class="section-lead">Variations on the same panel — a leading icon, trailing metadata, a selection checkbox, or a borderless "hidden" header.</p>
           <div class="variant-rows">
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px; align-items:stretch;">
@@ -142,10 +146,26 @@
             <div class="variant-row">
               <div class="variant-row-btn" style="padding:24px; align-items:stretch;">
                 <div class="acc" data-live="1" style="width:100%;">
-                  <div class="acc-item is-open"><button class="acc-header"><span class="acc-title">Collapsible header</span><span class="acc-meta">4 questions <span class="badge badge-brand">Power</span></span><i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">A richer header carries counts and tags — the "expansion panel" pattern for data rows.</div></div>
+                  <div class="acc-item is-open"><button class="acc-header"><span class="acc-title">Collapsible header</span><span class="acc-meta">4 questions <span class="badge badge-brand">Power</span></span><i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">Counts and tags sit on the right of the header.</div></div>
                 </div>
               </div>
-              <div class="variant-row-desc"><strong>Rich header (expansion panel)</strong> — Trailing metadata such as a count or a tag. In Figma this is the separate "Expansion panel"; it's the same component (see the gap below).</div>
+              <div class="variant-row-desc"><strong>With trailing metadata</strong> — A count, tag or other meta on the right of the header. (This is what Figma calls the "Expansion panel".)</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn" style="padding:24px; align-items:stretch;">
+                <div class="acc" style="width:100%;">
+                  <div class="acc-item is-selected is-open"><div class="acc-header" style="cursor:default;"><span class="cb-wrap"><input type="checkbox" class="cb" checked tabindex="-1"></span><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></div><div class="acc-body">A checkbox in the header lets the user select the panel; the selected panel gets a brand-coloured border.</div></div>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>With selection</strong> — A checkbox in the header to select the panel. The selected panel is highlighted with a brand border.</div>
+            </div>
+            <div class="variant-row">
+              <div class="variant-row-btn" style="padding:24px; align-items:stretch;">
+                <div class="acc" data-live="1" style="width:100%;">
+                  <div class="acc-item is-borderless is-open"><button class="acc-header"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">No border and no side padding — just the title, chevron and content. For embedding inside a row or card that already has its own frame.</div></div>
+                </div>
+              </div>
+              <div class="variant-row-desc"><strong>Borderless (hidden header)</strong> — Drops the panel border and side padding; shows only the title and chevron. Use it inside a container that already provides the frame.</div>
             </div>
           </div>
           <div class="dev-gap">
@@ -312,7 +332,7 @@
             <thead><tr><th>Class</th><th>Role</th></tr></thead>
             <tbody>
               <tr><td><code>.acc</code></td><td>The stack wrapping the panels (16px gap).</td></tr>
-              <tr><td><code>.acc-item</code></td><td>One panel. Add <code>.is-open</code> to expand it.</td></tr>
+              <tr><td><code>.acc-item</code></td><td>One panel. Modifiers: <code>.is-open</code> (expanded), <code>.is-selected</code> (brand border), <code>.is-borderless</code> (no border/side padding).</td></tr>
               <tr><td><code>.acc-header</code></td><td>The clickable header button. State: <code>.is-hover</code>.</td></tr>
               <tr><td><code>.acc-icon</code> · <code>.acc-title</code> · <code>.acc-meta</code> · <code>.acc-chevron</code></td><td>Leading icon, title, trailing metadata, chevron (rotates when open).</td></tr>
               <tr><td><code>.acc-body</code></td><td>The content, shown only when the item is <code>.is-open</code>.</td></tr>

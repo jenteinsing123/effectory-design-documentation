@@ -2332,4 +2332,8 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
 .acc-item.is-open .acc-chevron { transform: rotate(180deg); }
 .acc-body { padding: 0 24px 16px; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
 .acc-item:not(.is-open) .acc-body { display: none; }
+.acc-item.is-selected { border-color: var(--border-brand-base); }
+.acc-item.is-borderless { border: 0; border-radius: 0; }
+.acc-item.is-borderless .acc-header { padding: 16px 0; }
+.acc-item.is-borderless .acc-body { padding: 0 0 16px; }
 @media (prefers-reduced-motion: reduce) { .acc-chevron { transition: none; } }
