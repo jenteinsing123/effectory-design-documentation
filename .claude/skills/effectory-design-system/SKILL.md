@@ -11,16 +11,17 @@ Read(".claude/skills/effectory-design-system/design-system-reference.md")
 
 ## Referentie-prototypes (bekende schermen)
 
-In `reference-prototypes/` staan volledig uitgewerkte schermen die al een vaste, goedgekeurde vorm hebben. Vraagt iemand om zo'n scherm bij naam ("maak een prototype van de **reports pagina**"), dan is dat scherm **niet vrij in te vullen** — lees de referentie en neem die exact over:
+In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, goedgekeurde vorm. Herken ze op **intentie, niet op exacte woorden** — in welke taal of bewoording dan ook. Gaat een verzoek (ook impliciet) over zo'n scherm, dan is het **niet vrij in te vullen**: lees de referentie en neem die exact over.
 
 1. Lees `reference-prototypes/<naam>.md` (layout, states, gedrag, regels).
 2. Kopieer `reference-prototypes/<naam>.html` naar `prototypes/` en pas alleen aan wat de gebruiker vraagt. Verzin geen afwijkende layout of states.
 
-| Scherm | Trigger | Bestanden |
-|---|---|---|
-| Reports pagina | NL: "reports pagina", "reports prototype", "download reports", "reports (pagina) in het result(s) dashboard" · EN: "reports page", "make a prototype of the reports page", "reports page in the result(s) dashboard", "results dashboard reports" | `reference-prototypes/reports.md` + `reports.html` |
+**Beschikbare schermen**
 
-Staat het gevraagde scherm hier niet bij, bouw dan normaal volgens de reference.
+- **Reports pagina** → `reference-prototypes/reports.md` + `reports.html`
+  Het scherm waar je survey-rapporten downloadt (essential + raw-data reports, taalkeuze, generate/download), onderdeel van het results-/result-dashboard. Bedoelt iemand de reports- of rapporten-pagina, "download reports", of het rapporten-overzicht in het results-dashboard — in NL of EN, hoe dan ook geformuleerd — dan is dit het scherm.
+
+Twijfel je of een verzoek dit scherm bedoelt? Ga uit van ja en gebruik de referentie. Staat het gevraagde scherm er niet bij, bouw dan normaal volgens de reference.
 
 ---
 
