@@ -14,7 +14,7 @@
     .acc-header { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px 24px; background: none; border: 0; font-family: inherit; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-base); cursor: pointer; text-align: left; }
     .acc-header:hover, .acc-header.is-hover { background: var(--bg-base-hover); }
     .acc-icon { width: 16px; height: 16px; display: flex; flex-shrink: 0; color: var(--content-secondary); }
-    .acc-title { flex: 1; min-width: 0; }
+    .acc-title { flex: 1; min-width: 0; font-size: 16px; font-weight: 600; line-height: 1.5; color: var(--content-base); }
     .acc-titles { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
     .acc-titles .acc-title { flex: initial; }
     .acc-desc { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--content-secondary); }
@@ -23,8 +23,17 @@
     .acc-item.is-open .acc-chevron { transform: rotate(180deg); }
     .acc-body { padding: 0 24px 16px; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .acc-item:not(.is-open) .acc-body { display: none; }
+    .acc-item.is-open { border-color: var(--border-brand-base); }
     .acc-item.is-selected { border-color: var(--border-brand-base); }
     .acc-item.is-borderless { border: 0; border-radius: 0; }
+
+    /* documented checkbox (.cb-wrap / .cb) — needed locally since the page links styles.css, not components.css */
+    .cb-wrap { position: relative; display: inline-flex; flex-shrink: 0; vertical-align: middle; }
+    input[type="checkbox"].cb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border: 1.5px solid var(--border-action); border-radius: var(--radius-sm); background: var(--bg-base); cursor: pointer; transition: border-color .1s, background .1s; box-sizing: border-box; margin: 0; }
+    input[type="checkbox"].cb:hover { border-color: var(--border-action-hover); }
+    input[type="checkbox"].cb:checked { background-color: var(--bg-brand-base); border-color: var(--border-brand-base); }
+    .cb-wrap::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+    .cb-wrap:has(input:checked)::after { opacity: 1; background-color: var(--content-on-brand-base); -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20clip-rule%3D%27evenodd%27%20d%3D%27M17.3737%204.79289C17.7642%205.18342%2017.7642%205.81658%2017.3737%206.20711L8.20703%2015.3738C7.8165%2015.7643%207.18334%2015.7643%206.79281%2015.3738L2.62615%2011.2071C2.23562%2010.8166%202.23562%2010.1834%202.62615%209.79289C3.01667%209.40237%203.64983%209.40237%204.04036%209.79289L7.49992%2013.2525L15.9595%204.79289C16.35%204.40237%2016.9832%204.40237%2017.3737%204.79289Z%27%20fill%3D%27black%27/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20clip-rule%3D%27evenodd%27%20d%3D%27M17.3737%204.79289C17.7642%205.18342%2017.7642%205.81658%2017.3737%206.20711L8.20703%2015.3738C7.8165%2015.7643%207.18334%2015.7643%206.79281%2015.3738L2.62615%2011.2071C2.23562%2010.8166%202.23562%2010.1834%202.62615%209.79289C3.01667%209.40237%203.64983%209.40237%204.04036%209.79289L7.49992%2013.2525L15.9595%204.79289C16.35%204.40237%2016.9832%204.40237%2017.3737%204.79289Z%27%20fill%3D%27black%27/%3E%3C/svg%3E"); -webkit-mask-size: 12px 12px; mask-size: 12px 12px; }
     .acc-item.is-borderless .acc-header { padding: 16px 0; }
     .acc-item.is-borderless .acc-body { padding: 0 0 16px; }
     @media (prefers-reduced-motion: reduce) { .acc-chevron { transition: none; } }
@@ -191,11 +200,18 @@
 
         <section class="section" id="states">
           <h2 class="text-l3">States</h2>
-          <p class="section-lead">A panel is collapsed or expanded; the header responds to hover.</p>
+          <p class="section-lead">A panel is collapsed or expanded; the header responds to hover. An expanded panel gets a brand-coloured border.</p>
           <div class="states-row">
             <div class="state-col"><span class="state-lbl">Collapsed</span><div class="acc" style="width:100%;"><div class="acc-item"><button class="acc-header" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button></div></div></div>
             <div class="state-col"><span class="state-lbl">Hover</span><div class="acc" style="width:100%;"><div class="acc-item"><button class="acc-header is-hover" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button></div></div></div>
             <div class="state-col"><span class="state-lbl">Expanded</span><div class="acc" style="width:100%;"><div class="acc-item is-open"><button class="acc-header" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">Content shown.</div></div></div></div>
+          </div>
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap — expanded border</span>
+              <span class="dev-gap-text">Figma gives an expanded panel a brand-coloured border; the live styleguide keeps it grey when open. Align Figma ↔ code on the expanded border colour.</span>
+            </div>
           </div>
         </section>
 
