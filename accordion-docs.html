@@ -10,7 +10,7 @@
   <style>
     /* ── Accordion — collapsible header + content (a.k.a. expansion panel) ── */
     .acc { display: flex; flex-direction: column; gap: 16px; width: 100%; font-family: 'Poppins', sans-serif; }
-    .acc-item { border: 1px solid var(--border-action); border-radius: var(--radius-md); background: var(--bg-base); overflow: hidden; }
+    .acc-item { border: 1px solid var(--border-base); border-radius: var(--radius-md); background: var(--bg-base); overflow: hidden; }
     .acc-header { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px 24px; background: none; border: 0; font-family: inherit; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-base); cursor: pointer; text-align: left; }
     .acc-header:hover, .acc-header.is-hover { background: var(--bg-base-hover); }
     .acc-icon { width: 16px; height: 16px; display: flex; flex-shrink: 0; color: var(--content-secondary); }
@@ -237,7 +237,7 @@
             <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>--bg-base</code></td><td>Panel surface</td><td>#ffffff</td></tr>
-              <tr><td><code>--border-action</code></td><td>Panel border</td><td>#bcc1cd</td></tr>
+              <tr><td><code>--border-base</code></td><td>Panel border</td><td>#e1e4e8</td></tr>
               <tr><td><code>--bg-base-hover</code></td><td>Header hover</td><td>—</td></tr>
               <tr><td><code>--content-base</code></td><td>Header title + chevron</td><td>#192743</td></tr>
               <tr><td><code>--content-secondary</code></td><td>Body text, leading icon, meta</td><td>rgba(25,39,67,.80)</td></tr>
@@ -372,7 +372,7 @@
           <table class="token-table">
             <thead><tr><th>Token</th><th>Used for</th></tr></thead>
             <tbody>
-              <tr><td><code>--bg-base</code> · <code>--border-action</code></td><td>Panel surface + border</td></tr>
+              <tr><td><code>--bg-base</code> · <code>--border-base</code></td><td>Panel surface + border</td></tr>
               <tr><td><code>--bg-base-hover</code></td><td>Header hover</td></tr>
               <tr><td><code>--content-base</code> · <code>--content-secondary</code></td><td>Title/chevron · body/meta/icon</td></tr>
               <tr><td><code>--radius-md</code></td><td>Corner radius</td></tr>
