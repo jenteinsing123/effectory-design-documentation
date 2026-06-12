@@ -10,7 +10,7 @@
   <style>
     /* ── Accordion — collapsible header + content (a.k.a. expansion panel) ── */
     .acc { display: flex; flex-direction: column; gap: 16px; width: 100%; font-family: 'Poppins', sans-serif; }
-    .acc-item { border: 1px solid var(--border-base); border-radius: var(--radius-md); background: var(--bg-base); overflow: hidden; }
+    .acc-item { border: 1px solid var(--border-action); border-radius: var(--radius-md); background: var(--bg-base); overflow: hidden; }
     .acc-header { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px 24px; background: none; border: 0; font-family: inherit; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--content-base); cursor: pointer; text-align: left; }
     .acc-header:hover, .acc-header.is-hover { background: var(--bg-base-hover); }
     .acc-icon { width: 16px; height: 16px; display: flex; flex-shrink: 0; color: var(--content-secondary); }
@@ -23,7 +23,6 @@
     .acc-item.is-open .acc-chevron { transform: rotate(180deg); }
     .acc-body { padding: 0 24px 16px; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .acc-item:not(.is-open) .acc-body { display: none; }
-    .acc-item.is-open { border-color: var(--border-brand-base); }
     .acc-item.is-selected { border-color: var(--border-brand-base); }
     .acc-item.is-borderless { border: 0; border-radius: 0; }
 
@@ -200,18 +199,11 @@
 
         <section class="section" id="states">
           <h2 class="text-l3">States</h2>
-          <p class="section-lead">A panel is collapsed or expanded; the header responds to hover. An expanded panel gets a brand-coloured border.</p>
+          <p class="section-lead">A panel is collapsed or expanded; the header responds to hover.</p>
           <div class="states-row">
             <div class="state-col"><span class="state-lbl">Collapsed</span><div class="acc" style="width:100%;"><div class="acc-item"><button class="acc-header" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button></div></div></div>
             <div class="state-col"><span class="state-lbl">Hover</span><div class="acc" style="width:100%;"><div class="acc-item"><button class="acc-header is-hover" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button></div></div></div>
             <div class="state-col"><span class="state-lbl">Expanded</span><div class="acc" style="width:100%;"><div class="acc-item is-open"><button class="acc-header" tabindex="-1"><span class="acc-title">Accordion header</span><i data-icon="chevron-down" class="acc-chevron"></i></button><div class="acc-body">Content shown.</div></div></div></div>
-          </div>
-          <div class="dev-gap">
-            <span class="dev-gap-icon">⚠️</span>
-            <div class="dev-gap-body">
-              <span class="dev-gap-label">Figma gap — expanded border</span>
-              <span class="dev-gap-text">Figma gives an expanded panel a brand-coloured border; the live styleguide keeps it grey when open. Align Figma ↔ code on the expanded border colour.</span>
-            </div>
           </div>
         </section>
 
@@ -241,7 +233,7 @@
             <thead><tr><th>Token</th><th>Role</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td><code>--bg-base</code></td><td>Panel surface</td><td>#ffffff</td></tr>
-              <tr><td><code>--border-base</code></td><td>Panel border</td><td>#e1e4e8</td></tr>
+              <tr><td><code>--border-action</code></td><td>Panel border</td><td>#bcc1cd</td></tr>
               <tr><td><code>--bg-base-hover</code></td><td>Header hover</td><td>—</td></tr>
               <tr><td><code>--content-base</code></td><td>Header title + chevron</td><td>#192743</td></tr>
               <tr><td><code>--content-secondary</code></td><td>Body text, leading icon, meta</td><td>rgba(25,39,67,.80)</td></tr>
@@ -376,7 +368,7 @@
           <table class="token-table">
             <thead><tr><th>Token</th><th>Used for</th></tr></thead>
             <tbody>
-              <tr><td><code>--bg-base</code> · <code>--border-base</code></td><td>Panel surface + border</td></tr>
+              <tr><td><code>--bg-base</code> · <code>--border-action</code></td><td>Panel surface + border</td></tr>
               <tr><td><code>--bg-base-hover</code></td><td>Header hover</td></tr>
               <tr><td><code>--content-base</code> · <code>--content-secondary</code></td><td>Title/chevron · body/meta/icon</td></tr>
               <tr><td><code>--radius-md</code></td><td>Corner radius</td></tr>
