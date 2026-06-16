@@ -48,20 +48,21 @@
       padding: var(--spacing-super-loose) var(--spacing-loose) var(--spacing-super-extra-loose);
     }
 
-    /* ── Grid: alle kaarten 384×456, 24px ertussen ── */
+    /* ── Grid: alle kaarten max 384×456, 24px ertussen ── */
     .ov-grid {
       display: grid;
-      grid-template-columns: repeat(3, 384px);
+      grid-template-columns: repeat(3, minmax(0, 384px));
       gap: var(--spacing-loose);
       justify-content: center;
     }
-    @media (max-width: 1300px) { .ov-grid { grid-template-columns: repeat(2, 384px); } }
-    @media (max-width: 870px)  { .ov-grid { grid-template-columns: 384px; } }
+    @media (max-width: 1300px) { .ov-grid { grid-template-columns: repeat(2, minmax(0, 384px)); } }
+    @media (max-width: 870px)  { .ov-grid { grid-template-columns: minmax(0, 384px); } }
 
     /* ── Gedeelde kaart-shell ── */
     .card {
       box-sizing: border-box;
-      width: 384px;
+      width: 100%;
+      max-width: 384px;
       height: 456px;
       background: var(--bg-base);
       border: 1px solid var(--border-base);
@@ -242,7 +243,9 @@
 
     /* ════ Workload / Retention / Well-being ════ */
     .kpi-stack {
-      width: 384px;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 384px;
       height: 456px;
       display: flex;
       flex-direction: column;
@@ -662,3 +665,31 @@
     .ai-summary.is-open .ai-toggle .ai-toggle-more { display: none; }
     .ai-toggle-more, .ai-toggle-less { display: inline-flex; align-items: center; gap: var(--spacing-tight); }
     .efp-lead-em.is-pos { text-decoration-color: var(--bg-accent-green-subtle); }
+
+    /* ──────────────────────────────────────────────
+       Responsiveness
+       ────────────────────────────────────────────── */
+    /* Tighter page padding once the wide desktop margin no longer fits */
+    @media (max-width: 1100px) {
+      body { --results-side: var(--spacing-loose); } /* 24px */
+    }
+    /* Collapse the app sidebar so content gets the full width */
+    @media (max-width: 900px) {
+      .mainnav { display: none; }
+    }
+    /* Phone / small tablet */
+    @media (max-width: 768px) {
+      body { --results-side: var(--spacing-base); } /* 16px */
+      .overview-wrap { padding: var(--spacing-loose) var(--spacing-base) var(--spacing-extra-loose); }
+      .results-head { padding-top: var(--spacing-loose); }
+      /* Side panels go full-width with roomier-but-smaller padding */
+      .sidepanel { width: 100%; }
+      .sp-body { padding: var(--spacing-loose); }
+      .sp-heading, .sp-tabs { padding-left: var(--spacing-loose); padding-right: var(--spacing-loose); }
+      .efp-scores-intro { flex-direction: column; }
+    }
+    /* Very small screens — shrink the tall side-panel matrix */
+    @media (max-width: 480px) {
+      .efp-matrix { height: 340px; }
+      .engp-cards { grid-template-columns: 1fr; }
+    }
