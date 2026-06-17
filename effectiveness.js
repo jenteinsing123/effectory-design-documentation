@@ -135,14 +135,14 @@ const DATA = {
   after: {
     dateFrom: '22 Nov 2026', dateTo: '22 Oct 2026',
     /* AI summary */
-    aiIntro: "The IT team's latest survey results show a significant improvement across key engagement and employee experience indicators. Engagement has increased to 67%, while retention has risen to 79%, indicating that employees are more committed to both their current role and the organization. The team also achieved an eNPS of 31, reflecting a strong increase in employee advocacy and a greater willingness to recommend the organization as a place to work.",
+    aiIntro: "The IT team's latest survey results show a significant improvement across key engagement and employee experience indicators. Engagement has increased to 67%, while retention has risen to 73%, indicating that employees are more committed to both their current role and the organization. The team also achieved an eNPS of 31, reflecting a strong increase in employee advocacy and a greater willingness to recommend the organization as a place to work.",
     aiMore: [
       "Workload perceptions have improved considerably, with 56% of employees reporting that their workload feels “just right.” Combined with a strong response rate of 79%, these results provide a reliable view of employee sentiment and suggest that recent actions have positively impacted the employee experience.",
       "As a result of these improvements, the IT team has moved into the effective quadrant, demonstrating stronger organizational health, improved employee engagement, and a more sustainable work environment. Continued focus on employee development, recognition, and workload management will help maintain this positive momentum."
     ],
     aiStrengths: [
       "Engagement (67%) has increased, indicating stronger commitment, motivation, and connection to team objectives.",
-      "Retention (79%) shows that a large majority of employees intend to remain in their current role.",
+      "Retention (73%) shows that a large majority of employees intend to remain in their current role.",
       "eNPS (31) reflects a healthy level of employee advocacy and confidence in the organization.",
       "Workload perceptions have improved, with 56% of employees reporting that their workload is appropriately balanced.",
       "A response rate of 79% provides strong confidence in the reliability and representativeness of the survey results."
