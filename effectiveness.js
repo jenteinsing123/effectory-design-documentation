@@ -100,15 +100,15 @@ const DATA = {
       { name: 'Managing Systems', sub: true, cur: '47%', bench: '72%', benchClass: 'is-bench-neg' }
     ],
     efpMarkers: [
-      { variant: 'is-peer',    icon: 'building', label: 'Finance Operations',    x: 33, y: 82 },
+      { variant: 'is-peer',    icon: 'building', label: 'Infrastructure &amp; Platform',    x: 33, y: 82 },
       { variant: 'is-peer',    icon: 'building', label: 'Security & Compliance', x: 43, y: 70 },
-      { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 57, y: 80 },
-      { variant: 'is-peer',    icon: 'building', label: 'Product Enablement',    x: 70, y: 73 },
+      { variant: 'is-peer',    icon: 'building', label: 'Service Desk',    x: 57, y: 80 },
+      { variant: 'is-peer',    icon: 'building', label: 'Cloud &amp; DevOps',    x: 70, y: 73 },
       { variant: 'is-org',     icon: 'building', label: 'Novanta B.V.',          x: 82, y: 62 },
-      { variant: 'is-peer',    icon: 'building', label: 'Marketing Operations',  x: 64, y: 30 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Accounting',       x: 72, y: 20 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Sales',            x: 15, y: 34 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Finance',          x: 40, y: 15 },
+      { variant: 'is-peer',    icon: 'building', label: 'Data &amp; Analytics',  x: 64, y: 30 },
+      { variant: 'is-peer',    icon: 'building', label: 'Software Engineering',       x: 72, y: 20 },
+      { variant: 'is-peer',    icon: 'building', label: 'Network Operations',            x: 15, y: 34 },
+      { variant: 'is-peer',    icon: 'building', label: 'Workplace IT',          x: 40, y: 15 },
       { variant: 'is-current', icon: 'group',    label: 'Team IT',               x: 27, y: 24 }
     ],
 
@@ -224,15 +224,15 @@ const DATA = {
       { name: 'Managing Systems', sub: true, cur: '65%', bench: '72%', benchClass: 'is-bench-neutral' }
     ],
     efpMarkers: [
-      { variant: 'is-peer',    icon: 'building', label: 'Finance Operations',    x: 33, y: 82 },
+      { variant: 'is-peer',    icon: 'building', label: 'Infrastructure &amp; Platform',    x: 33, y: 82 },
       { variant: 'is-peer',    icon: 'building', label: 'Security & Compliance', x: 43, y: 70 },
-      { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 57, y: 80 },
-      { variant: 'is-peer',    icon: 'building', label: 'Product Enablement',    x: 48, y: 66 },
+      { variant: 'is-peer',    icon: 'building', label: 'Service Desk',    x: 57, y: 80 },
+      { variant: 'is-peer',    icon: 'building', label: 'Cloud &amp; DevOps',    x: 48, y: 66 },
       { variant: 'is-org',     icon: 'building', label: 'Novanta B.V.',          x: 80, y: 62 },
-      { variant: 'is-peer',    icon: 'building', label: 'Marketing Operations',  x: 64, y: 30 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Accounting',       x: 72, y: 20 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Sales',            x: 15, y: 34 },
-      { variant: 'is-peer',    icon: 'building', label: 'Team Finance',          x: 40, y: 15 },
+      { variant: 'is-peer',    icon: 'building', label: 'Data &amp; Analytics',  x: 64, y: 30 },
+      { variant: 'is-peer',    icon: 'building', label: 'Software Engineering',       x: 72, y: 20 },
+      { variant: 'is-peer',    icon: 'building', label: 'Network Operations',            x: 15, y: 34 },
+      { variant: 'is-peer',    icon: 'building', label: 'Workplace IT',          x: 40, y: 15 },
       { variant: 'is-previous', icon: 'rotate-backward', label: 'Previous survey', x: 27, y: 24 },
       { variant: 'is-current', icon: 'group',    label: 'Team IT',               x: 67, y: 80 }
     ],
