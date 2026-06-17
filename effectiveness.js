@@ -1426,6 +1426,17 @@ function renderOverview(variant, initialView) {
     });
   }
 
+  /* Survey name / date range: switch survey period (Q2 <-> Q3), keeping group + view */
+  const switchPeriod = () => {
+    const group = variant.startsWith('novanta') ? 'novanta' : 'team-it';
+    const targetPeriod = variant.endsWith('-before') ? 'after' : 'before';
+    const activeTab = document.querySelector('.tab.is-active[data-view]');
+    const view = activeTab ? activeTab.dataset.view : 'overview';
+    location.href = `${group}-${targetPeriod}-${view}.html`;
+  };
+  document.querySelector('.results-title')?.addEventListener('click', switchPeriod);
+  document.querySelector('.date-range')?.addEventListener('click', switchPeriod);
+
   /* Focus View: 'Explore' opens the effectiveness side panel */
   document.querySelectorAll('#view-focus .fv-explore').forEach(el => {
     el.addEventListener('click', () => { document.getElementById('efp-overlay').hidden = false; });
