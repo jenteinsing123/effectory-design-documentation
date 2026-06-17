@@ -292,12 +292,12 @@ function focusView(d) {
       <div class="fv-approach">
         <div class="fv-approach-lbl"><i data-icon="lightbulb"></i> Pick an approach to see the recommended action:</div>
         <div class="fv-approach-chips">
-          <button class="fv-chip">Team action</button>
-          <button class="fv-chip">1:1 action</button>
-          <button class="fv-chip">Process change</button>
-          <button class="fv-chip">Personal action</button>
+          <button class="btn btn-secondary">Team action</button>
+          <button class="btn btn-secondary">1:1 action</button>
+          <button class="btn btn-secondary">Process change</button>
+          <button class="btn btn-secondary">Personal action</button>
         </div>
-        <a class="fv-create"><i data-icon="plus"></i> Create new action</a>
+        <button class="btn btn-link"><i data-icon="plus"></i> Create new action</button>
       </div>
     </div>`;
 
