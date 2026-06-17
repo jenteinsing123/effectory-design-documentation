@@ -325,9 +325,12 @@ function focusView(d) {
   </div>
 
   <div class="fv-glance">
-    <div class="fv-glance-left">
+    <div class="fv-glance-head">
       <span class="fv-eyebrow is-glance">At first glance</span>
-      <h2 class="fv-verdict ${verdictClass}">Your team is <span class="fv-verdict-word">${d.efpLeadEm}</span></h2>
+      <h2 class="fv-verdict ${verdictClass}">Your team is <span class="fv-verdict-word">${d.efpLeadEm}<span class="fv-verdict-underline"></span></span></h2>
+    </div>
+    <div class="fv-glance-body">
+      <div class="fv-glance-left">
       <div class="fv-stat-cards">
         <div class="fv-stat-card">
           <div class="fv-stat-text">
@@ -366,6 +369,7 @@ function focusView(d) {
         </div>
       </div>
       <p class="fv-x-axis">Engagement score</p>
+      </div>
     </div>
   </div>
 

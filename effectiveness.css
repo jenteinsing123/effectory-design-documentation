@@ -771,16 +771,23 @@
 
     /* ──── At first glance ──── */
     .fv-glance {
-      display: flex; justify-content: space-between; gap: var(--spacing-super-extra-loose); align-items: flex-start;
+      display: flex; flex-direction: column; gap: var(--spacing-extra-loose);
       padding: var(--spacing-super-extra-loose); background: var(--bg-secondary); border-radius: var(--radius-xl);
     }
-    .fv-glance-left { flex: 0 1 517px; min-width: 0; display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .fv-glance-head { display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .fv-glance-body { display: flex; justify-content: space-between; gap: var(--spacing-super-extra-loose); align-items: flex-start; }
+    .fv-glance-left { flex: 0 1 517px; min-width: 0; display: flex; flex-direction: column; gap: var(--spacing-loose); }
     .fv-verdict { margin: 0; font-size: 32px; font-weight: 600; line-height: 38px; color: var(--content-base); }
-    .fv-verdict-word { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 4px; }
-    .fv-verdict.is-effective .fv-verdict-word { text-decoration-color: var(--bg-positive-base); }
-    .fv-verdict.is-ineffective .fv-verdict-word { text-decoration-color: var(--bg-negative-base); }
-    .fv-verdict.is-not-utilized .fv-verdict-word { text-decoration-color: var(--bg-highlight-base); }
-    .fv-verdict.is-detached .fv-verdict-word { text-decoration-color: var(--border-action-hover); }
+    .fv-verdict-word { position: relative; }
+    .fv-verdict-underline {
+      position: absolute; left: 0; right: 0; bottom: -6px; height: 8px;
+      -webkit-mask: url(assets/illustrations/verdict-underline.svg) no-repeat center / 100% 100%;
+      mask: url(assets/illustrations/verdict-underline.svg) no-repeat center / 100% 100%;
+    }
+    .fv-verdict.is-effective .fv-verdict-underline { background-color: var(--bg-positive-base); }
+    .fv-verdict.is-ineffective .fv-verdict-underline { background-color: var(--bg-negative-base); }
+    .fv-verdict.is-not-utilized .fv-verdict-underline { background-color: var(--bg-highlight-base); }
+    .fv-verdict.is-detached .fv-verdict-underline { background-color: var(--border-action-hover); }
 
     .fv-stat-cards { display: flex; flex-direction: column; gap: var(--spacing-tight); }
     .fv-stat-card {
@@ -822,7 +829,7 @@
     .fv-wins { background: var(--bg-accent-green-subtle); }
     .fv-block-aside { display: flex; flex-direction: column; gap: var(--spacing-base-tight); }
     .fv-block-main { display: flex; flex-direction: column; gap: var(--spacing-loose); }
-    .fv-section-title { margin: 0; font-size: 20px; font-weight: 600; line-height: 28px; color: var(--content-base); }
+    .fv-section-title { margin: 0; font-size: 26px; font-weight: 600; line-height: 31px; letter-spacing: -0.02em; color: var(--content-base); }
     .fv-section-desc { margin: 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .fv-why {
       display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); align-self: flex-end;
