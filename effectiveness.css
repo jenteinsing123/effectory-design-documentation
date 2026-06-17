@@ -797,21 +797,27 @@
     .fv-meaning p { margin: var(--spacing-tight) 0 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
 
     .fv-glance-matrix { display: flex; flex-direction: column; gap: var(--spacing-tight); }
-    .fv-glance-matrix .fx-matrix { flex: none; height: 305px; }
+    .fv-matrix-row { display: flex; align-items: stretch; gap: var(--spacing-tight); }
+    .fv-matrix-row .fx-matrix { flex: 1 1 auto; height: 305px; }
+    .fv-y-axis {
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      font-size: 14px; line-height: 1.6; color: var(--content-secondary); text-align: center;
+    }
+    .fv-x-axis { margin: 0; padding-left: var(--spacing-loose); font-size: 14px; line-height: 1.6; color: var(--content-secondary); text-align: center; }
 
     /* ──── Focus / Wins blocks ──── */
-    .fv-block { padding: var(--spacing-loose); border-radius: var(--radius-xl); }
+    .fv-block {
+      display: grid; grid-template-columns: 280px 1fr; gap: var(--spacing-extra-loose);
+      padding: var(--spacing-loose); border-radius: var(--radius-xl);
+    }
     .fv-focus { background: var(--bg-accent-orange-subtle); }
     .fv-wins { background: var(--bg-accent-green-subtle); }
-    .fv-block-head {
-      display: flex; align-items: flex-start; justify-content: space-between; gap: var(--spacing-base);
-      margin-bottom: var(--spacing-base);
-    }
-    .fv-block-head > div { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .fv-block-aside { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .fv-block-main { display: flex; flex-direction: column; gap: var(--spacing-tight); }
     .fv-section-title { margin: 0; font-size: 20px; font-weight: 600; line-height: 28px; color: var(--content-base); }
-    .fv-section-desc { margin: 0; max-width: 52ch; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+    .fv-section-desc { margin: 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .fv-why {
-      display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); align-self: flex-end;
       font-size: 14px; font-weight: 600; color: var(--content-secondary); cursor: pointer; white-space: nowrap;
     }
     .fv-why i { display: flex; width: 16px; height: 16px; }
@@ -874,7 +880,7 @@
       .sp-heading, .sp-tabs { padding-left: var(--spacing-loose); padding-right: var(--spacing-loose); }
       .efp-scores-intro { flex-direction: column; }
       .fv-glance { grid-template-columns: 1fr; gap: var(--spacing-loose); }
-      .fv-block-head { flex-direction: column; }
+      .fv-block { grid-template-columns: 1fr; gap: var(--spacing-base); }
     }
     /* Very small screens — shrink the tall side-panel matrix */
     @media (max-width: 480px) {

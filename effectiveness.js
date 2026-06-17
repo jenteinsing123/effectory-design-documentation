@@ -350,43 +350,45 @@ function focusView(d) {
       </div>
     </div>
     <div class="fv-glance-matrix">
-      <p class="fx-axis">Performance environment</p>
-      <div class="fx-matrix">
-        <div class="fx-quad is-detached">Detached</div>
-        <div class="fx-quad is-effective">Effective</div>
-        <div class="fx-quad is-ineffective">Ineffective</div>
-        <div class="fx-quad is-not-utilized">Not fully utilized</div>
-        <span class="fx-scale is-top-left">100%</span>
-        <span class="fx-scale is-bottom-left">0%</span>
-        <span class="fx-scale is-bottom-right">100%</span>
-        ${d.fxMarkers.map(fxMarker).join('')}
+      <div class="fv-matrix-row">
+        <span class="fv-y-axis">Performance environment</span>
+        <div class="fx-matrix">
+          <div class="fx-quad is-detached">Detached</div>
+          <div class="fx-quad is-effective">Effective</div>
+          <div class="fx-quad is-ineffective">Ineffective</div>
+          <div class="fx-quad is-not-utilized">Not fully utilized</div>
+          <span class="fx-scale is-top-left">100%</span>
+          <span class="fx-scale is-bottom-left">0%</span>
+          <span class="fx-scale is-bottom-right">100%</span>
+          ${d.fxMarkers.map(fxMarker).join('')}
+        </div>
       </div>
-      <p class="fx-axis is-x">Engagement score</p>
+      <p class="fv-x-axis">Engagement score</p>
     </div>
   </div>
 
   <div class="fv-block fv-focus">
-    <div class="fv-block-head">
-      <div>
-        <span class="fv-eyebrow is-focus">What needs focus</span>
-        <h2 class="fv-section-title">This is where your attention matters most</h2>
-        <p class="fv-section-desc">These are questions where improvement will have the most impact on your team results.</p>
-      </div>
-      <a class="fv-why"><i data-icon="info"></i> Why these focus areas?</a>
+    <div class="fv-block-aside">
+      <span class="fv-eyebrow is-focus">What needs focus</span>
+      <h2 class="fv-section-title">This is where your attention matters most</h2>
+      <p class="fv-section-desc">These are questions where improvement will have the most impact on your team results.</p>
     </div>
-    <div class="fv-cards">${d.lowScores.slice(0, 3).map(focusCard).join('')}</div>
+    <div class="fv-block-main">
+      <a class="fv-why"><i data-icon="info"></i> Why these focus areas?</a>
+      <div class="fv-cards">${d.lowScores.slice(0, 3).map(focusCard).join('')}</div>
+    </div>
   </div>
 
   <div class="fv-block fv-wins">
-    <div class="fv-block-head">
-      <div>
-        <span class="fv-eyebrow is-wins">Celebrate your wins</span>
-        <h2 class="fv-section-title">Your team is already getting this right</h2>
-        <p class="fv-section-desc">These are the areas where your team is performing well. Share these wins with your team to keep the momentum going!</p>
-      </div>
-      <a class="fv-why"><i data-icon="info"></i> Why these successes?</a>
+    <div class="fv-block-aside">
+      <span class="fv-eyebrow is-wins">Celebrate your wins</span>
+      <h2 class="fv-section-title">Your team is already getting this right</h2>
+      <p class="fv-section-desc">These are the areas where your team is performing well. Share these wins with your team to keep the momentum going!</p>
     </div>
-    <div class="fv-win-cards">${d.highScores.slice(0, 3).map(winCard).join('')}</div>
+    <div class="fv-block-main">
+      <a class="fv-why"><i data-icon="info"></i> Why these successes?</a>
+      <div class="fv-win-cards">${d.highScores.slice(0, 3).map(winCard).join('')}</div>
+    </div>
   </div>
   `;
 }
