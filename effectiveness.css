@@ -825,8 +825,8 @@
       display: grid; grid-template-columns: 339px 1fr; gap: var(--spacing-extra-loose);
       padding: var(--spacing-super-extra-loose); border-radius: var(--radius-xl);
     }
-    .fv-focus { background: var(--bg-accent-orange-subtle); }
-    .fv-wins { background: var(--bg-accent-green-subtle); }
+    .fv-focus { background: linear-gradient(115deg, #FFF6EA 17.95%, #FFEBE2 85.36%); }
+    .fv-wins { background: linear-gradient(115deg, #F4FEF4 17.95%, #ECFFF2 85.36%); }
     .fv-block-aside { display: flex; flex-direction: column; gap: var(--spacing-base-tight); }
     .fv-block-main { display: flex; flex-direction: column; gap: var(--spacing-loose); }
     .fv-section-title { margin: 0; font-size: 26px; font-weight: 600; line-height: 31px; letter-spacing: -0.02em; color: var(--content-base); }
