@@ -251,7 +251,31 @@ function shell(d) {
   const tpMax = Math.max(...d.topics.map(t => t.count));
   const li = (arr) => arr.map(x => `<li>${x}</li>`).join('');
   const fxMarker = (m) => `<div class="fx-marker ${m.variant} ${m.chip}" style="left:${m.x}%;top:${100 - m.y}%"><div class="fx-dot"></div><div class="fx-chip"><i data-icon="${m.icon}"></i>${m.label}</div></div>`;
-  const efpMarker = (m) => `<div class="efp-marker ${m.variant}" style="left:${m.x}%;top:${100 - m.y}%"><div class="efp-dot"></div><div class="efp-chip"><i data-icon="${m.icon}"></i>${m.label}</div></div>`;
+  const quadColor = (m) => {
+    const eng = m.x >= 50, perf = m.y >= 50;
+    if (eng && perf) return 'var(--border-positive-base)';   // Effective (green)
+    if (!eng && perf) return 'var(--border-action-hover)';   // Detached (grey)
+    if (!eng && !perf) return 'var(--bg-negative-base)';     // Ineffective (red)
+    return 'var(--bg-highlight-base)';                       // Not fully utilized (yellow)
+  };
+  const tipEyebrow = (m) => m.variant === 'is-current' ? 'Current group' : m.variant === 'is-org' ? 'Organization' : 'Group level below';
+  const efpMarker = (m) => `<div class="efp-marker ${m.variant}${m.y >= 55 ? ' tip-below' : ''}" style="left:${m.x}%;top:${100 - m.y}%;--q:${quadColor(m)}">
+    <div class="efp-dot"></div>
+    <div class="efp-chip"><i data-icon="${m.icon}"></i>${m.label}</div>
+    <div class="efp-tip">
+      <span class="efp-tip-bar"></span>
+      <div class="efp-tip-body">
+        <div class="efp-tip-head">
+          <span class="efp-tip-eyebrow"><i data-icon="sort-ascending"></i> ${tipEyebrow(m)}</span>
+          <span class="efp-tip-name">${m.label}</span>
+        </div>
+        <div class="efp-tip-rows">
+          <div class="efp-tip-row"><span>Engagement</span><b>${m.x}%</b></div>
+          <div class="efp-tip-row"><span>Performance environment</span><b>${m.y}%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
   const topicTile = (t) => `<button class="tp-tile ${t.color}"><span class="tp-tile-fill" style="width:${Math.round(t.count / tpMax * 90)}%"></span><p class="tp-tile-name">${t.name}</p><span class="tp-tile-meta"><i data-icon="users"></i>${t.count} times selected</span><span class="tp-tile-chevron"><i data-icon="chevron-right"></i></span></button>`;
   const qsRow = (s) => `<div class="qs-row"><p class="qs-row-q">${s.q}</p><span class="qs-row-score">${s.s}%</span></div>`;
   const efpScoreRow = (r) => `<div class="efp-score-row${r.sub ? ' is-sub' : ''}"><div class="efp-score-meta"><div class="efp-score-name">${r.name}</div>${r.desc ? `<div class="efp-score-desc">${r.desc}</div>` : ''}</div><span class="efp-score-badge is-current">${r.cur}</span><span class="efp-score-badge ${r.benchClass}">${r.bench}</span></div>`;
