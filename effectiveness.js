@@ -7,9 +7,10 @@
 /* ---------- per-variant data ---------- */
 const DATA = {
   before: {
+    dateFrom: '22 Apr 2026', dateTo: '22 May 2026',
     /* AI summary */
     aiIntro: "The IT team’s results indicate several challenges impacting overall effectiveness and employee experience. Engagement (56%) and retention (57%) are below desired levels, suggesting employees may feel disconnected from the organization and uncertain about their long-term future within the team. Workload scores are particularly low at 38%, highlighting concerns around capacity, prioritization, and sustainable ways of working. While the eNPS score of 12 remains positive, it indicates only moderate advocacy and suggests there is significant room for improvement in employee satisfaction and loyalty.",
-    aiMore: "As the team falls within the ineffective quadrant, focused action is required to address workload pressures, strengthen leadership support, and improve employee engagement. Creating greater clarity around priorities, improving resource allocation, and increasing opportunities for employee feedback may help rebuild trust and team effectiveness.",
+    aiMore: ["As the team falls within the ineffective quadrant, focused action is required to address workload pressures, strengthen leadership support, and improve employee engagement. Creating greater clarity around priorities, improving resource allocation, and increasing opportunities for employee feedback may help rebuild trust and team effectiveness."],
     aiStrengths: [
       "eNPS remains positive at 12, indicating that a portion of employees are still willing to recommend the organization as a place to work.",
       "Retention sentiment (57%) suggests that more than half of employees currently see themselves remaining with the organization."
@@ -132,42 +133,48 @@ const DATA = {
   },
 
   after: {
+    dateFrom: '22 Nov 2026', dateTo: '22 Oct 2026',
     /* AI summary */
-    aiIntro: "The IT team is performing strongly across the board. Engagement (78%) and retention (86%) are healthy and above benchmark, and the performance environment is giving people the clarity and support they need. Workload has improved to a sustainable level (72%), and the eNPS score of 46 reflects strong advocacy — employees are energized by their work and would recommend the team as a place to work.",
-    aiMore: "As the team now falls within the effective quadrant, the focus shifts from fixing to sustaining. Protect what is working, keep investing in the drivers behind these results, and stay alert to early signals so the team can maintain its momentum over time.",
+    aiIntro: "The IT team's latest survey results show a significant improvement across key engagement and employee experience indicators. Engagement has increased to 67%, while retention has risen to 79%, indicating that employees are more committed to both their current role and the organization. The team also achieved an eNPS of 31, reflecting a strong increase in employee advocacy and a greater willingness to recommend the organization as a place to work.",
+    aiMore: [
+      "Workload perceptions have improved considerably, with 56% of employees reporting that their workload feels “just right.” Combined with a strong response rate of 79%, these results provide a reliable view of employee sentiment and suggest that recent actions have positively impacted the employee experience.",
+      "As a result of these improvements, the IT team has moved into the effective quadrant, demonstrating stronger organizational health, improved employee engagement, and a more sustainable work environment. Continued focus on employee development, recognition, and workload management will help maintain this positive momentum."
+    ],
     aiStrengths: [
-      "eNPS is strong at 46, showing that employees are active promoters of the organization.",
-      "Engagement (78%) and retention (86%) are both above benchmark, pointing to a motivated and committed team."
+      "Engagement (67%) has increased, indicating stronger commitment, motivation, and connection to team objectives.",
+      "Retention (79%) shows that a large majority of employees intend to remain in their current role.",
+      "eNPS (31) reflects a healthy level of employee advocacy and confidence in the organization.",
+      "Workload perceptions have improved, with 56% of employees reporting that their workload is appropriately balanced.",
+      "A response rate of 79% provides strong confidence in the reliability and representativeness of the survey results."
     ],
     aiGrowth: [
-      "Managing Systems (71%) is the relative low point — keep refining tools and processes so they keep pace with the team.",
-      "Keep monitoring workload so the current healthy balance holds as priorities shift.",
-      "Continue nurturing diversity of perspectives to sustain innovation over time."
+      "While workload perceptions have improved, nearly half of employees still do not view their workload as optimal, presenting an opportunity for further refinement of prioritization and resource planning.",
+      "Engagement is trending positively but remains below top-performing team benchmarks, suggesting opportunities to further strengthen employee involvement and recognition."
     ],
     aiActions: [
-      "Recognize and celebrate the results with the team to reinforce what is working.",
-      "Document the practices behind the strong scores so they can be sustained and shared.",
-      "Keep a light-touch cadence of check-ins to catch early signals.",
-      "Continue investing in development and growth opportunities.",
-      "Set stretch goals together to keep building on the momentum."
+      "Continue monitoring workload distribution and team capacity to sustain improvements in employee wellbeing.",
+      "Build on the positive momentum by increasing opportunities for employee development, learning, and career growth.",
+      "Recognize and celebrate team achievements to reinforce engagement and advocacy.",
+      "Maintain regular employee feedback discussions to identify emerging concerns early and support continuous improvement.",
+      "Share progress updates on actions taken in response to employee feedback to strengthen trust and accountability."
     ],
 
     fxMarkers: [
       { variant: 'is-org',     chip: 'is-chip-above', icon: 'building', label: 'Novanta', x: 80, y: 70 },
-      { variant: 'is-current', chip: 'is-chip-above', icon: 'group',    label: 'Team IT', x: 62, y: 82 }
+      { variant: 'is-current', chip: 'is-chip-above', icon: 'group',    label: 'Team IT', x: 67, y: 80 }
     ],
 
-    engValue: '78%', engTrend: '11%', engTrendIcon: 'Trend-up', engBench: '70%', engBenchW: 70,
+    engValue: '67%', engTrend: '11%', engTrendIcon: 'Trend-up', engBench: '70%', engBenchW: 70,
 
-    npsPromoters: 58, npsPassives: 30, npsDetractors: 12,
-    npsPromCount: 328, npsPassCount: 169, npsDetrCount: 68,
+    npsPromoters: 52, npsPassives: 27, npsDetractors: 21,
+    npsPromCount: 329, npsPassCount: 171, npsDetrCount: 132,
 
-    swCurrent: [78, 72, 75, 88, 82, 85],
+    swCurrent: [67, 72, 75, 88, 82, 85],
     swPrevious: [56, 61, 56, 87, 62, 78],
 
-    rrValue: 84, rrPartDone: 472, rrPartTotal: 565, rrTrend: '13%', rrTrendIcon: 'Trend-up', rrBench: 84,
+    rrValue: 79, rrPartDone: 632, rrPartTotal: 800, rrTrend: '13%', rrTrendIcon: 'Trend-up', rrBench: 84,
 
-    kpiWorkload: 72, kpiRetention: 86, kpiWellbeing: 80,
+    kpiWorkload: 56, kpiRetention: 73, kpiWellbeing: 79,
 
     topics: [
       { name: 'Collaboration between teams', count: 540, color: 'is-green' },
@@ -204,7 +211,7 @@ const DATA = {
     ],
     efpFocusClosing: 'Consistent recognition, clear ownership and steady follow-up help the team sustain its effectiveness over time.',
     efpScores: [
-      { name: 'Engagement', desc: 'Employees that are inspired and energized by their work', cur: '78%', bench: '68%', benchClass: 'is-bench-pos' },
+      { name: 'Engagement', desc: 'Employees that are inspired and energized by their work', cur: '67%', bench: '68%', benchClass: 'is-bench' },
       { name: 'Performance environment', desc: 'Important basic conditions which enable employees to work effectively and efficiently', cur: '80%', bench: '68%', benchClass: 'is-bench-pos' },
       { name: 'Providing Direction', sub: true, cur: '76%', bench: '64%', benchClass: 'is-bench-pos' },
       { name: 'Leading change', sub: true, cur: '84%', bench: '67%', benchClass: 'is-bench-pos' },
@@ -221,17 +228,17 @@ const DATA = {
       { variant: 'is-peer',    icon: 'building', label: 'Team Accounting',       x: 72, y: 20 },
       { variant: 'is-peer',    icon: 'building', label: 'Team Sales',            x: 15, y: 34 },
       { variant: 'is-peer',    icon: 'building', label: 'Team Finance',          x: 40, y: 15 },
-      { variant: 'is-previous', icon: 'rotate-backward', label: 'Previous survey', x: 30, y: 30 },
-      { variant: 'is-current', icon: 'group',    label: 'Team IT',               x: 70, y: 80 }
+      { variant: 'is-previous', icon: 'rotate-backward', label: 'Previous survey', x: 27, y: 24 },
+      { variant: 'is-current', icon: 'group',    label: 'Team IT',               x: 67, y: 80 }
     ],
 
     engpDist: { dis: 5, pot: 25, eng: 70 },
     engpCards: [
-      { lbl: 'Team IT', val: '78%' },
+      { lbl: 'Team IT', val: '67%' },
       { lbl: 'Novanta B.V.', val: '72%' },
       { lbl: 'Benchmark', val: '75%' }
     ],
-    engpLine: { labels: ['Jun 2025', 'May 2026'], data: [60, 78] },
+    engpLine: { labels: ['Jun 2025', 'May 2026', 'Nov 2026'], data: [60, 56, 67] },
     engpTheme: [
       { q: 'Doing my work gives me energy', s: '88%' },
       { q: 'I enjoy doing my work / tasks', s: '85%' },
@@ -342,9 +349,9 @@ function shell(d) {
             <span class="sel-btn-value">Team IT</span>
           </button>
           <div class="date-range">
-            <span>22 Apr 2026</span>
+            <span>${d.dateFrom}</span>
             <i data-icon="from-to" style="display:flex;width:24px;height:16px;"></i>
-            <span>22 May 2026</span>
+            <span>${d.dateTo}</span>
           </div>
         </div>
         <div class="tabs">
@@ -379,7 +386,7 @@ function shell(d) {
   </div>
   <p class="ai-intro">${d.aiIntro}</p>
   <div class="ai-more">
-    <p>${d.aiMore}</p>
+    ${d.aiMore.map(p => `<p>${p}</p>`).join('')}
     <div class="ai-sec">
       <h4 class="ai-sec-title">Strengths</h4>
       <ul class="ai-list">${li(d.aiStrengths)}</ul>
