@@ -896,7 +896,7 @@
     .fv-reco-body { margin: 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
     .fv-reco-add { align-self: flex-start; }
     .fv-reco-add i { display: flex; width: 16px; height: 16px; }
-    .fv-create.btn-link { align-self: flex-start; gap: var(--spacing-tight); }
+    .fv-create.btn-link { align-self: flex-start; gap: var(--spacing-tight); padding: 0; }
     .fv-create.btn-link i { display: flex; width: 16px; height: 16px; }
 
     /* Win card (simpler) */
