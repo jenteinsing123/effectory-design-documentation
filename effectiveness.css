@@ -875,11 +875,12 @@
     /* Win card (simpler) */
     .fv-win-card {
       display: flex; align-items: center; gap: var(--spacing-base-tight);
-      padding: var(--spacing-base); background: var(--bg-base);
+      padding: var(--spacing-loose); background: var(--bg-base);
       border: 1px solid var(--border-positive-subtle); border-radius: var(--radius-lg); box-shadow: var(--sh-card);
     }
     .fv-win-card .fv-card-q { flex: 1; }
-    .fv-win-card .fv-card-theme { font-size: 14px; line-height: 22px; }
+    .fv-win-card .fv-card-question { font-size: 16px; line-height: 24px; }
+    .fv-win-card .fv-card-theme { font-size: 12px; line-height: 19px; }
 
     /* ──────────────────────────────────────────────
        Responsiveness
