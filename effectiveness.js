@@ -365,7 +365,6 @@ const DATA = {
     engpDist: { dis: 6, pot: 26, eng: 68 },
     engpCards: [
       { lbl: 'Novanta B.V.', val: '72%' },
-      { lbl: 'Team IT', val: '67%' },
       { lbl: 'Benchmark', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026', 'Nov 2026'], data: [69, 70, 72] },
@@ -487,7 +486,6 @@ const DATA = {
     engpDist: { dis: 10, pot: 31, eng: 59 },
     engpCards: [
       { lbl: 'Novanta B.V.', val: '66%' },
-      { lbl: 'Team IT', val: '56%' },
       { lbl: 'Benchmark', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026'], data: [67, 66] },
