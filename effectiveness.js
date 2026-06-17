@@ -160,7 +160,7 @@ const DATA = {
     ],
 
     fxMarkers: [
-      { variant: 'is-org',     chip: 'is-chip-above', icon: 'building', label: 'Novanta', x: 80, y: 70 },
+      { variant: 'is-org',     chip: 'is-chip-below', icon: 'building', label: 'Novanta', x: 84, y: 58 },
       { variant: 'is-current', chip: 'is-chip-above', icon: 'group',    label: 'Team IT', x: 67, y: 80 }
     ],
 
