@@ -172,7 +172,7 @@ const DATA = {
     swCurrent: [67, 72, 75, 88, 82, 85],
     swPrevious: [56, 61, 56, 87, 62, 78],
 
-    rrValue: 79, rrPartDone: 632, rrPartTotal: 800, rrTrend: '13%', rrTrendIcon: 'Trend-up', rrBench: 84,
+    rrValue: 79, rrPartDone: 499, rrPartTotal: 632, rrTrend: '13%', rrTrendIcon: 'Trend-up', rrBench: 84,
 
     kpiWorkload: 56, kpiRetention: 73, kpiWellbeing: 79,
 
