@@ -17,8 +17,8 @@
     /* Animated switch between views (View Transitions API): a soft focus-pull —
        the whole screen blurs out and the new view sharpens back into focus. */
     @view-transition { navigation: auto; }
-    ::view-transition-old(root) { animation: vt-blur-out var(--motion-slow) var(--ease-in) both; }
-    ::view-transition-new(root) { animation: vt-blur-in var(--motion-slow) var(--ease-out) both; }
+    ::view-transition-old(root) { animation: vt-blur-out 2s var(--ease-in) both; }
+    ::view-transition-new(root) { animation: vt-blur-in 2s var(--ease-out) both; }
     @keyframes vt-blur-out { to { filter: blur(18px); opacity: 0; transform: scale(1.03); } }
     @keyframes vt-blur-in { from { filter: blur(18px); opacity: 0; transform: scale(1.03); } }
     @media (prefers-reduced-motion: reduce) {
