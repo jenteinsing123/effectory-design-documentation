@@ -1160,6 +1160,11 @@ function renderOverview(variant) {
     });
   });
 
+  /* Focus View: 'Explore' opens the effectiveness side panel */
+  document.querySelectorAll('#view-focus .fv-explore').forEach(el => {
+    el.addEventListener('click', () => { document.getElementById('efp-overlay').hidden = false; });
+  });
+
   /* Focus View: picking an approach reveals a recommended-action card */
   document.querySelectorAll('#view-focus .fv-card').forEach(card => {
     const reco = card.querySelector('.fv-reco');
