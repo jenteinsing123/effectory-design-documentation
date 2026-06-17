@@ -76,7 +76,8 @@ const DATA = {
     /* Effectiveness side panel */
     efpLeadPre: 'Team IT is ', efpLeadEm: 'ineffective', efpLeadEmClass: '',
     efpLeadDesc: 'Both engagement and the performance environment are under pressure. Without attention, this can affect results and team wellbeing over time.',
-    efpComparisons: '3 selected',
+    efpComparisons: '2 selected',
+    efpHasPrevious: false,
     efpBench: '68%',
     efpFocusIntro: 'In this situation, it is important to slow down and create focus. A structured and supported follow-up helps bring stability and direction. Rather than trying to fix everything, concentrate on the few areas that are most urgent and within your influence.',
     efpFocusBullets: [
@@ -192,6 +193,7 @@ const DATA = {
     efpLeadPre: 'Team IT is ', efpLeadEm: 'effective', efpLeadEmClass: 'is-pos',
     efpLeadDesc: 'Both engagement and the performance environment are in a healthy place. Employees feel energized by their work and well-supported by how the team is organized. Focus on sustaining and building on these strengths.',
     efpComparisons: '3 selected',
+    efpHasPrevious: true,
     efpBench: '68%',
     efpFocusIntro: 'The team is in a strong position. The goal now is to sustain momentum and protect what is working, while staying alert to early signals. Rather than launching big changes, keep doing what works and fine-tune where useful.',
     efpFocusBullets: [
@@ -219,6 +221,7 @@ const DATA = {
       { variant: 'is-peer',    icon: 'building', label: 'Team Accounting',       x: 72, y: 20 },
       { variant: 'is-peer',    icon: 'building', label: 'Team Sales',            x: 15, y: 34 },
       { variant: 'is-peer',    icon: 'building', label: 'Team Finance',          x: 40, y: 15 },
+      { variant: 'is-previous', icon: 'rotate-backward', label: 'Previous survey', x: 30, y: 30 },
       { variant: 'is-current', icon: 'group',    label: 'Team IT',               x: 70, y: 80 }
     ],
 
@@ -655,21 +658,15 @@ function shell(d) {
             <i data-icon="chevron-down"></i>
           </button>
           <div class="efp-filter" id="efp-filter" hidden>
-            <label class="efp-filter-row">
-              <span class="cb-wrap"><input type="checkbox" class="cb" data-variant="is-org" checked></span>
-              <span class="efp-filter-label">Organization Level</span>
-              <i data-icon="building"></i>
-            </label>
-            <label class="efp-filter-row">
-              <span class="cb-wrap"><input type="checkbox" class="cb" data-variant="is-previous" checked></span>
-              <span class="efp-filter-label">Previous survey</span>
-              <i data-icon="rotate-backward"></i>
-            </label>
-            <label class="efp-filter-row">
-              <span class="cb-wrap"><input type="checkbox" class="cb" data-variant="is-peer" checked></span>
-              <span class="efp-filter-label">Group Level below</span>
-              <i data-icon="sort-descending"></i>
-            </label>
+            ${[
+              { variant: 'is-org', label: 'Organization Level', icon: 'building' },
+              ...(d.efpHasPrevious ? [{ variant: 'is-previous', label: 'Previous survey', icon: 'rotate-backward' }] : []),
+              { variant: 'is-peer', label: 'Group Level below', icon: 'sort-descending' }
+            ].map(r => `<label class="efp-filter-row">
+              <span class="cb-wrap"><input type="checkbox" class="cb" data-variant="${r.variant}" checked></span>
+              <span class="efp-filter-label">${r.label}</span>
+              <i data-icon="${r.icon}"></i>
+            </label>`).join('')}
           </div>
         </div>
         <div class="segctl">
