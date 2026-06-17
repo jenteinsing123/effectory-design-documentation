@@ -1026,7 +1026,7 @@ function gauge(id, pct, colorVar, opts) {
 }
 
 /* ---------- render ---------- */
-function renderOverview(variant) {
+function renderOverview(variant, initialView) {
   const d = DATA[variant] || DATA.before;
   document.getElementById('root').innerHTML = shell(d);
 
@@ -1159,6 +1159,12 @@ function renderOverview(variant) {
       document.querySelector('.main-scroll').scrollTop = 0;
     });
   });
+
+  /* Open directly on a given view (e.g. shared Focus View link) */
+  if (initialView === 'focus' || (typeof location !== 'undefined' && location.hash === '#focus')) {
+    const ft = document.querySelector('.tab[data-view="focus"]');
+    if (ft) ft.click();
+  }
 
   /* Focus View: 'Explore' opens the effectiveness side panel */
   document.querySelectorAll('#view-focus .fv-explore').forEach(el => {
