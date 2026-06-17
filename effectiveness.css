@@ -379,9 +379,11 @@
     }
 
     /* Matrix */
-    .efp-matrix-row { display: flex; gap: var(--spacing-tight); margin-bottom: var(--spacing-tight); }
+    /* The matrix fills the full content width (aligned with the rest of the
+       panel); the y-axis label is pulled out into the side-panel padding. */
+    .efp-matrix-row { position: relative; margin-bottom: var(--spacing-tight); }
     .efp-y-axis {
-      flex-shrink: 0; width: 20px;
+      position: absolute; left: -24px; top: 0; bottom: 0; width: 20px;
       display: flex; align-items: center; justify-content: center;
     }
     .efp-y-axis span {
@@ -389,7 +391,7 @@
       font-size: 12px; font-weight: 500; color: var(--content-secondary); white-space: nowrap;
     }
     .efp-matrix {
-      position: relative; flex: 1;
+      position: relative;
       height: 450px;
       display: grid;
       grid-template-columns: 1fr 1fr;

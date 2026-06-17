@@ -95,7 +95,6 @@ const DATA = {
       { name: 'Managing Systems', sub: true, cur: '47%', bench: '72%', benchClass: 'is-bench-neg' }
     ],
     efpMarkers: [
-      { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 22, y: 74 },
       { variant: 'is-peer',    icon: 'building', label: 'Finance Operations',    x: 33, y: 82 },
       { variant: 'is-peer',    icon: 'building', label: 'Security & Compliance', x: 43, y: 70 },
       { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 57, y: 80 },
@@ -211,7 +210,6 @@ const DATA = {
       { name: 'Managing Systems', sub: true, cur: '71%', bench: '72%', benchClass: 'is-bench' }
     ],
     efpMarkers: [
-      { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 22, y: 74 },
       { variant: 'is-peer',    icon: 'building', label: 'Finance Operations',    x: 33, y: 82 },
       { variant: 'is-peer',    icon: 'building', label: 'Security & Compliance', x: 43, y: 70 },
       { variant: 'is-peer',    icon: 'building', label: 'Revenue Operations',    x: 57, y: 80 },
