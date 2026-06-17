@@ -260,6 +260,30 @@ const DATA = {
   }
 };
 
+/* Recommended action per approach — 1:1 uses the Figma copy, the rest are placeholders */
+const RECO = {
+  'Team action': {
+    eyebrow: 'Team session', effort: 'High effort', effortClass: 'is-high',
+    title: 'Run a short team session on this theme',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bring the team together to name what gets in the way, then agree on one concrete change to try over the next few weeks.'
+  },
+  '1:1 action': {
+    eyebrow: '1:1 conversation', effort: 'Medium effort', effortClass: 'is-medium',
+    title: 'Ask each person where their strengths are underused',
+    body: 'Your team signalled their skills do not fully fit their roles. In your next 1:1s, ask what each person does best and where they feel stretched too thin — or not enough. Small adjustments to who owns what can close the fit gap surprisingly quickly.'
+  },
+  'Process change': {
+    eyebrow: 'Process change', effort: 'High effort', effortClass: 'is-high',
+    title: 'Adjust how work flows through the team',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Review the current workflow and remove the step that adds the least value.'
+  },
+  'Personal action': {
+    eyebrow: 'Personal action', effort: 'Low effort', effortClass: 'is-low',
+    title: 'Reflect on your own role in this theme',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Take a moment to consider one small thing you can change in how you support the team this week.'
+  }
+};
+
 /* ---------- Focus View (second tab) ---------- */
 function focusView(d) {
   const npsValue = d.npsPromoters - d.npsDetractors;
@@ -297,6 +321,19 @@ function focusView(d) {
       <div class="fv-approach">
         <div class="fv-approach-lbl"><i data-icon="lightbulb"></i> Pick an approach to see the recommended action:</div>
         <div class="fv-approach-chips">${approach(i)}</div>
+        <div class="fv-reco" hidden>
+          <div class="fv-reco-content">
+            <div class="fv-reco-head">
+              <div class="fv-reco-title-wrap">
+                <span class="fv-reco-eyebrow"></span>
+                <p class="fv-reco-title"></p>
+              </div>
+              <span class="fv-reco-effort"></span>
+            </div>
+            <p class="fv-reco-body"></p>
+          </div>
+          <button class="btn btn-primary fv-reco-add"><i data-icon="target"></i> Add to action planner</button>
+        </div>
         <button class="btn btn-link fv-create"><i data-icon="plus"></i> Create new action</button>
       </div>
     </div>`;
@@ -1120,6 +1157,29 @@ function renderOverview(variant) {
       tab.classList.add('is-active');
       Object.entries(views).forEach(([k, el]) => { if (el) el.hidden = (k !== v); });
       document.querySelector('.main-scroll').scrollTop = 0;
+    });
+  });
+
+  /* Focus View: picking an approach reveals a recommended-action card */
+  document.querySelectorAll('#view-focus .fv-card').forEach(card => {
+    const reco = card.querySelector('.fv-reco');
+    if (!reco) return;
+    card.querySelectorAll('.rb-btn-bordered').forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        const input = chip.querySelector('input.rb');
+        if (input) input.checked = true;
+        card.querySelectorAll('.rb-btn-bordered').forEach(c => c.classList.toggle('is-checked', c === chip));
+        card.classList.add('is-active');
+        const r = RECO[chip.textContent.trim()] || RECO['1:1 action'];
+        reco.querySelector('.fv-reco-eyebrow').textContent = r.eyebrow;
+        reco.querySelector('.fv-reco-title').textContent = r.title;
+        reco.querySelector('.fv-reco-body').textContent = r.body;
+        const eff = reco.querySelector('.fv-reco-effort');
+        eff.textContent = r.effort;
+        eff.className = 'fv-reco-effort ' + r.effortClass;
+        reco.hidden = false;
+      });
     });
   });
 

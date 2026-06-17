@@ -869,6 +869,33 @@
     .fv-approach-lbl { display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 400; color: var(--content-base); }
     .fv-approach-lbl i { display: flex; width: 20px; height: 20px; color: var(--content-highlight-secondary); }
     .fv-approach-chips { display: flex; flex-wrap: wrap; gap: var(--spacing-base-tight); }
+    .fv-approach-chips .rb-btn-bordered.is-checked { background: var(--bg-brand-subtle); border-color: var(--border-brand-subtle); }
+
+    /* Active focus card (an approach is selected) */
+    .fv-card.is-active { border-color: var(--border-warning-subtle); box-shadow: var(--sh-card); }
+
+    /* Recommended-action card (appears on selection) */
+    .fv-reco {
+      display: flex; flex-direction: column; gap: var(--spacing-base);
+      padding: var(--spacing-loose); background: var(--bg-base);
+      border: 1px solid var(--border-base); border-radius: var(--radius-md); box-shadow: var(--sh-card);
+    }
+    .fv-reco[hidden] { display: none; }
+    .fv-reco-content { display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .fv-reco-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--spacing-base); }
+    .fv-reco-title-wrap { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .fv-reco-eyebrow { font-size: 12px; font-weight: 600; line-height: 18px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--content-subtle); }
+    .fv-reco-title { margin: 0; font-size: 14px; font-weight: 600; line-height: 22px; color: var(--content-base); }
+    .fv-reco-effort {
+      flex-shrink: 0; padding: var(--spacing-tight) var(--spacing-base-tight); border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 500; line-height: 19px; white-space: nowrap;
+    }
+    .fv-reco-effort.is-low { background: var(--bg-accent-green-subtle); color: var(--content-accent-green-base); }
+    .fv-reco-effort.is-medium { background: var(--bg-accent-yellow-subtle); color: var(--content-accent-yellow-base); }
+    .fv-reco-effort.is-high { background: var(--bg-accent-orange-subtle); color: var(--content-accent-orange-base); }
+    .fv-reco-body { margin: 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+    .fv-reco-add { align-self: flex-start; }
+    .fv-reco-add i { display: flex; width: 16px; height: 16px; }
     .fv-create.btn-link { align-self: flex-start; gap: var(--spacing-tight); }
     .fv-create.btn-link i { display: flex; width: 16px; height: 16px; }
 
