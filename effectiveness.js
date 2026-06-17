@@ -7,6 +7,7 @@
 /* ---------- per-variant data ---------- */
 const DATA = {
   before: {
+    groupName: 'Team IT',
     dateFrom: '22 Apr 2026', dateTo: '22 May 2026',
     /* AI summary */
     aiIntro: "The IT team’s results indicate several challenges impacting overall effectiveness and employee experience. Engagement (56%) and retention (57%) are below desired levels, suggesting employees may feel disconnected from the organization and uncertain about their long-term future within the team. Workload scores are particularly low at 38%, highlighting concerns around capacity, prioritization, and sustainable ways of working. While the eNPS score of 12 remains positive, it indicates only moderate advocacy and suggests there is significant room for improvement in employee satisfaction and loyalty.",
@@ -134,6 +135,7 @@ const DATA = {
   },
 
   after: {
+    groupName: 'Team IT',
     dateFrom: '22 Nov 2026', dateTo: '22 Oct 2026',
     /* AI summary */
     aiIntro: "The IT team's latest survey results show a significant improvement across key engagement and employee experience indicators. Engagement has increased to 67%, while retention has risen to 73%, indicating that employees are more committed to both their current role and the organization. The team also achieved an eNPS of 31, reflecting a strong increase in employee advocacy and a greater willingness to recommend the organization as a place to work.",
@@ -254,6 +256,129 @@ const DATA = {
       { q: 'The vision for the future of Novanta inspires me', s: '82%' },
       { q: 'Novanta uses employees’ ideas and suggestions to do better', s: '78%' }
     ]
+  },
+
+  org: {
+    groupName: 'Novanta',
+    fvVerdictPre: 'Novanta is',
+    dateFrom: '22 Nov 2026', dateTo: '22 Oct 2026',
+    aiIntro: "Across Novanta, this survey shows a healthy and stable picture. Organization-wide engagement stands at 72% and retention at 76%, indicating that most employees feel committed to their work and intend to stay. An eNPS of 30 reflects solid advocacy, and a strong response rate of 81% gives a reliable view of how the organization is doing.",
+    aiMore: [
+      "Most departments sit in the effective quadrant, where engagement and the performance environment reinforce each other. A few teams still have room to grow — particularly around workload and development opportunities — but the overall foundation is strong.",
+      "Continued investment in leadership, recognition and balanced workloads will help Novanta sustain this momentum and lift the teams that are not yet performing at their best."
+    ],
+    aiStrengths: [
+      "Engagement (72%) is healthy organization-wide and close to the external benchmark.",
+      "Retention (76%) shows that the large majority of employees intend to stay with Novanta.",
+      "eNPS (30) reflects solid advocacy across the organization.",
+      "A response rate of 81% gives strong confidence in the representativeness of the results."
+    ],
+    aiGrowth: [
+      "Workload (62%) varies between departments and remains an opportunity in several teams.",
+      "Development opportunities score lower than engagement, suggesting room to strengthen growth and career paths."
+    ],
+    aiActions: [
+      "Share organization-wide results transparently and let departments set their own focus areas.",
+      "Support managers of lower-scoring teams with targeted coaching and resources.",
+      "Continue investing in development, recognition and balanced workloads.",
+      "Monitor workload distribution across departments to protect wellbeing.",
+      "Reinforce what works in high-performing teams and spread those practices."
+    ],
+
+    fxMarkers: [
+      { variant: 'is-previous', chip: 'is-chip-below', icon: 'rotate-backward', label: 'Previous survey', x: 66, y: 66 },
+      { variant: 'is-current',  chip: 'is-chip-above', icon: 'group',           label: 'Novanta', x: 74, y: 75 }
+    ],
+
+    engValue: '72%', engTrend: '4%', engTrendIcon: 'Trend-up', engBench: '75%', engBenchW: 75,
+
+    fvEngTrend: '4%', fvPerform: '74%', fvPerformTrend: '3%', npsTrend: '4',
+
+    npsPromoters: 50, npsPassives: 30, npsDetractors: 20,
+    npsPromCount: 2380, npsPassCount: 1420, npsDetrCount: 950,
+
+    swCurrent: [72, 70, 74, 86, 76, 81],
+    swPrevious: [69, 67, 70, 84, 73, 78],
+
+    rrValue: 81, rrPartDone: 3842, rrPartTotal: 4743, rrTrend: '4%', rrTrendIcon: 'Trend-up', rrBench: 84,
+
+    kpiWorkload: 62, kpiRetention: 76, kpiWellbeing: 81,
+
+    topics: [
+      { name: 'Collaboration between teams', count: 540, color: 'is-green' },
+      { name: 'Our feedback culture very long example', count: 384, color: 'is-turquoise' },
+      { name: 'Our feedback culture', count: 146, color: 'is-blue' }
+    ],
+
+    highScores: [
+      { q: 'I feel comfortable within the team', s: 92 },
+      { q: 'Our team trusts one another', s: 89 },
+      { q: 'During a team meeting, everyone has a fair chance to speak up', s: 88 },
+      { q: 'There is a relaxed atmosphere within our team', s: 86 },
+      { q: 'I enjoy my work', s: 85 }
+    ],
+    lowScores: [
+      { q: 'I know how to carry out my tasks', s: 66 },
+      { q: 'I receive enough feedback on my work', s: 68 },
+      { q: 'I see ample opportunities to develop further', s: 69 },
+      { q: 'I am satisfied with my work', s: 70 },
+      { q: 'We honour agreements in our team', s: 71 }
+    ],
+
+    efpLeadPre: 'Novanta is ', efpLeadEm: 'effective', efpLeadEmClass: 'is-pos',
+    efpLeadDesc: 'Across the organization, engagement and the performance environment reinforce each other. Most teams have the energy and the foundations in place to perform well and deliver sustainable results.',
+    efpComparisons: '2 selected',
+    efpHasPrevious: true,
+    efpHasOrg: false,
+    efpBench: '75%',
+    efpFocusIntro: 'Here, a light-touch organization-wide follow-up is enough. Acknowledge what is going well and give departments the space to act on their own results. The goal is to keep momentum across the organization.',
+    efpFocusBullets: [
+      'Reflect on the strengths that stand out across the organization.',
+      'Let each department translate the results into their own focus.',
+      'Support the few teams that are not yet performing at their best.'
+    ],
+    efpFocusClosing: 'Keep attention on what works well and continue building on it across teams.',
+    efpScores: [
+      { name: 'Engagement', desc: 'Employees that are inspired and energized by their work', cur: '72%', bench: '75%', benchClass: 'is-bench-neutral' },
+      { name: 'Performance environment', desc: 'Important basic conditions which enable employees to work effectively and efficiently', cur: '74%', bench: '68%', benchClass: 'is-bench-pos' },
+      { name: 'Providing Direction', sub: true, cur: '73%', bench: '64%', benchClass: 'is-bench-pos' },
+      { name: 'Leading change', sub: true, cur: '78%', bench: '67%', benchClass: 'is-bench-pos' },
+      { name: 'Managing People', sub: true, cur: '71%', bench: '67%', benchClass: 'is-bench-pos' },
+      { name: 'Managing Systems', sub: true, cur: '70%', bench: '72%', benchClass: 'is-bench-neutral' }
+    ],
+    efpMarkers: [
+      { variant: 'is-peer',     icon: 'building',        label: 'Team IT',           x: 67, y: 80 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Marketing',         x: 55, y: 72 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Sales',             x: 82, y: 58 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Finance',           x: 48, y: 64 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Human Resources',   x: 70, y: 86 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Operations',        x: 38, y: 46 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Product',           x: 88, y: 78 },
+      { variant: 'is-peer',     icon: 'building',        label: 'Customer Success',  x: 60, y: 38 },
+      { variant: 'is-previous', icon: 'rotate-backward', label: 'Previous survey',   x: 66, y: 66 },
+      { variant: 'is-current',  icon: 'group',           label: 'Novanta',           x: 74, y: 75 }
+    ],
+
+    engpDist: { dis: 6, pot: 26, eng: 68 },
+    engpCards: [
+      { lbl: 'Novanta B.V.', val: '72%' },
+      { lbl: 'Team IT', val: '67%' },
+      { lbl: 'Benchmark', val: '75%' }
+    ],
+    engpLine: { labels: ['Jun 2025', 'May 2026', 'Nov 2026'], data: [69, 70, 72] },
+    engpTheme: [
+      { q: 'Doing my work gives me energy', s: '80%' },
+      { q: 'I enjoy doing my work / tasks', s: '82%' },
+      { q: 'I am proud to work at Novanta', s: '86%' },
+      { q: 'I feel that I fit in at Novanta', s: '85%' }
+    ],
+    engpCorr: [
+      { q: 'My skills and abilities fit in well with my job', s: '88%' },
+      { q: 'I identify with the culture of Novanta', s: '85%' },
+      { q: 'Novanta is a good organisation to work for', s: '90%' },
+      { q: 'The vision for the future of Novanta inspires me', s: '80%' },
+      { q: 'Novanta uses employees’ ideas and suggestions to do better', s: '75%' }
+    ]
   }
 };
 
@@ -361,7 +486,7 @@ function focusView(d) {
   <div class="fv-glance">
     <div class="fv-glance-head">
       <span class="fv-eyebrow is-glance">At first glance</span>
-      <h2 class="fv-verdict ${verdictClass}">Your team is <span class="fv-verdict-word">${d.efpLeadEm}<span class="fv-verdict-underline"></span></span></h2>
+      <h2 class="fv-verdict ${verdictClass}">${d.fvVerdictPre || 'Your team is'} <span class="fv-verdict-word">${d.efpLeadEm}<span class="fv-verdict-underline"></span></span></h2>
     </div>
     <div class="fv-glance-body">
       <div class="fv-glance-left">
@@ -524,7 +649,7 @@ function shell(d) {
           <button class="sel-btn">
             <i data-icon="filter"></i>
             <span class="sel-btn-name">Filter</span>
-            <span class="sel-btn-value">Team IT</span>
+            <span class="sel-btn-value">${d.groupName}</span>
           </button>
           <div class="date-range">
             <span>${d.dateFrom}</span>
@@ -853,7 +978,7 @@ ${focusView(d)}
           </button>
           <div class="efp-filter" id="efp-filter" hidden>
             ${[
-              { variant: 'is-org', label: 'Organization Level', icon: 'building' },
+              ...(d.efpHasOrg !== false ? [{ variant: 'is-org', label: 'Organization Level', icon: 'building' }] : []),
               ...(d.efpHasPrevious ? [{ variant: 'is-previous', label: 'Previous survey', icon: 'rotate-backward' }] : []),
               { variant: 'is-peer', label: 'Group Level below', icon: 'sort-descending' }
             ].map(r => `<label class="efp-filter-row">
@@ -958,8 +1083,8 @@ ${focusView(d)}
         <p>See how your group scored on &ldquo;Engagement&rdquo; in comparison to other groups.</p>
         <div class="engp-cards">${d.engpCards.map(engpCard).join('')}</div>
         <div class="engp-chart-card" style="margin-top: var(--spacing-base);">
-          <div class="engp-chart-hd">Score over time <span class="engp-chart-dot"></span> Team IT</div>
-          <div class="engp-chart-wrap"><canvas id="engp-chart" role="img" aria-label="Engagement score over time for Team IT"></canvas></div>
+          <div class="engp-chart-hd">Score over time <span class="engp-chart-dot"></span> ${d.groupName}</div>
+          <div class="engp-chart-wrap"><canvas id="engp-chart" role="img" aria-label="Engagement score over time for ${d.groupName}"></canvas></div>
         </div>
       </div>
 
