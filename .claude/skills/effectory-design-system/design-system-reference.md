@@ -265,7 +265,7 @@ States: `.is-hover` `.is-pressed` `.is-disabled`
 States: `.is-hover` `.is-pressed` `.is-disabled`
 
 ### Sentiment Button
-Knop gekleurd naar sentiment voor een actie die die lading draagt (approve, delete, …). Gewone acties → gewone Button; sentiment-kleur verliest betekenis als alles gekleurd is.
+Knop gekleurd naar sentiment. **Voornamelijk gebruikt binnen een container die zelf een sentiment draagt** — een Inline notification, een gekleurde card, of de Announcement card / Announcement dialog: de knop neemt dezelfde kleur over zodat boodschap + actie als één geheel lezen. Losse, neutrale acties → gewone Button.
 ```html
 <button class="sbtn is-positive">Approve</button>      <!-- secondary (outline) -->
 <button class="sbtn is-primary is-negative">Delete</button>  <!-- primary (filled) -->
