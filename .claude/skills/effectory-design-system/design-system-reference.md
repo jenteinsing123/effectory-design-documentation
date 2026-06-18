@@ -264,6 +264,18 @@ States: `.is-hover` `.is-pressed` `.is-disabled`
 ```
 States: `.is-hover` `.is-pressed` `.is-disabled`
 
+### Sentiment Button
+Knop gekleurd naar sentiment voor een actie die die lading draagt (approve, delete, …). Gewone acties → gewone Button; sentiment-kleur verliest betekenis als alles gekleurd is.
+```html
+<button class="sbtn is-positive">Approve</button>      <!-- secondary (outline) -->
+<button class="sbtn is-primary is-negative">Delete</button>  <!-- primary (filled) -->
+```
+- Sentiment: `is-positive` / `is-negative` / `is-info` / `is-warning` — zet de border (secondary) of fill (`.is-primary`).
+- Secondary: witte fill + sentiment-border + `--content-base`; hover = `-base-hover` border + `--sh-action-hover`; pressed = `--bg-{sent}-subtle`.
+- Primary: gevuld met `--bg-{sent}-base` (warning = `--bg-warning-bold`, **donkere tekst**; info/positive/negative = witte tekst `--content-on-brand-base`).
+- Hoogte 36, radius `--radius-base`, `--sh-action`, label `body-14` Medium. States: `.is-hover` `.is-pressed` `.is-disabled`.
+> ⚠️ Figma/dev gap: Figma heeft een losse sentiment-knop met secondary én **filled primary**; de Angular-styleguide kent 'm momenteel alleen als **secondary** sentiment-actie binnen een Inline notification (`buttonMessages` / `messageType`). Standalone filled-primary nog te bevestigen.
+
 ### Icon Button
 Vierkante knop met alleen een icoon. Maat via `.ib-36` (16px icoon, radius `--radius-md`) of `.ib-24` (12px icoon, radius `--radius-base`); variant via `.ib-primary` / `.ib-secondary` / `.ib-tertiary`. Altijd een `aria-label` meegeven.
 ```html
