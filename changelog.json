@@ -1,6 +1,40 @@
 {
-  "count": 715,
+  "count": 719,
   "entries": [
+    {
+      "hash": "e0dd026",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Sentiment Button: document container-echo usage",
+      "pages": [
+        "sentiment-button-docs.html"
+      ]
+    },
+    {
+      "hash": "bf46099",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Sentiment Button: lean on the primary (filled) variant in examples",
+      "pages": [
+        "sentiment-button-docs.html"
+      ]
+    },
+    {
+      "hash": "c153833",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Sentiment Button: flag primitive-token usage as a Figma gap",
+      "pages": [
+        "sentiment-button-docs.html"
+      ]
+    },
+    {
+      "hash": "98e9fac",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Republish skill on effectory-design repo (v1.8.3)",
+      "pages": []
+    },
     {
       "hash": "065da56",
       "author": "Jente Insing",

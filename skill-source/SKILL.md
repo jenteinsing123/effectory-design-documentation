@@ -5,7 +5,7 @@ description: Bouw prototypes, mockups, designs, schermen, pagina's of losse comp
 
 # Skill: Effectory Design System
 
-**Version:** 1.8.3
+**Version:** 1.9.0
 
 Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **design**, **scherm**, **pagina** of **losse component-demo** te bouwen met onze design-system-componenten.
 
@@ -49,6 +49,26 @@ In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, go
 
 - **Reports pagina** → `reference-prototypes/reports.md` + `reports.html`
   Het scherm waar je survey-rapporten downloadt (essential + raw-data reports, taalkeuze, generate/download), onderdeel van het results-/result-dashboard. Bedoelt iemand de reports- of rapporten-pagina, "download reports", of het rapporten-overzicht in het results-dashboard — in NL of EN, hoe dan ook geformuleerd — dan is dit het scherm.
+
+- **Resultaten-dashboard — Overview** → `reference-prototypes/effectiveness-overview.md` + `effectiveness-overview.html`
+  De overzichtspagina van het resultaten-dashboard: app-shell met een kaarten-grid (Effectiveness-matrix, Engagement, eNPS, Themes, Response rate, Workload/Retention/Well-being, Feel-good topics, Highest/Lowest scores) en een AI-samenvatting. Groep-switch (Team IT ↔ Novanta), periode-switch (Q2 ↔ Q3), EN/NL/DE-taalwissel, blur-overgang. Voor "resultaten-/results-dashboard", "overzichtspagina van de resultaten" of "engagement-dashboard".
+
+- **Resultaten-dashboard — Focus View** → `reference-prototypes/effectiveness-focus.md` + `effectiveness-focus.html`
+  Dezelfde app op het Focus View-tabblad: verdict + matrix ("At first glance"), "What needs focus" (laagste scores met aanbevolen acties) en "Celebrate your wins" (hoogste scores). Voor "focus view", "focus areas" of "aandachtsgebieden".
+
+- **Effectiveness matrix side panel** → `reference-prototypes/effectiveness-panel.md` + `effectiveness-panel.html`
+  Het rechter side panel van de Effectiveness-kaart: verdict, vergelijkings-matrix met markers, suggested focus, areas to focus, legenda.
+
+- **Engagement side panel** → `reference-prototypes/engagement-panel.md` + `engagement-panel.html`
+  Het rechter side panel van de Engagement-kaart: uitleg, verdeling betrokken medewerkers, vergelijkingskaarten + score-over-time, thema- en correlerende vragen.
+
+- **Resultaten-dashboard — kaart-bibliotheek** → `reference-prototypes/dashboard-cards.md` + `dashboard-cards.html`
+  Alle losse dashboard-kaarten in een grid (zonder chrome), om één kaart te hergebruiken of te kiezen welke kaarten een dashboard moet tonen.
+
+**Bij een resultaten-dashboard (Overview of Focus View): vraag eerst**
+1. of de **side panels** (Effectiveness en/of Engagement) ook gemaakt moeten worden, en
+2. **welke kaarten** op het overzicht moeten staan (standaard: alle bovengenoemde kaarten).
+Bouw daarna met de bijbehorende referenties hierboven.
 
 Twijfel je of een verzoek dit scherm bedoelt? Ga uit van ja en gebruik de referentie. Staat het gevraagde scherm er niet bij, bouw dan normaal volgens de reference.
 
