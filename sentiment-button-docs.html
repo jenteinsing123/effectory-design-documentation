@@ -311,6 +311,14 @@
               <span class="dev-gap-text">Figma documents the sentiment button as a standalone control with both a secondary and a <strong>filled primary</strong> variant. In the Angular styleguide it currently only appears as the <strong>secondary</strong> sentiment action inside an Inline notification (via <code>buttonMessages</code> / <code>messageType</code>) — there's no standalone filled-primary sentiment button yet. Confirm the intended Angular API before building.</span>
             </div>
           </div>
+
+          <div class="dev-gap">
+            <span class="dev-gap-icon">⚠️</span>
+            <div class="dev-gap-body">
+              <span class="dev-gap-label">Figma gap — primitive tokens</span>
+              <span class="dev-gap-text">In Figma some states are painted with <strong>primitive</strong> colour tokens (e.g. <code>color/orange/700</code>, <code>color/blue/900</code>, <code>color/green/900</code> for the primary pressed states). Primitives shouldn't be referenced directly. This documentation uses the <strong>semantic</strong> tokens instead (<code>--bg-{sentiment}-base/-hover/-pressed</code>, <code>--border-{sentiment}-base/-hover</code>); the Figma layers should be rebound to those semantic tokens.</span>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="dev-props">
