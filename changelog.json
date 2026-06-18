@@ -1,6 +1,36 @@
 {
-  "count": 719,
+  "count": 723,
   "entries": [
+    {
+      "hash": "0e11718",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Skill v1.9.1: rebuild dashboard reference prototypes with the refined distribution bar",
+      "pages": []
+    },
+    {
+      "hash": "689253f",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Engagement panel: refine the engaged-employees distribution bar",
+      "pages": []
+    },
+    {
+      "hash": "51d6df5",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Build the Card documentation page",
+      "pages": [
+        "card-docs.html"
+      ]
+    },
+    {
+      "hash": "1da2b49",
+      "author": "Jente Insing",
+      "date": "2026-06-18",
+      "subject": "Add results-dashboard reference prototypes to the design-system skill",
+      "pages": []
+    },
     {
       "hash": "e0dd026",
       "author": "Jente Insing",
