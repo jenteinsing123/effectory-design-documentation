@@ -1,6 +1,27 @@
 {
-  "count": 763,
+  "count": 766,
   "entries": [
+    {
+      "hash": "7da84ca",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.15: eNPS card gets Previous survey + Benchmark stat block (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "628baa9",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "eNPS card: add Previous survey + Benchmark stat block beside the donut",
+      "pages": []
+    },
+    {
+      "hash": "6b19884",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.14",
+      "pages": []
+    },
     {
       "hash": "6d774a1",
       "author": "Jente Insing",
