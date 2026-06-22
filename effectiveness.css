@@ -880,6 +880,12 @@
     }
     .fv-why i { display: flex; width: 16px; height: 16px; }
 
+    /* 'Why these …?' explainer dialog body */
+    .fv-why-dialog { font-size: 14px; }
+    .fv-why-dialog p { margin: 0; }
+    .fv-why-dialog ul { margin: var(--spacing-base) 0; padding-left: var(--spacing-loose); display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .fv-why-dialog li { line-height: 1.6; }
+
     .fv-cards, .fv-win-cards { display: flex; flex-direction: column; gap: var(--spacing-base-tight); }
 
     /* Focus question card */

@@ -662,7 +662,7 @@ function focusView(d) {
       <p class="fv-section-desc">These are questions where improvement will have the most impact on your team results.</p>
     </div>
     <div class="fv-block-main">
-      <a class="fv-why"><i data-icon="info"></i> Why these focus areas?</a>
+      <a class="fv-why" data-dialog="fa-dialog"><i data-icon="info"></i> Why these focus areas?</a>
       <div class="fv-cards">${d.lowScores.slice(0, 3).map(focusCard).join('')}</div>
     </div>
   </div>
@@ -674,8 +674,44 @@ function focusView(d) {
       <p class="fv-section-desc">These are the areas where your team is performing well. Share these wins with your team to keep the momentum going!</p>
     </div>
     <div class="fv-block-main">
-      <a class="fv-why"><i data-icon="info"></i> Why these successes?</a>
+      <a class="fv-why" data-dialog="wins-dialog"><i data-icon="info"></i> Why these successes?</a>
       <div class="fv-win-cards">${d.highScores.slice(0, 3).map(winCard).join('')}</div>
+    </div>
+  </div>
+
+  <div class="overlay" id="fa-dialog" hidden>
+    <div class="dialog dialog-s" role="dialog" aria-modal="true" aria-labelledby="fa-dlg-title">
+      <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
+      <div class="dialog-header is-sm"><div class="dialog-header-top"><h3 class="dialog-title" id="fa-dlg-title">Why these focus areas?</h3></div></div>
+      <div class="dialog-body fv-why-dialog">
+        <p>Focus areas are identified based on four factors from your team's survey results:</p>
+        <ul>
+          <li>Trend - whether your team's score on this question has declined since the last survey</li>
+          <li>Gap - how your team's score compares to the rest of the organisation</li>
+          <li>Consistency - how aligned your team members are in their responses</li>
+          <li>Performance - how your score compares to internal and external benchmarks</li>
+        </ul>
+        <p>Questions that score highest across these four factors are surfaced as your top focus areas.</p>
+      </div>
+      <div class="dialog-footer"><button class="btn btn-primary">Got it</button></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="wins-dialog" hidden>
+    <div class="dialog dialog-s" role="dialog" aria-modal="true" aria-labelledby="wins-dlg-title">
+      <button class="dialog-close" aria-label="Close"><i data-icon="cross"></i></button>
+      <div class="dialog-header is-sm"><div class="dialog-header-top"><h3 class="dialog-title" id="wins-dlg-title">Why these successes?</h3></div></div>
+      <div class="dialog-body fv-why-dialog">
+        <p>Successes are identified based on the same four factors from your team's survey results:</p>
+        <ul>
+          <li>Trend - whether your team's score on this question has improved since the last survey</li>
+          <li>Gap - how your team's score compares to the rest of the organisation</li>
+          <li>Consistency - how aligned your team members are in their responses</li>
+          <li>Performance - how your score compares to internal and external benchmarks</li>
+        </ul>
+        <p>Questions that score best across these four factors are surfaced as your top successes.</p>
+      </div>
+      <div class="dialog-footer"><button class="btn btn-primary">Got it</button></div>
     </div>
   </div>
   `;
@@ -1443,6 +1479,20 @@ function renderOverview(variant, initialView) {
   /* Focus View: 'Explore' and the glance matrix open the effectiveness side panel */
   document.querySelectorAll('#view-focus .fv-explore, #view-focus .fv-glance-matrix').forEach(el => {
     el.addEventListener('click', () => { document.getElementById('efp-overlay').hidden = false; });
+  });
+
+  /* Focus View: 'Why these …?' opens an explainer dialog */
+  document.querySelectorAll('#view-focus .fv-why').forEach(el => {
+    el.addEventListener('click', () => { const ov = document.getElementById(el.dataset.dialog); if (ov) ov.hidden = false; });
+  });
+  ['fa-dialog', 'wins-dialog'].forEach(id => {
+    const ov = document.getElementById(id);
+    if (!ov) return;
+    const close = () => { ov.hidden = true; };
+    ov.querySelector('.dialog-close').addEventListener('click', close);
+    ov.querySelector('.dialog-footer .btn-primary').addEventListener('click', close);
+    ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !ov.hidden) close(); });
   });
 
   /* Focus View: picking an approach reveals a recommended-action card */
