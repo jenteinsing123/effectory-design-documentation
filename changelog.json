@@ -1,6 +1,27 @@
 {
-  "count": 731,
+  "count": 734,
   "entries": [
+    {
+      "hash": "fb980ef",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.4: rebuild reference prototypes with the tooltip height fix",
+      "pages": []
+    },
+    {
+      "hash": "e0734e2",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Tooltip auto-position: clear bottom/right so the fixed bubble isn't height-clamped",
+      "pages": []
+    },
+    {
+      "hash": "48c8329",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.3",
+      "pages": []
+    },
     {
       "hash": "1bd050b",
       "author": "Jente Insing",
