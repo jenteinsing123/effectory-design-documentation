@@ -1,3 +1,4 @@
+
 /* ============================================================
    Effectiveness group comparison — shared overview renderer
    One template + per-variant DATA. before.html / after.html call
@@ -45,6 +46,7 @@ const DATA = {
     /* eNPS */
     npsPromoters: 42, npsPassives: 28, npsDetractors: 30,
     npsPromCount: 237, npsPassCount: 158, npsDetrCount: 170,
+    npsPrev: 8, npsBench: 20, npsTop3: 30,
 
     /* Themes radar */
     swCurrent: [56, 61, 56, 87, 62, 78],
@@ -177,6 +179,7 @@ const DATA = {
 
     npsPromoters: 52, npsPassives: 27, npsDetractors: 21,
     npsPromCount: 329, npsPassCount: 171, npsDetrCount: 132,
+    npsPrev: 12, npsBench: 20, npsTop3: 30,
 
     swCurrent: [67, 72, 75, 88, 82, 85],
     swPrevious: [56, 61, 56, 87, 62, 78],
@@ -299,6 +302,7 @@ const DATA = {
 
     npsPromoters: 50, npsPassives: 30, npsDetractors: 20,
     npsPromCount: 2380, npsPassCount: 1420, npsDetrCount: 950,
+    npsPrev: 20, npsBench: 20, npsTop3: 30,
 
     swCurrent: [72, 70, 74, 86, 76, 81],
     swPrevious: [69, 67, 70, 84, 73, 78],
@@ -421,6 +425,7 @@ const DATA = {
 
     npsPromoters: 44, npsPassives: 32, npsDetractors: 24,
     npsPromCount: 2090, npsPassCount: 1520, npsDetrCount: 1140,
+    npsPrev: 18, npsBench: 20, npsTop3: 30,
 
     swCurrent: [66, 64, 68, 82, 70, 75],
     swPrevious: [63, 61, 65, 80, 68, 72],
@@ -786,6 +791,23 @@ function shell(d) {
   const engpCard = (c) => `<div class="engp-card-item"><div class="engp-card-lbl">${c.lbl}</div><div class="engp-card-val">${c.val}</div></div>`;
   const themeRow = (r) => `<div class="engp-q-row"><span class="engp-q-text">${r.q}</span><span class="engp-q-score">${r.s}</span></div>`;
   const corrRow = (r, i) => `<div class="engp-q-row"><span class="engp-q-num">${i + 1}</span><span class="engp-q-text">${r.q}</span><span class="engp-q-score">${r.s}</span></div>`;
+  /* eNPS panel: diverging comparison bar (value range -100..100, 0 at centre) */
+  const npsBar = (r) => {
+    const pos = r.val >= 0;
+    const w = Math.max(Math.min(Math.abs(r.val), 100) / 2, 1.5);
+    const style = pos ? `left:50%;width:${w}%` : `left:${(50 - w).toFixed(2)}%;width:${w}%`;
+    /* current group stays blue; everything else is green when positive, red when negative */
+    const color = r.group ? 'is-blue' : (pos ? 'is-green' : 'is-red');
+    return `<div class="npsp-bar-row ${r.group ? 'is-group' : ''}">
+      <span class="npsp-bar-lbl">${r.icon ? `<i data-icon="${r.icon}"></i>` : ''}${r.label}</span>
+      <div class="npsp-fill ${pos ? 'is-pos' : 'is-neg'} ${color}" style="${style}"><span class="npsp-val">${r.val}</span></div>
+    </div>`;
+  };
+  /* eNPS panel: 1..10 recommendation-scale cells (detractors 1-6, passives 7-8, promoters 9-10) */
+  const npsCells = () => Array.from({ length: 10 }, (_, i) => {
+    const n = i + 1, cls = n <= 6 ? 'is-det' : n <= 8 ? 'is-pas' : 'is-pro';
+    return `<span class="npsp-cell ${cls}">${n}</span>`;
+  }).join('');
 
   return `
 <div class="app">
@@ -1308,6 +1330,117 @@ ${focusView(d)}
     </div><!-- /sp-body -->
   </div><!-- /sidepanel -->
 </div><!-- /overlay -->
+
+<!-- eNPS side panel -->
+<div class="overlay is-right" id="npsp-overlay" hidden>
+  <div class="sidepanel" role="dialog" aria-modal="true" aria-labelledby="npsp-title">
+    <div class="sp-header">
+      <div class="sp-toolbar"><div class="sp-actions"><i data-icon="cross" id="npsp-close" role="button" tabindex="0" aria-label="Close"></i></div></div>
+      <div class="sp-heading">
+        <h2 class="sp-title" id="npsp-title">Employee net promoter score (eNPS)</h2>
+        <p class="sp-subtitle">The eNPS shows you to what extent your employees would recommend your organization as a good employer.</p>
+      </div>
+      <div class="sp-tabs engp-tabs">
+        <a class="sp-tab is-active"><i data-icon="category"></i> Insights</a>
+        <a class="sp-tab"><i data-icon="pin"></i> Actions</a>
+      </div>
+    </div>
+
+    <div class="sp-body">
+
+      <div class="npsp-section">
+        <h3 class="npsp-h">Your scores</h3>
+        <p class="npsp-sub">This is how the calculation works.</p>
+        <div class="npsp-calc">
+          <div class="npsp-card is-passive">
+            <span class="npsp-card-icon"><i data-icon="net-promoter-score-passive"></i></span>
+            <span class="npsp-card-lbl">Passive</span>
+            <span class="npsp-card-pct">${d.npsPassives}%</span>
+            <span class="npsp-card-count"><i data-icon="user"></i> ${d.npsPassCount}</span>
+          </div>
+          <div class="npsp-divider"></div>
+          <div class="npsp-card is-promoter">
+            <span class="npsp-card-icon"><i data-icon="net-promoter-score"></i></span>
+            <span class="npsp-card-lbl">Promoter</span>
+            <span class="npsp-card-pct">${d.npsPromoters}%</span>
+            <span class="npsp-card-count"><i data-icon="user"></i> ${d.npsPromCount}</span>
+          </div>
+          <div class="npsp-op"><span class="npsp-op-sign">–</span></div>
+          <div class="npsp-card is-detractor">
+            <span class="npsp-card-icon"><i data-icon="net-promoter-score-detractor"></i></span>
+            <span class="npsp-card-lbl">Detractor</span>
+            <span class="npsp-card-pct">${d.npsDetractors}%</span>
+            <span class="npsp-card-count"><i data-icon="user"></i> ${d.npsDetrCount}</span>
+          </div>
+          <div class="npsp-op"><span class="npsp-op-sign">=</span></div>
+          <div class="npsp-card is-result">
+            <span class="npsp-card-lbl">eNPS</span>
+            <span class="npsp-card-pct">${npsValue}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="npsp-section">
+        <h3 class="npsp-h">Compare scores</h3>
+        <p class="npsp-sub">Your score compared with the benchmarks.</p>
+        <div class="npsp-bars">
+          ${[
+            { label: d.groupName,        val: npsValue,    group: true },
+            { label: 'Previous survey',  val: d.npsPrev,   icon: 'rotate-backward' },
+            { label: 'Benchmark',        val: d.npsBench,  icon: 'benchmark-up' },
+            { label: 'Top 3 benchmark',  val: d.npsTop3,   icon: 'star' }
+          ].map(npsBar).join('')}
+        </div>
+        <div class="npsp-axis">
+          <span class="npsp-axis-line"></span><span class="npsp-axis-tick"></span>
+          <span class="npsp-axis-lbl l">-100</span><span class="npsp-axis-lbl m">0</span><span class="npsp-axis-lbl r">100</span>
+        </div>
+      </div>
+
+      <div class="npsp-section">
+        <div class="npsp-qcard">
+          <p class="npsp-q">&ldquo;How likely are you to recommend your company to others?&rdquo;</p>
+          <div class="npsp-cells">${npsCells()}</div>
+          <div class="npsp-legend">
+            <span class="npsp-leg is-det"><span class="npsp-dot"></span>Detractors (1–6)</span>
+            <span class="npsp-leg is-pas"><span class="npsp-dot"></span>Passives (7–8)</span>
+            <span class="npsp-leg is-pro"><span class="npsp-dot"></span>Promoters (9–10)</span>
+          </div>
+        </div>
+        <p class="npsp-note">Scores are based on global standards</p>
+      </div>
+
+      <div class="npsp-section">
+        <h3 class="npsp-h">Score breakdown</h3>
+        <div class="npsp-break">
+          <div class="npsp-break-card">
+            <span class="npsp-break-icon is-pro"><i data-icon="net-promoter-score"></i></span>
+            <div class="npsp-break-body">
+              <div class="npsp-break-title">Promoters: 9 to 10</div>
+              <p class="npsp-break-desc">These most positive, motivated and satisfied employees are most likely to recommend your company to others.</p>
+            </div>
+          </div>
+          <div class="npsp-break-card">
+            <span class="npsp-break-icon is-pas"><i data-icon="net-promoter-score-passive"></i></span>
+            <div class="npsp-break-body">
+              <div class="npsp-break-title">Passives: 7 to 8</div>
+              <p class="npsp-break-desc">These neutral employees are generally content, but not fully committed to your company. Their results are excluded from the eNPS calculation.</p>
+            </div>
+          </div>
+          <div class="npsp-break-card">
+            <span class="npsp-break-icon is-det"><i data-icon="net-promoter-score-detractor"></i></span>
+            <div class="npsp-break-body">
+              <div class="npsp-break-title">Detractors: 1 to 6</div>
+              <p class="npsp-break-desc">These employees will not recommend your company to others and may be dissatisfied.</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-link npsp-learn">Learn why the eNPS is important <i data-icon="external-link"></i></button>
+      </div>
+
+    </div><!-- /sp-body -->
+  </div><!-- /sidepanel -->
+</div><!-- /overlay -->
 `;
 }
 
@@ -1450,6 +1583,7 @@ function renderOverview(variant, initialView) {
   };
   wirePanel('efp-overlay', 'efp-close', '.fx-card');
   wirePanel('engp-overlay', 'engp-close', '.eng-card');
+  wirePanel('npsp-overlay', 'npsp-close', '.nps-card');
 
   /* Effectiveness panel: Matrix / List segmented control + list accordions */
   const segBtns = document.querySelectorAll('#efp-overlay .segctl-btn');
@@ -1658,3 +1792,5 @@ function renderOverview(variant, initialView) {
   document.addEventListener('mouseover', onEnter);
   document.addEventListener('focusin', onEnter);
 })();
+
+  

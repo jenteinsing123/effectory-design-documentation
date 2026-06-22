@@ -1,3 +1,4 @@
+
 /* ============================================================
    Lightweight i18n for the results dashboard.
    - T: translation map keyed by the EXACT English source string.
@@ -352,3 +353,5 @@
     });
   };
 })();
+
+  

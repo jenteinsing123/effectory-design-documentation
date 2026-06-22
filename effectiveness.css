@@ -1,3 +1,4 @@
+
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
     body {
@@ -664,6 +665,8 @@
        ════════════════════════════════════════════════ */
     .card.eng-card { cursor: pointer; gap: var(--spacing-base); transition: box-shadow var(--motion-base) var(--ease-out); }
     .card.eng-card:hover { box-shadow: var(--sh-card-hover); }
+    .card.nps-card { cursor: pointer; transition: box-shadow var(--motion-base) var(--ease-out); }
+    .card.nps-card:hover { box-shadow: var(--sh-card-hover); }
     .eng-header { display: flex; flex-direction: column; gap: var(--spacing-extra-tight); }
     .eng-title-row { display: flex; align-items: center; gap: var(--spacing-base-tight); }
     .eng-title { flex: 1; margin: 0; }
@@ -1032,3 +1035,80 @@
       .efp-matrix { height: 340px; }
       .engp-cards { grid-auto-flow: row; grid-template-columns: 1fr; }
     }
+
+
+    /* ════ eNPS side panel (redesign) ════ */
+    .npsp-section { margin-top: var(--spacing-super-loose); }
+    .npsp-section:first-child { margin-top: 0; }
+    /* Section header → content spacing is always 12px (--spacing-base-tight); title → subtitle stays tight at 4px */
+    .npsp-h { margin: 0 0 var(--spacing-base-tight); font-size: 20px; font-weight: 600; line-height: 28px; color: var(--content-base); }
+    .npsp-h:has(+ .npsp-sub) { margin-bottom: var(--spacing-extra-tight); }
+    .npsp-sub { margin: 0 0 var(--spacing-base-tight); font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+
+    /* Your scores — calculation row */
+    .npsp-calc { display: flex; align-items: stretch; gap: var(--spacing-base); }
+    .npsp-card { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: var(--spacing-extra-tight); padding: var(--spacing-base) var(--spacing-tight); border: 1px solid var(--border-base); border-radius: var(--radius-md); text-align: center; }
+    .npsp-card-icon { width: 24px; height: 24px; display: flex; }
+    .npsp-card.is-promoter  .npsp-card-icon { color: var(--bg-distribution-agree); }
+    .npsp-card.is-passive   .npsp-card-icon { color: var(--bg-distribution-neither-agree-disagree); }
+    .npsp-card.is-detractor .npsp-card-icon { color: var(--bg-distribution-disagree); }
+    .npsp-card-lbl { font-size: 14px; font-weight: 500; color: var(--content-secondary); }
+    .npsp-card-pct { font-size: 20px; font-weight: 600; color: var(--content-base); }
+    .npsp-card-count { display: flex; align-items: center; gap: var(--spacing-extra-tight); font-size: 14px; color: var(--content-secondary); }
+    .npsp-card-count i { width: 12px; height: 12px; display: flex; }
+    .npsp-card.is-result { background: var(--bg-accent-blue-subtle); border-color: var(--bg-accent-blue-subtle); justify-content: center; gap: 0; }
+    .npsp-card.is-result .npsp-card-pct { font-size: 32px; line-height: 1.2; color: var(--content-info-base); }
+    .npsp-divider { width: 1px; align-self: center; height: 48px; background: var(--border-base); flex: 0 0 auto; }
+    .npsp-op { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+    .npsp-op-sign { font-size: 16px; font-weight: 600; color: var(--content-subtle); line-height: 1; }
+
+    /* Compare scores — diverging bars */
+    .npsp-bars { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .npsp-bar-row { position: relative; height: 48px; background: var(--bg-secondary); border-radius: var(--radius-base); overflow: hidden; }
+    .npsp-bar-lbl { position: absolute; left: var(--spacing-base); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 600; color: var(--content-base); z-index: 1; }
+    .npsp-bar-lbl i { width: 16px; height: 16px; display: flex; color: var(--content-base); }
+    .npsp-bar-row.is-group .npsp-bar-lbl { color: var(--content-info-base); }
+    .npsp-fill { position: absolute; top: 0; height: 100%; box-sizing: border-box; display: flex; align-items: center; border-radius: var(--radius-base); border-left: 1px solid var(--border-white); border-right: 1px solid var(--border-white); }
+    .npsp-fill.is-blue  { background: var(--bg-accent-blue-subtle); }
+    .npsp-fill.is-green { background: var(--bg-scores-very-positive); }
+    .npsp-fill.is-red   { background: var(--bg-scores-very-negative); }
+    .npsp-val { font-size: 14px; font-weight: 600; color: var(--content-base); white-space: nowrap; }
+    .npsp-fill.is-pos { justify-content: flex-start; }
+    .npsp-fill.is-pos .npsp-val { padding-left: var(--spacing-base-tight); }
+    .npsp-fill.is-neg { justify-content: flex-end; }
+    .npsp-fill.is-neg .npsp-val { padding-right: var(--spacing-base-tight); }
+    .npsp-fill.is-blue .npsp-val { color: var(--content-info-base); }
+    .npsp-axis { position: relative; height: 36px; margin-top: var(--spacing-tight); }
+    .npsp-axis-line { position: absolute; left: 0; right: 0; top: 0; border-top: 1px solid var(--border-base); }
+    .npsp-axis-tick { position: absolute; left: 50%; top: 0; width: 1px; height: 8px; background: var(--border-base); }
+    .npsp-axis-lbl { position: absolute; top: 12px; font-size: 14px; font-weight: 600; color: var(--content-base); }
+    .npsp-axis-lbl.l { left: 0; } .npsp-axis-lbl.m { left: 50%; transform: translateX(-50%); } .npsp-axis-lbl.r { right: 0; }
+
+    /* Question breakdown — 1..10 cells */
+    .npsp-qcard { background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--spacing-base); }
+    .npsp-q { margin: 0 0 var(--spacing-base); text-align: center; font-size: 14px; font-weight: 600; color: var(--content-base); }
+    .npsp-cells { display: flex; justify-content: center; gap: var(--spacing-extra-tight); }
+    .npsp-cell { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; }
+    .npsp-cell.is-det { background: var(--bg-scores-very-negative); color: var(--content-accent-red-base); }
+    .npsp-cell.is-pas { background: var(--bg-accent-yellow-subtle); color: var(--content-accent-yellow-base); }
+    .npsp-cell.is-pro { background: var(--bg-scores-very-positive); color: var(--content-accent-green-base); }
+    .npsp-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-base) var(--spacing-loose); margin-top: var(--spacing-base); }
+    .npsp-leg { display: flex; align-items: center; gap: var(--spacing-tight); font-size: 12px; color: var(--content-secondary); }
+    .npsp-leg .npsp-dot { width: 8px; height: 8px; border-radius: var(--radius-full); }
+    .npsp-leg.is-det .npsp-dot { background: var(--bg-distribution-disagree); }
+    .npsp-leg.is-pas .npsp-dot { background: var(--bg-distribution-neither-agree-disagree); }
+    .npsp-leg.is-pro .npsp-dot { background: var(--bg-distribution-agree); }
+    .npsp-note { margin: var(--spacing-base) 0 0; text-align: center; font-size: 12px; color: var(--content-subtle); }
+
+    /* Score breakdown — bordered cards */
+    .npsp-break { display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .npsp-break-card { display: flex; gap: var(--spacing-base); padding: var(--spacing-base); border: 1px solid var(--border-base); border-radius: var(--radius-md); }
+    .npsp-break-icon { width: 20px; height: 20px; display: flex; flex: 0 0 auto; margin-top: 2px; }
+    .npsp-break-icon.is-pro { color: var(--bg-distribution-agree); }
+    .npsp-break-icon.is-pas { color: var(--bg-distribution-neither-agree-disagree); }
+    .npsp-break-icon.is-det { color: var(--bg-distribution-disagree); }
+    .npsp-break-title { font-size: 14px; font-weight: 600; color: var(--content-base); }
+    .npsp-break-desc { margin: var(--spacing-extra-tight) 0 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+    .npsp-learn { margin-top: var(--spacing-base); padding-left: 0; }
+    .npsp-learn i { width: 16px; height: 16px; display: inline-flex; vertical-align: middle; }
+  
