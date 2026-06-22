@@ -1,6 +1,27 @@
 {
-  "count": 734,
+  "count": 737,
   "entries": [
+    {
+      "hash": "35f3370",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.5: rebuild reference prototypes (focus matrix opens the panel)",
+      "pages": []
+    },
+    {
+      "hash": "b42f0a8",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Focus View: clicking the glance matrix also opens the effectiveness side panel",
+      "pages": []
+    },
+    {
+      "hash": "2a88827",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.4",
+      "pages": []
+    },
     {
       "hash": "fb980ef",
       "author": "Jente Insing",
