@@ -852,7 +852,7 @@
     .fv-meaning-hd i { display: flex; width: 16px; height: 16px; }
     .fv-meaning p { margin: var(--spacing-tight) 0 0; font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
 
-    .fv-glance-matrix { flex: none; width: 445px; max-width: 100%; display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .fv-glance-matrix { flex: none; width: 445px; max-width: 100%; display: flex; flex-direction: column; gap: var(--spacing-tight); cursor: pointer; }
     .fv-matrix-row { position: relative; }
     .fv-matrix-row .fx-matrix { width: 100%; height: 383px; }
     .fv-y-axis {

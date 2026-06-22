@@ -1440,8 +1440,8 @@ function renderOverview(variant, initialView) {
   document.querySelector('.results-title')?.addEventListener('click', switchPeriod);
   document.querySelector('.date-range')?.addEventListener('click', switchPeriod);
 
-  /* Focus View: 'Explore' opens the effectiveness side panel */
-  document.querySelectorAll('#view-focus .fv-explore').forEach(el => {
+  /* Focus View: 'Explore' and the glance matrix open the effectiveness side panel */
+  document.querySelectorAll('#view-focus .fv-explore, #view-focus .fv-glance-matrix').forEach(el => {
     el.addEventListener('click', () => { document.getElementById('efp-overlay').hidden = false; });
   });
 
