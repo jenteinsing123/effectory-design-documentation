@@ -1,6 +1,27 @@
 {
-  "count": 740,
+  "count": 743,
   "entries": [
+    {
+      "hash": "61fd7cf",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.7: rebuild reference prototypes with URL-synced tab switching",
+      "pages": []
+    },
+    {
+      "hash": "93852b1",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Dashboard: sync the URL with the active Overview/Focus tab (replaceState, no reload)",
+      "pages": []
+    },
+    {
+      "hash": "0cddd72",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.6",
+      "pages": []
+    },
     {
       "hash": "fb85dec",
       "author": "Jente Insing",
