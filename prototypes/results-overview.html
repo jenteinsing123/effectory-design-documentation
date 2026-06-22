@@ -999,10 +999,12 @@
     }
 
     /* ════ eNPS side panel (redesign) ════ */
-    .npsp-section { margin-top: var(--spacing-super-loose); }
-    .npsp-section:first-child { margin-top: 0; }
-    .npsp-h { margin: 0 0 var(--spacing-extra-tight); font-size: 20px; font-weight: 600; line-height: 28px; color: var(--content-base); }
-    .npsp-sub { margin: 0 0 var(--spacing-base); font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
+    #npsp-overlay .sp-body { display: flex; flex-direction: column; gap: var(--spacing-base); }
+    .npsp-section { margin-top: 0; }
+    /* Section header → content spacing is always 12px (--spacing-base-tight); title → subtitle stays tight at 4px */
+    .npsp-h { margin: 0 0 var(--spacing-base-tight); font-size: 20px; font-weight: 600; line-height: 28px; color: var(--content-base); }
+    .npsp-h:has(+ .npsp-sub) { margin-bottom: var(--spacing-extra-tight); }
+    .npsp-sub { margin: 0 0 var(--spacing-base-tight); font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
 
     /* Your scores — calculation row */
     .npsp-calc { display: flex; align-items: stretch; gap: var(--spacing-tight); }
@@ -1018,23 +1020,25 @@
     .npsp-card.is-result { background: var(--bg-accent-blue-subtle); border-color: var(--bg-accent-blue-subtle); justify-content: center; gap: 0; }
     .npsp-card.is-result .npsp-card-pct { font-size: 32px; line-height: 1.2; color: var(--content-info-base); }
     .npsp-divider { width: 1px; align-self: center; height: 48px; background: var(--border-base); flex: 0 0 auto; }
-    .npsp-op { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-extra-tight); }
-    .npsp-op-cap { font-size: 12px; color: var(--content-subtle); }
+    .npsp-op { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
     .npsp-op-sign { font-size: 16px; font-weight: 600; color: var(--content-subtle); line-height: 1; }
 
     /* Compare scores — diverging bars */
-    .npsp-bars { display: flex; flex-direction: column; gap: var(--spacing-extra-tight); }
+    .npsp-bars { display: flex; flex-direction: column; gap: var(--spacing-tight); }
     .npsp-bar-row { position: relative; height: 48px; background: var(--bg-secondary); border-radius: var(--radius-base); overflow: hidden; }
-    .npsp-bar-lbl { position: absolute; left: var(--spacing-base); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 500; color: var(--content-base); z-index: 1; }
-    .npsp-bar-lbl i { width: 16px; height: 16px; display: flex; color: var(--content-subtle); }
-    .npsp-bar-row.is-group .npsp-bar-lbl { color: var(--content-info-base); font-weight: 600; }
-    .npsp-fill { position: absolute; top: 0; height: 100%; display: flex; align-items: center; }
-    .npsp-fill.is-group { background: var(--p-color-blue-300); }
-    .npsp-fill.is-bench { background: var(--bg-scores-very-positive); }
-    .npsp-fill.is-prev  { background: var(--bg-scores-very-negative); }
+    .npsp-bar-lbl { position: absolute; left: var(--spacing-base); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 600; color: var(--content-base); z-index: 1; }
+    .npsp-bar-lbl i { width: 16px; height: 16px; display: flex; color: var(--content-base); }
+    .npsp-bar-row.is-group .npsp-bar-lbl { color: var(--content-info-base); }
+    .npsp-fill { position: absolute; top: 0; height: 100%; box-sizing: border-box; display: flex; align-items: center; border-radius: var(--radius-base); border-left: 1px solid var(--border-white); border-right: 1px solid var(--border-white); }
+    .npsp-fill.is-blue  { background: var(--bg-accent-blue-subtle); }
+    .npsp-fill.is-green { background: var(--bg-scores-very-positive); }
+    .npsp-fill.is-red   { background: var(--bg-scores-very-negative); }
     .npsp-val { font-size: 14px; font-weight: 600; color: var(--content-base); white-space: nowrap; }
-    .npsp-fill.is-pos .npsp-val { margin-left: auto; padding-right: var(--spacing-tight); }
-    .npsp-fill.is-neg .npsp-val.is-out { position: absolute; right: 100%; top: 50%; transform: translateY(-50%); margin-right: var(--spacing-tight); }
+    .npsp-fill.is-pos { justify-content: flex-start; }
+    .npsp-fill.is-pos .npsp-val { padding-left: var(--spacing-base-tight); }
+    .npsp-fill.is-neg { justify-content: flex-end; }
+    .npsp-fill.is-neg .npsp-val { padding-right: var(--spacing-base-tight); }
+    .npsp-fill.is-blue .npsp-val { color: var(--content-info-base); }
     .npsp-axis { position: relative; height: 36px; margin-top: var(--spacing-tight); }
     .npsp-axis-line { position: absolute; left: 0; right: 0; top: 0; border-top: 1px solid var(--border-base); }
     .npsp-axis-tick { position: absolute; left: 50%; top: 0; width: 1px; height: 8px; background: var(--border-base); }
@@ -1042,6 +1046,7 @@
     .npsp-axis-lbl.l { left: 0; } .npsp-axis-lbl.m { left: 50%; transform: translateX(-50%); } .npsp-axis-lbl.r { right: 0; }
 
     /* Question breakdown — 1..10 cells */
+    .npsp-qcard { background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--spacing-base); }
     .npsp-q { margin: 0 0 var(--spacing-base); text-align: center; font-size: 14px; font-weight: 600; color: var(--content-base); }
     .npsp-cells { display: flex; justify-content: center; gap: var(--spacing-extra-tight); }
     .npsp-cell { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--content-base); }
@@ -2197,9 +2202,11 @@ function shell(d) {
     const pos = r.val >= 0;
     const w = Math.max(Math.min(Math.abs(r.val), 100) / 2, 1.5);
     const style = pos ? `left:50%;width:${w}%` : `left:${(50 - w).toFixed(2)}%;width:${w}%`;
-    return `<div class="npsp-bar-row ${r.row || ''}">
+    /* current group stays blue; everything else is green when positive, red when negative */
+    const color = r.group ? 'is-blue' : (pos ? 'is-green' : 'is-red');
+    return `<div class="npsp-bar-row ${r.group ? 'is-group' : ''}">
       <span class="npsp-bar-lbl">${r.icon ? `<i data-icon="${r.icon}"></i>` : ''}${r.label}</span>
-      <div class="npsp-fill ${pos ? 'is-pos' : 'is-neg'} ${r.fill}" style="${style}"><span class="npsp-val${pos ? '' : ' is-out'}">${r.val}</span></div>
+      <div class="npsp-fill ${pos ? 'is-pos' : 'is-neg'} ${color}" style="${style}"><span class="npsp-val">${r.val}</span></div>
     </div>`;
   };
   /* eNPS panel: 1..10 recommendation-scale cells (detractors 1-6, passives 7-8, promoters 9-10) */
@@ -2652,14 +2659,14 @@ ${focusView(d)}
             <span class="npsp-card-pct">${d.npsPromoters}%</span>
             <span class="npsp-card-count"><i data-icon="user"></i> ${d.npsPromCount}</span>
           </div>
-          <div class="npsp-op"><span class="npsp-op-cap">minus</span><span class="npsp-op-sign">–</span></div>
+          <div class="npsp-op"><span class="npsp-op-sign">–</span></div>
           <div class="npsp-card is-detractor">
             <span class="npsp-card-icon"><i data-icon="net-promoter-score-detractor"></i></span>
             <span class="npsp-card-lbl">Detractor</span>
             <span class="npsp-card-pct">${d.npsDetractors}%</span>
             <span class="npsp-card-count"><i data-icon="user"></i> ${d.npsDetrCount}</span>
           </div>
-          <div class="npsp-op"><span class="npsp-op-cap">equals</span><span class="npsp-op-sign">=</span></div>
+          <div class="npsp-op"><span class="npsp-op-sign">=</span></div>
           <div class="npsp-card is-result">
             <span class="npsp-card-lbl">eNPS</span>
             <span class="npsp-card-pct">${npsValue}</span>
@@ -2672,10 +2679,10 @@ ${focusView(d)}
         <p class="npsp-sub">Your score compared with the benchmarks.</p>
         <div class="npsp-bars">
           ${[
-            { label: d.groupName,        val: npsValue,    row: 'is-group', fill: 'is-group' },
-            { label: 'Previous survey',  val: d.npsPrev,   icon: 'rotate-backward', fill: 'is-prev' },
-            { label: 'Benchmark',        val: d.npsBench,  icon: 'benchmark-up',    fill: 'is-bench' },
-            { label: 'Top 3 benchmark',  val: d.npsTop3,   icon: 'star',            fill: 'is-bench' }
+            { label: d.groupName,        val: npsValue,    group: true },
+            { label: 'Previous survey',  val: d.npsPrev,   icon: 'rotate-backward' },
+            { label: 'Benchmark',        val: d.npsBench,  icon: 'benchmark-up' },
+            { label: 'Top 3 benchmark',  val: d.npsTop3,   icon: 'star' }
           ].map(npsBar).join('')}
         </div>
         <div class="npsp-axis">
@@ -2685,12 +2692,14 @@ ${focusView(d)}
       </div>
 
       <div class="npsp-section">
-        <p class="npsp-q">&ldquo;How likely are you to recommend your company to others?&rdquo;</p>
-        <div class="npsp-cells">${npsCells()}</div>
-        <div class="npsp-legend">
-          <span class="npsp-leg is-det"><span class="npsp-dot"></span>Detractors (1–6)</span>
-          <span class="npsp-leg is-pas"><span class="npsp-dot"></span>Passives (7–8)</span>
-          <span class="npsp-leg is-pro"><span class="npsp-dot"></span>Promoters (9–10)</span>
+        <div class="npsp-qcard">
+          <p class="npsp-q">&ldquo;How likely are you to recommend your company to others?&rdquo;</p>
+          <div class="npsp-cells">${npsCells()}</div>
+          <div class="npsp-legend">
+            <span class="npsp-leg is-det"><span class="npsp-dot"></span>Detractors (1–6)</span>
+            <span class="npsp-leg is-pas"><span class="npsp-dot"></span>Passives (7–8)</span>
+            <span class="npsp-leg is-pro"><span class="npsp-dot"></span>Promoters (9–10)</span>
+          </div>
         </div>
         <p class="npsp-note">Scores are based on global standards</p>
       </div>
