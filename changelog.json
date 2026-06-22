@@ -1,6 +1,27 @@
 {
-  "count": 728,
+  "count": 731,
   "entries": [
+    {
+      "hash": "1bd050b",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.3: rebuild reference prototypes with the tooltip auto-position fix",
+      "pages": []
+    },
+    {
+      "hash": "0e85774",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Tooltips: add auto-position script so card overflow can't clip them",
+      "pages": []
+    },
+    {
+      "hash": "c38f017",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Update changelog for v1.9.2",
+      "pages": []
+    },
     {
       "hash": "bf3386c",
       "author": "Jente Insing",
