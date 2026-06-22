@@ -5,7 +5,7 @@ description: Bouw prototypes, mockups, designs, schermen, pagina's of losse comp
 
 # Skill: Effectory Design System
 
-**Version:** 1.9.9
+**Version:** 1.9.10
 
 Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **design**, **scherm**, **pagina** of **losse component-demo** te bouwen met onze design-system-componenten.
 
@@ -62,11 +62,14 @@ In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, go
 - **Engagement side panel** → `reference-prototypes/engagement-panel.md` + `engagement-panel.html`
   Het rechter side panel van de Engagement-kaart: uitleg, verdeling betrokken medewerkers, vergelijkingskaarten + score-over-time, thema- en correlerende vragen.
 
+- **eNPS side panel** → `reference-prototypes/enps-panel.md` + `enps-panel.html`
+  Het rechter side panel van de eNPS-kaart: de score-berekening (Passive | Promoter − Detractor = eNPS), een diverging vergelijkings-bargrafiek (groep/previous/benchmark/top 3), de 1–10 aanbevelingsschaal met legenda, en de score-breakdown (promoters/passives/detractors). Voor "eNPS side panel", "eNPS-paneel" of "employee net promoter score panel".
+
 - **Resultaten-dashboard — kaart-bibliotheek** → `reference-prototypes/dashboard-cards.md` + `dashboard-cards.html`
   Alle losse dashboard-kaarten in een grid (zonder chrome), om één kaart te hergebruiken of te kiezen welke kaarten een dashboard moet tonen.
 
 **Bij een resultaten-dashboard (Overview of Focus View): vraag eerst**
-1. of de **side panels** (Effectiveness en/of Engagement) ook gemaakt moeten worden, en
+1. of de **side panels** (Effectiveness, Engagement en/of eNPS) ook gemaakt moeten worden, en
 2. **welke kaarten** op het overzicht moeten staan (standaard: alle bovengenoemde kaarten).
 Bouw daarna met de bijbehorende referenties hierboven.
 
