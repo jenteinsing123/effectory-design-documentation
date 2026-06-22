@@ -1,6 +1,27 @@
 {
-  "count": 760,
+  "count": 763,
   "entries": [
+    {
+      "hash": "6d774a1",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.14: translate eNPS side panel to NL/DE (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "7363f91",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "i18n: translate the eNPS side panel to Dutch and German",
+      "pages": []
+    },
+    {
+      "hash": "be28aed",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.13",
+      "pages": []
+    },
     {
       "hash": "0da9012",
       "author": "Jente Insing",
