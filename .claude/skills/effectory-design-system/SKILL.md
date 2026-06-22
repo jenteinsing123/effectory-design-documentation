@@ -40,8 +40,8 @@ In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, go
   Alle losse dashboard-kaarten in een grid (zonder chrome), om één kaart te hergebruiken of te kiezen welke kaarten een dashboard moet tonen.
 
 **Bij een resultaten-dashboard (Overview of Focus View): vraag eerst**
-1. of de **side panels** (Effectiveness, Engagement en/of eNPS) ook gemaakt moeten worden, en
-2. **welke kaarten** op het overzicht moeten staan (standaard: alle bovengenoemde kaarten).
+1. **welke kaarten** op het overzicht moeten staan (standaard: alle bovengenoemde kaarten), en
+2. of de bijbehorende **side panels** ook gemaakt moeten worden. Elk side panel opent vanuit zijn kaart, dus bied een panel alléén aan als die kaart op het dashboard staat: **Effectiveness-kaart → Effectiveness panel**, **Engagement-kaart → Engagement panel**, **eNPS-kaart → eNPS panel**. (Staat de eNPS-kaart op het overzicht, vraag dan dus expliciet of het eNPS side panel ook gebouwd moet worden.)
 Bouw daarna met de bijbehorende referenties hierboven.
 
 Twijfel je of een verzoek dit scherm bedoelt? Ga uit van ja en gebruik de referentie. Staat het gevraagde scherm er niet bij, bouw dan normaal volgens de reference.
