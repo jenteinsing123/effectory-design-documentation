@@ -649,7 +649,7 @@
     .eng-value {
       position: relative; z-index: 1;
       font-size: 42px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.5;
-      color: var(--content-positive-base);
+      color: var(--content-info-secondary);
     }
     .eng-trend {
       position: absolute; z-index: 2;
@@ -2161,11 +2161,11 @@ function shell(d) {
     <div class="ai-head-right">
       <div class="tt-demo">
         <button class="ib ib-36 ib-tertiary" aria-label="Hide summary"><i data-icon="eye-off"></i></button>
-        <div class="tooltip is-below">Hide summary</div>
+        <div class="tooltip is-above">Hide summary</div>
       </div>
       <div class="tt-demo">
         <button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button>
-        <div class="tooltip is-below">More information</div>
+        <div class="tooltip is-above">More information</div>
       </div>
     </div>
   </div>
@@ -2239,7 +2239,7 @@ function shell(d) {
     <div class="eng-body">
       <!-- icon-exempt: decorative wave fill -->
       <svg class="eng-wave" viewBox="0 0 336 135.5" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 135.5V0.5C0 0.5 50.5 70.8587 167.5 70.8587C284.5 70.8587 336 0 336 0V135L0 135.5Z" fill="var(--bg-positive-subtle)"/>
+        <path d="M0 135.5V0.5C0 0.5 50.5 70.8587 167.5 70.8587C284.5 70.8587 336 0 336 0V135L0 135.5Z" fill="var(--bg-info-subtle)"/>
       </svg>
       <span class="eng-value">${d.engValue}</span>
       <div class="eng-trend">${d.engTrend} <i data-icon="${d.engTrendIcon}"></i></div>
@@ -2854,5 +2854,87 @@ function renderOverview(variant, initialView) {
 
   </script>
   <script>renderOverview('team-it-after','overview');</script>
+<script>
+/* Tooltip auto-position — renders the bubble in a fixed overlay layer so NO
+   ancestor (card, scroll container, overflow:hidden) can ever clip it. Keeps the
+   authored side as default (.is-above); if it doesn't fit in the viewport it tries
+   the other sides in order (above > below > right > left, rotated to start at the
+   authored side), then clamps fully inside the viewport. The active tooltip is
+   repositioned on scroll/resize so it stays pinned to its trigger. Delegated on
+   document, so it survives the in-place re-renders of #root. */
+(function () {
+  var GAP = 10, M = 8; /* offset from trigger, margin from viewport edge */
+  var ORDER = ['is-above', 'is-below', 'is-right', 'is-left'];
+  var active = null, ticking = false;
+  function evalPos(pos, dr, c, w, h) {
+    var cx = (dr.left + dr.right) / 2, cy = (dr.top + dr.bottom) / 2, room, need, cross;
+    if (pos === 'is-above')      { room = dr.top - c.top;       need = h + GAP; cross = (cx - w / 2 >= c.left) && (cx + w / 2 <= c.right); }
+    else if (pos === 'is-below') { room = c.bottom - dr.bottom; need = h + GAP; cross = (cx - w / 2 >= c.left) && (cx + w / 2 <= c.right); }
+    else if (pos === 'is-right') { room = c.right - dr.right;   need = w + GAP; cross = (cy - h / 2 >= c.top)  && (cy + h / 2 <= c.bottom); }
+    else                         { room = dr.left - c.left;     need = w + GAP; cross = (cy - h / 2 >= c.top)  && (cy + h / 2 <= c.bottom); }
+    return { pos: pos, fits: room >= need, cross: cross, slack: room - need };
+  }
+  function place(demo) {
+    var tip = demo.querySelector('.tooltip');
+    if (!tip) return;
+    var def = tip.getAttribute('data-tt-default');
+    if (!def) {
+      def = ORDER.filter(function (p) { return tip.classList.contains(p); })[0] || 'is-above';
+      tip.setAttribute('data-tt-default', def);
+    }
+    /* reset to natural (absolute) layout so we can measure true size */
+    tip.style.cssText = '';
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var dr = demo.getBoundingClientRect();
+    var c = { top: M, left: M, bottom: window.innerHeight - M, right: window.innerWidth - M };
+    var order = [def].concat(ORDER.filter(function (p) { return p !== def; }));
+    var scored = order.map(function (p) { return evalPos(p, dr, c, w, h); });
+    var pick = (scored.filter(function (s) { return s.fits && s.cross; })[0]
+             || scored.filter(function (s) { return s.fits; })[0]
+             || scored.slice().sort(function (a, b) { return b.slack - a.slack; })[0]).pos;
+    var cx = (dr.left + dr.right) / 2, cy = (dr.top + dr.bottom) / 2, left, top;
+    if (pick === 'is-above')      { left = cx - w / 2;  top = dr.top - GAP - h; }
+    else if (pick === 'is-below') { left = cx - w / 2;  top = dr.bottom + GAP; }
+    else if (pick === 'is-right') { left = dr.right + GAP; top = cy - h / 2; }
+    else                          { left = dr.left - GAP - w; top = cy - h / 2; }
+    /* final safety: clamp fully inside the viewport */
+    left = Math.max(c.left, Math.min(left, c.right - w));
+    top  = Math.max(c.top,  Math.min(top,  c.bottom - h));
+    ORDER.forEach(function (p) { tip.classList.remove(p); });
+    tip.classList.add(pick);
+    tip.style.position = 'fixed';
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    tip.style.right = 'auto';
+    tip.style.bottom = 'auto';
+    tip.style.transform = 'none';
+    tip.style.margin = '0';
+    tip.style.zIndex = '1000';
+  }
+  function show(e) {
+    var t = e.target, demo = (t && t.closest) ? t.closest('.tt-demo') : null;
+    if (demo) { active = demo; place(demo); }
+  }
+  function hide(e) {
+    var t = e.target, demo = (t && t.closest) ? t.closest('.tt-demo') : null;
+    if (demo && demo === active) active = null;
+  }
+  function reposition() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (active && active.isConnected && active.matches(':hover, :focus-within')) place(active);
+      else active = null;
+    });
+  }
+  document.addEventListener('pointerover', show, true);
+  document.addEventListener('focusin', show, true);
+  document.addEventListener('pointerout', hide, true);
+  document.addEventListener('focusout', hide, true);
+  document.addEventListener('scroll', reposition, true); /* capture = also inner scrollers */
+  window.addEventListener('resize', reposition);
+})();
+</script>
 </body>
 </html>
