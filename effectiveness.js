@@ -725,6 +725,12 @@ function focusView(d) {
 /* ---------- markup template ---------- */
 function shell(d) {
   const npsValue = d.npsPromoters - d.npsDetractors;
+  /* eNPS card: small trend badge comparing the current eNPS with a reference (previous survey / benchmark) */
+  const npsTrendBadge = (delta) => {
+    const cls = delta > 0 ? 'is-up' : delta < 0 ? 'is-down' : 'is-flat';
+    const icon = delta > 0 ? 'Trend-up' : delta < 0 ? 'Trend-down' : 'trend-stable';
+    return `<span class="nps-trend ${cls}">${Math.abs(delta)} <i data-icon="${icon}"></i></span>`;
+  };
   const tpMax = Math.max(...d.topics.map(t => t.count));
   const li = (arr) => arr.map(x => `<li>${x}</li>`).join('');
   const fxMarker = (m) => `<div class="fx-marker ${m.variant} ${m.chip}" style="left:${m.x}%;top:${100 - m.y}%"><div class="fx-dot"></div><div class="fx-chip"><i data-icon="${m.icon}"></i>${m.label}</div></div>`;
@@ -999,10 +1005,26 @@ function shell(d) {
     </div>
     <div class="nps-graph">
       <div class="nps-donut">
-        <canvas id="nps-chart" width="128" height="128" role="img" aria-label="eNPS ${npsValue}"></canvas>
+        <canvas id="nps-chart" width="100" height="100" role="img" aria-label="eNPS ${npsValue}"></canvas>
         <div class="nps-donut-center">
           <span class="nps-donut-value">${npsValue}</span>
           <span class="nps-donut-label">eNPS</span>
+        </div>
+      </div>
+      <div class="nps-stats">
+        <div class="nps-stat">
+          <span class="nps-stat-lbl">Previous survey</span>
+          <div class="nps-stat-val-row">
+            <span class="nps-stat-val">${d.npsPrev}</span>
+            ${npsTrendBadge(npsValue - d.npsPrev)}
+          </div>
+        </div>
+        <div class="nps-stat">
+          <span class="nps-stat-lbl">Benchmark<span class="tt-demo nps-stat-info-wrap"><i data-icon="info" class="nps-stat-info" aria-label="External benchmark"></i><span class="tooltip is-above">External benchmark</span></span></span>
+          <div class="nps-stat-val-row">
+            <span class="nps-stat-val">${d.npsBench}</span>
+            ${npsTrendBadge(npsValue - d.npsBench)}
+          </div>
         </div>
       </div>
     </div>

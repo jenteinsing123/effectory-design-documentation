@@ -77,6 +77,7 @@
     "Compare scores": { nl: "Scores vergelijken", de: "Werte vergleichen" },
     "Your score compared with the benchmarks.": { nl: "Uw score vergeleken met de benchmarks.", de: "Ihr Wert im Vergleich zu den Benchmarks." },
     "Benchmark": { nl: "Benchmark", de: "Benchmark" },
+    "External benchmark": { nl: "Externe benchmark", de: "Externe Benchmark" },
     "Top 3 benchmark": { nl: "Top 3-benchmark", de: "Top-3-Benchmark" },
     "“How likely are you to recommend your company to others?”": { nl: "“Hoe waarschijnlijk is het dat u uw bedrijf aanbeveelt bij anderen?”", de: "„Wie wahrscheinlich ist es, dass Sie Ihr Unternehmen weiterempfehlen?“" },
     "Detractors (1–6)": { nl: "Criticasters (1–6)", de: "Kritiker (1–6)" },
