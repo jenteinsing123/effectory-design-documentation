@@ -1,6 +1,27 @@
 {
-  "count": 737,
+  "count": 740,
   "entries": [
+    {
+      "hash": "fb85dec",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.6: rebuild reference prototypes with the why-these-focus-areas dialogs",
+      "pages": []
+    },
+    {
+      "hash": "492e14a",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Focus View: add 'Why these focus areas?' / 'Why these successes?' explainer dialogs",
+      "pages": []
+    },
+    {
+      "hash": "e0b52c9",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.5",
+      "pages": []
+    },
     {
       "hash": "35f3370",
       "author": "Jente Insing",
