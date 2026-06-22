@@ -1028,13 +1028,13 @@
     .npsp-bar-lbl { position: absolute; left: var(--spacing-base); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 500; color: var(--content-base); z-index: 1; }
     .npsp-bar-lbl i { width: 16px; height: 16px; display: flex; color: var(--content-subtle); }
     .npsp-bar-row.is-group .npsp-bar-lbl { color: var(--content-info-base); font-weight: 600; }
-    .npsp-fill { position: absolute; top: 50%; transform: translateY(-50%); height: 28px; display: flex; align-items: center; border-radius: var(--radius-sm); }
-    .npsp-fill.is-group { background: var(--bg-accent-blue-base); }
+    .npsp-fill { position: absolute; top: 0; height: 100%; display: flex; align-items: center; }
+    .npsp-fill.is-group { background: var(--p-color-blue-300); }
     .npsp-fill.is-bench { background: var(--bg-scores-very-positive); }
     .npsp-fill.is-prev  { background: var(--bg-scores-very-negative); }
     .npsp-val { font-size: 14px; font-weight: 600; color: var(--content-base); white-space: nowrap; }
     .npsp-fill.is-pos .npsp-val { margin-left: auto; padding-right: var(--spacing-tight); }
-    .npsp-fill.is-neg .npsp-val.is-out { position: absolute; right: 100%; margin-right: var(--spacing-tight); }
+    .npsp-fill.is-neg .npsp-val.is-out { position: absolute; right: 100%; top: 50%; transform: translateY(-50%); margin-right: var(--spacing-tight); }
     .npsp-axis { position: relative; height: 36px; margin-top: var(--spacing-tight); }
     .npsp-axis-line { position: absolute; left: 0; right: 0; top: 0; border-top: 1px solid var(--border-base); }
     .npsp-axis-tick { position: absolute; left: 50%; top: 0; width: 1px; height: 8px; background: var(--border-base); }
