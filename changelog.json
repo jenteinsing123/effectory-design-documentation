@@ -1,6 +1,27 @@
 {
-  "count": 757,
+  "count": 760,
   "entries": [
+    {
+      "hash": "0da9012",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.13: fix Novanta eNPS trend (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "5ddbda5",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Fix Novanta eNPS trend to match the previous/before survey (4 -> 10)",
+      "pages": []
+    },
+    {
+      "hash": "f781be0",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.12",
+      "pages": []
+    },
     {
       "hash": "53a1548",
       "author": "Jente Insing",
