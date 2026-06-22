@@ -572,6 +572,51 @@
 
     .efp-x-axis { text-align: center; font-size: 12px; font-weight: 500; color: var(--content-secondary); }
 
+    /* ── Effectiveness panel — List view ── */
+    .efp-bench-row {
+      display: flex; flex-wrap: wrap; gap: var(--spacing-base);
+      padding: var(--spacing-base-tight) var(--spacing-base);
+      background: var(--bg-secondary); border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-base);
+    }
+    .efp-bench-stat { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--spacing-tight); font-size: 14px; font-weight: 600; color: var(--content-secondary); white-space: nowrap; }
+    .efp-bench-stat i { display: flex; width: 16px; height: 16px; flex-shrink: 0; color: var(--content-brand-base); }
+    .efp-list { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .efp-acc { border-radius: var(--radius-lg); overflow: hidden; }
+    .efp-acc.is-effective { background: var(--bg-accent-green-subtle); }
+    .efp-acc.is-not-utilized { background: var(--bg-accent-yellow-subtle); }
+    .efp-acc.is-detached { background: var(--bg-tertiary); }
+    .efp-acc.is-ineffective { background: var(--bg-accent-red-subtle); }
+    .efp-acc-hd {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-base);
+      padding: var(--spacing-base); border: 0; background: transparent; cursor: pointer;
+      font-family: inherit; text-align: left;
+    }
+    .efp-acc-label { display: flex; flex-direction: column; gap: 2px; }
+    .efp-acc-title { font-size: 16px; font-weight: 600; line-height: 24px; color: var(--content-base); }
+    .efp-acc-count { font-size: 12px; line-height: 18px; color: var(--content-secondary); }
+    .efp-acc-right { display: flex; align-items: center; gap: var(--spacing-tight); flex-shrink: 0; }
+    .efp-acc-chip {
+      display: inline-flex; align-items: center; gap: var(--spacing-extra-tight);
+      padding: var(--spacing-extra-tight) var(--spacing-tight);
+      background: var(--bg-inverse-base); color: var(--content-inverse-base);
+      border-radius: var(--radius-base); font-size: 12px; font-weight: 600; white-space: nowrap;
+    }
+    .efp-acc-chip i { display: flex; width: 12px; height: 12px; }
+    .efp-acc-chev { display: flex; width: 16px; height: 16px; color: var(--content-secondary); transition: transform var(--motion-fast) var(--ease-standard); }
+    .efp-acc.is-open .efp-acc-chev { transform: rotate(180deg); }
+    .efp-acc-body { display: none; margin: 0 var(--spacing-base) var(--spacing-base); background: var(--bg-base); border-radius: var(--radius-md); overflow: hidden; }
+    .efp-acc.is-open .efp-acc-body { display: block; }
+    .efp-li-row { display: flex; align-items: center; gap: var(--spacing-base-tight); padding: var(--spacing-base-tight) var(--spacing-base); }
+    .efp-li-row + .efp-li-row { border-top: 1px solid var(--border-base); }
+    .efp-li-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; color: var(--content-secondary); }
+    .efp-li-icon i { display: flex; width: 16px; height: 16px; }
+    .efp-li-icon.is-current { width: 28px; height: 28px; border-radius: var(--radius-full); background: var(--bg-info-base); color: var(--content-inverse-base); }
+    .efp-li-icon.is-current i { width: 14px; height: 14px; }
+    .efp-li-text { min-width: 0; }
+    .efp-li-name { font-size: 14px; font-weight: 600; line-height: 22px; color: var(--content-base); }
+    .efp-li-meta { font-size: 12px; line-height: 18px; color: var(--content-secondary); }
+
     /* Section heading shared */
     .efp-section { margin-top: var(--spacing-super-loose); }
     .efp-section-title { margin: 0 0 var(--spacing-tight); font-size: 18px; font-weight: 600; line-height: 27px; color: var(--content-base); }
@@ -1125,6 +1170,7 @@
     "Current group": { nl: "Huidige groep", de: "Aktuelle Gruppe" },
     "Matrix": { nl: "Matrix", de: "Matrix" },
     "List": { nl: "Lijst", de: "Liste" },
+    "groups": { nl: "groepen", de: "Gruppen" },
     "selected": { nl: "geselecteerd", de: "ausgewählt" },
     "Suggested focus": { nl: "Voorgestelde focus", de: "Empfohlener Fokus" },
     "Areas to focus on": { nl: "Aandachtsgebieden", de: "Schwerpunktbereiche" },
@@ -2117,6 +2163,35 @@ function shell(d) {
       </div>
     </div>
   </div>`; };
+  /* Effectiveness panel — List view: comparison groups grouped by quadrant */
+  const efpListRow = (m) => `<div class="efp-li-row">
+    <span class="efp-li-icon ${m.variant}"><i data-icon="${markerIcon(m)}"></i></span>
+    <div class="efp-li-text">
+      <div class="efp-li-name">${m.label}</div>
+      <div class="efp-li-meta"><span>Engagement</span>: ${m.x}% • <span>Performance environment</span>: ${m.y}%</div>
+    </div>
+  </div>`;
+  const efpListView = () => {
+    const quads = [
+      { name: 'Effective',         cls: 'is-effective',    test: (m) => m.x >= 50 && m.y >= 50 },
+      { name: 'Not fully utilized', cls: 'is-not-utilized', test: (m) => m.x >= 50 && m.y < 50 },
+      { name: 'Detached',          cls: 'is-detached',     test: (m) => m.x < 50 && m.y >= 50 },
+      { name: 'Ineffective',       cls: 'is-ineffective',  test: (m) => m.x < 50 && m.y < 50 }
+    ];
+    const current = d.efpMarkers.find((m) => m.variant === 'is-current');
+    return quads.map((q) => {
+      const items = d.efpMarkers.filter(q.test);
+      if (!items.length) return '';
+      const hasCurrent = current && q.test(current);
+      return `<div class="efp-acc ${q.cls}${hasCurrent ? ' is-open' : ''}">
+        <button class="efp-acc-hd" type="button">
+          <span class="efp-acc-label"><span class="efp-acc-title">${q.name}</span><span class="efp-acc-count">${items.length} <span>groups</span></span></span>
+          <span class="efp-acc-right">${hasCurrent ? `<span class="efp-acc-chip"><i data-icon="group"></i>${current.label}</span>` : ''}<i data-icon="chevron-down" class="efp-acc-chev"></i></span>
+        </button>
+        <div class="efp-acc-body">${items.map(efpListRow).join('')}</div>
+      </div>`;
+    }).join('');
+  };
   const topicTile = (t) => `<button class="tp-tile ${t.color}"><span class="tp-tile-fill" style="width:${Math.round(t.count / tpMax * 90)}%"></span><p class="tp-tile-name">${t.name}</p><span class="tp-tile-meta"><i data-icon="users"></i>${t.count} <span>times selected</span></span><span class="tp-tile-chevron"><i data-icon="chevron-right"></i></span></button>`;
   const qsRow = (s) => `<div class="qs-row"><p class="qs-row-q">${s.q}</p><span class="qs-row-score">${s.s}%</span></div>`;
   const efpScoreRow = (r) => `<div class="efp-score-row${r.sub ? ' is-sub' : ''}"><div class="efp-score-meta"><div class="efp-score-name">${r.name}</div>${r.desc ? `<div class="efp-score-desc">${r.desc}</div>` : ''}</div><span class="efp-score-badge is-current">${r.cur}</span><span class="efp-score-badge ${r.benchClass}">${r.bench}</span></div>`;
@@ -2520,11 +2595,12 @@ ${focusView(d)}
           </div>
         </div>
         <div class="segctl">
-          <button class="segctl-btn is-active"><i data-icon="table"></i> Matrix</button>
-          <button class="segctl-btn"><i data-icon="list-unordered"></i> List</button>
+          <button class="segctl-btn is-active" data-seg="matrix"><i data-icon="table"></i> Matrix</button>
+          <button class="segctl-btn" data-seg="list"><i data-icon="list-unordered"></i> List</button>
         </div>
       </div>
 
+      <div class="efp-view" id="efp-view-matrix">
       <div class="efp-matrix-row">
         <div class="efp-y-axis"><span>Performance environment →</span></div>
         <div class="efp-matrix" id="efp-matrix">
@@ -2541,6 +2617,15 @@ ${focusView(d)}
         </div>
       </div>
       <p class="efp-x-axis">Engagement score →</p>
+      </div>
+
+      <div class="efp-view" id="efp-view-list" hidden>
+        <div class="efp-bench-row">
+          <span class="efp-bench-stat"><i data-icon="benchmark-up"></i> Benchmark <span>Engagement</span> ${d.engBench}</span>
+          <span class="efp-bench-stat"><i data-icon="benchmark-up"></i> Benchmark <span>Performance environment</span> ${d.efpBench}</span>
+        </div>
+        <div class="efp-list">${efpListView()}</div>
+      </div>
 
       <div class="efp-section">
         <h3 class="efp-section-title">Suggested focus</h3>
@@ -2778,6 +2863,21 @@ function renderOverview(variant, initialView) {
   };
   wirePanel('efp-overlay', 'efp-close', '.fx-card');
   wirePanel('engp-overlay', 'engp-close', '.eng-card');
+
+  /* Effectiveness panel: Matrix / List segmented control + list accordions */
+  const segBtns = document.querySelectorAll('#efp-overlay .segctl-btn');
+  const mView = document.getElementById('efp-view-matrix');
+  const lView = document.getElementById('efp-view-list');
+  segBtns.forEach((b) => b.addEventListener('click', () => {
+    segBtns.forEach((x) => x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    const isList = b.dataset.seg === 'list';
+    if (mView) mView.hidden = isList;
+    if (lView) lView.hidden = !isList;
+  }));
+  document.querySelectorAll('#efp-view-list .efp-acc-hd').forEach((hd) => {
+    hd.addEventListener('click', () => hd.closest('.efp-acc').classList.toggle('is-open'));
+  });
 
   /* Comparisons filter dropdown (effectiveness panel) */
   const cmpBtn = document.getElementById('efp-cmp-btn');

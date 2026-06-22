@@ -1042,17 +1042,17 @@
     .npsp-axis { position: relative; height: 36px; margin-top: var(--spacing-tight); }
     .npsp-axis-line { position: absolute; left: 0; right: 0; top: 0; border-top: 1px solid var(--border-base); }
     .npsp-axis-tick { position: absolute; left: 50%; top: 0; width: 1px; height: 8px; background: var(--border-base); }
-    .npsp-axis-lbl { position: absolute; top: 12px; font-size: 14px; color: var(--content-secondary); }
+    .npsp-axis-lbl { position: absolute; top: 12px; font-size: 14px; font-weight: 600; color: var(--content-base); }
     .npsp-axis-lbl.l { left: 0; } .npsp-axis-lbl.m { left: 50%; transform: translateX(-50%); } .npsp-axis-lbl.r { right: 0; }
 
     /* Question breakdown — 1..10 cells */
     .npsp-qcard { background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--spacing-base); }
     .npsp-q { margin: 0 0 var(--spacing-base); text-align: center; font-size: 14px; font-weight: 600; color: var(--content-base); }
     .npsp-cells { display: flex; justify-content: center; gap: var(--spacing-extra-tight); }
-    .npsp-cell { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--content-base); }
-    .npsp-cell.is-det { background: var(--bg-scores-very-negative); }
-    .npsp-cell.is-pas { background: var(--bg-accent-yellow-subtle); }
-    .npsp-cell.is-pro { background: var(--bg-scores-very-positive); }
+    .npsp-cell { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; }
+    .npsp-cell.is-det { background: var(--bg-scores-very-negative); color: var(--content-accent-red-base); }
+    .npsp-cell.is-pas { background: var(--bg-accent-yellow-subtle); color: var(--content-accent-yellow-base); }
+    .npsp-cell.is-pro { background: var(--bg-scores-very-positive); color: var(--content-accent-green-base); }
     .npsp-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-base) var(--spacing-loose); margin-top: var(--spacing-base); }
     .npsp-leg { display: flex; align-items: center; gap: var(--spacing-tight); font-size: 12px; color: var(--content-secondary); }
     .npsp-leg .npsp-dot { width: 8px; height: 8px; border-radius: var(--radius-full); }
