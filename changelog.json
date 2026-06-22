@@ -1,6 +1,27 @@
 {
-  "count": 746,
+  "count": 749,
   "entries": [
+    {
+      "hash": "6f917db",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.9: rebuild reference prototypes (List view chip = matrix blue)",
+      "pages": []
+    },
+    {
+      "hash": "c453e4f",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Effectiveness List view: current-group chip uses the matrix blue (bg-info-base)",
+      "pages": []
+    },
+    {
+      "hash": "11671e4",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.8",
+      "pages": []
+    },
     {
       "hash": "3e74de2",
       "author": "Jente Insing",
