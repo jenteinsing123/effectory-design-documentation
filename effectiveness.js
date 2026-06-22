@@ -1443,6 +1443,9 @@ function renderOverview(variant, initialView) {
       tab.classList.add('is-active');
       Object.entries(views).forEach(([k, el]) => { if (el) el.hidden = (k !== v); });
       document.querySelector('.main-scroll').scrollTop = 0;
+      /* keep the URL in sync with the active view (no reload) */
+      const path = location.pathname.replace(/(overview|focus)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
+      if (path !== location.pathname) history.replaceState(null, '', path + location.search + location.hash);
     });
   });
 
