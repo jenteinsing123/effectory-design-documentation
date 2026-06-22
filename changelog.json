@@ -1,6 +1,20 @@
 {
-  "count": 749,
+  "count": 751,
   "entries": [
+    {
+      "hash": "aa8a426",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.10: add eNPS side panel to dashboards + standalone reference",
+      "pages": []
+    },
+    {
+      "hash": "f07313d",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.9",
+      "pages": []
+    },
     {
       "hash": "6f917db",
       "author": "Jente Insing",
