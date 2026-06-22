@@ -1,6 +1,27 @@
 {
-  "count": 754,
+  "count": 757,
   "entries": [
+    {
+      "hash": "53a1548",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Skill v1.9.12: eNPS stat pill opens the eNPS panel (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "e0a321a",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Focus View: make the eNPS stat pill open the eNPS side panel",
+      "pages": []
+    },
+    {
+      "hash": "076c022",
+      "author": "Jente Insing",
+      "date": "2026-06-22",
+      "subject": "Sync skill-source bundle + changelog for v1.9.11",
+      "pages": []
+    },
     {
       "hash": "35d01de",
       "author": "Jente Insing",
