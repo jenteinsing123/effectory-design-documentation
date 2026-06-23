@@ -2100,6 +2100,18 @@ const RECO = {
   }
 };
 
+/* Which recommendation types show as radio options per survey item — a different
+   mix per question so the cards don't all repeat the same four options. */
+const FOCUS_TYPES = {
+  'I know what results are expected of me at work': ['Self directed', '1 on 1 action', 'Team level action'],
+  'Doing my work gives me energy': ['1 on 1 action', 'Team level action', 'Process / structural action'],
+  'I am provided with good work resources': ['Self directed', 'Team level action', 'Process / structural action'],
+  'My skills and abilities fit in well with my job': ['Self directed', '1 on 1 action', 'Process / structural action'],
+  'I enjoy doing my work / tasks': ['Self directed', '1 on 1 action', 'Team level action', 'Process / structural action'],
+  'Important information is readily accessible for me': ['1 on 1 action', 'Team level action', 'Process / structural action'],
+  'I am able to maintain a good balance between working and relaxing': ['Self directed', 'Team level action', 'Process / structural action']
+};
+
 /* ---------- Focus View (second tab) ---------- */
 function focusView(d) {
   const npsValue = d.npsPromoters - d.npsDetractors;
@@ -2123,7 +2135,7 @@ function focusView(d) {
   const fxMarker = (m) => `<div class="fx-marker ${m.variant} ${m.chip}" style="left:${m.x}%;top:${100 - m.y}%"><div class="fx-dot"></div><div class="fx-chip"><i data-icon="${m.icon}"></i>${m.label}</div></div>`;
   const trend = (val) => val ? `<div class="fv-trend-row"><span class="fv-trend">${val} <i data-icon="arrow-up"></i></span><span class="fv-trend-note">vs previous survey</span></div>` : '';
   const verdictClass = 'is-' + d.efpLeadEm.toLowerCase().replace(/\s+/g, '-');
-  const approach = (i) => APPROACHES
+  const approach = (i, q) => (FOCUS_TYPES[q] || APPROACHES)
     .map(a => `<button class="rb-btn-bordered" data-appr="${a}"><span class="rb-wrap"><input type="radio" class="rb" name="appr-${i}"></span>${a}</button>`).join('');
 
   const focusCard = (s, i) => `
@@ -2144,7 +2156,7 @@ function focusView(d) {
       <div class="fv-divider"></div>
       <div class="fv-approach">
         <div class="fv-approach-lbl"><i data-icon="lightbulb"></i> Pick an approach to see the recommended action:</div>
-        <div class="fv-approach-chips">${approach(i)}</div>
+        <div class="fv-approach-chips">${approach(i, s.q)}</div>
         <div class="fv-reco" hidden>
           <div class="fv-reco-content">
             <div class="fv-reco-head">
