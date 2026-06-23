@@ -981,7 +981,7 @@ function shell(d) {
     <div class="eng-body">
       <!-- icon-exempt: decorative wave fill -->
       <svg class="eng-wave" viewBox="0 0 336 135.5" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 135.5V0.5C0 0.5 50.5 70.8587 167.5 70.8587C284.5 70.8587 336 0 336 0V135L0 135.5Z" fill="var(--bg-positive-subtle)"/>
+        <path d="M0 135.5V0.5C0 0.5 50.5 70.8587 167.5 70.8587C284.5 70.8587 336 0 336 0V135L0 135.5Z" fill="var(--bg-info-subtle)"/>
       </svg>
       <span class="eng-value">${d.engValue}</span>
       <div class="eng-trend">${d.engTrend} <i data-icon="${d.engTrendIcon}"></i></div>
