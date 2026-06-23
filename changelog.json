@@ -1,6 +1,27 @@
 {
-  "count": 778,
+  "count": 781,
   "entries": [
+    {
+      "hash": "60b7775",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Skill v1.9.20: vary recommendation types per focus question (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "291b468",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Focus View: vary which recommendation types each question offers",
+      "pages": []
+    },
+    {
+      "hash": "826e279",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Sync skill-source bundle + changelog for v1.9.19",
+      "pages": []
+    },
     {
       "hash": "e900936",
       "author": "Jente Insing",
