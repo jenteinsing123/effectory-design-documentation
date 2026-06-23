@@ -1,6 +1,27 @@
 {
-  "count": 772,
+  "count": 775,
   "entries": [
+    {
+      "hash": "204ca6d",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Skill v1.9.18: real focus-view recommended actions (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "46be7f9",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Focus View: real recommended-action content per survey item + type",
+      "pages": []
+    },
+    {
+      "hash": "172b6c9",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Sync skill-source bundle + changelog for v1.9.17",
+      "pages": []
+    },
     {
       "hash": "4f60fc1",
       "author": "Jente Insing",
