@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Themes — Results dashboard</title>
+  <base href="/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/tokens.css" />
+  <link rel="stylesheet" href="/foundation.css" />
+  <link rel="stylesheet" href="/components.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      background: var(--bg-interface-body);
+      color: var(--content-base);
+      font-family: 'Poppins', sans-serif;
+      /* Results page container padding (Figma: results/padding) — built from spacing tokens */
+      --results-side: calc(var(--spacing-super-loose) * 2); /* 80px — container-sides */
+      --results-top: calc(var(--spacing-loose) * 2);        /* 48px — container-top-bot */
+    }
+
+    /* ── App shell (matches the results dashboard) ── */
+    .app { display: flex; height: 100vh; overflow: hidden; }
+    .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .main-scroll { flex: 1; overflow-y: auto; }
+
+    /* Header zone (title, filters, tabs) — same edges as the breadcrumb */
+    .breadcrumb { padding-left: var(--results-side); padding-right: var(--results-side); }
+    .results-head { padding: var(--results-top) var(--results-side) 0; }
+    .results-title { margin: 0 0 var(--spacing-base); cursor: pointer; width: fit-content; }
+    .results-filters { display: flex; align-items: center; gap: var(--spacing-base); margin-bottom: var(--spacing-loose); }
+    .date-range { display: flex; align-items: center; gap: var(--spacing-tight); cursor: pointer; color: var(--content-secondary); font-size: 14px; font-weight: 500; }
+    .date-range i { color: var(--content-subtle); }
+    .results-head .tabs { padding: 0 var(--results-side); margin: 0 calc(-1 * var(--results-side)); }
+    .results-head .tab .tab-spark { width: 18px; height: 18px; color: var(--bg-highlight-base); }
+
+    /* tooltips on icon buttons: hidden until hover/focus (positioned via the auto-position script) */
+    .tt-demo { position: relative; display: inline-flex; }
+    .tt-demo .tooltip { opacity: 0; pointer-events: none; transition: opacity var(--motion-fast) var(--ease-out); }
+    .tt-demo:hover .tooltip, .tt-demo:focus-within .tooltip { opacity: 1; }
+
+    /* ── Themes view — "wide" results container = 1200px (design-system-reference §2).
+       box-sizing: border-box so the container stays exactly 1200px incl. padding. ── */
+    .themes-wrap {
+      max-width: 1200px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: var(--spacing-super-loose) var(--spacing-loose) var(--spacing-super-extra-loose);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-extra-loose);
+    }
+
+    /* Section title row: "Themes | Scores per theme to know what to focus on" */
+    .sec-head { display: flex; align-items: center; gap: var(--spacing-base-tight); }
+    .sec-title { color: var(--content-base); }
+    .sec-sep { width: 1px; align-self: stretch; min-height: 20px; background: var(--border-base); }
+    .sec-sub { color: var(--content-secondary); font-size: 14px; }
+
+    /* ── Card surface shared with the dashboard (.card .card-elevated) ── */
+    .t-panel { padding: var(--spacing-loose); }
+
+    /* Comparison-graph card */
+    .cmp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--spacing-loose); }
+    .cmp-title { color: var(--content-base); }
+    .cmp-head-right { display: flex; align-items: center; gap: var(--spacing-extra-loose); }
+    .cmp-legend { display: flex; align-items: center; gap: var(--spacing-loose); }
+    .lg-item { display: flex; align-items: center; gap: var(--spacing-tight); font-size: 12px; font-weight: 500; color: var(--content-base); white-space: nowrap; }
+    .lg-dot { width: 8px; height: 8px; border-radius: var(--radius-sm); flex-shrink: 0; }
+    .lg-dot.is-current   { background: var(--bg-results-current); }
+    .lg-dot.is-previous  { background: var(--bg-results-previous); }
+    .lg-dot.is-benchmark { background: var(--bg-results-benchmark); }
+    .cmp-chart { margin-top: var(--spacing-super-loose); height: 300px; position: relative; }
+
+    /* ALL THEMES section */
+    .themes-section { display: flex; flex-direction: column; gap: var(--spacing-base-tight); }
+    .themes-label { color: var(--content-subtle); }
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--spacing-loose);
+    }
+
+    /* Theme card */
+    .tc { gap: var(--spacing-loose); }
+    .tc-top { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .tc-head { display: flex; align-items: center; gap: var(--spacing-base); }
+    .tc-title { flex: 1; min-width: 0; color: var(--content-base); }
+    .tc-desc {
+      color: var(--content-secondary); font-size: 14px; line-height: 20px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden; min-height: 60px;
+    }
+    .tc-scores { display: flex; flex-direction: column; gap: var(--spacing-base-tight); }
+
+    /* NEW thin score bar (Figma: "NEW: progress-bar-thin" — not yet in components.css) */
+    .score { display: flex; flex-direction: column; gap: var(--spacing-tight); }
+    .score-label { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-tight); }
+    .score-name { font-size: 14px; font-weight: 500; color: var(--content-secondary); }
+    .score-val { font-size: 14px; font-weight: 500; color: var(--content-base); }
+    .score-track { position: relative; height: 8px; width: 100%; border-radius: var(--radius-full); background: var(--bg-tertiary); }
+    .score-fill { position: absolute; inset: 0; height: 8px; border-radius: var(--radius-full); border: 2px solid var(--bg-base); box-sizing: border-box; }
+    .score-fill.is-current   { background: var(--bg-results-current); }
+    .score-fill.is-benchmark { background: var(--bg-results-benchmark); }
+
+    .tc-link { align-self: flex-start; padding-left: 0; padding-right: 0; }
+
+    /* small ghost icon button for the pin / gear (composes the Icon Button sizing) */
+    .icon-ghost { color: var(--content-action); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1280px) { .themes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 1100px) { .mainnav { display: none; } body { --results-side: var(--spacing-loose); } }
+    @media (max-width: 720px)  { .themes-grid { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ░░ Main navigation (app sidebar) ░░ -->
+  <div class="mainnav">
+    <div class="mn-portal">
+      <span class="mn-logo"></span>
+      <button class="mn-portal-btn"><b>Coordinator</b> <i data-icon="chevron-down" class="mn-chev"></i></button>
+    </div>
+    <nav class="mn-nav" aria-label="Main">
+      <a class="mn-item"><i data-icon="home"></i> Home</a>
+      <a class="mn-item"><i data-icon="clipboard"></i> Surveys <i data-icon="chevron-up" class="mn-chev"></i></a>
+      <div class="mn-sub">
+        <a class="mn-subitem">All surveys</a>
+        <a class="mn-subitem is-active">Projects</a>
+      </div>
+      <a class="mn-item"><i data-icon="refresh"></i> 360 feedback</a>
+      <a class="mn-item"><i data-icon="globe"></i> Organization <i data-icon="chevron-down" class="mn-chev"></i></a>
+    </nav>
+    <div class="mn-foot">
+      <a class="mn-item"><i data-icon="book-open"></i> Support wiki</a>
+      <div class="mn-foot-divider"></div>
+      <div class="mn-user">
+        <div class="av av-36 av-blue">JI</div>
+        <div class="mn-meta">
+          <div class="mn-name">Jente Insing</div>
+          <div class="mn-org">Novanta B.V.</div>
+        </div>
+        <i data-icon="chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- ░░ Breadcrumb ░░ -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
+      <ol class="bc-trail">
+        <li><a class="bc-link" href="#">Engagement Survey, 2023–2026</a></li>
+        <li><a class="bc-link" href="#">Results</a></li>
+      </ol>
+    </nav>
+
+    <div class="main-scroll">
+
+      <!-- ░░ Results header (title, filter, date range, tabs) ░░ -->
+      <div class="results-head">
+        <h1 class="text-l3 results-title">Engagement Survey, 2023–2026</h1>
+        <div class="results-filters">
+          <button class="sel-btn" type="button">
+            <i data-icon="filter"></i>
+            <span class="sel-btn-name">Filter</span>
+            <span class="sel-btn-value">Novanta</span>
+          </button>
+          <div class="date-range">
+            <span>22 Jul 2023</span>
+            <i data-icon="from-to" style="display:flex;width:24px;height:16px;"></i>
+            <span>22 Aug 2023</span>
+          </div>
+        </div>
+        <div class="tabs" role="tablist">
+          <a class="tab" role="tab" href="#">Overview</a>
+          <a class="tab" role="tab" href="#"><i data-icon="featured" class="tab-spark"></i> Focus View</a>
+          <a class="tab is-active" role="tab" aria-selected="true" href="#">Themes</a>
+          <a class="tab" role="tab" href="#">Questions</a>
+          <a class="tab" role="tab" href="#">Open answers</a>
+          <a class="tab" role="tab" href="#">Topics &amp; Ideas</a>
+          <a class="tab" role="tab" href="#">Reports</a>
+          <a class="tab" role="tab" href="#">Actions</a>
+        </div>
+      </div>
+
+      <!-- ░░ Themes view ░░ -->
+      <div class="themes-wrap">
+
+        <div class="sec-head">
+          <span class="sec-title text-l4">Themes</span>
+          <span class="sec-sep"></span>
+          <span class="sec-sub">Scores per theme to know what to focus on</span>
+        </div>
+
+        <!-- Theme comparison chart -->
+        <div class="card card-elevated t-panel">
+          <div class="cmp-head">
+            <span class="cmp-title text-l5">Theme comparison</span>
+            <div class="cmp-head-right">
+              <div class="cmp-legend">
+                <span class="lg-item"><span class="lg-dot is-current"></span> Current</span>
+                <span class="lg-item"><span class="lg-dot is-previous"></span> Previous</span>
+                <span class="lg-item"><span class="lg-dot is-benchmark"></span> Benchmark</span>
+              </div>
+              <div class="tt-demo">
+                <button class="ib ib-24 ib-tertiary icon-ghost" aria-label="Chart settings"><i data-icon="gear"></i></button>
+                <div class="tooltip is-above">Chart settings</div>
+              </div>
+            </div>
+          </div>
+          <div class="cmp-chart"><canvas id="cmp-chart"></canvas></div>
+        </div>
+
+        <!-- All themes -->
+        <div class="themes-section">
+          <span class="themes-label text-l6">ALL THEMES</span>
+          <div class="themes-grid" id="themes-grid"></div>
+        </div>
+
+      </div>
+
+    </div><!-- /main-scroll -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script src="/icons.js"></script>
+<script>
+/* ── Theme data (current / previous / benchmark, 0–100) ── */
+const THEMES = [
+  { name: 'Customer Focus', current: 62, previous: 45, benchmark: 71,
+    desc: "In essence, customer focus is about identifying the customer's wishes and requirements, anticipating these wishes and acting on them to build lasting relationships." },
+  { name: 'Vitality', current: 75, previous: 71, benchmark: 86,
+    desc: "Vitality covers both the mental and physical vitality of employees. Mental vitality refers to the mental state of an employee and their ability to recover and stay resilient." },
+  { name: 'Efficiency', current: 57, previous: 26, benchmark: 46,
+    desc: "On top of effectiveness, it's important that employees are given the ability to work efficiently. Efficiency is about the capacity to achieve results with minimal wasted effort." },
+  { name: 'Engagement', current: 62, previous: 48, benchmark: 70,
+    desc: "Engagement is the degree to which your employees feel inspired and energized by their work. It reflects their positive connection to your organization and their willingness to go the extra mile." },
+  { name: 'Satisfaction', current: 76, previous: 70, benchmark: 85,
+    desc: "Employee satisfaction is the sense of well-being that employees experience because of their job. A satisfied employee is content with their role, conditions and environment." },
+  { name: 'Willingness to change', current: 56, previous: 30, benchmark: 47,
+    desc: "Willingness to change reflects how open and ready employees are to adapt to new ways of working, embrace improvements and support the organization through change." },
+];
+
+/* ── Render the theme cards ── */
+const grid = document.getElementById('themes-grid');
+grid.innerHTML = THEMES.map(t => `
+  <div class="card card-elevated t-panel tc">
+    <div class="tc-top">
+      <div class="tc-head">
+        <span class="tc-title text-l5">${t.name}</span>
+        <div class="tt-demo">
+          <button class="ib ib-24 ib-tertiary icon-ghost" aria-label="Pin ${t.name}"><i data-icon="pin"></i></button>
+          <div class="tooltip is-above">Pin theme</div>
+        </div>
+      </div>
+      <p class="tc-desc">${t.desc}</p>
+    </div>
+    <div class="tc-scores">
+      <div class="score">
+        <div class="score-label"><span class="score-name">Novanta</span><span class="score-val">${t.current}%</span></div>
+        <div class="score-track"><div class="score-fill is-current" style="right:${100 - t.current}%"></div></div>
+      </div>
+      <div class="score">
+        <div class="score-label"><span class="score-name">Benchmark</span><span class="score-val">${t.benchmark}%</span></div>
+        <div class="score-track"><div class="score-fill is-benchmark" style="right:${100 - t.benchmark}%"></div></div>
+      </div>
+    </div>
+    <button class="btn btn-link tc-link">View insights <i data-icon="chevron-right"></i></button>
+  </div>
+`).join('');
+
+/* re-inject icons for the dynamically built cards */
+if (window.Icons) window.Icons.render(grid);
+
+/* ── Comparison bar chart (Chart.js) — colours pulled from result tokens ── */
+(function () {
+  const css = getComputedStyle(document.documentElement);
+  const cCurrent   = css.getPropertyValue('--bg-results-current').trim();
+  const cPrevious  = css.getPropertyValue('--bg-results-previous').trim();
+  const cBenchmark = css.getPropertyValue('--bg-results-benchmark').trim();
+  const cGrid      = css.getPropertyValue('--border-base').trim();
+  const cAxis      = css.getPropertyValue('--border-action').trim();
+  const cText      = css.getPropertyValue('--content-secondary').trim();
+  const cLabel     = css.getPropertyValue('--content-base').trim();
+  const cInverse   = css.getPropertyValue('--bg-inverse-base').trim();
+
+  const mk = (label, key, color) => ({
+    label, backgroundColor: color, data: THEMES.map(t => t[key]),
+    borderRadius: 4, borderSkipped: false, barThickness: 8, maxBarThickness: 8,
+  });
+
+  new Chart(document.getElementById('cmp-chart'), {
+    type: 'bar',
+    data: {
+      labels: THEMES.map(t => t.name),
+      datasets: [
+        mk('Current', 'current', cCurrent),
+        mk('Previous', 'previous', cPrevious),
+        mk('Benchmark', 'benchmark', cBenchmark),
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 4 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: cInverse, padding: 10, cornerRadius: 8,
+          titleFont: { family: 'Poppins', size: 12, weight: '600' },
+          bodyFont: { family: 'Poppins', size: 12 },
+          callbacks: { label: (c) => ` ${c.dataset.label}: ${c.parsed.y}` },
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { color: cAxis },
+          ticks: { color: cLabel, font: { family: 'Poppins', size: 12, weight: '500' } },
+        },
+        y: {
+          min: 0, max: 100,
+          grid: { color: cGrid, drawTicks: false, lineWidth: 1 },
+          border: { display: false, dash: [3, 3] },
+          ticks: { stepSize: 25, color: cText, font: { family: 'Poppins', size: 12, weight: '600' }, padding: 12 },
+        },
+      },
+    },
+  });
+})();
+
+/* tabs are visual in this single-screen prototype */
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', e => e.preventDefault()));
+
+/* ---------- Tooltip auto-position ----------
+   Render the bubble in a fixed layer so no overflow:hidden ancestor (cards,
+   scroll containers) can clip it. See design-system-reference.md → Tooltip. */
+(function () {
+  const GAP = 10, PAD = 8;
+  const place = (demo) => {
+    const tip = demo.querySelector('.tooltip');
+    if (!tip) return;
+    tip.style.position = 'fixed'; tip.style.margin = '0'; tip.style.transform = 'none';
+    tip.style.left = '0'; tip.style.top = '0'; tip.style.right = 'auto'; tip.style.bottom = 'auto'; tip.style.height = 'auto';
+    const t = demo.getBoundingClientRect();
+    const tw = tip.offsetWidth, th = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+    const pref = tip.classList.contains('is-below') ? 'below'
+      : tip.classList.contains('is-left') ? 'left'
+      : tip.classList.contains('is-right') ? 'right' : 'above';
+    const fits = {
+      above: t.top - th - GAP >= PAD, below: t.bottom + th + GAP <= vh - PAD,
+      left: t.left - tw - GAP >= PAD, right: t.right + tw + GAP <= vw - PAD,
+    };
+    const dir = [pref, 'above', 'below', 'right', 'left'].find(d => fits[d]) || pref;
+    let x, y;
+    if (dir === 'above')      { x = t.left + t.width / 2 - tw / 2; y = t.top - th - GAP; }
+    else if (dir === 'below') { x = t.left + t.width / 2 - tw / 2; y = t.bottom + GAP; }
+    else if (dir === 'left')  { x = t.left - tw - GAP; y = t.top + t.height / 2 - th / 2; }
+    else                      { x = t.right + GAP; y = t.top + t.height / 2 - th / 2; }
+    tip.style.left = Math.max(PAD, Math.min(x, vw - tw - PAD)) + 'px';
+    tip.style.top = Math.max(PAD, Math.min(y, vh - th - PAD)) + 'px';
+    tip.classList.remove('is-above', 'is-below', 'is-left', 'is-right');
+    tip.classList.add('is-' + dir);
+  };
+  const onEnter = (e) => { const demo = e.target.closest && e.target.closest('.tt-demo'); if (demo) place(demo); };
+  document.addEventListener('mouseover', onEnter);
+  document.addEventListener('focusin', onEnter);
+})();
+</script>
+</body>
+</html>

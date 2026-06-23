@@ -54,6 +54,8 @@ Geen formeel kolomgrid. Layout = **page padding** (responsive margin rondom de c
 | Sidebar (desktop) | `240px` breed |
 | Nav switch | op `1200px` wisselt sidebar ↔ hamburger-header |
 
+> ⚠️ **Paginabreedte komt uit deze regel, niet uit de Figma-artboard.** De Figma-frame (bijv. 1440/1920px) is canvas, geen container. Kies de container op basis van het type pagina: **wide = `max-width: 1200px`** is de default voor app-pagina's, card-grids en dashboards. De `max-width` is letterlijk 1200px — tel er geen padding bij op; gebruik `box-sizing: border-box` als de container interne padding heeft zodat hij exact 1200px blijft. Een resultaten-dashboard en al z'n tabs zijn **wide (1200px)** en even breed. Bereken de breedte nooit als `artboard − sidebar`. Zie ook SKILL-regel 10.
+
 ### Spacing
 | Token | Waarde |
 |---|---|

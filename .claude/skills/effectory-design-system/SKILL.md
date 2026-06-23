@@ -155,6 +155,19 @@ Een icoon-only knop (`.ib` / icon button) is zonder label niet te begrijpen. Gee
 ```
 Geldt voor elke icon-only knop (toolbar-acties, close-knoppen die alleen een icoon tonen, kebab-menu's, enz.). Knoppen mét zichtbare tekst hebben geen tooltip nodig. In Angular: de `matTooltip`-directive op de knop.
 
+### 10. Paginabreedte — uit de container-regel, nooit uit de Figma-artboard
+De breedte van een pagina of contentkolom komt **altijd** uit de container-regel in `design-system-reference.md` §2 — **nooit** uit de breedte van de Figma-frame/artboard. Die artboard (bijv. 1440 of 1920px) is alleen canvas, geen productie-breedte.
+
+| Container | max-width | Wanneer |
+|---|---|---|
+| narrow | 960px | lezen, formulieren, focus-flows |
+| **wide** | **1200px** | **standaard app-pagina's, card-grids, dashboards** (default) |
+| full-width | geen | alleen data-zware tabellen / complexe UI's |
+
+- Twijfel je? Kies **wide**: `max-width: 1200px`, `margin: 0 auto`. Gebruik je interne padding op die container, zet dan `box-sizing: border-box` zodat de container **exact 1200px** blijft — niet 1200 + padding. De `max-width` is letterlijk de waarde uit de tabel; tel er geen padding bij op.
+- Een resultaten-dashboard of een nieuw tabblad daarvan is **wide (1200px)** — alle tabs van hetzelfde scherm zijn even breed.
+- Toont een Figma op een 1920-artboard bijv. 1560px content, dan betekent dat **niet** een 1560px container — map naar de dichtstbijzijnde regel-container (meestal wide/1200). Reken de breedte nooit terug uit `artboard − sidebar`.
+
 ---
 
 ## Workflow
