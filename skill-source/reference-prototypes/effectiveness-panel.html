@@ -1743,11 +1743,11 @@ const DATA = {
       { q: 'I enjoy my work', s: 86 }
     ],
     lowScores: [
-      { q: 'I know what results are expected of me at work', s: 68 },
-      { q: 'Doing my work gives me energy', s: 70 },
-      { q: 'I am provided with good work resources', s: 71 },
-      { q: 'My skills and abilities fit in well with my job', s: 72 },
-      { q: 'I enjoy doing my work / tasks', s: 73 }
+      { q: 'Important information is readily accessible for me', s: 68 },
+      { q: 'I am able to maintain a good balance between working and relaxing', s: 70 },
+      { q: 'My skills and abilities fit in well with my job', s: 71 },
+      { q: 'I enjoy doing my work / tasks', s: 72 },
+      { q: 'I know what results are expected of me at work', s: 73 }
     ],
 
     efpLeadPre: 'Team IT is ', efpLeadEm: 'effective', efpLeadEmClass: 'is-pos',
@@ -1866,11 +1866,11 @@ const DATA = {
       { q: 'I enjoy my work', s: 85 }
     ],
     lowScores: [
-      { q: 'I know what results are expected of me at work', s: 66 },
-      { q: 'Doing my work gives me energy', s: 68 },
-      { q: 'I am provided with good work resources', s: 69 },
-      { q: 'My skills and abilities fit in well with my job', s: 70 },
-      { q: 'I enjoy doing my work / tasks', s: 71 }
+      { q: 'My skills and abilities fit in well with my job', s: 66 },
+      { q: 'I enjoy doing my work / tasks', s: 68 },
+      { q: 'Doing my work gives me energy', s: 69 },
+      { q: 'Important information is readily accessible for me', s: 70 },
+      { q: 'I am provided with good work resources', s: 71 }
     ],
 
     efpLeadPre: 'Novanta is ', efpLeadEm: 'effective', efpLeadEmClass: 'is-pos',
@@ -1989,11 +1989,11 @@ const DATA = {
       { q: 'I enjoy my work', s: 82 }
     ],
     lowScores: [
-      { q: 'I know what results are expected of me at work', s: 58 },
-      { q: 'Doing my work gives me energy', s: 61 },
-      { q: 'I am provided with good work resources', s: 63 },
-      { q: 'My skills and abilities fit in well with my job', s: 64 },
-      { q: 'I enjoy doing my work / tasks', s: 66 }
+      { q: 'I am able to maintain a good balance between working and relaxing', s: 58 },
+      { q: 'I know what results are expected of me at work', s: 61 },
+      { q: 'Important information is readily accessible for me', s: 63 },
+      { q: 'I am provided with good work resources', s: 64 },
+      { q: 'Doing my work gives me energy', s: 66 }
     ],
 
     efpLeadPre: 'Novanta is ', efpLeadEm: 'not fully utilized', efpLeadEmClass: '',
@@ -2085,6 +2085,18 @@ const RECO = {
     '1 on 1 action': { title: 'Map personal energisers and drainers', body: 'Ask each person what gives them energy and what drains more energy than it should. Agree one local fix for the draining item.' },
     'Team level action': { title: 'Run an energy drain audit with a fixability filter', body: 'Ask the team to list energy drains, rank them by frequency and fixability, and change one high-frequency drain for four weeks.' },
     'Process / structural action': { title: 'Make repeated hidden work visible before reallocating it', body: 'Track hidden work for two weeks, such as error fixing, informal coordination, handover clean-up, last-minute cover, admin recovery, customer follow-up, or emotional support after difficult incidents. Then rebalance one recurring task.' }
+  },
+  'Important information is readily accessible for me': {
+    'Self directed': { title: 'Stop adding new unofficial channels', body: 'For two weeks, stop adding new places for information. Put lasting updates in the official source and mark temporary updates clearly.' },
+    '1 on 1 action': { title: 'Ask each person where they lose information', body: 'In 1:1s, ask where the person gets stuck when looking for information. Identify whether the issue is location, access, ownership, wording, timing, or version control, then fix one concrete issue.' },
+    'Team level action': { title: "End team updates with 'what changed, where it lives'", body: 'End each meeting, huddle, or shift briefing by saying what changed, who is affected, what action is needed, and where the latest information lives.' },
+    'Process / structural action': { title: 'Create a five-item source-of-truth map', body: 'Pick the five information types the team uses most and name the official location, owner, update rhythm, and duplicate source to stop using.' }
+  },
+  'I am able to maintain a good balance between working and relaxing': {
+    'Self directed': { title: 'Remove one manager-created boundary leak', body: 'Review where your own behaviour weakens recovery, such as after-hours messages, last-minute requests, unclear urgency, praise for constant availability, or cancelled breaks. Remove one boundary leak this week.' },
+    '1 on 1 action': { title: 'Ask what is pushing work into recovery time', body: 'In 1:1s, ask what work most often spills into breaks, evenings, weekends, or recovery time. Identify whether the cause is volume, staffing, handover, unclear priority, or personal habit, then agree one immediate protection.' },
+    'Team level action': { title: 'Use a workload trade-off rule in planning', body: 'When new work is added, ask what will stop, move, or become lighter. Use the answer to protect people from hidden overload.' },
+    'Process / structural action': { title: 'Add recovery and workload limits to planning', body: 'Add a workload and recovery check to planning. Define peak periods, work to pause, cover needed, escalation triggers, and recovery time.' }
   }
 };
 
@@ -2099,6 +2111,8 @@ function focusView(d) {
     'I am provided with good work resources': 'Work enablement',
     'My skills and abilities fit in well with my job': 'Work performance',
     'I enjoy doing my work / tasks': 'Work enjoyment',
+    'Important information is readily accessible for me': 'Work enablement',
+    'I am able to maintain a good balance between working and relaxing': 'Wellbeing and workload',
     /* wins items (highest scores) */
     'I feel comfortable within the team': 'Engagement',
     'Our team trusts one another': 'Collaboration',
