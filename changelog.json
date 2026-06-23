@@ -1,6 +1,27 @@
 {
-  "count": 775,
+  "count": 778,
   "entries": [
+    {
+      "hash": "e900936",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Skill v1.9.19: vary focus items per variant (rebuild refs)",
+      "pages": []
+    },
+    {
+      "hash": "c6564b1",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Focus View: vary the focus items per variant so each screen differs",
+      "pages": []
+    },
+    {
+      "hash": "8f3b530",
+      "author": "Jente Insing",
+      "date": "2026-06-23",
+      "subject": "Sync skill-source bundle + changelog for v1.9.18",
+      "pages": []
+    },
     {
       "hash": "204ca6d",
       "author": "Jente Insing",
