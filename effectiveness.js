@@ -766,6 +766,125 @@ function focusView(d) {
   `;
 }
 
+/* ---------- Reports (third tab) ---------- */
+function reportsView(d) {
+  const row = (icon, name, desc, raw) => `
+    <div class="report-row"${raw ? ' data-raw="true"' : ''}>
+      <img class="file-icon" src="assets/icons/${icon}.svg" alt="" />
+      <div class="report-meta">
+        <div class="report-name">${name}</div>
+        <div class="report-desc">${desc}</div>
+      </div>
+      <button class="ib ib-36 ib-tertiary" aria-label="Download ${name}"><i data-icon="download"></i></button>
+    </div>`;
+  return `
+  <div class="reports-intro">
+    <h2 class="text-l3">Reports</h2>
+    <span class="reports-intro-sep"></span>
+    <span class="reports-intro-desc">View and download your reports</span>
+  </div>
+  <div class="report-group">
+    <h3 class="text-l5 report-group-title">Essential reports</h3>
+    <div class="report-card">
+      ${row('ppt-file', 'Standard Group Results', 'Includes response rate, themes, question performance and group deep-dives. Includes eNPS and Organizational Effectiveness when available.')}
+      ${row('pdf-file', 'Management Summary', 'A leadership-ready summary of key outcomes, strengths, improvement areas, and the main takeaways.')}
+      ${row('ppt-file', 'Answer Distribution Report', 'Shows how responses are distributed per question, to reveal patterns beyond averages.')}
+    </div>
+  </div>
+  <div class="report-group">
+    <h3 class="text-l5 report-group-title">Deep-dive reports</h3>
+    <div class="report-card">
+      ${row('xls-file', 'Raw Data Report: Anonymized', "Respondent-level raw answers for customers' own analysis and data portability.", true)}
+      ${row('xls-file', 'Raw Data Report: Pseudonymous', "Only internal — respondent-level raw answers for customers' own analysis and data portability.", true)}
+      ${row('xls-file', 'Raw Data Report: Non-anonymized', "Respondent-level raw answers for customers' own analysis and data portability.", true)}
+    </div>
+  </div>`;
+}
+
+/* Reports dialogs (language picker, generating dialog, ready notification) */
+function reportsDialogs() {
+  const langRow = (lang, flag, name, region, checked) => `
+    <label class="lang-row${checked ? ' is-selected' : ''}" data-lang="${lang}">
+      <span class="rb-wrap"><input type="radio" class="rb" name="lang"${checked ? ' checked' : ''}></span>
+      <span class="lang-flag">${flag}</span>
+      <span class="lang-name">${name} <span class="lang-region">(${region})</span></span>
+    </label>`;
+  return `
+<div class="scrim" id="lang-scrim" hidden>
+  <div class="dialog dialog-s" role="dialog" aria-modal="true" aria-labelledby="lang-title">
+    <button class="dialog-close" id="lang-close" aria-label="Close"><i data-icon="cross"></i></button>
+    <div class="dialog-header is-sm">
+      <h3 class="dialog-title" id="lang-title">Choose a language</h3>
+      <p class="dialog-subtitle" id="lang-sub">Download “<span id="lang-report">reportName</span>” in the language you select below</p>
+    </div>
+    <div class="dialog-body">
+      <div class="lang-list" role="radiogroup" aria-label="Language">
+        ${langRow('Dutch', '🇳🇱', 'Dutch', 'The Netherlands')}
+        ${langRow('English (US)', '🇺🇸', 'English', 'United States', true)}
+        ${langRow('English (UK)', '🇬🇧', 'English', 'United Kingdom')}
+        ${langRow('German', '🇩🇪', 'German', 'Germany')}
+        ${langRow('Italian', '🇮🇹', 'Italian', 'Italy')}
+        ${langRow('Polish', '🇵🇱', 'Polish', 'Poland')}
+        ${langRow('Portuguese', '🇵🇹', 'Portuguese', 'Portugal')}
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <button class="btn btn-secondary" id="lang-cancel">Cancel</button>
+      <button class="btn btn-primary">Download…</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-region" id="ready-toast" hidden>
+  <div class="sysnotif" role="status">
+    <button class="sysnotif-close" id="ready-close" aria-label="Dismiss"><i data-icon="cross"></i></button>
+    <span class="sysnotif-title" id="ready-title"></span>
+    <button class="sysnotif-action" id="ready-download"><i data-icon="download"></i> Download</button>
+  </div>
+</div>
+
+<div class="scrim" id="gen-scrim" hidden>
+  <div class="dialog dialog-s" role="dialog" aria-modal="true" aria-labelledby="gen-title">
+    <button class="dialog-close" id="gen-close" aria-label="Close"><i data-icon="cross"></i></button>
+    <div class="dialog-header is-sm">
+      <h3 class="dialog-title" id="gen-title">Generating report</h3>
+      <p class="dialog-subtitle" id="gen-subtitle">File is being generated.</p>
+    </div>
+    <div class="dialog-body">
+      <div class="gen-panel" id="gen-panel">
+        <div class="gen-card gen-loading">
+          <div class="gen-icon">
+            <img class="gen-file" src="assets/icons/file-loading.svg" alt="" />
+            <span class="gen-spinner"></span>
+          </div>
+          <div class="gen-text">
+            <span class="gen-title">Generating excel file…</span>
+            <span class="gen-sub" id="gen-sub">In your selected language</span>
+          </div>
+        </div>
+        <div class="gen-done">
+          <div class="gen-card">
+            <img class="gen-file" src="assets/icons/file-ready.svg" alt="" />
+            <div class="gen-text">
+              <span class="gen-title">Done!</span>
+              <span class="gen-sub">The report will download automatically</span>
+            </div>
+          </div>
+          <a class="gen-fallback" href="#">Download does not start? Click here</a>
+        </div>
+      </div>
+      <div class="gen-longer" id="gen-longer">
+        <div class="gen-longer-note">
+          <i data-icon="info" class="gen-longer-icon"></i>
+          <p>This can take a while. Feel free to close this window and keep working in My Effectory — your report will be ready to download here when it’s done.</p>
+        </div>
+        <div class="gen-longer-actions"><button class="btn btn-secondary" id="gen-close-btn">Got it</button></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
 /* ---------- markup template ---------- */
 function shell(d) {
   const npsValue = d.npsPromoters - d.npsDetractors;
@@ -1223,6 +1342,10 @@ function shell(d) {
 ${focusView(d)}
 </div><!-- /view-focus -->
 
+<div class="view" id="view-reports" hidden>
+${reportsView(d)}
+</div><!-- /view-reports -->
+
       </div><!-- /overview-wrap -->
     </div><!-- /main-scroll -->
   </div><!-- /main -->
@@ -1507,6 +1630,8 @@ ${focusView(d)}
     </div><!-- /sp-body -->
   </div><!-- /sidepanel -->
 </div><!-- /overlay -->
+
+${reportsDialogs()}
 `;
 }
 
@@ -1689,31 +1814,31 @@ function renderOverview(variant, initialView) {
 
   /* Overview ↔ Focus View tab switching */
   const viewTabs = document.querySelectorAll('.tab[data-view]');
-  const views = { overview: document.getElementById('view-overview'), focus: document.getElementById('view-focus') };
+  const views = {
+    overview: document.getElementById('view-overview'),
+    focus: document.getElementById('view-focus'),
+    reports: document.getElementById('view-reports')
+  };
   viewTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       const v = tab.dataset.view;
-      /* Reports is a separate page in the GTM prototype — navigate to it for this variant.
-         Only the GTM root pages load effectiveness.js as an external script and ship a
-         reports.html alongside; the bundled skill references inline it, so there it's a no-op. */
-      if (v === 'reports') {
-        if (document.querySelector('script[src$="effectiveness.js"]')) location.href = `reports.html?v=${variant}`;
-        return;
-      }
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('is-active'));
       tab.classList.add('is-active');
       Object.entries(views).forEach(([k, el]) => { if (el) el.hidden = (k !== v); });
       document.querySelector('.main-scroll').scrollTop = 0;
       /* keep the URL in sync with the active view (no reload) */
-      const path = location.pathname.replace(/(overview|focus)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
+      const path = location.pathname.replace(/(overview|focus|reports)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
       if (path !== location.pathname) history.replaceState(null, '', path + location.search + location.hash);
     });
   });
 
-  /* Open directly on a given view (e.g. shared Focus View link) */
+  /* Open directly on a given view (e.g. shared Focus View / Reports link) */
   if (initialView === 'focus' || (typeof location !== 'undefined' && location.hash === '#focus')) {
     const ft = document.querySelector('.tab[data-view="focus"]');
     if (ft) ft.click();
+  } else if (initialView === 'reports') {
+    const rt = document.querySelector('.tab[data-view="reports"]');
+    if (rt) rt.click();
   }
 
   /* Header filter: toggle between team level (Team IT) and organization level (Novanta),
@@ -1788,6 +1913,129 @@ function renderOverview(variant, initialView) {
       });
     });
   });
+
+  /* Reports view: language picker → generate → download / notify */
+  (function wireReports() {
+    const t = (s) => window.tr ? tr(s) : s;
+    const langScrim = document.getElementById('lang-scrim');
+    if (!langScrim) return;
+    const RAW_GEN_MS = 30000, QUICK_GEN_MS = 800, LONGER_HINT_MS = 10000;
+    const langRows = langScrim.querySelectorAll('.lang-row');
+    const langBtn = langScrim.querySelector('.btn-primary');
+    const genScrim = document.getElementById('gen-scrim');
+    const genTitle = document.getElementById('gen-title');
+    const genSubtitle = document.getElementById('gen-subtitle');
+    const genSub = document.getElementById('gen-sub');
+    const genPanel = document.getElementById('gen-panel');
+    const genLonger = document.getElementById('gen-longer');
+    const toast = document.getElementById('ready-toast');
+    const readyTitle = document.getElementById('ready-title');
+    let longerTimer = null, current = null;
+    const COPY = {
+      genTitle: t('Generating report'),
+      genBody: t('We are working hard to generate your file, please wait, your file will be downloaded once finished.'),
+      doneTitle: t('Your report is ready'),
+      doneBody: t('Your download will start automatically.')
+    };
+    const rowState = (row) => { if (!row._gen) row._gen = { generating: [], ready: [] }; return row._gen; };
+    const updateRowLabel = (row) => {
+      const label = row.querySelector('.report-gen-label'); if (!label) return;
+      const g = rowState(row).generating;
+      label.textContent = g.length > 1
+        ? t('Generating in {count} languages').replace('{count}', g.length)
+        : t('Generating in {lang}').replace('{lang}', g[0] || '');
+    };
+    const selectedLanguage = () => { const s = langScrim.querySelector('.lang-row.is-selected'); return (s && s.dataset.lang) || 'English (US)'; };
+    const updateLangButton = () => { if (current) langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? t('Download') : t('Generate'); };
+    const refreshLangDialog = () => {
+      const s = rowState(current.row);
+      langRows.forEach((lr) => {
+        const lang = lr.dataset.lang, old = lr.querySelector('.lang-status');
+        if (old) old.remove();
+        lr.classList.remove('is-busy');
+        const radio = lr.querySelector('input'); radio.disabled = false;
+        if (s.generating.indexOf(lang) !== -1) {
+          lr.classList.add('is-busy'); radio.disabled = true;
+          const st = document.createElement('span'); st.className = 'lang-status';
+          st.innerHTML = '<span class="gen-spinner gen-spinner-sm"></span> ' + t('Generating…');
+          lr.appendChild(st);
+        } else if (s.ready.indexOf(lang) !== -1) {
+          const st2 = document.createElement('span'); st2.className = 'lang-status is-ready';
+          st2.textContent = t('Generated'); lr.appendChild(st2);
+        }
+      });
+      const sel = langScrim.querySelector('.lang-row.is-selected');
+      if (!sel || sel.classList.contains('is-busy')) {
+        langRows.forEach((r) => { r.classList.remove('is-selected'); r.querySelector('input').checked = false; });
+        const firstFree = [].slice.call(langRows).filter((r) => !r.classList.contains('is-busy'))[0];
+        if (firstFree) { firstFree.classList.add('is-selected'); firstFree.querySelector('input').checked = true; }
+      }
+      updateLangButton();
+    };
+    const openLang = (row) => {
+      current = { row, name: row.querySelector('.report-name').textContent.trim(), isRaw: row.dataset.raw === 'true' };
+      document.getElementById('lang-sub').textContent = t('Download “{report}” in the language you select below').replace('{report}', current.name);
+      refreshLangDialog();
+      langScrim.hidden = false;
+    };
+    const closeLang = () => { langScrim.hidden = true; };
+    const closeGen = () => { genScrim.hidden = true; if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; } genLonger.classList.remove('is-shown'); };
+    const showLonger = () => { longerTimer = null; if (genScrim.hidden || genPanel.classList.contains('is-done')) return; genLonger.classList.add('is-shown'); };
+    const openGenDialog = (ready, lang) => {
+      genSub.textContent = lang || t('In your selected language');
+      genLonger.classList.remove('is-shown');
+      genTitle.textContent = ready ? COPY.doneTitle : COPY.genTitle;
+      genSubtitle.textContent = ready ? COPY.doneBody : COPY.genBody;
+      genPanel.classList.toggle('is-done', !!ready);
+      genScrim.hidden = false;
+    };
+    const showToast = (name, lang) => {
+      readyTitle.textContent = t('{report} is ready to download in {lang}').replace('{report}', name).replace('{lang}', lang);
+      toast.hidden = false;
+    };
+    const scheduleGeneration = (row, name, lang, isRaw) => {
+      setTimeout(() => {
+        const s = rowState(row), i = s.generating.indexOf(lang);
+        if (i !== -1) s.generating.splice(i, 1);
+        if (s.ready.indexOf(lang) === -1) s.ready.push(lang);
+        if (s.generating.length === 0) row.classList.remove('is-generating'); else updateRowLabel(row);
+        if (!genScrim.hidden && current && current.row === row) {
+          genPanel.classList.add('is-done');
+          genTitle.textContent = COPY.doneTitle; genSubtitle.textContent = COPY.doneBody;
+          if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
+          genLonger.classList.remove('is-shown');
+        } else { showToast(name, lang); }
+      }, isRaw ? RAW_GEN_MS : QUICK_GEN_MS);
+    };
+    document.querySelectorAll('#view-reports .report-row').forEach((row) => {
+      if (!row.querySelector('.report-gen')) {
+        const gen = document.createElement('span'); gen.className = 'report-gen';
+        gen.innerHTML = '<span class="report-gen-label">' + t('Generating…') + '</span><span class="report-gen-icon"><span class="gen-spinner gen-spinner-sm"></span></span>';
+        row.appendChild(gen);
+      }
+      row.addEventListener('click', () => openLang(row));
+    });
+    langBtn.addEventListener('click', () => {
+      if (!current) return;
+      const row = current.row, name = current.name, isRaw = current.isRaw, lang = selectedLanguage(), s = rowState(row);
+      closeLang();
+      if (s.ready.indexOf(lang) !== -1) { openGenDialog(true, lang); return; }
+      if (s.generating.indexOf(lang) === -1) { s.generating.push(lang); row.classList.add('is-generating'); updateRowLabel(row); scheduleGeneration(row, name, lang, isRaw); }
+      openGenDialog(false, lang);
+      if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
+      if (isRaw) longerTimer = setTimeout(showLonger, LONGER_HINT_MS);
+    });
+    document.getElementById('lang-close').addEventListener('click', closeLang);
+    document.getElementById('lang-cancel').addEventListener('click', closeLang);
+    langScrim.addEventListener('click', (e) => { if (e.target === langScrim) closeLang(); });
+    document.getElementById('gen-close').addEventListener('click', closeGen);
+    document.getElementById('gen-close-btn').addEventListener('click', closeGen);
+    genScrim.addEventListener('click', (e) => { if (e.target === genScrim) closeGen(); });
+    document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!genScrim.hidden) closeGen(); else if (!langScrim.hidden) closeLang(); });
+    langRows.forEach((row) => { row.addEventListener('change', () => { langRows.forEach((r) => r.classList.remove('is-selected')); row.classList.add('is-selected'); updateLangButton(); }); });
+    document.getElementById('ready-close').addEventListener('click', () => { toast.hidden = true; });
+    document.getElementById('ready-download').addEventListener('click', () => { toast.hidden = true; });
+  })();
 
   /* AI summary show more / less */
   const aiSummary = document.getElementById('ai-summary');
