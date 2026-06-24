@@ -470,7 +470,7 @@
     <button class="dialog-close" id="lang-close" aria-label="Close"><i data-icon="cross"></i></button>
     <div class="dialog-header is-sm">
       <h3 class="dialog-title" id="lang-title">Choose a language</h3>
-      <p class="dialog-subtitle">Download “<span id="lang-report">reportName</span>” in the language you select below</p>
+      <p class="dialog-subtitle" id="lang-sub">Download “<span id="lang-report">reportName</span>” in the language you select below</p>
     </div>
     <div class="dialog-body">
       <div class="lang-list" role="radiogroup" aria-label="Language">
@@ -572,12 +572,14 @@
 </div>
 
 <script src="icons.js"></script>
+<script src="i18n.js"></script>
 <script>
   (function () {
     // For the prototype we shorten generation times. Raw-data files take ~10 min in reality;
     // quick (essential) reports finish in seconds.
     var RAW_GEN_MS = 30000;
     var QUICK_GEN_MS = 800;
+    var t = function (s) { return window.tr ? window.tr(s) : s; };
 
     var langScrim = document.getElementById('lang-scrim');
     var reportLabel = document.getElementById('lang-report');
@@ -598,10 +600,10 @@
     var current = null; // { row, name, isRaw }
 
     var COPY = {
-      genTitle: 'Generating report',
-      genBody: 'We are working hard to generate your file, please wait, your file will be downloaded once finished.',
-      doneTitle: 'Your report is ready',
-      doneBody: 'Your download will start automatically.'
+      genTitle: t('Generating report'),
+      genBody: t('We are working hard to generate your file, please wait, your file will be downloaded once finished.'),
+      doneTitle: t('Your report is ready'),
+      doneBody: t('Your download will start automatically.')
     };
 
     // Per-row generation state: which languages are generating / already generated (ready)
@@ -614,8 +616,8 @@
       if (!label) return;
       var g = rowState(row).generating;
       label.textContent = g.length > 1
-        ? 'Generating in ' + g.length + ' languages'
-        : 'Generating in ' + (g[0] || '');
+        ? t('Generating in {count} languages').replace('{count}', g.length)
+        : t('Generating in {lang}').replace('{lang}', g[0] || '');
     }
 
     function selectedLanguage() {
@@ -627,7 +629,7 @@
     var langBtn = langScrim.querySelector('.btn-primary');
     function updateLangButton() {
       if (!current) return;
-      langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? 'Download' : 'Generate';
+      langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? t('Download') : t('Generate');
     }
 
     // Mark, in the language list, which languages are already generating / ready
@@ -647,12 +649,12 @@
           radio.disabled = true;
           var st = document.createElement('span');
           st.className = 'lang-status';
-          st.innerHTML = '<span class="gen-spinner gen-spinner-sm"></span> Generating…';
+          st.innerHTML = '<span class="gen-spinner gen-spinner-sm"></span> ' + t('Generating…');
           lr.appendChild(st);
         } else if (s.ready.indexOf(lang) !== -1) {
           var st2 = document.createElement('span');
           st2.className = 'lang-status is-ready';
-          st2.textContent = 'Generated';
+          st2.textContent = t('Generated');
           lr.appendChild(st2);
         }
       });
@@ -679,7 +681,8 @@
         name: row.querySelector('.report-name').textContent.trim(),
         isRaw: row.dataset.raw === 'true'
       };
-      reportLabel.textContent = current.name;
+      document.getElementById('lang-sub').textContent =
+        t('Download “{report}” in the language you select below').replace('{report}', current.name);
       refreshLangDialog();
       langScrim.hidden = false;
     }
@@ -699,7 +702,7 @@
     }
 
     function openGenDialog(ready, lang) {
-      genSub.textContent = lang || 'In your selected language';
+      genSub.textContent = lang || t('In your selected language');
       genLonger.classList.remove('is-shown');
       genTitle.textContent = ready ? COPY.doneTitle : COPY.genTitle;
       genSubtitle.textContent = ready ? COPY.doneBody : COPY.genBody;
@@ -712,7 +715,7 @@
       if (!row.querySelector('.report-gen')) {
         var gen = document.createElement('span');
         gen.className = 'report-gen';
-        gen.innerHTML = '<span class="report-gen-label">Generating…</span>' +
+        gen.innerHTML = '<span class="report-gen-label">' + t('Generating…') + '</span>' +
                         '<span class="report-gen-icon"><span class="gen-spinner gen-spinner-sm"></span></span>';
         row.appendChild(gen);
       }
@@ -798,7 +801,7 @@
     }
 
     function showToast(name, lang) {
-      readyTitle.textContent = name + ' is ready to download in ' + lang;
+      readyTitle.textContent = t('{report} is ready to download in {lang}').replace('{report}', name).replace('{lang}', lang);
       toast.hidden = false;
     }
     document.getElementById('ready-close').addEventListener('click', function () { toast.hidden = true; });
@@ -828,6 +831,8 @@
     document.getElementById('rep-tab-overview').setAttribute('href', key + '-overview.html');
     document.getElementById('rep-tab-focus').setAttribute('href', key + '-focus.html');
     document.getElementById('rep-back').setAttribute('href', key + '-overview.html');
+    /* Translate the page to the language chosen in the dashboard (localStorage effx-lang) */
+    if (window.translateDOM) translateDOM(document.body);
   })();
 </script>
 </body>
