@@ -78,6 +78,16 @@
     "Your score compared with the benchmarks.": { nl: "Uw score vergeleken met de benchmarks.", de: "Ihr Wert im Vergleich zu den Benchmarks." },
     "Benchmark": { nl: "Benchmark", de: "Benchmark" },
     "External benchmark": { nl: "Externe benchmark", de: "Externe Benchmark" },
+    /* Scores page (GTM prototype) */
+    "All survey questions & scores": { nl: "Alle onderzoeksvragen en scores", de: "Alle Umfragefragen und Werte" },
+    "Search": { nl: "Zoeken", de: "Suchen" },
+    "Sort by:": { nl: "Sorteren op:", de: "Sortieren nach:" },
+    "Default": { nl: "Standaard", de: "Standard" },
+    "2 selected": { nl: "2 geselecteerd", de: "2 ausgewählt" },
+    "Reset": { nl: "Reset", de: "Zurücksetzen" },
+    "Effectory Index": { nl: "Effectory Index", de: "Effectory Index" },
+    "Pin question": { nl: "Vraag vastpinnen", de: "Frage anpinnen" },
+    "Team collaboration and performance": { nl: "Teamsamenwerking en prestatie", de: "Teamzusammenarbeit und Leistung" },
     /* Reports page (GTM prototype) */
     "Scores": { nl: "Scores", de: "Werte" },
     "Cancel": { nl: "Annuleren", de: "Abbrechen" },

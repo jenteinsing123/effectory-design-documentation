@@ -885,6 +885,77 @@ function reportsDialogs() {
 </div>`;
 }
 
+/* ---------- Scores (tab) ---------- */
+/* All survey questions grouped by theme, with the group score, the Effectory Index
+   (external benchmark) and the previous-survey score. Illustrative data. */
+const SCORES = [
+  { theme: 'Work enjoyment', rows: [
+    { q: 'I enjoy doing my work / tasks', s: 74, idx: 71, prev: 70 },
+    { q: 'Doing my work gives me energy', s: 68, idx: 70, prev: 64 }
+  ] },
+  { theme: 'Work enablement', rows: [
+    { q: 'I am provided with good work resources', s: 71, idx: 73, prev: 67 },
+    { q: 'Important information is readily accessible for me', s: 69, idx: 72, prev: 66 }
+  ] },
+  { theme: 'Work performance', rows: [
+    { q: 'I know what results are expected of me at work', s: 72, idx: 74, prev: 65 },
+    { q: 'My skills and abilities fit in well with my job', s: 76, idx: 75, prev: 72 }
+  ] },
+  { theme: 'Wellbeing and workload', rows: [
+    { q: 'I am able to maintain a good balance between working and relaxing', s: 66, idx: 69, prev: 61 },
+    { q: 'Doing my work gives me energy', s: 68, idx: 70, prev: 64 }
+  ] },
+  { theme: 'Team collaboration and performance', rows: [
+    { q: 'I feel comfortable within the team', s: 91, idx: 84, prev: 89 },
+    { q: 'Our team trusts one another', s: 88, idx: 82, prev: 85 },
+    { q: 'During a team meeting, everyone has a fair chance to speak up', s: 85, idx: 80, prev: 83 }
+  ] }
+];
+
+function scoresView(d) {
+  const scoreRow = (r) => `
+    <div class="sc-row">
+      <div class="sc-q">${r.q}</div>
+      <div class="sc-actions">
+        <button class="btn btn-secondary sc-insights">Insights</button>
+        <div class="tt-demo"><button class="ib ib-36 ib-secondary" aria-label="Pin question"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin question</div></div>
+      </div>
+      <div class="sc-cell is-current">${r.s}%</div>
+      <div class="sc-cell is-index">${r.idx}%</div>
+      <div class="sc-cell">${r.prev}%</div>
+    </div>`;
+  const group = (g) => `
+    <div class="sc-group" data-open="true">
+      <div class="sc-head">
+        <button class="sc-head-title"><i data-icon="chevron-down" class="sc-chev"></i> ${g.theme}</button>
+        <div class="sc-col-head is-current"><i data-icon="hierarchy"></i> ${d.groupName}</div>
+        <div class="sc-col-head is-index">
+          <i data-icon="hierarchy"></i> Effectory Index
+          <i data-icon="chevron-down" class="sc-col-chev"></i>
+        </div>
+        <div class="sc-col-head"><i data-icon="rotate-backward"></i> Previous survey</div>
+      </div>
+      <div class="sc-rows">${g.rows.map(scoreRow).join('')}</div>
+    </div>`;
+  return `
+  <div class="sc-intro">
+    <h2 class="text-l3">Scores</h2>
+    <span class="sc-accent"></span>
+    <span class="sc-subtitle">All survey questions &amp; scores</span>
+  </div>
+  <div class="sc-toolbar">
+    <label class="sc-search">
+      <i data-icon="search"></i>
+      <input type="text" class="sc-search-input" placeholder="Search" aria-label="Search questions" />
+    </label>
+    <button class="sc-filter-btn" type="button"><i data-icon="sort-descending"></i><span class="sc-filter-lbl">Sort by:</span><span class="sc-filter-val">Default</span></button>
+    <span class="sc-tb-divider"></span>
+    <button class="sc-filter-btn" type="button"><i data-icon="sort-descending"></i><span class="sc-filter-lbl">Comparisons:</span><span class="sc-filter-val">2 selected</span></button>
+    <button class="sc-reset" type="button" disabled><i data-icon="rotate-backward"></i> Reset</button>
+  </div>
+  <div class="sc-table">${SCORES.map(group).join('')}</div>`;
+}
+
 /* ---------- markup template ---------- */
 function shell(d) {
   const npsValue = d.npsPromoters - d.npsDetractors;
@@ -1045,7 +1116,7 @@ function shell(d) {
           <a class="tab is-active" data-view="overview">Overview</a>
           <a class="tab" data-view="focus"><i data-icon="featured" class="tab-spark"></i> Focus View</a>
           <a class="tab">Themes</a>
-          <a class="tab">Scores</a>
+          <a class="tab" data-view="scores">Scores</a>
           <a class="tab">Open answers</a>
           <a class="tab">Topics &amp; Ideas</a>
           <a class="tab" data-view="reports">Reports</a>
@@ -1345,6 +1416,10 @@ ${focusView(d)}
 <div class="view" id="view-reports" hidden>
 ${reportsView(d)}
 </div><!-- /view-reports -->
+
+<div class="view" id="view-scores" hidden>
+${scoresView(d)}
+</div><!-- /view-scores -->
 
       </div><!-- /overview-wrap -->
     </div><!-- /main-scroll -->
@@ -1817,7 +1892,8 @@ function renderOverview(variant, initialView) {
   const views = {
     overview: document.getElementById('view-overview'),
     focus: document.getElementById('view-focus'),
-    reports: document.getElementById('view-reports')
+    reports: document.getElementById('view-reports'),
+    scores: document.getElementById('view-scores')
   };
   viewTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -1827,7 +1903,7 @@ function renderOverview(variant, initialView) {
       Object.entries(views).forEach(([k, el]) => { if (el) el.hidden = (k !== v); });
       document.querySelector('.main-scroll').scrollTop = 0;
       /* keep the URL in sync with the active view (no reload) */
-      const path = location.pathname.replace(/(overview|focus|reports)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
+      const path = location.pathname.replace(/(overview|focus|reports|scores)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
       if (path !== location.pathname) history.replaceState(null, '', path + location.search + location.hash);
     });
   });
@@ -1839,6 +1915,9 @@ function renderOverview(variant, initialView) {
   } else if (initialView === 'reports') {
     const rt = document.querySelector('.tab[data-view="reports"]');
     if (rt) rt.click();
+  } else if (initialView === 'scores') {
+    const st = document.querySelector('.tab[data-view="scores"]');
+    if (st) st.click();
   }
 
   /* Header filter: toggle between team level (Team IT) and organization level (Novanta),
@@ -2035,6 +2114,33 @@ function renderOverview(variant, initialView) {
     langRows.forEach((row) => { row.addEventListener('change', () => { langRows.forEach((r) => r.classList.remove('is-selected')); row.classList.add('is-selected'); updateLangButton(); }); });
     document.getElementById('ready-close').addEventListener('click', () => { toast.hidden = true; });
     document.getElementById('ready-download').addEventListener('click', () => { toast.hidden = true; });
+  })();
+
+  /* Scores view: collapsible groups + live search filter */
+  (function wireScores() {
+    const table = document.getElementById('view-scores');
+    if (!table) return;
+    table.querySelectorAll('.sc-head-title').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const g = btn.closest('.sc-group');
+        g.dataset.open = g.dataset.open === 'true' ? 'false' : 'true';
+      });
+    });
+    const search = table.querySelector('.sc-search-input');
+    if (search) {
+      search.addEventListener('input', () => {
+        const term = search.value.trim().toLowerCase();
+        table.querySelectorAll('.sc-group').forEach(g => {
+          let any = false;
+          g.querySelectorAll('.sc-row').forEach(row => {
+            const match = row.querySelector('.sc-q').textContent.toLowerCase().includes(term);
+            row.hidden = !match;
+            if (match) any = true;
+          });
+          g.hidden = !any;
+        });
+      });
+    }
   })();
 
   /* AI summary show more / less */
