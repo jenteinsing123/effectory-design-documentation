@@ -418,14 +418,22 @@ Chip-varianten: `.chip` `.chip-info` `.chip-error` `.chip-warning`
   <span class="sel-btn-name">Sorteren</span>
   <i data-icon="chevron-down"></i>
 </button>
+
+<!-- Selected/filled: add .is-filled zodra er een waarde gekozen is -->
+<button class="sel-btn sel-btn-inline is-filled">
+  <i data-icon="Clock"></i>
+  <span class="sel-btn-value">30 jun 2026</span>
+</button>
 ```
-States: `.is-hover` `.is-pressed` `.is-focus`
+States: `.is-hover` `.is-pressed` `.is-focus` `.is-filled`.
+`.sel-btn-value` is standaard `content-secondary` (placeholder-look). Voeg `.is-filled` toe wanneer er een waarde geselecteerd is — dat promoot de waarde én een leidend icoon naar `content-base`, gelijk aan de "Filled in"-state van de bordered Single Select.
 
 ### Dropdown menu
 ```html
 <div class="menu">
   <div class="menu-item">Optie 1</div>
-  <div class="menu-item is-selected">Optie 2</div>
+  <!-- Single-select: geselecteerde item krijgt ALTIJD de trailing check -->
+  <div class="menu-item is-selected">Optie 2 <i data-icon="check" class="menu-item-check"></i></div>
   <div class="menu-divider"></div>
   <div class="menu-item">Optie 3</div>
 </div>
@@ -469,6 +477,7 @@ States: `.is-hover` `.is-pressed` `.is-focus`
 </div>
 ```
 States op `.menu-item`: `.is-hover` `.is-selected` `.is-focus` `.is-disabled`.
+**Single-select selected state:** het `.is-selected` item krijgt naast de brand-subtle achtergrond ALTIJD de trailing check `<i data-icon="check" class="menu-item-check"></i>` (teal, `content-brand-base`) — de achtergrondtint alleen is niet genoeg. Multi-select gebruikt in plaats daarvan `.menu-cb` checkboxen, geen check. `.menu-item-check` heeft `display:flex` nodig om zijn 16px-box te krijgen.
 Echte Angular-API: Material `mat-menu` met `[matMenuTriggerFor]`; items `<button mat-menu-item disableRipple>` (icoon + `<span>`) of `<a mat-menu-item class="icon-before">` voor links.
 Onderdelen: `.menu-header` (titel), `.menu-group-lbl`, `.menu-divider`, `.menu-item` (+ `.menu-item-icon` / `.av` avatar, `.menu-item-body` → `.menu-item-title` + `.menu-item-sub`), trailing `.menu-item-check` / `.menu-chevron` / `.menu-label`.
 Icoongrootte: `.menu-item-icon` is 16px (default); voeg `size-24` of `size-32` toe voor een groter icoon (16/24/32). Hou één maat aan binnen één menu.
