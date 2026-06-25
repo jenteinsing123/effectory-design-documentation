@@ -726,7 +726,7 @@ if (window.Icons) window.Icons.render(document.body);
     const br = document.getElementById('scp-agree-bracket');
     br.style.width = agreeTotal + '%';
     document.getElementById('scp-agree-lbl').textContent = agreeTotal + '% agree with this statement';
-    const cards = [{ lbl: d.groupName, val: fmtv(group) }, { lbl: 'Benchmark', val: fmtv(bench) }];
+    const cards = [{ lbl: d.groupName, val: fmtv(group) }, { lbl: 'Effectory Index', val: fmtv(bench) }];
     document.getElementById('scp-cards').innerHTML = cards.map(c => `<div class="engp-card-item"><div class="engp-card-lbl">${c.lbl}</div><div class="engp-card-val">${c.val}</div></div>`).join('');
     document.getElementById('scp-chart-grp').textContent = d.groupName;
     const theme = QUESTION_THEME[q];

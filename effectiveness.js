@@ -2739,7 +2739,7 @@ function renderOverview(variant, initialView) {
       /* comparison cards — skip "Organization score" when the group already IS the organization (Novanta) */
       const cards = [{ lbl: d.groupName, val: fmtv(group) }];
       if (groupKey(d) !== 'novanta') cards.push({ lbl: T2('Organization score'), val: fmtv(org) });
-      cards.push({ lbl: T2('Benchmark'), val: fmtv(bench) });
+      cards.push({ lbl: T2('Effectory Index'), val: fmtv(bench) });
       document.getElementById('scp-cards').innerHTML = cards.map(c => `<div class="engp-card-item"><div class="engp-card-lbl">${c.lbl}</div><div class="engp-card-val">${c.val}</div></div>`).join('');
       document.getElementById('scp-chart-grp').textContent = d.groupName;
       /* theme section (only if the question belongs to a theme) */
