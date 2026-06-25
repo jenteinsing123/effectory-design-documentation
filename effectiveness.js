@@ -996,18 +996,86 @@ const goalChipHTML = (key) => {
   return g ? `<span class="goal-chip ${g.cls}"><i data-icon="${g.icon}"></i> ${T2(g.label)}</span>` : T2('Select a goal');
 };
 const autoGrow = (ta) => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; };
+const ACT_PEOPLE = [
+  { name: 'Jente Insing', av: 'av-blue', initials: 'JI', email: 'jente.insing@effectory.com' },
+  { name: 'Alex de Vries', av: 'av-green', initials: 'AV', email: 'alex.devries@effectory.com' },
+  { name: 'Sam Bakker', av: 'av-orange', initials: 'SB', email: 'sam.bakker@effectory.com' },
+  { name: 'Robin Smit', av: 'av-red', initials: 'RS', email: 'robin.smit@effectory.com' }
+];
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const avatarHTML = (name, size) => {
+  const p = ACT_PEOPLE.find(x => x.name === name);
+  const initials = p ? p.initials : (name || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  return `<span class="av ${size} ${p ? p.av : 'av-grey'}">${initials}</span>`;
+};
+const fmtActDate = (iso) => { if (!iso) return ''; const [y, m, da] = iso.split('-').map(Number); return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1] + ' ' + da + ', ' + y; };
+const isoOf = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+/* Design-system calendar (.dp) for one month */
+function dpMonthHTML(year, month, selIso) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const monNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const wdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  const startWd = (new Date(year, month, 1).getDay() + 6) % 7;
+  const dim = new Date(year, month + 1, 0).getDate();
+  const dimPrev = new Date(year, month, 0).getDate();
+  const t = new Date(); const todayIso = isoOf(t.getFullYear(), t.getMonth(), t.getDate());
+  const cells = [];
+  for (let i = 0; i < startWd; i++) cells.push({ d: dimPrev - startWd + 1 + i, other: true });
+  for (let d = 1; d <= dim; d++) cells.push({ d, iso: isoOf(year, month, d) });
+  while (cells.length % 7 !== 0) cells.push({ d: cells.length - (startWd + dim) + 1, other: true });
+  const days = cells.map(c => `<div class="dp-day${c.other ? ' is-other-month' : ''}${c.iso === selIso ? ' is-selected' : ''}${c.iso === todayIso ? ' is-today' : ''}"${c.iso ? ` data-iso="${c.iso}"` : ''}>${c.d}</div>`).join('');
+  return `<div class="dp"><div class="dp-body">
+    <div class="dp-header"><div class="dp-month-group"><span class="dp-month-label">${T2(monNames[month])} ${year}</span></div>
+      <div class="dp-nav"><button class="dp-nav-btn dp-prev" type="button" data-y="${year}" data-m="${month}"><i data-icon="chevron-left"></i></button><button class="dp-nav-btn dp-next" type="button" data-y="${year}" data-m="${month}"><i data-icon="chevron-right"></i></button></div></div>
+    <div class="dp-weekdays">${wdays.map(w => `<div class="dp-wday">${w}</div>`).join('')}</div>
+    <div class="dp-grid">${days}</div></div></div>`;
+}
 function renderActList(overlay) {
   const T2 = (s) => window.tr ? tr(s) : s;
   const st = actState(overlay.__actKey);
   const list = overlay.querySelector('.act-list');
-  list.innerHTML = st.actions.map((a, i) => `<div class="act-item${a.done ? ' is-done' : ''}"><span class="cb-wrap"><input type="checkbox" class="cb" data-i="${i}"${a.done ? ' checked' : ''}></span><input type="text" class="act-item-text" data-i="${i}" placeholder="${T2('Describe the action')}"></div>`).join('');
-  st.actions.forEach((a, i) => { const ti = list.querySelector(`.act-item-text[data-i="${i}"]`); if (ti) ti.value = a.text || ''; });
+  list.innerHTML = st.actions.map((a, i) => `
+    <div class="act-item${a.done ? ' is-done' : ''}">
+      <span class="cb-wrap"><input type="checkbox" class="cb act-item-cb" data-i="${i}"${a.done ? ' checked' : ''} aria-label="Mark done"></span>
+      <div class="act-item-main">
+        <input type="text" class="tf-inline act-item-input" data-i="${i}" value="${esc(a.text)}" placeholder="${T2('What needs to be done?')}">
+        <div class="act-item-controls">
+          <div class="act-item-deadline-wrap">
+            <span class="act-item-sel-trigger${a.deadline ? ' tt-demo' : ''}">
+              <button class="sel-btn sel-btn-inline act-item-deadline${a.deadline ? ' is-filled' : ''}" type="button" data-i="${i}"><i data-icon="Clock"></i><span class="sel-btn-value">${a.deadline ? fmtActDate(a.deadline) : T2('Pick due date')}</span></button>
+              ${a.deadline ? `<div class="tooltip is-above">${T2('Due date')}</div>` : ''}
+            </span>
+            ${a.deadline ? `<span class="tt-demo"><button class="ib ib-24 ib-tertiary act-item-deadline-clear" type="button" data-i="${i}" aria-label="${T2('Remove due date')}"><i data-icon="cross"></i></button><div class="tooltip is-above">${T2('Remove due date')}</div></span>` : ''}
+            <div class="act-item-dp" hidden></div>
+          </div>
+          <div class="act-item-assign-wrap">
+            <span class="act-item-sel-trigger${a.assignee ? ' tt-demo' : ''}">
+              <button class="sel-btn sel-btn-inline act-item-assign${a.assignee ? ' is-filled' : ''}" type="button" data-i="${i}">${a.assignee ? `${avatarHTML(a.assignee, 'av-24')}<span class="sel-btn-value">${esc(a.assignee)}</span>` : `<i data-icon="user"></i><span class="sel-btn-value">${T2('Assign someone')}</span>`}</button>
+              ${a.assignee ? `<div class="tooltip is-above">${T2('Assigned person')}</div>` : ''}
+            </span>
+            ${a.assignee ? `<span class="tt-demo"><button class="ib ib-24 ib-tertiary act-item-assign-clear" type="button" data-i="${i}" aria-label="${T2('Remove assignee')}"><i data-icon="cross"></i></button><div class="tooltip is-above">${T2('Remove assignee')}</div></span>` : ''}
+            <div class="menu act-item-assign-menu" hidden>${assigneeOptionsHTML(a.assignee)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-item-more-wrap">
+        <button class="ib ib-36 ib-tertiary act-item-more" type="button" aria-label="More"><i data-icon="more-vertical"></i></button>
+        <div class="menu act-item-menu" hidden><div class="menu-item act-item-del" role="button" data-i="${i}"><i data-icon="trash" class="menu-item-icon"></i><span class="menu-item-title">Remove action</span></div></div>
+      </div>
+    </div>`).join('');
   if (window.Icons) window.Icons.render(list);
   const done = st.actions.filter(a => a.done).length;
   overlay.querySelector('.act-prog-fill').style.width = st.actions.length ? (done / st.actions.length * 100) + '%' : '0';
   const badge = overlay.querySelector('.act-count');
   if (badge) { badge.textContent = st.actions.length; badge.hidden = st.actions.length === 0; }
+  const empty = overlay.querySelector('.act-empty');
+  if (empty) empty.hidden = st.actions.length > 0;
 }
+function assigneeOptionsHTML(selected) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  return ACT_PEOPLE.map(p => `<div class="menu-item act-item-assign-opt${p.name === selected ? ' is-selected' : ''}" role="option" aria-selected="${p.name === selected}" data-name="${esc(p.name)}"><span class="av av-32 ${p.av}">${p.initials}</span><div class="menu-item-body"><span class="menu-item-title">${esc(p.name)}</span><span class="menu-item-sub">${esc(p.email)}</span></div>${p.name === selected ? `<i data-icon="check" class="menu-item-check"></i>` : ''}</div>`).join('');
+}
+function closeActPopups(overlay) { overlay.querySelectorAll('.act-item-dp, .act-item-assign-menu, .act-item-menu').forEach(x => { x.hidden = true; }); }
 /* Point a panel's Actions tab at a subject: restore its state + set the score. */
 function loadActions(overlay, key, scoreText) {
   if (!overlay) return;
@@ -1018,7 +1086,7 @@ function loadActions(overlay, key, scoreText) {
   const menu = overlay.querySelector('.act-goal-menu'); if (menu) { menu.hidden = true; menu.classList.toggle('has-goal', !!st.goal); }
   overlay.querySelectorAll('.act-goal-opt').forEach(o => o.classList.toggle('is-selected', o.dataset.goal === st.goal));
   const desc = overlay.querySelector('.act-desc'); if (desc) { desc.value = st.desc; autoGrow(desc); }
-  const addBtn = overlay.querySelector('.act-add'); if (addBtn) addBtn.disabled = !st.goal;
+  const addBtn = overlay.querySelector('.act-add'); if (addBtn) { addBtn.disabled = !st.goal; addBtn.toggleAttribute('data-has-goal', !!st.goal); }
   renderActList(overlay);
 }
 function wireActions(overlay) {
@@ -1039,19 +1107,49 @@ function wireActions(overlay) {
     const cur = overlay.querySelector('.act-goal-current'); cur.innerHTML = goalChipHTML(opt.dataset.goal); if (window.Icons) window.Icons.render(cur);
     menu.querySelectorAll('.act-goal-opt').forEach(o => o.classList.toggle('is-selected', o === opt));
     menu.classList.add('has-goal');
-    addBtn.disabled = false; menu.hidden = true;
+    addBtn.disabled = false; addBtn.setAttribute('data-has-goal', ''); menu.hidden = true;
   }));
   const removeItem = overlay.querySelector('.act-goal-remove');
   if (removeItem) removeItem.addEventListener('click', () => { menu.hidden = true; openRemoveDialog(overlay); });
   desc.addEventListener('input', () => { actState(overlay.__actKey).desc = desc.value; autoGrow(desc); });
+  /* Add action → append a blank inline row and focus it (auto-saves, no editor) */
   addBtn.addEventListener('click', () => {
     if (addBtn.disabled) return;
-    actState(overlay.__actKey).actions.push({ text: '', done: false });
+    actState(overlay.__actKey).actions.push({ text: '', done: false, deadline: '', assignee: '' });
     renderActList(overlay);
-    const last = list.querySelector('.act-item:last-child .act-item-text'); if (last) last.focus();
+    const last = list.querySelector('.act-item:last-child .act-item-input'); if (last) last.focus();
   });
-  list.addEventListener('input', (e) => { const ti = e.target.closest('.act-item-text'); if (ti) actState(overlay.__actKey).actions[+ti.dataset.i].text = ti.value; });
-  list.addEventListener('change', (e) => { const cb = e.target.closest('.cb'); if (cb) { actState(overlay.__actKey).actions[+cb.dataset.i].done = cb.checked; renderActList(overlay); } });
+  /* inline editing — everything auto-saves to state */
+  list.addEventListener('input', (e) => { const ti = e.target.closest('.act-item-input'); if (ti) actState(overlay.__actKey).actions[+ti.dataset.i].text = ti.value; });
+  list.addEventListener('change', (e) => { const cb = e.target.closest('.act-item-cb'); if (cb) { actState(overlay.__actKey).actions[+cb.dataset.i].done = cb.checked; renderActList(overlay); } });
+  list.addEventListener('click', (e) => {
+    const st = actState(overlay.__actKey);
+    const dClear = e.target.closest('.act-item-deadline-clear');
+    if (dClear) { e.stopPropagation(); st.actions[+dClear.dataset.i].deadline = null; renderActList(overlay); return; }
+    const aClear = e.target.closest('.act-item-assign-clear');
+    if (aClear) { e.stopPropagation(); st.actions[+aClear.dataset.i].assignee = ''; renderActList(overlay); return; }
+    const dBtn = e.target.closest('.act-item-deadline');
+    if (dBtn) {
+      e.stopPropagation();
+      const pop = dBtn.closest('.act-item-deadline-wrap').querySelector('.act-item-dp');
+      const willOpen = pop.hidden; closeActPopups(overlay);
+      if (willOpen) { const i = +dBtn.dataset.i, iso = st.actions[i].deadline; const t = new Date(); const y = iso ? +iso.slice(0, 4) : t.getFullYear(), m = iso ? +iso.slice(5, 7) - 1 : t.getMonth(); pop.dataset.i = i; pop.innerHTML = dpMonthHTML(y, m, iso); if (window.Icons) window.Icons.render(pop); pop.hidden = false; }
+      return;
+    }
+    const navBtn = e.target.closest('.dp-prev, .dp-next');
+    if (navBtn) { e.stopPropagation(); let y = +navBtn.dataset.y, m = +navBtn.dataset.m; m += navBtn.classList.contains('dp-prev') ? -1 : 1; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } const pop = navBtn.closest('.act-item-dp'); pop.innerHTML = dpMonthHTML(y, m, st.actions[+pop.dataset.i].deadline); if (window.Icons) window.Icons.render(pop); return; }
+    const day = e.target.closest('.dp-day[data-iso]');
+    if (day) { e.stopPropagation(); const pop = day.closest('.act-item-dp'); st.actions[+pop.dataset.i].deadline = day.dataset.iso; renderActList(overlay); return; }
+    const aBtn = e.target.closest('.act-item-assign');
+    if (aBtn) { e.stopPropagation(); const m = aBtn.closest('.act-item-assign-wrap').querySelector('.act-item-assign-menu'); const willOpen = m.hidden; closeActPopups(overlay); m.hidden = !willOpen; return; }
+    const opt = e.target.closest('.act-item-assign-opt');
+    if (opt) { e.stopPropagation(); const i = +opt.closest('.act-item').querySelector('.act-item-assign').dataset.i; st.actions[i].assignee = opt.dataset.name; renderActList(overlay); return; }
+    const more = e.target.closest('.act-item-more');
+    if (more) { e.stopPropagation(); const m = more.closest('.act-item-more-wrap').querySelector('.act-item-menu'); const willOpen = m.hidden; closeActPopups(overlay); m.hidden = !willOpen; return; }
+    const del = e.target.closest('.act-item-del');
+    if (del) { st.actions.splice(+del.dataset.i, 1); renderActList(overlay); }
+  });
+  document.addEventListener('click', () => closeActPopups(overlay));
 }
 /* Generic Insights/Actions tab switching for a side panel (uses .sp-tab[data-scptab] + .scp-tabpanel). */
 function wirePanelTabs(overlay) {
@@ -1129,17 +1227,17 @@ const SCORES_GROUPS = [
   { theme: 'Work enjoyment', rows: [
     { q: 'I enjoy doing my work / tasks', bench: 71, v: { 'team-it': { before: 60, after: 72 }, 'novanta': { before: 66, after: 68 } } }
   ] },
-  { theme: 'Loyalty', rows: [
-    { q: 'I would recommend my team as a good place to work', bench: 5.6, scale: '10', v: { 'team-it': { before: 6.4, after: 7.1 }, 'novanta': { before: 6.6, after: 7.3 } } },
-    { q: 'I see myself working here in two years', bench: 6.6, scale: '10', v: { 'team-it': { before: 5.9, after: 6.4 }, 'novanta': { before: 6.3, after: 6.8 } } }
+  { theme: 'Work performance', rows: [
+    { q: 'I know what results are expected of me at work', bench: 74, v: { 'team-it': { before: 43, after: 73 }, 'novanta': { before: 61, after: 72 } } },
+    { q: 'My skills and abilities fit in well with my job', bench: 75, v: { 'team-it': { before: 54, after: 71 }, 'novanta': { before: 60, after: 66 } } }
   ] },
   { theme: 'Work enablement', rows: [
     { q: 'I am provided with good work resources', bench: 73, v: { 'team-it': { before: 52, after: 71 }, 'novanta': { before: 64, after: 71 } } },
     { q: 'Important information is readily accessible for me', bench: 72, v: { 'team-it': { before: 63, after: 68 }, 'novanta': { before: 63, after: 70 } } }
   ] },
-  { theme: 'Work performance', rows: [
-    { q: 'I know what results are expected of me at work', bench: 74, v: { 'team-it': { before: 43, after: 73 }, 'novanta': { before: 61, after: 72 } } },
-    { q: 'My skills and abilities fit in well with my job', bench: 75, v: { 'team-it': { before: 54, after: 71 }, 'novanta': { before: 60, after: 66 } } }
+  { theme: 'Loyalty', rows: [
+    { q: 'I would recommend my team as a good place to work', bench: 5.6, scale: '10', v: { 'team-it': { before: 6.4, after: 7.1 }, 'novanta': { before: 6.6, after: 7.3 } } },
+    { q: 'I see myself working here in two years', bench: 6.6, scale: '10', v: { 'team-it': { before: 5.9, after: 6.4 }, 'novanta': { before: 6.3, after: 6.8 } } }
   ] },
   { theme: 'Wellbeing and workload', rows: [
     { q: 'Doing my work gives me energy', bench: 70, v: { 'team-it': { before: 51, after: 68 }, 'novanta': { before: 66, after: 69 } } },
@@ -1207,23 +1305,88 @@ Object.keys(PANEL_THEMES).forEach(th => PANEL_THEMES[th].forEach(x => { QUESTION
 
 /* Tips & Best practices per question — shown in the question side panel's second tab. */
 const TIPS = {
-  'I enjoy doing my work / tasks': {
-    tips: [
-      'Make sure your team members’ experience is a match for their job duties and preferences. Take the actions needed when one of your team members experiences a mismatch, for example, spend a little more time with the team member, provide the team member with more help, or provide a training. In some situations, you might need to look for a more suitable position (inside or outside of the organization).',
-      'Get to know your colleagues and make sure that they are continuing to develop their skills. It might be time to offer them a bigger challenge, a change in position or work tasks, or to set them on a path towards a promotion.',
-      'Talk with your colleagues about the biggest obstacles you all encounter in your day to day work, and try to come up with solutions. Frustration diminishes job satisfaction, so take the time to remove obstacles when you can.',
-      'Talk with your colleagues about what energizes them the most on the job (this may vary from person to person). Take this into account when allocating tasks amongst your team members.',
-      'Work to maintain a pleasant atmosphere in the workplace. Lay down some ground rules and invest in team building exercises (for example, a team outing, lunch, joint training course, etc.).'
-    ],
-    bp: '“At the end of each shift, our team members wrote down what kind of day they had, that is, what they enjoyed and what they didn’t. After two weeks, everyone had a good picture of what gave them energy and what sapped their energy. We now take this into account when we allocate work duties.”'
+  "I enjoy doing my work / tasks": {
+    "tips": {
+      "en": [
+        "Make sure your team members’ experience is a match for their job duties and preferences. Take the actions needed when one of your team members experiences a mismatch, for example, spend a little more time with the team member, provide the team member with more help, or provide a training. In some situations, you might need to look for a more suitable position (inside or outside of the organization).",
+        "Get to know your colleagues and make sure that they are continuing to develop their skills. It might be time to offer them a bigger challenge, a change in position or work tasks, or to set them on a path towards a promotion.",
+        "Talk with your colleagues about the biggest obstacles you all encounter in your day to day work, and try to come up with solutions. Frustration diminishes job satisfaction, so take the time to remove obstacles when you can.",
+        "Talk with your colleagues about what energizes them the most on the job (this may vary from person to person). Take this into account when allocating tasks amongs your team members.",
+        "Work to maintain a pleasant atmosphere in the workplace. Lay down some ground rules and invest in team building exercises (for example, a team outing, lunch, joint training course, etc.)."
+      ],
+      "nl": [
+        "Zorg ervoor dat je teamleden ervaren dat hun taken aansluiten bij wat ze graag doen. Onderneem actie wanneer ze een discrepantie ervaren, door hem/haar extra aandacht te geven, meer te helpen of een training te geven. In sommige situaties kan het nodig zijn om op zoek te gaan naar een meer geschikte functie (binnen of buiten de organisatie).",
+        "Besteed aandacht aan je collega's en zorg ervoor dat ze hun vaardigheden blijven ontwikkelen. Misschien wil je ze een grotere uitdaging bieden of een verandering van functie of taken of een weg naar een promotie uitstippelen.",
+        "Bespreek met je collega's de grootste frustraties die je op je werk tegenkomt en probeer met oplossingen te komen. Frustraties nemen vaak het plezier in het werk weg, dus waarom zou je niet proactief proberen om ze te verwijderen als dat mogelijk is.",
+        "Bespreek wat je collega's de grootste energieboost geeft (dit kan van persoon tot persoon verschillen). Houd hier rekening mee bij het verdelen van taken over je teamleden.",
+        "Zorg ervoor dat de sfeer op de werkplek aangenaam is. Bepaal enkele spelregels en investeer in teambuilding (zoals een dagje uit, een gezamenlijke lunch, een gezamenlijke training, etc.)."
+      ],
+      "de": [
+        "Stellen Sie sicher, dass Mitarbeiter gut zu den für sie vorgesehenen Aufgaben passen, und ergreifen Sie Maßnahmen, wenn das Ergebnis nicht so gut ausfällt, wie Sie erwartet haben. In einigen Fällen kann das Problem, dass Mitarbeiter und Aufgabe nicht perfekt zusammen passen, behoben werden, indem Sie dem Mitarbeiter zusätzliche Aufmerksamkeit, Unterstützung und/oder Schulung geben, und in anderen Fällen müssen Sie geeignete Aufgaben für ihn/sie finden (innerhalb oder außerhalb des Unternehmens).",
+        "Achten Sie auf Ihre Mitarbeiter und stellen Sie sicher, dass sie sich kontinuierlich weiterentwickeln, z. B. indem Sie sie vor eine größere Herausforderung stellen, ihnen attraktivere Perspektiven bieten oder ihnen neue Aufgaben oder sogar eine andere Stelle geben.",
+        "Besprechen Sie die frustrierendsten Situationen, die sich für Mitarbeiter bei der Arbeit ergeben, und fragen Sie sie, welche Lösungen sie vorschlagen. Frustration ist häufig energieraubend, doch wenn solche Situationen vermieden werden können, erhöht das sicherlich die Arbeitszufriedenheit.",
+        "Besprechen Sie die Dinge, die Ihren Mitarbeitern die meiste Energie geben: Welche Aufgaben, Projekte oder Herausforderungen bereiten ihnen am meisten Freude? (Das kann von Person zu Person unterschiedlich sein.) Sobald Sie entsprechende Erkenntnisse gewonnen haben, können Sie diese bei der Verteilung von Aufgaben berücksichtigen.",
+        "Stellen Sie sicher, dass das Betriebsklima gut ist. Treffen Sie klare Vereinbarungen zum Umgang miteinander, und investieren Sie in Teambuildingmaßnahmen (Tagesausflug, gemeinsames Mittagessen, gemeinsame Schulung usw.)."
+      ]
+    },
+    "bp": {
+      "en": "“At the end of each shift, our team members wrote down what kind of day they had, that is, what they enjoyed and what they didn’t. After two weeks, everyone had a good picture of what gave them energy and what sapped their energy. We now take this into account when we allocate work duties.”",
+      "nl": "“Aan het eind van elke dienst schreven onze teamleden op hoe hun dag was geweest, wat ze wel en niet leuk hadden gevonden. Na twee weken had iedereen een goed beeld van wat hen persoonlijk energie gaf en wat hun veel energie kostte. Daar houden we nu rekening mee bij het toewijzen van taken.”",
+      "de": "„Eine ganze Zeit lang hielt sich unser Team am Ende jeder Schicht schriftlich fest, was ihm während der Arbeit Freude bereit hatte und was nicht. Nach zwei Wochen hatte jeder ein gutes Bild davon, was ihnen Energie verleiht und was ihnen Energie raubt. Wenn wir heute die Aufgaben verteilen, berücksichtigen wir diese Aspekte.“"
+    }
   },
-  'I am provided with good work resources': {
-    tips: [
-      'Talk with your team about the equipment and materials that are available to you. You don’t want anyone to feel like they aren’t allowed to perform at their best because of a lack of equipment or poor-quality equipment.',
-      'Talk with your team members to determine whether necessary equipment is missing or if it’s time for something to be replaced. Decide as a team which improvements or investments could have a big impact while remaining cost effective. By engaging your team in the decision making process, you can establish a sense of ownership.',
-      'If certain investments are cost prohibitive or are not possible for other reasons, discuss this openly as a team to avoid frustration.'
-    ],
-    bp: '“At a large vegetable and seed supplier, employees use bicycles to get around the fields and greenhouses. An employee survey revealed that the top complaint among employees was the poor condition of the bicycles. They were quite old and punctures in the tires had to be repaired weekly, wasting everyone’s time and energy. By investing in new bicycles, the organization was able to drastically improve employee morale while increasing overall efficiency.”'
+  "I know what results are expected of me at work": {
+    "tips": {
+      "en": [
+        "During team meetings, ask team members to share if they feel like they are hitting a wall and if they think they can take on more responsibility. Then take a look at how you can accommodate their requests.",
+        "Clearly define responsibilities within your team. Who is in charge and what does that entail? Make sure no issues are left up in the air.",
+        "Communicate clearly with your team. Let them know what you do and don’t need to be informed about and why. Decide as a team how communication will take place.",
+        "Determine how much freedom your team members can handle (also known as task maturity) and try to push them a little further."
+      ],
+      "nl": [
+        "Vraag teamleden om tijdens teamvergaderingen aan te geven wanneer ze het gevoel hebben dat ze tegen de muur aan lopen en wanneer ze denken dat ze meer verantwoordelijkheden op zich kunnen nemen. Bekijk vervolgens hoe je aan hun wensen kunt voldoen.",
+        "Wees in je team heel duidelijk met elkaar over verantwoordelijkheden. Wie heeft de leiding en wat betekent dat? Zorg ervoor dat er geen kwesties onopgelost blijven.",
+        "Laat je team als leidinggevende duidelijk weten waar je wel en niet over geïnformeerd wilt worden en waarom. Beslis samen hoe deze feedback moet plaatsvinden.",
+        "Bepaal hoeveel vrijheid je teamleden aankunnen (ook wel taakvolwassenheid genoemd) en probeer ze een beetje verder te duwen."
+      ],
+      "de": [
+        "Erörtern Sie in einer Teambesprechung, wann Mitarbeiter das Gefühl haben, an Grenzen zu stoßen, und welche zusätzlichen Verantwortlichkeiten Sie übernehmen möchten. Prüfen Sie dann, ob Sie ihre Erwartungen erfüllen können.",
+        "Schaffen Sie für alle Mitarbeiter absolute Klarheit über Verantwortungsbereiche: Wer ist für was verantwortlich, und was heißt das? Stellen Sie sicher, dass keine Probleme ungelöst bleiben.",
+        "Legen Sie als Vorgesetzter klar fest, über was Sie informiert werden wollen und über was nicht, und begründen Sie Ihre Entscheidung. Legen Sie dann gemeinsam mit Ihren Mitarbeitern fest, wie dieses Feedback erfolgen soll.",
+        "Versuchen Sie, sich auf das Endergebnis anstatt auf das Verfahren zu konzentrieren.",
+        "Seien Sie sich darüber im Klaren, mit wie viel Freiheit Ihre Mitarbeiter umgehen können (Aufgabenreife), und zielen Sie darauf ab, diese auszuweiten.",
+        "Teilen Sie mit Ihrem Team so viel relevantes Wissen wie möglich. Je mehr Informationen Mitarbeiter haben, desto besser können sie selbst die richtigen Entscheidungen treffen, und das wiederum erhöht ihre Unabhängigkeit erheblich. Wissen ist Macht, aber Wissen zu teilen ist Stärke!"
+      ]
+    },
+    "bp": {
+      "en": "At the beginning of each year, we set out the goals we need to achieve as a team by the end of the year. Then we split the overarching goal into various areas/projects. Team members can sign on to a certain area/project that then becomes their responsibility. Each group gives quarterly updates of their progress, and we collectively discuss whether the progress achieved to date is sufficient. We have seen that by doing things like this, our team members feel a much greater sense of responsibility for the tasks that they perform.”",
+      "nl": "“Aan het begin van elk jaar leggen we de resultaten vast die we als team aan het einde van het jaar moeten behalen. Vervolgens splitsen we dit op in verschillende gebieden/projecten. Teamleden kunnen zich opgeven voor een bepaald gebied/project waarvoor zij dan verantwoordelijk zijn. Elk kwartaal geeft elke groep een update van de resultaten en bespreken we of het tot dan toe behaalde resultaat voldoende is. We hebben gezien dat onze teamleden zich door dit soort zaken te doen veel verantwoordelijker voelen voor de taken die ze uitvoeren.”",
+      "de": "„Zu Beginn eines jeden Jahres entscheiden wir in unserem Team, welche Ergebnisse wir bis Ende des Jahres erreicht haben müssen. Anschließend teilen wir diese Ergebnisse in verschiedene Bereiche/Projekte auf, sodass sich die Mitarbeiter für einen bestimmten Bereich oder ein bestimmtes Projekt melden können, für den bzw. für das sie dann verantwortlich sind. Jeder Mitarbeiter bzw. jede Gruppe gibt vierteljährlich ein Update über die Ergebnisse, und wir diskutieren gemeinsam, ob die bisher erzielten Ergebnisse ausreichend sind oder nicht. Auf diese Weise hat man ein viel stärkeres Verantwortungsgefühl für die Aufgaben, die man ausführt.“"
+    }
+  },
+  "I am provided with good work resources": {
+    "tips": {
+      "en": [
+        "Talk with your team about the equipment and materials that are available to you. You don’t want anyone to feel like they aren’t allowed to perform at their best because of a lack of equipment or poor-quality equipment.",
+        "Talk with your team members to determine whether necessary equipment is missing or if it’s time for something to be replaced. Decide as a team which improvements or investments could have a big impact while remaining cost effective. By engaging your team in the decision making process, you can establish a sense of ownership.",
+        "If certain investments are cost prohibitive or are not possible for other reasons, discuss this openly as a team to avoid frustration."
+      ],
+      "nl": [
+        "Creëer mogelijkheden binnen je team om te discussiëren over de apparatuur en het materiaal die voor je beschikbaar zijn. Je wilt niet dat iemand het gevoel krijgt dat hij of zij wordt gehinderd om zijn of haar werk zo goed mogelijk te doen vanwege het ontbreken van of de slechte kwaliteit van apparatuur.",
+        "Bespreek met je teamleden of er apparatuur ontbreekt of dat het tijd is om iets te vervangen. Beslis samen welke verbeteringen of investeringen een grote impact zouden kunnen hebben en tegelijkertijd kostenefficiënt zijn. Door hen te betrekken bij de besluitvorming kun je een gevoel creëren van zeggenschap.",
+        "Als bepaalde investeringen niet kunnen worden gedaan, bespreek dit dan openlijk als team om frustratie te voorkomen."
+      ],
+      "de": [
+        "Sprechen Sie mit Ihren Mitarbeitern über die Ausstattung, die ihnen fehlt, oder fragen Sie sie, ob es ein Gerät, das ihre Anforderungen nicht erfüllt. Entscheiden Sie gemeinsam, welche Verbesserungen oder Investitionen erforderlich sind, um den höchsten Gewinn zu erzielen. Darüber hinaus ist es wichtig, offen über die finanzielle Machbarkeit bestimmter Geräte oder Ausstattungen zu sprechen.",
+        "Ermutigen Sie Mitarbeiter, darüber nachzudenken, was eine Investition in eine neue Ausstattung voraussichtlich bringen wird. Wenn sie Fakten vorlegen, die den voraussichtlichen Ertrag einer bestimmten Investition bestätigen, wird das Geld dafür häufig schneller zur Verfügung gestellt.",
+        "Nehmen Sie sich Zeit, um ausführlich zu erklären, warum bestimmte Investitionen nicht vorgenommen werden können. Wenn Mitarbeiter das verstehen, wird jegliche Frustration darüber (hoffentlich) schnell verfliegen."
+      ]
+    },
+    "bp": {
+      "en": "“At a large vegetable and seed supplier, employees use bicycles to get around the fields and greenhouses. An employee survey revealed that the top complaint among employees was the poor condition of the bicycles. They were quite old and punctures in the tires had to be repaired weekly, wasting everyone’s time and energy. By investing in new bicycles, the organization was able to drastically improve employee morale while increasing overall efficiency.”",
+      "nl": "“Bij een grote groente- en zaaigoedleverancier maken medewerkers gebruik van fietsen om door de velden en kassen te rijden. Uit een medewerkersonderzoek is gebleken dat de grootste frustratie onder medewerkers de slechte staat van de fietsen was. Ze waren vrij oud en hadden lekke banden die wekelijks gerepareerd moesten worden, waardoor iedereen tijd en energie verloor. Door te investeren in nieuwe fietsen kon de organisatie de moraal van haar medewerkers drastisch verbeteren en tegelijkertijd de algehele efficiëntie verhogen.”",
+      "de": "„Bei Rijkzwaan, einem großen Gemüse- und Saatgutlieferanten, nutzen die Mitarbeiter Fahrräder, um zu den Feldern und Gewächshäusern zu gelangen. Die Mitarbeiterbefragung hat ergeben, dass sich die Mitarbeiter am meisten über die Fahrräder geärgert haben, weil sie ziemlich alt waren. Platte Reifen mussten jede Woche repariert werden. Es war die reinste Zeit- und Energieverschwendung. Rijkzwaan investierte in neue Fahrräder, und jetzt drehen die Mitarbeiter mit großer Freude ihre Runden und schaffen viel mehr in der gleichen Zeit.“"
+    }
   }
 };
 
@@ -1373,44 +1536,46 @@ function scoresView(d) {
 
 /* ---------- Themes (in-page view) ---------- */
 /* Per theme: benchmark (Effectory Index) + the group's score per survey period (0–100). */
+/* SOS themes (Effectory). Note: bench/scores/sample questions are kept from the
+   previous prototype data and have not been re-mapped to each new theme. */
 const THEMES = [
-  { name: 'Customer Focus', bench: 71, v: { 'team-it': { before: 45, after: 62 }, 'novanta': { before: 55, after: 64 } },
-    desc: "In essence, customer focus is about identifying the customer's wishes and requirements, anticipating these wishes and acting on them to build lasting relationships.",
-    questions: [
-      { q: 'We put the customer at the centre of what we do', s: '64%' },
-      { q: 'I understand how my work affects our customers', s: '68%' },
-      { q: 'We act on customer feedback to improve', s: '54%' }
-    ] },
-  { name: 'Vitality', bench: 86, v: { 'team-it': { before: 71, after: 75 }, 'novanta': { before: 78, after: 80 } },
-    desc: "Vitality covers both the mental and physical vitality of employees. Mental vitality refers to the mental state of an employee and their ability to recover and stay resilient.",
-    questions: [
-      { q: 'I have enough energy to do my work well', s: '78%' },
-      { q: 'I can recover well after a busy period', s: '73%' },
-      { q: 'My workload is manageable', s: '69%' }
-    ] },
-  { name: 'Efficiency', bench: 46, v: { 'team-it': { before: 26, after: 57 }, 'novanta': { before: 50, after: 58 } },
-    desc: "On top of effectiveness, it's important that employees are given the ability to work efficiently. Efficiency is about the capacity to achieve results with minimal wasted effort.",
-    questions: [
-      { q: 'I can do my work without unnecessary obstacles', s: '55%' },
-      { q: 'Our processes help me work efficiently', s: '59%' },
-      { q: 'We avoid duplicate or wasted work', s: '52%' }
-    ] },
   { name: 'Engagement', bench: 70, v: { 'team-it': { before: 48, after: 62 }, 'novanta': { before: 60, after: 66 } },
-    desc: "Engagement is the degree to which your employees feel inspired and energized by their work. It reflects their positive connection to your organization and their willingness to go the extra mile.",
+    desc: "Engagement is the degree to which your employees are inspired and energized by their work. It also refers to their positive connection to your organization. Engaged employees experience their work as meaningful and rewarding, are proud of their jobs, and feel that they fit in at the organization. They can go the extra mile because they love what they do and where they work. Your engagement score will tell you how enthusiastic your employees are about their work and how connected they feel to your organization.",
     questions: [
       { q: 'Doing my work gives me energy', s: '64%' },
       { q: 'I am proud of the work I do', s: '67%' },
       { q: 'I feel committed to our goals', s: '58%' }
     ] },
-  { name: 'Satisfaction', bench: 85, v: { 'team-it': { before: 70, after: 76 }, 'novanta': { before: 75, after: 80 } },
-    desc: "Employee satisfaction is the sense of well-being that employees experience because of their job. A satisfied employee is content with their role, conditions and environment.",
+  { name: 'Managing systems', bench: 71, v: { 'team-it': { before: 45, after: 62 }, 'novanta': { before: 55, after: 64 } },
+    desc: "Well-managed systems enable employees to reach the expected performance by providing them with the necessary working conditions. This includes good working tools, effective work processes, good collaboration on different levels, and the availability of development opportunities.",
+    questions: [
+      { q: 'We put the customer at the centre of what we do', s: '64%' },
+      { q: 'I understand how my work affects our customers', s: '68%' },
+      { q: 'We act on customer feedback to improve', s: '54%' }
+    ] },
+  { name: 'Facilitating employees', bench: 86, v: { 'team-it': { before: 71, after: 75 }, 'novanta': { before: 78, after: 80 } },
+    desc: "People management ensures employees know the company’s expectations and can apply their knowledge and skills accordingly. This includes constructive feedback and recognition to show that good performance is acknowledged and well-rewarded in the company.",
+    questions: [
+      { q: 'I have enough energy to do my work well', s: '78%' },
+      { q: 'I can recover well after a busy period', s: '73%' },
+      { q: 'My workload is manageable', s: '69%' }
+    ] },
+  { name: 'Leadership in change', bench: 46, v: { 'team-it': { before: 26, after: 57 }, 'novanta': { before: 50, after: 58 } },
+    desc: "Leading Change should aim to let employees know what has to be changed, why, and how, and to obtain their backing for the necessary changes. For this, managers need to involve their teams in the process so that they understand and trust them. Involvement is particularly important in unsettling situations that inevitably occur during ongoing change.",
+    questions: [
+      { q: 'I can do my work without unnecessary obstacles', s: '55%' },
+      { q: 'Our processes help me work efficiently', s: '59%' },
+      { q: 'We avoid duplicate or wasted work', s: '52%' }
+    ] },
+  { name: 'Giving direction', bench: 85, v: { 'team-it': { before: 70, after: 76 }, 'novanta': { before: 75, after: 80 } },
+    desc: "Providing Direction should aim to make employees enthusiastic about the company’s vision, familiar with and convinced by the company’s strategy, and feel treated in a fair and just manner within the overall “ecosystem” of their company. Then, the employees will also be willing to go along with strategically necessary changes.",
     questions: [
       { q: 'I am satisfied with my job', s: '78%' },
       { q: 'I am happy with my working conditions', s: '74%' },
       { q: 'I would recommend us as a place to work', s: '72%' }
     ] },
-  { name: 'Willingness to change', bench: 47, v: { 'team-it': { before: 30, after: 56 }, 'novanta': { before: 48, after: 60 } },
-    desc: "Willingness to change reflects how open and ready employees are to adapt to new ways of working, embrace improvements and support the organization through change.",
+  { name: 'Employer-ship', bench: 47, v: { 'team-it': { before: 30, after: 56 }, 'novanta': { before: 48, after: 60 } },
+    desc: "Organizations that work on employer excellence provide their employees with a work environment where they feel at home and accepted. Such a work environment enhances your employees' feeling of being connected with their colleagues and your organization. High scores on employer excellence mean your employees feel part of a community, appreciated, inspired, and cared for at your organization. In such an environment, your employees will perform better and remain with the organization for a longer period because they are intrinsically motivated.",
     questions: [
       { q: 'I am open to new ways of working', s: '58%' },
       { q: 'I embrace improvements in how we work', s: '55%' },
@@ -2301,6 +2466,21 @@ const rgba = (hex, a) => {
 /* Shared "score over time" line chart — used by the engagement panel and the per-question
    panel so both look identical: angular line, content-base semibold axis labels with extra
    spacing, dashed blue grid, area gradient. */
+/* Survey periods for the "score over time" trend. Q2 view shows the first 5 (ending May 2026);
+   Q3 view shows all 6 (ending Sep 2026), matching each dataset's dateTo / prevDateTo. */
+const TREND_LABELS = ['22 Jan 2025', '22 May 2025', '22 Sep 2025', '22 Jan 2026', '22 May 2026', '22 Sep 2026'];
+/* Build a 5-point (Q2) or 6-point (Q3) trend ending at the known previous/current survey scores,
+   with synthetic earlier surveys leading up to them. previous == null → Q2 (no previous survey yet). */
+function trendSeries(current, previous, max = 100) {
+  const cl = (v) => Math.max(0, Math.min(max, v));
+  const rnd = (v) => max <= 10 ? Math.round(v * 10) / 10 : Math.round(v);
+  const hasPrev = previous != null;
+  const base = hasPrev ? previous : current;               // earliest "known" survey score
+  const hist = [0.80, 0.87, 0.84, 0.93].map(f => cl(rnd(base * f)));  // 4 synthetic earlier surveys
+  const data = hasPrev ? [...hist, previous, current] : [...hist, current];
+  const labels = hasPrev ? TREND_LABELS.slice() : TREND_LABELS.slice(0, 5);
+  return { labels, data };
+}
 const makeLineChart = (cv, labels, data, { max = 100, unit = '%' } = {}) => {
   const info = css('--bg-info-base');
   const gridBlue = css('--border-info-subtle');
@@ -2391,7 +2571,7 @@ function renderOverview(variant, initialView) {
     new Chart(document.getElementById('sw-chart'), {
       type: 'radar',
       data: {
-        labels: ['Engagement', 'Diversity', 'Employer-ship', 'Customer focus', 'Alignment', 'Leadership'].map(s => window.tr ? tr(s) : s),
+        labels: ['Engagement', 'Managing systems', 'Facilitating employees', 'Leadership in change', 'Giving direction', 'Employer-ship'].map(s => window.tr ? tr(s) : s),
         datasets: [
           { label: 'Previous', data: d.swPrevious, backgroundColor: rgba(swPrev, 0.54), borderColor: swPrev, borderWidth: 1, pointBackgroundColor: css('--bg-base'), pointBorderColor: css('--border-highlight-base'), pointBorderWidth: 2, pointRadius: 5 },
           { label: 'Current', data: d.swCurrent, backgroundColor: rgba(swCur, 0.47), borderColor: swCur, borderWidth: 1, pointBackgroundColor: css('--bg-base'), pointBorderColor: css('--border-info-base'), pointBorderWidth: 2, pointRadius: 5 }
@@ -2399,6 +2579,7 @@ function renderOverview(variant, initialView) {
       },
       options: {
         responsive: false, events: ['mousemove', 'mouseout'], animation: { duration: 800, easing: 'easeOutQuart' },
+        layout: { padding: 2 },
         interaction: { mode: 'nearest', intersect: true },
         plugins: {
           legend: { display: false },
@@ -2408,13 +2589,26 @@ function renderOverview(variant, initialView) {
             callbacks: { title: (items) => items[0].label, label: (item) => `${item.dataset.label}: ${item.formattedValue}%` }
           }
         },
-        scales: { r: { min: 0, max: 100, ticks: { display: false, stepSize: 25 }, grid: { color: css('--border-base') }, angleLines: { color: css('--border-base') }, pointLabels: { color: css('--content-base'), font: { family: 'Poppins', size: 12, weight: 500 } } } }
+        scales: { r: { min: 0, max: 100, ticks: { display: false, stepSize: 25 }, grid: { color: css('--border-base') }, angleLines: { color: css('--border-base') }, pointLabels: { color: css('--content-base'), padding: 6, font: { family: 'Poppins', size: 11, weight: 500 }, callback: (label) => {
+          if (label.length <= 13) return label;
+          const words = String(label).split(' ');
+          if (words.length < 2) return label;
+          let best = 1, bestDiff = Infinity, total = label.length;
+          for (let i = 1; i < words.length; i++) { const a = words.slice(0, i).join(' ').length; const diff = Math.abs(a - (total - a)); if (diff < bestDiff) { bestDiff = diff; best = i; } }
+          return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+        } } } }
       }
     });
 
     /* Engagement panel: score over time (line) */
     const engLine = document.getElementById('engp-chart');
-    if (engLine) makeLineChart(engLine, [d.prevDateTo, d.dateTo], d.engpLine.data.slice(-2), { max: 100, unit: '%' });
+    if (engLine) {
+      const ed = d.engpLine.data;
+      const engCur = ed[ed.length - 1];
+      const engPrev = periodKey(d) === 'after' ? ed[ed.length - 2] : null;
+      const trd = trendSeries(engCur, engPrev, 100);
+      makeLineChart(engLine, trd.labels, trd.data, { max: 100, unit: '%' });
+    }
   });
 
   /* Panel open/close wiring */
@@ -2472,9 +2666,8 @@ function renderOverview(variant, initialView) {
         if (window.Icons) window.Icons.render(overlay);
         /* build the chart only once the panel is visible so the canvas has a measured size */
         if (thChart) { thChart.destroy(); thChart = null; }
-        const labels = previous != null ? [d.prevDateTo, d.dateTo] : [d.dateTo];
-        const series = previous != null ? [previous, current] : [current];
-        requestAnimationFrame(() => { thChart = makeLineChart(document.getElementById('thp-chart'), labels, series, { max: 100, unit: '%' }); });
+        const trd = trendSeries(current, previous, 100);
+        requestAnimationFrame(() => { thChart = makeLineChart(document.getElementById('thp-chart'), trd.labels, trd.data, { max: 100, unit: '%' }); });
       });
     });
     const close = () => { overlay.hidden = true; };
@@ -2938,8 +3131,11 @@ function renderOverview(variant, initialView) {
       const tip = TIPS[q];
       const tipsUl = document.getElementById('scp-tips'), bpEl = document.getElementById('scp-bp');
       if (tip) {
-        tipsUl.innerHTML = tip.tips.map(t => `<li>${T2(t)}</li>`).join('');
-        bpEl.textContent = T2(tip.bp);
+        const L = window.LANG || 'en';
+        const tArr = (tip.tips && (tip.tips[L] || tip.tips.en)) || [];
+        const bpText = (tip.bp && (tip.bp[L] || tip.bp.en)) || '';
+        tipsUl.innerHTML = tArr.map(t => `<li>${t}</li>`).join('');
+        bpEl.textContent = bpText;
       } else {
         tipsUl.innerHTML = `<li>${T2('No tips available for this question yet.')}</li>`;
         bpEl.textContent = '';
@@ -2958,9 +3154,8 @@ function renderOverview(variant, initialView) {
       if (scpChart) { scpChart.destroy(); scpChart = null; }
       /* Only the current survey and (if present) the previous survey, labelled by end date */
       const hasPrev = row.dataset.prev != null;
-      const labels = hasPrev ? [d.prevDateTo, d.dateTo] : [d.dateTo];
-      const series = (hasPrev ? [parseFloat(row.dataset.prev), group] : [group]).map(v => clamp(v, max));
-      scpChart = makeLineChart(document.getElementById('scp-chart'), labels, series, { max, unit: scale === '10' ? '' : '%' });
+      const trd = trendSeries(group, hasPrev ? parseFloat(row.dataset.prev) : null, max);
+      scpChart = makeLineChart(document.getElementById('scp-chart'), trd.labels, trd.data, { max, unit: scale === '10' ? '' : '%' });
     };
     document.querySelectorAll('#view-scores .sc-row').forEach(row => {
       row.querySelector('.sc-q')?.addEventListener('click', () => open(row));
