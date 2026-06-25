@@ -5,7 +5,7 @@ description: Bouw prototypes, mockups, designs, schermen, pagina's of losse comp
 
 # Skill: Effectory Design System
 
-**Version:** 1.9.29
+**Version:** 1.9.30
 
 Activeer deze skill wanneer iemand vraagt een **prototype**, **mockup**, **design**, **scherm**, **pagina** of **losse component-demo** te bouwen met onze design-system-componenten.
 
@@ -73,12 +73,17 @@ In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, go
 - **Resultaten-dashboard — Scores** → `reference-prototypes/scores.md` + `scores.html`
   Het Scores-tabblad: een full-width tabel met alle vragen gegroepeerd per thema, met een bevroren vraagkolom (Asana-stijl scheidingslijn) + horizontaal scrollende, heatmap-gekleurde vergelijkingskolommen, een Comparisons-popover (Quick comparisons chips + Segments/Age-crossing met kolommen), een zwevende legenda, en een vraag-side-panel (5-punts antwoorddistributie met "X% agree"-bracket, score-vergelijkingskaarten, score-over-time grafiek, thema-vragen). Voor "scores pagina", "scores view", "scores prototype" of "vragen & scores tabel" — in welke taal of bewoording dan ook.
 
-**Bij een resultaten-dashboard (Overview of Focus View): vraag eerst**
-1. **welke kaarten** op het overzicht moeten staan (standaard: alle bovengenoemde kaarten), en
-2. of de bijbehorende **side panels** ook gemaakt moeten worden. Elk side panel opent vanuit zijn kaart, dus bied een panel alléén aan als die kaart op het dashboard staat: **Effectiveness-kaart → Effectiveness panel**, **Engagement-kaart → Engagement panel**, **eNPS-kaart → eNPS panel**. (Staat de eNPS-kaart op het overzicht, vraag dan dus expliciet of het eNPS side panel ook gebouwd moet worden.)
-Bouw daarna met de bijbehorende referenties hierboven.
+**Bij een verzoek om het resultaten-dashboard (algemeen — niet één specifiek tabblad): vraag in twee stappen. Bouw nooit zomaar alles; soms is maar een deel nodig.**
 
-Twijfel je of een verzoek dit scherm bedoelt? Ga uit van ja en gebruik de referentie. Staat het gevraagde scherm er niet bij, bouw dan normaal volgens de reference.
+1. **Welke tabbladen** moeten gebouwd worden? Beschikbare referenties: **Overview**, **Focus View**, **Themes**, **Scores**, **Reports**. (Open answers, Topics & Ideas en Actions hebben nog geen referentie — meld dat als ze gevraagd worden.) Bouw alleen de gekozen tabs.
+2. **Per gekozen tabblad** de relevante deelkeuzes uitvragen (weer: niet automatisch alles):
+   - **Overview** → welke **kaarten** (standaard alle) en welke **side panels**. Elk side panel opent vanuit zijn kaart, dus bied een panel alléén aan als die kaart op het dashboard staat: **Effectiveness-kaart → Effectiveness panel**, **Engagement-kaart → Engagement panel**, **eNPS-kaart → eNPS panel**.
+   - **Focus View** → of de **Effectiveness / eNPS side panels** ook nodig zijn.
+   - **Themes / Scores / Reports** → uit hun eigen referentie (Themes en Scores hebben een vraag/thema-side-panel ingebouwd).
+
+Bouw daarna elk gekozen tabblad met de bijbehorende referentie hierboven, met werkende tab-navigatie ertussen.
+
+Vraagt iemand expliciet om één specifiek tabblad (bijv. "scores pagina", "reports pagina"), bouw dan direct dat scherm — sla de tab-uitvraag over. Twijfel je of een verzoek een van deze schermen bedoelt? Ga uit van ja en gebruik de referentie. Staat het gevraagde scherm er niet bij, bouw dan normaal volgens de reference.
 
 ---
 
