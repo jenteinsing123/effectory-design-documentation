@@ -1,6 +1,27 @@
 {
-  "count": 792,
+  "count": 795,
   "entries": [
+    {
+      "hash": "6401978",
+      "author": "Jente Insing",
+      "date": "2026-06-24",
+      "subject": "GTM prototype: add the Scores tab as an in-page view",
+      "pages": []
+    },
+    {
+      "hash": "5debd37",
+      "author": "Jente Insing",
+      "date": "2026-06-24",
+      "subject": "GTM prototype: make Reports an in-page view (like Focus View)",
+      "pages": []
+    },
+    {
+      "hash": "50a078a",
+      "author": "Jente Insing",
+      "date": "2026-06-24",
+      "subject": "Sync skill-source bundle + changelog for v1.9.23",
+      "pages": []
+    },
     {
       "hash": "de86690",
       "author": "Jente Insing",

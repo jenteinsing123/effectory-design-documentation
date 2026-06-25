@@ -1947,7 +1947,7 @@ span.inline-notif-icon.is-subtle i[data-icon] { width: 24px; height: 24px; displ
   position: relative; display: inline-block; max-width: 240px;
   background: var(--bg-inverse-base); color: var(--content-inverse-base);
   font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; line-height: 1.4;
-  padding: 8px 12px; border-radius: var(--radius-md);
+  padding: 8px 12px; border-radius: var(--radius-md); text-align: center;
 }
 .tooltip::after { content: ''; position: absolute; border: 6px solid transparent; }
 .tooltip.is-above::after { top: 100%;    left: 50%; transform: translateX(-50%); border-top-color: var(--bg-inverse-base); }

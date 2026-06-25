@@ -96,7 +96,12 @@ Gebruik altijd design tokens of foundation-variabelen voor kleuren, spacing en s
 Nooit: `color: #0a9d99`, `padding: 16px`, `box-shadow: 0 2px 4px ...`
 Altijd: `color: var(--content-brand-base)`, `padding: var(--spacing-base)`, `box-shadow: var(--sh-card)`
 
-### 4. Iconen via `data-icon`
+### 4. UX-copy via de `ux-copy` skill
+Alle zichtbare tekst in een prototype (knoppen, labels, helper text, placeholders, errors, empty states, tooltips, dialog-titels, notificaties, microcopy in component-demo's) **moet** via de **`ux-copy`** skill geschreven of gereviewd worden, zodat de tekst in de Effectory tone of voice staat.
+
+Roep `ux-copy` aan zodra je tekst gaat schrijven of wijzigen — niet alleen op expliciet verzoek. Bouw je een prototype, mockup, scherm of component-demo met copy erin, dan hoort `ux-copy` standaard in de flow: schrijf nooit zelf "vrije" UI-tekst.
+
+### 5. Iconen via `data-icon`
 ```html
 <!-- ✅ -->
 <i data-icon="search" style="display:flex;width:16px;height:16px;"></i>
@@ -106,17 +111,17 @@ Altijd: `color: var(--content-brand-base)`, `padding: var(--spacing-base)`, `box
 ```
 Gebruik alleen iconnamen uit de lijst in `design-system-reference.md` sectie 5.
 
-### 5. tokens.css is auto-generated
+### 6. tokens.css is auto-generated
 Nooit `tokens.css` handmatig bewerken. Alleen lezen en gebruiken.
 Regenereren: `python3 build-tokens.py`
 
-### 6. Prototype is een productscherm
+### 7. Prototype is een productscherm
 Een prototype ziet eruit als een echte pagina in de app — niet als een docs-pagina.
 - Gebruik `--bg-interface-body` als paginaachtergrond
 - Gebruik `--content-base` als standaard tekstkleur
 - Geen docs-chrome (sidebar, tabs, TOC, etc.)
 
-### 7. Altijd via lokale server openen — en `<base href="/">` verplicht
+### 8. Altijd via lokale server openen — en `<base href="/">` verplicht
 Prototypes in `prototypes/` staan in een submap. `icons.js` fetcht SVGs relatief aan het HTML-document, niet het script. Zonder `<base href="/">` wordt `assets/icons/` omgezet naar `prototypes/assets/icons/` — die map bestaat niet. Iconen laden dan niet, ook niet via http.
 
 Altijd in de `<head>` van elk prototype:
@@ -135,7 +140,7 @@ En gebruik root-relatieve paden voor alle assets:
 Bovendien: open prototypes altijd via `python3 serve.py` → `http://localhost:<poort>/...`.
 Nooit via dubbelklik (`file://`) — CSS-masks voor het Toggle-vinkje werken dan ook niet.
 
-### 8. Animaties via motion-tokens en `.overlay`
+### 9. Animaties via motion-tokens en `.overlay`
 Verzin geen eigen duraties of easings — gebruik de motion-tokens (`--motion-fast/base/slow`, `--ease-out/in/standard`; zie reference sectie 2 → Motion).
 Toon een dialog of side panel altijd in een `.overlay`, dan komt de juiste enter-animatie automatisch mee:
 ```html
@@ -144,7 +149,7 @@ Toon een dialog of side panel altijd in een `.overlay`, dan komt de juiste enter
 ```
 De backdrop gebruikt `--bg-interface-overlay`. `prefers-reduced-motion` is al afgevangen.
 
-### 9. Icon buttons hebben ALTIJD een tooltip
+### 10. Icon buttons hebben ALTIJD een tooltip
 Een icoon-only knop (`.ib` / icon button) is zonder label niet te begrijpen. Geef elke icon button **altijd** een tooltip die het doel benoemt, plus een `aria-label` met dezelfde tekst.
 ```html
 <!-- ✅ tooltip via de .tt-demo wrapper + .tooltip bubble; aria-label = dezelfde tekst -->
@@ -158,7 +163,7 @@ Een icoon-only knop (`.ib` / icon button) is zonder label niet te begrijpen. Gee
 ```
 Geldt voor elke icon-only knop (toolbar-acties, close-knoppen die alleen een icoon tonen, kebab-menu's, enz.). Knoppen mét zichtbare tekst hebben geen tooltip nodig. In Angular: de `matTooltip`-directive op de knop.
 
-### 10. Paginabreedte & padding — uit de grid-regel, nooit uit de Figma-artboard
+### 11. Paginabreedte & padding — uit de grid-regel, nooit uit de Figma-artboard
 Layout-maten komen **altijd** uit de grid/layout-regel in `design-system-reference.md` §2 — **nooit** uit de Figma-frame/artboard (1440/1920px is canvas; reken nooit `artboard − sidebar`).
 
 **Page padding is responsive en geldt voor de héle pagina** (breadcrumb, header, tabs én content gebruiken dezelfde horizontale padding, zodat alles op één lijn begint):
