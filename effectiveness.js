@@ -118,7 +118,7 @@ const DATA = {
     engpCards: [
       { lbl: 'Team IT', val: '56%' },
       { lbl: 'Novanta B.V.', val: '72%' },
-      { lbl: 'Benchmark', val: '75%' }
+      { lbl: 'Effectory Index', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026'], data: [60, 56] },
     engpTheme: [
@@ -244,7 +244,7 @@ const DATA = {
     engpCards: [
       { lbl: 'Team IT', val: '67%' },
       { lbl: 'Novanta B.V.', val: '72%' },
-      { lbl: 'Benchmark', val: '75%' }
+      { lbl: 'Effectory Index', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026', 'Nov 2026'], data: [60, 56, 67] },
     engpTheme: [
@@ -368,7 +368,7 @@ const DATA = {
     engpDist: { dis: 6, pot: 26, eng: 68 },
     engpCards: [
       { lbl: 'Novanta B.V.', val: '72%' },
-      { lbl: 'Benchmark', val: '75%' }
+      { lbl: 'Effectory Index', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026', 'Nov 2026'], data: [69, 70, 72] },
     engpTheme: [
@@ -490,7 +490,7 @@ const DATA = {
     engpDist: { dis: 10, pot: 31, eng: 59 },
     engpCards: [
       { lbl: 'Novanta B.V.', val: '66%' },
-      { lbl: 'Benchmark', val: '75%' }
+      { lbl: 'Effectory Index', val: '75%' }
     ],
     engpLine: { labels: ['Jun 2025', 'May 2026'], data: [67, 66] },
     engpTheme: [
@@ -802,11 +802,13 @@ function reportsView(d) {
 
 /* Reports dialogs (language picker, generating dialog, ready notification) */
 function reportsDialogs() {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  /* language + country shown in the current UI language so users can find the language they want */
   const langRow = (lang, flag, name, region, checked) => `
     <label class="lang-row${checked ? ' is-selected' : ''}" data-lang="${lang}">
       <span class="rb-wrap"><input type="radio" class="rb" name="lang"${checked ? ' checked' : ''}></span>
       <span class="lang-flag">${flag}</span>
-      <span class="lang-name">${name} <span class="lang-region">(${region})</span></span>
+      <span class="lang-name">${T2(name)} <span class="lang-region">(${T2(region)})</span></span>
     </label>`;
   return `
 <div class="scrim" id="lang-scrim" hidden>
@@ -884,6 +886,130 @@ function reportsDialogs() {
 </div>`;
 }
 
+/* ---------- Action Planner (in-page view) ---------- */
+/* Runtime state for the planner: custom-pinned rows the user adds, removed keys, active sort. */
+let AP_CUSTOM = [];
+let AP_REMOVED = new Set();
+let AP_PINNED = [];                 /* questions/themes pinned via the Scores page: { key, name, score } */
+let AP_SORT = null;                 /* { col: 'score'|'goal'|'progress', dir: 1|-1 } */
+const AP_GOAL_ORDER = { promote: 3, improve: 2, contemplate: 1, '': 0 };
+let AP_CUSTOM_SEQ = 0;
+
+/* The subjects shown in the planner: a couple of themes/questions plus any custom pins. */
+function actionPlannerSeed(d) {
+  const g = groupKey(d), p = periodKey(d);
+  const themeScore = (n) => { const t = THEMES.find(x => x.name === n); return t ? t.v[g][p] : null; };
+  const qScore = (q) => { for (const grp of SCORES_GROUPS) { const r = grp.rows.find(x => x.q === q); if (r) return r.v[g][p]; } return null; };
+  return [
+    { key: 'I enjoy doing my work / tasks', name: 'I enjoy doing my work / tasks', score: qScore('I enjoy doing my work / tasks') },
+    { key: 'I know what results are expected of me at work', name: 'I know what results are expected of me at work', score: qScore('I know what results are expected of me at work') }
+  ];
+}
+
+/* Seed ACT_STORE once so the planner rows AND the question/theme side panels stay in sync. */
+function seedActionPlanner() {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const defaults = {
+    'I enjoy doing my work / tasks': { goal: 'improve', actions: [
+      { text: 'Plan monthly one-on-ones', done: true, deadline: '', assignee: 'Alex de Vries' },
+      { text: 'Review how tasks are shared out', done: false, deadline: '', assignee: '' },
+      { text: 'Run a team energiser session', done: false, deadline: '', assignee: '' } ] },
+    'I know what results are expected of me at work': { goal: 'promote', actions: [
+      { text: 'Write down the team goals together', done: true, deadline: '', assignee: 'Sam Bakker' },
+      { text: 'Share the quarterly priorities', done: false, deadline: '', assignee: '' },
+      { text: 'Set up progress check-ins', done: false, deadline: '', assignee: '' } ] }
+  };
+  let off = 0;
+  Object.entries(defaults).forEach(([k, v]) => { if (!ACT_STORE[k]) ACT_STORE[k] = { goal: v.goal, desc: '', lastEdited: Date.now() - (++off) * 36e5, actions: v.actions.map(a => ({ ...a, text: T2(a.text) })) }; });
+}
+
+/* Current planner rows (seed + pins added on the Scores page + custom), minus removed, deduped by key. */
+function actionPlannerRows(d) {
+  const all = [...actionPlannerSeed(d), ...AP_PINNED, ...AP_CUSTOM].filter(r => !AP_REMOVED.has(r.key));
+  const seen = new Set();
+  return all.filter(r => (seen.has(r.key) ? false : seen.add(r.key)));
+}
+
+function apRowHTML(r) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const st = actState(r.key);
+  const total = st.actions.length, done = st.actions.filter(a => a.done).length;
+  const scoreTxt = r.scoreText != null ? r.scoreText : (r.score == null ? '–' : r.score + '%');
+  const progress = total > 0
+    ? `<div class="ap-prog"><div class="ap-bar"><div class="ap-bar-fill" style="width:${Math.round(done / total * 100)}%"></div></div><span class="ap-bar-count">${done}/${total}</span></div>`
+    : `<button class="btn btn-secondary ap-add" type="button">${T2('Add actions')}</button>`;
+  const isCustom = r.key.startsWith('custom:');
+  const hasName = r.name && r.name.trim();
+  const display = isCustom ? (hasName ? esc(r.name) : `<span class="ap-name-empty">${T2('Untitled pin')}</span>`) : T2(r.name);
+  return `<div class="ap-row" data-key="${esc(r.key)}" data-name="${esc((hasName ? r.name : (isCustom ? 'pin' : r.name)).toLowerCase())}" role="button" tabindex="0">
+    <span class="ap-name">${display}</span>
+    <span class="ap-score">${scoreTxt}</span>
+    <span class="ap-goal">${st.goal ? goalChipHTML(st.goal) : '<span class="ap-goal-none">–</span>'}</span>
+    <span class="ap-prog-cell">${progress}</span>
+    <div class="ap-kebab-wrap">
+      <button class="ib ib-36 ib-tertiary ap-kebab" type="button" aria-label="${T2('More actions')}"><i data-icon="more-vertical"></i></button>
+      <div class="menu ap-kebab-menu" hidden>
+        <div class="menu-item ap-edit" role="button" tabindex="0"><i data-icon="edit" class="menu-item-icon"></i><span class="menu-item-title">${T2('Edit pin')}</span></div>
+        <div class="menu-item ap-addk" role="button" tabindex="0"><i data-icon="plus" class="menu-item-icon"></i><span class="menu-item-title">${T2('Add actions')}</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item ap-remove" role="button" tabindex="0"><i data-icon="trash" class="menu-item-icon"></i><span class="menu-item-title">${T2('Remove pin')}</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function actionsView(d) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  seedActionPlanner();
+  const rows = actionPlannerRows(d);
+  return `
+  <div class="ap-wrap">
+    <div class="ap-headrow">
+      <div class="rd-intro"><h2 class="text-l3">${T2('Action Planner')}</h2><span class="rd-bar"></span><span class="rd-sub">${T2('Pinboard & actions')}</span></div>
+      <a class="ap-tutorial" href="https://support.effectory.com/hc/en-us/articles/16130091054749-results-dashboard-action-planner" target="_blank" rel="noopener noreferrer">${T2('Watch tutorial')} <i data-icon="external-link"></i></a>
+    </div>
+    <div class="ap-toolbar">
+      <div class="search-wrap ap-search"><span class="search-icon"><i data-icon="search"></i></span><input type="search" class="srch ap-srch" placeholder="${T2('Search')}"></div>
+      <div class="ap-toolbar-right">
+        <div class="ap-export-wrap">
+          <button class="btn btn-secondary ap-export" type="button"><i data-icon="download"></i> ${T2('Export')} <i data-icon="chevron-down"></i></button>
+          <div class="menu ap-export-menu" hidden>
+            <div class="menu-item ap-export-opt"><span class="menu-item-title">${T2('Export as PDF')}</span></div>
+            <div class="menu-item ap-export-opt"><span class="menu-item-title">${T2('Export as Excel')}</span></div>
+          </div>
+        </div>
+        <button class="btn btn-primary ap-custom" type="button"><i data-icon="plus"></i> ${T2('Custom pin')}</button>
+      </div>
+    </div>
+    <div class="ap-table">
+      <div class="ap-thead">
+        <span class="ap-th ap-th-name">${T2('Topic')}</span>
+        <button class="ap-th ap-sort" data-col="score" type="button">${T2('Score')} <i data-icon="chevron-down"></i></button>
+        <button class="ap-th ap-sort" data-col="goal" type="button">${T2('Goal')} <i data-icon="chevron-down"></i></button>
+        <button class="ap-th ap-sort" data-col="progress" type="button">${T2('Action progress')} <i data-icon="chevron-down"></i></button>
+        <span></span>
+      </div>
+      <div class="ap-tbody">${rows.map(apRowHTML).join('')}</div>
+    </div>
+  </div>`;
+}
+
+/* Action Planner side panel — reuses the shared Actions tab content (goal, description, to-do list). */
+function actionPanel() {
+  return `
+<div class="overlay is-right" id="app-overlay" hidden>
+  <div class="sidepanel" role="dialog" aria-modal="true" aria-labelledby="app-title">
+    <div class="sp-header">
+      <div class="sp-toolbar"><span class="app-eyebrow" id="app-eyebrow" hidden></span><div class="sp-actions"><i data-icon="cross" id="app-close" role="button" tabindex="0" aria-label="Close"></i></div></div>
+      <div class="sp-heading"><h2 class="sp-title" id="app-title">Action</h2></div>
+    </div>
+    <div class="sp-body">
+      ${actionsPanelInner()}
+    </div>
+  </div>
+</div>`;
+}
+
 /* Per-question side panel (opens from a Scores row) — same look as the engagement panel */
 function scorePanel() {
   return `
@@ -955,7 +1081,8 @@ function scorePanel() {
 function actionsPanelInner() {
   return `
   <div class="act-props">
-    <div class="act-row"><span class="act-row-lbl"><i data-icon="benchmark-up"></i> Score</span><span class="act-row-val act-score">–</span></div>
+    <div class="act-row act-row-activity" hidden><span class="act-row-lbl"><i data-icon="version-history"></i> Activity</span><span class="act-row-val act-activity"></span></div>
+    <div class="act-row act-row-score"><span class="act-row-lbl"><i data-icon="benchmark-up"></i> Score</span><span class="act-row-val act-score">–</span></div>
     <div class="act-row"><span class="act-row-lbl"><i data-icon="goals"></i> Goal</span>
       <div class="act-goal-wrap">
         <button class="act-goal-trigger" type="button"><span class="act-goal-current">Select a goal</span> <i data-icon="chevron-down"></i></button>
@@ -995,6 +1122,50 @@ const goalChipHTML = (key) => {
   const g = GOAL_CHIPS[key];
   return g ? `<span class="goal-chip ${g.cls}"><i data-icon="${g.icon}"></i> ${T2(g.label)}</span>` : T2('Select a goal');
 };
+/* Pin → "select a goal" popover, shared by Scores rows, Theme cards and Overview cards. */
+function pinPopHTML(name, scoreText) {
+  return `<div class="menu sc-pin-pop" hidden>
+    <div class="sc-pin-head"><span class="sc-pin-q">${name}</span> <span class="sc-pin-score">(${scoreText})</span></div>
+    <div class="menu-group-lbl">Select a goal</div>
+    <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="promote"><span class="goal-chip is-promote"><i data-icon="win"></i> Promote</span></div>
+    <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="improve"><span class="goal-chip is-improve"><i data-icon="barchart-2"></i> Improve</span></div>
+    <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="contemplate"><span class="goal-chip is-contemplate"><i data-icon="message"></i> Contemplate</span></div>
+  </div>`;
+}
+/* A pin icon button + its goal popover. key/name/score travel on the wrapper for the generic wiring. */
+function pinControl(key, name, scoreText, btnClass) {
+  return `<div class="sc-pin-wrap" data-pin-key="${esc(key)}" data-pin-name="${esc(name)}" data-pin-score="${esc(scoreText)}">
+    <div class="tt-demo"><button class="ib ${btnClass || 'ib-36 ib-tertiary'} sc-pin" aria-label="Pin: no status"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin: no status</div></div>
+    ${pinPopHTML(name, scoreText)}
+  </div>`;
+}
+/* Multi-item pin: the popover first lists the card's items; clicking one shows the goal step.
+   items: [{ key, name, score }]. Used by Themes, Feel-good topics, Highest/Lowest scores. */
+function pinListControl(items, btnClass) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const list = items.map(it => `<div class="menu-item sc-pinlist-item" role="button" tabindex="0" data-pin-key="${esc(it.key)}" data-pin-name="${esc(it.name)}" data-pin-score="${esc(it.score)}">
+      <span class="menu-item-body"><span class="menu-item-title">${it.name} <span class="sc-pinlist-score">(${it.score})</span></span><span class="sc-pinlist-meta"></span></span>
+      <i data-icon="pin-filled" class="sc-pinlist-pin"></i>
+    </div>`).join('');
+  return `<div class="sc-pin-wrap sc-pin-multi">
+    <span class="sc-pin-count" hidden></span>
+    <div class="tt-demo"><button class="ib ${btnClass || 'ib-36 ib-tertiary'} sc-pin" aria-label="Pin: no status"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin: no status</div></div>
+    <div class="menu sc-pin-pop sc-pinlist" hidden>
+      <div class="sc-pinlist-view">${list}</div>
+      <div class="sc-pingoal-view" hidden>
+        <button class="sc-pin-back" type="button"><i data-icon="chevron-left"></i> ${T2('Back')}</button>
+        <div class="sc-pin-head"><span class="sc-pin-q"></span> <span class="sc-pin-score"></span></div>
+        <div class="menu-group-lbl">Select a goal</div>
+        <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="promote"><span class="goal-chip is-promote"><i data-icon="win"></i> Promote</span></div>
+        <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="improve"><span class="goal-chip is-improve"><i data-icon="barchart-2"></i> Improve</span></div>
+        <div class="menu-item sc-pin-goal" role="button" tabindex="0" data-goal="contemplate"><span class="goal-chip is-contemplate"><i data-icon="message"></i> Contemplate</span></div>
+      </div>
+    </div>
+  </div>`;
+}
+function pinThemeItems(d) { const g = groupKey(d), p = periodKey(d); return THEMES.map(t => ({ key: 'theme:' + t.name, name: t.name, score: t.v[g][p] + '%' })); }
+function pinQItems(arr) { return arr.map(x => ({ key: x.q, name: x.q, score: x.s + '%' })); }
+function pinTopicItems(d) { return d.topics.map(t => ({ key: 'topic:' + t.name, name: t.name, score: t.count + '×' })); }
 const autoGrow = (ta) => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; };
 const ACT_PEOPLE = [
   { name: 'Jente Insing', av: 'av-blue', initials: 'JI', email: 'jente.insing@effectory.com' },
@@ -1009,6 +1180,100 @@ const avatarHTML = (name, size) => {
   return `<span class="av ${size} ${p ? p.av : 'av-grey'}">${initials}</span>`;
 };
 const fmtActDate = (iso) => { if (!iso) return ''; const [y, m, da] = iso.split('-').map(Number); return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1] + ' ' + da + ', ' + y; };
+/* "Last edited on" timestamp for the Activity row (e.g. "Jun 25, 2026, 11:47") */
+const fmtActivity = (ts) => { if (!ts) return ''; const d = new Date(ts); const mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()]; const hh = String(d.getHours()).padStart(2, '0'), mm = String(d.getMinutes()).padStart(2, '0'); return `${mo} ${d.getDate()}, ${d.getFullYear()}, ${hh}:${mm}`; };
+const apTouch = (key) => { const s = actState(key); s.lastEdited = Date.now(); };
+/* System notification toast (top-right) shown after pinning a score on the Scores page. */
+function showSysNotif(key, name) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const stack = document.getElementById('sysnotif-stack');
+  if (!stack) return;
+  const el = document.createElement('div');
+  el.className = 'sysnotif';
+  el.innerHTML = `<span class="sysnotif-title">${T2('Pinned')}: “${esc(T2(name))}”</span>`
+    + `<a class="sysnotif-action link-inline" role="button" tabindex="0" data-key="${esc(key)}">${T2('Add action')}</a>`
+    + `<button class="sysnotif-close" aria-label="${T2('Close')}"><i data-icon="cross"></i></button>`;
+  stack.appendChild(el);
+  if (window.Icons) window.Icons.render(el);
+  const remove = () => el.remove();
+  el.querySelector('.sysnotif-close').addEventListener('click', remove);
+  setTimeout(remove, 6000);
+}
+/* Generic pin → goal popover wiring for every .sc-pin-wrap[data-pin-key]
+   (Scores rows, Theme cards, Overview cards). Pinning sets the goal, adds it to the
+   Action Planner and shows a system notification; the pin tooltip reflects the status. */
+function wirePins() {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const setTip = (wrap) => {
+    const pin = wrap.querySelector('.sc-pin'); if (!pin) return;
+    const goal = actState(wrap.dataset.pinKey).goal;
+    const txt = goal ? `Pin: ${T2(GOAL_CHIPS[goal].label)}` : T2('Pin: no status');
+    pin.classList.toggle('is-pinned', !!goal);
+    ['promote', 'improve', 'contemplate'].forEach(g => pin.classList.toggle('is-goal-' + g, goal === g));
+    pin.setAttribute('aria-label', txt);
+    const tip = wrap.querySelector('.tooltip'); if (tip) tip.textContent = txt;
+    /* filled pin when pinned, outline when not */
+    const ico = pin.querySelector('[data-icon]');
+    if (ico) { const want = goal ? 'pin-filled' : 'pin'; if (ico.dataset.icon !== want) { ico.dataset.icon = want; delete ico.dataset.iconLoaded; ico.innerHTML = ''; if (window.Icons) window.Icons.renderOne(ico); } }
+  };
+  const closeAll = () => { document.querySelectorAll('.sc-pin-pop').forEach(p => p.hidden = true); document.querySelectorAll('.is-pin-open').forEach(r => r.classList.remove('is-pinning', 'is-pin-open')); document.querySelectorAll('.sc-pin.is-pressed').forEach(b => b.classList.remove('is-pressed')); };
+  document.querySelectorAll('.sc-pin-wrap[data-pin-key]').forEach(wrap => {
+    if (wrap.dataset.pinWired) return; wrap.dataset.pinWired = '1';
+    const key = wrap.dataset.pinKey, name = wrap.dataset.pinName, scoreText = wrap.dataset.pinScore;
+    const btn = wrap.querySelector('.sc-pin'), pop = wrap.querySelector('.sc-pin-pop');
+    const host = wrap.closest('.sc-row') || wrap.closest('.card');   /* lift this card/row above siblings so the popover isn't covered */
+    setTip(wrap);
+    btn.addEventListener('click', (e) => { e.stopPropagation(); const willOpen = pop.hidden; closeAll(); pop.hidden = !willOpen; btn.classList.toggle('is-pressed', willOpen); if (host) { host.classList.toggle('is-pin-open', willOpen); if (host.classList.contains('sc-row')) host.classList.toggle('is-pinning', willOpen); } });
+    pop.addEventListener('click', (e) => e.stopPropagation());
+    pop.querySelectorAll('.sc-pin-goal').forEach(opt => opt.addEventListener('click', () => {
+      const st = actState(key); st.goal = opt.dataset.goal; st.lastEdited = Date.now();
+      if (!AP_PINNED.some(r => r.key === key)) AP_PINNED.push({ key, name, scoreText });
+      AP_REMOVED.delete(key);
+      closeAll(); setTip(wrap); showSysNotif(key, name);
+    }));
+  });
+  /* Multi-item cards: pin → list of items → pick one → goal step */
+  document.querySelectorAll('.sc-pin-multi').forEach(wrap => {
+    if (wrap.dataset.pinWired) return; wrap.dataset.pinWired = '1';
+    const btn = wrap.querySelector('.sc-pin'), pop = wrap.querySelector('.sc-pin-pop');
+    const listView = pop.querySelector('.sc-pinlist-view'), goalView = pop.querySelector('.sc-pingoal-view');
+    const host = wrap.closest('.sc-row') || wrap.closest('.card');
+    const refresh = () => {
+      let n = 0;
+      wrap.querySelectorAll('.sc-pinlist-item').forEach(it => {
+        const st = actState(it.dataset.pinKey), pinned = !!st.goal; if (pinned) n++;
+        it.classList.toggle('is-pinned', pinned);
+        const pinIco = it.querySelector('.sc-pinlist-pin'); if (pinIco) ['promote', 'improve', 'contemplate'].forEach(g => pinIco.classList.toggle('is-goal-' + g, st.goal === g));
+        const meta = it.querySelector('.sc-pinlist-meta'); if (meta) meta.textContent = pinned ? `${st.actions.length} ${T2('action(s)')}` : '';
+      });
+      const cnt = wrap.querySelector('.sc-pin-count'); if (cnt) { cnt.textContent = n; cnt.hidden = n === 0; }
+      btn.classList.toggle('is-pinned', n > 0);
+      const ico = btn.querySelector('[data-icon]'); if (ico) { const want = n > 0 ? 'pin-filled' : 'pin'; if (ico.dataset.icon !== want) { ico.dataset.icon = want; delete ico.dataset.iconLoaded; ico.innerHTML = ''; if (window.Icons) window.Icons.renderOne(ico); } }
+      const txt = n > 0 ? T2('{n} items with selected goal').replace('{n}', n) : T2('Pin: no status');
+      btn.setAttribute('aria-label', txt);
+      const tip = wrap.querySelector('.tooltip'); if (tip) tip.textContent = txt;
+    };
+    refresh();
+    const showList = () => { listView.hidden = false; goalView.hidden = true; };
+    btn.addEventListener('click', (e) => { e.stopPropagation(); const willOpen = pop.hidden; closeAll(); pop.hidden = !willOpen; showList(); refresh(); btn.classList.toggle('is-pressed', willOpen); if (host) host.classList.toggle('is-pin-open', willOpen); });
+    pop.addEventListener('click', (e) => e.stopPropagation());
+    listView.querySelectorAll('.sc-pinlist-item').forEach(it => it.addEventListener('click', () => {
+      pop.dataset.curKey = it.dataset.pinKey; pop.dataset.curName = it.dataset.pinName; pop.dataset.curScore = it.dataset.pinScore;
+      goalView.querySelector('.sc-pin-q').textContent = T2(it.dataset.pinName);
+      goalView.querySelector('.sc-pin-score').textContent = `(${it.dataset.pinScore})`;
+      listView.hidden = true; goalView.hidden = false;
+    }));
+    pop.querySelector('.sc-pin-back')?.addEventListener('click', showList);
+    goalView.querySelectorAll('.sc-pin-goal').forEach(opt => opt.addEventListener('click', () => {
+      const key = pop.dataset.curKey, name = pop.dataset.curName;
+      const st = actState(key); st.goal = opt.dataset.goal; st.lastEdited = Date.now();
+      if (!AP_PINNED.some(r => r.key === key)) AP_PINNED.push({ key, name, scoreText: pop.dataset.curScore });
+      AP_REMOVED.delete(key);
+      closeAll(); refresh(); showSysNotif(key, name);
+    }));
+  });
+  document.addEventListener('click', closeAll);
+}
 const isoOf = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 /* Design-system calendar (.dp) for one month */
 function dpMonthHTML(year, month, selIso) {
@@ -1060,7 +1325,7 @@ function renderActList(overlay) {
       </div>
       <div class="act-item-more-wrap">
         <button class="ib ib-36 ib-tertiary act-item-more" type="button" aria-label="More"><i data-icon="more-vertical"></i></button>
-        <div class="menu act-item-menu" hidden><div class="menu-item act-item-del" role="button" data-i="${i}"><i data-icon="trash" class="menu-item-icon"></i><span class="menu-item-title">Remove action</span></div></div>
+        <div class="menu act-item-menu" hidden><div class="menu-item act-item-del" role="button" data-i="${i}"><i data-icon="trash" class="menu-item-icon"></i><span class="menu-item-title">${T2('Remove action')}</span></div></div>
       </div>
     </div>`).join('');
   if (window.Icons) window.Icons.render(list);
@@ -1081,6 +1346,9 @@ function loadActions(overlay, key, scoreText) {
   if (!overlay) return;
   overlay.__actKey = key;
   const st = actState(key);
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const act = overlay.querySelector('.act-row-activity');
+  if (act) { if (st.lastEdited) { act.hidden = false; act.querySelector('.act-activity').textContent = T2('Last edited on {date}').replace('{date}', fmtActivity(st.lastEdited)); } else { act.hidden = true; } }
   const sc = overlay.querySelector('.act-score'); if (sc) sc.textContent = scoreText;
   const cur = overlay.querySelector('.act-goal-current'); if (cur) { cur.innerHTML = goalChipHTML(st.goal); if (window.Icons) window.Icons.render(cur); }
   const menu = overlay.querySelector('.act-goal-menu'); if (menu) { menu.hidden = true; menu.classList.toggle('has-goal', !!st.goal); }
@@ -1103,7 +1371,7 @@ function wireActions(overlay) {
   menu.addEventListener('click', (e) => e.stopPropagation());
   document.addEventListener('click', () => { menu.hidden = true; });
   menu.querySelectorAll('.act-goal-opt').forEach(opt => opt.addEventListener('click', () => {
-    actState(overlay.__actKey).goal = opt.dataset.goal;
+    actState(overlay.__actKey).goal = opt.dataset.goal; apTouch(overlay.__actKey);
     const cur = overlay.querySelector('.act-goal-current'); cur.innerHTML = goalChipHTML(opt.dataset.goal); if (window.Icons) window.Icons.render(cur);
     menu.querySelectorAll('.act-goal-opt').forEach(o => o.classList.toggle('is-selected', o === opt));
     menu.classList.add('has-goal');
@@ -1111,23 +1379,23 @@ function wireActions(overlay) {
   }));
   const removeItem = overlay.querySelector('.act-goal-remove');
   if (removeItem) removeItem.addEventListener('click', () => { menu.hidden = true; openRemoveDialog(overlay); });
-  desc.addEventListener('input', () => { actState(overlay.__actKey).desc = desc.value; autoGrow(desc); });
+  desc.addEventListener('input', () => { actState(overlay.__actKey).desc = desc.value; apTouch(overlay.__actKey); autoGrow(desc); });
   /* Add action → append a blank inline row and focus it (auto-saves, no editor) */
   addBtn.addEventListener('click', () => {
     if (addBtn.disabled) return;
-    actState(overlay.__actKey).actions.push({ text: '', done: false, deadline: '', assignee: '' });
+    actState(overlay.__actKey).actions.push({ text: '', done: false, deadline: '', assignee: '' }); apTouch(overlay.__actKey);
     renderActList(overlay);
     const last = list.querySelector('.act-item:last-child .act-item-input'); if (last) last.focus();
   });
   /* inline editing — everything auto-saves to state */
-  list.addEventListener('input', (e) => { const ti = e.target.closest('.act-item-input'); if (ti) actState(overlay.__actKey).actions[+ti.dataset.i].text = ti.value; });
-  list.addEventListener('change', (e) => { const cb = e.target.closest('.act-item-cb'); if (cb) { actState(overlay.__actKey).actions[+cb.dataset.i].done = cb.checked; renderActList(overlay); } });
+  list.addEventListener('input', (e) => { const ti = e.target.closest('.act-item-input'); if (ti) { actState(overlay.__actKey).actions[+ti.dataset.i].text = ti.value; apTouch(overlay.__actKey); } });
+  list.addEventListener('change', (e) => { const cb = e.target.closest('.act-item-cb'); if (cb) { actState(overlay.__actKey).actions[+cb.dataset.i].done = cb.checked; apTouch(overlay.__actKey); renderActList(overlay); } });
   list.addEventListener('click', (e) => {
     const st = actState(overlay.__actKey);
     const dClear = e.target.closest('.act-item-deadline-clear');
-    if (dClear) { e.stopPropagation(); st.actions[+dClear.dataset.i].deadline = null; renderActList(overlay); return; }
+    if (dClear) { e.stopPropagation(); st.actions[+dClear.dataset.i].deadline = null; apTouch(overlay.__actKey); renderActList(overlay); return; }
     const aClear = e.target.closest('.act-item-assign-clear');
-    if (aClear) { e.stopPropagation(); st.actions[+aClear.dataset.i].assignee = ''; renderActList(overlay); return; }
+    if (aClear) { e.stopPropagation(); st.actions[+aClear.dataset.i].assignee = ''; apTouch(overlay.__actKey); renderActList(overlay); return; }
     const dBtn = e.target.closest('.act-item-deadline');
     if (dBtn) {
       e.stopPropagation();
@@ -1139,15 +1407,15 @@ function wireActions(overlay) {
     const navBtn = e.target.closest('.dp-prev, .dp-next');
     if (navBtn) { e.stopPropagation(); let y = +navBtn.dataset.y, m = +navBtn.dataset.m; m += navBtn.classList.contains('dp-prev') ? -1 : 1; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } const pop = navBtn.closest('.act-item-dp'); pop.innerHTML = dpMonthHTML(y, m, st.actions[+pop.dataset.i].deadline); if (window.Icons) window.Icons.render(pop); return; }
     const day = e.target.closest('.dp-day[data-iso]');
-    if (day) { e.stopPropagation(); const pop = day.closest('.act-item-dp'); st.actions[+pop.dataset.i].deadline = day.dataset.iso; renderActList(overlay); return; }
+    if (day) { e.stopPropagation(); const pop = day.closest('.act-item-dp'); st.actions[+pop.dataset.i].deadline = day.dataset.iso; apTouch(overlay.__actKey); renderActList(overlay); return; }
     const aBtn = e.target.closest('.act-item-assign');
     if (aBtn) { e.stopPropagation(); const m = aBtn.closest('.act-item-assign-wrap').querySelector('.act-item-assign-menu'); const willOpen = m.hidden; closeActPopups(overlay); m.hidden = !willOpen; return; }
     const opt = e.target.closest('.act-item-assign-opt');
-    if (opt) { e.stopPropagation(); const i = +opt.closest('.act-item').querySelector('.act-item-assign').dataset.i; st.actions[i].assignee = opt.dataset.name; renderActList(overlay); return; }
+    if (opt) { e.stopPropagation(); const i = +opt.closest('.act-item').querySelector('.act-item-assign').dataset.i; st.actions[i].assignee = opt.dataset.name; apTouch(overlay.__actKey); renderActList(overlay); return; }
     const more = e.target.closest('.act-item-more');
     if (more) { e.stopPropagation(); const m = more.closest('.act-item-more-wrap').querySelector('.act-item-menu'); const willOpen = m.hidden; closeActPopups(overlay); m.hidden = !willOpen; return; }
     const del = e.target.closest('.act-item-del');
-    if (del) { st.actions.splice(+del.dataset.i, 1); renderActList(overlay); }
+    if (del) { st.actions.splice(+del.dataset.i, 1); apTouch(overlay.__actKey); renderActList(overlay); }
   });
   document.addEventListener('click', () => closeActPopups(overlay));
 }
@@ -1255,11 +1523,11 @@ const periodKey = (d) => /Q3/.test(d.surveyName) ? 'after' : 'before';
 /* Segments (demographic crossings) the user can compare by. Age is the interactive one;
    selecting it adds a column per category to the Scores table. */
 const AGE_CATS = [
-  { key: '35-39', label: '35 - 39 years', n: 40, delta: 7 },
-  { key: '30-34', label: '30 - 34 years', n: 55, delta: -7 },
-  { key: '25-29', label: '25 - 29 years', n: 34, delta: -1 },
-  { key: '40-44', label: '40 - 44 years', n: 15, delta: 6 },
   { key: 'u25', label: 'Younger than 25 years', n: 12, delta: -4 },
+  { key: '25-29', label: '25 - 29 years', n: 34, delta: -1 },
+  { key: '30-34', label: '30 - 34 years', n: 55, delta: -7 },
+  { key: '35-39', label: '35 - 39 years', n: 40, delta: 7 },
+  { key: '40-44', label: '40 - 44 years', n: 15, delta: 6 },
   { key: '45+', label: '45+ years', n: 15, delta: 1 }
 ];
 const SEGMENTS = [
@@ -1427,7 +1695,7 @@ function scoresView(d) {
       <div class="sc-q"><span class="sc-q-text">${r.q}</span>
         <div class="sc-actions">
           <button class="btn btn-secondary sc-insights">Insights</button>
-          <div class="tt-demo"><button class="ib ib-36 ib-secondary" aria-label="Pin question"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin question</div></div>
+          ${pinControl(r.q, r.q, fmt(r.s, scale), 'ib-36 ib-secondary')}
         </div>
       </div>
       <div class="sc-cell is-current"><span class="sc-fill">${fmt(r.s, scale)}</span></div>
@@ -1605,7 +1873,7 @@ function themesView(d) {
       <div class="tc-top">
         <div class="tc-head">
           <span class="tc-title text-l5">${r.name}</span>
-          <div class="tt-demo"><button class="ib ib-36 ib-tertiary icon-ghost" aria-label="Pin theme"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin theme</div></div>
+          ${pinControl('theme:' + r.name, r.name, r.current + '%', 'ib-36 ib-tertiary icon-ghost')}
         </div>
         <p class="tc-desc">${r.desc}</p>
       </div>
@@ -1816,7 +2084,7 @@ function shell(d) {
           <a class="tab">Open answers</a>
           <a class="tab">Topics &amp; Ideas</a>
           <a class="tab" data-view="reports">Reports</a>
-          <a class="tab">Actions</a>
+          <a class="tab" data-view="actions">Actions</a>
         </div>
       </div>
 
@@ -1856,12 +2124,12 @@ function shell(d) {
       <h4 class="ai-sec-title">Suggested actions</h4>
       <ul class="ai-list">${li(d.aiActions)}</ul>
     </div>
-    <div class="ai-notice">
-      <span class="ai-notice-text"><i data-icon="info"></i> This AI summary may not be fully accurate&mdash;please review before making decisions. <a href="#">Learn more</a></span>
-      <div class="ai-notice-actions">
-        <button class="btn btn-secondary"><i data-icon="up-vote"></i> This summary was helpful</button>
-        <button class="btn btn-secondary"><i data-icon="down-vote"></i> Not really helpful</button>
+    <div class="ai-foot">
+      <div class="ai-feedback">
+        <button class="btn btn-tertiary ai-fb"><i data-icon="up-vote"></i> This summary was helpful</button>
+        <button class="btn btn-tertiary ai-fb"><i data-icon="down-vote"></i> Not really helpful</button>
       </div>
+      <p class="ai-disclaimer">This AI summary may not be fully accurate&mdash;please review before making decisions. <a href="#" class="ai-learn">Learn more</a></p>
     </div>
   </div>
   <button class="ai-toggle" id="ai-toggle" aria-expanded="false">
@@ -1901,7 +2169,7 @@ function shell(d) {
       <div class="eng-title-row">
         <p class="eng-title text-l5">Engagement</p>
         <div class="eng-icons">
-          <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+          ${pinControl('engagement', 'Engagement', d.engValue)}
           <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
           <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Correlating questions"><i data-icon="correlation-positive"></i></button><div class="tooltip is-above">Correlating questions</div></div>
         </div>
@@ -1927,7 +2195,7 @@ function shell(d) {
       <div class="nps-title-row">
         <p class="nps-title text-l5">Employee Net Promoter Score</p>
         <div class="nps-icons">
-          <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+          ${pinControl('enps', 'eNPS', String(npsValue))}
           <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
         </div>
       </div>
@@ -1981,7 +2249,7 @@ function shell(d) {
     <div class="sw-header">
       <p class="sw-title text-l5">Themes</p>
       <div class="sw-icons">
-        <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+        ${pinListControl(pinThemeItems(d), 'ib-36 ib-tertiary')}
         <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Card settings"><i data-icon="gear"></i></button><div class="tooltip is-above">Card settings</div></div>
         <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
       </div>
@@ -1999,7 +2267,7 @@ function shell(d) {
     <div class="rr-header">
       <p class="rr-title text-l5">Response rate</p>
       <div class="rr-icons">
-        <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+        ${pinControl('response', 'Response rate', d.rrValue + '%')}
         <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
       </div>
     </div>
@@ -2023,7 +2291,7 @@ function shell(d) {
         <div class="kpi-title-row">
           <p class="kpi-title text-l5">Workload</p>
           <div class="kpi-icons">
-            <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+            ${pinControl('kpi:workload', 'Workload', d.kpiWorkload + '%')}
             <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
           </div>
         </div>
@@ -2036,7 +2304,7 @@ function shell(d) {
         <div class="kpi-title-row">
           <p class="kpi-title text-l5">Retention</p>
           <div class="kpi-icons">
-            <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+            ${pinControl('kpi:retention', 'Retention', d.kpiRetention + '%')}
             <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
           </div>
         </div>
@@ -2049,7 +2317,7 @@ function shell(d) {
         <div class="kpi-title-row">
           <p class="kpi-title text-l5">Well-being</p>
           <div class="kpi-icons">
-            <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+            ${pinControl('kpi:wellbeing', 'Well-being', d.kpiWellbeing + '%')}
             <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
           </div>
         </div>
@@ -2064,7 +2332,7 @@ function shell(d) {
       <div class="tp-title-row">
         <p class="tp-title text-l5">Feel-good topics</p>
         <div class="tp-icons">
-          <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+          ${pinListControl(pinTopicItems(d), 'ib-36 ib-tertiary')}
           <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Card settings"><i data-icon="gear"></i></button><div class="tooltip is-above">Card settings</div></div>
           <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
         </div>
@@ -2082,7 +2350,7 @@ function shell(d) {
       <img class="qs-illu" src="assets/illustrations/win-small.svg" alt="" />
       <p class="qs-title text-l5">Highest scores</p>
       <div class="qs-icons">
-        <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+        ${pinListControl(pinQItems(d.highScores), 'ib-36 ib-tertiary')}
         <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
       </div>
     </div>
@@ -2094,7 +2362,7 @@ function shell(d) {
       <img class="qs-illu" src="assets/illustrations/improve-small.svg" alt="" />
       <p class="qs-title text-l5">Lowest scores</p>
       <div class="qs-icons">
-        <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="Pin card"><i data-icon="pin"></i></button><div class="tooltip is-above">Pin card</div></div>
+        ${pinListControl(pinQItems(d.lowScores), 'ib-36 ib-tertiary')}
         <div class="tt-demo"><button class="ib ib-36 ib-tertiary" aria-label="More information"><i data-icon="info"></i></button><div class="tooltip is-above">More information</div></div>
       </div>
     </div>
@@ -2120,6 +2388,10 @@ ${themesView(d)}
 <div class="view" id="view-scores" hidden>
 ${scoresView(d)}
 </div><!-- /view-scores -->
+
+<div class="view" id="view-actions" hidden>
+${actionsView(d)}
+</div><!-- /view-actions -->
 
       </div><!-- /overview-wrap -->
     </div><!-- /main-scroll -->
@@ -2157,7 +2429,7 @@ ${scoresView(d)}
           </button>
           <div class="efp-filter" id="efp-filter" hidden>
             ${[
-              ...(d.efpHasOrg !== false ? [{ variant: 'is-org', label: 'Organization Level', icon: 'building' }] : []),
+              ...(d.efpHasOrg !== false ? [{ variant: 'is-org', label: ORG_LABEL, icon: 'building' }] : []),
               ...(d.efpHasPrevious ? [{ variant: 'is-previous', label: 'Previous survey', icon: 'rotate-backward' }] : []),
               { variant: 'is-peer', label: 'Group Level below', icon: 'sort-descending' }
             ].map(r => `<label class="efp-filter-row">
@@ -2394,7 +2666,7 @@ ${scoresView(d)}
           ${[
             { label: d.groupName,        val: npsValue,    group: true },
             { label: 'Previous survey',  val: d.npsPrev,   icon: 'rotate-backward' },
-            { label: 'Benchmark',        val: d.npsBench,  icon: 'benchmark-up' },
+            { label: 'Effectory Index',  val: d.npsBench,  icon: 'benchmark-up' },
             { label: 'Top 3 benchmark',  val: d.npsTop3,   icon: 'star' }
           ].map(npsBar).join('')}
         </div>
@@ -2453,6 +2725,8 @@ ${scoresView(d)}
 
 ${reportsDialogs()}
 ${scorePanel()}
+${actionPanel()}
+<div class="sysnotif-stack" id="sysnotif-stack"></div>
 ${actRemoveDialog()}
 `;
 }
@@ -2720,7 +2994,8 @@ function renderOverview(variant, initialView) {
     focus: document.getElementById('view-focus'),
     themes: document.getElementById('view-themes'),
     reports: document.getElementById('view-reports'),
-    scores: document.getElementById('view-scores')
+    scores: document.getElementById('view-scores'),
+    actions: document.getElementById('view-actions')
   };
   viewTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -2730,8 +3005,9 @@ function renderOverview(variant, initialView) {
       Object.entries(views).forEach(([k, el]) => { if (el) el.hidden = (k !== v); });
       document.querySelector('.overview-wrap')?.classList.toggle('is-full', v === 'scores');
       document.querySelector('.main-scroll').scrollTop = 0;
+      if (v === 'actions' && window.renderAPBody) window.renderAPBody();   /* refresh planner rows from current ACT_STORE state */
       /* keep the URL in sync with the active view (no reload) */
-      const path = location.pathname.replace(/(overview|focus|themes|reports|scores)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
+      const path = location.pathname.replace(/(overview|focus|themes|reports|scores|actions)(\.html)?$/, (m, _g1, ext) => v + (ext || ''));
       if (path !== location.pathname) history.replaceState(null, '', path + location.search + location.hash);
     });
   });
@@ -2749,7 +3025,148 @@ function renderOverview(variant, initialView) {
   } else if (initialView === 'scores') {
     const st = document.querySelector('.tab[data-view="scores"]');
     if (st) st.click();
+  } else if (initialView === 'actions') {
+    const at = document.querySelector('.tab[data-view="actions"]');
+    if (at) at.click();
   }
+
+  /* ---- Action Planner wiring ---- */
+  (function wireActionPlanner() {
+    const view = document.getElementById('view-actions');
+    const appOverlay = document.getElementById('app-overlay');
+    if (!view || !appOverlay) return;
+    const T2 = (s) => window.tr ? tr(s) : s;
+    wireActions(appOverlay);
+    const closeAP = () => { appOverlay.hidden = true; window.renderAPBody(); };   /* refresh progress/goal on close */
+    document.getElementById('app-close').addEventListener('click', closeAP);
+    appOverlay.addEventListener('click', (e) => { if (e.target === appOverlay) closeAP(); });
+
+    const titleEl = document.getElementById('app-title');
+    const eyebrowEl = document.getElementById('app-eyebrow');
+    const openAP = (key, name, score) => {
+      const isCustom = key.startsWith('custom:');
+      const realName = isCustom ? ((AP_CUSTOM.find(r => r.key === key) || {}).name || '') : name;
+      titleEl.textContent = realName;
+      titleEl.dataset.apkey = key;
+      titleEl.contentEditable = isCustom ? 'true' : 'false';
+      titleEl.classList.toggle('is-editable', isCustom);
+      titleEl.setAttribute('data-placeholder', T2('What do you want to tackle?'));
+      eyebrowEl.textContent = realName ? T2('Edit pin') : T2('Create pin');
+      eyebrowEl.hidden = !isCustom;
+      appOverlay.classList.toggle('is-custom', isCustom);   /* only a real custom pin hides the Score row */
+      loadActions(appOverlay, key, score);
+      appOverlay.hidden = false;
+      if (window.Icons) window.Icons.render(appOverlay);
+    };
+    /* editing a custom pin's title updates its planner row */
+    titleEl.addEventListener('input', () => {
+      const key = titleEl.dataset.apkey;
+      if (!key || !key.startsWith('custom:')) return;
+      const row = AP_CUSTOM.find(r => r.key === key);
+      if (row) row.name = titleEl.textContent.trim();
+    });
+    titleEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); titleEl.blur(); } });
+
+    window.renderAPBody = function () {
+      const tbody = view.querySelector('.ap-tbody');
+      if (!tbody) return;
+      let rows = actionPlannerRows(d);
+      if (AP_SORT) {
+        const val = (r) => {
+          const st = actState(r.key);
+          if (AP_SORT.col === 'score') return r.score == null ? -1 : r.score;
+          if (AP_SORT.col === 'goal') return AP_GOAL_ORDER[st.goal] || 0;
+          const tot = st.actions.length; return tot ? st.actions.filter(a => a.done).length / tot : -1;
+        };
+        rows = rows.slice().sort((a, b) => (val(a) - val(b)) * AP_SORT.dir);
+      }
+      tbody.innerHTML = rows.map(apRowHTML).join('');
+      if (window.Icons) window.Icons.render(tbody);
+    };
+
+    /* Open the right panel for a subject (by key). A pinned score keeps its full tabs:
+       questions → Scores question panel; themes → theme panel; engagement/eNPS → their cards' panels;
+       other metrics & custom pins → the Actions-only panel. Always lands on the Actions tab.
+       addAction also appends a fresh action + focuses it. Exposed globally for the pin toasts. */
+    const apOpenActions = (key, name, scoreText, addAction) => {
+      let overlay = null;
+      /* fall back to the planner data for name/score (e.g. when opened from a pin toast) */
+      const pr = actionPlannerRows(d).find(x => x.key === key);
+      if (pr) {
+        if (!name) name = T2(pr.name);
+        if (scoreText == null || scoreText === '–') scoreText = pr.scoreText != null ? pr.scoreText : (pr.score == null ? '–' : pr.score + '%');
+      }
+      const goActions = (id) => { overlay = document.getElementById(id); overlay.querySelector('.sp-tab[data-scptab="actions"]')?.click(); };
+      if (key.startsWith('custom:')) { openAP(key, '', scoreText); overlay = appOverlay; }
+      else if (key.startsWith('theme:')) {
+        const idx = THEMES.findIndex(t => t.name === key.slice(6));
+        const link = document.querySelector(`#view-themes .tc-link[data-theme="${idx}"]`);
+        if (link) { link.click(); goActions('thp-overlay'); }
+      } else if (key === 'engagement') { document.getElementById('engp-overlay').hidden = false; goActions('engp-overlay'); }
+      else if (key === 'enps') { document.getElementById('npsp-overlay').hidden = false; goActions('npsp-overlay'); }
+      else {
+        const sr = [...document.querySelectorAll('#view-scores .sc-row')].find(r => r.dataset.q === key);
+        if (sr) { (sr.querySelector('.sc-insights') || sr.querySelector('.sc-q')).click(); goActions('scp-overlay'); }
+      }
+      if (!overlay) { openAP(key, name || '', scoreText); overlay = appOverlay; }
+      if (addAction) { const add = overlay.querySelector('.act-add'); if (add && !add.disabled) add.click(); }
+    };
+    window.apOpenActions = apOpenActions;
+    const openSubject = (rowEl, addAction) => apOpenActions(rowEl.dataset.key, rowEl.querySelector('.ap-name').textContent, rowEl.querySelector('.ap-score').textContent, addAction);
+
+    /* "Add action" link in any pin toast → open that subject's Actions */
+    document.getElementById('sysnotif-stack')?.addEventListener('click', (e) => {
+      const a = e.target.closest('.sysnotif-action'); if (!a) return;
+      apOpenActions(a.dataset.key, '', '–', true);
+      a.closest('.sysnotif')?.remove();
+    });
+
+    /* delegated clicks inside the Actions view */
+    view.addEventListener('click', (e) => {
+      const kebab = e.target.closest('.ap-kebab');
+      if (kebab) { e.stopPropagation(); const m = kebab.closest('.ap-kebab-wrap').querySelector('.ap-kebab-menu'); const willOpen = m.hidden; view.querySelectorAll('.ap-kebab-menu, .ap-export-menu').forEach(x => x.hidden = true); m.hidden = !willOpen; return; }
+      const edit = e.target.closest('.ap-edit');
+      if (edit) { e.stopPropagation(); openSubject(edit.closest('.ap-row'), false); return; }
+      const addk = e.target.closest('.ap-addk');
+      if (addk) { e.stopPropagation(); openSubject(addk.closest('.ap-row'), true); return; }
+      const remove = e.target.closest('.ap-remove');
+      if (remove) { e.stopPropagation(); const key = remove.closest('.ap-row').dataset.key; AP_REMOVED.add(key); AP_CUSTOM = AP_CUSTOM.filter(r => r.key !== key); window.renderAPBody(); return; }
+      const exportBtn = e.target.closest('.ap-export');
+      if (exportBtn) { e.stopPropagation(); const m = view.querySelector('.ap-export-menu'); const willOpen = m.hidden; view.querySelectorAll('.ap-kebab-menu, .ap-export-menu').forEach(x => x.hidden = true); m.hidden = !willOpen; return; }
+      if (e.target.closest('.ap-export-opt')) { view.querySelector('.ap-export-menu').hidden = true; return; }
+      const sort = e.target.closest('.ap-sort');
+      if (sort) { const col = sort.dataset.col; AP_SORT = (AP_SORT && AP_SORT.col === col) ? { col, dir: -AP_SORT.dir } : { col, dir: -1 }; view.querySelectorAll('.ap-sort').forEach(s => s.classList.toggle('is-active', s === sort)); window.renderAPBody(); return; }
+      if (e.target.closest('.ap-custom')) {
+        const key = 'custom:' + (++AP_CUSTOM_SEQ);
+        ACT_STORE[key] = { goal: 'contemplate', desc: '', actions: [] };   /* a new custom pin starts on Contemplate */
+        AP_CUSTOM.push({ key, name: '', score: null, custom: true });       /* empty title → placeholder in the panel */
+        AP_REMOVED.delete(key);
+        window.renderAPBody();
+        openAP(key, '', '–');
+        return;
+      }
+      const addBtn = e.target.closest('.ap-add');
+      if (addBtn) { openSubject(addBtn.closest('.ap-row'), true); return; }
+      const row = e.target.closest('.ap-row');
+      if (row) { openSubject(row, false); }
+    });
+    view.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('ap-row')) { e.preventDefault(); e.target.click(); } });
+
+    /* search filters rows by name */
+    const srch = view.querySelector('.ap-srch');
+    if (srch) srch.addEventListener('input', () => { const q = srch.value.trim().toLowerCase(); view.querySelectorAll('.ap-row').forEach(r => { r.style.display = r.dataset.name.includes(q) ? '' : 'none'; }); });
+
+    /* close planner menus on outside click */
+    document.addEventListener('click', () => { view.querySelectorAll('.ap-kebab-menu, .ap-export-menu').forEach(x => x.hidden = true); });
+
+    /* refresh planner rows (goal / progress) whenever a subject panel closes while the planner is open */
+    ['scp-overlay', 'thp-overlay', 'app-overlay'].forEach(id => {
+      const ov = document.getElementById(id);
+      if (ov) new MutationObserver(() => { if (ov.hidden && !view.hidden) window.renderAPBody(); }).observe(ov, { attributes: true, attributeFilter: ['hidden'] });
+    });
+  })();
+
+  wirePins();   /* pin → goal popover on Scores rows, Theme cards and Overview cards */
 
   /* Header filter: toggle between team level (Team IT) and organization level (Novanta),
      keeping the survey period (before/after) and the active view (overview/focus). */
@@ -2853,7 +3270,7 @@ function renderOverview(variant, initialView) {
       const g = rowState(row).generating;
       label.textContent = g.length > 1
         ? t('Generating in {count} languages').replace('{count}', g.length)
-        : t('Generating in {lang}').replace('{lang}', g[0] || '');
+        : t('Generating in {lang}').replace('{lang}', g[0] ? t(g[0]) : '');
     };
     const selectedLanguage = () => { const s = langScrim.querySelector('.lang-row.is-selected'); return (s && s.dataset.lang) || 'English (US)'; };
     const updateLangButton = () => { if (current) langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? t('Download') : t('Generate'); };
@@ -2892,7 +3309,7 @@ function renderOverview(variant, initialView) {
     const closeGen = () => { genScrim.hidden = true; if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; } genLonger.classList.remove('is-shown'); };
     const showLonger = () => { longerTimer = null; if (genScrim.hidden || genPanel.classList.contains('is-done')) return; genLonger.classList.add('is-shown'); };
     const openGenDialog = (ready, lang) => {
-      genSub.textContent = lang || t('In your selected language');
+      genSub.textContent = lang ? t(lang) : t('In your selected language');
       genLonger.classList.remove('is-shown');
       genTitle.textContent = ready ? COPY.doneTitle : COPY.genTitle;
       genSubtitle.textContent = ready ? COPY.doneBody : COPY.genBody;
@@ -2900,7 +3317,7 @@ function renderOverview(variant, initialView) {
       genScrim.hidden = false;
     };
     const showToast = (name, lang) => {
-      readyTitle.textContent = t('{report} is ready to download in {lang}').replace('{report}', name).replace('{lang}', lang);
+      readyTitle.textContent = t('{report} is ready to download in {lang}').replace('{report}', name).replace('{lang}', t(lang));
       toast.hidden = false;
     };
     const scheduleGeneration = (row, name, lang, isRaw) => {
@@ -3034,10 +3451,14 @@ function renderOverview(variant, initialView) {
       const segApplied = document.getElementById('sc-seg-applied');
       const T3 = (s) => window.tr ? tr(s) : s;
       const quickChips = pop.querySelectorAll('.sc-quick-chip');
+      const resetBtn = document.querySelector('.sc-reset');
+      const defaultQuick = [...quickChips].map(c => c.classList.contains('is-active'));   /* default comparison state */
+      const updateReset = () => { if (resetBtn) resetBtn.disabled = !((ageCb && ageCb.checked) || [...quickChips].some((c, i) => c.classList.contains('is-active') !== defaultQuick[i])); };
       /* "X selected" = active quick comparisons + the Age segment when applied */
       const recomputeCount = () => {
         const active = pop.querySelectorAll('.sc-quick-chip.is-active').length + (ageCb && ageCb.checked ? 1 : 0);
         cmpCount.textContent = T3('{n} selected').replace('{n}', String(active));
+        updateReset();
       };
       const hideAgeCol = (key, hidden) => {
         table.querySelectorAll(`[data-age="${key}"]`).forEach(el => { el.style.display = hidden ? 'none' : ''; });
@@ -3073,6 +3494,14 @@ function renderOverview(variant, initialView) {
         seg.classList.toggle('is-open');
         if (opening && seg.dataset.seg === 'age' && ageCb && !ageCb.checked) { ageCb.checked = true; applyAge(); }
       }));
+      /* Reset → restore the default comparisons (drop segments, restore default quick comparisons) */
+      resetBtn?.addEventListener('click', () => {
+        if (resetBtn.disabled) return;
+        quickChips.forEach((c, i) => { const want = defaultQuick[i]; if (c.classList.contains('is-active') !== want) { c.classList.toggle('is-active', want); if (c.dataset.qcol) setColVisible(c.dataset.qcol, want); } });
+        if (ageCb && ageCb.checked) { ageCb.checked = false; applyAge(); ageSeg.classList.remove('is-open'); }
+        recomputeCount();
+      });
+      updateReset();   /* initial disabled state */
     }
   })();
 
@@ -3111,9 +3540,9 @@ function renderOverview(variant, initialView) {
       const br = document.getElementById('scp-agree-bracket');
       br.style.width = agreeTotal + '%';
       document.getElementById('scp-agree-lbl').textContent = T2('{n}% agree with this statement').replace('{n}', agreeTotal);
-      /* comparison cards — skip "Organization score" when the group already IS the organization (Novanta) */
+      /* comparison cards — show the organization by name (Novanta B.V.); skip it when the group already IS the organization */
       const cards = [{ lbl: d.groupName, val: fmtv(group) }];
-      if (groupKey(d) !== 'novanta') cards.push({ lbl: T2('Organization score'), val: fmtv(org) });
+      if (groupKey(d) !== 'novanta') cards.push({ lbl: ORG_LABEL, val: fmtv(org) });
       cards.push({ lbl: T2('Effectory Index'), val: fmtv(bench) });
       document.getElementById('scp-cards').innerHTML = cards.map(c => `<div class="engp-card-item"><div class="engp-card-lbl">${c.lbl}</div><div class="engp-card-val">${c.val}</div></div>`).join('');
       document.getElementById('scp-chart-grp').textContent = d.groupName;
@@ -3161,6 +3590,7 @@ function renderOverview(variant, initialView) {
       row.querySelector('.sc-q')?.addEventListener('click', () => open(row));
       row.querySelector('.sc-insights')?.addEventListener('click', (e) => { e.stopPropagation(); open(row); });
     });
+    /* pin → goal popovers are wired generically by wirePins() (scores, themes, overview cards) */
     /* Tab switching inside the panel (Insights / Tips & Best practices / Actions) */
     scp.querySelectorAll('.sp-tab').forEach(tab => {
       tab.addEventListener('click', () => {

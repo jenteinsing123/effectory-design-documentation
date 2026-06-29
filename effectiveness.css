@@ -6,7 +6,7 @@
       color: var(--content-base);
       font-family: 'Poppins', sans-serif;
       /* Results page container padding (Figma: results/padding) — built from spacing tokens */
-      --results-side: calc(var(--spacing-super-loose) * 2); /* 80px — container-sides */
+      --results-side: calc(var(--spacing-extra-loose) * 2); /* 64px — desktop page padding (design system §11) */
       --results-top: calc(var(--spacing-loose) * 2);        /* 48px — container-top-bot */
     }
 
@@ -839,16 +839,12 @@
     .ai-list { margin: 0; padding-left: var(--spacing-base); display: flex; flex-direction: column; gap: var(--spacing-tight); }
     .ai-list li { font-size: 14px; line-height: 1.6; color: var(--content-secondary); }
 
-    .ai-notice {
-      display: flex; align-items: center; gap: var(--spacing-base); flex-wrap: wrap;
-      margin-top: var(--spacing-loose); padding: var(--spacing-base-tight) var(--spacing-base);
-      background: var(--bg-info-subtle); border-radius: var(--radius-md);
-    }
-    .ai-notice-text { flex: 1; min-width: 240px; display: flex; align-items: center; gap: var(--spacing-tight); font-size: 12px; color: var(--content-info-base); }
-    .ai-notice-text i { display: flex; width: 16px; height: 16px; flex-shrink: 0; }
-    .ai-notice-text a { color: var(--content-info-base); font-weight: 600; }
-    .ai-notice-actions { display: flex; gap: var(--spacing-tight); }
-    .ai-notice-actions .btn i { display: flex; width: 16px; height: 16px; }
+    .ai-foot { margin-top: var(--spacing-loose); }
+    .ai-feedback { display: flex; gap: var(--spacing-base); }
+    .ai-fb { height: auto; padding: var(--spacing-extra-tight) var(--spacing-tight); margin-left: calc(-1 * var(--spacing-tight)); font-weight: 500; }
+    .ai-fb i { display: flex; width: 16px; height: 16px; }
+    .ai-disclaimer { margin: var(--spacing-base-tight) 0 0; padding-top: var(--spacing-base-tight); border-top: 1px solid var(--border-base); font-size: 12px; line-height: 1.6; color: var(--content-secondary); }
+    .ai-learn { color: var(--content-brand-base); font-weight: 600; }
 
     .ai-toggle {
       display: flex; align-items: center; justify-content: center; gap: var(--spacing-tight);
@@ -1044,7 +1040,11 @@
     .sc-q-text { min-width: 0; }
     .sc-row:hover .sc-q { background: var(--bg-input-hover, var(--bg-secondary)); }
     .sc-actions { display: none; position: absolute; right: var(--spacing-base); top: 50%; transform: translateY(-50%); align-items: center; gap: var(--spacing-tight); padding-left: var(--spacing-base); background: inherit; }
-    .sc-row:hover .sc-actions { display: flex; }
+    /* show the actions strip on hover, OR when the row is pinned (so the pin stays visible) */
+    .sc-row:hover .sc-actions,
+    .sc-row:has(.sc-pin.is-pinned) .sc-actions { display: flex; }
+    .sc-row:not(:hover) .sc-insights { display: none; }                 /* Insights only on hover */
+    .sc-row:not(:hover) .sc-pin:not(.is-pressed) { background: transparent; border-color: transparent; box-shadow: none; }  /* pinned pin is a ghost icon until hover/open, then secondary */
     .sc-insights { height: 36px; padding: var(--spacing-extra-tight) var(--spacing-base); }
     .sc-cell { width: 140px; flex: none; align-self: stretch; display: flex; align-items: center; padding: var(--spacing-extra-tight); border-bottom: 1px solid var(--border-base); }
     /* Inner colour block — a little inset from the cell, rounded corners */
@@ -1406,8 +1406,8 @@
     /* ──────────────────────────────────────────────
        Responsiveness
        ────────────────────────────────────────────── */
-    /* Tighter page padding once the wide desktop margin no longer fits */
-    @media (max-width: 1100px) {
+    /* Tablet page padding (design system §11: below the 1200px desktop breakpoint) */
+    @media (max-width: 1199px) {
       body { --results-side: var(--spacing-loose); } /* 24px */
     }
     /* Collapse the app sidebar so content gets the full width */
@@ -1415,8 +1415,11 @@
       .mainnav { display: none; }
     }
     /* Phone / small tablet */
-    @media (max-width: 768px) {
+    /* Mobile page padding (design system §11: below 576px) */
+    @media (max-width: 575px) {
       body { --results-side: var(--spacing-base); } /* 16px */
+    }
+    @media (max-width: 768px) {
       .overview-wrap { padding: var(--spacing-loose) var(--spacing-base) var(--spacing-extra-loose); }
       .results-head { padding-top: var(--spacing-loose); }
       /* Side panels go full-width with roomier-but-smaller padding */
@@ -1509,3 +1512,80 @@
     .npsp-learn { margin-top: var(--spacing-base); padding-left: 0; }
     .npsp-learn i { width: 16px; height: 16px; display: inline-flex; vertical-align: middle; }
   
+    /* ───────── Action Planner (Actions view) ───────── */
+    .ap-headrow { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-base); margin-bottom: var(--spacing-super-loose); }
+    .ap-headrow .rd-intro { margin-bottom: 0; }
+    .ap-tutorial { display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); color: var(--content-brand-base); font-size: 14px; font-weight: 500; text-decoration: none; flex: none; }
+    .ap-tutorial i { width: 16px; height: 16px; display: flex; }
+    .ap-tutorial:hover { text-decoration: underline; }
+
+    .ap-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-base); margin-bottom: var(--spacing-loose); }
+    .ap-search { flex: 1; min-width: 0; }
+    .ap-toolbar-right { display: flex; align-items: center; gap: var(--spacing-tight); }
+    .ap-export-wrap { position: relative; }
+    .ap-export-menu, .ap-kebab-menu { position: absolute; z-index: 30; right: 0; top: calc(100% + var(--spacing-extra-tight)); width: max-content; min-width: 180px; }
+    .ap-export-menu[hidden], .ap-kebab-menu[hidden] { display: none; }
+
+    .ap-thead, .ap-row { display: grid; grid-template-columns: 1fr 72px 150px 184px 36px; align-items: center; gap: var(--spacing-base); }
+    .ap-thead { padding: var(--spacing-tight) var(--spacing-base); background: var(--bg-secondary); border-radius: var(--radius-base) var(--radius-base) 0 0; }
+    .ap-th { font-size: 12px; font-weight: 500; color: var(--content-secondary); justify-self: start; }
+    .ap-sort { background: transparent; border: 0; cursor: pointer; font: inherit; font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); border-radius: var(--radius-sm); padding: var(--spacing-extra-tight); margin: calc(-1 * var(--spacing-extra-tight)); }
+    .ap-sort i { width: 14px; height: 14px; display: flex; }
+    .ap-sort:hover { color: var(--content-secondary); }
+    .ap-sort.is-active { color: var(--content-brand-base); }
+    .ap-goal-none { color: var(--content-subtle); }
+
+    .ap-row { min-height: 76px; padding: 0 var(--spacing-base); border-top: 1px solid var(--border-base); cursor: pointer; }
+    .ap-tbody .ap-row:first-child { border-top: 0; }
+    .ap-tbody .ap-row:last-child { border-bottom: 1px solid var(--border-base); }
+    .ap-row:hover { background: var(--bg-base-hover); }
+    .ap-name { font-size: 14px; color: var(--content-base); font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ap-score { font-size: 14px; color: var(--content-base); }
+    .ap-goal { display: flex; }
+    .ap-prog-cell { display: flex; }
+    .ap-prog { display: flex; align-items: center; gap: var(--spacing-tight); }
+    .ap-bar { width: 96px; height: 6px; background: var(--bg-tertiary); border-radius: var(--radius-full); overflow: hidden; flex: none; }
+    .ap-bar-fill { height: 100%; background: var(--bg-brand-base); border-radius: var(--radius-full); }
+    .ap-bar-count { font-size: 12px; color: var(--content-secondary); }
+    .ap-kebab-wrap { position: relative; display: flex; justify-content: flex-end; }
+    .app-eyebrow { font-size: 14px; font-weight: 600; color: var(--content-base); }
+    .sp-title.is-editable { cursor: text; border-radius: var(--radius-md); outline: none; padding: var(--spacing-base-tight); margin: calc(-1 * var(--spacing-base-tight)); box-shadow: inset 0 0 0 1px transparent; transition: box-shadow var(--motion-fast) var(--ease-out); }
+    .sp-title.is-editable:hover { box-shadow: inset 0 0 0 1px var(--border-action); }
+    .sp-title.is-editable:focus { box-shadow: inset 0 0 0 1px var(--border-brand-base); }
+    .sp-title.is-editable:empty::before { content: attr(data-placeholder); color: var(--content-placeholder); }
+    .ap-name-empty { color: var(--content-subtle); font-style: italic; }
+    /* A custom pin has no survey score → hide the Score row in its panel (metric pins keep it) */
+    #app-overlay.is-custom .act-row-score { display: none; }
+    /* Scores page: pin → goal popover */
+    .sc-pin-wrap { position: relative; display: inline-flex; }
+    .sc-pin-pop { position: absolute; top: calc(100% + var(--spacing-extra-tight)); right: 0; z-index: 40; width: max-content; min-width: 260px; max-width: 320px; white-space: normal; text-align: left; }
+    .sc-pin-pop[hidden] { display: none; }
+    .sc-pin-head { padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-base-tight); margin-bottom: var(--spacing-tight); border-bottom: 1px solid var(--border-base); font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--content-base); }
+    .sc-pin-score { color: var(--content-secondary); font-weight: 500; }
+    /* a pinned pin is a filled icon in its goal colour (stays even non-hover) */
+    .sc-pin.is-pinned { color: var(--content-brand-base); }
+    .sc-pin.is-pinned.is-goal-promote { color: var(--bg-positive-base); }
+    .sc-pin.is-pinned.is-goal-improve { color: var(--bg-warning-bold); }
+    .sc-pin.is-pinned.is-goal-contemplate { color: var(--content-secondary); }
+    .sc-row.is-pinning { position: relative; z-index: 50; }
+    .sc-row.is-pinning .sc-actions { display: flex; }
+    /* card/row whose pin popover is open: lift above siblings + don't clip the popover */
+    .is-pin-open { position: relative; z-index: 60; overflow: visible; }
+    /* multi-item pin: count badge + list popover */
+    .sc-pin-wrap.sc-pin-multi { display: inline-flex; align-items: center; }
+    .sc-pin-count { display: inline-flex; align-items: center; color: var(--content-secondary); font-size: 14px; font-weight: 600; margin-right: 2px; }
+    .sc-pin-count[hidden] { display: none; }
+    /* multi-item card pin: filled grey when items are pinned (like contemplate) */
+    .sc-pin-multi .sc-pin.is-pinned { color: var(--content-secondary); }
+    .sc-pinlist-item { align-items: flex-start; }
+    .sc-pinlist-item .menu-item-title { white-space: normal; }
+    .sc-pinlist-score { color: var(--content-secondary); font-weight: 500; }
+    .sc-pinlist-meta { display: block; font-size: 12px; color: var(--content-subtle); margin-top: 2px; }
+    .sc-pinlist-meta:empty { display: none; }
+    .sc-pinlist-pin { display: none; width: 16px; height: 16px; flex: none; align-self: center; color: var(--content-brand-base); }
+    .sc-pinlist-item.is-pinned .sc-pinlist-pin { display: flex; }
+    .sc-pinlist-pin.is-goal-promote { color: var(--bg-positive-base); }
+    .sc-pinlist-pin.is-goal-improve { color: var(--bg-warning-bold); }
+    .sc-pinlist-pin.is-goal-contemplate { color: var(--content-secondary); }
+    .sc-pin-back { display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); background: none; border: 0; cursor: pointer; font: inherit; font-size: 12px; color: var(--content-secondary); padding: var(--spacing-extra-tight) 0; margin-bottom: var(--spacing-extra-tight); }
+    .sc-pin-back i { width: 14px; height: 14px; display: flex; }
