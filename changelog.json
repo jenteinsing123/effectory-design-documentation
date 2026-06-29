@@ -1,6 +1,127 @@
 {
-  "count": 795,
+  "count": 812,
   "entries": [
+    {
+      "hash": "c8257df",
+      "author": "Jente Insing",
+      "date": "2026-06-29",
+      "subject": "Skill v1.9.31: refresh effectiveness reference prototypes + add Action Planner",
+      "pages": []
+    },
+    {
+      "hash": "ea3f558",
+      "author": "Jente Insing",
+      "date": "2026-06-29",
+      "subject": "GTM prototype: Focus View \"Add to action planner\" animates the action in",
+      "pages": []
+    },
+    {
+      "hash": "575becf",
+      "author": "Jente Insing",
+      "date": "2026-06-29",
+      "subject": "GTM prototype: working Focus View actions + keep goal on toast \"Add action\"",
+      "pages": []
+    },
+    {
+      "hash": "c30f326",
+      "author": "Jente Insing",
+      "date": "2026-06-29",
+      "subject": "GTM prototype: sync goal between overview card pin and side-panel dropdown",
+      "pages": []
+    },
+    {
+      "hash": "ecd8f7e",
+      "author": "Jente Insing",
+      "date": "2026-06-29",
+      "subject": "GTM prototype: interactive Action Planner + report-download language localisation",
+      "pages": []
+    },
+    {
+      "hash": "ab18dc2",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Design system: inline-select filled state + menu-item-check fix; doc & reference sync",
+      "pages": [
+        "select-docs.html"
+      ]
+    },
+    {
+      "hash": "115546d",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "GTM prototype: SOS themes, theme descriptions, tips & best practices, bevlogenheid copy, 5/6-point trends",
+      "pages": []
+    },
+    {
+      "hash": "1adfbd0",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "GTM prototype: interactive Actions tab in the side panels + DS disabled-button fix",
+      "pages": []
+    },
+    {
+      "hash": "c02352d",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Skill v1.9.30: results-dashboard builds chosen tabs via a two-step ask",
+      "pages": []
+    },
+    {
+      "hash": "983f3d5",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Skill v1.9.29: design system is the styling source of truth (over Figma)",
+      "pages": []
+    },
+    {
+      "hash": "c810354",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Name the Scores side-panel benchmark \"Effectory Index\" (skill v1.9.28)",
+      "pages": []
+    },
+    {
+      "hash": "8ee43e7",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Skill v1.9.27: add Scores reference prototype",
+      "pages": []
+    },
+    {
+      "hash": "323d9ef",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "GTM prototype: Themes tab as in-page view + theme side panel",
+      "pages": []
+    },
+    {
+      "hash": "1990274",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "Skill v1.9.26: Themes reference prototype with bar tooltips + theme side panel",
+      "pages": []
+    },
+    {
+      "hash": "8559b64",
+      "author": "Jente Insing",
+      "date": "2026-06-25",
+      "subject": "GTM prototype: add Q3 trend for \"I see myself working here in two years\"",
+      "pages": []
+    },
+    {
+      "hash": "75ab744",
+      "author": "Jente Insing",
+      "date": "2026-06-24",
+      "subject": "GTM prototype: fully collapse the segment accordion",
+      "pages": []
+    },
+    {
+      "hash": "d533d43",
+      "author": "Jente Insing",
+      "date": "2026-06-24",
+      "subject": "GTM prototype: Scores comparisons popover + Asana-style frozen question column",
+      "pages": []
+    },
     {
       "hash": "6401978",
       "author": "Jente Insing",
