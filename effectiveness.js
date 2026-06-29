@@ -3112,8 +3112,8 @@ function renderOverview(variant, initialView) {
         const idx = THEMES.findIndex(t => t.name === key.slice(6));
         const link = document.querySelector(`#view-themes .tc-link[data-theme="${idx}"]`);
         if (link) { link.click(); goActions('thp-overlay'); }
-      } else if (key === 'engagement') { document.getElementById('engp-overlay').hidden = false; goActions('engp-overlay'); }
-      else if (key === 'enps') { document.getElementById('npsp-overlay').hidden = false; goActions('npsp-overlay'); }
+      } else if (key === 'engagement') { const o = document.getElementById('engp-overlay'); loadActions(o, 'engagement', (d.engpCards[0] || {}).val || '–'); o.hidden = false; goActions('engp-overlay'); }
+      else if (key === 'enps') { const o = document.getElementById('npsp-overlay'); loadActions(o, 'enps', String(d.npsPromoters - d.npsDetractors)); o.hidden = false; goActions('npsp-overlay'); }
       else {
         const sr = [...document.querySelectorAll('#view-scores .sc-row')].find(r => r.dataset.q === key);
         if (sr) { (sr.querySelector('.sc-insights') || sr.querySelector('.sc-q')).click(); goActions('scp-overlay'); }
@@ -3248,6 +3248,28 @@ function renderOverview(variant, initialView) {
         reco.querySelector('.fv-reco-body').textContent = T2(r.body);
         reco.hidden = false;
       });
+    });
+
+    /* "Add to action planner" / "Create new action" → set this focus item's goal to
+       Improve, register it in the Action Planner, then open its Actions panel. */
+    const q = card.dataset.q;
+    const scoreText = (card.querySelector('.fv-score')?.textContent || '–').trim();
+    const pinFocus = () => {
+      actState(q).goal = 'improve';
+      if (!AP_PINNED.some(r => r.key === q)) AP_PINNED.push({ key: q, name: q, scoreText });
+      AP_REMOVED.delete(q); apTouch(q);
+    };
+    card.querySelector('.fv-reco-add')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = (card.querySelector('.fv-reco-title')?.textContent || '').trim();
+      pinFocus();
+      if (title && !actState(q).actions.some(a => a.text === title)) actState(q).actions.push({ text: title, done: false, deadline: '', assignee: '' });
+      if (window.apOpenActions) window.apOpenActions(q, q, scoreText, false);
+    });
+    card.querySelector('.fv-create')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      pinFocus();
+      if (window.apOpenActions) window.apOpenActions(q, q, scoreText, true);
     });
   });
 
