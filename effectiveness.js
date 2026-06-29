@@ -3120,6 +3120,7 @@ function renderOverview(variant, initialView) {
       }
       if (!overlay) { openAP(key, name || '', scoreText); overlay = appOverlay; }
       if (addAction) { const add = overlay.querySelector('.act-add'); if (add && !add.disabled) add.click(); }
+      return overlay;
     };
     window.apOpenActions = apOpenActions;
     const openSubject = (rowEl, addAction) => apOpenActions(rowEl.dataset.key, rowEl.querySelector('.ap-name').textContent, rowEl.querySelector('.ap-score').textContent, addAction);
@@ -3263,8 +3264,18 @@ function renderOverview(variant, initialView) {
       e.preventDefault();
       const title = (card.querySelector('.fv-reco-title')?.textContent || '').trim();
       pinFocus();
-      if (title && !actState(q).actions.some(a => a.text === title)) actState(q).actions.push({ text: title, done: false, deadline: '', assignee: '' });
-      if (window.apOpenActions) window.apOpenActions(q, q, scoreText, false);
+      /* open the panel first, then let the recommended action appear so it reads as
+         "being added" rather than already sitting there */
+      const overlay = window.apOpenActions ? window.apOpenActions(q, q, scoreText, false) : null;
+      if (overlay && title && !actState(q).actions.some(a => a.text === title)) {
+        setTimeout(() => {
+          actState(q).actions.push({ text: title, done: false, deadline: '', assignee: '' }); apTouch(q);
+          renderActList(overlay);
+          const rows = overlay.querySelectorAll('.act-list .act-item');
+          const fresh = rows[rows.length - 1];
+          if (fresh) requestAnimationFrame(() => fresh.classList.add('is-new'));
+        }, 450);
+      }
     });
     card.querySelector('.fv-create')?.addEventListener('click', (e) => {
       e.preventDefault();

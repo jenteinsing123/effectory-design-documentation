@@ -1167,6 +1167,11 @@
     /* saved action row — a bordered card: [checkbox] [title + assignee] [due date] [⋮] */
     /* inline editable action row (auto-saves): round check + [title on top / deadline + assignee below] + ⋮ */
     .act-item { display: flex; align-items: flex-start; gap: var(--spacing-tight); padding: var(--spacing-base); border: 1px solid var(--border-base); border-radius: var(--radius-md); background: var(--bg-base); box-shadow: var(--sh-action); }
+    /* a freshly added action slides + fades in with a brief highlight so it reads as "just added" */
+    @keyframes actItemIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes actItemFlash { 0% { background: var(--bg-brand-subtle); border-color: var(--border-brand-base); } 100% { background: var(--bg-base); border-color: var(--border-base); } }
+    .act-item.is-new { animation: actItemIn .3s ease both, actItemFlash 1.4s ease .3s both; }
+    @media (prefers-reduced-motion: reduce) { .act-item.is-new { animation: none; } }
     .act-item .cb-wrap { flex: none; align-self: center; }   /* vertically centred in the row */
     input[type="checkbox"].act-item-cb { width: 24px; height: 24px; border-radius: var(--radius-full); }   /* round "mark done" toggle, larger */
     .cb-wrap:has(input.act-item-cb)::after { -webkit-mask-size: 18px 18px; mask-size: 18px 18px; }
