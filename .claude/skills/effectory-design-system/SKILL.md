@@ -43,14 +43,16 @@ In `reference-prototypes/` staan volledig uitgewerkte schermen met een vaste, go
   Het Themes-tabblad in het resultaten-dashboard: een theme-comparison kaart (Current/Previous/Benchmark bargroepen met **"Select filter"** icon button) en een grid met thema-kaarten (titel, pin, beschrijving, org-score, "View insights"). Voor "themes pagina", "thema's pagina", "themes view" of "thema-vergelijking" — in welke taal of bewoording dan ook.
 - **Resultaten-dashboard — Scores** → `reference-prototypes/scores.md` + `scores.html`
   Het Scores-tabblad: een full-width tabel met alle vragen gegroepeerd per thema, met een bevroren vraagkolom (Asana-stijl scheidingslijn) + horizontaal scrollende, heatmap-gekleurde vergelijkingskolommen, een Comparisons-popover (Quick comparisons chips + Segments/Age-crossing met kolommen), een zwevende legenda, en een vraag-side-panel (5-punts antwoorddistributie met "X% agree"-bracket, score-vergelijkingskaarten, score-over-time grafiek, thema-vragen). Voor "scores pagina", "scores view", "scores prototype" of "vragen & scores tabel" — in welke taal of bewoording dan ook.
+- **Resultaten-dashboard — Action Planner** → `reference-prototypes/action-planner.md` + `action-planner.html`
+  Het Actions-tabblad: de **Action Planner** / pinboard — een tabel met vastgepinde onderwerpen (Topic, Score, Goal-chip Improve/Promote/Contemplate, Action progress), Search, Export (PDF/Excel), Custom pin, en per rij een Actions-side-panel met doel, beschrijving en een afvinkbare to-do-lijst (deadline + toegewezene). Goal wordt gedeeld per onderwerp (pin ↔ planner ↔ side panel). Voor "action planner", "actieplanner", "actions tab", "acties-pagina" of "pinboard" — in welke taal of bewoording dan ook.
 
 **Bij een verzoek om het resultaten-dashboard (algemeen — niet één specifiek tabblad): vraag in twee stappen. Bouw nooit zomaar alles; soms is maar een deel nodig.**
 
-1. **Welke tabbladen** moeten gebouwd worden? Beschikbare referenties: **Overview**, **Focus View**, **Themes**, **Scores**, **Reports**. (Open answers, Topics & Ideas en Actions hebben nog geen referentie — meld dat als ze gevraagd worden.) Bouw alleen de gekozen tabs.
+1. **Welke tabbladen** moeten gebouwd worden? Beschikbare referenties: **Overview**, **Focus View**, **Themes**, **Scores**, **Reports**, **Actions** (Action Planner). (Open answers en Topics & Ideas hebben nog geen referentie — meld dat als ze gevraagd worden.) Bouw alleen de gekozen tabs.
 2. **Per gekozen tabblad** de relevante deelkeuzes uitvragen (weer: niet automatisch alles):
    - **Overview** → welke **kaarten** (standaard alle) en welke **side panels**. Elk side panel opent vanuit zijn kaart, dus bied een panel alléén aan als die kaart op het dashboard staat: **Effectiveness-kaart → Effectiveness panel**, **Engagement-kaart → Engagement panel**, **eNPS-kaart → eNPS panel**.
    - **Focus View** → of de **Effectiveness / eNPS side panels** ook nodig zijn.
-   - **Themes / Scores / Reports** → uit hun eigen referentie (Themes en Scores hebben een vraag/thema-side-panel ingebouwd).
+   - **Themes / Scores / Reports / Actions** → uit hun eigen referentie (Themes en Scores hebben een vraag/thema-side-panel ingebouwd; Actions is de Action Planner met Actions-side-panel).
 
 Bouw daarna elk gekozen tabblad met de bijbehorende referentie hierboven, met werkende tab-navigatie ertussen.
 
