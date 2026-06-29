@@ -1202,20 +1202,27 @@ function showSysNotif(key, name) {
 /* Generic pin → goal popover wiring for every .sc-pin-wrap[data-pin-key]
    (Scores rows, Theme cards, Overview cards). Pinning sets the goal, adds it to the
    Action Planner and shows a system notification; the pin tooltip reflects the status. */
+/* Update a single pin's visual (icon, colour, tooltip, aria) from its stored goal. */
+function setPinTip(wrap) {
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const pin = wrap.querySelector('.sc-pin'); if (!pin) return;
+  const goal = actState(wrap.dataset.pinKey).goal;
+  const txt = goal ? `Pin: ${T2(GOAL_CHIPS[goal].label)}` : T2('Pin: no status');
+  pin.classList.toggle('is-pinned', !!goal);
+  ['promote', 'improve', 'contemplate'].forEach(g => pin.classList.toggle('is-goal-' + g, goal === g));
+  pin.setAttribute('aria-label', txt);
+  const tip = wrap.querySelector('.tooltip'); if (tip) tip.textContent = txt;
+  /* filled pin when pinned, outline when not */
+  const ico = pin.querySelector('[data-icon]');
+  if (ico) { const want = goal ? 'pin-filled' : 'pin'; if (ico.dataset.icon !== want) { ico.dataset.icon = want; delete ico.dataset.iconLoaded; ico.innerHTML = ''; if (window.Icons) window.Icons.renderOne(ico); } }
+}
+/* Re-sync any single-pin controls bound to `key` after the goal changed elsewhere (e.g. a side panel). */
+function syncPinsForKey(key) {
+  document.querySelectorAll('.sc-pin-wrap[data-pin-key]').forEach(wrap => { if (wrap.dataset.pinKey === key) setPinTip(wrap); });
+}
 function wirePins() {
   const T2 = (s) => window.tr ? tr(s) : s;
-  const setTip = (wrap) => {
-    const pin = wrap.querySelector('.sc-pin'); if (!pin) return;
-    const goal = actState(wrap.dataset.pinKey).goal;
-    const txt = goal ? `Pin: ${T2(GOAL_CHIPS[goal].label)}` : T2('Pin: no status');
-    pin.classList.toggle('is-pinned', !!goal);
-    ['promote', 'improve', 'contemplate'].forEach(g => pin.classList.toggle('is-goal-' + g, goal === g));
-    pin.setAttribute('aria-label', txt);
-    const tip = wrap.querySelector('.tooltip'); if (tip) tip.textContent = txt;
-    /* filled pin when pinned, outline when not */
-    const ico = pin.querySelector('[data-icon]');
-    if (ico) { const want = goal ? 'pin-filled' : 'pin'; if (ico.dataset.icon !== want) { ico.dataset.icon = want; delete ico.dataset.iconLoaded; ico.innerHTML = ''; if (window.Icons) window.Icons.renderOne(ico); } }
-  };
+  const setTip = setPinTip;
   const closeAll = () => { document.querySelectorAll('.sc-pin-pop').forEach(p => p.hidden = true); document.querySelectorAll('.is-pin-open').forEach(r => r.classList.remove('is-pinning', 'is-pin-open')); document.querySelectorAll('.sc-pin.is-pressed').forEach(b => b.classList.remove('is-pressed')); };
   document.querySelectorAll('.sc-pin-wrap[data-pin-key]').forEach(wrap => {
     if (wrap.dataset.pinWired) return; wrap.dataset.pinWired = '1';
@@ -1376,6 +1383,7 @@ function wireActions(overlay) {
     menu.querySelectorAll('.act-goal-opt').forEach(o => o.classList.toggle('is-selected', o === opt));
     menu.classList.add('has-goal');
     addBtn.disabled = false; addBtn.setAttribute('data-has-goal', ''); menu.hidden = true;
+    syncPinsForKey(overlay.__actKey);   /* reflect the goal on the matching card pin */
   }));
   const removeItem = overlay.querySelector('.act-goal-remove');
   if (removeItem) removeItem.addEventListener('click', () => { menu.hidden = true; openRemoveDialog(overlay); });
@@ -1458,6 +1466,7 @@ let actSkipRemoveConfirm = false;
 function actClearGoal(overlay) {
   ACT_STORE[overlay.__actKey] = { goal: '', desc: '', actions: [] };
   loadActions(overlay, overlay.__actKey, overlay.querySelector('.act-score').textContent);
+  syncPinsForKey(overlay.__actKey);   /* reset the matching card pin when the goal is removed */
 }
 function openRemoveDialog(overlay) {
   if (actSkipRemoveConfirm) { actClearGoal(overlay); return; }
@@ -2886,10 +2895,10 @@ function renderOverview(variant, initialView) {
   });
 
   /* Panel open/close wiring */
-  const wirePanel = (overlayId, closeId, cardSel) => {
+  const wirePanel = (overlayId, closeId, cardSel, onOpen) => {
     const overlay = document.getElementById(overlayId);
     const card = document.querySelector(cardSel);
-    const open = () => { resetPanelTabs(overlay); overlay.hidden = false; };
+    const open = () => { if (onOpen) onOpen(); resetPanelTabs(overlay); overlay.hidden = false; };
     const close = () => { overlay.hidden = true; };
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
@@ -2900,8 +2909,9 @@ function renderOverview(variant, initialView) {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) close(); });
   };
   wirePanel('efp-overlay', 'efp-close', '.fx-card');
-  wirePanel('engp-overlay', 'engp-close', '.eng-card');
-  wirePanel('npsp-overlay', 'npsp-close', '.nps-card');
+  /* re-sync the Actions tab from state on open so a goal set via the card pin shows in the panel */
+  wirePanel('engp-overlay', 'engp-close', '.eng-card', () => loadActions(document.getElementById('engp-overlay'), 'engagement', (d.engpCards[0] || {}).val || '–'));
+  wirePanel('npsp-overlay', 'npsp-close', '.nps-card', () => loadActions(document.getElementById('npsp-overlay'), 'enps', String(d.npsPromoters - d.npsDetractors)));
 
   /* interactive Actions tab on the Engagement + eNPS panels (score = the card's score) */
   wireActRemoveDialog();
