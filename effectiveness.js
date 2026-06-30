@@ -3430,10 +3430,13 @@ function renderOverview(variant, initialView) {
     const REPORT_FILE_EXT = { sgr: 'pptx', mgmt: 'pptx', onepager: 'pdf' };
     const LANG_FILE = { Dutch: 'nl', English: 'en', German: 'de' };
     const LANG_FILE_NAME = { nl: 'Nederlands', en: 'English', de: 'Deutsch' };
+    /* Downloads are group-aware: the Team IT dashboard serves the Team IT files. */
+    const GROUP_SEG = (variant.indexOf('novanta') === 0) ? '' : 'team-it-';
+    const GROUP_NAME = d.groupName || (GROUP_SEG ? 'Team IT' : 'Novanta B.V.');
     const fileFor = (key, lang) => {
       const base = REPORT_FILE_BASE[key], suf = LANG_FILE[lang], ext = REPORT_FILE_EXT[key];
       if (!base || !suf) return null;
-      return { url: base + suf + '.' + ext, filename: `Novanta B.V. - ${REPORT_FILE_NAME[key]} - ${LANG_FILE_NAME[suf]}.${ext}` };
+      return { url: base + GROUP_SEG + suf + '.' + ext, filename: `${GROUP_NAME} - ${REPORT_FILE_NAME[key]} - ${LANG_FILE_NAME[suf]}.${ext}` };
     };
     const triggerDownload = (info) => {
       if (!info) return;
