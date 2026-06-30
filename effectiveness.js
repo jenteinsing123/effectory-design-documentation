@@ -9,7 +9,7 @@
 const DATA = {
   'team-it-before': {
     groupName: 'Team IT',
-    surveyName: 'Engagement Survey 2026 Q2',
+    surveyName: 'Your voice 2026 Q2',
     dateFrom: '22 Apr 2026', dateTo: '22 May 2026', prevDateTo: '22 Jan 2026',
     /* AI summary */
     aiIntro: "The IT team’s results indicate several challenges impacting overall effectiveness and employee experience. Engagement (56%) and retention (57%) are below desired levels, suggesting employees may feel disconnected from the organization and uncertain about their long-term future within the team. Workload scores are particularly low at 38%, highlighting concerns around capacity, prioritization, and sustainable ways of working. While the eNPS score of 12 remains positive, it indicates only moderate advocacy and suggests there is significant room for improvement in employee satisfaction and loyalty.",
@@ -138,7 +138,7 @@ const DATA = {
 
   'team-it-after': {
     groupName: 'Team IT',
-    surveyName: 'Engagement Survey 2026 Q3',
+    surveyName: 'Your voice 2026 Q3',
     dateFrom: '22 Jul 2026', dateTo: '22 Sep 2026', prevDateTo: '22 May 2026',
     /* AI summary */
     aiIntro: "The IT team's latest survey results show a significant improvement across key engagement and employee experience indicators. Engagement has increased to 67%, while retention has risen to 73%, indicating that employees are more committed to both their current role and the organization. The team also achieved an eNPS of 31, reflecting a strong increase in employee advocacy and a greater willingness to recommend the organization as a place to work.",
@@ -265,7 +265,7 @@ const DATA = {
   'novanta-after': {
     groupName: 'Novanta B.V.',
     fvVerdictPre: 'Novanta is',
-    surveyName: 'Engagement Survey 2026 Q3',
+    surveyName: 'Your voice 2026 Q3',
     dateFrom: '22 Jul 2026', dateTo: '22 Sep 2026', prevDateTo: '22 May 2026',
     aiIntro: "Across Novanta, this survey shows a healthy and stable picture. Organization-wide engagement stands at 72% and retention at 76%, indicating that most employees feel committed to their work and intend to stay. An eNPS of 30 reflects solid advocacy, and a strong response rate of 81% gives a reliable view of how the organization is doing.",
     aiMore: [
@@ -389,7 +389,7 @@ const DATA = {
   'novanta-before': {
     groupName: 'Novanta B.V.',
     fvVerdictPre: 'Novanta is',
-    surveyName: 'Engagement Survey 2026 Q2',
+    surveyName: 'Your voice 2026 Q2',
     dateFrom: '22 Apr 2026', dateTo: '22 May 2026', prevDateTo: '22 Jan 2026',
     aiIntro: "Across Novanta, this survey points to a mixed picture. Organization-wide engagement stands at 66% with retention at 70% — most employees are reasonably committed, but energy is not yet translating into a supportive performance environment everywhere. An eNPS of 20 and a response rate of 77% give a workable read on where the organization stands.",
     aiMore: [
@@ -1179,9 +1179,31 @@ const avatarHTML = (name, size) => {
   const initials = p ? p.initials : (name || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
   return `<span class="av ${size} ${p ? p.av : 'av-grey'}">${initials}</span>`;
 };
-const fmtActDate = (iso) => { if (!iso) return ''; const [y, m, da] = iso.split('-').map(Number); return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1] + ' ' + da + ', ' + y; };
-/* "Last edited on" timestamp for the Activity row (e.g. "Jun 25, 2026, 11:47") */
-const fmtActivity = (ts) => { if (!ts) return ''; const d = new Date(ts); const mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()]; const hh = String(d.getHours()).padStart(2, '0'), mm = String(d.getMinutes()).padStart(2, '0'); return `${mo} ${d.getDate()}, ${d.getFullYear()}, ${hh}:${mm}`; };
+/* ── Localized month/weekday names (dates are shown in the active language) ── */
+const MONTHS_ABBR = {
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  nl: ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+  de: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+};
+const MONTHS_FULL = {
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  nl: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+  de: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+};
+const WEEKDAYS = {
+  en: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+  nl: ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'],
+  de: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
+};
+const lang3 = () => (MONTHS_ABBR[window.LANG] ? window.LANG : 'en');
+/* Translate an English "DD Mon YYYY" / "Mon YYYY" / "Mon 'YY" string to the active language. */
+const locDate = (s) => {
+  if (!s) return s; const L = lang3(); if (L === 'en') return s;
+  return s.replace(/\b([A-Z][a-z]{2})\b/, (m) => { const i = MONTHS_ABBR.en.indexOf(m); return i === -1 ? m : MONTHS_ABBR[L][i]; });
+};
+const fmtActDate = (iso) => { if (!iso) return ''; const [y, m, da] = iso.split('-').map(Number); const L = lang3(); const mon = MONTHS_ABBR[L][m - 1]; return L === 'en' ? `${mon} ${da}, ${y}` : `${da} ${mon} ${y}`; };
+/* "Last edited on" timestamp for the Activity row (e.g. "Jun 25, 2026, 11:47" / "25 jun 2026, 11:47") */
+const fmtActivity = (ts) => { if (!ts) return ''; const d = new Date(ts); const L = lang3(); const mon = MONTHS_ABBR[L][d.getMonth()]; const hh = String(d.getHours()).padStart(2, '0'), mm = String(d.getMinutes()).padStart(2, '0'); const dp = L === 'en' ? `${mon} ${d.getDate()}, ${d.getFullYear()}` : `${d.getDate()} ${mon} ${d.getFullYear()}`; return `${dp}, ${hh}:${mm}`; };
 const apTouch = (key) => { const s = actState(key); s.lastEdited = Date.now(); };
 /* System notification toast (top-right) shown after pinning a score on the Scores page. */
 function showSysNotif(key, name) {
@@ -1284,9 +1306,9 @@ function wirePins() {
 const isoOf = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 /* Design-system calendar (.dp) for one month */
 function dpMonthHTML(year, month, selIso) {
-  const T2 = (s) => window.tr ? tr(s) : s;
-  const monNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const wdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  const L = lang3();
+  const monNames = MONTHS_FULL[L];
+  const wdays = WEEKDAYS[L];
   const startWd = (new Date(year, month, 1).getDay() + 6) % 7;
   const dim = new Date(year, month + 1, 0).getDate();
   const dimPrev = new Date(year, month, 0).getDate();
@@ -1297,7 +1319,7 @@ function dpMonthHTML(year, month, selIso) {
   while (cells.length % 7 !== 0) cells.push({ d: cells.length - (startWd + dim) + 1, other: true });
   const days = cells.map(c => `<div class="dp-day${c.other ? ' is-other-month' : ''}${c.iso === selIso ? ' is-selected' : ''}${c.iso === todayIso ? ' is-today' : ''}"${c.iso ? ` data-iso="${c.iso}"` : ''}>${c.d}</div>`).join('');
   return `<div class="dp"><div class="dp-body">
-    <div class="dp-header"><div class="dp-month-group"><span class="dp-month-label">${T2(monNames[month])} ${year}</span></div>
+    <div class="dp-header"><div class="dp-month-group"><span class="dp-month-label">${monNames[month][0].toUpperCase() + monNames[month].slice(1)} ${year}</span></div>
       <div class="dp-nav"><button class="dp-nav-btn dp-prev" type="button" data-y="${year}" data-m="${month}"><i data-icon="chevron-left"></i></button><button class="dp-nav-btn dp-next" type="button" data-y="${year}" data-m="${month}"><i data-icon="chevron-right"></i></button></div></div>
     <div class="dp-weekdays">${wdays.map(w => `<div class="dp-wday">${w}</div>`).join('')}</div>
     <div class="dp-grid">${days}</div></div></div>`;
@@ -2064,7 +2086,7 @@ function shell(d) {
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <button class="btn btn-secondary"><i data-icon="arrow-left"></i> Back</button>
       <ol class="bc-trail">
-        <li><a class="bc-link" href="#">Engagement Survey, 2023–2026</a></li>
+        <li><a class="bc-link" href="#">Your voice, 2023–2026</a></li>
         <li><a class="bc-link" href="#">Results</a></li>
       </ol>
     </nav>
@@ -2080,9 +2102,9 @@ function shell(d) {
             <span class="sel-btn-value">${d.groupName}</span>
           </button>
           <div class="date-range">
-            <span>${d.dateFrom}</span>
+            <span>${locDate(d.dateFrom)}</span>
             <i data-icon="from-to" style="display:flex;width:24px;height:16px;"></i>
-            <span>${d.dateTo}</span>
+            <span>${locDate(d.dateTo)}</span>
           </div>
         </div>
         <div class="tabs">
@@ -2751,17 +2773,19 @@ const rgba = (hex, a) => {
    spacing, dashed blue grid, area gradient. */
 /* Survey periods for the "score over time" trend. Q2 view shows the first 5 (ending May 2026);
    Q3 view shows all 6 (ending Sep 2026), matching each dataset's dateTo / prevDateTo. */
-const TREND_LABELS = ['22 Jan 2025', '22 May 2025', '22 Sep 2025', '22 Jan 2026', '22 May 2026', '22 Sep 2026'];
-/* Build a 5-point (Q2) or 6-point (Q3) trend ending at the known previous/current survey scores,
-   with synthetic earlier surveys leading up to them. previous == null → Q2 (no previous survey yet). */
+/* 12 survey moments (4-monthly), shortened to "Mon 'YY" so they fit on the axis.
+   Q2 view shows the first 11 (ending May '26); Q3 shows all 12 (ending Sep '26). */
+const TREND_LABELS = ["Jan '23", "May '23", "Sep '23", "Jan '24", "May '24", "Sep '24", "Jan '25", "May '25", "Sep '25", "Jan '26", "May '26", "Sep '26"];
+/* Build an 11-point (Q2) or 12-point (Q3) trend ending at the known previous/current survey
+   scores, with synthetic earlier surveys leading up to them. previous == null → Q2 (no previous). */
 function trendSeries(current, previous, max = 100) {
   const cl = (v) => Math.max(0, Math.min(max, v));
   const rnd = (v) => max <= 10 ? Math.round(v * 10) / 10 : Math.round(v);
   const hasPrev = previous != null;
   const base = hasPrev ? previous : current;               // earliest "known" survey score
-  const hist = [0.80, 0.87, 0.84, 0.93].map(f => cl(rnd(base * f)));  // 4 synthetic earlier surveys
-  const data = hasPrev ? [...hist, previous, current] : [...hist, current];
-  const labels = hasPrev ? TREND_LABELS.slice() : TREND_LABELS.slice(0, 5);
+  const hist = [0.70, 0.74, 0.78, 0.76, 0.82, 0.85, 0.83, 0.88, 0.86, 0.92].map(f => cl(rnd(base * f)));  // 10 synthetic earlier surveys
+  const data = hasPrev ? [...hist, previous, current] : [...hist, current];   // 12 (Q3) / 11 (Q2)
+  const labels = (hasPrev ? TREND_LABELS.slice() : TREND_LABELS.slice(0, 11)).map(locDate);
   return { labels, data };
 }
 const makeLineChart = (cv, labels, data, { max = 100, unit = '%' } = {}) => {
