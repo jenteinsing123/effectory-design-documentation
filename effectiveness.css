@@ -1596,7 +1596,7 @@
     .sc-pin-back i { width: 14px; height: 14px; display: flex; }
 
     /* ── Feedback widget (sales users → prototype feedback) ── */
-    .fb-fab { position: fixed; top: var(--spacing-base); right: var(--spacing-loose); z-index: 90; display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); padding: var(--spacing-tight) var(--spacing-base); border-radius: var(--radius-full); border: 1px solid var(--border-base); background: var(--bg-base); color: var(--content-base); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: var(--sh-card); transition: background .12s, box-shadow .12s; }
+    .fb-fab { position: fixed; top: var(--spacing-base); right: var(--spacing-loose); z-index: 90; display: inline-flex; align-items: center; gap: var(--spacing-extra-tight); padding: var(--spacing-tight) var(--spacing-base); border-radius: var(--radius-base); border: 1px solid var(--border-base); background: var(--bg-base); color: var(--content-base); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: var(--sh-card); transition: background .12s, box-shadow .12s; }
     .fb-fab:hover { background: var(--bg-base-hover); box-shadow: var(--sh-card-hover); }
     .fb-fab:active { background: var(--bg-base-pressed); }
     .fb-fab i { width: 16px; height: 16px; display: flex; }
