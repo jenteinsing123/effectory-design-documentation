@@ -1596,9 +1596,9 @@
     .sc-pin-back i { width: 14px; height: 14px; display: flex; }
 
     /* ── Feedback widget (sales users → prototype feedback) ── */
-    .fb-fab { position: fixed; top: 14px; right: var(--spacing-loose); z-index: 90; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: var(--radius-base); border: 1px solid var(--border-base); background: var(--bg-base); color: var(--content-base); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: var(--sh-card); transition: background .12s, box-shadow .12s; }
-    .fb-fab:hover { background: var(--bg-base-hover); box-shadow: var(--sh-card-hover); }
-    .fb-fab:active { background: var(--bg-base-pressed); }
+    /* The button itself is a standard DS secondary button (.btn.btn-secondary);
+       .fb-fab only pins it to the top-right of the viewport. */
+    .fb-fab { position: fixed; top: 14px; right: var(--spacing-loose); z-index: 90; }
     .fb-fab i { width: 16px; height: 16px; display: flex; }
     .scrim .dialog.fb-dialog { width: 460px; max-width: 100%; }
     .scrim .dialog.fb-dialog.is-embed { width: 680px; }

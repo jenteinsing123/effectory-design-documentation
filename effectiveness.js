@@ -2861,7 +2861,7 @@ function wireFeedback() {
   const embedForm = `
     <iframe class="fb-iframe" id="fb-iframe" title="${T2('Share feedback')}"></iframe>`;
   wrap.innerHTML = `
-    <button class="fb-fab" id="fb-btn" type="button"><i data-icon="message"></i> ${T2('Feedback')}</button>
+    <button class="btn btn-secondary fb-fab" id="fb-btn" type="button"><i data-icon="message"></i> ${T2('Feedback')}</button>
     <div class="scrim" id="fb-scrim" hidden>
       <div class="dialog fb-dialog${embed ? ' is-embed' : ''}" role="dialog" aria-modal="true" ${embed ? `aria-label="${T2('Share feedback')}"` : 'aria-labelledby="fb-title"'}>
         <button class="dialog-close" id="fb-close" aria-label="${T2('Cancel')}"><i data-icon="cross"></i></button>
