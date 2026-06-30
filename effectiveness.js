@@ -2822,6 +2822,109 @@ function gauge(id, pct, colorVar, opts) {
   });
 }
 
+/* ── Feedback widget — sales users send prototype feedback. ──────────────────
+   Ready for Microsoft Forms: set FEEDBACK_FORM.embedUrl (the Forms "Embed"
+   URL) and, optionally, pageParam (the page question's key from a Forms
+   "Get pre-filled link") to auto-fill the current page. While embedUrl is
+   empty the widget stores submissions in localStorage ('effx-feedback') so it
+   stays demoable per device. */
+const FEEDBACK_FORM = {
+  embedUrl: '',   // e.g. 'https://forms.office.com/Pages/ResponsePage.aspx?id=…&embed=true'
+  pageParam: ''   // optional pre-fill key for the page question, e.g. 'r2a1b3c…'
+};
+function currentPageLabel() {
+  const tab = document.querySelector('.tab.is-active[data-view]');
+  const view = tab ? tab.textContent.trim() : 'Overview';
+  const group = (document.querySelector('#hdr-filter .sel-btn-value')?.textContent || '').trim();
+  const survey = (document.querySelector('.results-title')?.textContent || '').trim();
+  return [view, group && ('— ' + group), survey && ('(' + survey + ')')].filter(Boolean).join(' ');
+}
+function wireFeedback() {
+  if (document.getElementById('fb-btn')) return;   /* inject once; survives in-place re-renders */
+  const T2 = (s) => window.tr ? tr(s) : s;
+  const embed = !!FEEDBACK_FORM.embedUrl;
+  const wrap = document.createElement('div');
+  const nativeForm = `
+    <div id="fb-form">
+      <div class="fb-field"><label>${T2('Page')}</label><div class="fb-page"><i data-icon="file" style="width:14px;height:14px;display:flex;"></i><strong id="fb-page"></strong></div></div>
+      <div class="fb-field"><label for="fb-problem">${T2("What's the problem?")}</label>
+        <textarea id="fb-problem" placeholder="${T2("Describe what isn't working or what's confusing…")}"></textarea></div>
+      <div class="fb-field"><label for="fb-solution">${T2('What would the solution be?')}</label>
+        <textarea id="fb-solution" placeholder="${T2('Your idea for how to fix or improve it…')}"></textarea></div>
+      <div class="fb-row">
+        <div class="fb-field"><label for="fb-type">${T2('Type')}</label>
+          <select id="fb-type"><option value="Bug">${T2('Bug')}</option><option value="Idea">${T2('Idea')}</option><option value="Question">${T2('Question')}</option></select></div>
+        <div class="fb-field"><label for="fb-priority">${T2('Priority')}</label>
+          <select id="fb-priority"><option value="Low">${T2('Low')}</option><option value="Medium" selected>${T2('Medium')}</option><option value="High">${T2('High')}</option></select></div>
+      </div>
+    </div>`;
+  const embedForm = `
+    <div class="fb-field"><label>${T2('Page')}</label><div class="fb-page"><i data-icon="file" style="width:14px;height:14px;display:flex;"></i><strong id="fb-page"></strong></div></div>
+    <iframe class="fb-iframe" id="fb-iframe" title="${T2('Share feedback')}"></iframe>`;
+  wrap.innerHTML = `
+    <button class="fb-fab" id="fb-btn" type="button"><i data-icon="message"></i> ${T2('Feedback')}</button>
+    <div class="scrim" id="fb-scrim" hidden>
+      <div class="dialog fb-dialog" role="dialog" aria-modal="true" aria-labelledby="fb-title">
+        <button class="dialog-close" id="fb-close" aria-label="${T2('Cancel')}"><i data-icon="cross"></i></button>
+        <div class="dialog-header is-sm">
+          <h3 class="dialog-title" id="fb-title">${T2('Share feedback')}</h3>
+          <p class="dialog-subtitle">${T2('Help us improve this prototype — tell us what could be better.')}</p>
+        </div>
+        <div class="dialog-body">
+          ${embed ? embedForm : nativeForm}
+          <div class="fb-done" id="fb-done" hidden><div class="fb-done-ico"><i data-icon="check"></i></div><h4>${T2('Thanks for your feedback!')}</h4><p>${T2("We'll use it to improve the prototype.")}</p></div>
+        </div>
+        ${embed ? '' : `<div class="dialog-footer" id="fb-footer"><button class="btn btn-secondary" id="fb-cancel">${T2('Cancel')}</button><button class="btn btn-primary" id="fb-send">${T2('Send')}</button></div>`}
+      </div>
+    </div>`;
+  document.body.appendChild(wrap);
+  if (window.Icons) window.Icons.render(wrap);
+
+  const scrim = wrap.querySelector('#fb-scrim');
+  const setPage = () => { const el = wrap.querySelector('#fb-page'); if (el) el.textContent = currentPageLabel(); };
+  const reset = () => {
+    const form = wrap.querySelector('#fb-form'), done = wrap.querySelector('#fb-done'), footer = wrap.querySelector('#fb-footer');
+    if (form) form.hidden = false; if (done) done.hidden = true; if (footer) footer.hidden = false;
+    ['#fb-problem', '#fb-solution'].forEach(s => { const t = wrap.querySelector(s); if (t) { t.value = ''; t.style.borderColor = ''; } });
+    const ty = wrap.querySelector('#fb-type'); if (ty) ty.value = 'Bug';
+    const pr = wrap.querySelector('#fb-priority'); if (pr) pr.value = 'Medium';
+  };
+  const open = () => {
+    if (!embed) reset();
+    setPage();
+    if (embed) {
+      const ifr = wrap.querySelector('#fb-iframe');
+      const sep = FEEDBACK_FORM.embedUrl.indexOf('?') === -1 ? '?' : '&';
+      ifr.src = FEEDBACK_FORM.embedUrl + (FEEDBACK_FORM.pageParam ? sep + FEEDBACK_FORM.pageParam + '=' + encodeURIComponent(currentPageLabel()) : '');
+    }
+    scrim.hidden = false;
+  };
+  const close = () => { scrim.hidden = true; };
+  wrap.querySelector('#fb-btn').addEventListener('click', open);
+  wrap.querySelector('#fb-close').addEventListener('click', close);
+  scrim.addEventListener('click', (e) => { if (e.target === scrim) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !scrim.hidden) close(); });
+
+  if (!embed) {
+    wrap.querySelector('#fb-cancel').addEventListener('click', close);
+    const problem = wrap.querySelector('#fb-problem');
+    problem.addEventListener('input', () => { problem.style.borderColor = ''; });
+    wrap.querySelector('#fb-send').addEventListener('click', () => {
+      if (!problem.value.trim()) { problem.style.borderColor = 'var(--border-negative-base)'; problem.focus(); return; }
+      const entry = {
+        ts: new Date().toISOString(), page: currentPageLabel(), url: location.href, lang: window.LANG || 'en',
+        problem: problem.value.trim(), solution: wrap.querySelector('#fb-solution').value.trim(),
+        type: wrap.querySelector('#fb-type').value, priority: wrap.querySelector('#fb-priority').value
+      };
+      try { const all = JSON.parse(localStorage.getItem('effx-feedback') || '[]'); all.push(entry); localStorage.setItem('effx-feedback', JSON.stringify(all)); } catch (e) {}
+      wrap.querySelector('#fb-form').hidden = true;
+      wrap.querySelector('#fb-footer').hidden = true;
+      wrap.querySelector('#fb-done').hidden = false;
+      setTimeout(close, 1800);
+    });
+  }
+}
+
 /* ---------- render ---------- */
 function renderOverview(variant, initialView) {
   const d = (window.translateData ? translateData(DATA[variant] || DATA['team-it-after']) : (DATA[variant] || DATA['team-it-after']));
@@ -3039,6 +3142,8 @@ function renderOverview(variant, initialView) {
     const at = document.querySelector('.tab[data-view="actions"]');
     if (at) at.click();
   }
+
+  wireFeedback();   /* floating feedback button + modal (sales → prototype feedback) */
 
   /* ---- Action Planner wiring ---- */
   (function wireActionPlanner() {
