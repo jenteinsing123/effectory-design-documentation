@@ -3431,7 +3431,7 @@ function renderOverview(variant, initialView) {
     const fileFor = (key, lang) => {
       const base = REPORT_FILE_BASE[key], suf = LANG_FILE[lang];
       if (!base || !suf) return null;
-      return { url: base + suf + '.pptx', filename: `EFFECTORY - ${REPORT_FILE_NAME[key]} - ${LANG_FILE_NAME[suf]}.pptx` };
+      return { url: base + suf + '.pptx', filename: `Novanta B.V. - ${REPORT_FILE_NAME[key]} - ${LANG_FILE_NAME[suf]}.pptx` };
     };
     const triggerDownload = (info) => {
       if (!info) return;
