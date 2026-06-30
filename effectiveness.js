@@ -1953,6 +1953,7 @@ function themesView(d) {
 
 /* ---------- markup template ---------- */
 function shell(d) {
+  const T2 = (s) => window.tr ? tr(s) : s;
   const npsValue = d.npsPromoters - d.npsDetractors;
   /* eNPS card: small trend badge comparing the current eNPS with a reference (previous survey / benchmark) */
   const npsTrendBadge = (delta) => {
@@ -2478,7 +2479,7 @@ ${actionsView(d)}
 
       <div class="efp-view" id="efp-view-matrix">
       <div class="efp-matrix-row">
-        <div class="efp-y-axis"><span>Performance environment →</span></div>
+        <div class="efp-y-axis"><span>${T2('Performance environment')} →</span></div>
         <div class="efp-matrix" id="efp-matrix">
           <div class="efp-quad is-detached"><span class="efp-quad-lbl">Detached</span></div>
           <div class="efp-quad is-effective"><span class="efp-quad-lbl">Effective</span></div>
@@ -2492,7 +2493,7 @@ ${actionsView(d)}
           ${d.efpMarkers.map(efpMarker).join('')}
         </div>
       </div>
-      <p class="efp-x-axis">Engagement score →</p>
+      <p class="efp-x-axis">${T2('Engagement score')} →</p>
       </div>
 
       <div class="efp-view" id="efp-view-list" hidden>
