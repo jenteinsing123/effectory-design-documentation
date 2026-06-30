@@ -2859,7 +2859,6 @@ function wireFeedback() {
       </div>
     </div>`;
   const embedForm = `
-    <div class="fb-field"><label>${T2('Page')}</label><div class="fb-page"><i data-icon="file" style="width:14px;height:14px;display:flex;"></i><strong id="fb-page"></strong></div></div>
     <iframe class="fb-iframe" id="fb-iframe" title="${T2('Share feedback')}"></iframe>`;
   wrap.innerHTML = `
     <button class="fb-fab" id="fb-btn" type="button"><i data-icon="message"></i> ${T2('Feedback')}</button>
