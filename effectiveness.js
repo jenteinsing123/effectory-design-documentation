@@ -2829,8 +2829,8 @@ function gauge(id, pct, colorVar, opts) {
    empty the widget stores submissions in localStorage ('effx-feedback') so it
    stays demoable per device. */
 const FEEDBACK_FORM = {
-  embedUrl: '',   // e.g. 'https://forms.office.com/Pages/ResponsePage.aspx?id=…&embed=true'
-  pageParam: ''   // optional pre-fill key for the page question, e.g. 'r2a1b3c…'
+  embedUrl: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=1y956URA50ekDT-6RvHNCYhLeyOQYrJNu2uWOF_cct5UN0haTVIwUzdPR0RWWFBUNTM2Mk1SUzJOQi4u&embed=true',
+  pageParam: ''   // optional pre-fill key for a "Page" question (from a Forms "Get pre-filled link")
 };
 function currentPageLabel() {
   const tab = document.querySelector('.tab.is-active[data-view]');
@@ -2864,7 +2864,7 @@ function wireFeedback() {
   wrap.innerHTML = `
     <button class="fb-fab" id="fb-btn" type="button"><i data-icon="message"></i> ${T2('Feedback')}</button>
     <div class="scrim" id="fb-scrim" hidden>
-      <div class="dialog fb-dialog" role="dialog" aria-modal="true" aria-labelledby="fb-title">
+      <div class="dialog fb-dialog${embed ? ' is-embed' : ''}" role="dialog" aria-modal="true" aria-labelledby="fb-title">
         <button class="dialog-close" id="fb-close" aria-label="${T2('Cancel')}"><i data-icon="cross"></i></button>
         <div class="dialog-header is-sm">
           <h3 class="dialog-title" id="fb-title">${T2('Share feedback')}</h3>
