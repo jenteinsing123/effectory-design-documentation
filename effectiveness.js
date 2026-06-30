@@ -767,8 +767,8 @@ function focusView(d) {
 
 /* ---------- Reports (third tab) ---------- */
 function reportsView(d) {
-  const row = (icon, name, desc, raw) => `
-    <div class="report-row"${raw ? ' data-raw="true"' : ''}>
+  const row = (icon, key, name, desc) => `
+    <div class="report-row" data-report="${key}">
       <img class="file-icon" src="assets/icons/${icon}.svg" alt="" />
       <div class="report-meta">
         <div class="report-name">${name}</div>
@@ -785,17 +785,8 @@ function reportsView(d) {
   <div class="report-group">
     <h3 class="text-l5 report-group-title">Essential reports</h3>
     <div class="report-card">
-      ${row('ppt-file', 'Standard Group Results', 'Includes response rate, themes, question performance and group deep-dives. Includes eNPS and Organizational Effectiveness when available.')}
-      ${row('pdf-file', 'Management Summary', 'A leadership-ready summary of key outcomes, strengths, improvement areas, and the main takeaways.')}
-      ${row('ppt-file', 'Answer Distribution Report', 'Shows how responses are distributed per question, to reveal patterns beyond averages.')}
-    </div>
-  </div>
-  <div class="report-group">
-    <h3 class="text-l5 report-group-title">Deep-dive reports</h3>
-    <div class="report-card">
-      ${row('xls-file', 'Raw Data Report: Anonymized', "Respondent-level raw answers for customers' own analysis and data portability.", true)}
-      ${row('xls-file', 'Raw Data Report: Pseudonymous', "Only internal — respondent-level raw answers for customers' own analysis and data portability.", true)}
-      ${row('xls-file', 'Raw Data Report: Non-anonymized', "Respondent-level raw answers for customers' own analysis and data portability.", true)}
+      ${row('ppt-file', 'sgr', 'Standard Group Results', 'Includes response rate, themes, question performance and group deep-dives. Includes eNPS and Organizational Effectiveness when available.')}
+      ${row('ppt-file', 'mgmt', 'Management Summary', 'A leadership-ready summary of key outcomes, strengths, improvement areas, and the main takeaways.')}
     </div>
   </div>`;
 }
@@ -820,13 +811,9 @@ function reportsDialogs() {
     </div>
     <div class="dialog-body">
       <div class="lang-list" role="radiogroup" aria-label="Language">
-        ${langRow('Dutch', '🇳🇱', 'Dutch', 'The Netherlands')}
-        ${langRow('English (US)', '🇺🇸', 'English', 'United States', true)}
-        ${langRow('English (UK)', '🇬🇧', 'English', 'United Kingdom')}
+        ${langRow('Dutch', '🇳🇱', 'Dutch', 'The Netherlands', true)}
+        ${langRow('English', '🇬🇧', 'English', 'United Kingdom')}
         ${langRow('German', '🇩🇪', 'German', 'Germany')}
-        ${langRow('Italian', '🇮🇹', 'Italian', 'Italy')}
-        ${langRow('Polish', '🇵🇱', 'Polish', 'Poland')}
-        ${langRow('Portuguese', '🇵🇹', 'Portuguese', 'Portugal')}
       </div>
     </div>
     <div class="dialog-footer">
@@ -3436,6 +3423,23 @@ function renderOverview(variant, initialView) {
     const toast = document.getElementById('ready-toast');
     const readyTitle = document.getElementById('ready-title');
     let longerTimer = null, current = null;
+    /* Real downloadable files per report + language (only the 3 supported languages have files). */
+    const REPORT_FILE_BASE = { sgr: 'reports/standard-group-results-', mgmt: 'reports/management-summary-' };
+    const REPORT_FILE_NAME = { sgr: 'Standard Group Results', mgmt: 'Management Summary' };
+    const LANG_FILE = { Dutch: 'nl', English: 'en', German: 'de' };
+    const LANG_FILE_NAME = { nl: 'Nederlands', en: 'English', de: 'Deutsch' };
+    const fileFor = (key, lang) => {
+      const base = REPORT_FILE_BASE[key], suf = LANG_FILE[lang];
+      if (!base || !suf) return null;
+      return { url: base + suf + '.pptx', filename: `EFFECTORY - ${REPORT_FILE_NAME[key]} - ${LANG_FILE_NAME[suf]}.pptx` };
+    };
+    const triggerDownload = (info) => {
+      if (!info) return;
+      const a = document.createElement('a');
+      a.href = info.url; a.download = info.filename; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+    };
+    let genFile = null, toastFile = null;   /* file behind the open gen dialog / the toast */
     const COPY = {
       genTitle: t('Generating report'),
       genBody: t('We are working hard to generate your file, please wait, your file will be downloaded once finished.'),
@@ -3450,7 +3454,7 @@ function renderOverview(variant, initialView) {
         ? t('Generating in {count} languages').replace('{count}', g.length)
         : t('Generating in {lang}').replace('{lang}', g[0] ? t(g[0]) : '');
     };
-    const selectedLanguage = () => { const s = langScrim.querySelector('.lang-row.is-selected'); return (s && s.dataset.lang) || 'English (US)'; };
+    const selectedLanguage = () => { const s = langScrim.querySelector('.lang-row.is-selected'); return (s && s.dataset.lang) || 'Dutch'; };
     const updateLangButton = () => { if (current) langBtn.textContent = rowState(current.row).ready.indexOf(selectedLanguage()) !== -1 ? t('Download') : t('Generate'); };
     const refreshLangDialog = () => {
       const s = rowState(current.row);
@@ -3478,7 +3482,7 @@ function renderOverview(variant, initialView) {
       updateLangButton();
     };
     const openLang = (row) => {
-      current = { row, name: row.querySelector('.report-name').textContent.trim(), isRaw: row.dataset.raw === 'true' };
+      current = { row, key: row.dataset.report, name: row.querySelector('.report-name').textContent.trim(), isRaw: row.dataset.raw === 'true' };
       document.getElementById('lang-sub').textContent = t('Download “{report}” in the language you select below').replace('{report}', current.name);
       refreshLangDialog();
       langScrim.hidden = false;
@@ -3494,11 +3498,13 @@ function renderOverview(variant, initialView) {
       genPanel.classList.toggle('is-done', !!ready);
       genScrim.hidden = false;
     };
-    const showToast = (name, lang) => {
+    const showToast = (name, lang, file) => {
       readyTitle.textContent = t('{report} is ready to download in {lang}').replace('{report}', name).replace('{lang}', t(lang));
+      toastFile = file;
       toast.hidden = false;
     };
     const scheduleGeneration = (row, name, lang, isRaw) => {
+      const key = row.dataset.report, file = fileFor(key, lang);
       setTimeout(() => {
         const s = rowState(row), i = s.generating.indexOf(lang);
         if (i !== -1) s.generating.splice(i, 1);
@@ -3509,7 +3515,8 @@ function renderOverview(variant, initialView) {
           genTitle.textContent = COPY.doneTitle; genSubtitle.textContent = COPY.doneBody;
           if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
           genLonger.classList.remove('is-shown');
-        } else { showToast(name, lang); }
+          genFile = file; triggerDownload(file);   /* "your file will be downloaded once finished" */
+        } else { showToast(name, lang, file); }
       }, isRaw ? RAW_GEN_MS : QUICK_GEN_MS);
     };
     document.querySelectorAll('#view-reports .report-row').forEach((row) => {
@@ -3524,7 +3531,7 @@ function renderOverview(variant, initialView) {
       if (!current) return;
       const row = current.row, name = current.name, isRaw = current.isRaw, lang = selectedLanguage(), s = rowState(row);
       closeLang();
-      if (s.ready.indexOf(lang) !== -1) { openGenDialog(true, lang); return; }
+      if (s.ready.indexOf(lang) !== -1) { openGenDialog(true, lang); genFile = fileFor(current.key, lang); triggerDownload(genFile); return; }
       if (s.generating.indexOf(lang) === -1) { s.generating.push(lang); row.classList.add('is-generating'); updateRowLabel(row); scheduleGeneration(row, name, lang, isRaw); }
       openGenDialog(false, lang);
       if (longerTimer) { clearTimeout(longerTimer); longerTimer = null; }
@@ -3539,7 +3546,8 @@ function renderOverview(variant, initialView) {
     document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (!genScrim.hidden) closeGen(); else if (!langScrim.hidden) closeLang(); });
     langRows.forEach((row) => { row.addEventListener('change', () => { langRows.forEach((r) => r.classList.remove('is-selected')); row.classList.add('is-selected'); updateLangButton(); }); });
     document.getElementById('ready-close').addEventListener('click', () => { toast.hidden = true; });
-    document.getElementById('ready-download').addEventListener('click', () => { toast.hidden = true; });
+    document.getElementById('ready-download').addEventListener('click', () => { triggerDownload(toastFile); toast.hidden = true; });
+    document.querySelector('.gen-fallback')?.addEventListener('click', (e) => { e.preventDefault(); triggerDownload(genFile); });
   })();
 
   /* Scores view: collapsible groups + live search filter */
