@@ -1604,7 +1604,7 @@
     .fb-fab.is-attn { position: fixed; }
     .fb-fab.is-attn::before {
       content: ""; position: absolute; inset: -3px; border-radius: var(--radius-md); padding: 2px;
-      background: linear-gradient(90deg, var(--bg-brand-base), var(--bg-info-base), var(--bg-brand-base));
+      background: linear-gradient(90deg, var(--p-color-yellow-400), var(--p-color-yellow-200), var(--p-color-yellow-400));
       background-size: 220% 100%;
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
